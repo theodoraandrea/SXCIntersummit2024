@@ -1,12 +1,40 @@
-const express = require('express');
-const app = express();
-const port = 3001;
+require("dotenv").config();
+const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
+const routes = require("./routes");
+const corsMiddleware = require("./middlewares/corsMiddleware");
 
-app.get('/api/data', (req, res) => {
-    const data = { message: "SxC Intersummit 2024!"};
-    res.json(data);
+const app = express();
+const port = process.env.PORT;
+
+// CORS configuration
+app.use(corsMiddleware);
+
+// Session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Import Passport configuration
+require("./config/passport");
+
+// Routes
+app.use("/", routes);
+
+// Default route handler
+app.get("/", (req, res) => {
+  res.send('<h1>Home</h1><a href="/auth/google">Login with Google</a>');
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
