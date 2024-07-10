@@ -4,9 +4,19 @@ const session = require("express-session");
 const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
+const db = require("./config/databaseConfig");
 
 const app = express();
 const port = process.env.PORT;
+
+// Database Connection
+db.authenticate()
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // CORS configuration
 app.use(corsMiddleware);
