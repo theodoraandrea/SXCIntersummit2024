@@ -30,6 +30,10 @@ app.use(
   })
 );
 
+// Body parser middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
