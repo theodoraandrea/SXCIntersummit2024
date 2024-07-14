@@ -5,7 +5,8 @@ const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
 const db = require("./config/databaseConfig");
-const bmc = require("./models/bmc");
+
+const chamber = require("./models/chamber");
 
 const app = express();
 const port = process.env.PORT;
@@ -18,6 +19,17 @@ db.authenticate()
   .catch((err) => {
     console.log(err);
   });
+
+// Database Table synchronizing
+// chamber
+//   .sync({ alter: true })
+//   .then(() => {
+//     console.log("Chamber added");
+//   })
+//   .catch((err) => {
+//     console.log("ERROR");
+//     console.log(err.message);
+//   });
 
 // CORS configuration
 app.use(corsMiddleware);
