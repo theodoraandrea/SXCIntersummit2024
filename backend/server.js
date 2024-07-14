@@ -5,6 +5,7 @@ const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
 const db = require("./config/databaseConfig");
+const bmc = require("./models/bmc");
 
 const app = express();
 const port = process.env.PORT;
