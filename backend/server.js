@@ -7,6 +7,7 @@ const corsMiddleware = require("./middlewares/corsMiddleware");
 const db = require("./config/databaseConfig");
 
 const chamber = require("./models/chamber");
+const CompanyVisit = require("./models/companyvisit");
 
 const app = express();
 const port = process.env.PORT;
@@ -21,15 +22,14 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// chamber
-//   .sync({ alter: true })
-//   .then(() => {
-//     console.log("Chamber added");
-//   })
-//   .catch((err) => {
-//     console.log("ERROR");
-//     console.log(err.message);
-//   });
+CompanyVisit.sync()
+  .then(() => {
+    console.log("CompanyVisit added");
+  })
+  .catch((err) => {
+    console.log("ERROR");
+    console.log(err.message);
+  });
 
 // CORS configuration
 app.use(corsMiddleware);
