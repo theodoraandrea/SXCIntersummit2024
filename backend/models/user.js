@@ -18,6 +18,15 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    fullname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    gender: {
+      type: DataTypes.ENUM,
+      values: ["Male", "Female"],
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,6 +34,34 @@ const User = sequelize.define(
       validate: {
         isEmail: true,
       },
+    },
+    institution: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    major: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    batch: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    studentIdCard: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    cv: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    screenshotSxC: {
+      type: DataTypes.JSON,
+      allowNull: true,
     },
   },
   {

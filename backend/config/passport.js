@@ -14,15 +14,17 @@ passport.use(
         const currentUser = await User.findOne({
           where: { oauthId: profile.id },
         });
-        console.log(currentUser);
         if (currentUser) {
           return done(null, currentUser);
         } else {
-          console.log("masuk sini");
           const newUser = await User.create({
             oauthId: profile.id,
             username: profile.name.givenName,
             email: profile.emails[0].value,
+            fullname: "",
+            gender: "",
+            institution: "",
+            phoneNumber: "",
           });
 
           await newUser.save();
