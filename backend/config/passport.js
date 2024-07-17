@@ -27,6 +27,7 @@ passport.use(
             gender: "",
             institution: "",
             phoneNumber: "",
+            picture: profile.photos[0]?.value,
           });
 
           await newUser.save();
