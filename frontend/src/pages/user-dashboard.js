@@ -3,16 +3,19 @@ import Navbar from "./../components/navbar";
 import Profile from "./../images/sponsor.png";
 import { DummyProfileData } from "../constants/dummy/userdata";
 import { DummyEventsData } from "../constants/dummy/eventsdata";
+import { DummyCompetitionsData } from "../constants/dummy/competitions";
 
 export default function UserDashboard() {
   const [activeTab, setActiveTab] = useState("events");
   const [userData, setUserData] = useState(null);
   const [eventsData, setEventsData] = useState(null);
+  const [competitionsData, setCompetitionsData] = useState(null);
 
   useEffect(() => {
     // Fetch data function here
     setUserData(DummyProfileData);
     setEventsData(DummyEventsData);
+    setCompetitionsData(DummyCompetitionsData);
   }, []);
 
   // Function to calculate days until the event
@@ -89,7 +92,7 @@ export default function UserDashboard() {
                         {event.eventName}
                       </h3>
                       <p className="text-gray-600">{formatDate(event.date)}</p>
-                      <p className="text-gray-600">📍 Jakarta Timur</p>
+                      <p className="text-gray-600">📍 {event.location}</p>
                     </div>
                     <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
                       {getDaysUntilEvent(event.date)} days to go
@@ -100,18 +103,29 @@ export default function UserDashboard() {
             </>
           )}
           {activeTab === "competitions" && (
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold">Competition 01</h3>
-                  <p className="text-gray-600">25 July 2024 | 10.00 WIB</p>
-                  <p className="text-gray-600">📍 Jakarta Barat</p>
+            <>
+              {competitionsData?.map((competition) => (
+                <div
+                  key={competition.id}
+                  className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-semibold">
+                        {competition.competitionName}
+                      </h3>
+                      <p className="text-gray-600">
+                        {formatDate(competition.date)}
+                      </p>
+                      <p className="text-gray-600">📍 {competition.location}</p>
+                    </div>
+                    <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
+                      {getDaysUntilEvent(competition.date)} days to go
+                    </button>
+                  </div>
                 </div>
-                <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
-                  8 days to go
-                </button>
-              </div>
-            </div>
+              ))}
+            </>
           )}
         </div>
       </section>
