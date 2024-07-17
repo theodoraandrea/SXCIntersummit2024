@@ -34,7 +34,7 @@ export default function NavbarLanding() {
         </li>
         <li>
           <Link
-            to="/signin"
+            to="/register"
             className="text-white hover:underline px-4 py-2 rounded bg-primary-2 cursor-pointer"
           >
             Login
