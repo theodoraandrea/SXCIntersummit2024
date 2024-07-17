@@ -2,15 +2,33 @@ import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
 import Profile from "./../images/sponsor.png";
 import { DummyProfileData } from "../constants/dummy/userdata";
+import { DummyEventsData } from "../constants/dummy/eventsdata";
 
 export default function UserDashboard() {
   const [activeTab, setActiveTab] = useState("events");
   const [userData, setUserData] = useState(null);
+  const [eventsData, setEventsData] = useState(null);
 
   useEffect(() => {
     // Fetch data function here
     setUserData(DummyProfileData);
+    setEventsData(DummyEventsData);
   }, []);
+
+  // Function to calculate days until the event
+  const getDaysUntilEvent = (eventDate) => {
+    const today = new Date();
+    const event = new Date(eventDate);
+    const diffTime = event - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+
+  // Function to format the date
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
 
   return (
     <div>
@@ -59,18 +77,27 @@ export default function UserDashboard() {
             </button>
           </div>
           {activeTab === "events" && (
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-xl font-semibold">Event 01</h3>
-                  <p className="text-gray-600">20 July 2024 | 19.00 WIB</p>
-                  <p className="text-gray-600">📍 Jakarta Timur</p>
+            <>
+              {eventsData?.map((event) => (
+                <div
+                  key={event.id}
+                  className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-semibold">
+                        {event.eventName}
+                      </h3>
+                      <p className="text-gray-600">{formatDate(event.date)}</p>
+                      <p className="text-gray-600">📍 Jakarta Timur</p>
+                    </div>
+                    <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
+                      {getDaysUntilEvent(event.date)} days to go
+                    </button>
+                  </div>
                 </div>
-                <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
-                  3 days to go
-                </button>
-              </div>
-            </div>
+              ))}
+            </>
           )}
           {activeTab === "competitions" && (
             <div className="bg-white rounded-lg shadow-lg p-6">
