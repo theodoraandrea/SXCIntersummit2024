@@ -1,32 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/home";
+import About from "./pages/about";
+import Register from "./pages/register";
+import UserDashboard from "./pages/user-dashboard";
 
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
-function App() {
-
-  const [data, setData] = useState('');
-
-  useEffect(()=> {
-    console.log("Hello");
-    axios.get('/api/data')
-      .then(response => {
-        setData(response.data.message);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{data}</p>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/user-dashboard" element={<UserDashboard />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
