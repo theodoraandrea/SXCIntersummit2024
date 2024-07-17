@@ -13,7 +13,7 @@ export default function NavbarLanding() {
           </Link>
         </li>
         <li className="ml-auto">
-          <Link to="/" className="text-white hover:underline cursor-pointer">
+          <Link to="/about" className="text-white hover:underline cursor-pointer">
             About
           </Link>
         </li>
