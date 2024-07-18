@@ -24,7 +24,10 @@ export default function UserDashboard() {
     const event = new Date(eventDate);
     const diffTime = event - today;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
+    return {
+      message: diffDays <= 0 ? "Event has started" : `${diffDays} days to go`,
+      status: diffDays <= 0 ? "started" : "upcoming",
+    };
   };
 
   // Function to format the date
@@ -81,50 +84,68 @@ export default function UserDashboard() {
           </div>
           {activeTab === "events" && (
             <>
-              {eventsData?.map((event) => (
-                <div
-                  key={event.id}
-                  className="bg-white rounded-lg shadow-lg p-6 mb-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold">
-                        {event.eventName}
-                      </h3>
-                      <p className="text-gray-600">{formatDate(event.date)}</p>
-                      <p className="text-gray-600">📍 {event.location}</p>
+              {eventsData?.map((event) => {
+                const { message, status } = getDaysUntilEvent(event.date);
+                return (
+                  <div
+                    key={event.id}
+                    className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-xl font-semibold">
+                          {event.eventName}
+                        </h3>
+                        <p className="text-gray-600">
+                          {formatDate(event.date)}
+                        </p>
+                        <p className="text-gray-600">📍 {event.location}</p>
+                      </div>
+                      <button
+                        className={`px-4 py-2 rounded-full ${
+                          status === "started" ? "bg-green-500" : "bg-primary-2"
+                        } text-white`}
+                      >
+                        {message}
+                      </button>
                     </div>
-                    <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
-                      {getDaysUntilEvent(event.date)} days to go
-                    </button>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </>
           )}
           {activeTab === "competitions" && (
             <>
-              {competitionsData?.map((competition) => (
-                <div
-                  key={competition.id}
-                  className="bg-white rounded-lg shadow-lg p-6 mb-4"
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-xl font-semibold">
-                        {competition.competitionName}
-                      </h3>
-                      <p className="text-gray-600">
-                        {formatDate(competition.date)}
-                      </p>
-                      <p className="text-gray-600">📍 {competition.location}</p>
+              {competitionsData?.map((competition) => {
+                const { message, status } = getDaysUntilEvent(competition.date);
+                return (
+                  <div
+                    key={competition.id}
+                    className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="text-xl font-semibold">
+                          {competition.competitionName}
+                        </h3>
+                        <p className="text-gray-600">
+                          {formatDate(competition.date)}
+                        </p>
+                        <p className="text-gray-600">
+                          📍 {competition.location}
+                        </p>
+                      </div>
+                      <button
+                        className={`px-4 py-2 rounded-full ${
+                          status === "started" ? "bg-green-500" : "bg-primary-2"
+                        } text-white`}
+                      >
+                        {message}
+                      </button>
                     </div>
-                    <button className="bg-primary-2 text-white px-4 py-2 rounded-full">
-                      {getDaysUntilEvent(competition.date)} days to go
-                    </button>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </>
           )}
         </div>

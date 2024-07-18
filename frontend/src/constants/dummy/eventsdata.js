@@ -8,7 +8,7 @@ export const DummyEventsData = [
   {
     id: 2,
     eventName: "Chambers",
-    date: "2024-11-09",
+    date: "2024-7-09",
     location: "Jakarta Barat",
   },
   {
