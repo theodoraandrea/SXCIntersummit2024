@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
-import Register from "./pages/register";
+import Register1 from "./pages/register/register1";
+import Register2 from "./pages/register/register2";
 import UserDashboard from "./pages/user-dashboard";
 
 export default function App() {
@@ -9,9 +10,10 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/register2/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register1" element={<Register1 />} />
+        <Route path="/register2" element={<Register2 />} />
         <Route path="/user-dashboard" element={<UserDashboard />} />
       </Routes>
     </Router>
