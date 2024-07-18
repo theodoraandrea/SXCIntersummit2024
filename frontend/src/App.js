@@ -10,10 +10,11 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register2/home" element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/register1/register2/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/register1" element={<Register1 />} />
-        <Route path="/register2" element={<Register2 />} />
+        <Route path="/register1/register2" element={<Register2 />} />
         <Route path="/user-dashboard" element={<UserDashboard />} />
       </Routes>
     </Router>
