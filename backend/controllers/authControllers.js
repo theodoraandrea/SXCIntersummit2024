@@ -8,7 +8,7 @@ exports.login = passport.authenticate("google", {
 
 exports.googleAuthCallback = passport.authenticate("google", {
   failureRedirect: "/",
-  successRedirect: "/profile/completeProfile",
+  successRedirect: "/profile",
 });
 
 // Logout

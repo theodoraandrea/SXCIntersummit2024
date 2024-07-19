@@ -10,6 +10,7 @@ passport.use(
       callbackURL: "http://localhost:3001/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
+      // console.log(profile);
       try {
         const currentUser = await User.findOne({
           where: { oauthId: profile.id },
@@ -21,10 +22,12 @@ passport.use(
             oauthId: profile.id,
             username: profile.name.givenName,
             email: profile.emails[0].value,
+            // fullname: profile.displayName,
             fullname: "",
             gender: "",
             institution: "",
             phoneNumber: "",
+            picture: profile.photos[0]?.value,
           });
 
           await newUser.save();
