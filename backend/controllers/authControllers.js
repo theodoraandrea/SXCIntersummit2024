@@ -1,7 +1,11 @@
 const passport = require("passport");
 const Validator = require("validatorjs");
 const User = require("../models/user");
-const { REGISTER_PAGE, FILL_DETAILS_PAGE } = require("../constants/url");
+const {
+  REGISTER_PAGE,
+  FILL_DETAILS_PAGE,
+  HOME_PAGE,
+} = require("../constants/url");
 
 exports.login = passport.authenticate("google", {
   scope: ["profile", "email"],
@@ -31,7 +35,7 @@ module.exports.logout = (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Logout failed", error: err });
     }
-    res.status(200).json({ message: "Logout successful" });
+    res.redirect(HOME_PAGE);
   });
 };
 
