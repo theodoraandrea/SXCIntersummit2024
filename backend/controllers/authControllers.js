@@ -1,16 +1,29 @@
 const passport = require("passport");
 const Validator = require("validatorjs");
 const User = require("../models/user");
-const { REGISTER_PAGE, HOME_PAGE } = require("../constants/url");
+const { REGISTER_PAGE, FILL_DETAILS_PAGE } = require("../constants/url");
 
 exports.login = passport.authenticate("google", {
   scope: ["profile", "email"],
 });
 
-exports.googleAuthCallback = passport.authenticate("google", {
-  failureRedirect: `${REGISTER_PAGE}`,
-  successRedirect: `${HOME_PAGE}`,
-});
+exports.googleAuthCallback = (req, res) => {
+  passport.authenticate("google", (err, user, info) => {
+    if (err) {
+      return res.redirect(REGISTER_PAGE);
+    }
+    // if (!user) {
+    //   return res.redirect(REGISTER_PAGE);
+    // }
+    // Successful authentication, establish session and redirect to home page
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.redirect(REGISTER_PAGE);
+      }
+      res.redirect(FILL_DETAILS_PAGE);
+    });
+  })(req, res);
+};
 
 // Logout
 module.exports.logout = (req, res) => {
