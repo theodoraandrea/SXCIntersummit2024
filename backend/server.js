@@ -59,9 +59,9 @@ require("./config/passport");
 app.use("/", routes);
 
 // Default route handler
-// app.get("/", (req, res) => {
-//   res.send('<h1>Home</h1><a href="/auth/google">Login with Google</a>');
-// });
+app.get("/", (req, res) => {
+  res.send("API is running fine :)");
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
