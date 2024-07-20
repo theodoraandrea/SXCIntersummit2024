@@ -7,7 +7,7 @@ import { API_LOGOUT } from "../config/endpoints";
 
 export default function NavbarUser() {
   const { profileData, isLoggedIn } = useUser();
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn)
   return (
     <nav className="bg-primary-1 w-full h-16 flex items-center justify-between px-10 sticky top-0">
       <img src={logo} className="w-32" />
