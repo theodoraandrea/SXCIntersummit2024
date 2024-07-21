@@ -4,7 +4,16 @@ const Chamber = require("../models/chamber");
 const BMC = require("../models/bmc");
 const CompanyVisit = require("../models/companyvisit");
 const Summit = require("../models/summit");
+const Event = require("../models/event");
 
+exports.getAllEvents = async (req, res) => {
+  try {
+    const events = await Event.findAll();
+    return res.status(200).json(events);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to fetch events" });
+  }
+};
 exports.getAllEventsById = async (req, res) => {
   try {
     const id = req.user.id; //req.user.id
@@ -19,6 +28,6 @@ exports.getAllEventsById = async (req, res) => {
     );
     res.status(200).json({ eventList });
   } catch (error) {
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({ message: "Failed to fetch events" });
   }
 };

@@ -10,6 +10,7 @@ const User = require("./models/user");
 const chamber = require("./models/chamber");
 const CompanyVisit = require("./models/companyvisit");
 const Summit = require("./models/summit");
+const Event = require("./models/event");
 
 const app = express();
 const port = process.env.PORT;
@@ -24,7 +25,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// User.sync({ alter: true })
+// Event.sync({ alter: true })
 //   .then(() => {
 //     console.log("Summit added");
 //   })
