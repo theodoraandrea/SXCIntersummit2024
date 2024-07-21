@@ -6,6 +6,7 @@ const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
 const db = require("./config/databaseConfig");
 
+const User = require("./models/user");
 const chamber = require("./models/chamber");
 const CompanyVisit = require("./models/companyvisit");
 const Summit = require("./models/summit");
@@ -23,7 +24,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// Summit.sync()
+// User.sync({ alter: true })
 //   .then(() => {
 //     console.log("Summit added");
 //   })

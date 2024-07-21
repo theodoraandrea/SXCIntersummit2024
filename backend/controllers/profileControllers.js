@@ -4,7 +4,7 @@ const User = require("../models/user");
 // Get User Profile
 exports.getProfile = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
     const user = await User.findByPk(userId);
 
     res.status(201).json(user);

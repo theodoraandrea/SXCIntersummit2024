@@ -9,6 +9,7 @@ router.get("/", isAuthenticated, profileControllers.getProfile);
 
 router.put(
   "/",
+  isAuthenticated,
   [
     body("username").notEmpty().withMessage("Username is required"),
     body("fullname")
