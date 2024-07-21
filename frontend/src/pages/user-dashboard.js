@@ -6,43 +6,38 @@ import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate } from "react-router-dom";
 import { REGISTER } from "../constants/routes";
+import { fetchEventsByUserId } from "../service/services";
+import { getDaysUntilEvent, formatDate } from "../service/helpers";
 
 export default function UserDashboard() {
-  const { profileData, isLoggedIn } = useUser();
+  const { profileData, isLoggedIn, loading } = useUser();
   const [activeTab, setActiveTab] = useState("events");
   const [userData, setUserData] = useState(null);
-  const [eventsData, setEventsData] = useState(null);
+  const [registeredEventsData, setRegisteredEventsData] = useState(null);
   const [competitionsData, setCompetitionsData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch data function here
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-      setUserData(profileData);
-      setEventsData(DummyEventsData);
-      setCompetitionsData(DummyCompetitionsData);
-    } else {
-      navigate(REGISTER);
+    if (!loading) {
+      if (isLoggedIn) {
+        setUserData(profileData);
+        // fetchRegisteredEventsData();
+        setRegisteredEventsData(DummyEventsData);
+        setCompetitionsData(DummyCompetitionsData);
+      } else {
+        navigate(REGISTER);
+      }
     }
-  }, []);
+  }, [loading, isLoggedIn, profileData]);
 
-  // Function to calculate days until the event
-  const getDaysUntilEvent = (eventDate) => {
-    const today = new Date();
-    const event = new Date(eventDate);
-    const diffTime = event - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return {
-      message: diffDays <= 0 ? "Event has started" : `${diffDays} days to go`,
-      status: diffDays <= 0 ? "started" : "upcoming",
-    };
-  };
-
-  // Function to format the date
-  const formatDate = (dateString) => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+  const fetchRegisteredEventsData = async () => {
+    try {
+      const response = await fetchEventsByUserId();
+      // console.log(response);
+      setRegisteredEventsData(response);
+    } catch (error) {
+      // bisa taro function buat display error message dsini (maybe alert, etc)
+    }
   };
 
   return (
@@ -93,7 +88,7 @@ export default function UserDashboard() {
           </div>
           {activeTab === "events" && (
             <>
-              {eventsData?.map((event) => {
+              {registeredEventsData?.map((event) => {
                 const { message, status } = getDaysUntilEvent(event.date);
                 return (
                   <div
