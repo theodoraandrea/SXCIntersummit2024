@@ -1,35 +1,35 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import axiosInstance from "../config/axiosConfig";
-import { API_PROFILE_DATA } from "../config/endpoints";
+import { fetchProfileData } from "../service/services";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [profileData, setProfileData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const response = await axiosInstance.get(API_PROFILE_DATA);
-        // console.log(response);
-        setProfileData(response.data);
-        if (response.data.username) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
-      } catch (error) {
-        console.error("Error fetching profile data:", error);
-        setIsLoggedIn(false);
-      }
-    };
-
-    fetchProfileData();
+    fetchData();
   }, []);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetchProfileData();
+      setProfileData(response);
+      if (response.username) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      setIsLoggedIn(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ profileData, isLoggedIn }}>
+    <UserContext.Provider value={{ profileData, isLoggedIn, loading }}>
       {children}
     </UserContext.Provider>
   );
