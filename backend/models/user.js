@@ -51,6 +51,10 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    events: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
     studentIdCard: {
       type: DataTypes.STRING,
       allowNull: true,

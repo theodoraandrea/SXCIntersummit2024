@@ -1,4 +1,7 @@
-// Check whether user login or sign up
+/**
+ * Check whether user login or signup
+ * (SAMPAI SAAT INI TIDAK DIPAKAI)
+ */
 
 module.exports = (req, res, next) => {
   if (

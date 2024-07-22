@@ -10,7 +10,6 @@ passport.use(
       callbackURL: "http://localhost:3001/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      // console.log(profile);
       try {
         const currentUser = await User.findOne({
           where: { oauthId: profile.id },
