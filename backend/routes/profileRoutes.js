@@ -1,28 +1,43 @@
 const express = require("express");
+const { body } = require("express-validator");
 const router = express.Router();
 
-const authControllers = require("../controllers/authControllers");
+const profileControllers = require("../controllers/profileControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
-const checkCompletedProfile = require("../middlewares/checkCompletedProfile");
 
-router.get("/", isAuthenticated, authControllers.getProfile);
-
-/**
- * If login -> to /
- * If signup -> to /completeProfile page to fill the extra detail form then submit with PUT /completeProfile.
- */
-router.get(
-  "/completeProfile",
-  isAuthenticated,
-  checkCompletedProfile,
-  authControllers.getCompleteProfile
-);
+router.get("/", isAuthenticated, profileControllers.getProfile);
 
 router.put(
-  "/completeProfile",
+  "/",
   isAuthenticated,
-  checkCompletedProfile,
-  authControllers.completeProfile
+  [
+    body("username").notEmpty().withMessage("Username is required"),
+    body("fullname")
+      .notEmpty()
+      .withMessage("Fullname is required")
+      .isAlpha("en-US", {
+        ignore: " ",
+      })
+      .withMessage("Fullname must be in alphabets"),
+    body("gender")
+      .isIn(["Male", "Female"])
+      .notEmpty()
+      .withMessage("Gender is required and must be male or female"),
+    body("institution").notEmpty().withMessage("Institution is required"),
+    body("major").optional().isString().withMessage("Major must be a text"),
+    body("batch")
+      .optional()
+      .isInt({
+        min: 1,
+      })
+      .withMessage("Batch must be a valid number"),
+    body("phoneNumber")
+      .notEmpty()
+      .withMessage("Phone number is required")
+      .isMobilePhone("id-ID")
+      .withMessage("Invalid phone number format for Indonesia"),
+  ],
+  profileControllers.completeProfile
 );
 
 module.exports = router;

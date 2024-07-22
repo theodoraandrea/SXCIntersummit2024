@@ -6,9 +6,11 @@ const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
 const db = require("./config/databaseConfig");
 
+const User = require("./models/user");
 const chamber = require("./models/chamber");
 const CompanyVisit = require("./models/companyvisit");
 const Summit = require("./models/summit");
+const Event = require("./models/event");
 
 const app = express();
 const port = process.env.PORT;
@@ -23,7 +25,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// Summit.sync()
+// Event.sync({ alter: true })
 //   .then(() => {
 //     console.log("Summit added");
 //   })
@@ -60,7 +62,7 @@ app.use("/", routes);
 
 // Default route handler
 app.get("/", (req, res) => {
-  res.send('<h1>Home</h1><a href="/auth/google">Login with Google</a>');
+  res.send("API is running fine :)");
 });
 
 app.listen(port, () => {

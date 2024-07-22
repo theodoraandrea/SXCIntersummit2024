@@ -1,4 +1,4 @@
-import Navbar from "./../components/navbar-landing";
+import Navbar from "./../components/navbar";
 import BgHero from "./../images/bg-about.png";
 import logo from "./../images/sxc-jakarta.png";
 import AboutCard from "../components/elements/about-card";

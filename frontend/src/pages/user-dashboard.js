@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
-import Profile from "./../images/sponsor.png";
 import { DummyProfileData } from "../constants/dummy/userdata";
 import { DummyEventsData } from "../constants/dummy/eventsdata";
 import { DummyCompetitionsData } from "../constants/dummy/competitions";
+import { useUser } from "../contexts/user-context";
+import { useNavigate } from "react-router-dom";
+import { REGISTER } from "../constants/routes";
 
 export default function UserDashboard() {
+  const { profileData, isLoggedIn } = useUser();
   const [activeTab, setActiveTab] = useState("events");
   const [userData, setUserData] = useState(null);
   const [eventsData, setEventsData] = useState(null);
   const [competitionsData, setCompetitionsData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data function here
-    setUserData(DummyProfileData);
-    setEventsData(DummyEventsData);
-    setCompetitionsData(DummyCompetitionsData);
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
+      setUserData(profileData);
+      setEventsData(DummyEventsData);
+      setCompetitionsData(DummyCompetitionsData);
+    } else {
+      navigate(REGISTER);
+    }
   }, []);
 
   // Function to calculate days until the event
