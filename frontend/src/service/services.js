@@ -3,6 +3,7 @@ import {
   API_PROFILE_DATA,
   API_GET_ALL_EVENTS,
   API_GET_USER_REGISTERED_EVENTS,
+  API_GET_USER_REGISTERED_COMPETITIONS,
 } from "../config/endpoints";
 
 // Get Profile Datas
@@ -43,7 +44,9 @@ const fetchRegisteredEvents = async () => {
 // Get competitions registered by user
 const fetchRegisteredCompetitions = async () => {
   try {
-    const response = await axiosInstance.get(API_GET_USER_REGISTERED_EVENTS);
+    const response = await axiosInstance.get(
+      API_GET_USER_REGISTERED_COMPETITIONS
+    );
     // console.log(response);
     return response.data.competitions;
   } catch (error) {
