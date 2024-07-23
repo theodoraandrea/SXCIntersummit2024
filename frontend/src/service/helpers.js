@@ -1,12 +1,36 @@
-// Function to calculate days until the event
+// Function to calculate days and hours until the event
 const getDaysUntilEvent = (eventDate) => {
   const today = new Date();
   const event = new Date(eventDate);
   const diffTime = event - today;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffHours = Math.floor(
+    (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+
+  let message;
+  let status;
+
+  if (diffTime <= 0) {
+    message = "Event has started";
+    status = "started";
+  } else {
+    if (diffDays > 0) {
+      message = `${diffDays} days to go`;
+    } else if (diffHours > 0) {
+      message = `${diffHours} hours to go`;
+    } else if (diffMinutes > 0) {
+      message = `Starting in < 1 hour`;
+    } else {
+      message = "Event has started";
+    }
+  }
+
   return {
-    message: diffDays <= 0 ? "Event has started" : `${diffDays} days to go`,
-    status: diffDays <= 0 ? "started" : "upcoming",
+    message,
+    status,
   };
 };
 
