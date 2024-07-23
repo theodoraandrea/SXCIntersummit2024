@@ -17,6 +17,17 @@ const fetchProfileData = async () => {
   }
 };
 
+// PUT profile datas
+const putProfileData = async (data) => {
+  try {
+    const response = await axiosInstance.put(API_PROFILE_DATA, data);
+    return response;
+  } catch (error) {
+    console.error("Error sending profile data:", error);
+    throw error;
+  }
+};
+
 // Get all events
 const fetchAllEvents = async () => {
   try {
@@ -55,4 +66,9 @@ const fetchRegisteredCompetitions = async () => {
   }
 };
 
-export { fetchProfileData, fetchRegisteredEvents, fetchAllEvents };
+export {
+  fetchProfileData,
+  putProfileData,
+  fetchRegisteredEvents,
+  fetchAllEvents,
+};
