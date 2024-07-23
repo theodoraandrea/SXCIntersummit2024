@@ -2,7 +2,7 @@ import axiosInstance from "../config/axiosConfig";
 import {
   API_PROFILE_DATA,
   API_GET_ALL_EVENTS,
-  API_GET_EVENT_BY_ID,
+  API_GET_USER_REGISTERED_EVENTS,
 } from "../config/endpoints";
 
 // Get Profile Datas
@@ -29,15 +29,15 @@ const fetchAllEvents = async () => {
 };
 
 // Get events registered by user
-const fetchEventsByUserId = async () => {
+const fetchRegisteredEvents = async () => {
   try {
-    const response = await axiosInstance.get(API_GET_EVENT_BY_ID);
-    // console.log(response)
-    return response.data.eventList;
+    const response = await axiosInstance.get(API_GET_USER_REGISTERED_EVENTS);
+    // console.log(response);
+    return response.data.events;
   } catch (error) {
     console.error("Error fetching registered events:", error);
     throw error;
   }
 };
 
-export { fetchProfileData, fetchEventsByUserId, fetchAllEvents };
+export { fetchProfileData, fetchRegisteredEvents, fetchAllEvents };
