@@ -5,6 +5,7 @@ const BMC = require("../models/bmc");
 const CompanyVisit = require("../models/companyvisit");
 const Summit = require("../models/summit");
 const Event = require("../models/event");
+const Registration = require("../models/registration");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -14,20 +15,21 @@ exports.getAllEvents = async (req, res) => {
     return res.status(500).json({ message: "Failed to fetch events" });
   }
 };
-exports.getAllEventsById = async (req, res) => {
+exports.getRegisteredEventsByUser = async (req, res) => {
   try {
-    const id = req.user.id; //req.user.id
+    const id = req.user.id;
+    const events = await Event.findAll({
+      include: {
+        model: Registration,
+        where: {
+          userId: id,
+        },
+      },
+      order: [["eventDate", "ASC"]],
+    });
 
-    const chamber = await Chamber.findOne({ where: { userId: id } });
-    const companyVisit = await CompanyVisit.findOne({ where: { userId: id } });
-    const bmc = await BMC.findOne({ where: { userId: id } });
-    const summit = await Summit.findOne({ where: { userId: id } });
-
-    const eventList = [chamber, companyVisit, bmc, summit].filter(
-      (event) => event != null
-    );
-    res.status(200).json({ eventList });
+    res.status(200).json({ events });
   } catch (error) {
-    return res.status(500).json({ message: "Failed to fetch events" });
+    return res.status(500).json(error.message);
   }
 };

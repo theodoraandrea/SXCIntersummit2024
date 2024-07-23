@@ -15,6 +15,14 @@ exports.entitiesAssociation = () => {
     foreignKey: "eventId",
   });
 
+  Registration.belongsTo(User, {
+    foreignKey: "userId",
+  });
+
+  Registration.belongsTo(Event, {
+    foreignKey: "eventId",
+  });
+
   Summit.belongsTo(Registration, {
     foreignKey: "registrationId",
   });

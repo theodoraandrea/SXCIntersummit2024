@@ -20,7 +20,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// db.sync()
+// db.sync({ alter: true })
 //   .then(() => {
 //     console.log("Summit added");
 //   })
