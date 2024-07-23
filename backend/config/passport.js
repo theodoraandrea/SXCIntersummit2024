@@ -15,6 +15,22 @@ passport.use(
           where: { oauthId: profile.id },
         });
         if (currentUser) {
+          // Check if username or picture changed
+          let needsUpdate = false;
+          if (currentUser.username !== profile.name.givenName) {
+            currentUser.username = profile.name.givenName;
+            needsUpdate = true;
+          }
+
+          if (currentUser.picture !== profile.photos[0]?.value) {
+            currentUser.picture = profile.photos[0]?.value;
+            needsUpdate = true;
+          }
+
+          // Save only if there are changes
+          if (needsUpdate) {
+            await currentUser.save();
+          }
           return done(null, currentUser);
         } else {
           const newUser = await User.create({
