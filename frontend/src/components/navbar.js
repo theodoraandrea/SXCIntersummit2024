@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import logo from "./../images/logo.png";
 import profile from "./../images/person.png";
 import { useUser } from "../contexts/user-context";
-import { HOME, REGISTER, USER_DASHBOARD, ABOUT } from "../constants/routes";
+import {
+  HOME,
+  REGISTER_PAGE,
+  USER_DASHBOARD_PAGE,
+  ABOUT_PAGE,
+  EVENTS_PAGE,
+} from "../constants/routes";
 import { API_LOGOUT } from "../config/endpoints";
 
 export default function NavbarUser() {
@@ -19,14 +25,17 @@ export default function NavbarUser() {
         </li>
         <li className="ml-auto">
           <Link
-            to={ABOUT}
+            to={ABOUT_PAGE}
             className="text-white hover:underline cursor-pointer"
           >
             About
           </Link>
         </li>
         <li className="ml-auto">
-          <Link to="#" className="text-white hover:underline cursor-pointer">
+          <Link
+            to={EVENTS_PAGE}
+            className="text-white hover:underline cursor-pointer"
+          >
             Events
           </Link>
         </li>
@@ -45,7 +54,7 @@ export default function NavbarUser() {
           <>
             <li>
               <Link
-                to={USER_DASHBOARD}
+                to={USER_DASHBOARD_PAGE}
                 className=" gap-1 cursor-pointer flex items-center"
               >
                 <img src={profile} alt="Profile" className="w-6 h-6 mr-1" />
@@ -66,7 +75,7 @@ export default function NavbarUser() {
         ) : (
           <li>
             <Link
-              to={REGISTER}
+              to={REGISTER_PAGE}
               className="text-white hover:underline px-4 py-2 rounded bg-primary-2 cursor-pointer"
             >
               Login
