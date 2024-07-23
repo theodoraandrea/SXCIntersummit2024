@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 const User = require("../models/user");
+const Registration = require("../models/registration");
 
 const Summit = sequelize.define(
   "Summit",
@@ -10,11 +11,10 @@ const Summit = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    userId: {
+    registrationId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
-        model: "users",
+        model: "registrations",
         key: "id",
       },
     },
