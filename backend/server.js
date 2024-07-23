@@ -4,17 +4,12 @@ const session = require("express-session");
 const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
-const db = require("./config/databaseConfig");
 
-const User = require("./models/user");
-const chamber = require("./models/chamber");
-const CompanyVisit = require("./models/companyvisit");
-const Summit = require("./models/summit");
-const Event = require("./models/event");
+const db = require("./config/databaseConfig");
+require("./associations/association").entitiesAssociation();
 
 const app = express();
 const port = process.env.PORT;
-
 // Database Connection
 db.authenticate()
   .then(() => {
@@ -25,7 +20,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// Event.sync({ alter: true })
+// db.sync()
 //   .then(() => {
 //     console.log("Summit added");
 //   })
