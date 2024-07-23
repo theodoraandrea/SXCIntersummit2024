@@ -35,7 +35,19 @@ const fetchRegisteredEvents = async () => {
     // console.log(response);
     return response.data.events;
   } catch (error) {
-    console.error("Error fetching registered events:", error);
+    console.error("Error fetching registered event(s):", error);
+    throw error;
+  }
+};
+
+// Get competitions registered by user
+const fetchRegisteredCompetitions = async () => {
+  try {
+    const response = await axiosInstance.get(API_GET_USER_REGISTERED_EVENTS);
+    // console.log(response);
+    return response.data.competitions;
+  } catch (error) {
+    console.error("Error fetching registered competition(s):", error);
     throw error;
   }
 };
