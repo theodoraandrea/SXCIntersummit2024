@@ -10,3 +10,5 @@ export const USER_PROFILE_PAGE = "/user-dashboard/profile";
 export const USER_SETTINGS_PAGE = "/user-dashboard/settings";
 export const EVENTS_PAGE = "/events";
 export const USER_EVENTS_PAGE = "/user-dashboard/events";
+export const DETAIL_EVENTS ="/events/detail-events";
+export const REGIST_EVENTS = "/events/detail-events/regist-events"

@@ -4,6 +4,10 @@ import About from "./pages/about";
 import Register1 from "./pages/register/register1";
 import Register2 from "./pages/register/register2";
 import UserDashboard from "./pages/user-dashboard";
+import Events from "./pages/event";
+import DetailEvents from "./pages/event-details/index";
+import RegistEvents from "./pages/event-registration/index";
+
 import {
   HOME,
   HOME2,
@@ -12,6 +16,9 @@ import {
   FILL_DETAILS_PAGE,
   USER_DASHBOARD_PAGE,
   ABOUT_PAGE,
+  EVENTS_PAGE,
+  DETAIL_EVENTS,
+  REGIST_EVENTS,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -27,6 +34,9 @@ export default function App() {
           <Route path={REGISTER_PAGE} element={<Register1 />} />
           <Route path={FILL_DETAILS_PAGE} element={<Register2 />} />
           <Route path={USER_DASHBOARD_PAGE} element={<UserDashboard />} />
+          <Route path={EVENTS_PAGE} element={<Events />} />
+          <Route path={DETAIL_EVENTS} element={<DetailEvents />} />
+          <Route path={REGIST_EVENTS} element={<RegistEvents />} />
         </Routes>
       </Router>
     </UserProvider>

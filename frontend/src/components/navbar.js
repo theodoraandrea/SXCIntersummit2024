@@ -16,7 +16,7 @@ export default function NavbarUser() {
   // console.log(isLoggedIn)
   return (
     <nav className="bg-primary-1 w-full h-16 flex items-center justify-between px-10 sticky top-0">
-      <img src={logo} className="w-32" />
+      <img src={logo} alt="logo" className="w-32" />
       <ul className="flex space-x-20">
         <li className="ml-auto">
           <Link to={HOME} className="text-white hover:underline cursor-pointer">
