@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './../../components/navbar';
 import { Link } from 'react-router-dom';
-import Footer from "./../components/footer";
+import Footer from "./../../components/footer";
 
 export default function DetailEvents() {
   const [openFAQ, setOpenFAQ] = useState(Array(5).fill(false));
