@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import bg from "./../../images/Kiri.png";
 import { Link, useNavigate } from "react-router-dom";
 import { putProfileData } from "../../service/services";
-import { HOME } from "../../constants/routes";
+import { HOME, REGISTER_PAGE } from "../../constants/routes";
+import { useUser } from "../../contexts/user-context";
 
 const sanitizeInput = (input) => {
   return input.trim().replace(/[^a-zA-Z0-9._%+-@]/g, "");
 };
 
 export default function Register() {
+  const { isLoggedIn, profileData, loading } = useUser();
   const [fullName, setFullName] = useState("");
   const [gender, setGender] = useState("");
   const [institution, setInstitution] = useState("");
@@ -17,6 +19,15 @@ export default function Register() {
   const [batch, setBatch] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading) {
+      if (isLoggedIn) {
+      } else {
+        navigate(REGISTER_PAGE);
+      }
+    }
+  }, [loading, isLoggedIn, profileData]);
 
   // function buat ngilangin error message waktu user isi field masing2
   useEffect(() => {
@@ -81,9 +92,9 @@ export default function Register() {
 
     try {
       const response = await putProfileData(data);
-
-      if (response.ok) {
-        console.log("Profile updated successfully");
+      console.log(response);
+      if (response.status === 200) {
+        // console.log("Profile updated successfully");
         navigate(HOME);
       }
     } catch (error) {
