@@ -5,15 +5,16 @@ import { DummyEventsData } from "../constants/dummy/eventsdata";
 import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate } from "react-router-dom";
-import { REGISTER } from "../constants/routes";
-import { fetchEventsByUserId } from "../service/services";
+import { REGISTER_PAGE, EVENTS_PAGE } from "../constants/routes";
+import { fetchRegisteredEvents } from "../service/services";
 import { getDaysUntilEvent, formatDate } from "../service/helpers";
+import profile from "./../images/person.png";
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
   const [activeTab, setActiveTab] = useState("events");
   const [userData, setUserData] = useState(null);
-  const [registeredEventsData, setRegisteredEventsData] = useState(null);
+  const [registeredEventsData, setRegisteredEventsData] = useState([]);
   const [competitionsData, setCompetitionsData] = useState(null);
   const navigate = useNavigate();
 
@@ -21,18 +22,21 @@ export default function UserDashboard() {
     if (!loading) {
       if (isLoggedIn) {
         setUserData(profileData);
-        // fetchRegisteredEventsData();
-        setRegisteredEventsData(DummyEventsData);
+        fetchRegisteredEventsData();
+
+        // Dummy Datas
+        // setUserData(DummyProfileData);
+        // setRegisteredEventsData(DummyEventsData);
         setCompetitionsData(DummyCompetitionsData);
       } else {
-        navigate(REGISTER);
+        navigate(REGISTER_PAGE);
       }
     }
   }, [loading, isLoggedIn, profileData]);
 
   const fetchRegisteredEventsData = async () => {
     try {
-      const response = await fetchEventsByUserId();
+      const response = await fetchRegisteredEvents();
       // console.log(response);
       setRegisteredEventsData(response);
     } catch (error) {
@@ -88,68 +92,110 @@ export default function UserDashboard() {
           </div>
           {activeTab === "events" && (
             <>
-              {registeredEventsData?.map((event) => {
-                const { message, status } = getDaysUntilEvent(event.date);
-                return (
-                  <div
-                    key={event.id}
-                    className="bg-white rounded-lg shadow-lg p-6 mb-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-xl font-semibold">
-                          {event.eventName}
-                        </h3>
-                        <p className="text-gray-600">
-                          {formatDate(event.date)}
-                        </p>
-                        <p className="text-gray-600">📍 {event.location}</p>
+              {registeredEventsData && registeredEventsData.length > 0 ? (
+                registeredEventsData.map((event) => {
+                  const { message, status } = getDaysUntilEvent(
+                    event.eventDate
+                  );
+                  return (
+                    <div
+                      key={event.id}
+                      className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-xl font-semibold">
+                            {event.eventName}
+                          </h3>
+                          <p className="text-gray-600">
+                            {formatDate(event.eventDate)}
+                          </p>
+                          <p className="text-gray-600">
+                            📍 {event.eventLocation}
+                          </p>
+                        </div>
+                        <button
+                          className={`px-4 py-2 rounded-full ${
+                            status === "started"
+                              ? "bg-green-500"
+                              : "bg-primary-2"
+                          } text-white`}
+                        >
+                          {message}
+                        </button>
                       </div>
-                      <button
-                        className={`px-4 py-2 rounded-full ${
-                          status === "started" ? "bg-green-500" : "bg-primary-2"
-                        } text-white`}
-                      >
-                        {message}
-                      </button>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-xl text-white mb-4">
+                    No registered events yet.
+                  </p>
+                  <button
+                    className="bg-primary-2 text-white px-4 py-2 rounded-full"
+                    onClick={() => {
+                      navigate(EVENTS_PAGE);
+                    }}
+                  >
+                    Register Now!
+                  </button>
+                </div>
+              )}
             </>
           )}
           {activeTab === "competitions" && (
             <>
-              {competitionsData?.map((competition) => {
-                const { message, status } = getDaysUntilEvent(competition.date);
-                return (
-                  <div
-                    key={competition.id}
-                    className="bg-white rounded-lg shadow-lg p-6 mb-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-xl font-semibold">
-                          {competition.competitionName}
-                        </h3>
-                        <p className="text-gray-600">
-                          {formatDate(competition.date)}
-                        </p>
-                        <p className="text-gray-600">
-                          📍 {competition.location}
-                        </p>
+              {competitionsData && competitionsData.length > 0 ? (
+                competitionsData?.map((competition) => {
+                  const { message, status } = getDaysUntilEvent(
+                    competition.date
+                  );
+                  return (
+                    <div
+                      key={competition.id}
+                      className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-xl font-semibold">
+                            {competition.competitionName}
+                          </h3>
+                          <p className="text-gray-600">
+                            {formatDate(competition.date)}
+                          </p>
+                          <p className="text-gray-600">
+                            📍 {competition.location}
+                          </p>
+                        </div>
+                        <button
+                          className={`px-4 py-2 rounded-full ${
+                            status === "started"
+                              ? "bg-green-500"
+                              : "bg-primary-2"
+                          } text-white`}
+                        >
+                          {message}
+                        </button>
                       </div>
-                      <button
-                        className={`px-4 py-2 rounded-full ${
-                          status === "started" ? "bg-green-500" : "bg-primary-2"
-                        } text-white`}
-                      >
-                        {message}
-                      </button>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <div className="text-center py-8">
+                  <p className="text-xl text-white mb-4">
+                    No registered competition yet.
+                  </p>
+                  <button
+                    className="bg-primary-2 text-white px-4 py-2 rounded-full"
+                    onClick={() => {
+                      // navigate(COMPETITION_PAGE);
+                    }}
+                  >
+                    Register Now!
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>

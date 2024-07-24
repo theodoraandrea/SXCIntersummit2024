@@ -2,7 +2,8 @@ import axiosInstance from "../config/axiosConfig";
 import {
   API_PROFILE_DATA,
   API_GET_ALL_EVENTS,
-  API_GET_EVENT_BY_ID,
+  API_GET_USER_REGISTERED_EVENTS,
+  API_GET_USER_REGISTERED_COMPETITIONS,
 } from "../config/endpoints";
 
 // Get Profile Datas
@@ -12,6 +13,17 @@ const fetchProfileData = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching profile data:", error);
+    throw error;
+  }
+};
+
+// PUT profile datas
+const putProfileData = async (data) => {
+  try {
+    const response = await axiosInstance.put(API_PROFILE_DATA, data);
+    return response;
+  } catch (error) {
+    console.error("Error sending profile data:", error);
     throw error;
   }
 };
@@ -29,15 +41,34 @@ const fetchAllEvents = async () => {
 };
 
 // Get events registered by user
-const fetchEventsByUserId = async () => {
+const fetchRegisteredEvents = async () => {
   try {
-    const response = await axiosInstance.get(API_GET_EVENT_BY_ID);
-    // console.log(response)
-    return response.data.eventList;
+    const response = await axiosInstance.get(API_GET_USER_REGISTERED_EVENTS);
+    // console.log(response);
+    return response.data.events;
   } catch (error) {
-    console.error("Error fetching registered events:", error);
+    console.error("Error fetching registered event(s):", error);
     throw error;
   }
 };
 
-export { fetchProfileData, fetchEventsByUserId, fetchAllEvents };
+// Get competitions registered by user
+const fetchRegisteredCompetitions = async () => {
+  try {
+    const response = await axiosInstance.get(
+      API_GET_USER_REGISTERED_COMPETITIONS
+    );
+    // console.log(response);
+    return response.data.competitions;
+  } catch (error) {
+    console.error("Error fetching registered competition(s):", error);
+    throw error;
+  }
+};
+
+export {
+  fetchProfileData,
+  putProfileData,
+  fetchRegisteredEvents,
+  fetchAllEvents,
+};

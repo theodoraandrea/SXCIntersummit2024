@@ -7,7 +7,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3001/auth/google/callback",
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -15,6 +15,22 @@ passport.use(
           where: { oauthId: profile.id },
         });
         if (currentUser) {
+          // Check if username or picture changed
+          let needsUpdate = false;
+          if (currentUser.username !== profile.name.givenName) {
+            currentUser.username = profile.name.givenName;
+            needsUpdate = true;
+          }
+
+          if (currentUser.picture !== profile.photos[0]?.value) {
+            currentUser.picture = profile.photos[0]?.value;
+            needsUpdate = true;
+          }
+
+          // Save only if there are changes
+          if (needsUpdate) {
+            await currentUser.save();
+          }
           return done(null, currentUser);
         } else {
           const newUser = await User.create({

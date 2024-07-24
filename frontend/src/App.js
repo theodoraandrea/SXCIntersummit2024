@@ -8,10 +8,10 @@ import {
   HOME,
   HOME2,
   HOME3,
-  REGISTER,
-  FILL_DETAILS,
-  USER_DASHBOARD,
-  ABOUT,
+  REGISTER_PAGE,
+  FILL_DETAILS_PAGE,
+  USER_DASHBOARD_PAGE,
+  ABOUT_PAGE,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -23,10 +23,10 @@ export default function App() {
           <Route path={HOME} element={<Home />} />
           <Route path={HOME2} element={<Home />} />
           <Route path={HOME3} element={<Home />} />
-          <Route path={ABOUT} element={<About />} />
-          <Route path={REGISTER} element={<Register1 />} />
-          <Route path={FILL_DETAILS} element={<Register2 />} />
-          <Route path={USER_DASHBOARD} element={<UserDashboard />} />
+          <Route path={ABOUT_PAGE} element={<About />} />
+          <Route path={REGISTER_PAGE} element={<Register1 />} />
+          <Route path={FILL_DETAILS_PAGE} element={<Register2 />} />
+          <Route path={USER_DASHBOARD_PAGE} element={<UserDashboard />} />
         </Routes>
       </Router>
     </UserProvider>

@@ -11,8 +11,9 @@ router.put(
   "/",
   isAuthenticated,
   [
-    body("username").notEmpty().withMessage("Username is required"),
+    body("username").optional().notEmpty().withMessage("Username is required"),
     body("fullname")
+      .optional()
       .notEmpty()
       .withMessage("Fullname is required")
       .isAlpha("en-US", {
@@ -20,10 +21,13 @@ router.put(
       })
       .withMessage("Fullname must be in alphabets"),
     body("gender")
+      .optional()
       .isIn(["Male", "Female"])
+      .withMessage("Gender must be male or female"),
+    body("institution")
+      .optional()
       .notEmpty()
-      .withMessage("Gender is required and must be male or female"),
-    body("institution").notEmpty().withMessage("Institution is required"),
+      .withMessage("Institution is required"),
     body("major").optional().isString().withMessage("Major must be a text"),
     body("batch")
       .optional()
@@ -32,6 +36,7 @@ router.put(
       })
       .withMessage("Batch must be a valid number"),
     body("phoneNumber")
+      .optional()
       .notEmpty()
       .withMessage("Phone number is required")
       .isMobilePhone("id-ID")
