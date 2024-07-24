@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 const User = require("../models/user");
+const Registration = require("../models/registration");
 
 const BusinessMasterClass = sequelize.define(
   "BusinessMasterClass",
@@ -10,11 +11,10 @@ const BusinessMasterClass = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    userId: {
+    registrationId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
-        model: "users",
+        model: "registrations",
         key: "id",
       },
     },
@@ -42,7 +42,4 @@ const BusinessMasterClass = sequelize.define(
   }
 );
 
-BusinessMasterClass.belongsTo(User, {
-  onDelete: "CASCADE",
-});
 module.exports = BusinessMasterClass;

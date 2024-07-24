@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize");
 
-const database = new Sequelize("sxcdatabase", "root", "root", {
+const database = new Sequelize("sxcsummitdb", "root", "root", {
   host: "localhost",
   dialect: "mysql",
 });

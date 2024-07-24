@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 const User = require("../models/user");
+const Registration = require("../models/registration");
 
 const Chamber = sequelize.define(
   "Chamber",
@@ -10,14 +11,13 @@ const Chamber = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    userId: {
+    registrationId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "users",
+        model: "registrations",
         key: "id",
       },
     },
-
     industryType: {
       type: DataTypes.ENUM,
       values: ["Start Up", "BUMN", "FMCG", "Consulting"],
@@ -37,9 +37,5 @@ const Chamber = sequelize.define(
     timestamps: true,
   }
 );
-
-Chamber.belongsTo(User, {
-  onDelete: "CASCADE",
-});
 
 module.exports = Chamber;
