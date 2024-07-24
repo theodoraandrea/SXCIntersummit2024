@@ -45,7 +45,7 @@ export default function DetailEvents() {
               <div className="ml-4">
                 <h3 className="font-bold">Open Registration</h3>
                 <p>15 July 2024 - 19 July 2024</p>
-                <Link to="/events/detail-events/regist-events">
+                <Link to="/events/detail-events/regist-events-2">
                   <button className="bg-primary-2 px-4 py-2 rounded-lg text-white mt-2">
                     Regist Now
                   </button>

@@ -12,3 +12,4 @@ export const EVENTS_PAGE = "/events";
 export const USER_EVENTS_PAGE = "/user-dashboard/events";
 export const DETAIL_EVENTS ="/events/detail-events";
 export const REGIST_EVENTS = "/events/detail-events/regist-events"
+export const REGIST_EVENTS2 = "/events/detail-events/regist-events-2"
