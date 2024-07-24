@@ -4,9 +4,14 @@ const session = require("express-session");
 const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
+const dotenv = require("dotenv");
+const path = require("path");
 
 const db = require("./config/databaseConfig");
 require("./associations/association").entitiesAssociation();
+
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env";
+dotenv.config({ path: path.resolve(__dirname, envFile) });
 
 const app = express();
 const port = process.env.PORT;
