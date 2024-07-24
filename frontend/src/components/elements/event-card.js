@@ -13,7 +13,8 @@ const EventCard = ({title, description, category}) => {
                     <div className='text-black space-y-3 my-5 col-span-2'>
                         <h1 className='text-2xl font-extrabold'>{title}</h1>
                         <p>{description}</p>
-                        <Link to="/DetailEvents">
+                        
+                        <Link to="/events/detail-events">
                             <button className='bg-primary-2 px-5 rounded-lg py-2 my-4 text-white'>Read more</button>
                         </Link> 
                     </div>
