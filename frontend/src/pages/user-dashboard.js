@@ -9,6 +9,8 @@ import { REGISTER_PAGE, EVENTS_PAGE } from "../constants/routes";
 import { fetchRegisteredEvents } from "../service/services";
 import { getDaysUntilEvent, formatDate } from "../service/helpers";
 import profile from "./../images/person.png";
+import Footer from "./../components/footer";
+
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
@@ -200,6 +202,7 @@ export default function UserDashboard() {
           )}
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

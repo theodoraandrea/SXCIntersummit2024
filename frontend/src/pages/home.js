@@ -1,4 +1,5 @@
 import Navbar from "./../components/navbar";
+import Footer from "./../components/footer";
 import BgHero from "./../images/bg-home.png";
 import Timeline1 from "./../images/home1.png";
 import Timeline2 from "./../images/home2.png";
@@ -172,6 +173,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

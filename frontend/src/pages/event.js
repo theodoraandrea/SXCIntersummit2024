@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import EventCard from './../components/elements/event-card';
 import Navbar from "./../components/navbar";
-import { Link } from 'react-router-dom';
+import Footer from "./../components/footer";
 
 const events = [
   { title: 'Event 01', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.', category: 'Workshop' },
@@ -45,6 +45,7 @@ const Events = () => {
           ))}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
