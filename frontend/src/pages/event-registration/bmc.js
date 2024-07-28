@@ -27,9 +27,20 @@ const SecondView = ({ title, description, onNext }) => (
                     Download Agreement Paper
                 </button>
                 <p className='text-lg text-white mb-6'>{description}</p>
-                <button className='bg-primary-3 text-white px-6 py-2 rounded-full'>
-                    Submit Agreement Paper
-                </button>
+                <div className='relative inline-block'>
+                    <input 
+                    type='file'
+                    id="file-upload" 
+                    name='agreement-paper'
+                    className='absolute inset-0 opacity-0 cursor-pointer'
+                    />
+                    <label
+                        htmlFor='file-upload'
+                        className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                    >
+                        Submit Agreement Paper 
+                    </label>
+                </div>
                 <button className='bg-primary-3 text-white px-6 py-2 rounded-full' onClick={onNext}>
                     Next
                 </button>
@@ -45,15 +56,37 @@ const ThirdView = ({ onPrevious, onNext }) => {
         email: '',
         phoneNumber: ''
     });
+    const [emailError, setEmailError] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({ ...prevState, [name]: value }));
+
+        if (name === 'email') {
+            const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!gmailRegex.test(value)) {
+                setEmailError('Email must be a valid @gmail.com address');
+            } else {
+                setEmailError('');
+            }
+        }
+
+        if (name === 'phoneNumber') {
+            const phoneRegex = /^\+62/;
+            if (!phoneRegex.test(value)) {
+                setPhoneError('Phone number must start with +62');
+            } else {
+                setPhoneError('');
+            }
+        }
     };
 
     const handleSubmit = () => {
-        console.log("Form Data Submitted: ", formData);
-        onNext();
+        if (!emailError && !phoneError) {
+            console.log("Form Data Submitted: ", formData);
+            onNext();
+        }
     };
 
     return (
@@ -76,14 +109,17 @@ const ThirdView = ({ onPrevious, onNext }) => {
                         </div>
                         <div className='mb-4'>
                             <label className='block text-white mb-2' htmlFor='gender'>Gender</label>
-                            <input
-                                type='text'
+                            <select
                                 id='gender'
                                 name='gender'
                                 value={formData.gender}
                                 onChange={handleChange}
                                 className='w-full px-3 py-2 rounded-lg'
-                            />
+                            >
+                                <option value="" disabled>Select Gender</option>
+                                <option value="perempuan">Perempuan</option>
+                                <option value="lakilaki">Laki-laki</option>
+                            </select>
                         </div>
                         <div className='mb-4'>
                             <label className='block text-white mb-2' htmlFor='email'>Email</label>
@@ -95,6 +131,7 @@ const ThirdView = ({ onPrevious, onNext }) => {
                                 onChange={handleChange}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
+                            {emailError && <p className='text-red-500'>{emailError}</p>}
                         </div>
                         <div className='mb-4'>
                             <label className='block text-white mb-2' htmlFor='phoneNumber'>Phone Number</label>
@@ -106,11 +143,13 @@ const ThirdView = ({ onPrevious, onNext }) => {
                                 onChange={handleChange}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
+                            {phoneError && <p className='text-red-500'>{phoneError}</p>}
                         </div>
                         <button
                             type='button'
                             onClick={handleSubmit}
                             className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                            disabled={emailError || phoneError}
                         >
                             Submit
                         </button>
@@ -233,17 +272,27 @@ const FifthView = ({ onPrevious, onNext }) => {
     );
 };
 
-const SixthView = ({ onPrevious, onNext }) => (
+const SixthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
     <div>
         <Navbar />
         <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>Have you ever participated in a business competition before?</h1>
                 <div className='grid grid-cols-2 gap-4'>
-                    <button className='bg-primary-3 text-white px-6 py-2 rounded-full' onClick={onNext}>
+                    {/* I have - goes to seventh view */}
+                    <button 
+                        className='bg-primary-3 text-white px-6 py-2 rounded-full' 
+                        onClick={onNextHave} 
+                        aria-label='I have'
+                    >
                         I have
                     </button>
-                    <button className='bg-primary-3 text-white px-6 py-2 rounded-full' onClick={onNext}>
+                    {/* I have not - goes to eighth view */}
+                    <button 
+                        className='bg-primary-3 text-white px-6 py-2 rounded-full' 
+                        onClick={onNextHaveNot} 
+                        aria-label='I have not'
+                    >
                         I have not
                     </button>
                 </div>
@@ -399,6 +448,7 @@ const TenthView = ({ onPrevious }) => {
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>Connect with us!</h1>
                     <form className='text-left'>
+                        {/* setiap selesai chekck list harus upload gambar  */}
                         <div className='mb-4'>
                             <label className='block text-white mb-2'>
                                 <input
@@ -435,13 +485,28 @@ const TenthView = ({ onPrevious }) => {
                                 I have followed @SxCIntersummit Instagram account
                             </label>
                         </div>
-                        <button
-                            type='button'
-                            onClick={handleSubmit}
-                            className='bg-primary-3 text-white px-6 py-2 rounded-full'
-                        >
-                            Submit
-                        </button>
+                        <div className='flex gap-3'>
+                            <div className='my-4 relative'>
+                                <input
+                                    type='file'
+                                    id='file-upload2'
+                                    className='absolute inset-0 opacity-0 cursor-pointer'
+                                />
+                                <label
+                                    htmlFor='file-upload2'
+                                    className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                                >
+                                    Submit Your Proof (screenshoot)!
+                                </label>
+                            </div>
+                            <button
+                                type='button'
+                                onClick={handleSubmit}
+                                className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                            >
+                                Submit
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -465,6 +530,10 @@ const EventCard = () => {
         setCurrentView(prevView => prevView - 1);
     };
 
+    const handleNext2 = () => {
+        setCurrentView(prevView => prevView + 2);
+    }
+
     switch (currentView) {
         case 1:
             return <FirstView {...eventData} onNext={handleNext} />;
@@ -477,7 +546,7 @@ const EventCard = () => {
         case 5:
             return <FifthView onPrevious={handlePrevious} onNext={handleNext} />;
         case 6:
-            return <SixthView onPrevious={handlePrevious} onNext={handleNext} />;
+            return <SixthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext2} />;
         case 7:
             return <SeventhView onPrevious={handlePrevious} onNext={handleNext} />;
         case 8:
