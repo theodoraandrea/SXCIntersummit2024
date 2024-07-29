@@ -7,8 +7,8 @@ const corsMiddleware = require("./middlewares/corsMiddleware");
 
 const db = require("./config/databaseConfig");
 
-// require("./associations/association").entitiesAssociation();
-//require("./associations/association").competitionAssociations();
+require("./associations/association").eventAssociations();
+require("./associations/association").competitionAssociations();
 
 const app = express();
 const port = process.env.PORT;
