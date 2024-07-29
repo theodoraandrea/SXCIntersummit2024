@@ -5,7 +5,7 @@ const BMC = require("../models/bmc");
 const CompanyVisit = require("../models/companyvisit");
 const Summit = require("../models/summit");
 const Event = require("../models/event");
-const Registration = require("../models/registration");
+const EventRegistration = require("../models/eventregistrations");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -20,7 +20,7 @@ exports.getRegisteredEventsByUser = async (req, res) => {
     const id = req.user.id;
     const events = await Event.findAll({
       include: {
-        model: Registration,
+        model: EventRegistration,
         where: {
           userId: id,
         },

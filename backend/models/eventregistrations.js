@@ -1,11 +1,11 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
-const User = require("../models/user");
-const Event = require("../models/event");
-const Chamber = require("../models/chamber");
+const User = require("./user");
+const Event = require("./event");
+const Chamber = require("./chamber");
 
-const Registration = sequelize.define(
-  "Registration",
+const EventRegistration = sequelize.define(
+  "EventRegistration",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -29,8 +29,8 @@ const Registration = sequelize.define(
   },
   {
     timestamps: true,
-    tableName: "registrations",
+    tableName: "eventregistrations",
   }
 );
 
-module.exports = Registration;
+module.exports = EventRegistration;
