@@ -1,6 +1,6 @@
 const passport = require("passport");
 const Validator = require("validatorjs");
-const User = require("../models/user");
+const User = require("../models");
 const {
   REGISTER_PAGE,
   FILL_DETAILS_PAGE,
