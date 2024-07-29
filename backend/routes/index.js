@@ -9,6 +9,6 @@ const fceoRoutes = require("./fceoRoutes");
 router.use("/auth", authRoutes);
 router.use("/profile", profileRoutes);
 router.use("/events", eventRoutes);
-router.use("/fceo");
+router.use("/fceo", fceoRoutes);
 
 module.exports = router;
