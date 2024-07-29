@@ -1,12 +1,14 @@
 const User = require("../models/user");
 const Event = require("../models/event");
+const Competition = require("../models/competition");
 const EventRegistration = require("../models/eventregistrations");
+const CompetitionRegistration = require("../models/competitionregistrations");
 const BMC = require("../models/bmc");
 const CompanyVisit = require("../models/companyvisit");
 const Chamber = require("../models/chamber");
 const Summit = require("../models/summit");
 
-exports.entitiesAssociation = () => {
+exports.eventAssociations = () => {
   User.hasMany(EventRegistration, {
     foreignKey: "userId",
   });
@@ -40,9 +42,22 @@ exports.entitiesAssociation = () => {
   EventRegistration.hasOne(CompanyVisit, { foreignKey: "registrationId" });
   EventRegistration.hasOne(Chamber, { foreignKey: "registrationId" });
   EventRegistration.hasOne(BMC, { foreignKey: "registrationId" });
+};
 
-  // EventRegistration.belongsTo(Summit, { foreignKey: "registrationId" });
-  // Registration.belongsTo(CompanyVisit, { foreignKey: "registrationId" });
-  // Registration.belongsTo(Chamber, { foreignKey: "registrationId" });
-  // Registration.belongsTo(BMC, { foreignKey: "registrationId" });
+exports.competitionAssociations = () => {
+  User.hasMany(CompetitionRegistration, {
+    foreignKey: "userId",
+  });
+
+  Competition.hasMany(CompetitionRegistration, {
+    foreignKey: "competitionId",
+  });
+
+  CompetitionRegistration.belongsTo(User, {
+    foreignKey: "userId",
+  });
+
+  CompetitionRegistration.belongsTo(Competition, {
+    foreignKey: "competitionId",
+  });
 };

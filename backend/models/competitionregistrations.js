@@ -1,15 +1,15 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
-const User = require("./user");
-const Event = require("./event");
+const User = require("../models/user");
+const Competition = require("../models/competition");
 
-const EventRegistration = sequelize.define(
-  "EventRegistration",
+const CompetitionRegistration = sequelize.define(
+  "CompetitionRegistration",
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -18,18 +18,18 @@ const EventRegistration = sequelize.define(
         key: "id",
       },
     },
-    eventId: {
+    competitionId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "events",
+        model: "competitions",
         key: "id",
       },
     },
   },
   {
     timestamps: true,
-    tableName: "eventregistrations",
+    tableName: "competitionregistrations",
   }
 );
 
-module.exports = EventRegistration;
+module.exports = CompetitionRegistration;

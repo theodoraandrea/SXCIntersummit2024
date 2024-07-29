@@ -6,10 +6,13 @@ const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
 
 const db = require("./config/databaseConfig");
-require("./associations/association").entitiesAssociation();
+
+// require("./associations/association").entitiesAssociation();
+//require("./associations/association").competitionAssociations();
 
 const app = express();
 const port = process.env.PORT;
+
 // Database Connection
 db.authenticate()
   .then(() => {
@@ -20,9 +23,9 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// db.sync({ alter: true })
+// CompetitionRegistration.sync({ alter: true })
 //   .then(() => {
-//     console.log("Summit added");
+//     console.log("Competition added");
 //   })
 //   .catch((err) => {
 //     console.log("ERROR");
