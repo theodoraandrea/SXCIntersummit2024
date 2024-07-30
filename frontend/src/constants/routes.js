@@ -13,3 +13,4 @@ export const USER_EVENTS_PAGE = "/user-dashboard/events";
 export const DETAIL_EVENTS ="/events/detail-events";
 export const REGIST_EVENTS = "/events/detail-events/regist-events"
 export const REGIST_EVENTS2 = "/events/detail-events/regist-events-2"
+export const REGIST_EVENTS3 = "/events/detail-events/regist-events-2/regist-events-3"

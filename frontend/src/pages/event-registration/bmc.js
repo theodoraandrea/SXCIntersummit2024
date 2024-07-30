@@ -8,6 +8,18 @@ const FirstView = ({ title, description, onNext }) => (
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>{title}</h1>
                 <p className='text-lg text-white mb-6'>{description}</p>
+                <div className='mb-4'>
+                    <label className='block text-white mb-2' htmlFor='selectType'></label>
+                    <select
+                        id='selectType'
+                        name='selectType'
+                        className='w-full px-3 py-2 rounded-lg'
+                    >
+                        <option value="" disabled>Select Gender</option>
+                        <option value="Business Case Competition">Business Case Competition</option>
+                        <option value="Business Plan Competition">Business Plan Competition</option>
+                    </select>
+                </div>
                 <button className='bg-primary-3 text-white px-6 py-2 rounded-full' onClick={onNext}>
                     Next
                 </button>
@@ -460,6 +472,19 @@ const TenthView = ({ onPrevious }) => {
                                 />
                                 I have followed @SxCIntersummit Instagram account
                             </label>
+                            <div className='my-4 relative'>
+                                <input
+                                    type='file'
+                                    id='file-upload2'
+                                    className='absolute inset-0 opacity-0 cursor-pointer'
+                                />
+                                <label
+                                    htmlFor='file-upload2'
+                                    className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                                >
+                                    Submit Your Proof (screenshoot)!
+                                </label>
+                            </div>
                         </div>
                         <div className='mb-4'>
                             <label className='block text-white mb-2'>
@@ -470,11 +495,24 @@ const TenthView = ({ onPrevious }) => {
                                     onChange={handleChange}
                                     className='mr-2'
                                 />
-                                I have followed @SxCIntersummit Instagram account
+                                I have reposted BMC Poster Feed to Instagram Story and tag 3 people
                             </label>
+                            <div className='my-4 relative'>
+                                <input
+                                    type='file'
+                                    id='file-upload2'
+                                    className='absolute inset-0 opacity-0 cursor-pointer'
+                                />
+                                <label
+                                    htmlFor='file-upload2'
+                                    className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                                >
+                                    Submit Your Proof (screenshoot)!
+                                </label>
+                            </div>
                         </div>
-                        <div className='mb-4'>
-                            <label className='block text-white mb-2'>
+                        <div className=''>
+                            <label className='block text-white'>
                                 <input
                                     type='checkbox'
                                     name='follow3'
@@ -482,11 +520,11 @@ const TenthView = ({ onPrevious }) => {
                                     onChange={handleChange}
                                     className='mr-2'
                                 />
-                                I have followed @SxCIntersummit Instagram account
+                                I have liked and commented on BMC Poster Feed
                             </label>
                         </div>
                         <div className='flex gap-3'>
-                            <div className='my-4 relative'>
+                             <div className='my-4 relative'>
                                 <input
                                     type='file'
                                     id='file-upload2'
