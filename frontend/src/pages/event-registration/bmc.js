@@ -15,7 +15,7 @@ const FirstView = ({ title, description, onNext }) => (
                         name='selectType'
                         className='w-full px-3 py-2 rounded-lg'
                     >
-                        <option value="" disabled>Select Gender</option>
+                        <option value="" disabled>Select Competition</option>
                         <option value="Business Case Competition">Business Case Competition</option>
                         <option value="Business Plan Competition">Business Plan Competition</option>
                     </select>
