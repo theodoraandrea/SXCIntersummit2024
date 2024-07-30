@@ -20,6 +20,7 @@ export default function Register() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     if (!loading) {
       if (isLoggedIn) {
@@ -28,6 +29,7 @@ export default function Register() {
       }
     }
   }, [loading, isLoggedIn, profileData]);
+  
 
   // function buat ngilangin error message waktu user isi field masing2
   useEffect(() => {
@@ -63,7 +65,6 @@ export default function Register() {
     const sanitizedInstitution = sanitizeInput(institution);
     const sanitizedMajor = sanitizeInput(major);
     const sanitizedPhoneNumber = sanitizeInput(phoneNumber);
-    const sanitizedBatch = sanitizeInput(batch);
 
     const data = {
       fullname: sanitizedFullName,

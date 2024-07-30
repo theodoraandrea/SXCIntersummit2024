@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
-import { DummyProfileData } from "../constants/dummy/userdata";
-import { DummyEventsData } from "../constants/dummy/eventsdata";
 import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate } from "react-router-dom";

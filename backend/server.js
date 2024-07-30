@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
@@ -10,6 +11,7 @@ require("./associations/association").entitiesAssociation();
 
 const app = express();
 const port = process.env.PORT;
+
 // Database Connection
 db.authenticate()
   .then(() => {
@@ -19,25 +21,15 @@ db.authenticate()
     console.log(err);
   });
 
-// Database Table synchronizing
-// db.sync({ alter: true })
-//   .then(() => {
-//     console.log("Summit added");
-//   })
-//   .catch((err) => {
-//     console.log("ERROR");
-//     console.log(err.message);
-//   });
-
 // CORS configuration
 app.use(corsMiddleware);
 
 // Session middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 

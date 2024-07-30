@@ -5,13 +5,12 @@ const router = express.Router();
 const profileControllers = require("../controllers/profileControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 
-router.get("/", isAuthenticated, profileControllers.getProfile);
+router.post("/", profileControllers.getProfile);
 
 router.put(
   "/",
   isAuthenticated,
   [
-    body("username").optional().notEmpty().withMessage("Username is required"),
     body("fullname")
       .optional()
       .notEmpty()
