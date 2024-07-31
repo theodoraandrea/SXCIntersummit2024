@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import Navbar from "./../components/navbar";
 import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
-import { useNavigate } from "react-router-dom";
-import { REGISTER_PAGE, EVENTS_PAGE } from "../constants/routes";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import { EVENTS_PAGE, LANDING_PAGE, USER_DETAILS_PAGE } from "../constants/routes";
 import { fetchRegisteredEvents } from "../service/services";
 import { getDaysUntilEvent, formatDate } from "../service/helpers";
 import profile from "./../images/person.png";
@@ -17,6 +17,7 @@ export default function UserDashboard() {
   const [registeredEventsData, setRegisteredEventsData] = useState([]);
   const [competitionsData, setCompetitionsData] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!loading) {
@@ -29,15 +30,15 @@ export default function UserDashboard() {
         //setRegisteredEventsData(DummyEventsData);
         setCompetitionsData(DummyCompetitionsData);
       } else {
-        navigate(REGISTER_PAGE);
+        navigate(LANDING_PAGE);
       }
     }
   }, [loading, isLoggedIn, profileData]);
 
   const fetchRegisteredEventsData = async () => {
     try {
+      console.log("in fetchRegisteredEventsData...");
       const response = await fetchRegisteredEvents();
-      // console.log(response);
       setRegisteredEventsData(response);
     } catch (error) {
       // bisa taro function buat display error message dsini (maybe alert, etc)
@@ -46,21 +47,32 @@ export default function UserDashboard() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar 
+        currentPath={location.pathname}
+      />
       {/* Profile Section */}
-      <section className="bg-primary-4 grid grid-cols-[auto,1fr] py-12">
-        <div className="flex items-center justify-center ml-36 w-28 h-28">
+      <section className="bg-primary-4 flex items-center py-12 px-20">
+        <div className="flex items-center justify-center w-28 h-28">
           <img
-            src={userData?.picture}
+            src={userData?.picture ?? profile}
             alt="Profile Picture"
-            className="w-24 h-24 rounded-full mb-4"
+            className="w-24 h-24 rounded-full"
           />
         </div>
-        <div className="ml-5 mt-5">
+        <div className="ml-5">
           <h2 className="text-2xl font-bold text-white ">
             {userData?.fullname}
           </h2>
-          <p className="text-white">{userData?.email}</p>
+          <p className="text-white">{userData?.email} | {userData?.phoneNumber} </p>
+          <p className="text-white">{userData?.institution}</p>
+          <p className="text-white">{userData?.major} {userData?.batch}</p>
+        </div>
+        <div className="ml-auto">
+        <Link to={USER_DETAILS_PAGE}>
+          <button className="bg-primary-2 text-white px-4 py-2 rounded">
+            Edit Profile
+          </button>
+        </Link>
         </div>
       </section>
 

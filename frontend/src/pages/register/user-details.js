@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from "react";
 import bg from "./../../images/Kiri.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { putProfileData } from "../../service/services";
-import { HOME, REGISTER_PAGE } from "../../constants/routes";
+import { HOME, LANDING_PAGE } from "../../constants/routes";
 import { useUser } from "../../contexts/user-context";
 
-export default function Register() {
+export default function UserDetails() {
   const { isLoggedIn, profileData, loading } = useUser();
   const [fullName, setFullName] = useState("");
-  const [gender, setGender] = useState("");
-  const [institution, setInstitution] = useState("");
-  const [major, setMajor] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("+62 "); // For display
-  const [rawPhoneNumber, setRawPhoneNumber] = useState("62"); // For sending to backend
-  const [batch, setBatch] = useState("");
-  const [errors, setErrors] = useState({});
+  const [ gender, setGender ] = useState("");
+  const [ institution, setInstitution ] = useState("");
+  const [ major, setMajor ] = useState("");
+  const [ phoneNumber, setPhoneNumber ] = useState("+62 "); // For display
+  const [ batch, setBatch ] = useState("");
+  const [ errors, setErrors ] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!loading) {
       if (!isLoggedIn) {
-        navigate(REGISTER_PAGE);
-      } else if (profileData.fullName) {
-        navigate(HOME);
+        navigate(LANDING_PAGE);
+      }
+
+      if (profileData) {
+        setFullName(profileData.fullname);
+        setMajor(profileData.major);
+        setInstitution(profileData.institution);
+        setBatch(profileData.batch);
+        setPhoneNumber(profileData.phoneNumber);
+        setGender(profileData.gender);
       }
     }
   }, [loading, isLoggedIn, profileData]);
@@ -57,13 +63,14 @@ export default function Register() {
     e.preventDefault();
 
     const data = {
-      fullname: fullName,
+      fullname: sanitizeInput(fullName),
       gender: gender,
-      institution: institution,
-      major: major,
-      phoneNumber: rawPhoneNumber,
+      institution: sanitizeInput(institution),
+      major: sanitizeInput(major),
+      phoneNumber: phoneNumber,
       batch: batch,
     };
+
     console.log(data);
     const newErrors = {};
 
@@ -81,7 +88,7 @@ export default function Register() {
     }
 
     try {
-      console.log("data from register2: ", data);
+      console.log("data from user-details: ", data);
       const response = await putProfileData(data);
       console.log(response);
       if (response.status === 200) {
@@ -95,21 +102,6 @@ export default function Register() {
 
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
-  };
-
-  const handleFullNameChange = (e) => {
-    const inputValue = e.target.value;
-    setFullName(sanitizeInput(inputValue));
-  };
-
-  const handleInstitutionChange = (e) => {
-    const inputValue = e.target.value;
-    setInstitution(sanitizeInput(inputValue));
-  };
-
-  const handleMajorChange = (e) => {
-    const inputValue = e.target.value;
-    setMajor(sanitizeInput(inputValue));
   };
 
   const handlePhoneNumberChange = (e) => {
@@ -127,7 +119,6 @@ export default function Register() {
     );
 
     setPhoneNumber(formattedValue);
-    setRawPhoneNumber(numericValue);
   };
 
   // Constants for Batches
@@ -171,7 +162,7 @@ export default function Register() {
                 type="text"
                 placeholder="Full Name"
                 value={fullName}
-                onChange={handleFullNameChange}
+                onChange={(e)=>setFullName(e.target.value)}
               />
               {errors.fullname && (
                 <p className="text-red-500 text-xs mt-1">{errors.fullname}</p>
@@ -221,7 +212,7 @@ export default function Register() {
                 type="text"
                 placeholder="Institution"
                 value={institution}
-                onChange={handleInstitutionChange}
+                onChange={(e)=>setInstitution(e.target.value)}
               />
               <small className="text-gray-400">
                 Example: Universitas Indonesia
@@ -246,7 +237,7 @@ export default function Register() {
                 type="text"
                 placeholder="Major"
                 value={major}
-                onChange={handleMajorChange}
+                onChange={(e)=>setMajor(e.target.value)}
               />
               <small className="text-gray-400">Example: Computer Science</small>
               {errors.major && (

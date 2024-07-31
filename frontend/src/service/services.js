@@ -62,6 +62,7 @@ const fetchProfileData = async (data) => {
 // PUT profile datas
 const putProfileData = async (data) => {
   try {
+    console.log("putProfileData data ", data);
     const response = await axiosInstance.put(API_PROFILE_DATA, data);
     return response;
   } catch (error) {
@@ -86,7 +87,6 @@ const fetchAllEvents = async () => {
 const fetchRegisteredEvents = async () => {
   try {
     const response = await axiosInstance.get(API_GET_USER_REGISTERED_EVENTS);
-    // console.log(response);
     return response.data.events;
   } catch (error) {
     console.error("Error fetching registered event(s):", error);

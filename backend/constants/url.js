@@ -1,6 +1,6 @@
 const FRONTEND_URL = "http://localhost:3000";
-const REGISTER_PAGE = `${FRONTEND_URL}/register1`;
-const FILL_DETAILS_PAGE = `${FRONTEND_URL}/register1/register2`;
+const REGISTER_PAGE = `${FRONTEND_URL}/landing`;
+const USER_DETAILS_PAGE = `${FRONTEND_URL}/user-details`;
 const HOME_PAGE = `${FRONTEND_URL}/`;
 
-module.exports = { HOME_PAGE, REGISTER_PAGE, FILL_DETAILS_PAGE };
+module.exports = { HOME_PAGE, REGISTER_PAGE, USER_DETAILS_PAGE };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "./../images/logo.png";
 import profile from "./../images/person.png";
 import { useUser } from "../contexts/user-context";
@@ -7,44 +7,58 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import {
   HOME,
-  REGISTER_PAGE,
+  LANDING_PAGE,
   USER_DASHBOARD_PAGE,
   ABOUT_PAGE,
   EVENTS_PAGE,
 } from "../constants/routes";
 
-export default function NavbarUser() {
+export default function NavbarUser({ currentPath }) {
   const { isLoggedIn, removeUser } = useUser();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handleScrollToSponsorship = () => {
-    const element = document.getElementById('sponsorship');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentPath !== HOME) {
+      navigate(HOME);
+      console.log("AT HOME");
+      console.log(currentPath);
+    } else {
+      const element = document.getElementById('sponsorship');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
-    <nav className="bg-primary-1 w-full h-16 flex items-center justify-between px-10 sticky top-0">
+<nav className="bg-primary-1 w-full h-16 flex items-center px-10 sticky top-0">
       <img src={logo} alt="logo" className="w-32" />
-      <ul className="flex space-x-20">
-        <li className="ml-auto">
-          <Link to={HOME} className="text-white hover:underline cursor-pointer">
+      <ul className="flex flex-grow items-center space-x-10 ml-10">
+        <li>
+          <Link
+            to={HOME}
+            className={`text-white hover:font-semibold ${currentPath === HOME ? 'font-semibold text-yellow-500' : 'hover:text-yellow-500'}`}
+          >
             Home
           </Link>
         </li>
-        <li className="ml-auto">
-          <Link to={ABOUT_PAGE} className="text-white hover:underline cursor-pointer">
+        <li>
+          <Link
+            to={ABOUT_PAGE}
+            className={`text-white hover:font-semibold ${currentPath === ABOUT_PAGE ? 'font-semibold text-yellow-500' : 'hover:text-yellow-500'}`}
+          >
             About
           </Link>
         </li>
-        <li className="ml-auto relative">
+        <li className="relative">
           <button 
-            onClick={toggleDropdown} 
-            className="text-white hover:underline cursor-pointer flex items-center"
+            onClick={toggleDropdown}
+            className={`flex items-center text-white hover:font-semibold ${currentPath === EVENTS_PAGE ? 'font-semibold text-yellow-500' : 'hover:text-yellow-500'}`}
           >
             Events
             <svg 
@@ -90,49 +104,50 @@ export default function NavbarUser() {
             </div>
           )}
         </li>
-        <li className="ml-auto">
+        <li>
           <button
             onClick={handleScrollToSponsorship}
-            className="text-white hover:underline cursor-pointer"
+            className="text-white hover:font-semibold hover:text-yellow-500"
           >
             Partnership
           </button>
         </li>
-        <li className="ml-auto">
-          <Link to="#" className="text-white hover:underline cursor-pointer">
+        <li>
+          <Link
+            to="#"
+            className="text-white hover:font-semibold hover:text-yellow-500"
+          >
             Merchandise
           </Link>
         </li>
-
+      </ul>
+      <div className="ml-auto flex items-center space-x-4">
         {isLoggedIn ? (
           <>
-            <li>
-              <Link
-                to={USER_DASHBOARD_PAGE}
-                className="text-white hover:underline cursor-pointer"
-              >
-               <AccountCircleIcon style={{ marginRight: '8px' }} />
-                My profile
-              </Link>
-            </li>
-            <li>
-                <button onClick={removeUser}
-                className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer">
-                  Logout
-                </button>
-            </li>
+            <Link
+              to={USER_DASHBOARD_PAGE}
+              className={`flex items-center text-white hover:font-semibold ${currentPath === USER_DASHBOARD_PAGE ? 'font-semibold text-yellow-500' : 'hover:text-yellow-500'}`}
+            >
+              <AccountCircleIcon className="mr-2" />
+              My profile
+            </Link>
+            <button 
+              onClick={removeUser}
+              className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer"
+            >
+              Logout
+            </button>
           </>
         ) : (
-          <li>
-            <Link
-              to={REGISTER_PAGE}
-              className="text-white hover:underline px-4 py-2 rounded bg-primary-2 cursor-pointer"
-            >
-              Login
-            </Link>
-          </li>
+          <Link
+            to={LANDING_PAGE}
+            className="text-white hover:underline px-4 py-2 rounded bg-primary-2 cursor-pointer"
+          >
+            Login
+          </Link>
         )}
-      </ul>
+      </div>
     </nav>
+ 
   );
 }

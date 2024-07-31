@@ -8,8 +8,15 @@ import Timeline4 from "./../images/home4.png";
 import Timeline5 from "./../images/home5.png";
 import Timeline6 from "./../images/home6.png";
 import Circle from "./../images/sponsor.png";
+import { useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
+
+  const location = useLocation();
+
+  const partnershipRef = useRef(null);
+
   const partnerImages = [
     Circle,
     Circle,
@@ -30,7 +37,9 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar />
+      <Navbar 
+        currentPath={location.pathname}
+      />
       {/* Hero Section */}
       <section
         className="bg-cover bg-center h-screen flex flex-col justify-center"
@@ -122,7 +131,7 @@ export default function Home() {
       </section>
 
       {/* Partners Section */}
-      <section id="sponsorship" class="scroll-smooth" className="bg-primary-1 py-20">
+      <section id="sponsorship" className="bg-primary-1 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">

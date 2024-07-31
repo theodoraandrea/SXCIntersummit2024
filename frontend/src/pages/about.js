@@ -3,11 +3,17 @@ import BgHero from "./../images/bg-about.png";
 import logo from "./../images/sxc-jakarta.png";
 import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
+import { useLocation } from "react-router-dom";
 
 export default function About() {
+
+  const location = useLocation();
+  
   return (
     <div>
-      <Navbar />
+      <Navbar 
+        currentPath={location.pathname}
+      />
       {/* Hero Section */}
       <section
         className="bg-cover bg-center h-500 flex flex-col justify-center"
