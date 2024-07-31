@@ -25,7 +25,9 @@ const Events = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar 
+        currentPath={location.pathname}
+      />
       <div className="p-8 bg-primary-1 text-white min-h-screen">
         <div className="flex mx-auto">
           <div className="flex space-x-4 mb-4 mx-auto">
