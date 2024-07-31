@@ -19,7 +19,7 @@ const BusinessMasterClass = sequelize.define(
       },
     },
     agreement: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.JSON,
       allowNull: false,
     },
     sessionType: {
