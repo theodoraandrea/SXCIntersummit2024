@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from "../../components/navbar";
+import { Link } from 'react-router-dom';
 
 const MemberForm = ({ formData, handleChange }) => (
     <div>
@@ -59,9 +60,11 @@ const FutureCEOPage = () => {
                     <h1 className='text-3xl font-extrabold text-white mb-4'>Future CEO Team Registration</h1>
                     <form onSubmit={handleSubmit} className='text-left'>
                         <MemberForm formData={formData} handleChange={handleChange} />
-                        <button type='submit' className='bg-primary-3 text-white px-6 py-2 rounded-full'>
+                        <Link to="/events/detail-events/regist-events-2/summary">
+                            <button type='submit' className='bg-primary-3 text-white px-6 py-2 rounded-full'>
                             Submit
-                        </button>
+                            </button>
+                        </Link>
                     </form>
                 </div>
             </div>
