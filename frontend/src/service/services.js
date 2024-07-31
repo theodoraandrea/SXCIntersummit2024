@@ -4,13 +4,55 @@ import {
   API_GET_ALL_EVENTS,
   API_GET_USER_REGISTERED_EVENTS,
   API_GET_USER_REGISTERED_COMPETITIONS,
+  API_LOGIN,
+  API_SIGNUP,
 } from "../config/endpoints";
 
-// Get Profile Datas
-const fetchProfileData = async () => {
+
+//Login
+const login = async (data) => {
   try {
-    const response = await axiosInstance.get(API_PROFILE_DATA);
+    const response = await axiosInstance.post(API_LOGIN, data);
+    const token = response.data.token;
+    const userId = response.data.user.id;
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', userId);
     return response.data;
+  } catch (error) {
+    console.error("Error logging in: ", error);
+    if (error.response) {
+      throw new Error(error.response.data.message || 'Incorrrect email or password');
+    } else {
+      throw new Error('Network error');
+    }
+  }
+}
+
+//Register
+const register = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_SIGNUP, data);
+    const token = response.data.token;
+    const userId = response.data.user.id;
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', userId);
+    console.log("response from services.js/register:", response);
+    return response.data;
+  } catch (error) {
+    console.error("Error signing up: ", error);
+    if (error.response) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error("Network error");
+    }
+  }
+}
+
+// Get Profile Datas
+const fetchProfileData = async (data) => {
+  try {
+    const res = await axiosInstance.post(API_PROFILE_DATA, data);
+    return res.data;
   } catch (error) {
     console.error("Error fetching profile data:", error);
     throw error;
@@ -67,6 +109,8 @@ const fetchRegisteredCompetitions = async () => {
 };
 
 export {
+  login,
+  register,
   fetchProfileData,
   putProfileData,
   fetchRegisteredEvents,

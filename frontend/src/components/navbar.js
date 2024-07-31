@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import logo from "./../images/logo.png";
 import profile from "./../images/person.png";
 import { useUser } from "../contexts/user-context";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import {
   HOME,
   REGISTER_PAGE,
@@ -9,11 +11,12 @@ import {
   ABOUT_PAGE,
   EVENTS_PAGE,
 } from "../constants/routes";
-import { API_LOGOUT } from "../config/endpoints";
 
 export default function NavbarUser() {
-  const { profileData, isLoggedIn } = useUser();
-  // console.log(isLoggedIn)
+  const { profileData, isLoggedIn, removeUser } = useUser();
+
+  console.log(isLoggedIn);
+
   return (
     <nav className="bg-primary-1 w-full h-16 flex items-center justify-between px-10 sticky top-0">
       <img src={logo} alt="logo" className="w-32" />
@@ -55,21 +58,17 @@ export default function NavbarUser() {
             <li>
               <Link
                 to={USER_DASHBOARD_PAGE}
-                className=" gap-1 cursor-pointer flex items-center"
+                className="text-white hover:underline cursor-pointer"
               >
-                <img src={profile} alt="Profile" className="w-6 h-6 mr-1" />
-                <p className="text-white">Hello,</p>
-                <p className="text-white underline">
-                  {profileData?.username + "!" || "User!"}
-                </p>
+               <AccountCircleIcon style={{ marginRight: '8px' }} />
+                My profile
               </Link>
             </li>
             <li>
-              <Link to={API_LOGOUT}>
-                <p className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer">
+                <button onClick={removeUser}
+                className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer">
                   Logout
-                </p>
-              </Link>
+                </button>
             </li>
           </>
         ) : (
