@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from "../../components/navbar";
+import { Link } from 'react-router-dom';
 
 const LeaderForm = ({ formData, handleChange }) => (
     <div>
@@ -80,9 +81,11 @@ const FutureCEOPage = () => {
                                 className='w-full px-3 py-2 rounded-lg'
                             />
                         </div>
-                        <button type='submit' className='bg-primary-3 text-white px-6 py-2 rounded-full'>
-                            Submit
-                        </button>
+                        <Link to="/events/detail-events/regist-events-2/summary">
+                            <button type='submit' className='bg-primary-3 text-white px-6 py-2 rounded-full'>
+                                Submit
+                            </button>
+                        </Link>
                     </form>
                 </div>
             </div>
