@@ -1,3 +1,5 @@
+import { API_GET_TEAM_DETAILS_BY_USER } from "../config/endpoints";
+
 // Function to calculate days and hours until the event
 const getDaysUntilEvent = (eventDate) => {
   const today = new Date();
@@ -40,4 +42,9 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-export { getDaysUntilEvent, formatDate };
+// Function to get team detail url
+const getTeamDetailsUrl = (userId) => {
+  return API_GET_TEAM_DETAILS_BY_USER.replace(":userId", userId);
+};
+
+export { getDaysUntilEvent, formatDate, getTeamDetailsUrl };
