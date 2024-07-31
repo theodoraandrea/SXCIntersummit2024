@@ -9,13 +9,14 @@ const {
 
 exports.signup = async (req, res) => {
   try {
-    await User.create({
+    const user = await User.create({
       email: req.body.email, 
       password: req.body.password });
-    res.redirect(FILL_DETAILS_PAGE);
+    console.log("user from signup: ", user);
+    const token = generateToken(user);
+    return res.status(200).json({ token, user });
   } catch (err) {
     console.error(err);
-    return res.redirect(REGISTER_PAGE);
   }
 }
 

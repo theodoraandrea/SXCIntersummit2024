@@ -23,8 +23,7 @@ export default function Register() {
   
   useEffect(() => {
     if (!loading) {
-      if (isLoggedIn) {
-      } else {
+      if (!isLoggedIn) {
         navigate(REGISTER_PAGE);
       }
     }
@@ -92,25 +91,15 @@ export default function Register() {
     }
 
     try {
+      console.log("data from register2: ", data);
       const response = await putProfileData(data);
       console.log(response);
       if (response.status === 200) {
-        // console.log("Profile updated successfully");
+        console.log("Profile updated successfully");
         navigate(HOME);
       }
     } catch (error) {
       console.error("Network error:", error);
-      const errorData = await error?.response?.data;
-      const backendErrors = {};
-
-      errorData?.message?.forEach((error) => {
-        backendErrors[error.path] = error.msg;
-      });
-
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        ...backendErrors,
-      }));
     }
   };
 
@@ -129,7 +118,7 @@ export default function Register() {
           className="w-full max-w-xl px-6 py-8 rounded-lg shadow-lg text-white"
         >
           <h1 className="text-4xl font-bold mb-4 text-left">
-            Let Us Know More About You
+            Let us know more about you
           </h1>
 
           <div className="flex flex-wrap -mx-2">

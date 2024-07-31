@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import logo from "./../images/logo.png";
 import profile from "./../images/person.png";
 import { useUser } from "../contexts/user-context";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 import {
   HOME,
   REGISTER_PAGE,
@@ -56,13 +58,10 @@ export default function NavbarUser() {
             <li>
               <Link
                 to={USER_DASHBOARD_PAGE}
-                className=" gap-1 cursor-pointer flex items-center"
+                className="text-white hover:underline cursor-pointer"
               >
-                <img src={profile} alt="Profile" className="w-6 h-6 mr-1" />
-                <p className="text-white">Hello,</p>
-                <p className="text-white underline">
-                  {profileData?.fullname + "!" || "User!"}
-                </p>
+               <AccountCircleIcon style={{ marginRight: '8px' }} />
+                My profile
               </Link>
             </li>
             <li>

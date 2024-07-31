@@ -5,7 +5,7 @@ const router = express.Router();
 const profileControllers = require("../controllers/profileControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 
-router.post("/", profileControllers.getProfile);
+router.post("/", isAuthenticated, profileControllers.getProfile);
 
 router.put(
   "/",

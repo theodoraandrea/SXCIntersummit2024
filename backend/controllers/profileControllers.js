@@ -5,9 +5,7 @@ const User = require("../models/user");
 exports.getProfile = async (req, res) => {
   console.log("is in getprofile");
   try {
-    const { userId, token } = req.body;
-    console.log("user id in getProfile: " + userId);
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(req.user.id);
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ message: "Error fetching profile" });
