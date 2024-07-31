@@ -5,5 +5,5 @@ const eventControllers = require("../controllers/eventControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 
 router.get("/", isAuthenticated, eventControllers.getRegisteredEventsByUser);
-router.get("/all", isAuthenticated, eventControllers.getAllEvents);
+router.get("/all", eventControllers.getAllEvents);
 module.exports = router;
