@@ -24,7 +24,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// CompetitionRegistration.sync({ alter: true })
+// BMC.sync({ alter: true })
 //   .then(() => {
 //     console.log("Competition added");
 //   })
