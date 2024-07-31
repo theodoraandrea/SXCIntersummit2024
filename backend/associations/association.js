@@ -1,10 +1,14 @@
-const User = require("../models/user");
-const Event = require("../models/event");
-const Registration = require("../models/registration");
-const BMC = require("../models/bmc");
-const CompanyVisit = require("../models/companyvisit");
-const Chamber = require("../models/chamber");
-const Summit = require("../models/summit");
+const {
+  BMC,
+  Chamber,
+  CompanyVisit,
+  Event,
+  FCEOMember,
+  FCEOTeam,
+  Registration,
+  Summit,
+  User,
+} = require("../models");
 
 exports.entitiesAssociation = () => {
   User.hasMany(Registration, {
@@ -45,4 +49,29 @@ exports.entitiesAssociation = () => {
   // Registration.belongsTo(CompanyVisit, { foreignKey: "registrationId" });
   // Registration.belongsTo(Chamber, { foreignKey: "registrationId" });
   // Registration.belongsTo(BMC, { foreignKey: "registrationId" });
+
+  // FCEOTeam and FCEOMember associations
+  FCEOTeam.hasMany(FCEOMember, {
+    foreignKey: "teamId",
+    as: "members",
+  });
+  FCEOMember.belongsTo(FCEOTeam, {
+    foreignKey: "teamId",
+  });
+
+  // User and FCEOTeam/FCEOMember associations
+  User.hasMany(FCEOMember, {
+    foreignKey: "userId",
+  });
+  FCEOMember.belongsTo(User, {
+    foreignKey: "userId",
+  });
+
+  User.hasOne(FCEOTeam, {
+    foreignKey: "leaderId",
+    as: "teamLeader",
+  });
+  FCEOTeam.belongsTo(User, {
+    foreignKey: "leaderId",
+  });
 };

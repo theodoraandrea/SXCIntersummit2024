@@ -1,5 +1,5 @@
 const express = require("express");
-const { FCEOMember, FCEOTeam } = require("../models");
+const { FCEOMember, FCEOTeam, User } = require("../models");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
@@ -8,7 +8,7 @@ exports.createNewTeam = async (req, res) => {
     // const teamCode = Math.floor(100000 + Math.random() * 900000).toString();
 
     const newTeam = await FCEOTeam.create({
-      name,
+      teamName: name,
       leaderId,
       teamCode,
       proofOfPayment,
@@ -25,7 +25,7 @@ exports.createNewTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
-    const { userId, teamCode, isLeader } = req.body;
+    const { userId, teamCode, nationalStudentIdNumber, isLeader } = req.body;
 
     const team = await FCEOTeam.findOne({ where: { teamCode } });
 
@@ -37,6 +37,7 @@ exports.createNewFCEOMember = async (req, res) => {
       userId,
       teamId: team.id,
       isLeader,
+      nationalStudentIdNumber,
     });
 
     res
@@ -47,34 +48,45 @@ exports.createNewFCEOMember = async (req, res) => {
   }
 };
 
-// Get all details about a team by userId
+// Get team details and members by userId
 exports.getTeamDetailsByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    const member = await FCEOMember.findOne({ where: { userId } });
+    // Find member corresponding to the userId
+    const member = await FCEOMember.findOne({
+      where: { userId },
+    });
 
     if (!member) {
       return res.status(404).json({ error: "Member not found" });
     }
-    const team = await FCEOTeam.findOne({ where: { id: member.teamId } });
+
+    // Find team details using the teamId
+    const teamId = member.teamId;
+    const team = await FCEOTeam.findOne({
+      where: { id: teamId },
+    });
 
     if (!team) {
       return res.status(404).json({ error: "Team not found" });
     }
 
-    // Find all members of the team
-    const members = await FCEOMember.findAll({
-      where: { teamId: team.id },
+    // Find all members of the same team
+    const teamMembers = await FCEOMember.findAll({
+      where: { teamId },
       include: [
-        { model: User, attributes: ["fullname", "email", "phoneNumber"] },
-      ], // Include user details
+        {
+          model: User,
+          attributes: ["fullname", "email", "phoneNumber"],
+        },
+      ],
     });
 
     res.status(200).json({
-      teamName: team.name,
+      teamName: team.teamName,
       teamCode: team.teamCode,
-      members: members.map((member) => ({
+      members: teamMembers.map((member) => ({
         userId: member.userId,
         isLeader: member.isLeader,
         fullname: member.User.fullname,
