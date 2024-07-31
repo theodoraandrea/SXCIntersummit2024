@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      scrollBehavior: {
+        smooth: 'smooth',
+      },
       colors: {
         'primary-1': '#003337',
         'primary-2': '#01AFBA',

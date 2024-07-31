@@ -18,6 +18,13 @@ export default function NavbarUser() {
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
+  const handleScrollToSponsorship = () => {
+    const element = document.getElementById('sponsorship');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="bg-primary-1 w-full h-16 flex items-center justify-between px-10 sticky top-0">
       <img src={logo} alt="logo" className="w-32" />
@@ -82,9 +89,12 @@ export default function NavbarUser() {
           )}
         </li>
         <li className="ml-auto">
-          <Link to="#" className="text-white hover:underline cursor-pointer">
+          <button
+            onClick={handleScrollToSponsorship}
+            className="text-white hover:underline cursor-pointer"
+          >
             Partnership
-          </Link>
+          </button>
         </li>
         <li className="ml-auto">
           <Link to="#" className="text-white hover:underline cursor-pointer">
@@ -97,7 +107,7 @@ export default function NavbarUser() {
             <li>
               <Link
                 to={USER_DASHBOARD_PAGE}
-                className=" gap-1 cursor-pointer flex items-center"
+                className="gap-1 cursor-pointer flex items-center"
               >
                 <img src={profile} alt="Profile" className="w-6 h-6 mr-1" />
                 <p className="text-white">Hello,</p>
