@@ -1,5 +1,5 @@
-// src/Events.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import EventCard from './../components/elements/event-card';
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
@@ -11,7 +11,16 @@ const events = [
 ];
 
 const Events = () => {
+  const location = useLocation();
   const [filter, setFilter] = useState('All');
+
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const category = query.get('category');
+    if (category) {
+      setFilter(category);
+    }
+  }, [location.search]);
 
   const filteredEvents = filter === 'All'
     ? events
