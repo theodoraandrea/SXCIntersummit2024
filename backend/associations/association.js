@@ -1,48 +1,92 @@
-const User = require("../models/user");
-const Event = require("../models/event");
-const Registration = require("../models/registration");
-const BMC = require("../models/bmc");
-const CompanyVisit = require("../models/companyvisit");
-const Chamber = require("../models/chamber");
-const Summit = require("../models/summit");
+const {
+  BMC,
+  Chamber,
+  CompanyVisit,
+  Event,
+  FCEOMember,
+  FCEOTeam,
+  EventRegistration,
+  Competition,
+  CompetitionRegistration,
+  Summit,
+  User,
+} = require("../models");
 
-exports.entitiesAssociation = () => {
-  User.hasMany(Registration, {
+exports.eventAssociations = () => {
+  User.hasMany(EventRegistration, {
     foreignKey: "userId",
   });
 
-  Event.hasMany(Registration, {
+  Event.hasMany(EventRegistration, {
     foreignKey: "eventId",
   });
 
-  Registration.belongsTo(User, {
+  EventRegistration.belongsTo(User, {
     foreignKey: "userId",
   });
 
-  Registration.belongsTo(Event, {
+  EventRegistration.belongsTo(Event, {
     foreignKey: "eventId",
   });
 
-  Summit.belongsTo(Registration, {
+  Summit.belongsTo(EventRegistration, {
     foreignKey: "registrationId",
   });
-  CompanyVisit.belongsTo(Registration, {
+  CompanyVisit.belongsTo(EventRegistration, {
     foreignKey: "registrationId",
   });
-  Chamber.belongsTo(Registration, {
+  Chamber.belongsTo(EventRegistration, {
     foreignKey: "registrationId",
   });
-  BMC.belongsTo(Registration, {
+  BMC.belongsTo(EventRegistration, {
     foreignKey: "registrationId",
   });
 
-  Registration.hasOne(Summit, { foreignKey: "registrationId" });
-  Registration.hasOne(CompanyVisit, { foreignKey: "registrationId" });
-  Registration.hasOne(Chamber, { foreignKey: "registrationId" });
-  Registration.hasOne(BMC, { foreignKey: "registrationId" });
+  EventRegistration.hasOne(Summit, { foreignKey: "registrationId" });
+  EventRegistration.hasOne(CompanyVisit, { foreignKey: "registrationId" });
+  EventRegistration.hasOne(Chamber, { foreignKey: "registrationId" });
+  EventRegistration.hasOne(BMC, { foreignKey: "registrationId" });
 
-  // Registration.belongsTo(Summit, { foreignKey: "registrationId" });
-  // Registration.belongsTo(CompanyVisit, { foreignKey: "registrationId" });
-  // Registration.belongsTo(Chamber, { foreignKey: "registrationId" });
-  // Registration.belongsTo(BMC, { foreignKey: "registrationId" });
+  // FCEOTeam and FCEOMember associations
+  FCEOTeam.hasMany(FCEOMember, {
+    foreignKey: "teamId",
+    as: "members",
+  });
+  FCEOMember.belongsTo(FCEOTeam, {
+    foreignKey: "teamId",
+  });
+
+  // User and FCEOTeam/FCEOMember associations
+  User.hasMany(FCEOMember, {
+    foreignKey: "userId",
+  });
+  FCEOMember.belongsTo(User, {
+    foreignKey: "userId",
+  });
+
+  User.hasOne(FCEOTeam, {
+    foreignKey: "leaderId",
+    as: "teamLeader",
+  });
+  FCEOTeam.belongsTo(User, {
+    foreignKey: "leaderId",
+  });
+};
+
+exports.competitionAssociations = () => {
+  User.hasMany(CompetitionRegistration, {
+    foreignKey: "userId",
+  });
+
+  Competition.hasMany(CompetitionRegistration, {
+    foreignKey: "competitionId",
+  });
+
+  CompetitionRegistration.belongsTo(User, {
+    foreignKey: "userId",
+  });
+
+  CompetitionRegistration.belongsTo(Competition, {
+    foreignKey: "competitionId",
+  });
 };

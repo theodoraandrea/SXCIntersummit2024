@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 const User = require("../models/user");
-const Registration = require("../models/registration");
+const EventRegistration = require("../models/eventregistrations");
 
 const BusinessMasterClass = sequelize.define(
   "BusinessMasterClass",
@@ -14,12 +14,12 @@ const BusinessMasterClass = sequelize.define(
     registrationId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "registrations",
+        model: "eventregistrations",
         key: "id",
       },
     },
     agreement: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.JSON,
       allowNull: false,
     },
     sessionType: {

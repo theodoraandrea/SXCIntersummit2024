@@ -1,5 +1,5 @@
-// src/Events.js
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import EventCard from "./../components/elements/event-card";
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
@@ -7,30 +7,21 @@ import { DummyEventsData as events } from "../constants/dummy/eventsdata";
 import { fetchAllEvents } from "../service/services";
 
 const Events = () => {
+  const location = useLocation();
   const [filter, setFilter] = useState("All");
-  const [eventsData, setEventsData] = useState(null);
-  const [filteredData, setFilteredData] = useState([]);
 
-  const fetchAllEventsData = async () => {
-    try {
-      // const response = await fetchAllEvents();
-      setEventsData(events);
-    } catch (error) {
-      console.error(error);
+  useEffect(() => {
+    const query = new URLSearchParams(location.search);
+    const category = query.get("category");
+    if (category) {
+      setFilter(category);
     }
-  };
+  }, [location.search]);
 
-  useEffect(() => {
-    fetchAllEventsData();
-  }, []);
-
-  useEffect(() => {
-    let filteredEvents =
-      filter === "All"
-        ? eventsData
-        : eventsData.filter((event) => event.category === filter);
-    setFilteredData(filteredEvents);
-  }, [eventsData, filter]);
+  const filteredEvents =
+    filter === "All"
+      ? events
+      : events.filter((event) => event.category === filter);
 
   return (
     <>
