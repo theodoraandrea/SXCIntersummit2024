@@ -8,11 +8,7 @@ const Event = require("../models/event");
 const EventRegistration = require("../models/eventregistrations");
 
 // Handling Images Dependencies
-const {
-  createFolder,
-  getImageURLsList,
-  ROOT_FOLDER,
-} = require("../utils/handleImage");
+const { createFolder, getImageURLsList } = require("../utils/handleImage");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -81,7 +77,7 @@ exports.registerBMC = async (req, res) => {
     /**
      * Upload Images to Google Drive
      *
-     * 1. Get Root Folder ID (e.g: bmc, futureCEO, summit, etc) from ../utils/handleImage
+     * 1. Get Root Folder ID (e.g: bmc, futureCEO, summit, etc) from .ENV file
      *
      * 2. Create folder of the registrant for specific event/competition-> await createFolder(user.fullname, ROOT_FOLDER_ID)
      *
@@ -89,7 +85,7 @@ exports.registerBMC = async (req, res) => {
      *
      */
 
-    const rootFolderId = ROOT_FOLDER.bmc;
+    const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
 
     const agreementURL = await getImageURLsList(files.agreement, folderId);

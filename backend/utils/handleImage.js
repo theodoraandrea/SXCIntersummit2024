@@ -5,14 +5,6 @@ const { google } = require("googleapis");
 const KEYFILEPATH = path.join(__dirname, "/apikeys.json");
 const scopes = ["https://www.googleapis.com/auth/drive"];
 
-exports.ROOT_FOLDER = {
-  bmc: "1MZdEInxIq7Qz31srlAfqw_wy-3djW7i0",
-  futureceo: "1apJr1hZ4tF4K1mrmFtx-kGyiCkNHOCk0",
-  chamber: "",
-  companyvisit: "",
-  summit: "",
-};
-
 const auth = new google.auth.GoogleAuth({
   keyFile: KEYFILEPATH,
   scopes: scopes,
