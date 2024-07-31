@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 
@@ -9,23 +10,12 @@ const User = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    oauthId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     fullname: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     gender: {
       type: DataTypes.ENUM,
       values: ["Male", "Female"],
-      allowNull: false,
     },
     email: {
       type: DataTypes.STRING,
@@ -37,11 +27,9 @@ const User = sequelize.define(
     },
     institution: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     major: {
       type: DataTypes.STRING,
-      allowNull: true,
     },
     batch: {
       type: DataTypes.INTEGER,
@@ -49,7 +37,6 @@ const User = sequelize.define(
     },
     phoneNumber: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
 
     studentIdCard: {
@@ -66,13 +53,39 @@ const User = sequelize.define(
     },
     picture: {
       type: DataTypes.STRING,
-      allowNull: false,
+    },
+    salt: {
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
   },
   {
     tableName: "users",
     timestamps: true,
-  }
-);
+    hooks: {
+      beforeCreate: async (user) => {
+        user.salt = crypto.randomBytes(16).toString('hex');
+        user.password = hashPassword(user.password, user.salt);
+      },
+      beforeUpdate: async (user) => {
+        if (user.changed('password')) {
+          user.salt = crypto.randomBytes(16).toString('hex');
+          user.password = hashPassword(user.password, user.salt);
+        }
+      }
+    }
+});
+
+function hashPassword(password, salt) {
+  return crypto.pbkdf2Sync(password, salt, 1000, 32, 'sha256').toString('hex');
+}
+
+User.prototype.validatePassword = function(password) {
+  const hashedPassword = hashPassword(password, this.salt);
+  return this.password === hashedPassword;
+}
 
 module.exports = User;

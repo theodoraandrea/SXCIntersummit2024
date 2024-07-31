@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
@@ -38,9 +39,9 @@ app.use(corsMiddleware);
 // Session middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
