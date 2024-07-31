@@ -6,6 +6,7 @@ const {
   FCEOMember,
   FCEOTeam,
   EventRegistration,
+  Competition,
   CompetitionRegistration,
   Summit,
   User,
