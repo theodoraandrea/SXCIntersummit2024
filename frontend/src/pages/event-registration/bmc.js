@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar";
 const FirstView = ({ title, description, onNext }) => (
     <div>
         <Navbar />
-        <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+        <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>{title}</h1>
                 <p className='text-lg text-white mb-6'>{description}</p>
@@ -31,7 +31,7 @@ const FirstView = ({ title, description, onNext }) => (
 const SecondView = ({ title, description, onNext }) => (
     <div>
         <Navbar />
-        <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+        <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>{title}</h1>
                 <p className='text-lg text-white mb-6'>{description}</p>
@@ -104,7 +104,7 @@ const ThirdView = ({ onPrevious, onNext }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>Personal Information</h1>
                     <form className='text-left'>
@@ -192,7 +192,7 @@ const FourthView = ({ onPrevious, onNext }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>Education Information</h1>
                     <form className='text-left'>
@@ -258,7 +258,7 @@ const FifthView = ({ onPrevious, onNext }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>How did you know this event?</h1>
                     <form className='text-left'>
@@ -287,7 +287,7 @@ const FifthView = ({ onPrevious, onNext }) => {
 const SixthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
     <div>
         <Navbar />
-        <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+        <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>Have you ever participated in a business competition before?</h1>
                 <div className='grid grid-cols-2 gap-4'>
@@ -328,7 +328,7 @@ const SeventhView = ({ onPrevious, onNext }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>What was your experience when participating in a business competition before?</h1>
                     <form className='text-left'>
@@ -369,7 +369,7 @@ const EighthView = ({ onPrevious, onNext }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>What are your expectations for this Business Master Class?</h1>
                     <form className='text-left'>
@@ -410,7 +410,7 @@ const NinthView = ({ onPrevious, onNext }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>What kind of competition materials do you need?</h1>
                     <form className='text-left'>
@@ -456,7 +456,7 @@ const TenthView = ({ onPrevious }) => {
     return (
         <div>
             <Navbar />
-            <div className='bg-primary-2 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>Connect with us!</h1>
                     <form className='text-left'>
