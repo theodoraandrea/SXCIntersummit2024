@@ -5,32 +5,28 @@ import { putProfileData } from "../../service/services";
 import { HOME, REGISTER_PAGE } from "../../constants/routes";
 import { useUser } from "../../contexts/user-context";
 
-const sanitizeInput = (input) => {
-  return input.trim().replace(/[^a-zA-Z0-9._%+-@]/g, "");
-};
-
 export default function Register() {
   const { isLoggedIn, profileData, loading } = useUser();
   const [fullName, setFullName] = useState("");
   const [gender, setGender] = useState("");
   const [institution, setInstitution] = useState("");
   const [major, setMajor] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("+62 "); // For display
+  const [rawPhoneNumber, setRawPhoneNumber] = useState("62"); // For sending to backend
   const [batch, setBatch] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     if (!loading) {
       if (!isLoggedIn) {
         navigate(REGISTER_PAGE);
+      } else if (profileData.fullName) {
+        navigate(HOME);
       }
     }
   }, [loading, isLoggedIn, profileData]);
-  
 
-  // function buat ngilangin error message waktu user isi field masing2
   useEffect(() => {
     if (fullName) setErrors((errors) => ({ ...errors, fullname: undefined }));
   }, [fullName]);
@@ -60,23 +56,17 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const sanitizedFullName = sanitizeInput(fullName);
-    const sanitizedInstitution = sanitizeInput(institution);
-    const sanitizedMajor = sanitizeInput(major);
-    const sanitizedPhoneNumber = sanitizeInput(phoneNumber);
-
     const data = {
-      fullname: sanitizedFullName,
+      fullname: fullName,
       gender: gender,
-      institution: sanitizedInstitution,
-      major: sanitizedMajor,
-      phoneNumber: sanitizedPhoneNumber,
+      institution: institution,
+      major: major,
+      phoneNumber: rawPhoneNumber,
       batch: batch,
     };
-
+    console.log(data);
     const newErrors = {};
 
-    // Preliminary frontend validation
     if (!data.fullname) newErrors.fullname = "Full Name is required";
     if (!data.gender) newErrors.gender = "Gender is required";
     if (!data.institution) newErrors.institution = "Institution is required";
@@ -102,6 +92,52 @@ export default function Register() {
       console.error("Network error:", error);
     }
   };
+
+  const sanitizeInput = (input) => {
+    return input.trim().replace(/[^a-zA-Z\s]/g, "");
+  };
+
+  const handleFullNameChange = (e) => {
+    const inputValue = e.target.value;
+    setFullName(sanitizeInput(inputValue));
+  };
+
+  const handleInstitutionChange = (e) => {
+    const inputValue = e.target.value;
+    setInstitution(sanitizeInput(inputValue));
+  };
+
+  const handleMajorChange = (e) => {
+    const inputValue = e.target.value;
+    setMajor(sanitizeInput(inputValue));
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    let inputValue = e.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, "");
+
+    if (!numericValue.startsWith("62")) {
+      numericValue = `62${numericValue}`;
+    }
+
+    const formattedValue = numericValue.replace(
+      /(\d{2})(\d{4})(\d{4})(\d*)/,
+      "+62 $2 $3 $4"
+    );
+
+    setPhoneNumber(formattedValue);
+    setRawPhoneNumber(numericValue);
+  };
+
+  // Constants for Batches
+  const oldestBatch = 2016;
+  const currentYear = new Date().getFullYear();
+
+  const batchesOptions = Array.from(
+    { length: currentYear - oldestBatch + 1 },
+    (_, i) => oldestBatch + i
+  );
 
   return (
     <div className="flex h-screen">
@@ -135,7 +171,7 @@ export default function Register() {
                 type="text"
                 placeholder="Full Name"
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={handleFullNameChange}
               />
               {errors.fullname && (
                 <p className="text-red-500 text-xs mt-1">{errors.fullname}</p>
@@ -185,7 +221,7 @@ export default function Register() {
                 type="text"
                 placeholder="Institution"
                 value={institution}
-                onChange={(e) => setInstitution(e.target.value)}
+                onChange={handleInstitutionChange}
               />
               <small className="text-gray-400">
                 Example: Universitas Indonesia
@@ -210,7 +246,7 @@ export default function Register() {
                 type="text"
                 placeholder="Major"
                 value={major}
-                onChange={(e) => setMajor(e.target.value)}
+                onChange={handleMajorChange}
               />
               <small className="text-gray-400">Example: Computer Science</small>
               {errors.major && (
@@ -233,9 +269,11 @@ export default function Register() {
                 type="text"
                 placeholder="Phone Number"
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
+                onChange={handlePhoneNumberChange}
               />
-              <small className="text-gray-400">Example: 081234567890</small>
+              <small className="text-gray-400">
+                Example: +62 812 3456 7890
+              </small>
               {errors.phoneNumber && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.phoneNumber}
@@ -251,7 +289,7 @@ export default function Register() {
                 Batch
               </label>
               <select
-                id="gender"
+                id="batch"
                 className="w-full px-4 py-2 mb-1 border rounded-lg bg-opacity-25 bg-white"
                 value={batch}
                 onChange={(e) => setBatch(e.target.value)}
@@ -259,45 +297,14 @@ export default function Register() {
                 <option className="text-black" value="">
                   Select Batch
                 </option>
-                <option className="text-black" value="2016">
-                  2016
-                </option>
-                <option className="text-black" value="2017">
-                  2017
-                </option>
-                <option className="text-black" value="2018">
-                  2018
-                </option>
-                <option className="text-black" value="2019">
-                  2019
-                </option>
-                <option className="text-black" value="2020">
-                  2020
-                </option>
-                <option className="text-black" value="2021">
-                  2021
-                </option>
-                <option className="text-black" value="2022">
-                  2022
-                </option>
-                <option className="text-black" value="2023">
-                  2023
-                </option>
-                <option className="text-black" value="2024">
-                  2024
-                </option>
-                <option className="text-black" value="2025">
-                  2025
-                </option>
+                {batchesOptions.map((year) => {
+                  return (
+                    <option className="text-black" key={year} value={year}>
+                      {year}
+                    </option>
+                  );
+                })}
               </select>
-              {/* <input
-                id="batch"
-                className="w-full px-4 py-2 mb-1 border rounded-lg bg-opacity-25 bg-white"
-                type="text"
-                placeholder="Batch"
-                value={batch}
-                onChange={(e) => setBatch(e.target.value)}
-              /> */}
               {errors.batch && (
                 <p className="text-red-500 text-xs mt-1">{errors.batch}</p>
               )}
