@@ -1,31 +1,30 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
-const EventRegistration = require("../models/eventregistrations");
 
-const Event = sequelize.define(
-  "Event",
+const Competition = sequelize.define(
+  "Competition",
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    eventName: {
+    competitionName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventLocation: {
+    competitionLocation: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventDate: {
+    competitionDate: {
       type: DataTypes.DATE,
       allowNull: false,
     },
   },
   {
-    tableName: "events",
+    tableName: "competitions",
   }
 );
 
-module.exports = Event;
+module.exports = Competition;
