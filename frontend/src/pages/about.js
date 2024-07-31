@@ -2,6 +2,7 @@ import Navbar from "./../components/navbar";
 import BgHero from "./../images/bg-about.png";
 import logo from "./../images/sxc-jakarta.png";
 import AboutCard from "../components/elements/about-card";
+import Footer from "./../components/footer";
 
 export default function About() {
   return (
@@ -59,6 +60,7 @@ export default function About() {
           <p className="text-lg">Mission content goes here.</p>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

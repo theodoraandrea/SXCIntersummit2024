@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
-import { DummyProfileData } from "../constants/dummy/userdata";
-import { DummyEventsData } from "../constants/dummy/eventsdata";
 import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +7,8 @@ import { REGISTER_PAGE, EVENTS_PAGE } from "../constants/routes";
 import { fetchRegisteredEvents } from "../service/services";
 import { getDaysUntilEvent, formatDate } from "../service/helpers";
 import profile from "./../images/person.png";
+import Footer from "./../components/footer";
+
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
@@ -26,7 +26,7 @@ export default function UserDashboard() {
 
         // Dummy Datas
         // setUserData(DummyProfileData);
-        // setRegisteredEventsData(DummyEventsData);
+        //setRegisteredEventsData(DummyEventsData);
         setCompetitionsData(DummyCompetitionsData);
       } else {
         navigate(REGISTER_PAGE);
@@ -47,7 +47,6 @@ export default function UserDashboard() {
   return (
     <div>
       <Navbar />
-
       {/* Profile Section */}
       <section className="bg-primary-4 grid grid-cols-[auto,1fr] py-12">
         <div className="flex items-center justify-center ml-36 w-28 h-28">
@@ -59,7 +58,7 @@ export default function UserDashboard() {
         </div>
         <div className="ml-5 mt-5">
           <h2 className="text-2xl font-bold text-white ">
-            {userData?.username}
+            {userData?.fullname}
           </h2>
           <p className="text-white">{userData?.email}</p>
         </div>
@@ -200,6 +199,7 @@ export default function UserDashboard() {
           )}
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
+const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const routes = require("./routes");
 const corsMiddleware = require("./middlewares/corsMiddleware");
@@ -8,13 +9,16 @@ const dotenv = require("dotenv");
 const path = require("path");
 
 const db = require("./config/databaseConfig");
-require("./associations/association").entitiesAssociation();
+
+require("./associations/association").eventAssociations();
+require("./associations/association").competitionAssociations();
 
 const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : ".env";
 dotenv.config({ path: path.resolve(__dirname, envFile) });
 
 const app = express();
 const port = process.env.PORT;
+
 // Database Connection
 db.authenticate()
   .then(() => {
@@ -25,9 +29,9 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// db.sync({ alter: true })
+// BMC.sync({ alter: true })
 //   .then(() => {
-//     console.log("Summit added");
+//     console.log("Competition added");
 //   })
 //   .catch((err) => {
 //     console.log("ERROR");
@@ -40,9 +44,9 @@ app.use(corsMiddleware);
 // Session middleware
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
