@@ -4,6 +4,7 @@ import {
   API_GET_ALL_EVENTS,
   API_GET_USER_REGISTERED_EVENTS,
   API_GET_USER_REGISTERED_COMPETITIONS,
+  API_GET_ALL_COMPETITIONS,
 } from "../config/endpoints";
 
 // Get Profile Datas
@@ -66,9 +67,22 @@ const fetchRegisteredCompetitions = async () => {
   }
 };
 
+const fetchAllCompetitions = async () => {
+  try {
+    const response = await axiosInstance.get(API_GET_ALL_COMPETITIONS);
+    // console.log(response);
+    return response.data.competitions;
+  } catch (error) {
+    console.error("Error fetching competition(s):", error);
+    throw error;
+  }
+};
+
 export {
   fetchProfileData,
   putProfileData,
   fetchRegisteredEvents,
   fetchAllEvents,
+  fetchAllCompetitions,
+  fetchRegisteredCompetitions,
 };
