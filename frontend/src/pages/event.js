@@ -4,12 +4,14 @@ import EventCard from "./../components/elements/event-card";
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 // import { DummyEventsData as events } from "../constants/dummy/eventsdata";
-import { fetchAllEvents } from "../service/services";
+import { fetchAllCompetitions, fetchAllEvents } from "../service/services";
+import { normalizeData } from "../service/helpers";
 
 const Events = () => {
   const location = useLocation();
   const [filter, setFilter] = useState("All");
   const [eventsData, setEventsData] = useState(null);
+  const [competitionsData, setCompetitionsData] = useState(null);
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
@@ -23,7 +25,16 @@ const Events = () => {
   const fetchAllEventsData = async () => {
     try {
       const response = await fetchAllEvents();
-      setEventsData(response);
+      setEventsData(normalizeData(response, "event"));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchAllCompetitionsData = async () => {
+    try {
+      const response = await fetchAllCompetitions();
+      setCompetitionsData(normalizeData(response, "competition"));
     } catch (error) {
       console.error(error);
     }
@@ -31,18 +42,22 @@ const Events = () => {
 
   useEffect(() => {
     fetchAllEventsData();
+    fetchAllCompetitionsData();
   }, []);
 
   useEffect(() => {
-    if (!eventsData) {
+    if (!eventsData && !competitionsData) {
       return;
     }
+
+    const combinedData = [...(eventsData || []), ...(competitionsData || [])];
+
     let filteredEvents =
       filter === "All"
-        ? eventsData
-        : eventsData.filter((event) => event.category === filter);
+        ? combinedData
+        : combinedData.filter((event) => event.category === filter);
     setFilteredData(filteredEvents);
-  }, [eventsData, filter]);
+  }, [eventsData, competitionsData, filter]);
 
   return (
     <>
@@ -70,9 +85,9 @@ const Events = () => {
             filteredData.map((event, index) => (
               <EventCard
                 key={index}
-                eventId={event.id}
-                title={event.eventName}
-                description={event.shortDesc}
+                id={event.id}
+                title={event.title}
+                description={event.description}
                 category={event.category}
               />
             ))

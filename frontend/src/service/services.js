@@ -114,7 +114,7 @@ const fetchAllCompetitions = async () => {
   try {
     const response = await axiosInstance.get(API_GET_ALL_COMPETITIONS);
     // console.log(response);
-    return response.data.competitions;
+    return response.data;
   } catch (error) {
     console.error("Error fetching competition(s):", error);
     throw error;
