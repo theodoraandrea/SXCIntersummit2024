@@ -7,6 +7,9 @@ import {
   API_GET_ALL_COMPETITIONS,
   API_LOGIN,
   API_SIGNUP,
+  // FCEO
+  API_POST_NEW_FCEO_MEMBER,
+  API_POST_NEW_FCEO_TEAM,
 } from "../config/endpoints";
 
 //Login
@@ -121,6 +124,27 @@ const fetchAllCompetitions = async () => {
   }
 };
 
+// FCEO
+const postNewFceoMember = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const postNewFceoTeam = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_FCEO_TEAM, data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export {
   login,
   register,
@@ -130,4 +154,6 @@ export {
   fetchAllEvents,
   fetchAllCompetitions,
   fetchRegisteredCompetitions,
+  postNewFceoMember,
+  postNewFceoTeam,
 };
