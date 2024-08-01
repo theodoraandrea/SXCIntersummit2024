@@ -3,8 +3,8 @@ export const HOME2 = "/home";
 export const HOME3 = "/register1/register2/home";
 
 export const ABOUT_PAGE = "/about";
-export const REGISTER_PAGE = "/register1";
-export const FILL_DETAILS_PAGE = "/register1/register2";
+export const REGISTER_PAGE = "/login";
+export const FILL_DETAILS_PAGE = "/fill-details";
 export const USER_DASHBOARD_PAGE = "/user-dashboard";
 export const USER_PROFILE_PAGE = "/user-dashboard/profile";
 export const USER_SETTINGS_PAGE = "/user-dashboard/settings";

@@ -1,5 +1,5 @@
 const passport = require("passport");
-const Validator = require("validatorjs");
+const { generateToken } = require('../config/jwtConfig');
 const User = require("../models/user");
 const {
   REGISTER_PAGE,
@@ -7,37 +7,35 @@ const {
   HOME_PAGE,
 } = require("../constants/url");
 
-exports.login = passport.authenticate("google", {
-  scope: ["profile", "email"],
-});
+exports.signup = async (req, res) => {
+  try {
+    const user = await User.create({
+      email: req.body.email, 
+      password: req.body.password });
+    console.log("user from signup: ", user);
+    const token = generateToken(user);
+    return res.status(200).json({ token, user });
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-exports.googleAuthCallback = (req, res) => {
-  passport.authenticate("google", (err, user, info) => {
-    if (err) {
-      return res.redirect(REGISTER_PAGE);
-    }
-    // if (!user) {
-    //   return res.redirect(REGISTER_PAGE);
-    // }
-    // Successful authentication, establish session and redirect to home page
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.redirect(REGISTER_PAGE);
-      }
-      res.redirect(FILL_DETAILS_PAGE);
-    });
-  })(req, res);
-};
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email }});
 
-// Logout
-module.exports.logout = (req, res) => {
-  req.logout((err) => {
-    if (err) {
-      return res.status(500).json({ message: "Logout failed", error: err });
+    if (user && user.validatePassword(password)) {
+      const token = generateToken(user);
+      res.status(200).json({ token, user });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password'});
     }
-    res.redirect(HOME_PAGE);
-  });
-};
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+}
 
 // Success Redirect
 exports.successRedirect = (req, res) => {
