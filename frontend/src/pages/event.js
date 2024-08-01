@@ -52,10 +52,19 @@ const Events = () => {
 
     const combinedData = [...(eventsData || []), ...(competitionsData || [])];
 
+    // Sort the combined data by date
+    const sortedCombinedData = combinedData.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA - dateB; // Sort by ascending order
+    });
+
+    console.log(sortedCombinedData);
+
     let filteredEvents =
       filter === "All"
-        ? combinedData
-        : combinedData.filter((event) => event.category === filter);
+        ? sortedCombinedData
+        : sortedCombinedData.filter((event) => event.category === filter);
     setFilteredData(filteredEvents);
   }, [eventsData, competitionsData, filter]);
 
