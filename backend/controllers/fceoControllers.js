@@ -4,8 +4,8 @@ const { FCEOMember, FCEOTeam, User } = require("../models");
 // Create a new team
 exports.createNewTeam = async (req, res) => {
   try {
-    const { name, leaderId, proofOfPayment, teamCode } = req.body;
-    // const teamCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const { name, leaderId, proofOfPayment } = req.body;
+    const teamCode = Math.floor(100000 + Math.random() * 900000).toString();
 
     const newTeam = await FCEOTeam.create({
       teamName: name,
@@ -16,7 +16,11 @@ exports.createNewTeam = async (req, res) => {
 
     res
       .status(201)
-      .json({ message: "Team created successfully", team: newTeam });
+      .json({
+        message: "Team created successfully",
+        team: newTeam,
+        teamCode: teamCode,
+      });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
