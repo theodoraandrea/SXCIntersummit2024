@@ -1,12 +1,13 @@
 const express = require("express");
-const User = require("../models/user");
-const Chamber = require("../models/chamber");
-const BMC = require("../models/bmc");
-const CompanyVisit = require("../models/companyvisit");
-const Summit = require("../models/summit");
-const Event = require("../models/event");
-const EventRegistration = require("../models/eventregistrations");
-
+const {
+  User,
+  Chamber,
+  BMC,
+  CompanyVisit,
+  Summit,
+  Event,
+  EventRegistration,
+} = require("../models");
 // Handling Images Dependencies
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 

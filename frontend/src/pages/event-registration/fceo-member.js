@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../../components/navbar";
+import { FCEO_REGIST_MEMBER_2 } from '../../constants/routes';
 
 const TeamCode = () => {
     const [teamCode, setTeamCode] = useState('');
@@ -8,7 +9,7 @@ const TeamCode = () => {
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            navigate('/events/detail-events/regist-events-2/member2');
+            navigate(FCEO_REGIST_MEMBER_2);
         }
     };
 

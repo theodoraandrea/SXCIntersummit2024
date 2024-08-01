@@ -14,6 +14,14 @@ const Event = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    shortDesc: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     eventLocation: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -37,9 +37,7 @@ router.put(
     body("phoneNumber")
       .optional()
       .notEmpty()
-      .withMessage("Phone number is required")
-      .isMobilePhone("id-ID")
-      .withMessage("Invalid phone number format for Indonesia"),
+      .withMessage("Phone number is required"),
   ],
   profileControllers.completeProfile
 );

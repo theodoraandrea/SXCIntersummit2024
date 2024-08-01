@@ -5,11 +5,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useUser } from "../../contexts/user-context";
-import { FILL_DETAILS_PAGE, HOME } from "../../constants/routes";
+import { USER_DETAILS_PAGE, HOME } from "../../constants/routes";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-export default function Register1() {
+export default function Landing() {
   
   const { loginUser } = useUser();
 
@@ -93,7 +93,7 @@ export default function Register1() {
         const response = await register(data);
         console.log("Successfully registered: ", response);
         loginUser();
-        navigate(FILL_DETAILS_PAGE);
+        navigate(USER_DETAILS_PAGE);
       } catch (error) {
         console.log("Registration failed: ", error);
         setErrorMessage(error.message);

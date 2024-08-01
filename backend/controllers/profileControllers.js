@@ -3,7 +3,6 @@ const User = require("../models/user");
 
 // Get User Profile
 exports.getProfile = async (req, res) => {
-  console.log("is in getprofile");
   try {
     const user = await User.findByPk(req.user.id);
     res.status(201).json(user);
