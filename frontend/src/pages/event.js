@@ -34,6 +34,9 @@ const Events = () => {
   }, []);
 
   useEffect(() => {
+    if (!eventsData) {
+      return;
+    }
     let filteredEvents =
       filter === "All"
         ? eventsData
@@ -62,17 +65,22 @@ const Events = () => {
             )}
           </div>
         </div>
-        <div className="space-y-4 my-5">
-          {filteredData && filteredData.length > 0
-            ? filteredData.map((event, index) => (
-                <EventCard
-                  key={index}
-                  title={event.eventName}
-                  description={event.shortDesc}
-                  category={event.category}
-                />
-              ))
-            : null}
+        <div className="space-y-4 my-5 min-h-screen">
+          {filteredData && filteredData.length > 0 ? (
+            filteredData.map((event, index) => (
+              <EventCard
+                key={index}
+                eventId={event.id}
+                title={event.eventName}
+                description={event.shortDesc}
+                category={event.category}
+              />
+            ))
+          ) : (
+            <div className="flex w-full min-h-[50vh] items-center justify-center ">
+              <p className="text-3xl">No events posted yet. Stay tuned!</p>
+            </div>
+          )}
         </div>
       </div>
       <Footer />
