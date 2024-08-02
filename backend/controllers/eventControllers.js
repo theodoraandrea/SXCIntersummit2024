@@ -51,7 +51,7 @@ exports.registerBMC = async (req, res) => {
     const { body, files } = req;
     const userId = body.userId;
     const user = await User.findByPk(userId);
-    const event = await Event.findByPk(eventId);
+    const event = await Event.findByPk(bmcId);
 
     if (!user && !event) {
       return res.status(400).json({ message: "User or Event not found" });
