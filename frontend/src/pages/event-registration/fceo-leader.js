@@ -80,10 +80,12 @@ const LeaderForm = ({
           type={field.type}
           id={field.name}
           name={field.name}
-          value={formData[field.name]}
+          {...(field.type !== "file" && {
+            value: formData[field.name],
+          })}
           onChange={handleChange}
           className="w-full px-3 py-2 rounded-lg"
-          // Disable the input if it can be prefilled and isProfilePrefilled is true
+          // Disable the input if it can be prefilled
           disabled={
             isProfilePrefilled && profileData && profileData[field.prefillKey]
           }
