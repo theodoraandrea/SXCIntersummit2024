@@ -145,6 +145,7 @@ export default function Home() {
                   alt={`Company Partner ${index + 1}`}
                   className="w-12 h-12 md:w-16 md:h-16 rounded-full"
                 />
+                
               ))}
             </div>
           </div>
