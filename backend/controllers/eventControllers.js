@@ -46,10 +46,10 @@ exports.getRegisteredEventsByUser = async (req, res) => {
 
 exports.registerBMC = async (req, res) => {
   try {
-    const userId = 1;
-    const eventId = 1;
+    // const userId = 1;
+    const bmcId = 1; // BMC event id
     const { body, files } = req;
-
+    const userId = body.userId;
     const user = await User.findByPk(userId);
     const event = await Event.findByPk(eventId);
 
@@ -98,7 +98,7 @@ exports.registerBMC = async (req, res) => {
     // BMC Registration
     const eventRegistration = await EventRegistration.create({
       userId: userId,
-      eventId: eventId,
+      eventId: bmcId,
     });
 
     const bmc = await BMC.create({
