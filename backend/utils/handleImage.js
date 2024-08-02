@@ -33,6 +33,7 @@ const uploadImage = async (fileObject, folderId) => {
 
   return data.id;
 };
+
 const generatePublicLink = async (imgFileId) => {
   try {
     const drive = google.drive({ version: "v3", auth });
@@ -76,8 +77,14 @@ exports.createFolder = async (name, rootFolderId) => {
 exports.getImageURLsList = async (files, folderId) => {
   const publicURL = [];
 
-  for (let f = 0; f < files.length; f++) {
-    const imgFileId = await uploadImage(files[f], folderId);
+  // Ensure files is an array
+  const fileArray = Array.isArray(files) ? files : [files];
+
+  for (let i = 0; i < fileArray.length; i++) {
+    const file = fileArray[i];
+
+    const imgFileId = await uploadImage(file, folderId);
+
     publicURL.push(await generatePublicLink(imgFileId));
   }
 

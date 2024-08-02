@@ -57,6 +57,7 @@ const register = async (data) => {
 const fetchProfileData = async (data) => {
   try {
     const res = await axiosInstance.post(API_PROFILE_DATA, data);
+    console.log(res);
     return res.data;
   } catch (error) {
     console.error("Error fetching profile data:", error);
@@ -127,7 +128,11 @@ const fetchAllCompetitions = async () => {
 // FCEO
 const postNewFceoMember = async (data) => {
   try {
-    const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data);
+    const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -137,7 +142,11 @@ const postNewFceoMember = async (data) => {
 
 const postNewFceoTeam = async (data) => {
   try {
-    const response = await axiosInstance.post(API_POST_NEW_FCEO_TEAM, data);
+    const response = await axiosInstance.post(API_POST_NEW_FCEO_TEAM, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { LANDING_PAGE } from "../../constants/routes";
+import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
 
 const LeaderForm = ({
   formData,
@@ -98,6 +98,7 @@ const LeaderForm = ({
 const FutureCEOPage = () => {
   const { isLoggedIn, profileData, loading } = useUser();
   const [isProfilePrefilled, setIsProfilePrefilled] = useState(false);
+  const [teamCode, setTeamCode] = useState(null);
   const [formData, setFormData] = useState({
     "fullName-leader": "",
     "gender-leader": "",
@@ -125,7 +126,33 @@ const FutureCEOPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted: ", formData);
+    const teamDataToSend = new FormData();
+    teamDataToSend.append("teamName", formData.teamName);
+    teamDataToSend.append("leaderId", localStorage.getItem("userId"));
+    if (formData.proofPayment) {
+      teamDataToSend.append("proofOfPayment", formData.proofPayment);
+    }
+    registerTeam(teamDataToSend);
+  };
+
+  const registerTeam = async (data) => {
+    try {
+      const response = await postNewFceoTeam(data);
+
+      setTeamCode(response.teamCode);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const registerMember = async (data) => {
+    try {
+      const response = await postNewFceoMember(data);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -135,13 +162,16 @@ const FutureCEOPage = () => {
       }
 
       if (profileData) {
-        setFormData({
-          "fullName-leader": profileData.fullname,
-          "gender-leader": profileData.gender,
-          "school-leader": profileData.institution,
-          "phone-leader": profileData.phoneNumber,
-          "email-leader": profileData.email,
-        });
+        setFormData((prevState) => ({
+          ...prevState,
+          "fullName-leader":
+            profileData.fullname || prevState["fullName-leader"],
+          "gender-leader": profileData.gender || prevState["gender-leader"],
+          "school-leader":
+            profileData.institution || prevState["school-leader"],
+          "phone-leader": profileData.phoneNumber || prevState["phone-leader"],
+          "email-leader": profileData.email || prevState["email-leader"],
+        }));
         setIsProfilePrefilled(true);
       }
     }
@@ -188,14 +218,12 @@ const FutureCEOPage = () => {
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
-            <Link to="/events/detail-events/regist-events-2/summary">
-              <button
-                type="submit"
-                className="bg-primary-3 text-white px-6 py-2 rounded-full"
-              >
-                Submit
-              </button>
-            </Link>
+            <button
+              type="submit"
+              className="bg-primary-3 text-white px-6 py-2 rounded-full"
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>
