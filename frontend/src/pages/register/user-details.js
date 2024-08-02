@@ -8,12 +8,12 @@ import { useUser } from "../../contexts/user-context";
 export default function UserDetails() {
   const { isLoggedIn, profileData, loading } = useUser();
   const [fullName, setFullName] = useState("");
-  const [ gender, setGender ] = useState("");
-  const [ institution, setInstitution ] = useState("");
-  const [ major, setMajor ] = useState("");
-  const [ phoneNumber, setPhoneNumber ] = useState("+62 "); // For display
-  const [ batch, setBatch ] = useState("");
-  const [ errors, setErrors ] = useState({});
+  const [gender, setGender] = useState("");
+  const [institution, setInstitution] = useState("");
+  const [major, setMajor] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("+62 "); // For display
+  const [batch, setBatch] = useState("");
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,7 +71,6 @@ export default function UserDetails() {
       batch: batch,
     };
 
-    console.log(data);
     const newErrors = {};
 
     if (!data.fullname) newErrors.fullname = "Full Name is required";
@@ -88,9 +87,7 @@ export default function UserDetails() {
     }
 
     try {
-      console.log("data from user-details: ", data);
       const response = await putProfileData(data);
-      console.log(response);
       if (response.status === 200) {
         console.log("Profile updated successfully");
         navigate(HOME);
@@ -162,7 +159,7 @@ export default function UserDetails() {
                 type="text"
                 placeholder="Full Name"
                 value={fullName}
-                onChange={(e)=>setFullName(e.target.value)}
+                onChange={(e) => setFullName(e.target.value)}
               />
               {errors.fullname && (
                 <p className="text-red-500 text-xs mt-1">{errors.fullname}</p>
@@ -212,7 +209,7 @@ export default function UserDetails() {
                 type="text"
                 placeholder="Institution"
                 value={institution}
-                onChange={(e)=>setInstitution(e.target.value)}
+                onChange={(e) => setInstitution(e.target.value)}
               />
               <small className="text-gray-400">
                 Example: Universitas Indonesia
@@ -237,7 +234,7 @@ export default function UserDetails() {
                 type="text"
                 placeholder="Major"
                 value={major}
-                onChange={(e)=>setMajor(e.target.value)}
+                onChange={(e) => setMajor(e.target.value)}
               />
               <small className="text-gray-400">Example: Computer Science</small>
               {errors.major && (

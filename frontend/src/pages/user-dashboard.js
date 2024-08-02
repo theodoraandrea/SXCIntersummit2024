@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
 import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { EVENTS_PAGE, LANDING_PAGE, USER_DETAILS_PAGE } from "../constants/routes";
-import { fetchRegisteredEvents } from "../service/services";
+import {
+  EVENTS_PAGE,
+  LANDING_PAGE,
+  USER_DETAILS_PAGE,
+} from "../constants/routes";
+import {
+  fetchRegisteredEvents,
+  fetchRegisteredCompetitions,
+} from "../service/services";
 import { getDaysUntilEvent, formatDate } from "../service/helpers";
 import profile from "./../images/person.png";
 import Footer from "./../components/footer";
-
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
   const [activeTab, setActiveTab] = useState("events");
   const [userData, setUserData] = useState(null);
   const [registeredEventsData, setRegisteredEventsData] = useState([]);
-  const [competitionsData, setCompetitionsData] = useState(null);
+  const [registeredCompetitionsData, setRegisteredCompetitionsData] = useState(
+    []
+  );
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,20 +32,19 @@ export default function UserDashboard() {
       if (isLoggedIn) {
         setUserData(profileData);
         fetchRegisteredEventsData();
-
+        fetchRegisteredCompetitionsData();
         // Dummy Datas
         // setUserData(DummyProfileData);
         //setRegisteredEventsData(DummyEventsData);
-        setCompetitionsData(DummyCompetitionsData);
+        // setCompetitionsData(DummyCompetitionsData);
       } else {
         navigate(LANDING_PAGE);
       }
     }
-  }, [loading, isLoggedIn, profileData]);
+  }, [loading, isLoggedIn, profileData, navigate]);
 
   const fetchRegisteredEventsData = async () => {
     try {
-      console.log("in fetchRegisteredEventsData...");
       const response = await fetchRegisteredEvents();
       setRegisteredEventsData(response);
     } catch (error) {
@@ -45,11 +52,18 @@ export default function UserDashboard() {
     }
   };
 
+  const fetchRegisteredCompetitionsData = async () => {
+    try {
+      const response = await fetchRegisteredCompetitions();
+      setRegisteredCompetitionsData(response);
+    } catch (error) {
+      // something
+    }
+  };
+
   return (
     <div>
-      <Navbar 
-        currentPath={location.pathname}
-      />
+      <Navbar currentPath={location.pathname} />
       {/* Profile Section */}
       <section className="bg-primary-4 flex items-center py-12 px-20">
         <div className="flex items-center justify-center w-28 h-28">
@@ -63,16 +77,20 @@ export default function UserDashboard() {
           <h2 className="text-2xl font-bold text-white ">
             {userData?.fullname}
           </h2>
-          <p className="text-white">{userData?.email} | {userData?.phoneNumber} </p>
+          <p className="text-white">
+            {userData?.email} | {userData?.phoneNumber}{" "}
+          </p>
           <p className="text-white">{userData?.institution}</p>
-          <p className="text-white">{userData?.major} {userData?.batch}</p>
+          <p className="text-white">
+            {userData?.major} {userData?.batch}
+          </p>
         </div>
         <div className="ml-auto">
-        <Link to={USER_DETAILS_PAGE}>
-          <button className="bg-primary-2 text-white px-4 py-2 rounded">
-            Edit Profile
-          </button>
-        </Link>
+          <Link to={USER_DETAILS_PAGE}>
+            <button className="bg-primary-2 text-white px-4 py-2 rounded">
+              Edit Profile
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -157,8 +175,9 @@ export default function UserDashboard() {
           )}
           {activeTab === "competitions" && (
             <>
-              {competitionsData && competitionsData.length > 0 ? (
-                competitionsData?.map((competition) => {
+              {registeredCompetitionsData &&
+              registeredCompetitionsData.length > 0 ? (
+                registeredCompetitionsData?.map((competition) => {
                   const { message, status } = getDaysUntilEvent(
                     competition.date
                   );
@@ -211,7 +230,7 @@ export default function UserDashboard() {
           )}
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
