@@ -16,59 +16,59 @@ const LeaderForm = ({
     {[
       {
         label: "Full Name",
-        name: "fullName-leader",
+        name: "fullName",
         type: "text",
         prefillKey: "fullname",
       },
       {
         label: "Gender",
-        name: "gender-leader",
+        name: "gender",
         type: "text",
         prefillKey: "gender",
       },
       {
         label: "School",
-        name: "school-leader",
+        name: "school",
         type: "text",
         prefillKey: "institution",
       },
       {
         label: "Phone",
-        name: "phone-leader",
+        name: "phone",
         type: "text",
         prefillKey: "phoneNumber",
       },
       {
         label: "Email",
-        name: "email-leader",
+        name: "email",
         type: "email",
         prefillKey: "email",
       },
       {
         label: "National Student Identification Number",
-        name: "studentId-leader",
+        name: "studentId",
         type: "text",
       },
-      { label: "Student ID Card", name: "studentCard-leader", type: "file" },
+      { label: "Student ID Card", name: "studentCard", type: "file" },
       {
         label:
           "Proof of Following @sxcintersummit and @sxcintersummitcompetition Instagram Account",
-        name: "proofFollow-leader",
+        name: "proofFollow",
         type: "file",
       },
       {
         label: "Proof of Twibbon Post",
-        name: "proofTwibbon-leader",
+        name: "proofTwibbon",
         type: "file",
       },
       {
         label: "Proof of Sharing Instagram Story Posters",
-        name: "proofStory-leader",
+        name: "proofStory",
         type: "file",
       },
       {
         label: "Proof of Sharing Posters to 3 Whatsapp Group",
-        name: "proofWhatsapp-leader",
+        name: "proofWhatsapp",
         type: "file",
       },
     ].map((field) => (
@@ -100,17 +100,17 @@ const FutureCEOPage = () => {
   const [isProfilePrefilled, setIsProfilePrefilled] = useState(false);
   const [teamCode, setTeamCode] = useState(null);
   const [formData, setFormData] = useState({
-    "fullName-leader": "",
-    "gender-leader": "",
-    "school-leader": "",
-    "phone-leader": "",
-    "email-leader": "",
-    "studentId-leader": "",
-    "studentCard-leader": null,
-    "proofFollow-leader": null,
-    "proofTwibbon-leader": null,
-    "proofStory-leader": null,
-    "proofWhatsapp-leader": null,
+    fullName: "",
+    gender: "",
+    school: "",
+    phone: "",
+    email: "",
+    studentId: "",
+    studentCard: null,
+    proofFollow: null,
+    proofTwibbon: null,
+    proofStory: null,
+    proofWhatsapp: null,
     teamName: "",
     proofPayment: null,
   });
@@ -124,23 +124,36 @@ const FutureCEOPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const teamDataToSend = new FormData();
     teamDataToSend.append("teamName", formData.teamName);
     teamDataToSend.append("leaderId", localStorage.getItem("userId"));
     if (formData.proofPayment) {
       teamDataToSend.append("proofOfPayment", formData.proofPayment);
     }
-    registerTeam(teamDataToSend);
+    const teamDetails = await registerTeam(teamDataToSend);
+    if (teamDetails && teamDetails.teamCode) {
+      const memberDataToSend = new FormData();
+      memberDataToSend.append("userId", profileData.id);
+      memberDataToSend.append("teamCode", teamDetails.teamCode);
+      memberDataToSend.append("nationalStudentIdNumber", formData.studentId);
+      memberDataToSend.append("isLeader", true);
+      memberDataToSend.append("screenshotFCEO", formData.studentCard);
+      memberDataToSend.append("screenshotFCEO", formData.proofFollow);
+      memberDataToSend.append("screenshotFCEO", formData.proofTwibbon);
+      memberDataToSend.append("screenshotFCEO", formData.proofStory);
+      memberDataToSend.append("screenshotFCEO", formData.proofWhatsapp);
+
+      await registerMember(memberDataToSend);
+    }
   };
 
   const registerTeam = async (data) => {
     try {
       const response = await postNewFceoTeam(data);
-
-      setTeamCode(response.teamCode);
-      console.log(response);
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -164,13 +177,11 @@ const FutureCEOPage = () => {
       if (profileData) {
         setFormData((prevState) => ({
           ...prevState,
-          "fullName-leader":
-            profileData.fullname || prevState["fullName-leader"],
-          "gender-leader": profileData.gender || prevState["gender-leader"],
-          "school-leader":
-            profileData.institution || prevState["school-leader"],
-          "phone-leader": profileData.phoneNumber || prevState["phone-leader"],
-          "email-leader": profileData.email || prevState["email-leader"],
+          fullName: profileData.fullname || prevState["fullName"],
+          gender: profileData.gender || prevState["gender"],
+          school: profileData.institution || prevState["school"],
+          phone: profileData.phoneNumber || prevState["phone"],
+          email: profileData.email || prevState["email"],
         }));
         setIsProfilePrefilled(true);
       }

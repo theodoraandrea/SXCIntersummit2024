@@ -45,15 +45,20 @@ exports.createNewTeam = async (req, res) => {
 exports.createNewFCEOMember = async (req, res) => {
   try {
     const fceoId = 1;
-    const { files } = req;
-    const { userId, teamCode, nationalStudentIdNumber, isLeader } = req.body;
+    const { files, body } = req;
+    const { userId, teamCode, nationalStudentIdNumber, isLeader } = body;
 
-    const team = await FCEOTeam.findOne({ where: { teamCode } });
-
+    const team = await FCEOTeam.findOne({ where: { teamCode: teamCode } });
     const user = await User.findByPk(userId);
 
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
     if (!team) {
-      return res.status(404).json({ error: "Team not found" });
+      return res
+        .status(404)
+        .json({ error: "Team not found. Please check your Code" });
     }
 
     const rootFolderId = process.env.FOLDER_FCEO_ID;
@@ -66,7 +71,7 @@ exports.createNewFCEOMember = async (req, res) => {
 
     const fceoRegistration = await CompetitionRegistration.create({
       userId,
-      eventId: fceoId,
+      competitionId: fceoId,
     });
 
     const newMember = await FCEOMember.create({
@@ -79,7 +84,7 @@ exports.createNewFCEOMember = async (req, res) => {
     });
 
     res.status(201).json({
-      message: "Success registering FCEO new member",
+      message: "Success registering FCEO as a new member!",
       member: newMember,
     });
   } catch (error) {

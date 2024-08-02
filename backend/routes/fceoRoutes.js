@@ -5,7 +5,12 @@ const fceoControllers = require("../controllers/fceoControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
 const upload = multer();
 
-router.post("/member", isAuthenticated, fceoControllers.createNewFCEOMember);
+router.post(
+  "/member",
+  upload.fields([{ name: "screenshotFCEO", minCount: 5 }]),
+  isAuthenticated,
+  fceoControllers.createNewFCEOMember
+);
 router.post(
   "/team",
   upload.fields([{ name: "proofOfPayment", maxCount: 1 }]),
