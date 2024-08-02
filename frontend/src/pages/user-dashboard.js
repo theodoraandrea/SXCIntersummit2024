@@ -12,8 +12,8 @@ import Footer from "./../components/footer";
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
-  const [activeTab, setActiveTab] = useState("events");
-  const [userData, setUserData] = useState(null);
+  const [ activeTab, setActiveTab] = useState("events");
+  const [ userData, setUserData ] = useState(null);
   const [registeredEventsData, setRegisteredEventsData] = useState([]);
   const [competitionsData, setCompetitionsData] = useState(null);
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ export default function UserDashboard() {
 
   useEffect(() => {
     if (!loading) {
+      console.log(profileData);
       if (isLoggedIn) {
         setUserData(profileData);
         fetchRegisteredEventsData();

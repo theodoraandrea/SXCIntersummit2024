@@ -25,7 +25,7 @@ export default function DetailEvents() {
             </p>
             <Link to="/events/detail-events/regist-events">
               <button className="bg-primary-2 px-5 rounded-lg py-2 text-white mt-4">
-                Regist Now
+                Register Now
               </button>
             </Link>
           </div>

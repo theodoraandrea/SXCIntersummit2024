@@ -66,18 +66,15 @@ export default function Landing() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (validateEmail(email.trim())) {
-      console.log("email ok");
       try {
         const response = await login({ email, password });
         console.log('Login successful', response); 
-        loginUser();
+        loginUser(response.user);
         navigate(HOME);
       } catch (error) {
         console.log('Login failed: ', error);
         setErrorMessage(error.message);
       }
-    } else {
-      console.log("email not ok");
     }
   }
 

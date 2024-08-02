@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import bg from "./../../images/Kiri.png";
 import { useNavigate } from "react-router-dom";
 import { putProfileData } from "../../service/services";
-import { HOME, LANDING_PAGE } from "../../constants/routes";
+import { HOME, LANDING_PAGE, USER_DASHBOARD_PAGE } from "../../constants/routes";
 import { useUser } from "../../contexts/user-context";
 
 export default function UserDetails() {
-  const { isLoggedIn, profileData, loading } = useUser();
+  const { isLoggedIn, profileData, loading, setProfileData } = useUser();
   const [fullName, setFullName] = useState("");
   const [ gender, setGender ] = useState("");
   const [ institution, setInstitution ] = useState("");
@@ -90,10 +90,12 @@ export default function UserDetails() {
     try {
       console.log("data from user-details: ", data);
       const response = await putProfileData(data);
-      console.log(response);
+      console.log(response);      
       if (response.status === 200) {
         console.log("Profile updated successfully");
-        navigate(HOME);
+        const updatedProfile = response.data.completedProfile;
+        setProfileData(updatedProfile);
+        navigate(USER_DASHBOARD_PAGE);
       }
     } catch (error) {
       console.error("Network error:", error);
