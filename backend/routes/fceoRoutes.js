@@ -17,6 +17,7 @@ router.post(
   isAuthenticated,
   fceoControllers.createNewTeam
 );
+router.post("/team/check", isAuthenticated, fceoControllers.checkTeam);
 router.get(
   "/team/detail/user/:userId",
   isAuthenticated,

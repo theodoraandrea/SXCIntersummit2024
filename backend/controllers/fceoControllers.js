@@ -41,6 +41,38 @@ exports.createNewTeam = async (req, res) => {
   }
 };
 
+// Check Team Existence
+exports.checkTeam = async (req, res) => {
+  try {
+    const { body } = req;
+    const { teamCode } = body;
+
+    const team = await FCEOTeam.findOne({ where: { teamCode: teamCode } });
+    if (!team) {
+      return res
+        .status(404)
+        .json({ error: "Team not found. Please check your Code" });
+    }
+
+    const teamLeaderId = team.leaderId;
+    console.log(teamLeaderId);
+    const teamLeader = await User.findOne({
+      where: {
+        id: teamLeaderId,
+      },
+    });
+    console.log(teamLeader);
+    res.status(200).json({
+      message: "Team found",
+      teamName: team.teamName,
+      teamCode: team.teamCode,
+      leader: teamLeader.fullname,
+    });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
