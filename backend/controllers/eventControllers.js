@@ -46,7 +46,8 @@ exports.getRegisteredEventsByUser = async (req, res) => {
 
 exports.registerBMC = async (req, res) => {
   try {
-    const userId = 1;
+    console.log(req.files);
+    const userId = req.user.id;
     const eventId = 1;
     const { body, files } = req;
 
@@ -59,20 +60,20 @@ exports.registerBMC = async (req, res) => {
 
     // List of Questions and Answers
     const qnaList = [
-      { "How did you now this event?": body.question[0] },
+      { "How did you know this event?": body.eventSource },
       {
         "Have you ever participated in a business competition before?":
-          body.question[1],
+          body.experience ? 'Yes' : 'No',
       },
       {
         "What was your experience when participating in a business competition before?":
-          body.question[2],
+          body.experience ?? '-',
       },
       {
         "What are your expectations for this Business Master Class?":
-          body.question[3],
+          body.expectations,
       },
-      { "What kind of competition materials do you need?": body.question[4] },
+      { "What kind of competition materials do you need?": body.materials },
     ];
 
     /**

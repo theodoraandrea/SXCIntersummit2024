@@ -6,6 +6,7 @@ import {
   API_GET_USER_REGISTERED_COMPETITIONS,
   API_LOGIN,
   API_SIGNUP,
+  API_POST_BMC_REGISTRATION
 } from "../config/endpoints";
 
 
@@ -108,6 +109,21 @@ const fetchRegisteredCompetitions = async () => {
   }
 };
 
+//BMC
+const postBMCRegistration = async (data) => {
+  try {    
+    const response = await axiosInstance.post(API_POST_BMC_REGISTRATION, data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export {
   login,
   register,
@@ -115,4 +131,5 @@ export {
   putProfileData,
   fetchRegisteredEvents,
   fetchAllEvents,
+  postBMCRegistration
 };

@@ -3,6 +3,7 @@ import { useUser } from '../../contexts/user-context'
 import Navbar from "../../components/navbar";
 import { useNavigate } from 'react-router-dom';
 import { LANDING_PAGE } from '../../constants/routes';
+import { postBMCRegistration } from '../../service/services';
 
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     const navigate = useNavigate();
@@ -713,7 +714,8 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
 
 const Summary = ({ formData, onPrevious }) => {
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        const response = await postBMCRegistration(formData);
         console.log(formData);
     }
     
