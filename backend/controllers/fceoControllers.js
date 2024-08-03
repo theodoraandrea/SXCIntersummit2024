@@ -55,13 +55,11 @@ exports.checkTeam = async (req, res) => {
     }
 
     const teamLeaderId = team.leaderId;
-    console.log(teamLeaderId);
     const teamLeader = await User.findOne({
       where: {
         id: teamLeaderId,
       },
     });
-    console.log(teamLeader);
     res.status(200).json({
       message: "Team found",
       teamName: team.teamName,

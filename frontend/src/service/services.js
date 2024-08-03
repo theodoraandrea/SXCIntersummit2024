@@ -10,6 +10,7 @@ import {
   // FCEO
   API_POST_NEW_FCEO_MEMBER,
   API_POST_NEW_FCEO_TEAM,
+  API_POST_CHECK_FCEO_TEAMCODE,
 } from "../config/endpoints";
 
 //Login
@@ -154,6 +155,18 @@ const postNewFceoTeam = async (data) => {
   }
 };
 
+const postCheckTeamCode = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_CHECK_FCEO_TEAMCODE, {
+      teamCode: data,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export {
   login,
   register,
@@ -165,4 +178,5 @@ export {
   fetchRegisteredCompetitions,
   postNewFceoMember,
   postNewFceoTeam,
+  postCheckTeamCode,
 };
