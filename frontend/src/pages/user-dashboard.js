@@ -30,12 +30,18 @@ export default function UserDashboard() {
   const [fetching, setFetching] = useState(true); // Add a fetching state
 
   useEffect(() => {
+    if (isLoggedIn) {
+      fetchRegisteredEventsData();
+      fetchRegisteredCompetitionsData();
+    }
+  }, [isLoggedIn]);
+  
+  useEffect(() => {
     if (!loading) {
       console.log(profileData);
       if (isLoggedIn) {
         setUserData(profileData);
-        fetchRegisteredEventsData();
-        fetchRegisteredCompetitionsData();
+
       } else {
         navigate(LANDING_PAGE);
       }

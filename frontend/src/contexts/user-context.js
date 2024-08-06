@@ -25,12 +25,6 @@ export const UserProvider = ({ children }) => {
 
     if (userId && token) {
       setIsLoggedIn(true);
-      const data = {
-        userId: userId,
-        token: token,
-      };
-      console.log("fetching data...");
-      fetchData(data);
     } else {
       setIsLoggedIn(false);
     }
