@@ -46,12 +46,14 @@ exports.getRegisteredEventsByUser = async (req, res) => {
 
 exports.registerBMC = async (req, res) => {
   try {
-    const userId = 1;
-    const eventId = 1;
+    // const userId = 1;
+    const bmcId = 1; // BMC event id
+    console.log(req.files);
+    const userId = req.user.id;
     const { body, files } = req;
 
     const user = await User.findByPk(userId);
-    const event = await Event.findByPk(eventId);
+    const event = await Event.findByPk(bmcId);
 
     if (!user && !event) {
       return res.status(400).json({ message: "User or Event not found" });
@@ -59,20 +61,20 @@ exports.registerBMC = async (req, res) => {
 
     // List of Questions and Answers
     const qnaList = [
-      { "How did you now this event?": body.question[0] },
+      { "How did you know this event?": body.eventSource },
       {
         "Have you ever participated in a business competition before?":
-          body.question[1],
+          body.experience ? 'Yes' : 'No',
       },
       {
         "What was your experience when participating in a business competition before?":
-          body.question[2],
+          body.experience ?? '-',
       },
       {
         "What are your expectations for this Business Master Class?":
-          body.question[3],
+          body.expectations,
       },
-      { "What kind of competition materials do you need?": body.question[4] },
+      { "What kind of competition materials do you need?": body.materials },
     ];
 
     /**
@@ -98,7 +100,7 @@ exports.registerBMC = async (req, res) => {
     // BMC Registration
     const eventRegistration = await EventRegistration.create({
       userId: userId,
-      eventId: eventId,
+      eventId: bmcId,
     });
 
     const bmc = await BMC.create({

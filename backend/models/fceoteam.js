@@ -27,7 +27,7 @@ const FCEOTeam = sequelize.define(
       unique: true,
     },
     proofOfPayment: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: true,
     },
   },
