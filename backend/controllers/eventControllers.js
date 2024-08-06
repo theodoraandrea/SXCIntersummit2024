@@ -46,11 +46,32 @@ exports.getRegisteredEventsByUser = async (req, res) => {
 
 exports.registerBMC = async (req, res) => {
   try {
-    // const userId = 1;
     const bmcId = 1; // BMC event id
-    console.log(req.files);
     const userId = req.user.id;
-    const { body, files } = req;
+    const body = req.body;
+    const files = req.files;
+
+    if (!files.agreement) {
+      console.log("Haven't uploaded agreement");
+    } else {
+      console.log("agreement: ", files.agreement);
+    }
+
+    if (!files.screenshot1) {
+      console.log("Haven't uploaded screenshot 1");
+    } else {
+      console.log("screenshot 1: ", files.screenshot1);
+    }
+    if (!files.screenshot2) {
+      console.log("Haven't uploaded screenshot 2");
+    } else {
+      console.log("screenshot 2: ", files.screenshot2);
+    }
+    if (!files.screenshot1) {
+      console.log("Haven't uploaded screenshot 3");
+    } else {
+      console.log("screenshot 3: ", files.screenshot3);
+    }
 
     const user = await User.findByPk(userId);
     const event = await Event.findByPk(bmcId);
@@ -88,14 +109,20 @@ exports.registerBMC = async (req, res) => {
      *
      */
 
+    
     const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
+    console.log("Folder created: ", folderId);
+
+    const screenshots = [files.screenshot1, files.screenshot2, files.screenshot3];
 
     const agreementURL = await getImageURLsList(files.agreement, folderId);
-    const screenshotBMC_URL = await getImageURLsList(
-      files.screenshotBMC,
-      folderId
-    );
+    console.log("agreement URL: ", agreementURL);
+    const screenshot1 = await getImageURLsList(files.screenshot1, folderId);
+    const screenshot2 = await getImageURLsList(files.screenshot2, folderId);
+    const screenshot3 = await getImageURLsList(files.screenshot3, folderId);
+    const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3];
+    console.log("ss URL: ", screenshotBMC_URL);
 
     // BMC Registration
     const eventRegistration = await EventRegistration.create({

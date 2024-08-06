@@ -122,7 +122,11 @@ export default function Landing() {
                 ? "text-yellow-500 border-b-4 border-yellow-500"
                 : "text-gray-500"
             }`}
-            onClick={() => setActiveTab("register")}
+            onClick={() => {
+              setActiveTab("register");
+              setErrorMessage("");
+            }
+          }
           >
             Register
           </button>

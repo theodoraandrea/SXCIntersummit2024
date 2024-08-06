@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/user-context'
 import Navbar from "../../components/navbar";
 import { useNavigate } from 'react-router-dom';
-import { LANDING_PAGE } from '../../constants/routes';
+import { LANDING_PAGE, USER_DASHBOARD_PAGE } from '../../constants/routes';
 import { postBMCRegistration } from '../../service/services';
+import Spinner from '../../components/elements/spinner';
 
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     const navigate = useNavigate();
@@ -70,26 +71,48 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     );
 };
 
-const SecondView = ({ title, description, onNext, onPrevious }) => (
+const SecondView = ({ title, description, formData, setFormData, onNext, onPrevious }) => {
+    
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: files ? files[0] : value,
+        }));
+        console.log(files);
+      };
+
+    const handleDownload = () => {
+        const link = document.createElement('a');
+        link.href = '{LINK}'; // REPLACE LINK
+        link.download = 'BMC-AgreementPaper.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    return (
     <div>
         <Navbar />
         <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>{title}</h1>
                 <p className='text-lg text-white mb-6'>{description}</p>
-                <button className='border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4'>
+                <button className='border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4'
+                onClick={handleDownload}>
                     Download Agreement Paper
                 </button>
                 <p className='text-lg text-white mb-6'>{description}</p>
                 <div className='relative inline-block mb-10'>
                 <input 
                     type='file'
-                    id="file-upload" 
-                    name='agreement-paper'
+                    id="agreement" 
+                    name='agreement'
+                    onChange={handleChange}
                     className='absolute inset-0 opacity-0 cursor-pointer'
                 />
                 <label
-                    htmlFor='file-upload'
+                    htmlFor='agreement'
                     className='bg-primary-3 text-white px-5 py-3 rounded-full'>
                         Submit Agreement Paper
                 </label>
@@ -113,7 +136,8 @@ const SecondView = ({ title, description, onNext, onPrevious }) => (
             </div>
         </div>
     </div>
-);
+    );
+};
 
 const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }) => {
     const { profileData } = useUser();
@@ -594,15 +618,16 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
     const [ follow3, setFollow3 ] = useState(false);
 
     const handleSubmit = () => {
-        formData = {
-            ...formData,
-            follow1: follow1,
-            follow2: follow2,
-            follow3: follow3,
-        }
-        setFormData(formData);
         onNext();
     }
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: files ? files[0] : value,
+        }));
+      };
 
     return (
         <div>
@@ -626,11 +651,13 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                             <div className='my-4 relative'>
                                 <input
                                     type='file'
-                                    id='file-upload2'
+                                    id='screenshot1'
+                                    name='screenshot1'
+                                    onChange={handleChange}
                                     className='absolute inset-0 opacity-0 cursor-pointer'
                                 />
                                 <label
-                                    htmlFor='file-upload2'
+                                    htmlFor='screenshot1'
                                     className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
                                 >
                                     Submit screenshot
@@ -651,11 +678,13 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                             <div className='my-4 relative'>
                                 <input
                                     type='file'
-                                    id='file-upload2'
+                                    id='screenshot2'
+                                    name='screenshot2'
+                                    onChange={handleChange}
                                     className='absolute inset-0 opacity-0 cursor-pointer'
                                 />
                                 <label
-                                    htmlFor='file-upload2'
+                                    htmlFor='screenshot2'
                                     className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
                                 >
                                     Submit screenshot
@@ -678,11 +707,13 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                              <div className='my-4 relative'>
                                 <input
                                     type='file'
-                                    id='file-upload2'
+                                    id='screenshot3'
+                                    name='screenshot3'
+                                    onChange={handleChange}
                                     className='absolute inset-0 opacity-0 cursor-pointer'
                                 />
                                 <label
-                                    htmlFor='file-upload2'
+                                    htmlFor='screenshot3'
                                     className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
                                 >
                                     Submit screenshot
@@ -713,10 +744,25 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
 };
 
 const Summary = ({ formData, onPrevious }) => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
-        const response = await postBMCRegistration(formData);
-        console.log(formData);
+        try {
+            setIsLoading(true);
+            console.log(formData);
+            const response = await postBMCRegistration(formData);
+            setIsLoading(false);
+            if (response.status === 200) {
+                {/*INSERT SUCCESS INDICATOR*/}
+                navigate(USER_DASHBOARD_PAGE);
+            }
+            console.log(response);
+        } catch (error) {
+            {/*INSERT ERROR INDICATOR*/}
+            console.log(error);
+        }
     }
     
     return (
@@ -724,6 +770,7 @@ const Summary = ({ formData, onPrevious }) => {
             <Navbar />
             <div className='bg-gradient-primary w-full min-h-screen p-4 text-white'>
                 <div className='flex items-center justify-center'>
+                    { isLoading ? <Spinner customStyles={{ margin: "2rem 0" }} /> :
                     <div className='flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25'>
                         <p className='text-xl font-bold mb-2'>BMC Registration Form</p>
                         <p className='text-sm font-semibold mb-2'>Please make sure all data is correct before submitting</p>
@@ -767,6 +814,7 @@ const Summary = ({ formData, onPrevious }) => {
                         </button>
                     </div>
                     </div>
+                    }
                 </div>
             </div>
         </div>
@@ -796,7 +844,7 @@ const EventCard = () => {
     };
 
     const handlePrevious = () => {
-        if(currentView == 7 && !formData.experience) {
+        if(currentView === 7 && !formData.experience) {
             setCurrentView(prevView => prevView - 2);
         } else {
             setCurrentView(prevView => prevView - 1);
@@ -815,7 +863,7 @@ const EventCard = () => {
         case 1:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
         case 2:
-            return <SecondView {...eventData} onNext={handleNext} onPrevious={handlePrevious}/>;
+            return <SecondView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} onPrevious={handlePrevious}/>;
         case 3:
             return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} />;
         case 4:

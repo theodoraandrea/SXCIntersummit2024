@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
-import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import {

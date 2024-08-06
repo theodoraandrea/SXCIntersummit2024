@@ -59,7 +59,6 @@ const register = async (data) => {
 const fetchProfileData = async (data) => {
   try {
     const res = await axiosInstance.post(API_PROFILE_DATA, data);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.error("Error fetching profile data:", error);
@@ -70,7 +69,6 @@ const fetchProfileData = async (data) => {
 // PUT profile datas
 const putProfileData = async (data) => {
   try {
-    console.log("putProfileData data ", data);
     const response = await axiosInstance.put(API_PROFILE_DATA, data);
     return response;
   } catch (error) {
@@ -83,7 +81,6 @@ const putProfileData = async (data) => {
 const fetchAllEvents = async () => {
   try {
     const response = await axiosInstance.get(API_GET_ALL_EVENTS);
-    // console.log(response)
     return response.data;
   } catch (error) {
     console.error("Error fetching events:", error);
@@ -108,7 +105,6 @@ const fetchRegisteredCompetitions = async () => {
     const response = await axiosInstance.get(
       API_GET_USER_REGISTERED_COMPETITIONS
     );
-    // console.log(response);
     return response.data.competitions;
   } catch (error) {
     console.error("Error fetching registered competition(s):", error);
@@ -124,7 +120,7 @@ const postBMCRegistration = async (data) => {
         "Content-Type": "multipart/form-data"
       },
     });
-    console.log(response.data);
+    return response;
   } catch (error) {
     console.error(error);
     throw error;
