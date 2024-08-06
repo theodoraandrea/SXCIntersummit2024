@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import bg from "./../../images/Kiri.png";
 import { useNavigate } from "react-router-dom";
 import { putProfileData } from "../../service/services";
-import { HOME, LANDING_PAGE, USER_DASHBOARD_PAGE } from "../../constants/routes";
+import {
+  HOME,
+  LANDING_PAGE,
+  USER_DASHBOARD_PAGE,
+} from "../../constants/routes";
 import { useUser } from "../../contexts/user-context";
 
 export default function UserDetails() {
@@ -116,8 +120,17 @@ export default function UserDetails() {
       /(\d{2})(\d{4})(\d{4})(\d*)/,
       "+62 $2 $3 $4"
     );
-
     setPhoneNumber(formattedValue);
+  };
+
+  const handleFullNameChange = (e) => {
+    const inputValue = e.target.value;
+    setFullName(sanitizeInput(inputValue));
+  };
+
+  const handleInstitutionChange = (e) => {
+    const inputValue = e.target.value;
+    setInstitution(sanitizeInput(inputValue));
   };
 
   // Constants for Batches
@@ -161,7 +174,7 @@ export default function UserDetails() {
                 type="text"
                 placeholder="Full Name"
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={handleFullNameChange}
               />
               {errors.fullname && (
                 <p className="text-red-500 text-xs mt-1">{errors.fullname}</p>
@@ -211,7 +224,7 @@ export default function UserDetails() {
                 type="text"
                 placeholder="Institution"
                 value={institution}
-                onChange={(e) => setInstitution(e.target.value)}
+                onChange={handleInstitutionChange}
               />
               <small className="text-gray-400">
                 Example: Universitas Indonesia
