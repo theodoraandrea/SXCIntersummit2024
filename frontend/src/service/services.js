@@ -11,6 +11,7 @@ import {
   API_POST_NEW_FCEO_MEMBER,
   API_POST_NEW_FCEO_TEAM,
   API_POST_CHECK_FCEO_TEAMCODE,
+  API_POST_BMC_REGISTRATION
 } from "../config/endpoints";
 
 //Login
@@ -115,6 +116,21 @@ const fetchRegisteredCompetitions = async () => {
   }
 };
 
+//BMC
+const postBMCRegistration = async (data) => {
+  try {    
+    const response = await axiosInstance.post(API_POST_BMC_REGISTRATION, data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+    });
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 const fetchAllCompetitions = async () => {
   try {
     const response = await axiosInstance.get(API_GET_ALL_COMPETITIONS);
@@ -179,4 +195,5 @@ export {
   postNewFceoMember,
   postNewFceoTeam,
   postCheckTeamCode,
+  postBMCRegistration
 };

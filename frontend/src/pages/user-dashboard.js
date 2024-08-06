@@ -19,8 +19,8 @@ import Spinner from "../components/elements/spinner";
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
-  const [activeTab, setActiveTab] = useState("events");
-  const [userData, setUserData] = useState(null);
+  const [ activeTab, setActiveTab] = useState("events");
+  const [ userData, setUserData ] = useState(null);
   const [registeredEventsData, setRegisteredEventsData] = useState([]);
   const [registeredCompetitionsData, setRegisteredCompetitionsData] = useState(
     []
@@ -31,6 +31,7 @@ export default function UserDashboard() {
 
   useEffect(() => {
     if (!loading) {
+      console.log(profileData);
       if (isLoggedIn) {
         setUserData(profileData);
         fetchRegisteredEventsData();

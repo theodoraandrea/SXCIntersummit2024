@@ -67,13 +67,12 @@ export default function Landing() {
     if (validateEmail(email.trim())) {
       try {
         const response = await login({ email, password });
-        loginUser();
+        console.log('Login successful', response); 
+        loginUser(response.user);
         navigate(HOME);
       } catch (error) {
         setErrorMessage(error.message);
       }
-    } else {
-      console.log("email not ok");
     }
   };
 
