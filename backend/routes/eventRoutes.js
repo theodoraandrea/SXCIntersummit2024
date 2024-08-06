@@ -31,6 +31,7 @@ router.get("/all", eventControllers.getAllEvents);
 
 router.post(
   "/BMC",
+  isAuthenticated,
   upload.fields([
     { name: "agreement", maxCount: 1 },
     { name: "screenshotBMC", minCount: 3 },
