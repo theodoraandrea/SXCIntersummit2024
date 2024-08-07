@@ -17,6 +17,10 @@ const Competition = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    shortDesc: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     competitionDate: {
       type: DataTypes.DATE,
       allowNull: false,

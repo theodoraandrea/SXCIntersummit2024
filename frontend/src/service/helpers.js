@@ -1,3 +1,5 @@
+import { API_GET_TEAM_DETAILS_BY_USER } from "../config/endpoints";
+
 // Function to calculate days and hours until the event
 const getDaysUntilEvent = (eventDate) => {
   const today = new Date();
@@ -40,4 +42,36 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
-export { getDaysUntilEvent, formatDate };
+// Function to get team detail url
+const getTeamDetailsUrl = (userId) => {
+  return API_GET_TEAM_DETAILS_BY_USER.replace(":userId", userId);
+};
+
+// Function to normalize data in /events page
+const normalizeData = (data, type) => {
+  return data.map((item) => {
+    if (type === "event") {
+      return {
+        id: `event_${item.id}`,
+        title: item.eventName,
+        description: item.description || item.shortDesc,
+        category: item.category,
+        date: item.eventDate,
+        location: item.eventLocation,
+      };
+    } else if (type === "competition") {
+      return {
+        id: `comp_${item.id}`,
+        title: item.competitionName,
+        description: item.shortDesc,
+        category: "Competition",
+        date: item.competitionDate,
+        location: item.competitionLocation,
+      };
+    } else {
+      return {};
+    }
+  });
+};
+
+export { getDaysUntilEvent, formatDate, getTeamDetailsUrl, normalizeData };

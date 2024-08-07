@@ -1,6 +1,6 @@
 const passport = require("passport");
 const { generateToken } = require("../config/jwtConfig");
-const User = require("../models/user");
+const { User } = require("../models");
 const {
   REGISTER_PAGE,
   FILL_DETAILS_PAGE,

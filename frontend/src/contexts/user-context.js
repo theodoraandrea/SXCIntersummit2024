@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
       userId: userId,
       token: token
     }
-    console.log("fetching data...");
+    console.log("fetching user data...");
     fetchData(data);
   }, []);
   
@@ -24,13 +24,13 @@ export const UserProvider = ({ children }) => {
     const token = localStorage.getItem("token");
 
     if (userId && token) {
-      console.log("has id and token");
       setIsLoggedIn(true);
     } else {
-      console.log("no id or token");
+      setIsLoggedIn(false);
     }
   });
 
+  
   const fetchData = async (data) => {
     try {
       const response = await fetchProfileData(data);
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }; 
 
   const removeUser = () => {
     console.log("removeUser");
@@ -48,15 +48,16 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("userId");
     setIsLoggedIn(false);
     setProfileData(null);
-  }
+  };
 
-  const loginUser = () => {
+  const loginUser = (data) => {
     console.log("loginUser");
     setIsLoggedIn(true);
+    setProfileData(data);
   }
 
   return (
-    <UserContext.Provider value={{ profileData, isLoggedIn, loading, removeUser, loginUser }}>
+    <UserContext.Provider value={{ profileData, isLoggedIn, loading, setProfileData, removeUser, loginUser }}>
       {children}
     </UserContext.Provider>
   );
