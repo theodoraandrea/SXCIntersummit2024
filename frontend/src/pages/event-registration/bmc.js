@@ -73,6 +73,8 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
 
 const SecondView = ({ title, description, formData, setFormData, onNext, onPrevious }) => {
     
+    const [ agreement, setAgreement ] = useState(formData.agreement?.name ?? '');
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         setFormData((prevState) => ({
@@ -80,6 +82,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
           [name]: files ? files[0] : value,
         }));
         console.log(files);
+        setAgreement(files[0].name);
       };
 
     const handleDownload = () => {
@@ -90,6 +93,12 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
         link.click();
         document.body.removeChild(link);
     };
+
+    const handleSubmit = () => {
+        if (agreement) {
+            onNext();
+        }
+    }
 
     return (
     <div>
@@ -103,7 +112,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
                     Download Agreement Paper
                 </button>
                 <p className='text-lg text-white mb-6'>{description}</p>
-                <div className='relative inline-block mb-10'>
+                <div className='relative inline-block mb-5'>
                 <input 
                     type='file'
                     id="agreement" 
@@ -116,6 +125,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
                     className='bg-primary-3 text-white px-5 py-3 rounded-full'>
                         Submit Agreement Paper
                 </label>
+                <label className='block text-white mt-6'>{agreement}</label>
                 </div>
                 <div className='flex justify-center'>
                 <button
@@ -128,7 +138,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
                 <button
                     type='button'
                     className='bg-primary-3 text-white px-6 py-2 rounded-full'
-                    onClick={onNext}
+                    onClick={handleSubmit}
                     >
                     Next
                 </button>
@@ -613,12 +623,20 @@ const EighthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
 };
 
 const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
-    const [ follow1, setFollow1 ] = useState(false);
-    const [ follow2, setFollow2 ] = useState(false);
-    const [ follow3, setFollow3 ] = useState(false);
+    const [ follow1, setFollow1 ] = useState(formData.screenshot1 ? true : false);
+    const [ follow2, setFollow2 ] = useState(formData.screenshot2 ? true : false);
+    const [ follow3, setFollow3 ] = useState(formData.screenshot3 ? true : false);
+
+    const [ screenshot1, setScreenshot1 ] = useState(formData.screenshot1?.name ?? "");
+    const [ screenshot2, setScreenshot2 ] = useState(formData.screenshot2?.name ?? "");
+    const [ screenshot3, setScreenshot3 ] = useState(formData.screenshot3?.name ?? "");
 
     const handleSubmit = () => {
-        onNext();
+        if (screenshot1 && screenshot2 && screenshot3
+            && follow1 && follow2 && follow3
+        ) {
+            onNext();
+        }
     }
 
     const handleChange = (e) => {
@@ -627,6 +645,13 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
           ...prevState,
           [name]: files ? files[0] : value,
         }));
+        if (name === "screenshot1") {
+            setScreenshot1(files[0].name);
+        } else if (name === "screenshot2") {
+            setScreenshot2(files[0].name);
+        } else if (name === "screenshot3") {
+            setScreenshot3(files[0].name);
+        }
     };
 
     return (
@@ -662,6 +687,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                 >
                                     Submit screenshot
                                 </label>
+                                <label className='text-white ml-2'>{screenshot1}</label>
                             </div>
                         </div>
                         <div className='mb-4'>
@@ -689,6 +715,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                 >
                                     Submit screenshot
                                 </label>
+                                <label className='text-white ml-2'>{screenshot2}</label>
                             </div>
                         </div>
                         <div className=''>
@@ -718,6 +745,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                 >
                                     Submit screenshot
                                 </label>
+                                <label className='text-white ml-2'>{screenshot3}</label>
                             </div>
                         </div>
                         <div className='mt-6 flex justify-center items-center'>
@@ -796,6 +824,10 @@ const Summary = ({ formData, onPrevious }) => {
                             <p>{formData.expectations}</p>
                             <strong>What kind of competition materials do you need?</strong>
                             <p>{formData.materials}</p>
+                            <p><strong>Agreement Paper: </strong> {formData.agreement.name}</p>
+                            <p><strong>Proof of following @SxCIntersummit instagram:</strong> {formData.screenshot1.name}</p>
+                            <p><strong>Proof of reposting BMC poster:</strong> {formData.screenshot2.name}</p>
+                            <p><strong>Proof of like & comment on BMC poster:</strong> {formData.screenshot3.name}</p>
                         </div>
                         <div className='flex mt-6'>
                         <button
