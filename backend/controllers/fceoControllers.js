@@ -8,6 +8,8 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
+const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
@@ -19,11 +21,8 @@ exports.createNewTeam = async (req, res) => {
 
     const teamCode = generateTeamCode(6);
 
-    const rootFolderId = process.env.FOLDER_FCEO_ID;
-    const folderId = await createFolder(
-      "Team " + teamName,
-      rootFolderId
-    );
+    const rootFolderId = process.env.FOLDER_FUTURECEO_ID;
+    const folderId = await createFolder("Team " + teamName, rootFolderId);
 
     const proofPayment = await getImageURLsList(files.proofPayment, folderId);
     const proofFollow = await getImageURLsList(files.proofFollow, folderId);
@@ -31,14 +30,14 @@ exports.createNewTeam = async (req, res) => {
     const proofStory = await getImageURLsList(files.proofStory, folderId);
     const studentIds = await getImageURLsList(files.studentIds, folderId);
 
-    const screenshotFCEO = [ proofFollow, proofTwibbon, proofStory, studentIds ];
+    const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
 
     const newTeam = await FCEO.create({
       teamName,
       leaderId: userId,
       teamCode,
       proofOfPayment: proofPayment,
-      screenshotFCEO: screenshotFCEO
+      screenshotFCEO: screenshotFCEO,
     });
 
     await CompetitionRegistration.create({
@@ -91,14 +90,75 @@ exports.createNewFCEOMember = async (req, res) => {
   try {
     const { body } = req;
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
+    const userId = req.user.id;
 
     const newMember = await FCEOMember.create({
       teamId: teamId,
       fullname: fullname,
       gender: gender,
       school: school,
-      phoneNumber: phoneNumber, 
-      email: email
+      phoneNumber: phoneNumber,
+      email: email,
+    });
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    var mailGenerator = new Mailgen({
+      theme: "salted",
+      product: {
+        name: "StudentsxCEOs International Summit 2024",
+        link: "#",
+      },
+    });
+
+    const user = await User.findByPk(userId);
+
+    var welcomeEmail = {
+      body: {
+        name: user.fullname,
+        intro:
+          "You've just successfully registered to the FCEO competition. We're excited to have you on board!",
+
+        action: {
+          instructions: "Join the WA Group by clicking the button below",
+          button: {
+            color: "#003337",
+            text: "Join WA Group",
+            link: "#",
+          },
+        },
+
+        outro:
+          "We're glad to have you on board! stay stuned in the group for further information!",
+
+        signature: "Cheers, StudentsxCEOs International Summit 2024",
+      },
+    };
+
+    const welcomeEmailHtml = mailGenerator.generate(welcomeEmail);
+
+    let mailOptions = {
+      from: `"StudentsXCEOs International Summit 2024" <info.sxcintersummit@gmail.com>`,
+      to: user.email,
+      subject: `Welcome to SxC Intersummit - ${user.fullname}`,
+      text: `Hi, ${user.fullname}.\nYou've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!`,
+      html: welcomeEmailHtml,
+    };
+
+    transporter.sendMail(mailOptions, function (err, data) {
+      if (err) {
+        return res.status(500).json({ message: "Error sending email", err });
+      } else {
+        return res.status(201).json({
+          message: `Email sent: ${email}`,
+        });
+      }
     });
 
     res.status(201).json({
@@ -106,7 +166,7 @@ exports.createNewFCEOMember = async (req, res) => {
       member: newMember,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -128,7 +188,7 @@ exports.getTeamDetailsByUserId = async (req, res) => {
 
     // Find all members of the same team
     const teamMembers = await FCEOMember.findAll({
-      where: { teamId }
+      where: { teamId },
     });
 
     res.status(200).json({
@@ -141,8 +201,8 @@ exports.getTeamDetailsByUserId = async (req, res) => {
         gender: member.gender,
         email: member.email,
         phoneNumber: member.phoneNumber,
-        school: member.school
-      }))
+        school: member.school,
+      })),
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
