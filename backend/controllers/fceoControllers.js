@@ -19,16 +19,6 @@ exports.createNewTeam = async (req, res) => {
 
     const teamCode = generateTeamCode(6);
 
-<<<<<<< HEAD
-    const rootFolderId = process.env.FOLDER_FCEO_ID;
-    const folderId = await createFolder(
-      "Payment Proof - Team " + teamName,
-      rootFolderId
-    );
-    const proofUrl = await getImageURLsList(files.proofOfPayment, folderId);
-
-    const newTeam = await FCEOTeam.create({
-=======
     const rootFolderId = process.env.FOLDER_FUTURECEO_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
 
@@ -41,13 +31,9 @@ exports.createNewTeam = async (req, res) => {
     const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
 
     const newTeam = await FCEO.create({
->>>>>>> 4f52ce9261942e45c37e3f5700e0c9f8d80497d5
       teamName,
       leaderId,
       teamCode,
-<<<<<<< HEAD
-      proofOfPayment: proofUrl,
-=======
       proofOfPayment: proofPayment,
       screenshotFCEO: screenshotFCEO,
     });
@@ -55,7 +41,6 @@ exports.createNewTeam = async (req, res) => {
     await CompetitionRegistration.create({
       userId,
       competitionId: fceoId,
->>>>>>> 4f52ce9261942e45c37e3f5700e0c9f8d80497d5
     });
 
     res.status(201).json({
@@ -101,45 +86,6 @@ exports.checkTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
-<<<<<<< HEAD
-    const fceoId = 1;
-    const { files, body } = req;
-    const { userId, teamCode, nationalStudentIdNumber, isLeader } = body;
-
-    const team = await FCEOTeam.findOne({ where: { teamCode: teamCode } });
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    if (!team) {
-      return res
-        .status(404)
-        .json({ error: "Team not found. Please check your Code" });
-    }
-
-    const rootFolderId = process.env.FOLDER_FCEO_ID;
-    const folderId = await createFolder(user.fullname, rootFolderId);
-
-    const screenshotFCEO_URL = await getImageURLsList(
-      files.screenshotFCEO,
-      folderId
-    );
-
-    const fceoRegistration = await CompetitionRegistration.create({
-      userId,
-      competitionId: fceoId,
-    });
-
-    const newMember = await FCEOMember.create({
-      userId,
-      registrationId: fceoRegistration.id,
-      teamId: team.id,
-      isLeader,
-      nationalStudentIdNumber,
-      screenshotFCEO: screenshotFCEO_URL,
-=======
     const { body } = req;
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
     const userId = req.user.id;
@@ -151,7 +97,6 @@ exports.createNewFCEOMember = async (req, res) => {
       school: school,
       phoneNumber: phoneNumber,
       email: email,
->>>>>>> 4f52ce9261942e45c37e3f5700e0c9f8d80497d5
     });
 
     const transporter = nodemailer.createTransport({
