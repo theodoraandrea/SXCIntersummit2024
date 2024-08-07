@@ -91,6 +91,7 @@ export default function UserDetails() {
     }
 
     try {
+      console.log(data);
       const response = await putProfileData(data);
       if (response.status === 200) {
         console.log("Profile updated successfully");
@@ -104,7 +105,7 @@ export default function UserDetails() {
   };
 
   const sanitizeInput = (input) => {
-    return input.trim().replace(/[^a-zA-Z\s]/g, "");
+    return input.replace(/[^a-zA-Z\s]/g, "");
   };
 
   const handlePhoneNumberChange = (e) => {

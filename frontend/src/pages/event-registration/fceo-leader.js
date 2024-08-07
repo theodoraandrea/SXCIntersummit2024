@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { LANDING_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
+import Spinner from "../../components/elements/spinner";
 
 const LeaderForm = ({
   formData,
@@ -98,7 +99,6 @@ const LeaderForm = ({
 const FutureCEOPage = () => {
   const { isLoggedIn, profileData, loading } = useUser();
   const [isProfilePrefilled, setIsProfilePrefilled] = useState(false);
-  const [teamCode, setTeamCode] = useState(null);
   const [formData, setFormData] = useState({
     fullName: "",
     gender: "",
@@ -114,7 +114,31 @@ const FutureCEOPage = () => {
     teamName: "",
     proofPayment: null,
   });
+  const [isUploading, setIsUploading] = useState(false); // New state for tracking upload
   const navigate = useNavigate();
+
+  // Helper function to check if all required fields are filled
+  const isFormValid = () => {
+    const requiredFields = [
+      "fullName",
+      "gender",
+      "school",
+      "phone",
+      "email",
+      "studentId",
+      "studentCard",
+      "proofFollow",
+      "proofTwibbon",
+      "proofStory",
+      "proofWhatsapp",
+      "teamName",
+      "proofPayment",
+    ];
+
+    return requiredFields.every(
+      (field) => formData[field] !== "" && formData[field] !== null
+    );
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -126,27 +150,34 @@ const FutureCEOPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsUploading(true); // Start uploading
 
-    const teamDataToSend = new FormData();
-    teamDataToSend.append("teamName", formData.teamName);
-    teamDataToSend.append("leaderId", localStorage.getItem("userId"));
-    if (formData.proofPayment) {
-      teamDataToSend.append("proofOfPayment", formData.proofPayment);
-    }
-    const teamDetails = await registerTeam(teamDataToSend);
-    if (teamDetails && teamDetails.teamCode) {
-      const memberDataToSend = new FormData();
-      memberDataToSend.append("userId", profileData.id);
-      memberDataToSend.append("teamCode", teamDetails.teamCode);
-      memberDataToSend.append("nationalStudentIdNumber", formData.studentId);
-      memberDataToSend.append("isLeader", true);
-      memberDataToSend.append("screenshotFCEO", formData.studentCard);
-      memberDataToSend.append("screenshotFCEO", formData.proofFollow);
-      memberDataToSend.append("screenshotFCEO", formData.proofTwibbon);
-      memberDataToSend.append("screenshotFCEO", formData.proofStory);
-      memberDataToSend.append("screenshotFCEO", formData.proofWhatsapp);
+    try {
+      const teamDataToSend = new FormData();
+      teamDataToSend.append("teamName", formData.teamName);
+      teamDataToSend.append("leaderId", localStorage.getItem("userId"));
+      if (formData.proofPayment) {
+        teamDataToSend.append("proofOfPayment", formData.proofPayment);
+      }
+      const teamDetails = await registerTeam(teamDataToSend);
+      if (teamDetails && teamDetails.teamCode) {
+        const memberDataToSend = new FormData();
+        memberDataToSend.append("userId", profileData.id);
+        memberDataToSend.append("teamCode", teamDetails.teamCode);
+        memberDataToSend.append("nationalStudentIdNumber", formData.studentId);
+        memberDataToSend.append("isLeader", true);
+        memberDataToSend.append("screenshotFCEO", formData.studentCard);
+        memberDataToSend.append("screenshotFCEO", formData.proofFollow);
+        memberDataToSend.append("screenshotFCEO", formData.proofTwibbon);
+        memberDataToSend.append("screenshotFCEO", formData.proofStory);
+        memberDataToSend.append("screenshotFCEO", formData.proofWhatsapp);
 
-      await registerMember(memberDataToSend);
+        await registerMember(memberDataToSend);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsUploading(false); // End uploading
     }
   };
 
@@ -229,12 +260,28 @@ const FutureCEOPage = () => {
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
-            <button
-              type="submit"
-              className="bg-primary-3 text-white px-6 py-2 rounded-full"
-            >
-              Submit
-            </button>
+            <div className="flex items-center">
+              <button
+                type="submit"
+                className={`bg-primary-3 text-white px-6 py-2 rounded-full ${
+                  isUploading || !isFormValid()
+                    ? "opacity-50 cursor-not-allowed"
+                    : ""
+                }`}
+                disabled={isUploading || !isFormValid()} // Disable the button if uploading or form is incomplete
+              >
+                Submit
+              </button>
+              {isUploading && (
+                <div className="ml-4 flex items-center">
+                  <Spinner size={30} />
+                  <span className="ml-2 text-white">
+                    Uploading... please dont leave the page (this may take some
+                    time)
+                  </span>
+                </div>
+              )}
+            </div>
           </form>
         </div>
       </div>
