@@ -1,5 +1,5 @@
-import { API_GET_TEAM_DETAILS_BY_USER } from "../config/endpoints";
-import { FCEO_REGIST_SUMMARY } from "../constants/routes";
+import { API_GET_FCEO_REGISTRATION } from "../config/endpoints";
+import { BMC_REGIST_SUMMARY, FCEO_REGIST_SUMMARY } from "../constants/routes";
 
 // Function to calculate days and hours until the event
 const getDaysUntilEvent = (eventDate) => {
@@ -46,6 +46,15 @@ const getCompetitionSummaryLink = (competitionId) => {
   }
 }
 
+const getEventSummaryLink = (eventId) => {
+  switch (eventId) {
+    case 1:
+      return BMC_REGIST_SUMMARY;
+    default:
+      return "#";
+  }
+}
+
 // Function to format the date
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -54,7 +63,7 @@ const formatDate = (dateString) => {
 
 // Function to get team detail url
 const getTeamDetailsUrl = (userId) => {
-  return API_GET_TEAM_DETAILS_BY_USER.replace(":userId", userId);
+  return API_GET_FCEO_REGISTRATION.replace(":userId", userId);
 };
 
 // Function to normalize data in /events page
@@ -84,4 +93,10 @@ const normalizeData = (data, type) => {
   });
 };
 
-export { getDaysUntilEvent, formatDate, getTeamDetailsUrl, normalizeData, getCompetitionSummaryLink };
+export { getDaysUntilEvent, 
+  formatDate, 
+  getTeamDetailsUrl, 
+  normalizeData, 
+  getCompetitionSummaryLink,
+  getEventSummaryLink
+};

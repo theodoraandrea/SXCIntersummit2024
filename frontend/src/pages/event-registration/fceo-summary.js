@@ -55,7 +55,6 @@ const FCEOSummary = () => {
                                 <li key={index}>{member.fullname}</li>
                             ))}
                         </ul>
-                        <p className='mt-2'><strong>Files</strong></p>
                     </div>
                     <div className='col-span-2 rounded-lg shadow-lg p-4 bg-opacity-25'>
                         <p className='text-xl font-semibold mb-2'>Submitted Data</p>

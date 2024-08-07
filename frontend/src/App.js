@@ -7,6 +7,7 @@ import UserDashboard from "./pages/user-dashboard";
 import Events from "./pages/event";
 import DetailEvents from "./pages/event-details/index";
 import BMCRegistration from "./pages/event-registration/bmc";
+import BMCSummary from "./pages/event-registration/bmc-summary";
 import FCEORegistration from "./pages/event-registration/fceo";
 import FCEOSummary from "./pages/event-registration/fceo-summary";
 
@@ -17,9 +18,9 @@ import {
   USER_DASHBOARD_PAGE,
   ABOUT_PAGE,
   EVENTS_PAGE,
-  FCEO,
   EVENT_DETAILS,
   BMC_REGIST,
+  BMC_REGIST_SUMMARY,
   FCEO_REGIST,
   FCEO_REGIST_SUMMARY,
 } from "./constants/routes";
@@ -42,6 +43,7 @@ export default function App() {
             element={<DetailEvents />}
           />
           <Route path={BMC_REGIST} element={<BMCRegistration/>} />
+          <Route path={BMC_REGIST_SUMMARY} element={<BMCSummary/>}/>
           <Route path={FCEO_REGIST} element={<FCEORegistration />} />
           <Route path={FCEO_REGIST_SUMMARY} element={<FCEOSummary />} />
         </Routes>

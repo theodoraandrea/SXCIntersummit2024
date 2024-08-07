@@ -39,6 +39,43 @@ exports.getRegisteredEventsByUser = async (req, res) => {
   }
 };
 
+exports.getBMCRegistration = async (req, res) => {
+  try {
+    const bmcId = 1;
+    const userId = req.user.id;
+
+    const registrations = await EventRegistration.findAll({
+      where: {
+        userId: userId,
+        eventId: bmcId
+      }
+    });
+
+    const forms = [];
+
+    if (registrations.length > 0) {
+      console.log("found: ", registrations.length);
+      for (let i=0; i < registrations.length; i++) {
+        const item = registrations[i];
+        try {
+          const data = await BMC.findOne({
+            where: {
+              registrationId: item.id
+            }
+          });
+          forms.push(data);
+        } catch (error) {
+          res.status(400).json({message: "Registration data not found"});
+        }
+      }
+    }
+    console.log(forms);
+    res.status(200).json(forms);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 /**
  *
  * EVENTS REGISTRATION
@@ -112,17 +149,14 @@ exports.registerBMC = async (req, res) => {
     
     const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
-    console.log("Folder created: ", folderId);
 
     const screenshots = [files.screenshot1, files.screenshot2, files.screenshot3];
 
     const agreementURL = await getImageURLsList(files.agreement, folderId);
-    console.log("agreement URL: ", agreementURL);
     const screenshot1 = await getImageURLsList(files.screenshot1, folderId);
     const screenshot2 = await getImageURLsList(files.screenshot2, folderId);
     const screenshot3 = await getImageURLsList(files.screenshot3, folderId);
     const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3];
-    console.log("ss URL: ", screenshotBMC_URL);
 
     // BMC Registration
     const eventRegistration = await EventRegistration.create({

@@ -12,7 +12,8 @@ import {
   API_POST_NEW_FCEO_TEAM,
   API_POST_CHECK_FCEO_TEAMCODE,
   API_POST_BMC_REGISTRATION,
-  API_GET_TEAM_DETAILS_BY_USER
+  API_GET_FCEO_REGISTRATION,
+  API_GET_BMC_REGISTRATION
 } from "../config/endpoints";
 
 //Login
@@ -139,6 +140,16 @@ const fetchAllCompetitions = async () => {
   }
 };
 
+const getBmcRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_BMC_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 // FCEO
 const postNewFceoMember = async (data) => {
   try {
@@ -171,7 +182,7 @@ const postNewFceoTeam = async (data) => {
 
 const getFceoRegistrationData = async (data) => {
   try {
-    const response = await axiosInstance.get(API_GET_TEAM_DETAILS_BY_USER, data);
+    const response = await axiosInstance.get(API_GET_FCEO_REGISTRATION, data);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -205,5 +216,6 @@ export {
   postNewFceoTeam,
   getFceoRegistrationData,
   postCheckTeamCode,
-  postBMCRegistration
+  postBMCRegistration,
+  getBmcRegistrationData
 };

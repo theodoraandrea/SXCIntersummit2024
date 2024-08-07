@@ -698,7 +698,13 @@ const Summary = ({ formData, members, setCurrentView }) => {
                 await registerMember(memberData);
                 console.log("posted member");
                 setIsLoading(false);
-                navigate(USER_DASHBOARD_PAGE);
+                //Add this activeTab state for competition registrations
+                //because user-dashboard opens "events" by default
+                navigate(USER_DASHBOARD_PAGE, {
+                  state: {
+                    activeTab: "competitions"
+                  }
+                });
                 {/*INSERT SUCCESS ALERT*/}
               } catch (memberError) {
                 console.log("Error posting member: ", memberError);
