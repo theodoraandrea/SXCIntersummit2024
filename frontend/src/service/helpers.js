@@ -1,4 +1,5 @@
 import { API_GET_TEAM_DETAILS_BY_USER } from "../config/endpoints";
+import { FCEO_REGIST_SUMMARY } from "../constants/routes";
 
 // Function to calculate days and hours until the event
 const getDaysUntilEvent = (eventDate) => {
@@ -35,6 +36,15 @@ const getDaysUntilEvent = (eventDate) => {
     status,
   };
 };
+
+const getCompetitionSummaryLink = (competitionId) => {
+  switch (competitionId) {
+    case 1:
+      return FCEO_REGIST_SUMMARY;
+    default:
+      return "#";
+  }
+}
 
 // Function to format the date
 const formatDate = (dateString) => {
@@ -74,4 +84,4 @@ const normalizeData = (data, type) => {
   });
 };
 
-export { getDaysUntilEvent, formatDate, getTeamDetailsUrl, normalizeData };
+export { getDaysUntilEvent, formatDate, getTeamDetailsUrl, normalizeData, getCompetitionSummaryLink };

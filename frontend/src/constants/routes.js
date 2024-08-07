@@ -12,6 +12,4 @@ export const EVENT_DETAILS = "/event-details";
 export const FCEO = "/fceo";
 export const BMC_REGIST = "/bmc/register";
 export const FCEO_REGIST = "/fceo/register";
-export const FCEO_REGIST_MEMBER_1 = "/fceo/register/member/1";
-export const FCEO_REGIST_MEMBER_2 = "/fceo/register/member/2";
-export const FCEO_REGIST_SUMMARY = "/fceo/register/summary";
+export const FCEO_REGIST_SUMMARY = "/fceo/summary";

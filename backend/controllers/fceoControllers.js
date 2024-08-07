@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   FCEOMember,
-  FCEOTeam,
+  FCEO,
   User,
   Competition,
   CompetitionRegistration,
@@ -33,7 +33,7 @@ exports.createNewTeam = async (req, res) => {
 
     const screenshotFCEO = [ proofFollow, proofTwibbon, proofStory, studentIds ];
 
-    const newTeam = await FCEOTeam.create({
+    const newTeam = await FCEO.create({
       teamName,
       leaderId: userId,
       teamCode,
@@ -62,7 +62,7 @@ exports.checkTeam = async (req, res) => {
     const { body } = req;
     const { teamCode } = body;
 
-    const team = await FCEOTeam.findOne({ where: { teamCode: teamCode } });
+    const team = await FCEO.findOne({ where: { teamCode: teamCode } });
     if (!team) {
       return res
         .status(404)
@@ -110,51 +110,39 @@ exports.createNewFCEOMember = async (req, res) => {
   }
 };
 
-// Get team details and members by userId
+// Get team details and members by userId of leader
 exports.getTeamDetailsByUserId = async (req, res) => {
   try {
-    const { userId } = req.params;
-
-    // Find member corresponding to the userId
-    const member = await FCEOMember.findOne({
-      where: { userId },
-    });
-
-    if (!member) {
-      return res.status(404).json({ error: "Member not found" });
-    }
+    const userId = req.user.id;
 
     // Find team details using the teamId
-    const teamId = member.teamId;
-    const team = await FCEOTeam.findOne({
-      where: { id: teamId },
+    const team = await FCEO.findOne({
+      where: { leaderId: userId },
     });
 
     if (!team) {
       return res.status(404).json({ error: "Team not found" });
     }
 
+    const teamId = team.id;
+
     // Find all members of the same team
     const teamMembers = await FCEOMember.findAll({
-      where: { teamId },
-      include: [
-        {
-          model: User,
-          attributes: ["fullname", "email", "phoneNumber"],
-        },
-      ],
+      where: { teamId }
     });
 
     res.status(200).json({
       teamName: team.teamName,
       teamCode: team.teamCode,
+      proofPayment: team.proofOfPayment,
+      screenshotFCEO: team.screenshotFCEO,
       members: teamMembers.map((member) => ({
-        userId: member.userId,
-        isLeader: member.isLeader,
-        fullname: member.User.fullname,
-        email: member.User.email,
-        phoneNumber: member.User.phoneNumber,
-      })),
+        fullname: member.fullname,
+        gender: member.gender,
+        email: member.email,
+        phoneNumber: member.phoneNumber,
+        school: member.school
+      }))
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

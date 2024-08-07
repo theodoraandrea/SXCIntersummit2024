@@ -25,7 +25,7 @@ router.post(
 );
 router.post("/team/check", isAuthenticated, fceoControllers.checkTeam);
 router.get(
-  "/team/detail/user/:userId",
+  "/summary",
   isAuthenticated,
   fceoControllers.getTeamDetailsByUserId
 );

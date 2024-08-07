@@ -16,7 +16,7 @@ const GET_ALL_COMPETITIONS = "/competitions/all";
 const POST_NEW_FCEO_MEMBER = "/fceo/member";
 const POST_NEW_FCEO_TEAM = "/fceo/team";
 const POST_CHECK_FCEO_TEAMCODE = "/fceo/team/check";
-const GET_TEAM_DETAILS_BY_USER = "/fceo/team/detail/user/:userId";
+const GET_TEAM_DETAILS_BY_USER = "/fceo/summary";
 
 const API_SIGNUP = `${API_URL}${SIGNUP}`;
 const API_LOGIN = `${API_URL}${LOGIN}`;

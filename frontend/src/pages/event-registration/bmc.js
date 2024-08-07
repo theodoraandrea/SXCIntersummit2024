@@ -268,8 +268,8 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                                 className='w-full px-3 py-2 rounded-lg'
                             >
                                 <option value="" disabled>Select Gender</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
                             </select>
                         </div>
                         <div className='mb-4'>

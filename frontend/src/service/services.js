@@ -11,7 +11,8 @@ import {
   API_POST_NEW_FCEO_MEMBER,
   API_POST_NEW_FCEO_TEAM,
   API_POST_CHECK_FCEO_TEAMCODE,
-  API_POST_BMC_REGISTRATION
+  API_POST_BMC_REGISTRATION,
+  API_GET_TEAM_DETAILS_BY_USER
 } from "../config/endpoints";
 
 //Login
@@ -168,6 +169,17 @@ const postNewFceoTeam = async (data) => {
   }
 };
 
+const getFceoRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_TEAM_DETAILS_BY_USER, data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+//LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
     const response = await axiosInstance.post(API_POST_CHECK_FCEO_TEAMCODE, {
@@ -191,6 +203,7 @@ export {
   fetchRegisteredCompetitions,
   postNewFceoMember,
   postNewFceoTeam,
+  getFceoRegistrationData,
   postCheckTeamCode,
   postBMCRegistration
 };
