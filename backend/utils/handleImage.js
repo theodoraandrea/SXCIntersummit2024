@@ -83,7 +83,9 @@ exports.getImageURLsList = async (files, folderId) => {
   for (let i = 0; i < fileArray.length; i++) {
     const file = fileArray[i];
 
+    console.log("uploading image ", file.originalname);
     const imgFileId = await uploadImage(file, folderId);
+    console.log("upload complete");
 
     publicURL.push(await generatePublicLink(imgFileId));
   }

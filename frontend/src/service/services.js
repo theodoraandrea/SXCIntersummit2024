@@ -10,6 +10,8 @@ import {
   // FCEO
   API_POST_NEW_FCEO_MEMBER,
   API_POST_NEW_FCEO_TEAM,
+  API_POST_CHECK_FCEO_TEAMCODE,
+  API_POST_BMC_REGISTRATION
 } from "../config/endpoints";
 
 //Login
@@ -57,7 +59,6 @@ const register = async (data) => {
 const fetchProfileData = async (data) => {
   try {
     const res = await axiosInstance.post(API_PROFILE_DATA, data);
-    console.log(res);
     return res.data;
   } catch (error) {
     console.error("Error fetching profile data:", error);
@@ -68,7 +69,6 @@ const fetchProfileData = async (data) => {
 // PUT profile datas
 const putProfileData = async (data) => {
   try {
-    console.log("putProfileData data ", data);
     const response = await axiosInstance.put(API_PROFILE_DATA, data);
     return response;
   } catch (error) {
@@ -81,7 +81,6 @@ const putProfileData = async (data) => {
 const fetchAllEvents = async () => {
   try {
     const response = await axiosInstance.get(API_GET_ALL_EVENTS);
-    // console.log(response)
     return response.data;
   } catch (error) {
     console.error("Error fetching events:", error);
@@ -106,13 +105,27 @@ const fetchRegisteredCompetitions = async () => {
     const response = await axiosInstance.get(
       API_GET_USER_REGISTERED_COMPETITIONS
     );
-    // console.log(response);
     return response.data.competitions;
   } catch (error) {
     console.error("Error fetching registered competition(s):", error);
     throw error;
   }
 };
+
+//BMC
+const postBMCRegistration = async (data) => {
+  try {    
+    const response = await axiosInstance.post(API_POST_BMC_REGISTRATION, data, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 
 const fetchAllCompetitions = async () => {
   try {
@@ -154,6 +167,18 @@ const postNewFceoTeam = async (data) => {
   }
 };
 
+const postCheckTeamCode = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_CHECK_FCEO_TEAMCODE, {
+      teamCode: data,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export {
   login,
   register,
@@ -165,4 +190,6 @@ export {
   fetchRegisteredCompetitions,
   postNewFceoMember,
   postNewFceoTeam,
+  postCheckTeamCode,
+  postBMCRegistration
 };
