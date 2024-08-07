@@ -761,7 +761,7 @@ const Member2Data = ({
 };
 
 const Summary = ({ formData, members, setCurrentView }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
