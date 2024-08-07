@@ -10,6 +10,7 @@ const {
 } = require("../models");
 // Handling Images Dependencies
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
+const { validationResult } = require("express-validator");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -46,6 +47,12 @@ exports.getRegisteredEventsByUser = async (req, res) => {
 
 exports.registerBMC = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     // const userId = 1;
     const bmcId = 1; // BMC event id
     const { body, files } = req;

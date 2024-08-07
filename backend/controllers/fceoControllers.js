@@ -8,10 +8,17 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
+const { validationResult } = require("express-validator");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { files, body } = req;
     const { teamName, leaderId } = body;
 
@@ -44,6 +51,12 @@ exports.createNewTeam = async (req, res) => {
 // Check Team Existence
 exports.checkTeam = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { body } = req;
     const { teamCode } = body;
 
@@ -76,6 +89,12 @@ exports.checkTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const fceoId = 1;
     const { files, body } = req;
     const { userId, teamCode, nationalStudentIdNumber, isLeader } = body;
