@@ -127,6 +127,7 @@ exports.createNewFCEOMember = async (req, res) => {
       theme: "salted",
       product: {
         name: "StudentsxCEOs International Summit 2024",
+        link: "#",
       },
     });
 
@@ -134,10 +135,10 @@ exports.createNewFCEOMember = async (req, res) => {
       body: {
         name: user.fullname,
         intro:
-          "You've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!",
+          "You've just successfully registered to the FCEO competition. We're excited to have you on board!",
 
         action: {
-          instructions: "Join the WA Group",
+          instructions: "Join the WA Group by clicking the button below",
           button: {
             color: "#003337",
             text: "Join WA Group",
@@ -152,22 +153,22 @@ exports.createNewFCEOMember = async (req, res) => {
       },
     };
 
-    const welcomeEmailHtml = mailGenerator.generate(welcomeEmailHtml);
+    const welcomeEmailHtml = mailGenerator.generate(welcomeEmail);
 
     let mailOptions = {
       from: process.env.EMAIL_USER,
       to: user.email,
-      subject: `Welcome to SxC Intersummit -  + ${user.fullname}`,
+      subject: `Welcome to SxC Intersummit - ${user.fullname}`,
       text: `Hi, ${user.fullname}.\nYou've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!`,
       html: welcomeEmailHtml,
     };
 
     transporter.sendMail(mailOptions, function (err, data) {
       if (err) {
-        return res.status(500).json({ err });
+        return res.status(500).json({ message: "Error sending email", err });
       } else {
         return res.status(201).json({
-          message: `OTP has been sent to your email : ${email}`,
+          message: `Email sent: ${email}`,
         });
       }
     });
