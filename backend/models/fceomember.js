@@ -9,40 +9,34 @@ const FCEOMember = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    registrationId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "competitionregistrations",
-        key: "id",
-      },
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "users",
-        key: "id",
-      },
-      allowNull: false,
-    },
-    nationalStudentIdNumber: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     teamId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "fceoteams",
+        model: "fceo",
         key: "id",
       },
       allowNull: false,
     },
-    isLeader: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+    fullname: {
+      type: DataTypes.STRING,
     },
-    screenshotFCEO: {
-      type: DataTypes.JSON,
+    gender: {
+      type: DataTypes.ENUM,
+      values: ["Male", "Female"],
+    },
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    school: {
+      type: DataTypes.STRING,
+    },
+    phoneNumber: {
+      type: DataTypes.STRING,
     },
   },
   {

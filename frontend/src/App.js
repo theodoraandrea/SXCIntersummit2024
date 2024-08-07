@@ -8,10 +8,6 @@ import Events from "./pages/event";
 import DetailEvents from "./pages/event-details/index";
 import BMC_Regist from "./pages/event-registration/bmc";
 import FCEO_Regist from "./pages/event-registration/fceo";
-import RegistEvents3 from "./pages/event-registration/fceo-leader";
-import RegistEvents4 from "./pages/event-registration/fceo-member";
-import RegistEvents5 from "./pages/event-registration/fceo-member2";
-import RegistEvents6 from "./pages/event-registration/fceo-summary";
 
 import {
   HOME,
@@ -24,10 +20,6 @@ import {
   EVENT_DETAILS,
   BMC_REGIST,
   FCEO_REGIST,
-  FCEO_REGIST_LEADER,
-  FCEO_REGIST_MEMBER_1,
-  FCEO_REGIST_MEMBER_2,
-  FCEO_REGIST_SUMMARY,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -49,10 +41,6 @@ export default function App() {
           />
           <Route path={BMC_REGIST} element={<BMC_Regist />} />
           <Route path={FCEO_REGIST} element={<FCEO_Regist />} />
-          <Route path={FCEO_REGIST_LEADER} element={<RegistEvents3 />} />
-          <Route path={FCEO_REGIST_MEMBER_1} element={<RegistEvents4 />} />
-          <Route path={FCEO_REGIST_MEMBER_2} element={<RegistEvents5 />} />
-          <Route path={FCEO_REGIST_SUMMARY} element={<RegistEvents6 />} />
         </Routes>
       </Router>
     </UserProvider>

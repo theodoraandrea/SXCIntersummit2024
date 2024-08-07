@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 
-const FCEOTeam = sequelize.define(
+const FCEO = sequelize.define(
   "FCEOTeam",
   {
     id: {
@@ -28,13 +28,17 @@ const FCEOTeam = sequelize.define(
     },
     proofOfPayment: {
       type: DataTypes.JSON,
-      allowNull: true,
+      allowNull: false,
     },
+    screenshotFCEO: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    }
   },
   {
-    tableName: "fceoteams",
+    tableName: "fceo",
     timestamps: true,
   }
 );
 
-module.exports = FCEOTeam;
+module.exports = FCEO;

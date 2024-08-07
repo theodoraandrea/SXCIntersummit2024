@@ -16,28 +16,7 @@ const MemberForm = ({ formData, handleChange }) => (
         name: "studentId-member",
         type: "text",
       },
-      { label: "Student ID Card", name: "studentCard-member", type: "file" },
-      {
-        label:
-          "Proof of Following @sxcintersummit and @sxcintersummitcompetition Instagram Account",
-        name: "proofFollow-member",
-        type: "file",
-      },
-      {
-        label: "Proof of Twibbon Post",
-        name: "proofTwibbon-member",
-        type: "file",
-      },
-      {
-        label: "Proof of Sharing Instagram Story Posters",
-        name: "proofStory-member",
-        type: "file",
-      },
-      {
-        label: "Proof of Sharing Posters to 3 Whatsapp Group",
-        name: "proofWhatsapp-member",
-        type: "file",
-      },
+      { label: "Student ID Card", name: "studentCard-member", type: "file" }
     ].map((field) => (
       <div key={field.name} className="mb-4">
         <label className="block text-white mb-2" htmlFor={field.name}>
