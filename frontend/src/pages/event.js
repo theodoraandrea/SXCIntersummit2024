@@ -1,62 +1,111 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import EventCard from './../components/elements/event-card';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import EventCard from "./../components/elements/event-card";
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
-
-const events = [
-  { title: 'Event 01', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.', category: 'Workshop' },
-  { title: 'Event 02', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.', category: 'Company Visit' },
-  { title: 'Event 03', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.', category: 'Competitions' },
-];
+// import { DummyEventsData as events } from "../constants/dummy/eventsdata";
+import { fetchAllCompetitions, fetchAllEvents } from "../service/services";
+import { normalizeData } from "../service/helpers";
 
 const Events = () => {
   const location = useLocation();
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
+  const [eventsData, setEventsData] = useState(null);
+  const [competitionsData, setCompetitionsData] = useState(null);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const query = new URLSearchParams(location.search);
-    const category = query.get('category');
+    const category = query.get("category");
     if (category) {
       setFilter(category);
     }
   }, [location.search]);
 
-  const filteredEvents = filter === 'All'
-    ? events
-    : events.filter(event => event.category === filter);
+  const fetchAllEventsData = async () => {
+    try {
+      const response = await fetchAllEvents();
+      setEventsData(normalizeData(response, "event"));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchAllCompetitionsData = async () => {
+    try {
+      const response = await fetchAllCompetitions();
+      setCompetitionsData(normalizeData(response, "competition"));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllEventsData();
+    fetchAllCompetitionsData();
+  }, []);
+
+  useEffect(() => {
+    if (!eventsData && !competitionsData) {
+      return;
+    }
+
+    const combinedData = [...(eventsData || []), ...(competitionsData || [])];
+
+    // Sort the combined data by date
+    const sortedCombinedData = combinedData.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA - dateB; // Sort by ascending order
+    });
+
+    let filteredEvents =
+      filter === "All"
+        ? sortedCombinedData
+        : sortedCombinedData.filter((event) => event.category === filter);
+    setFilteredData(filteredEvents);
+  }, [eventsData, competitionsData, filter]);
 
   return (
     <>
-      <Navbar 
-        currentPath={location.pathname}
-      />
+      <Navbar currentPath={location.pathname} />
       <div className="p-8 bg-primary-1 text-white min-h-screen">
-        <div className='flex mx-auto'>
+        <div className="flex mx-auto">
           <div className="flex space-x-4 mb-4 mx-auto">
-            {['All', 'Workshop', 'Company Visit', 'Competitions'].map(category => (
+            {["All", "Workshop", "Company Visit", "Competition"].map(
+              (category) => (
                 <button
                   key={category}
                   onClick={() => setFilter(category)}
-                  className={`px-4 py-2 rounded ${filter === category ? 'bg-yellow-500' : 'bg-teal-700'}`}
+                  className={`px-4 py-2 rounded ${
+                    filter === category ? "bg-yellow-500" : "bg-teal-700"
+                  }`}
                 >
                   {category}
                 </button>
-            ))}
+              )
+            )}
           </div>
         </div>
-        <div className="space-y-4 my-5">
-          {filteredEvents.map((event, index) => (
-            <EventCard
-              key={index}
-              title={event.title}
-              description={event.description}
-              category={event.category}
-            />
-          ))}
+        <div className="space-y-4 my-5 min-h-screen">
+          {filteredData && filteredData.length > 0 ? (
+            filteredData.map((event, index) => (
+              <EventCard
+                key={index}
+                id={event.id}
+                title={event.title}
+                description={event.description}
+                category={event.category}
+              />
+            ))
+          ) : (
+            <div className="flex w-full min-h-[50vh] items-center justify-center ">
+              <p className="text-3xl">No events posted yet. Stay tuned!</p>
+            </div>
+          )}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

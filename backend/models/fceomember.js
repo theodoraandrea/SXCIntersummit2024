@@ -9,6 +9,13 @@ const FCEOMember = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    registrationId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "competitionregistrations",
+        key: "id",
+      },
+    },
     userId: {
       type: DataTypes.INTEGER,
       references: {
@@ -31,6 +38,10 @@ const FCEOMember = sequelize.define(
     },
     isLeader: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
+    },
+    screenshotFCEO: {
+      type: DataTypes.JSON,
       allowNull: false,
     },
   },

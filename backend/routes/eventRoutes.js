@@ -30,10 +30,13 @@ router.get("/", isAuthenticated, eventControllers.getRegisteredEventsByUser);
 router.get("/all", eventControllers.getAllEvents);
 
 router.post(
-  "/BMC",
+  "/BMC", isAuthenticated,
   upload.fields([
     { name: "agreement", maxCount: 1 },
-    { name: "screenshotBMC", minCount: 3 },
+    { name: "screenshot1", maxCount: 1 },
+    { name: "screenshot2", maxCount: 1 },
+    { name: "screenshot3", maxCount: 1 },
+    //{ name: "screenshotBMC", minCount: 3 },
   ]),
   eventControllers.registerBMC
 );

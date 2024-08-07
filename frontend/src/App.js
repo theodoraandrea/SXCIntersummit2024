@@ -21,10 +21,11 @@ import {
   ABOUT_PAGE,
   EVENTS_PAGE,
   FCEO,
+  EVENT_DETAILS,
   BMC_REGIST,
   FCEO_REGIST,
   FCEO_REGIST_LEADER,
-  FCEO_REGIST_MEMBER_1 ,
+  FCEO_REGIST_MEMBER_1,
   FCEO_REGIST_MEMBER_2,
   FCEO_REGIST_SUMMARY,
 } from "./constants/routes";
@@ -40,8 +41,12 @@ export default function App() {
           <Route path={LANDING_PAGE} element={<Landing />} />
           <Route path={USER_DETAILS_PAGE} element={<UserDetails />} />
           <Route path={USER_DASHBOARD_PAGE} element={<UserDashboard />} />
+          {/* Events */}
           <Route path={EVENTS_PAGE} element={<Events />} />
-          <Route path={FCEO} element={<DetailEvents />} />
+          <Route
+            path={`${EVENT_DETAILS}/:eventId`}
+            element={<DetailEvents />}
+          />
           <Route path={BMC_REGIST} element={<BMC_Regist />} />
           <Route path={FCEO_REGIST} element={<FCEO_Regist />} />
           <Route path={FCEO_REGIST_LEADER} element={<RegistEvents3 />} />
