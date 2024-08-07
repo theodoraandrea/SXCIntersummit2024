@@ -627,7 +627,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
           ...prevState,
           [name]: files ? files[0] : value,
         }));
-      };
+    };
 
     return (
         <div>
@@ -881,7 +881,7 @@ const EventCard = () => {
         case 10:
             return <Summary formData={formData} onPrevious={handlePrevious}/>
         default:
-            return <FirstView {...eventData} onNext={handleNext} />;
+            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }
 };
 

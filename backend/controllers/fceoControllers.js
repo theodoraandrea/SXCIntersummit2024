@@ -11,24 +11,40 @@ const { generateTeamCode } = require("../utils/generateTeamCode");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
+  const fceoId = 1;
   try {
     const { files, body } = req;
-    const { teamName, leaderId } = body;
+    const { teamName } = body;
+    const userId = req.user.id;
+    console.log(userId);
 
     const teamCode = generateTeamCode(6);
 
     const rootFolderId = process.env.FOLDER_FCEO_ID;
     const folderId = await createFolder(
-      "Payment Proof - Team " + teamName,
+      "Team " + teamName,
       rootFolderId
     );
-    const proofUrl = await getImageURLsList(files.proofOfPayment, folderId);
+
+    const proofPayment = await getImageURLsList(files.proofPayment, folderId);
+    const proofFollow = await getImageURLsList(files.proofFollow, folderId);
+    const proofTwibbon = await getImageURLsList(files.proofTwibbon, folderId);
+    const proofStory = await getImageURLsList(files.proofStory, folderId);
+    const studentIds = await getImageURLsList(files.studentIds, folderId);
+
+    const screenshotFCEO = [ proofFollow, proofTwibbon, proofStory, studentIds ];
 
     const newTeam = await FCEOTeam.create({
       teamName,
-      leaderId,
+      leaderId: userId,
       teamCode,
-      proofOfPayment: proofUrl,
+      proofOfPayment: proofPayment,
+      screenshotFCEO: screenshotFCEO
+    });
+
+    await CompetitionRegistration.create({
+      userId,
+      competitionId: fceoId,
     });
 
     res.status(201).json({
@@ -74,43 +90,17 @@ exports.checkTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
-    const fceoId = 1;
-    const { files, body } = req;
-    const { userId, teamCode, nationalStudentIdNumber, isLeader } = body;
-
-    const team = await FCEOTeam.findOne({ where: { teamCode: teamCode } });
-    const user = await User.findByPk(userId);
-
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    if (!team) {
-      return res
-        .status(404)
-        .json({ error: "Team not found. Please check your Code" });
-    }
-
-    const rootFolderId = process.env.FOLDER_FCEO_ID;
-    const folderId = await createFolder(user.fullname, rootFolderId);
-
-    const screenshotFCEO_URL = await getImageURLsList(
-      files.screenshotFCEO,
-      folderId
-    );
-
-    const fceoRegistration = await CompetitionRegistration.create({
-      userId,
-      competitionId: fceoId,
-    });
+    const { body } = req;
+    const { teamId, fullname, gender, school, phoneNumber, email } = body;
+    console.log(req.body);
 
     const newMember = await FCEOMember.create({
-      userId,
-      registrationId: fceoRegistration.id,
-      teamId: team.id,
-      isLeader,
-      nationalStudentIdNumber,
-      screenshotFCEO: screenshotFCEO_URL,
+      teamId: teamId,
+      fullname: fullname,
+      gender: gender,
+      school: school,
+      phoneNumber: phoneNumber, 
+      email: email
     });
 
     res.status(201).json({
