@@ -6,12 +6,13 @@ import {
   EVENTS_PAGE,
   LANDING_PAGE,
   USER_DETAILS_PAGE,
+  FCEO_REGIST_SUMMARY
 } from "../constants/routes";
 import {
   fetchRegisteredEvents,
   fetchRegisteredCompetitions,
 } from "../service/services";
-import { getDaysUntilEvent, formatDate } from "../service/helpers";
+import { getDaysUntilEvent, formatDate, getCompetitionSummaryLink } from "../service/helpers";
 import profile from "./../images/person.png";
 import Footer from "./../components/footer";
 import Spinner from "../components/elements/spinner";
@@ -149,7 +150,8 @@ export default function UserDashboard() {
                       return (
                         <div
                           key={event.id}
-                          className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                          className="bg-white rounded-lg shadow-lg p-6 mb-4
+                          transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
                         >
                           <div className="flex items-center justify-between">
                             <div>
@@ -202,9 +204,11 @@ export default function UserDashboard() {
                         competition.competitionDate
                       );
                       return (
+                        <Link to={getCompetitionSummaryLink(competition.id)}>
                         <div
                           key={competition.id}
-                          className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                          className="bg-white rounded-lg shadow-lg p-6 mb-4 
+                          transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
                         >
                           <div className="flex items-center justify-between">
                             <div>
@@ -229,6 +233,7 @@ export default function UserDashboard() {
                             </button>
                           </div>
                         </div>
+                        </Link>
                       );
                     })
                   ) : (

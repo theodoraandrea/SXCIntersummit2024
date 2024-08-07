@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar";
 import { FCEO_REGIST_MEMBER_2 } from "../../constants/routes";
 import { postCheckTeamCode } from "../../service/services";
 
-const TeamCode = () => {
+const ReferralCode = () => {
   const [teamCode, setTeamCode] = useState("");
   const [teamDetails, setTeamDetails] = useState(null);
   const [error, setError] = useState(false);
@@ -69,4 +69,4 @@ const TeamCode = () => {
   );
 };
 
-export default TeamCode;
+export default ReferralCode;

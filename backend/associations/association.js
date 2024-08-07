@@ -4,7 +4,7 @@ const {
   CompanyVisit,
   Event,
   FCEOMember,
-  FCEOTeam,
+  FCEO,
   EventRegistration,
   Competition,
   CompetitionRegistration,
@@ -47,28 +47,21 @@ exports.eventAssociations = () => {
   EventRegistration.hasOne(Chamber, { foreignKey: "registrationId" });
   EventRegistration.hasOne(BMC, { foreignKey: "registrationId" });
 
-  // FCEOTeam and FCEOMember associations
-  FCEOTeam.hasMany(FCEOMember, {
+  // FCEO and FCEOMember associations
+  FCEO.hasMany(FCEOMember, {
     foreignKey: "teamId",
     as: "members",
   });
-  FCEOMember.belongsTo(FCEOTeam, {
+  FCEOMember.belongsTo(FCEO, {
     foreignKey: "teamId",
   });
 
-  // User and FCEOTeam/FCEOMember associations
-  User.hasMany(FCEOMember, {
-    foreignKey: "userId",
-  });
-  FCEOMember.belongsTo(User, {
-    foreignKey: "userId",
-  });
-
-  User.hasOne(FCEOTeam, {
+  // User and FCEO/FCEOMember associations
+  User.hasOne(FCEO, {
     foreignKey: "leaderId",
     as: "teamLeader",
   });
-  FCEOTeam.belongsTo(User, {
+  FCEO.belongsTo(User, {
     foreignKey: "leaderId",
   });
 };
