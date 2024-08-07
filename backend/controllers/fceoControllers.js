@@ -21,11 +21,8 @@ exports.createNewTeam = async (req, res) => {
 
     const teamCode = generateTeamCode(6);
 
-    const rootFolderId = process.env.FOLDER_FCEO_ID;
-    const folderId = await createFolder(
-      "Team " + teamName,
-      rootFolderId
-    );
+    const rootFolderId = process.env.FOLDER_FUTURECEO_ID;
+    const folderId = await createFolder("Team " + teamName, rootFolderId);
 
     const proofPayment = await getImageURLsList(files.proofPayment, folderId);
     const proofFollow = await getImageURLsList(files.proofFollow, folderId);
@@ -33,14 +30,14 @@ exports.createNewTeam = async (req, res) => {
     const proofStory = await getImageURLsList(files.proofStory, folderId);
     const studentIds = await getImageURLsList(files.studentIds, folderId);
 
-    const screenshotFCEO = [ proofFollow, proofTwibbon, proofStory, studentIds ];
+    const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
 
     const newTeam = await FCEO.create({
       teamName,
       leaderId: userId,
       teamCode,
       proofOfPayment: proofPayment,
-      screenshotFCEO: screenshotFCEO
+      screenshotFCEO: screenshotFCEO,
     });
 
     await CompetitionRegistration.create({
@@ -93,14 +90,15 @@ exports.createNewFCEOMember = async (req, res) => {
   try {
     const { body } = req;
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
+    const userId = req.user.id;
 
     const newMember = await FCEOMember.create({
       teamId: teamId,
       fullname: fullname,
       gender: gender,
       school: school,
-      phoneNumber: phoneNumber, 
-      email: email
+      phoneNumber: phoneNumber,
+      email: email,
     });
 
     const transporter = nodemailer.createTransport({
@@ -118,6 +116,8 @@ exports.createNewFCEOMember = async (req, res) => {
         link: "#",
       },
     });
+
+    const user = await User.findByPk(userId);
 
     var welcomeEmail = {
       body: {
@@ -144,7 +144,7 @@ exports.createNewFCEOMember = async (req, res) => {
     const welcomeEmailHtml = mailGenerator.generate(welcomeEmail);
 
     let mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"StudentsXCEOs International Summit 2024" <info.sxcintersummit@gmail.com>`,
       to: user.email,
       subject: `Welcome to SxC Intersummit - ${user.fullname}`,
       text: `Hi, ${user.fullname}.\nYou've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!`,
