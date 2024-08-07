@@ -8,6 +8,7 @@ const corsMiddleware = require("./middlewares/corsMiddleware");
 const dotenv = require("dotenv");
 const path = require("path");
 
+const user = require("./models/user");
 const db = require("./config/databaseConfig");
 
 require("./associations/association").eventAssociations();
@@ -29,9 +30,10 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// BMC.sync({ alter: true })
+// user
+//   .sync({ alter: true })
 //   .then(() => {
-//     console.log("Competition added");
+//     console.log("Update Database");
 //   })
 //   .catch((err) => {
 //     console.log("ERROR");
@@ -42,6 +44,7 @@ db.authenticate()
 app.use(corsMiddleware);
 
 // Session middleware
+// console.log(process.env.JWT_SECRET);
 app.use(
   session({
     secret: process.env.JWT_SECRET,
