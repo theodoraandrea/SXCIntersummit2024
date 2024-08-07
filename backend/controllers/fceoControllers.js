@@ -19,6 +19,7 @@ exports.createNewTeam = async (req, res) => {
 
     const teamCode = generateTeamCode(6);
 
+<<<<<<< HEAD
     const rootFolderId = process.env.FOLDER_FCEO_ID;
     const folderId = await createFolder(
       "Payment Proof - Team " + teamName,
@@ -27,10 +28,34 @@ exports.createNewTeam = async (req, res) => {
     const proofUrl = await getImageURLsList(files.proofOfPayment, folderId);
 
     const newTeam = await FCEOTeam.create({
+=======
+    const rootFolderId = process.env.FOLDER_FUTURECEO_ID;
+    const folderId = await createFolder("Team " + teamName, rootFolderId);
+
+    const proofPayment = await getImageURLsList(files.proofPayment, folderId);
+    const proofFollow = await getImageURLsList(files.proofFollow, folderId);
+    const proofTwibbon = await getImageURLsList(files.proofTwibbon, folderId);
+    const proofStory = await getImageURLsList(files.proofStory, folderId);
+    const studentIds = await getImageURLsList(files.studentIds, folderId);
+
+    const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
+
+    const newTeam = await FCEO.create({
+>>>>>>> 4f52ce9261942e45c37e3f5700e0c9f8d80497d5
       teamName,
       leaderId,
       teamCode,
+<<<<<<< HEAD
       proofOfPayment: proofUrl,
+=======
+      proofOfPayment: proofPayment,
+      screenshotFCEO: screenshotFCEO,
+    });
+
+    await CompetitionRegistration.create({
+      userId,
+      competitionId: fceoId,
+>>>>>>> 4f52ce9261942e45c37e3f5700e0c9f8d80497d5
     });
 
     res.status(201).json({
@@ -76,6 +101,7 @@ exports.checkTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
+<<<<<<< HEAD
     const fceoId = 1;
     const { files, body } = req;
     const { userId, teamCode, nationalStudentIdNumber, isLeader } = body;
@@ -113,6 +139,19 @@ exports.createNewFCEOMember = async (req, res) => {
       isLeader,
       nationalStudentIdNumber,
       screenshotFCEO: screenshotFCEO_URL,
+=======
+    const { body } = req;
+    const { teamId, fullname, gender, school, phoneNumber, email } = body;
+    const userId = req.user.id;
+
+    const newMember = await FCEOMember.create({
+      teamId: teamId,
+      fullname: fullname,
+      gender: gender,
+      school: school,
+      phoneNumber: phoneNumber,
+      email: email,
+>>>>>>> 4f52ce9261942e45c37e3f5700e0c9f8d80497d5
     });
 
     const transporter = nodemailer.createTransport({
@@ -130,6 +169,8 @@ exports.createNewFCEOMember = async (req, res) => {
         link: "#",
       },
     });
+
+    const user = await User.findByPk(userId);
 
     var welcomeEmail = {
       body: {
@@ -156,7 +197,7 @@ exports.createNewFCEOMember = async (req, res) => {
     const welcomeEmailHtml = mailGenerator.generate(welcomeEmail);
 
     let mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"StudentsXCEOs International Summit 2024" <info.sxcintersummit@gmail.com>`,
       to: user.email,
       subject: `Welcome to SxC Intersummit - ${user.fullname}`,
       text: `Hi, ${user.fullname}.\nYou've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!`,
