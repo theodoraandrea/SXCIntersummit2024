@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
 import Spinner from "../../components/elements/spinner";
 import { useNavigate } from "react-router-dom";
