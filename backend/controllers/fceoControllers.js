@@ -16,7 +16,6 @@ exports.createNewTeam = async (req, res) => {
     const { files, body } = req;
     const { teamName } = body;
     const userId = req.user.id;
-    console.log(userId);
 
     const teamCode = generateTeamCode(6);
 
@@ -92,7 +91,6 @@ exports.createNewFCEOMember = async (req, res) => {
   try {
     const { body } = req;
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
-    console.log(req.body);
 
     const newMember = await FCEOMember.create({
       teamId: teamId,

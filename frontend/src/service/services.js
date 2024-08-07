@@ -141,9 +141,10 @@ const fetchAllCompetitions = async () => {
 // FCEO
 const postNewFceoMember = async (data) => {
   try {
+    console.log("in postNewFceoMember ", data);
     const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
     return response.data;
