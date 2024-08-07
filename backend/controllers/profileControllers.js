@@ -27,6 +27,8 @@ exports.completeProfile = async (req, res) => {
       },
     });
 
+    const completedProfile = User.findByPk(userId);
+
     return res.status(200).json({
       success: true,
       message: "Success updating / adding profile data",

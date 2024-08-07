@@ -8,6 +8,8 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
+const nodemailer = require("nodemailer");
+const Mailgen = require("mailgen");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
@@ -113,12 +115,69 @@ exports.createNewFCEOMember = async (req, res) => {
       screenshotFCEO: screenshotFCEO_URL,
     });
 
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+
+    var mailGenerator = new Mailgen({
+      theme: "salted",
+      product: {
+        name: "StudentsxCEOs International Summit 2024",
+      },
+    });
+
+    var welcomeEmail = {
+      body: {
+        name: user.fullname,
+        intro:
+          "You've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!",
+
+        action: {
+          instructions: "Join the WA Group",
+          button: {
+            color: "#003337",
+            text: "Join WA Group",
+            link: "#",
+          },
+        },
+
+        outro:
+          "We're glad to have you on board! stay stuned in the group for further information!",
+
+        signature: "Cheers, StudentsxCEOs International Summit 2024",
+      },
+    };
+
+    const welcomeEmailHtml = mailGenerator.generate(welcomeEmailHtml);
+
+    let mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: `Welcome to SxC Intersummit -  + ${user.fullname}`,
+      text: `Hi, ${user.fullname}.\nYou've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!`,
+      html: welcomeEmailHtml,
+    };
+
+    transporter.sendMail(mailOptions, function (err, data) {
+      if (err) {
+        return res.status(500).json({ err });
+      } else {
+        return res.status(201).json({
+          message: `OTP has been sent to your email : ${email}`,
+        });
+      }
+    });
+
     res.status(201).json({
       message: "Success registering FCEO as a new member!",
       member: newMember,
     });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
