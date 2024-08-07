@@ -27,13 +27,14 @@ exports.completeProfile = async (req, res) => {
       },
     });
 
-    const completedProfile = await User.findByPk(userId);
+    const completedProfile = User.findByPk(userId);
+
     return res.status(200).json({
       success: true,
       message: "Success updating / adding profile data",
       completedProfile,
     });
   } catch (err) {
-    return res.status(500).json({ message: "Something went wrong" });
+    return res.status(500).json({ message: "Something went wrong", err });
   }
 };

@@ -14,6 +14,13 @@ exports.signup = async (req, res) => {
       password: req.body.password,
     });
     console.log("user from signup: ", user);
+
+    // try {
+    //   await sendWelcomeEmail(user);
+    //   console.log("Welcome email sent successfully");
+    // } catch (err) {
+    //   console.error("Failed to send welcome email", err);
+    // }
     const token = generateToken(user);
     return res.status(200).json({ token, user });
   } catch (err) {
