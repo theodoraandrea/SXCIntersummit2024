@@ -13,7 +13,6 @@ export default function Landing() {
   const { loginUser } = useUser();
 
   const [activeTab, setActiveTab] = useState("login");
-
   const [email, setEmail] = useState("");
   const [emailIsValid, setEmailIsValid] = useState(null);
   const [emailTouched, setEmailTouched] = useState(false);
@@ -25,6 +24,7 @@ export default function Landing() {
   const [confirmPasswordIsValid, setConfirmPasswordIsValid] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -67,7 +67,7 @@ export default function Landing() {
     if (validateEmail(email.trim())) {
       try {
         const response = await login({ email, password });
-        console.log('Login successful', response); 
+        console.log("Login successful", response);
         loginUser(response.user);
         navigate(HOME);
       } catch (error) {
@@ -95,6 +95,13 @@ export default function Landing() {
       setValidationMessage("Passwords do not match");
     }
   };
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    // Handle the forgot password logic here
+    alert("Password reset instructions sent to your email.");
+  };
+
   return (
     <div className="flex h-screen">
       {/* Left Side */}
@@ -106,32 +113,35 @@ export default function Landing() {
       {/* Right Side */}
       <div className="w-1/2 bg-primary-1 flex flex-col justify-center items-center p-8">
         <div className="flex justify-center space-x-6 mb-8">
-          <button
-            className={`text-lg font-semibold ${
-              activeTab === "login"
-                ? "text-yellow-500 border-b-4 border-yellow-500"
-                : "text-gray-500"
-            }`}
-            onClick={() => setActiveTab("login")}
-          >
-            Login
-          </button>
-          <button
-            className={`text-lg font-semibold ${
-              activeTab === "register"
-                ? "text-yellow-500 border-b-4 border-yellow-500"
-                : "text-gray-500"
-            }`}
-            onClick={() => {
-              setActiveTab("register");
-              setErrorMessage("");
-            }
-          }
-          >
-            Register
-          </button>
+          {!forgotPasswordMode && (
+            <>
+              <button
+                className={`text-lg font-semibold ${
+                  activeTab === "login"
+                    ? "text-yellow-500 border-b-4 border-yellow-500"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setActiveTab("login")}
+              >
+                Login
+              </button>
+              <button
+                className={`text-lg font-semibold ${
+                  activeTab === "register"
+                    ? "text-yellow-500 border-b-4 border-yellow-500"
+                    : "text-gray-500"
+                }`}
+                onClick={() => {
+                  setActiveTab("register");
+                  setErrorMessage("");
+                }}
+              >
+                Register
+              </button>
+            </>
+          )}
         </div>
-        {activeTab === "login" && (
+        {!forgotPasswordMode && activeTab === "login" && (
           <>
             <form className="w-full max-w-sm" onSubmit={handleLogin}>
               <input
@@ -159,10 +169,16 @@ export default function Landing() {
               >
                 Login
               </button>
+              <small
+                className="text-gray-500 hover:text-white hover:underline cursor-pointer"
+                onClick={() => setForgotPasswordMode(true)}
+              >
+                Forgot Password?
+              </small>
             </form>
           </>
         )}
-        {activeTab === "register" && (
+        {!forgotPasswordMode && activeTab === "register" && (
           <>
             <form className="w-full max-w-sm" onSubmit={handleRegister}>
               <div className="relative w-full mb-4">
@@ -251,6 +267,41 @@ export default function Landing() {
               >
                 Register
               </button>
+            </form>
+          </>
+        )}
+        {forgotPasswordMode && (
+          <>
+            <p className="text-lg font-semibold text-yellow-500 py-5">
+              Forgot Password
+            </p>
+            <form className="w-full max-w-sm" onSubmit={handleForgotPassword}>
+              <input
+                id="email"
+                className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <small
+                className="text-red-400 mb-4 block"
+                hidden={!validationMessage}
+              >
+                {validationMessage}
+              </small>
+              <button
+                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                type="submit"
+              >
+                Send Reset Link
+              </button>
+              <small
+                className="text-gray-500 cursor-pointer hover:text-white hover:underline"
+                onClick={() => setForgotPasswordMode(false)}
+              >
+                Back to Login
+              </small>
             </form>
           </>
         )}
