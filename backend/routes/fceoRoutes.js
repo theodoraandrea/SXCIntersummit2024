@@ -7,19 +7,25 @@ const upload = multer();
 
 router.post(
   "/member",
-  upload.fields([{ name: "screenshotFCEO", minCount: 5 }]),
   isAuthenticated,
   fceoControllers.createNewFCEOMember
 );
+
 router.post(
   "/team",
-  upload.fields([{ name: "proofOfPayment", maxCount: 1 }]),
+  upload.fields([
+    { name: "proofPayment", minCount: 1, maxCount: 1 },
+    { name: "studentIds", minCount: 1, maxCount: 1},
+    { name: "proofFollow", minCount: 1, maxCount: 1},
+    { name: "proofTwibbon", minCount: 1, maxCount: 1},
+    { name: "proofStory", minCount: 1, maxCount: 1},
+  ]),
   isAuthenticated,
   fceoControllers.createNewTeam
 );
 router.post("/team/check", isAuthenticated, fceoControllers.checkTeam);
 router.get(
-  "/team/detail/user/:userId",
+  "/summary",
   isAuthenticated,
   fceoControllers.getTeamDetailsByUserId
 );

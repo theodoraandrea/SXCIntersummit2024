@@ -11,7 +11,9 @@ import {
   API_POST_NEW_FCEO_MEMBER,
   API_POST_NEW_FCEO_TEAM,
   API_POST_CHECK_FCEO_TEAMCODE,
-  API_POST_BMC_REGISTRATION
+  API_POST_BMC_REGISTRATION,
+  API_GET_FCEO_REGISTRATION,
+  API_GET_BMC_REGISTRATION
 } from "../config/endpoints";
 
 //Login
@@ -138,12 +140,23 @@ const fetchAllCompetitions = async () => {
   }
 };
 
+const getBmcRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_BMC_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 // FCEO
 const postNewFceoMember = async (data) => {
   try {
+    console.log("in postNewFceoMember ", data);
     const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
     return response.data;
@@ -167,6 +180,17 @@ const postNewFceoTeam = async (data) => {
   }
 };
 
+const getFceoRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_FCEO_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+//LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
     const response = await axiosInstance.post(API_POST_CHECK_FCEO_TEAMCODE, {
@@ -190,6 +214,8 @@ export {
   fetchRegisteredCompetitions,
   postNewFceoMember,
   postNewFceoTeam,
+  getFceoRegistrationData,
   postCheckTeamCode,
-  postBMCRegistration
+  postBMCRegistration,
+  getBmcRegistrationData
 };

@@ -11,8 +11,7 @@ import {
   fetchRegisteredEvents,
   fetchRegisteredCompetitions,
 } from "../service/services";
-import { getDaysUntilEvent, formatDate } from "../service/helpers";
-import profile from "./../images/person.png";
+import { getDaysUntilEvent, formatDate, getCompetitionSummaryLink, getEventSummaryLink } from "../service/helpers";
 import Footer from "./../components/footer";
 import Spinner from "../components/elements/spinner";
 
@@ -47,6 +46,12 @@ export default function UserDashboard() {
     }
   }, [loading, isLoggedIn, profileData, navigate]);
 
+  useEffect(() => {
+    if (location.state) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location]);
+
   const fetchRegisteredEventsData = async () => {
     try {
       setFetching(true);
@@ -71,6 +76,8 @@ export default function UserDashboard() {
     }
   };
 
+
+
   if (loading) {
     return <Spinner customStyles={{ height: "50vh" }} />; // Show spinner during initial loading
   }
@@ -80,13 +87,6 @@ export default function UserDashboard() {
       <Navbar currentPath={location.pathname} />
       {/* Profile Section */}
       <section className="bg-primary-4 flex items-center py-12 px-20">
-        <div className="flex items-center justify-center w-28 h-28">
-          <img
-            src={userData?.picture ?? profile}
-            alt="Profile Picture"
-            className="w-24 h-24 rounded-full"
-          />
-        </div>
         <div className="ml-5">
           <h2 className="text-2xl font-bold text-white ">
             {userData?.fullname}
@@ -147,9 +147,11 @@ export default function UserDashboard() {
                         event.eventDate
                       );
                       return (
+                        <Link to={getEventSummaryLink(event.id)}>
                         <div
                           key={event.id}
-                          className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                          className="bg-white rounded-lg shadow-lg p-6 mb-4
+                          transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
                         >
                           <div className="flex items-center justify-between">
                             <div>
@@ -174,6 +176,7 @@ export default function UserDashboard() {
                             </button>
                           </div>
                         </div>
+                        </Link>
                       );
                     })
                   ) : (
@@ -202,9 +205,11 @@ export default function UserDashboard() {
                         competition.competitionDate
                       );
                       return (
+                        <Link to={getCompetitionSummaryLink(competition.id)}>
                         <div
                           key={competition.id}
-                          className="bg-white rounded-lg shadow-lg p-6 mb-4"
+                          className="bg-white rounded-lg shadow-lg p-6 mb-4 
+                          transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
                         >
                           <div className="flex items-center justify-between">
                             <div>
@@ -229,6 +234,7 @@ export default function UserDashboard() {
                             </button>
                           </div>
                         </div>
+                        </Link>
                       );
                     })
                   ) : (
