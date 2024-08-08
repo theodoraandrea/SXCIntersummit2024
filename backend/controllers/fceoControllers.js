@@ -8,8 +8,7 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
-const nodemailer = require("nodemailer");
-const Mailgen = require("mailgen");
+const sendAutomatedEmail = require("../services/automatedEmail");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
@@ -92,39 +91,36 @@ exports.createNewFCEOMember = async (req, res) => {
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
     const userId = req.user.id;
 
+    // Create a new FCEOMember
     const newMember = await FCEOMember.create({
-      teamId: teamId,
-      fullname: fullname,
-      gender: gender,
-      school: school,
-      phoneNumber: phoneNumber,
-      email: email,
+      teamId,
+      fullname,
+      gender,
+      school,
+      phoneNumber,
+      email,
     });
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-
-    var mailGenerator = new Mailgen({
-      theme: "salted",
-      product: {
-        name: "StudentsxCEOs International Summit 2024",
-        link: "#",
-      },
-    });
-
+    // Fetch the user details
     const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    var welcomeEmail = {
-      body: {
-        name: user.fullname,
+    // Automated Email details
+    const emailDetails = {
+      from: "info.sxcintersummit@gmail.com",
+      fromName: "StudentsXCEOs International Summit 2024",
+      mailgenOptions: {
+        theme: "salted",
+        product: {
+          name: "StudentsxCEOs International Summit 2024",
+          link: "#",
+        },
+      },
+      emailContent: {
         intro:
           "You've just successfully registered to the FCEO competition. We're excited to have you on board!",
-
         action: {
           instructions: "Join the WA Group by clicking the button below",
           button: {
@@ -133,34 +129,24 @@ exports.createNewFCEOMember = async (req, res) => {
             link: "#",
           },
         },
-
         outro:
-          "We're glad to have you on board! stay stuned in the group for further information!",
-
+          "We're glad to have you on board! Stay tuned in the group for further information!",
         signature: "Cheers, StudentsxCEOs International Summit 2024",
       },
     };
 
-    const welcomeEmailHtml = mailGenerator.generate(welcomeEmail);
+    const emailResult = await sendAutomatedEmail({ userId, emailDetails });
 
-    let mailOptions = {
-      from: `"StudentsXCEOs International Summit 2024" <info.sxcintersummit@gmail.com>`,
-      to: user.email,
-      subject: `Welcome to SxC Intersummit - ${user.fullname}`,
-      text: `Hi, ${user.fullname}.\nYou've just successfully registered to the FCEO competition. Please join the WA group by clicking the link below!`,
-      html: welcomeEmailHtml,
-    };
+    if (!emailResult.success) {
+      return res
+        .status(500)
+        .json({ message: emailResult.message, error: emailResult.error });
+    }
 
-    transporter.sendMail(mailOptions, function (err, data) {
-      if (err) {
-        return res.status(500).json({ message: "Error sending email", err });
-      } else {
-        return res.status(201).json({
-          message: "Success registering FCEO as a new member!",
-          member: newMember,
-          emailSent: `Email sent to: ${email}`,
-        });
-      }
+    return res.status(201).json({
+      message: "Success registering FCEO as a new member!",
+      member: newMember,
+      emailSent: emailResult.message,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
