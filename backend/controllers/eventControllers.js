@@ -77,11 +77,7 @@ exports.getBMCRegistration = async (req, res) => {
   }
 };
 
-/**
- *
- * EVENTS REGISTRATION
- */
-
+// BMC Registration
 exports.registerBMC = async (req, res) => {
   try {
     const bmcId = 1; // BMC event id
@@ -165,7 +161,7 @@ exports.registerBMC = async (req, res) => {
 
     // Automated Email
     const emailDetails = {
-      from: "info.sxcintersummit@gmail.com",
+      from: process.env.EMAIL_USER,
       fromName: "StudentsXCEOs International Summit 2024",
       mailgenOptions: {
         theme: "salted",

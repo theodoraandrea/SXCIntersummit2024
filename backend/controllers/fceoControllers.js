@@ -109,7 +109,7 @@ exports.createNewFCEOMember = async (req, res) => {
 
     // Automated Email details
     const emailDetails = {
-      from: "info.sxcintersummit@gmail.com",
+      from: process.env.EMAIL_USER,
       fromName: "StudentsXCEOs International Summit 2024",
       mailgenOptions: {
         theme: "salted",
