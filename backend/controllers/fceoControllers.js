@@ -156,14 +156,11 @@ exports.createNewFCEOMember = async (req, res) => {
         return res.status(500).json({ message: "Error sending email", err });
       } else {
         return res.status(201).json({
-          message: `Email sent: ${email}`,
+          message: "Success registering FCEO as a new member!",
+          member: newMember,
+          emailSent: `Email sent to: ${email}`,
         });
       }
-    });
-
-    res.status(201).json({
-      message: "Success registering FCEO as a new member!",
-      member: newMember,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
