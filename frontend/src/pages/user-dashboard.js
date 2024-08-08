@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Navbar from "./../components/navbar";
-import { DummyCompetitionsData } from "../constants/dummy/competitions";
 import { useUser } from "../contexts/user-context";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import {
@@ -12,67 +11,82 @@ import {
   fetchRegisteredEvents,
   fetchRegisteredCompetitions,
 } from "../service/services";
-import { getDaysUntilEvent, formatDate } from "../service/helpers";
-import profile from "./../images/person.png";
+import { getDaysUntilEvent, formatDate, getCompetitionSummaryLink, getEventSummaryLink } from "../service/helpers";
 import Footer from "./../components/footer";
+import Spinner from "../components/elements/spinner";
 
 export default function UserDashboard() {
   const { profileData, isLoggedIn, loading } = useUser();
-  const [activeTab, setActiveTab] = useState("events");
-  const [userData, setUserData] = useState(null);
+  const [ activeTab, setActiveTab] = useState("events");
+  const [ userData, setUserData ] = useState(null);
   const [registeredEventsData, setRegisteredEventsData] = useState([]);
   const [registeredCompetitionsData, setRegisteredCompetitionsData] = useState(
     []
   );
   const navigate = useNavigate();
   const location = useLocation();
+  const [fetching, setFetching] = useState(true); // Add a fetching state
 
   useEffect(() => {
+    if (isLoggedIn) {
+      fetchRegisteredEventsData();
+      fetchRegisteredCompetitionsData();
+    }
+  }, [isLoggedIn]);
+  
+  useEffect(() => {
     if (!loading) {
+      console.log(profileData);
       if (isLoggedIn) {
         setUserData(profileData);
-        fetchRegisteredEventsData();
-        fetchRegisteredCompetitionsData();
-        // Dummy Datas
-        // setUserData(DummyProfileData);
-        //setRegisteredEventsData(DummyEventsData);
-        // setCompetitionsData(DummyCompetitionsData);
+
       } else {
         navigate(LANDING_PAGE);
       }
     }
   }, [loading, isLoggedIn, profileData, navigate]);
 
+  useEffect(() => {
+    if (location.state) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location]);
+
   const fetchRegisteredEventsData = async () => {
     try {
+      setFetching(true);
       const response = await fetchRegisteredEvents();
       setRegisteredEventsData(response);
     } catch (error) {
-      // bisa taro function buat display error message dsini (maybe alert, etc)
+      // Handle error
+    } finally {
+      setFetching(false);
     }
   };
 
   const fetchRegisteredCompetitionsData = async () => {
     try {
+      setFetching(true);
       const response = await fetchRegisteredCompetitions();
       setRegisteredCompetitionsData(response);
     } catch (error) {
-      // something
+      // Handle error
+    } finally {
+      setFetching(false);
     }
   };
+
+
+
+  if (loading) {
+    return <Spinner customStyles={{ height: "50vh" }} />; // Show spinner during initial loading
+  }
 
   return (
     <div>
       <Navbar currentPath={location.pathname} />
       {/* Profile Section */}
       <section className="bg-primary-4 flex items-center py-12 px-20">
-        <div className="flex items-center justify-center w-28 h-28">
-          <img
-            src={userData?.picture ?? profile}
-            alt="Profile Picture"
-            className="w-24 h-24 rounded-full"
-          />
-        </div>
         <div className="ml-5">
           <h2 className="text-2xl font-bold text-white ">
             {userData?.fullname}
@@ -119,112 +133,126 @@ export default function UserDashboard() {
               Competitions
             </button>
           </div>
-          {activeTab === "events" && (
+
+          {/* Show spinner while fetching data */}
+          {fetching ? (
+            <Spinner customStyles={{ margin: "2rem 0" }} />
+          ) : (
             <>
-              {registeredEventsData && registeredEventsData.length > 0 ? (
-                registeredEventsData.map((event) => {
-                  const { message, status } = getDaysUntilEvent(
-                    event.eventDate
-                  );
-                  return (
-                    <div
-                      key={event.id}
-                      className="bg-white rounded-lg shadow-lg p-6 mb-4"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-xl font-semibold">
-                            {event.eventName}
-                          </h3>
-                          <p className="text-gray-600">
-                            {formatDate(event.eventDate)}
-                          </p>
-                          <p className="text-gray-600">
-                            📍 {event.eventLocation}
-                          </p>
-                        </div>
-                        <button
-                          className={`px-4 py-2 rounded-full ${
-                            status === "started"
-                              ? "bg-green-500"
-                              : "bg-primary-2"
-                          } text-white`}
+              {activeTab === "events" && (
+                <>
+                  {registeredEventsData && registeredEventsData.length > 0 ? (
+                    registeredEventsData.map((event) => {
+                      const { message, status } = getDaysUntilEvent(
+                        event.eventDate
+                      );
+                      return (
+                        <Link to={getEventSummaryLink(event.id)}>
+                        <div
+                          key={event.id}
+                          className="bg-white rounded-lg shadow-lg p-6 mb-4
+                          transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
                         >
-                          {message}
-                        </button>
-                      </div>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h3 className="text-xl font-semibold">
+                                {event.eventName}
+                              </h3>
+                              <p className="text-gray-600">
+                                {formatDate(event.eventDate)}
+                              </p>
+                              <p className="text-gray-600">
+                                📍 {event.eventLocation}
+                              </p>
+                            </div>
+                            <button
+                              className={`px-4 py-2 rounded-full ${
+                                status === "started"
+                                  ? "bg-green-500"
+                                  : "bg-primary-2"
+                              } text-white`}
+                            >
+                              {message}
+                            </button>
+                          </div>
+                        </div>
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center py-8">
+                      <p className="text-xl text-white mb-4">
+                        No registered events yet.
+                      </p>
+                      <button
+                        className="bg-primary-2 text-white px-4 py-2 rounded-full"
+                        onClick={() => {
+                          navigate(EVENTS_PAGE);
+                        }}
+                      >
+                        Register Now!
+                      </button>
                     </div>
-                  );
-                })
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-xl text-white mb-4">
-                    No registered events yet.
-                  </p>
-                  <button
-                    className="bg-primary-2 text-white px-4 py-2 rounded-full"
-                    onClick={() => {
-                      navigate(EVENTS_PAGE);
-                    }}
-                  >
-                    Register Now!
-                  </button>
-                </div>
+                  )}
+                </>
               )}
-            </>
-          )}
-          {activeTab === "competitions" && (
-            <>
-              {registeredCompetitionsData &&
-              registeredCompetitionsData.length > 0 ? (
-                registeredCompetitionsData?.map((competition) => {
-                  const { message, status } = getDaysUntilEvent(
-                    competition.date
-                  );
-                  return (
-                    <div
-                      key={competition.id}
-                      className="bg-white rounded-lg shadow-lg p-6 mb-4"
-                    >
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="text-xl font-semibold">
-                            {competition.competitionName}
-                          </h3>
-                          <p className="text-gray-600">
-                            {formatDate(competition.date)}
-                          </p>
-                          <p className="text-gray-600">
-                            📍 {competition.location}
-                          </p>
-                        </div>
-                        <button
-                          className={`px-4 py-2 rounded-full ${
-                            status === "started"
-                              ? "bg-green-500"
-                              : "bg-primary-2"
-                          } text-white`}
+              {activeTab === "competitions" && (
+                <>
+                  {registeredCompetitionsData &&
+                  registeredCompetitionsData.length > 0 ? (
+                    registeredCompetitionsData?.map((competition) => {
+                      const { message, status } = getDaysUntilEvent(
+                        competition.competitionDate
+                      );
+                      return (
+                        <Link to={getCompetitionSummaryLink(competition.id)}>
+                        <div
+                          key={competition.id}
+                          className="bg-white rounded-lg shadow-lg p-6 mb-4 
+                          transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"
                         >
-                          {message}
-                        </button>
-                      </div>
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h3 className="text-xl font-semibold">
+                                {competition.competitionName}
+                              </h3>
+                              <p className="text-gray-600">
+                                {formatDate(competition.competitionDate)}
+                              </p>
+                              <p className="text-gray-600">
+                                📍 {competition.competitionLocation}
+                              </p>
+                            </div>
+                            <button
+                              className={`px-4 py-2 rounded-full ${
+                                status === "started"
+                                  ? "bg-green-500"
+                                  : "bg-primary-2"
+                              } text-white`}
+                            >
+                              {message}
+                            </button>
+                          </div>
+                        </div>
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center py-8">
+                      <p className="text-xl text-white mb-4">
+                        No registered competition yet.
+                      </p>
+                      <button
+                        className="bg-primary-2 text-white px-4 py-2 rounded-full"
+                        onClick={() => {
+                          navigate(`${EVENTS_PAGE}?category=Competition`);
+                        }}
+                      >
+                        Register Now!
+                      </button>
                     </div>
-                  );
-                })
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-xl text-white mb-4">
-                    No registered competition yet.
-                  </p>
-                  <button
-                    className="bg-primary-2 text-white px-4 py-2 rounded-full"
-                    onClick={() => {
-                      // navigate(COMPETITION_PAGE);
-                    }}
-                  >
-                    Register Now!
-                  </button>
-                </div>
+                  )}
+                </>
               )}
             </>
           )}

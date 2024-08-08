@@ -31,15 +31,25 @@ router.post(
   upload.fields([{ name: "screenshotFCEO", minCount: 5 }]),
   fceoControllers.createNewFCEOMember
 );
+
 router.post(
   "/team",
   isAuthenticated,
   [body("teamName").notEmpty().withMessage("Team name is required")],
+  upload.fields([
+    { name: "proofPayment", minCount: 1, maxCount: 1 },
+    { name: "studentIds", minCount: 1, maxCount: 1 },
+    { name: "proofFollow", minCount: 1, maxCount: 1 },
+    { name: "proofTwibbon", minCount: 1, maxCount: 1 },
+    { name: "proofStory", minCount: 1, maxCount: 1 },
+  ]),
+
   upload.fields([{ name: "proofOfPayment", maxCount: 1 }]),
   fceoControllers.createNewTeam
 );
-router.post(
-  "/team/check",
+router.post("/team/check", isAuthenticated, fceoControllers.checkTeam);
+router.get(
+  "/summary",
   isAuthenticated,
   [
     body("teamCode")
@@ -50,10 +60,6 @@ router.post(
   ],
   fceoControllers.checkTeam
 );
-router.get(
-  "/team/detail/user/:userId",
-  isAuthenticated,
-  fceoControllers.getTeamDetailsByUserId
-);
+router.get("/summary", isAuthenticated, fceoControllers.getTeamDetailsByUserId);
 
 module.exports = router;

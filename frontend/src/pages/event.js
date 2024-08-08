@@ -59,8 +59,6 @@ const Events = () => {
       return dateA - dateB; // Sort by ascending order
     });
 
-    console.log(sortedCombinedData);
-
     let filteredEvents =
       filter === "All"
         ? sortedCombinedData

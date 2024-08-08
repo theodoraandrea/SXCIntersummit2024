@@ -67,13 +67,12 @@ export default function Landing() {
     if (validateEmail(email.trim())) {
       try {
         const response = await login({ email, password });
-        loginUser();
+        console.log('Login successful', response); 
+        loginUser(response.user);
         navigate(HOME);
       } catch (error) {
         setErrorMessage(error.message);
       }
-    } else {
-      console.log("email not ok");
     }
   };
 
@@ -123,7 +122,11 @@ export default function Landing() {
                 ? "text-yellow-500 border-b-4 border-yellow-500"
                 : "text-gray-500"
             }`}
-            onClick={() => setActiveTab("register")}
+            onClick={() => {
+              setActiveTab("register");
+              setErrorMessage("");
+            }
+          }
           >
             Register
           </button>
