@@ -10,6 +10,7 @@ const {
 } = require("../models");
 // Handling Images Dependencies
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
+const sendAutomatedEmail = require("../services/automatedEmail");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -47,25 +48,25 @@ exports.getBMCRegistration = async (req, res) => {
     const registrations = await EventRegistration.findAll({
       where: {
         userId: userId,
-        eventId: bmcId
-      }
+        eventId: bmcId,
+      },
     });
 
     const forms = [];
 
     if (registrations.length > 0) {
       console.log("found: ", registrations.length);
-      for (let i=0; i < registrations.length; i++) {
+      for (let i = 0; i < registrations.length; i++) {
         const item = registrations[i];
         try {
           const data = await BMC.findOne({
             where: {
-              registrationId: item.id
-            }
+              registrationId: item.id,
+            },
           });
           forms.push(data);
         } catch (error) {
-          res.status(400).json({message: "Registration data not found"});
+          res.status(400).json({ message: "Registration data not found" });
         }
       }
     }
@@ -111,6 +112,7 @@ exports.registerBMC = async (req, res) => {
     }
 
     const user = await User.findByPk(userId);
+    const email = user.email;
     const event = await Event.findByPk(bmcId);
 
     if (!user && !event) {
@@ -122,11 +124,11 @@ exports.registerBMC = async (req, res) => {
       { "How did you know this event?": body.eventSource },
       {
         "Have you ever participated in a business competition before?":
-          body.experience ? 'Yes' : 'No',
+          body.experience ? "Yes" : "No",
       },
       {
         "What was your experience when participating in a business competition before?":
-          body.experience ?? '-',
+          body.experience ?? "-",
       },
       {
         "What are your expectations for this Business Master Class?":
@@ -146,17 +148,56 @@ exports.registerBMC = async (req, res) => {
      *
      */
 
-    
     const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
 
-    const screenshots = [files.screenshot1, files.screenshot2, files.screenshot3];
+    const screenshots = [
+      files.screenshot1,
+      files.screenshot2,
+      files.screenshot3,
+    ];
 
     const agreementURL = await getImageURLsList(files.agreement, folderId);
     const screenshot1 = await getImageURLsList(files.screenshot1, folderId);
     const screenshot2 = await getImageURLsList(files.screenshot2, folderId);
     const screenshot3 = await getImageURLsList(files.screenshot3, folderId);
     const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3];
+
+    // Automated Email
+    const emailDetails = {
+      from: "info.sxcintersummit@gmail.com",
+      fromName: "StudentsXCEOs International Summit 2024",
+      mailgenOptions: {
+        theme: "salted",
+        product: {
+          name: "StudentsxCEOs International Summit 2024",
+          link: "#",
+        },
+      },
+      emailContent: {
+        intro:
+          "You've just successfully registered to the Business Master Class! We're excited to have you on board! Your task is now to join the Whatsapp group for further info and instructions",
+        action: {
+          instructions: "Join the WA Group by clicking the button below",
+          button: {
+            color: "#003337",
+            text: "Join WA Group",
+            link: "#",
+          },
+        },
+        outro:
+          "We're glad to have you on board! Stay tuned in the group for further information!",
+        signature: "Cheers, StudentsxCEOs International Summit 2024",
+      },
+    };
+
+    const emailResult = await sendAutomatedEmail({ userId, emailDetails });
+
+    if (!emailResult.success) {
+      return res
+        .status(500)
+        .json({ message: emailResult.message, error: emailResult.error });
+    }
 
     // BMC Registration
     const eventRegistration = await EventRegistration.create({
@@ -172,7 +213,11 @@ exports.registerBMC = async (req, res) => {
       screenshotBMC: screenshotBMC_URL,
     });
 
-    res.status(200).json(bmc);
+    res.status(200).json({
+      message: "Success registering BMC!",
+      bmc: bmc,
+      email: emailResult.message,
+    });
   } catch (error) {
     res.status(500).json(error.message);
   }
