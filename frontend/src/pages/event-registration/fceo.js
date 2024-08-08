@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
 import Spinner from "../../components/elements/spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { USER_DASHBOARD_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
@@ -968,11 +968,23 @@ const Summary = ({ formData, members, setCurrentView }) => {
 };
 
 const EventCard = () => {
+  const location = useLocation();
+
   const [currentView, setCurrentView] = useState(1);
 
   const [formData, setFormData] = useState({});
   const [member1Data, setMember1Data] = useState({});
   const [member2Data, setMember2Data] = useState({});
+
+  useEffect(() => {
+    if (location && location.state.currentView) {
+      setCurrentView(location.state.currentView);
+    }
+    if (location && location.state.referralCode) {
+      console.log("Ref code found: ");
+      console.log(location.state.referralCode);
+    }
+  }, []);
 
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");

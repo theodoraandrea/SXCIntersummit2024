@@ -10,6 +10,7 @@ const Competition = require("./competition");
 const CompetitionRegistration = require("./competitionregistrations");
 const Summit = require("./summit");
 const User = require("./user");
+const ReferralCode = require("./referralCode");
 
 module.exports = {
   BMC,
@@ -23,4 +24,5 @@ module.exports = {
   FCEO,
   Summit,
   User,
+  ReferralCode
 };
