@@ -8,6 +8,7 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
+const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 
@@ -15,6 +16,12 @@ const Mailgen = require("mailgen");
 exports.createNewTeam = async (req, res) => {
   const fceoId = 1;
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { files, body } = req;
     const { teamName } = body;
     const userId = req.user.id;
@@ -58,6 +65,12 @@ exports.createNewTeam = async (req, res) => {
 // Check Team Existence
 exports.checkTeam = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { body } = req;
     const { teamCode } = body;
 
@@ -88,6 +101,12 @@ exports.checkTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { body } = req;
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
     const userId = req.user.id;

@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const { body } = require("express-validator");
 
 const router = express.Router();
 const eventControllers = require("../controllers/eventControllers");
@@ -30,7 +31,17 @@ router.get("/", isAuthenticated, eventControllers.getRegisteredEventsByUser);
 router.get("/all", eventControllers.getAllEvents);
 
 router.post(
-  "/BMC", isAuthenticated,
+  "/BMC",
+  isAuthenticated,
+  [
+    body("sessionType")
+      .notEmpty()
+      .withMessage("Session type is required")
+      .isIn(["Business Plan Competition", "Business Case Competition"])
+      .withMessage(
+        "Session type must be Business Plan Competition or Business Case Competition"
+      ),
+  ],
   upload.fields([
     { name: "agreement", maxCount: 1 },
     { name: "screenshot1", maxCount: 1 },

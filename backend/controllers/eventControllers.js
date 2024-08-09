@@ -10,6 +10,7 @@ const {
 } = require("../models");
 // Handling Images Dependencies
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
+const { validationResult } = require("express-validator");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -39,6 +40,11 @@ exports.getRegisteredEventsByUser = async (req, res) => {
   }
 };
 
+/**
+ *
+ * EVENTS REGISTRATION
+ */
+
 exports.getBMCRegistration = async (req, res) => {
   try {
     const bmcId = 1;
@@ -47,25 +53,25 @@ exports.getBMCRegistration = async (req, res) => {
     const registrations = await EventRegistration.findAll({
       where: {
         userId: userId,
-        eventId: bmcId
-      }
+        eventId: bmcId,
+      },
     });
 
     const forms = [];
 
     if (registrations.length > 0) {
       console.log("found: ", registrations.length);
-      for (let i=0; i < registrations.length; i++) {
+      for (let i = 0; i < registrations.length; i++) {
         const item = registrations[i];
         try {
           const data = await BMC.findOne({
             where: {
-              registrationId: item.id
-            }
+              registrationId: item.id,
+            },
           });
           forms.push(data);
         } catch (error) {
-          res.status(400).json({message: "Registration data not found"});
+          res.status(400).json({ message: "Registration data not found" });
         }
       }
     }
@@ -76,13 +82,15 @@ exports.getBMCRegistration = async (req, res) => {
   }
 };
 
-/**
- *
- * EVENTS REGISTRATION
- */
-
 exports.registerBMC = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    // const userId = 1;
     const bmcId = 1; // BMC event id
     const userId = req.user.id;
     const body = req.body;
@@ -122,11 +130,11 @@ exports.registerBMC = async (req, res) => {
       { "How did you know this event?": body.eventSource },
       {
         "Have you ever participated in a business competition before?":
-          body.experience ? 'Yes' : 'No',
+          body.experience ? "Yes" : "No",
       },
       {
         "What was your experience when participating in a business competition before?":
-          body.experience ?? '-',
+          body.experience ?? "-",
       },
       {
         "What are your expectations for this Business Master Class?":
@@ -146,11 +154,14 @@ exports.registerBMC = async (req, res) => {
      *
      */
 
-    
     const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
 
-    const screenshots = [files.screenshot1, files.screenshot2, files.screenshot3];
+    const screenshots = [
+      files.screenshot1,
+      files.screenshot2,
+      files.screenshot3,
+    ];
 
     const agreementURL = await getImageURLsList(files.agreement, folderId);
     const screenshot1 = await getImageURLsList(files.screenshot1, folderId);

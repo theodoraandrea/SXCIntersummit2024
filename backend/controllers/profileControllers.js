@@ -18,6 +18,7 @@ exports.completeProfile = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
     }
+
     const userId = req.user.id;
     const updatedProfile = req.body;
 
