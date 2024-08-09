@@ -14,8 +14,17 @@ router.post(
       .notEmpty()
       .withMessage("Email is required")
       .isEmail()
-      .withMessage("Email must be valid"),
-    body("password").notEmpty().withMessage("Password is required"),
+      .withMessage("Email must be valid")
+      .custom(async (value) => {
+        const isEmailExist = await User.findOne({ where: { email: value } });
+        if (isEmailExist) throw new Error("Email already in use");
+      }),
+
+    body("password")
+      .notEmpty()
+      .withMessage("Password is required")
+      .isLength({ min: 6 })
+      .withMessage("Password must be at least 6 characters"),
   ],
   authController.signup
 );
@@ -28,7 +37,11 @@ router.post(
       .isEmail()
       .withMessage("Email must be valid"),
 
-    body("password").notEmpty().withMessage("Password is required"),
+    body("password")
+      .notEmpty()
+      .withMessage("Password is required")
+      .isLength({ min: 6 })
+      .withMessage("Password must be at least 6 characters"),
   ],
   authController.login
 );
@@ -67,7 +80,11 @@ router.put(
       .isEmail()
       .withMessage("Email must be valid"),
 
-    body("password").notEmpty().withMessage("Password is required"),
+    body("password")
+      .notEmpty()
+      .withMessage("Password is required")
+      .isLength({ min: 6 })
+      .withMessage("Password must be at least 6 characters"),
   ],
   authController.resetPassword
 );
