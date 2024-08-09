@@ -10,25 +10,30 @@ router.post(
   "/member",
   isAuthenticated,
   [
-    body("teamCode")
+    body("fullname")
+      .optional()
       .notEmpty()
-      .withMessage("Team code is required")
-      .isLength({ min: 6, max: 6 })
-      .withMessage("Team codes consists of 6 characters"),
-
-    body("nationalStudentIdNumber")
+      .withMessage("Fullname is required")
+      .isAlpha("en-US", {
+        ignore: " ",
+      })
+      .withMessage("Fullname must be in strings"),
+    body("gender")
+      .optional()
+      .isIn(["Male", "Female"])
+      .withMessage("Gender must be male or female"),
+    body("school").optional().notEmpty().withMessage("School is required"),
+    body("phoneNumber")
+      .optional()
       .notEmpty()
-      .withMessage("National Student ID Number is required")
-      .isNumeric()
-      .withMessage("National Student ID Number must be numeric"),
-
-    body("isLeader")
+      .withMessage("Phone number is required"),
+    body("email")
+      .optional()
       .notEmpty()
-      .withMessage("isLeader is required")
-      .isBoolean()
-      .withMessage("isLeader must be boolean"),
+      .withMessage("Email is required")
+      .isEmail()
+      .withMessage("Email must be valid"),
   ],
-  upload.fields([{ name: "screenshotFCEO", minCount: 5 }]),
   fceoControllers.createNewFCEOMember
 );
 
@@ -43,13 +48,11 @@ router.post(
     { name: "proofTwibbon", minCount: 1, maxCount: 1 },
     { name: "proofStory", minCount: 1, maxCount: 1 },
   ]),
-
-  upload.fields([{ name: "proofOfPayment", maxCount: 1 }]),
   fceoControllers.createNewTeam
 );
-router.post("/team/check", isAuthenticated, fceoControllers.checkTeam);
-router.get(
-  "/summary",
+
+router.post(
+  "/team/check",
   isAuthenticated,
   [
     body("teamCode")
@@ -60,6 +63,7 @@ router.get(
   ],
   fceoControllers.checkTeam
 );
+
 router.get("/summary", isAuthenticated, fceoControllers.getTeamDetailsByUserId);
 
 module.exports = router;

@@ -40,6 +40,11 @@ exports.getRegisteredEventsByUser = async (req, res) => {
   }
 };
 
+/**
+ *
+ * EVENTS REGISTRATION
+ */
+
 exports.getBMCRegistration = async (req, res) => {
   try {
     const bmcId = 1;
@@ -76,11 +81,6 @@ exports.getBMCRegistration = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
-
-/**
- *
- * EVENTS REGISTRATION
- */
 
 exports.registerBMC = async (req, res) => {
   try {
