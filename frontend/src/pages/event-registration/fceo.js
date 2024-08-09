@@ -380,220 +380,6 @@ const Member1Data = ({
   formData,
   setFormData,
   onPrevious,
-  onSubmit,
-  onAddMember,
-  sanitizeInput,
-  member2Data,
-}) => {
-  const [fullName, setFullName] = useState(formData.fullName ?? "");
-  const [gender, setGender] = useState(formData.gender ?? "");
-  const [school, setSchool] = useState(formData.school ?? "");
-  const [phoneNumber, setPhoneNumber] = useState(formData.phoneNumber ?? "+62");
-  const [email, setEmail] = useState(formData.email ?? "");
-
-  const [emailError, setEmailError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-
-  const handleSubmit = () => {
-    if (checkAllFilled()) {
-      if (!emailError && !phoneError) {
-        formData = {
-          ...formData,
-          fullName: sanitizeInput(fullName),
-          gender: sanitizeInput(gender),
-          email: email,
-          phoneNumber: phoneNumber,
-          school: sanitizeInput(school),
-        };
-        setFormData(formData);
-      }
-    }
-  };
-
-  const checkAllFilled = () => {
-    if (fullName && gender && email && phoneNumber && school) {
-      return true;
-    }
-    return false;
-  };
-
-  const handlePhoneNumberChange = (e) => {
-    let inputValue = e.target.value;
-
-    let numericValue = inputValue.replace(/\D/g, "");
-
-    if (!numericValue.startsWith("62")) {
-      if (numericValue.startsWith("0")) {
-        numericValue = numericValue.slice(1);
-        console.log(numericValue);
-      }
-      numericValue = `62${numericValue}`;
-    }
-
-    setPhoneNumber(numericValue);
-  };
-
-  const formatPhoneNumber = () => {
-    if (phoneNumber.length < 10) {
-      setPhoneError("Please enter a valid phone number");
-    } else {
-      setPhoneError("");
-    }
-    const formattedValue = phoneNumber.replace(
-      /(\d{2})(\d{4})(\d{4})(\d*)/,
-      "+62 $2 $3 $4"
-    );
-    setPhoneNumber(formattedValue);
-  };
-
-  const handleEmailChange = (e) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(e.target.value)) {
-      setEmailError("Email must be a valid email address");
-    } else {
-      setEmailError("");
-    }
-    setEmail(e.target.value);
-  };
-
-  return (
-    <div>
-      <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4">Member 1 Data</h1>
-          <form className="text-left">
-            <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="fullName">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="gender">
-                Gender
-              </label>
-              <select
-                id="gender"
-                name="gender"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg"
-              >
-                <option value="" disabled>
-                  Select Gender
-                </option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-              </select>
-            </div>
-            <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={email}
-                onChange={handleEmailChange}
-                className="w-full px-3 py-2 rounded-lg"
-              />
-              {emailError && <p className="text-red-500">{emailError}</p>}
-            </div>
-            <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="phoneNumber">
-                Phone Number
-              </label>
-              <input
-                type="text"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={phoneNumber}
-                onChange={handlePhoneNumberChange}
-                onBlur={formatPhoneNumber}
-                className="w-full px-3 py-2 rounded-lg"
-              />
-              {phoneError && <p className="text-red-500">{phoneError}</p>}
-            </div>
-            <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="fullName">
-                School
-              </label>
-              <input
-                type="text"
-                id="school"
-                name="school"
-                value={school}
-                onChange={(e) => setSchool(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg"
-              />
-            </div>
-          </form>
-          <div className="mt-6 flex justify-center items-center">
-            <button
-              type="button"
-              onClick={onPrevious}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
-            >
-              Back
-            </button>
-            {!member2Data.fullName && (
-              <button
-                type="button"
-                onClick={() => {
-                  handleSubmit();
-                  onAddMember();
-                }}
-                className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
-                disabled={emailError || phoneError}
-              >
-                Add Member
-              </button>
-            )}
-            {member2Data.fullName ? (
-              <button
-                type="button"
-                onClick={() => {
-                  handleSubmit();
-                  onAddMember();
-                }}
-                className="bg-primary-3 text-white px-6 py-2 rounded-full"
-                disabled={emailError || phoneError}
-              >
-                Next
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  handleSubmit();
-                  onSubmit();
-                }}
-                className="bg-primary-3 text-white px-6 py-2 rounded-full"
-                disabled={emailError || phoneError}
-              >
-                Submit
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const Member2Data = ({
-  formData,
-  setFormData,
-  onPrevious,
   onNext,
   sanitizeInput,
 }) => {
@@ -618,13 +404,19 @@ const Member2Data = ({
           school: sanitizeInput(school),
         };
         setFormData(formData);
-        onNext();
       }
+      onNext();
     }
   };
 
   const checkAllFilled = () => {
-    if (fullName && gender && email && phoneNumber && school) {
+    if (
+      fullName &&
+      gender &&
+      school && 
+      phoneNumber &&
+      email
+    ) {
       return true;
     }
     return false;
@@ -674,7 +466,7 @@ const Member2Data = ({
       <Navbar />
       <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
         <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4">Member 2 Data</h1>
+          <h1 className="text-3xl font-bold text-white mb-4 w-80">Member 1 Data</h1>
           <form className="text-left">
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -759,10 +551,225 @@ const Member2Data = ({
               Back
             </button>
             <button
+                type="button"
+                onClick={() => {
+                  handleSubmit();
+                }}
+                className="bg-primary-3 text-white px-6 py-2 rounded-full"
+                disabled={emailError || phoneError}
+              >
+                Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Member2Data = ({
+  formData,
+  setFormData,
+  onPrevious,
+  onNext,
+  sanitizeInput,
+}) => {
+  const [fullName, setFullName] = useState(formData.fullName ?? "");
+  const [gender, setGender] = useState(formData.gender ?? "");
+  const [school, setSchool] = useState(formData.school ?? "");
+  const [phoneNumber, setPhoneNumber] = useState(formData.phoneNumber ?? "+62");
+  const [email, setEmail] = useState(formData.email ?? "");
+
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+  const handleNext = () => {
+    if (doesNotHaveMemberTwo()) {
+      setFormData({});
+      onNext();
+    }
+
+    if (saveData()) {
+      onNext();
+    }
+  };
+
+  const handleBack = () => {
+    if (doesNotHaveMemberTwo()) {
+      setFormData({});
+      onPrevious();
+    }
+
+    if (saveData()) {
+      onPrevious();
+    }
+  }
+
+  const saveData = () => {
+    if (checkAllFilled()) {
+      if (!emailError && !phoneError) {
+        formData = {
+          ...formData,
+          fullName: sanitizeInput(fullName),
+          gender: sanitizeInput(gender),
+          email: email,
+          phoneNumber: phoneNumber,
+          school: sanitizeInput(school),
+        };
+        setFormData(formData);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const checkAllFilled = () => {
+    if (fullName && gender && email && phoneNumber && school) {
+      return true;
+    }
+    return false; 
+  };
+
+  const doesNotHaveMemberTwo = () => {
+    if (!fullName) {
+      return true;
+    }
+    return false;
+  }
+
+  const handlePhoneNumberChange = (e) => {
+    let inputValue = e.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, "");
+
+    if (!numericValue.startsWith("62")) {
+      if (numericValue.startsWith("0")) {
+        numericValue = numericValue.slice(1);
+        console.log(numericValue);
+      }
+      numericValue = `62${numericValue}`;
+    }
+
+    setPhoneNumber(numericValue);
+  };
+
+  const formatPhoneNumber = () => {
+    if (phoneNumber.length < 10) {
+      setPhoneError("Please enter a valid phone number");
+    } else {
+      setPhoneError("");
+    }
+    const formattedValue = phoneNumber.replace(
+      /(\d{2})(\d{4})(\d{4})(\d*)/,
+      "+62 $2 $3 $4"
+    );
+    setPhoneNumber(formattedValue);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e.target.value)) {
+      setEmailError("Email must be a valid email address");
+    } else {
+      setEmailError("");
+    }
+    setEmail(e.target.value);
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
+        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-white mb-4 w-80">Member 2 Data</h1>
+          <form className="text-left">
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="fullName">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="gender">
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              >
+                <option value="" disabled>
+                  Select Gender
+                </option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+              {emailError && <p className="text-red-500">{emailError}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="phoneNumber">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                onBlur={formatPhoneNumber}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+              {phoneError && <p className="text-red-500">{phoneError}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="fullName">
+                School
+              </label>
+              <input
+                type="text"
+                id="school"
+                name="school"
+                value={school}
+                onChange={(e) => setSchool(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+          </form>
+          <div className="mt-6 flex justify-center items-center">
+            <button
               type="button"
-              onClick={handleSubmit}
+              onClick={handleBack}
+              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
               className="bg-primary-3 text-white px-6 py-2 rounded-full"
-              disabled={emailError || phoneError}
+              disabled={fullName && (emailError || phoneError)}
             >
               Next
             </button>
@@ -1022,10 +1029,7 @@ const EventCard = () => {
           formData={member1Data}
           setFormData={setMember1Data}
           member2Data={member2Data}
-          onSubmit={() => {
-            setCurrentView(4);
-          }}
-          onAddMember={handleNext}
+          onNext={handleNext}
           onPrevious={handlePrevious}
           sanitizeInput={sanitizeInput}
         />
