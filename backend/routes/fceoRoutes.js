@@ -4,7 +4,8 @@ const router = express.Router();
 const { body } = require("express-validator");
 const fceoControllers = require("../controllers/fceoControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
-const upload = multer();
+const upload = require("../middlewares/multer");
+const errorHandling = require("../middlewares/errorHandling");
 
 router.post(
   "/member",
@@ -40,14 +41,15 @@ router.post(
 router.post(
   "/team",
   isAuthenticated,
-  [body("teamName").notEmpty().withMessage("Team name is required")],
   upload.fields([
-    { name: "proofPayment", minCount: 1, maxCount: 1 },
-    { name: "studentIds", minCount: 1, maxCount: 1 },
-    { name: "proofFollow", minCount: 1, maxCount: 1 },
-    { name: "proofTwibbon", minCount: 1, maxCount: 1 },
-    { name: "proofStory", minCount: 1, maxCount: 1 },
+    { name: "proofPayment", maxCount: 1 },
+    { name: "studentIds", maxCount: 1 },
+    { name: "proofFollow", maxCount: 1 },
+    { name: "proofTwibbon", maxCount: 1 },
+    { name: "proofStory", maxCount: 1 },
   ]),
+  [body("teamName").notEmpty().withMessage("Team name is required")],
+  errorHandling,
   fceoControllers.createNewTeam
 );
 

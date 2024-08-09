@@ -11,6 +11,7 @@ const {
 // Handling Images Dependencies
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { validationResult } = require("express-validator");
+const checkRequiredFields = require("../utils/checkRequiredFields");
 
 exports.getAllEvents = async (req, res) => {
   try {
@@ -84,10 +85,24 @@ exports.getBMCRegistration = async (req, res) => {
 
 exports.registerBMC = async (req, res) => {
   try {
-    // Body Validation Checking
+    //Body Validation Checking
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
+    }
+
+    // Check if there any required image not uploaded.
+    const requiredFields = [
+      "agreement",
+      "screenshot1",
+      "screenshot2",
+      "screenshot3",
+    ];
+    if (!checkRequiredFields(req.files, requiredFields)) {
+      return res.status(400).json({
+        message:
+          "Upload incomplete: Please ensure that all required images are uploaded before submitting the form.",
+      });
     }
 
     // const userId = 1;
@@ -96,27 +111,27 @@ exports.registerBMC = async (req, res) => {
     const body = req.body;
     const files = req.files;
 
-    if (!files.agreement) {
-      console.log("Haven't uploaded agreement");
-    } else {
-      console.log("agreement: ", files.agreement);
-    }
+    // if (!files.agreement) {
+    //   console.log("Haven't uploaded agreement");
+    // } else {
+    //   console.log("agreement: ", files.agreement);
+    // }
 
-    if (!files.screenshot1) {
-      console.log("Haven't uploaded screenshot 1");
-    } else {
-      console.log("screenshot 1: ", files.screenshot1);
-    }
-    if (!files.screenshot2) {
-      console.log("Haven't uploaded screenshot 2");
-    } else {
-      console.log("screenshot 2: ", files.screenshot2);
-    }
-    if (!files.screenshot1) {
-      console.log("Haven't uploaded screenshot 3");
-    } else {
-      console.log("screenshot 3: ", files.screenshot3);
-    }
+    // if (!files.screenshot1) {
+    //   console.log("Haven't uploaded screenshot 1");
+    // } else {
+    //   console.log("screenshot 1: ", files.screenshot1);
+    // }
+    // if (!files.screenshot2) {
+    //   console.log("Haven't uploaded screenshot 2");
+    // } else {
+    //   console.log("screenshot 2: ", files.screenshot2);
+    // }
+    // if (!files.screenshot1) {
+    //   console.log("Haven't uploaded screenshot 3");
+    // } else {
+    //   console.log("screenshot 3: ", files.screenshot3);
+    // }
 
     const user = await User.findByPk(userId);
     const event = await Event.findByPk(bmcId);

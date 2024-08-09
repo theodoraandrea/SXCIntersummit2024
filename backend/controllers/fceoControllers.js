@@ -8,6 +8,7 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
+const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
@@ -23,6 +24,21 @@ exports.createNewTeam = async (req, res) => {
     }
 
     const { files, body } = req;
+    // Check if there any required image not uploaded.
+    const requiredFields = [
+      "proofPayment",
+      "studentIds",
+      "proofTwibbon",
+      "proofFollow",
+      "proofStory",
+    ];
+    if (!checkRequiredFields(req.files, requiredFields)) {
+      return res.status(400).json({
+        message:
+          "Upload incomplete: Please ensure that all required images are uploaded before submitting the form.",
+      });
+    }
+
     const { teamName } = body;
     const userId = req.user.id;
 
