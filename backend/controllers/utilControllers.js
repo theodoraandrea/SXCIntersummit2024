@@ -1,5 +1,4 @@
-const { where } = require('sequelize');
-const ReferralCode = require('../models/referralCode');
+const ReferralCode = require('../models/referralcode');
 
 // Check referral code
 exports.checkReferralCode = async (req, res) => {

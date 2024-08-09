@@ -10,7 +10,7 @@ const Competition = require("./competition");
 const CompetitionRegistration = require("./competitionregistrations");
 const Summit = require("./summit");
 const User = require("./user");
-const ReferralCode = require("./referralCode");
+const ReferralCode = require("./referralcode");
 
 module.exports = {
   BMC,

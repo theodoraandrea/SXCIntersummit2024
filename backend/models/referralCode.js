@@ -4,9 +4,8 @@ const sequelize = require("../config/databaseConfig");
 const ReferralCode = sequelize.define(
     "ReferralCode",
     {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+    code: {
+        type: DataTypes.STRING,
         primaryKey: true,
     },
     eventId: {
@@ -22,10 +21,6 @@ const ReferralCode = sequelize.define(
             model: "competitions",
             key: "id"
         }
-    },
-    code: {
-        type: DataTypes.STRING,
-        unique: true
     },
     discountPercentage: {
         type: DataTypes.INTEGER

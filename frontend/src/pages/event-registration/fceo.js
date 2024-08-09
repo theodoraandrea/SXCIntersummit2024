@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
 import Spinner from "../../components/elements/spinner";
-import { useNavigate, useLocation } from "react-router-dom";
+import ReferralModal from "../../components/referral-modal";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { USER_DASHBOARD_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
@@ -40,6 +41,10 @@ const FirstView = ({
   const [proofPayment, setProofPayment] = useState(
     formData.proofPayment?.name ?? ""
   );
+  
+  //REFERRAL DATA
+  const [ referralCode, setReferralCode ] = useState("");
+  const [ discountedPrice, setDiscountedPrice ] = useState("");
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -55,8 +60,10 @@ const FirstView = ({
           phoneNumber: phoneNumber,
           school: sanitizeInput(school),
           teamName: sanitizeInput(teamName),
+          referralCode: referralCode
         };
         setFormData(formData);
+        console.log(formData);
         onNext();
       }
     }
@@ -142,7 +149,7 @@ const FirstView = ({
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
+      <div className="bg-gradient-primary w-full min-h-screen flex justify-center">
         <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
           <h1 className="text-3xl font-bold text-white mb-4">
             FCEO Registration
@@ -237,13 +244,13 @@ const FirstView = ({
               />
             </div>
             <label className="block text-white">Proof of Payment</label>
-            <div className="my-4 relative">
+            <div className="my-4 relative w-fit">
               <input
                 type="file"
                 id="proofPayment"
                 name="proofPayment"
                 onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                className="absolute inset-0 opacity-0 cursor-pointer"
               />
               <label
                 htmlFor="proofPayment"
@@ -257,7 +264,7 @@ const FirstView = ({
             <label className="block text-white mb-2">
               File name: Team Name_Leader Name_Proof of Student Card
             </label>
-            <div className="my-4 relative">
+            <div className="my-4 relative w-fit">
               <input
                 type="file"
                 id="studentIds"
@@ -280,7 +287,7 @@ const FirstView = ({
             <label className="block text-white mb-2">
               File name: Team Name_Leader Name_Proof of Follow
             </label>
-            <div className="my-4 relative">
+            <div className="my-4 relative w-fit">
               <input
                 type="file"
                 id="proofFollow"
@@ -302,7 +309,7 @@ const FirstView = ({
             <label className="block text-white mb-2">
               File name: Team Name_Leader Name_Proof of Twibbon
             </label>
-            <div className="my-4 relative">
+            <div className="my-4 relative w-fit">
               <input
                 type="file"
                 id="proofTwibbon"
@@ -324,7 +331,7 @@ const FirstView = ({
             <label className="block text-white mb-2">
               File name: Team Name_Leader Name_Proof of Instastory
             </label>
-            <div className="my-4 relative">
+            <div className="my-4 relative w-fit">
               <input
                 type="file"
                 id="proofStory"
@@ -357,6 +364,12 @@ const FirstView = ({
             >
               Next
             </button>
+          </div>
+        </div>
+        <div className="bg-dark-2 p-4 pt-0 rounded-lg shadow-lg text-center">
+          <ReferralModal setDiscountedPrice={setDiscountedPrice} setReferralCode={setReferralCode}/>
+          <div className="bg-dark-2 p-4 mt-2 rounded-lg shadow-lg text-white text-center">
+            <p>insert payment info here</p>
           </div>
         </div>
       </div>
@@ -911,6 +924,13 @@ const Summary = ({ formData, members, setCurrentView }) => {
               <p>
                 <strong>Email:</strong> {formData.email}
               </p>
+              {
+                formData.referralCode && 
+                <>
+                  <p className="text-lg font-semibold mt-2">Referral Code</p>
+                  {formData.referralCode}
+                </>
+              }
             </div>
             {members.map(
               (member, index) =>
@@ -968,29 +988,17 @@ const Summary = ({ formData, members, setCurrentView }) => {
 };
 
 const EventCard = () => {
-  const location = useLocation();
-
   const [currentView, setCurrentView] = useState(1);
 
   const [formData, setFormData] = useState({});
   const [member1Data, setMember1Data] = useState({});
   const [member2Data, setMember2Data] = useState({});
 
-  useEffect(() => {
-    if (location && location.state.currentView) {
-      setCurrentView(location.state.currentView);
-    }
-    if (location && location.state.referralCode) {
-      console.log("Ref code found: ");
-      console.log(location.state.referralCode);
-    }
-  }, []);
-
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
   };
 
-  const handleNext = (count) => {
+  const handleNext = () => {
     setCurrentView((prevView) => prevView + 1);
   };
 

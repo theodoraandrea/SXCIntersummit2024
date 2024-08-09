@@ -78,8 +78,12 @@ const FCEOSummary = () => {
                         ))}
                     </div>
                     <div className='rounded-lg shadow-lg p-4 bg-opacity-25'>
-                        <p className='text-xl font-semibold mb-2'>Team Code</p>
+                        <p className='text-xl font-semibold mb-2'>Registration Data</p>
                         <p><strong>Team Code:</strong> {teamData.teamCode}</p>
+                        {
+                            teamData.referralCode &&
+                            <p><strong>Referral Code:</strong> {teamData.referralCode}</p>
+                        }
                     </div>
                 </div>
             }

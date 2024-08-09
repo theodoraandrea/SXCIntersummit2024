@@ -33,6 +33,13 @@ const FCEO = sequelize.define(
     screenshotFCEO: {
       type: DataTypes.JSON,
       allowNull: false,
+    },
+    referralCode: {
+      type: DataTypes.STRING,
+      references : {
+        model: "referralcodes",
+        key: "code"
+      }
     }
   },
   {
