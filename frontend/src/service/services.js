@@ -1,20 +1,26 @@
 import axiosInstance from "../config/axiosConfig";
 import {
+  // Auth
+  API_LOGIN,
+  API_SIGNUP,
   API_PROFILE_DATA,
+  API_POST_FORGOT_PASSWORD,
+  API_POST_VERIFY_OTP,
+  API_PUT_RESET_PASSWORD,
+  // GET DATA
   API_GET_ALL_EVENTS,
   API_GET_USER_REGISTERED_EVENTS,
   API_GET_USER_REGISTERED_COMPETITIONS,
   API_GET_ALL_COMPETITIONS,
   API_POST_CHECK_REF_CODE,
-  API_LOGIN,
-  API_SIGNUP,
   // FCEO
   API_POST_NEW_FCEO_MEMBER,
   API_POST_NEW_FCEO_TEAM,
   API_POST_CHECK_FCEO_TEAMCODE,
-  API_POST_BMC_REGISTRATION,
   API_GET_FCEO_REGISTRATION,
-  API_GET_BMC_REGISTRATION
+  // BMC
+  API_GET_BMC_REGISTRATION,
+  API_POST_BMC_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -38,7 +44,7 @@ const login = async (data) => {
   }
 };
 
-//Register
+// Register
 const register = async (data) => {
   try {
     const response = await axiosInstance.post(API_SIGNUP, data);
@@ -55,6 +61,43 @@ const register = async (data) => {
     } else {
       throw new Error("Network error");
     }
+  }
+};
+
+// Forgot Password
+const postForgotPassword = async (email) => {
+  const data = { email: email };
+
+  try {
+    const res = await axiosInstance.post(API_POST_FORGOT_PASSWORD, data);
+    return res.data;
+  } catch (error) {
+    console.error("Error forgot password: ", error);
+    throw error;
+  }
+};
+
+// Verify OTP
+const postVerifyOtp = async (otp) => {
+  const data = { otpCode: otp };
+  try {
+    const res = await axiosInstance.post(API_POST_VERIFY_OTP, data);
+    return res;
+  } catch (error) {
+    console.error("Error verifying OTP: ", error);
+    throw error;
+  }
+};
+
+// Reset password
+const putResetPassword = async ({ email, password }) => {
+  const data = { email, password };
+  try {
+    const res = await axiosInstance.put(API_PUT_RESET_PASSWORD, data);
+    return res.data;
+  } catch (error) {
+    console.error("Error resetting password: ", error);
+    throw error;
   }
 };
 
@@ -108,13 +151,13 @@ const fetchTwoEvents = async () => {
     const response = await axiosInstance.get(API_GET_ALL_EVENTS);
     const allEvents = response.data;
 
-    const twoEvents = allEvents.slice(0,2);
-    return twoEvents
-  } catch(error) {
+    const twoEvents = allEvents.slice(0, 2);
+    return twoEvents;
+  } catch (error) {
     console.error("Error fetching events:", error);
     throw error;
   }
-}
+};
 
 // Get competitions registered by user
 const fetchRegisteredCompetitions = async () => {
@@ -131,10 +174,10 @@ const fetchRegisteredCompetitions = async () => {
 
 //BMC
 const postBMCRegistration = async (data) => {
-  try {    
+  try {
     const response = await axiosInstance.post(API_POST_BMC_REGISTRATION, data, {
       headers: {
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "multipart/form-data",
       },
     });
     return response;
@@ -142,7 +185,7 @@ const postBMCRegistration = async (data) => {
     console.error(error);
     throw error;
   }
-}
+};
 
 const fetchAllCompetitions = async () => {
   try {
@@ -163,7 +206,7 @@ const getBmcRegistrationData = async (data) => {
     console.log(error);
     throw error;
   }
-}
+};
 
 // FCEO
 const postNewFceoMember = async (data) => {
@@ -203,7 +246,7 @@ const getFceoRegistrationData = async (data) => {
     console.log(error);
     throw error;
   }
-}
+};
 
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
@@ -222,14 +265,14 @@ const postCheckReferralCode = async (data) => {
     console.log("in postCheckReferralCode");
     console.log("data ", data);
     const response = await axiosInstance.post(API_POST_CHECK_REF_CODE, {
-      referralCode: data
+      referralCode: data,
     });
     return response.data;
   } catch (error) {
     console.log(error);
     throw error;
   }
-}
+};
 
 export {
   login,
@@ -247,5 +290,8 @@ export {
   postCheckTeamCode,
   postCheckReferralCode,
   postBMCRegistration,
-  getBmcRegistrationData
+  getBmcRegistrationData,
+  postForgotPassword,
+  postVerifyOtp,
+  putResetPassword,
 };
