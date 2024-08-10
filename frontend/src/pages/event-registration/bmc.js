@@ -477,7 +477,7 @@ const FourthView = ({
                     </form>
                     */}
           <div className="grid grid-cols-2 gap-4 text-left">
-            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource1"
                 name="eventSourceRadio"
@@ -493,7 +493,7 @@ const FourthView = ({
                 SxC InterSummit Instagram
               </label>
             </div>
-            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource2"
                 name="eventSourceRadio"
@@ -509,7 +509,7 @@ const FourthView = ({
                 SxC InterSummit LinkedIn
               </label>
             </div>
-            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource3"
                 name="eventSourceRadio"
@@ -525,7 +525,7 @@ const FourthView = ({
                 SxC InterSummit Tiktok
               </label>
             </div>
-            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource4"
                 name="eventSourceRadio"
