@@ -70,7 +70,7 @@ const postForgotPassword = async (email) => {
 
   try {
     const res = await axiosInstance.post(API_POST_FORGOT_PASSWORD, data);
-    return res.data;
+    return res;
   } catch (error) {
     console.error("Error forgot password: ", error);
     throw error;
@@ -94,7 +94,7 @@ const putResetPassword = async ({ email, password }) => {
   const data = { email, password };
   try {
     const res = await axiosInstance.put(API_PUT_RESET_PASSWORD, data);
-    return res.data;
+    return res;
   } catch (error) {
     console.error("Error resetting password: ", error);
     throw error;
