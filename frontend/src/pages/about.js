@@ -19,13 +19,13 @@ export default function About() {
         className="bg-cover bg-center h-500 flex flex-col justify-center"
         style={{ backgroundImage: `url(${BgHero})` }}
       >
-        <h1 className="text-4xl md:text-5xl font-bold text-white mx-20">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20">
           StudentxCEOs International Summit 2024
         </h1>
-        <h2 className="text-2xl md:text-4xl font-semibold mt-4 text-gradient mx-20">
+        <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold mt-2 sm:mt-4 md:mt-6 text-gradient mx-4 sm:mx-8 md:mx-20">
           Innovate or Obsolete: Thriving in a world of technology disruption
         </h2>
-        <p className="mt-5 text-lg md:text-xl max-w-full mx-20 text-white">
+        <p className="text-base sm:text-lg md:text-xl mt-3 sm:mt-5 md:mt-6 max-w-full mx-4 sm:mx-8 md:mx-20 text-white">
           Prepare yourself for a brand new era with SxC International Summit, a
           Grand Event organized by StudentsxCEOs Jakarta consisting of a
           sequence of enriching and groundbreaking events.
@@ -33,12 +33,12 @@ export default function About() {
       </section>
 
       {/* New Section */}
-      <section className="bg-primary-1 py-20">
-        <div className="container mx-auto px-6 md:px-12 text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
+      <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10">
             Part of StudentxCEOs
           </h2>
-          <div className="flex flex-col md:flex-row justify-center items-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center">
             <AboutCard logo={logo} header={"StudentsxCEOs Jakarta"}>
               StudentsxCEOs Jakarta is a non-governmental and non-profit
               organization to support college students as an incubator for
@@ -58,12 +58,12 @@ export default function About() {
         </div>
       </section>
 
-      <section className="justify-center items-center flex text-center bg-white py-20">
-        <div className="mt-16">
-          <h3 className="text-2xl font-semibold mb-4">Vision</h3>
-          <p className="text-lg mb-8">Vision content goes here.</p>
-          <h3 className="text-2xl font-semibold mb-4">Mission</h3>
-          <p className="text-lg">Mission content goes here.</p>
+      <section className="bg-white py-10 sm:py-16 md:py-20">
+        <div className="container mx-auto text-center">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 md:mb-8">Vision</h3>
+          <p className="text-base sm:text-lg mb-4 sm:mb-6">Vision content goes here.</p>
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 md:mb-8">Mission</h3>
+          <p className="text-base sm:text-lg">Mission content goes here.</p>
         </div>
       </section>
       <Footer/>

@@ -101,6 +101,20 @@ const fetchRegisteredEvents = async () => {
   }
 };
 
+// Get two events for homepage
+const fetchTwoEvents = async () => {
+  try {
+    const response = await axiosInstance.get(API_GET_ALL_EVENTS);
+    const allEvents = response.data;
+
+    const twoEvents = allEvents.slice(0,2);
+    return twoEvents
+  } catch(error) {
+    console.error("Error fetching events:", error);
+    throw error;
+  }
+}
+
 // Get competitions registered by user
 const fetchRegisteredCompetitions = async () => {
   try {
@@ -210,6 +224,7 @@ export {
   putProfileData,
   fetchRegisteredEvents,
   fetchAllEvents,
+  fetchTwoEvents,
   fetchAllCompetitions,
   fetchRegisteredCompetitions,
   postNewFceoMember,

@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://d194-2a02-908-1786-30a0-fdbf-952c-c9f6-60b8.ngrok-free.app";
 
 const SIGNUP = "/auth/signup";
 const LOGIN = "/auth/login";
