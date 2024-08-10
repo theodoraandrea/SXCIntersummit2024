@@ -4,12 +4,13 @@ const Chamber = require("./chamber");
 const CompanyVisit = require("./companyvisit");
 const Event = require("./event");
 const FCEOMember = require("./fceomember");
-const FCEOTeam = require("./fceoteam");
+const FCEO = require("./fceo");
 const EventRegistration = require("./eventregistrations");
 const Competition = require("./competition");
 const CompetitionRegistration = require("./competitionregistrations");
 const Summit = require("./summit");
 const User = require("./user");
+const ReferralCode = require("./referralcode");
 
 module.exports = {
   BMC,
@@ -20,7 +21,8 @@ module.exports = {
   Competition,
   CompetitionRegistration,
   FCEOMember,
-  FCEOTeam,
+  FCEO,
   Summit,
   User,
+  ReferralCode
 };

@@ -36,7 +36,7 @@ export default function NavbarUser({ currentPath }) {
   };
 
   return (
-<nav className="bg-primary-1 w-full h-16 flex items-center px-10 sticky top-0">
+<nav className="bg-primary-1 w-full h-16 flex items-center px-10 sticky top-0 z-50">
       <img src={logo} alt="logo" className="w-32" />
       <ul className="flex flex-grow items-center space-x-10 ml-10">
         <li>
@@ -132,7 +132,10 @@ export default function NavbarUser({ currentPath }) {
               My profile
             </Link>
             <button 
-              onClick={removeUser}
+              onClick={() => {
+                removeUser();
+                navigate(LANDING_PAGE);
+              }}
               className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer"
             >
               Logout

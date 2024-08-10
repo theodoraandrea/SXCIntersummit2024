@@ -37,8 +37,14 @@ router.post(
     { name: "screenshot1", maxCount: 1 },
     { name: "screenshot2", maxCount: 1 },
     { name: "screenshot3", maxCount: 1 },
-    //{ name: "screenshotBMC", minCount: 3 },
   ]),
   eventControllers.registerBMC
 );
+
+router.get(
+  "/BMC/summary",
+  isAuthenticated,
+  eventControllers.getBMCRegistration
+);
+
 module.exports = router;

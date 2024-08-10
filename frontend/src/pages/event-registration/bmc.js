@@ -73,6 +73,8 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
 
 const SecondView = ({ title, description, formData, setFormData, onNext, onPrevious }) => {
     
+    const [ agreement, setAgreement ] = useState(formData.agreement?.name ?? '');
+
     const handleChange = (e) => {
         const { name, value, files } = e.target;
         setFormData((prevState) => ({
@@ -80,6 +82,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
           [name]: files ? files[0] : value,
         }));
         console.log(files);
+        setAgreement(files[0].name);
       };
 
     const handleDownload = () => {
@@ -90,6 +93,12 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
         link.click();
         document.body.removeChild(link);
     };
+
+    const handleSubmit = () => {
+        if (agreement) {
+            onNext();
+        }
+    }
 
     return (
     <div>
@@ -103,7 +112,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
                     Download Agreement Paper
                 </button>
                 <p className='text-lg text-white mb-6'>{description}</p>
-                <div className='relative inline-block mb-10'>
+                <div className='relative inline-block mb-5'>
                 <input 
                     type='file'
                     id="agreement" 
@@ -116,6 +125,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
                     className='bg-primary-3 text-white px-5 py-3 rounded-full'>
                         Submit Agreement Paper
                 </label>
+                <label className='block text-white mt-6'>{agreement}</label>
                 </div>
                 <div className='flex justify-center'>
                 <button
@@ -128,7 +138,7 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
                 <button
                     type='button'
                     className='bg-primary-3 text-white px-6 py-2 rounded-full'
-                    onClick={onNext}
+                    onClick={handleSubmit}
                     >
                     Next
                 </button>
@@ -234,32 +244,35 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
         <div>
             <Navbar />
             <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
-                    <h1 className='text-3xl font-bold text-white mb-4'>Personal Information</h1>
-                    <form className='text-left'>
-                        <div className='mb-4'>
+                <div className='bg-dark-2 p-8 rounded-lg shadow-lg max-w-3xl'>
+                    <h1 className='text-3xl font-bold text-white text-center mb-2'>Personal Information</h1>
+                    <p className='text-white text-center font-bold mb-6'>You can edit your personal information from My Account</p>
+                    <div className='my-2 px-4'>
                             <label className='block text-white mb-2' htmlFor='fullName'>Full Name</label>
                             <input
                                 type='text'
                                 id='fullName'
                                 name='fullName'
                                 value={fullName}
+                                disabled={true}
                                 onChange={(e) => setFullName(e.target.value)}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
-                        </div>
-                        <div className='mb-4'>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 text-left">
+                        <div className='mb-4 md:w-80'>
                             <label className='block text-white mb-2' htmlFor='gender'>Gender</label>
                             <select
                                 id='gender'
                                 name='gender'
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
+                                disabled={true}
                                 className='w-full px-3 py-2 rounded-lg'
                             >
                                 <option value="" disabled>Select Gender</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
                             </select>
                         </div>
                         <div className='mb-4'>
@@ -269,6 +282,7 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                                 id='email'
                                 name='email'
                                 value={email}
+                                disabled={true}
                                 onChange={handleEmailChange}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
@@ -282,6 +296,7 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                                 name='phoneNumber'
                                 value={phoneNumber}
                                 onChange={handlePhoneNumberChange}
+                                disabled={true}
                                 onBlur={formatPhoneNumber}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
@@ -295,6 +310,7 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                                 name='university'
                                 value={university}
                                 onChange={(e) => setUniversity(e.target.value)}
+                                disabled={true}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
                         </div>
@@ -306,6 +322,7 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                                 name='major'
                                 value={major}
                                 onChange={(e) => setMajor(e.target.value)}
+                                disabled={true}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
                         </div>
@@ -316,11 +333,12 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                                 id='batch'
                                 name='batch'
                                 value={batch}
+                                disabled={true}
                                 onChange={(e) => setBatch(e.target.value.replace(/\D/g, "").slice(0,4))}
                                 className='w-full px-3 py-2 rounded-lg'
                             />
                         </div>
-                    </form>
+                    </div>
                     <div className='mt-6 flex justify-center items-center'>
                     <button
                             type='button'
@@ -338,6 +356,7 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                             Next
                     </button>
                     </div>
+               
                 </div>
             </div>
         </div>
@@ -345,7 +364,17 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
 };
 
 const FourthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }) => {
-    const [ eventSource, setEventSource ] = useState(formData.eventSource ?? '');
+    const [ eventSource, setEventSource ] = useState(formData.eventSource ?? "");
+    const [ eventSourceOther, setEventSourceOther ] = useState(formData.eventSourceOther ?? "Other");
+    const [ option, setOption ] = useState(formData.eventSource ?? "");
+
+    const handleOptionChange = (e) => {
+        setOption(e.target.value);
+        setEventSource(e.target.value);
+        if (e.target.value !== 4) {
+            setEventSourceOther("");
+        }
+    }
 
     const checkAllFilled = () => {
         if (eventSource) {
@@ -358,7 +387,8 @@ const FourthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
         if (checkAllFilled()) {
             setFormData({
                 ...formData,
-                eventSource: sanitizeInput(eventSource)
+                eventSource: eventSource,
+                eventSourceOther: sanitizeInput(eventSourceOther)
             });
             onNext();
         }
@@ -370,6 +400,7 @@ const FourthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
             <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white mb-4'>How did you know this event?</h1>
+                    {/*
                     <form className='text-left'>
                         <div className='mb-4'>
                             <textarea
@@ -380,6 +411,56 @@ const FourthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
                             />
                         </div>
                     </form>
+                    */}
+                    <div className="grid grid-cols-2 gap-4 text-left">
+                        <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+                            <input id="eventSource1" name="eventSourceRadio" 
+                            type="radio" 
+                            value="Instagram"
+                            checked={option === "Instagram"}
+                            onChange={handleOptionChange}
+                            />
+                            <label htmlFor="eventSource1" className="w-full ml-2 text-sm text-gray-800">SxC InterSummit Instagram</label>
+                        </div>
+                        <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+                            <input id="eventSource2" 
+                            name="eventSourceRadio" 
+                            type="radio" 
+                            value="LinkedIn"
+                            checked={option === "LinkedIn"}
+                            onChange={handleOptionChange}
+                            />
+                            <label htmlFor="eventSource2" className="w-full ml-2 text-sm text-gray-800">SxC InterSummit LinkedIn</label>
+                        </div>
+                        <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+                            <input id="eventSource3" 
+                            name="eventSourceRadio" 
+                            type="radio" 
+                            value="Tiktok"
+                            checked={option === "Tiktok"}
+                            onChange={handleOptionChange}
+                            />
+                            <label htmlFor="eventSource3" className="w-full ml-2 text-sm text-gray-800">SxC InterSummit Tiktok</label>
+                        </div>
+                        <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
+                            <input id="eventSource4" 
+                            name="eventSourceRadio" 
+                            type="radio"
+                            value="Other"
+                            checked={option === "Other"}
+                            onChange={handleOptionChange}
+                            />
+                            <input id="eventSource4" 
+                            className="text-sm ml-2 bg-gray-100"
+                            name="eventSource" 
+                            type="text" 
+                            value={eventSourceOther}
+                            placeholder="Other"
+                            onChange={(e)=>setEventSourceOther(e.target.value)}
+                            disabled={option !== "Other"}
+                            />
+                        </div>
+                    </div>
                     <div className='mt-6 flex justify-center items-center'>
                     <button
                             type='button'
@@ -440,6 +521,7 @@ const FifthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
 
 const SixthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }) => {
     const [ experience, setExperience ] = useState(formData.experience ?? '');
+    const [ charCount, setCharCount ] = useState(formData.experience?.length ?? 0);
 
     const checkAllFilled = () => {
         if (experience) {
@@ -463,15 +545,21 @@ const SixthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
             <Navbar />
             <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
-                    <h1 className='text-3xl font-bold text-white mb-4'>What was your experience when participating in a business competition before?</h1>
+                    <h1 className='text-3xl px-12 font-bold text-white mb-4'>What was your experience when participating in a business competition before?</h1>
                     <form className='text-left'>
                         <div className='mb-4'>
                             <textarea
                                 name='experience'
                                 value={experience}
-                                onChange={(e) => setExperience(e.target.value)}
-                                className='w-full px-3 py-2 rounded-lg'
+                                onChange={(e) => {
+                                    if (e.target.value.length <= 300) {
+                                        setExperience(e.target.value);
+                                        setCharCount(e.target.value.length);
+                                    }
+                                }}
+                                className='w-full h-40 px-3 py-2 rounded-lg text-sm'
                             />
+                            <p className='text-right text-gray-300 text-sm'>{charCount}/300</p>
                         </div>
                     </form>
                     <div className='mt-6 flex justify-center items-center'>
@@ -498,6 +586,7 @@ const SixthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
 
 const SeventhView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }) => {
     const [ expectations, setExpectations ] = useState(formData.expectations ?? '');
+    const [ charCount, setCharCount ] = useState(formData.expectations?.length ?? 0);
 
     const checkAllFilled = () => {
         if (expectations) {
@@ -527,9 +616,15 @@ const SeventhView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext 
                             <textarea
                                 name='expectations'
                                 value={expectations}
-                                onChange={(e) => setExpectations(e.target.value)}
-                                className='w-full px-3 py-2 rounded-lg'
+                                onChange={(e) => {
+                                    if (e.target.value.length <= 300) {
+                                        setExpectations(e.target.value);
+                                        setCharCount(e.target.value.length);
+                                    }
+                                }}
+                                className='w-full h-40 px-3 py-2 rounded-lg'
                             />
+                            <p className='text-right text-gray-300 text-sm'>{charCount}/300</p>
                         </div>
                     </form>
                     <div className='mt-6 flex justify-center items-center'>
@@ -556,6 +651,7 @@ const SeventhView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext 
 
 const EighthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }) => {
     const [ materials, setMaterials ] = useState(formData.materials ?? '');
+    const [ charCount, setCharCount ] = useState(formData.materials?.length ?? 0);
 
     const checkAllFilled = () => {
         if (materials) {
@@ -585,9 +681,15 @@ const EighthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
                             <textarea
                                 name='materials'
                                 value={materials}
-                                onChange={(e) => setMaterials(e.target.value)}
-                                className='w-full px-3 py-2 rounded-lg'
+                                onChange={(e) => {
+                                    if (e.target.value.length <= 300) {
+                                        setMaterials(e.target.value);
+                                        setCharCount(e.target.value.length);
+                                    }
+                                }}
+                                className='w-full h-40 px-3 py-2 rounded-lg'
                             />
+                            <p className='text-right text-gray-300 text-sm'>{charCount}/300</p>
                         </div>
                     </form>
                     <div className='mt-6 flex justify-center items-center'>
@@ -613,12 +715,20 @@ const EighthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
 };
 
 const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
-    const [ follow1, setFollow1 ] = useState(false);
-    const [ follow2, setFollow2 ] = useState(false);
-    const [ follow3, setFollow3 ] = useState(false);
+    const [ follow1, setFollow1 ] = useState(formData.screenshot1 ? true : false);
+    const [ follow2, setFollow2 ] = useState(formData.screenshot2 ? true : false);
+    const [ follow3, setFollow3 ] = useState(formData.screenshot3 ? true : false);
+
+    const [ screenshot1, setScreenshot1 ] = useState(formData.screenshot1?.name ?? "");
+    const [ screenshot2, setScreenshot2 ] = useState(formData.screenshot2?.name ?? "");
+    const [ screenshot3, setScreenshot3 ] = useState(formData.screenshot3?.name ?? "");
 
     const handleSubmit = () => {
-        onNext();
+        if (screenshot1 && screenshot2 && screenshot3
+            && follow1 && follow2 && follow3
+        ) {
+            onNext();
+        }
     }
 
     const handleChange = (e) => {
@@ -627,7 +737,14 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
           ...prevState,
           [name]: files ? files[0] : value,
         }));
-      };
+        if (name === "screenshot1") {
+            setScreenshot1(files[0].name);
+        } else if (name === "screenshot2") {
+            setScreenshot2(files[0].name);
+        } else if (name === "screenshot3") {
+            setScreenshot3(files[0].name);
+        }
+    };
 
     return (
         <div>
@@ -662,6 +779,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                 >
                                     Submit screenshot
                                 </label>
+                                <label className='text-white ml-2'>{screenshot1}</label>
                             </div>
                         </div>
                         <div className='mb-4'>
@@ -689,6 +807,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                 >
                                     Submit screenshot
                                 </label>
+                                <label className='text-white ml-2'>{screenshot2}</label>
                             </div>
                         </div>
                         <div className=''>
@@ -718,6 +837,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                 >
                                     Submit screenshot
                                 </label>
+                                <label className='text-white ml-2'>{screenshot3}</label>
                             </div>
                         </div>
                         <div className='mt-6 flex justify-center items-center'>
@@ -774,7 +894,7 @@ const Summary = ({ formData, onPrevious }) => {
                     <div className='flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25'>
                         <p className='text-xl font-bold mb-2'>BMC Registration Form</p>
                         <p className='text-sm font-semibold mb-2'>Please make sure all data is correct before submitting</p>
-                        <div className='max-w-md w-full p-4 rounded-lg shadow-lg'>
+                        <div className='max-w-lg w-full p-4 rounded-lg shadow-lg'>
                             <p><strong>Session:</strong> {formData.sessionType}</p>
                             <p><strong>Full Name:</strong> {formData.fullName}</p>
                             <p><strong>Gender:</strong> {formData.gender}</p>
@@ -783,8 +903,15 @@ const Summary = ({ formData, onPrevious }) => {
                             <p><strong>Batch:</strong> {formData.batch}</p>
                             <p><strong>Phone:</strong> {formData.phoneNumber}</p>
                             <p><strong>Email:</strong> {formData.email}</p>
+                            <div className="border-t border-gray-300 my-4"></div>
                             <strong>How did you know this event?</strong>
-                            <p>{formData.eventSource}</p>
+                            <p>
+                            {
+                            formData.eventSource === "Other" 
+                            ? `${formData.eventSource}${formData.eventSourceOther !== "" ? `: ${formData.eventSourceOther}` : ""}`
+                            : `SxC InterSummit ${formData.eventSource}`
+                            }
+                            </p>
                             {
                                 formData.experience ? <>
                                 <strong>What was your experience when participating in a business competition before?</strong>
@@ -796,6 +923,11 @@ const Summary = ({ formData, onPrevious }) => {
                             <p>{formData.expectations}</p>
                             <strong>What kind of competition materials do you need?</strong>
                             <p>{formData.materials}</p>
+                            <div className="border-t border-gray-300 my-4"></div>
+                            <p><strong>Agreement Paper: </strong> {formData.agreement.name}</p>
+                            <p><strong>Proof of following @SxCIntersummit Instagram:</strong> {formData.screenshot1.name}</p>
+                            <p><strong>Proof of reposting BMC poster:</strong> {formData.screenshot2.name}</p>
+                            <p><strong>Proof of like & comment on BMC poster:</strong> {formData.screenshot3.name}</p>
                         </div>
                         <div className='flex mt-6'>
                         <button
@@ -881,7 +1013,7 @@ const EventCard = () => {
         case 10:
             return <Summary formData={formData} onPrevious={handlePrevious}/>
         default:
-            return <FirstView {...eventData} onNext={handleNext} />;
+            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }
 };
 

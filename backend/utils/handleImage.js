@@ -83,7 +83,7 @@ exports.getImageURLsList = async (files, folderId) => {
   for (let i = 0; i < fileArray.length; i++) {
     const file = fileArray[i];
 
-    console.log("uploading image ", file.originalname);
+    console.log("uploading image ");
     const imgFileId = await uploadImage(file, folderId);
     console.log("upload complete");
 
