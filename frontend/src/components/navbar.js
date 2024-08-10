@@ -132,7 +132,10 @@ export default function NavbarUser({ currentPath }) {
               My profile
             </Link>
             <button 
-              onClick={removeUser}
+              onClick={() => {
+                removeUser();
+                navigate(LANDING_PAGE);
+              }}
               className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer"
             >
               Logout

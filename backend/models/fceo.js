@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 
 const FCEO = sequelize.define(
-  "FCEOTeam",
+  "FCEO",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -33,6 +33,13 @@ const FCEO = sequelize.define(
     screenshotFCEO: {
       type: DataTypes.JSON,
       allowNull: false,
+    },
+    referralCode: {
+      type: DataTypes.STRING,
+      references : {
+        model: "referralcodes",
+        key: "code"
+      }
     }
   },
   {
