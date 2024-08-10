@@ -39,7 +39,7 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
-    const { teamName } = body;
+    const { teamName, referralCode } = body;
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
