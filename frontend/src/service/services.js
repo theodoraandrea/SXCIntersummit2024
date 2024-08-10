@@ -5,6 +5,7 @@ import {
   API_GET_USER_REGISTERED_EVENTS,
   API_GET_USER_REGISTERED_COMPETITIONS,
   API_GET_ALL_COMPETITIONS,
+  API_POST_CHECK_REF_CODE,
   API_LOGIN,
   API_SIGNUP,
   // FCEO
@@ -212,10 +213,23 @@ const postCheckTeamCode = async (data) => {
     });
     return response.data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
+
+const postCheckReferralCode = async (data) => {
+  try {
+    console.log("in postCheckReferralCode");
+    console.log("data ", data);
+    const response = await axiosInstance.post(API_POST_CHECK_REF_CODE, {
+      referralCode: data
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
 export {
   login,
@@ -231,6 +245,7 @@ export {
   postNewFceoTeam,
   getFceoRegistrationData,
   postCheckTeamCode,
+  postCheckReferralCode,
   postBMCRegistration,
   getBmcRegistrationData
 };

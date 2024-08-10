@@ -118,8 +118,19 @@ exports.registerBMC = async (req, res) => {
     }
 
     // List of Questions and Answers
+    let eventSource;
+    if (body.eventSource === "Other") {
+      if (body.eventSourceOther) {
+        eventSource = `Other: ${body.eventSourceOther}`;
+      } else {
+        eventSource = "Other";
+      }
+    } else {
+      eventSource = `SxC InterSummit ${body.eventSource}`;
+    }
     const qnaList = [
-      { "How did you know this event?": body.eventSource },
+      { "How did you know this event?": eventSource
+      },
       {
         "Have you ever participated in a business competition before?":
           body.experience ? 'Yes' : 'No',
