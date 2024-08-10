@@ -477,7 +477,7 @@ const FourthView = ({
                     </form>
                     */}
           <div className="grid grid-cols-2 gap-4 text-left">
-            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource1"
                 name="eventSourceRadio"
@@ -493,7 +493,7 @@ const FourthView = ({
                 SxC InterSummit Instagram
               </label>
             </div>
-            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource2"
                 name="eventSourceRadio"
@@ -509,7 +509,7 @@ const FourthView = ({
                 SxC InterSummit LinkedIn
               </label>
             </div>
-            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource3"
                 name="eventSourceRadio"
@@ -525,7 +525,7 @@ const FourthView = ({
                 SxC InterSummit Tiktok
               </label>
             </div>
-            <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 items-center rounded bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource4"
                 name="eventSourceRadio"
@@ -1026,10 +1026,15 @@ const Summary = ({ formData, onPrevious }) => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen p-4 text-white">
-        <div className="flex items-center justify-center">
+      <div className="bg-gradient-primary w-full p-4 text-white">
+        <div className="flex min-h-screen items-center justify-center">
           {isLoading ? (
-            <Spinner customStyles={{ margin: "2rem 0" }} />
+            <div className="">
+              <Spinner
+                text="Uploading files... Please don't leave the page"
+                longText="This might take a while..."
+              />
+            </div>
           ) : (
             <div className="flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25">
               <p className="text-xl font-bold mb-2">BMC Registration Form</p>
@@ -1129,126 +1134,6 @@ const Summary = ({ formData, onPrevious }) => {
     </div>
   );
 };
-const handleSubmit = async () => {
-  try {
-    setIsLoading(true);
-    console.log(formData);
-    const response = await postBMCRegistration(formData);
-    setIsLoading(false);
-    if (response.status === 200) {
-      {
-        /*INSERT SUCCESS INDICATOR*/
-      }
-      navigate(USER_DASHBOARD_PAGE);
-    }
-    console.log(response);
-  } catch (error) {
-    {
-      /*INSERT ERROR INDICATOR*/
-    }
-    console.log(error);
-  }
-};
-
-return (
-  <div>
-    <Navbar />
-    <div className="bg-gradient-primary p-4 text-white">
-      <div className="flex items-center justify-center w-full h-screen">
-        {isLoading ? (
-          <Spinner
-            text="Uploading files... Please don't leave the page"
-            longText="This might take a while..."
-          />
-        ) : (
-          <div className="flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25">
-            <p className="text-xl font-bold mb-2">BMC Registration Form</p>
-            <p className="text-sm font-semibold mb-2">
-              Please make sure all data is correct before submitting
-            </p>
-            <div className="max-w-md w-full p-4 rounded-lg shadow-lg">
-              <p>
-                <strong>Session:</strong> {formData.sessionType}
-              </p>
-              <p>
-                <strong>Full Name:</strong> {formData.fullName}
-              </p>
-              <p>
-                <strong>Gender:</strong> {formData.gender}
-              </p>
-              <p>
-                <strong>University:</strong> {formData.university}
-              </p>
-              <p>
-                <strong>Major:</strong> {formData.major}
-              </p>
-              <p>
-                <strong>Batch:</strong> {formData.batch}
-              </p>
-              <p>
-                <strong>Phone:</strong> {formData.phoneNumber}
-              </p>
-              <p>
-                <strong>Email:</strong> {formData.email}
-              </p>
-              <strong>How did you know this event?</strong>
-              <p>{formData.eventSource}</p>
-              {formData.experience ? (
-                <>
-                  <strong>
-                    What was your experience when participating in a business
-                    competition before?
-                  </strong>
-                  <p>{formData.experience}</p>
-                </>
-              ) : (
-                ""
-              )}
-              <strong>
-                What are your expectations for this Business Master Class?
-              </strong>
-              <p>{formData.expectations}</p>
-              <strong>What kind of competition materials do you need?</strong>
-              <p>{formData.materials}</p>
-              <p>
-                <strong>Agreement Paper: </strong> {formData.agreement.name}
-              </p>
-              <p>
-                <strong>Proof of following @SxCIntersummit instagram:</strong>{" "}
-                {formData.screenshot1.name}
-              </p>
-              <p>
-                <strong>Proof of reposting BMC poster:</strong>{" "}
-                {formData.screenshot2.name}
-              </p>
-              <p>
-                <strong>Proof of like & comment on BMC poster:</strong>{" "}
-                {formData.screenshot3.name}
-              </p>
-            </div>
-            <div className="flex mt-6">
-              <button
-                type="button"
-                onClick={onPrevious}
-                className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
-              >
-                Back
-              </button>
-              <button
-                type="button"
-                className="bg-primary-3 text-white px-6 py-2 rounded-full"
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  </div>
-);
-
 const EventCard = () => {
   const [currentView, setCurrentView] = useState(1);
 
