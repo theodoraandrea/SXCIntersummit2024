@@ -112,7 +112,7 @@ exports.forgotPassword = async (req, res) => {
     const otpHtml = mailGenerator.generate(otpEmail);
 
     let mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"StudentsxCEOs International Summit 2024" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "OTP Reset Password",
       text: `Hi, ${user.fullname}.\nYou've requested to reset your password. No worries, you can enter the OTP provided : ${otpCode}\n\nRegards, StudentsxCEOs International Summit 2024`,

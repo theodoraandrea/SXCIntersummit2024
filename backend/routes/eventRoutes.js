@@ -1,30 +1,11 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
+const { body } = require("express-validator");
 
 const router = express.Router();
 const eventControllers = require("../controllers/eventControllers");
 const isAuthenticated = require("../middlewares/isAuthenticated");
-
-// function checkFileType(file, cb) {
-//   const filetypes = /jpeg|jpg|png/;
-//   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-//   const mimetype = filetypes.test(file.mimetype);
-
-//   if (mimetype && extname) {
-//     return cb(null, true);
-//   } else {
-//     cb(new Error("Error: Images only! (jpeg, jpg, png)"));
-//   }
-// }
-
-// const upload = multer({
-//   fileFilter: function (req, file, cb) {
-//     checkFileType(file, cb);
-//   },
-// });
-
-const upload = multer();
+const upload = require("../middlewares/multer");
+const errorHandling = require("../middlewares/errorHandling");
 
 router.get("/", isAuthenticated, eventControllers.getRegisteredEventsByUser);
 router.get("/all", eventControllers.getAllEvents);
@@ -38,6 +19,16 @@ router.post(
     { name: "screenshot2", maxCount: 1 },
     { name: "screenshot3", maxCount: 1 },
   ]),
+  [
+    body("sessionType")
+      .notEmpty()
+      .withMessage("Session type is required")
+      .isIn(["Business Plan Competition", "Business Case Competition"])
+      .withMessage(
+        "Session type must be Business Plan Competition or Business Case Competition"
+      ),
+  ],
+  errorHandling,
   eventControllers.registerBMC
 );
 

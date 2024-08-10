@@ -5,6 +5,7 @@ import {
   API_GET_USER_REGISTERED_EVENTS,
   API_GET_USER_REGISTERED_COMPETITIONS,
   API_GET_ALL_COMPETITIONS,
+  API_POST_CHECK_REF_CODE,
   API_LOGIN,
   API_SIGNUP,
   // FCEO
@@ -29,7 +30,7 @@ const login = async (data) => {
     console.error("Error logging in: ", error);
     if (error.response) {
       throw new Error(
-        error.response.data.message || "Incorrrect email or password"
+        error.response.data.message[0].msg || "Incorrrect email or password"
       );
     } else {
       throw new Error("Network error");
@@ -50,7 +51,7 @@ const register = async (data) => {
   } catch (error) {
     console.error("Error signing up: ", error);
     if (error.response) {
-      throw new Error(error.response.data.message);
+      throw new Error(error.response.data.message[0].msg);
     } else {
       throw new Error("Network error");
     }
@@ -100,6 +101,20 @@ const fetchRegisteredEvents = async () => {
     throw error;
   }
 };
+
+// Get two events for homepage
+const fetchTwoEvents = async () => {
+  try {
+    const response = await axiosInstance.get(API_GET_ALL_EVENTS);
+    const allEvents = response.data;
+
+    const twoEvents = allEvents.slice(0,2);
+    return twoEvents
+  } catch(error) {
+    console.error("Error fetching events:", error);
+    throw error;
+  }
+}
 
 // Get competitions registered by user
 const fetchRegisteredCompetitions = async () => {
@@ -198,10 +213,23 @@ const postCheckTeamCode = async (data) => {
     });
     return response.data;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };
+
+const postCheckReferralCode = async (data) => {
+  try {
+    console.log("in postCheckReferralCode");
+    console.log("data ", data);
+    const response = await axiosInstance.post(API_POST_CHECK_REF_CODE, {
+      referralCode: data
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
 
 export {
   login,
@@ -210,12 +238,14 @@ export {
   putProfileData,
   fetchRegisteredEvents,
   fetchAllEvents,
+  fetchTwoEvents,
   fetchAllCompetitions,
   fetchRegisteredCompetitions,
   postNewFceoMember,
   postNewFceoTeam,
   getFceoRegistrationData,
   postCheckTeamCode,
+  postCheckReferralCode,
   postBMCRegistration,
   getBmcRegistrationData
 };
