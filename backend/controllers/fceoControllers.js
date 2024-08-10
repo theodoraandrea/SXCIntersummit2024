@@ -41,17 +41,40 @@ exports.createNewTeam = async (req, res) => {
 
     const { teamName } = body;
     const userId = req.user.id;
-
+    const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
 
+    // Create and upload File/Image
+    const fileNames = [
+      `${teamName}_${user.fullname}_Proof of Follow`,
+      `${teamName}_${user.fullname}_Proof of Twibbon`,
+      `${teamName}_${user.fullname}_Proof of Instastory`,
+      `${teamName}_${user.fullname}_Proof of Student Card`,
+    ];
     const rootFolderId = process.env.FOLDER_FUTURECEO_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
 
     const proofPayment = await getImageURLsList(files.proofPayment, folderId);
-    const proofFollow = await getImageURLsList(files.proofFollow, folderId);
-    const proofTwibbon = await getImageURLsList(files.proofTwibbon, folderId);
-    const proofStory = await getImageURLsList(files.proofStory, folderId);
-    const studentIds = await getImageURLsList(files.studentIds, folderId);
+    const proofFollow = await getImageURLsList(
+      files.proofFollow,
+      folderId,
+      fileNames[0]
+    );
+    const proofTwibbon = await getImageURLsList(
+      files.proofTwibbon,
+      folderId,
+      fileNames[1]
+    );
+    const proofStory = await getImageURLsList(
+      files.proofStory,
+      folderId,
+      fileNames[2]
+    );
+    const studentIds = await getImageURLsList(
+      files.studentIds,
+      folderId,
+      fileNames[3]
+    );
 
     const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
 

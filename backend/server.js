@@ -30,8 +30,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// user
-//   .sync({ alter: true })
+// db.sync({ alter: true })
 //   .then(() => {
 //     console.log("Update Database");
 //   })
