@@ -12,8 +12,10 @@ import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { fetchTwoEvents } from "../service/services";
 
 export default function Home() {
+  const [eventCards, setEventCards] = useState([]);
   const [showArrows, setShowArrows] = useState(false);
   const location = useLocation();
   const partnershipRef = useRef(null);
@@ -36,20 +38,19 @@ export default function Home() {
     Circle,
   ];
 
-  const eventCards = [
-    {
-      title: "Event Title 1",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.",
-      image: Dummy,
-    },
-    {
-      title: "Event Title 2",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.",
-      image: Dummy,
-    },
-  ];
+  useEffect(() => {
+    const getEventCards = async () => {
+      try {
+        const data = await fetchTwoEvents();
+        console.log(data)
+        setEventCards(data);
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      }
+    };
+
+    getEventCards();
+  }, []);
 
   const handleScrollToEvent = () => {
     const element = document.getElementById("event-section");
@@ -119,8 +120,8 @@ export default function Home() {
               <div key={index} className="px-2">
                 <div className="bg-gradient-primary p-4 rounded-xl">
                   <img className="bg-white w-full" src={card.image} alt="Event" />
-                  <h1 className="text-xl font-bold mt-4 text-white">{card.title}</h1>
-                  <p className="mt-2 text-white">{card.description}</p>
+                  <h1 className="text-xl font-bold mt-4 text-white">{card.eventName}</h1>
+                  <p className="mt-2 text-white">{card.shortDesc}</p>
                   <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md">
                     Read More
                   </button>
