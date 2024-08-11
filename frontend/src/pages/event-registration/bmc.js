@@ -539,14 +539,14 @@ const FourthView = ({
           <div className="mt-6 flex justify-center items-center">
             <button
               type="button"
-              onClick={onPrevious}
+              onClick={handleBack}
               className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
             >
               Back
             </button>
             <button
               type="button"
-              onClick={handleSubmit}
+              onClick={handleNext}
               className="bg-primary-3 text-white px-6 py-2 rounded-full"
             >
               Next
@@ -664,14 +664,14 @@ const SixthView = ({
           <div className="mt-6 flex justify-center items-center">
             <button
               type="button"
-              onClick={onPrevious}
+              onClick={handleBack}
               className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
             >
               Back
             </button>
             <button
               type="button"
-              onClick={handleSubmit}
+              onClick={handleNext}
               className="bg-primary-3 text-white px-6 py-2 rounded-full"
             >
               Next

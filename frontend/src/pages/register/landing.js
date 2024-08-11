@@ -115,7 +115,8 @@ export default function Landing() {
     if (validateEmail(email.trim())) {
       try {
         const response = await postForgotPassword(email);
-        if (response.status === 200) {
+        console.log(response);
+        if (response.status === 201) {
           setOtpMode(true);
           setForgotPasswordMode(false);
         }
