@@ -8,6 +8,7 @@ import { USER_DASHBOARD_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
 
 const FirstView = ({
+  eventData,
   formData,
   setFormData,
   onPrevious,
@@ -42,9 +43,10 @@ const FirstView = ({
     formData.proofPayment?.name ?? ""
   );
   
-  //REFERRAL DATA
-  const [ referralCode, setReferralCode ] = useState("");
-  const [ discountedPrice, setDiscountedPrice ] = useState("");
+  //REFERRAL & PAYMENT DATA
+  const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+  const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+  const [ refCodeValid, setRefCodeValid ] = useState(false);
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -60,7 +62,6 @@ const FirstView = ({
           phoneNumber: phoneNumber,
           school: sanitizeInput(school),
           teamName: sanitizeInput(teamName),
-          referralCode: referralCode
         };
         setFormData(formData);
         console.log(formData);
@@ -68,6 +69,14 @@ const FirstView = ({
       }
     }
   };
+
+  //saving referral code
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      referralCode: verifiedRefCode
+    });
+  }, [verifiedRefCode]);
 
   const checkAllFilled = () => {
     if (
@@ -367,10 +376,41 @@ const FirstView = ({
           </div>
         </div>
         <div className="bg-dark-2 p-4 pt-0 rounded-lg shadow-lg text-center">
-          <ReferralModal setDiscountedPrice={setDiscountedPrice} setReferralCode={setReferralCode}/>
-          <div className="bg-dark-2 p-4 mt-2 rounded-lg shadow-lg text-white text-center">
-            <p>insert payment info here</p>
-          </div>
+        <div className='mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+                    <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+                        <p className='text-white mx-4 mb-2 text-center'>
+                            Please transfer the following amount to complete your registration
+                        </p>
+                        <div className='text-white text-left w-40'>
+                            <div className='flex flex-row justify-between'>
+                                <p><strong>Price: </strong></p>
+                                <p>{regularPrice}</p>
+                            </div>
+                        {
+                            verifiedRefCode && refCodeValid && (
+                                <>
+                                <div className='flex flex-row justify-between'>
+                                <p><strong>Discount:</strong></p>
+                                <p>{discount}</p>
+                                </div>
+                                <div className='flex flex-row justify-between'>
+                                <p><strong>Total:</strong></p>
+                                <p><strong>{discountedPrice}</strong></p>
+                                </div>
+                                </>
+                            )
+                        }
+                        </div>
+                        <p className='text-white mx-4 text-center'>
+                            <strong>Bank Account Number: </strong>{bankAccount}
+                        </p>
+                </div>
+          <ReferralModal 
+          eventName="fceo"
+          referralCode={formData.referral ?? ''} 
+          setVerifiedRefCode={setVerifiedRefCode}
+          setRefCodeValid={setRefCodeValid}
+          />
         </div>
       </div>
     </div>
@@ -1001,6 +1041,13 @@ const EventCard = () => {
   const [member1Data, setMember1Data] = useState({});
   const [member2Data, setMember2Data] = useState({});
 
+  const eventData = {
+    bankAccout: "BCA - ",
+    discount: 5000,
+    regularPrice: 50000,
+    discountedPrice: 45000
+  }
+
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
   };
@@ -1017,6 +1064,7 @@ const EventCard = () => {
     case 1:
       return (
         <FirstView
+          eventData={eventData}
           formData={formData}
           setFormData={setFormData}
           onNext={handleNext}

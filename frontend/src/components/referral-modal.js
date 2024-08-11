@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import { postCheckReferralCode } from "../service/services";
 
 
-const ReferralModal = ({ setReferralCode, setDiscountedPrice }) => {
-    const [ code, setCode ] = useState("");
-    const [ discount, setDiscount ] = useState("");
+const ReferralModal = ({ eventName, referralCode, setVerifiedRefCode, setRefCodeValid }) => {
+    const [ code, setCode ] = useState(referralCode ?? "");
     const [ referralDetails, setReferralDetails ] = useState({});
-
-    const [ price, setPrice ] = useState(15000);
 
     const [ error, setError ] = useState(false);
     const [ errorMsg, setErrorMsg ] = useState(null);
@@ -15,16 +12,19 @@ const ReferralModal = ({ setReferralCode, setDiscountedPrice }) => {
 
     useEffect(() => {
         if (referralDetails?.code) {
-            setDiscount(referralDetails.discountPercentage);
-            setPrice((price) => price - referralDetails.discountPercentage);
-            setReferralCode(referralDetails.code);
-            setDiscountedPrice(price);
+            setVerifiedRefCode(referralDetails.code);
+            setRefCodeValid(true);
+        } else {
+            setRefCodeValid(false);
         }
     }, [referralDetails]);
 
     const handleSubmit = async () => {
         try {
-            const res = await postCheckReferralCode(code);
+            const res = await postCheckReferralCode({
+                code: code,
+                eventName: eventName
+            });
             setReferralDetails(res);
         } catch (error) {
             setError(true);
@@ -52,7 +52,7 @@ const ReferralModal = ({ setReferralCode, setDiscountedPrice }) => {
           onClick={handleSubmit}
           className="ml-3 bg-primary-3 text-white px-6 py-2 rounded-full"
           >
-            Check
+            Use code
           </button>
           </div>
           {error && <p className="text-red-500 mt-2">{errorMsg}</p>}
@@ -60,7 +60,7 @@ const ReferralModal = ({ setReferralCode, setDiscountedPrice }) => {
             submitTouched && 
             <div className="text-white mt-4">
             { referralDetails?.code ? 
-            <p>Referral code valid!</p> : 
+            <p>Discount applied!</p> : 
             <p>Referral code invalid</p>
             }
           </div>

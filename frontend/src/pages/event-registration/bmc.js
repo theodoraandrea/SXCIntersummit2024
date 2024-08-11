@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../../contexts/user-context'
 import Navbar from "../../components/navbar";
-import { useNavigate } from 'react-router-dom';
-import { LANDING_PAGE, USER_DASHBOARD_PAGE } from '../../constants/routes';
+import { useNavigate, Link } from 'react-router-dom';
+import { LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
 import { postBMCRegistration } from '../../service/services';
 import Spinner from '../../components/elements/spinner';
+import ReferralModal from '../../components/referral-modal';
 
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     const navigate = useNavigate();
@@ -71,9 +72,11 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     );
 };
 
-const SecondView = ({ title, description, formData, setFormData, onNext, onPrevious }) => {
+const SecondView = ({ eventData, formData, setFormData, onNext, onPrevious }) => {
     
     const [ agreement, setAgreement ] = useState(formData.agreement?.name ?? '');
+
+    const { title, description, price, bankAccount } = eventData;
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -107,11 +110,14 @@ const SecondView = ({ title, description, formData, setFormData, onNext, onPrevi
             <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
                 <h1 className='text-3xl font-bold text-white mb-4'>{title}</h1>
                 <p className='text-lg text-white mb-6'>{description}</p>
+                <div>
+                    
+                </div>
                 <button className='border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4'
                 onClick={handleDownload}>
                     Download Agreement Paper
                 </button>
-                <p className='text-lg text-white mb-6'>{description}</p>
+                <p className='text-lg text-white mb-6'>Please submit your agreement below</p>
                 <div className='relative inline-block mb-5'>
                 <input 
                     type='file'
@@ -246,7 +252,11 @@ const ThirdView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
             <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
                 <div className='bg-dark-2 p-8 rounded-lg shadow-lg max-w-3xl'>
                     <h1 className='text-3xl font-bold text-white text-center mb-2'>Personal Information</h1>
-                    <p className='text-white text-center font-bold mb-6'>You can edit your personal information from My Account</p>
+                    <p className='text-white text-center font-bold mb-6'>You can edit your personal information
+                        <Link to={USER_DETAILS_PAGE}
+                        className='text-yellow-500'
+                        > here</Link>
+                    </p>
                     <div className='my-2 px-4'>
                             <label className='block text-white mb-2' htmlFor='fullName'>Full Name</label>
                             <input
@@ -383,15 +393,25 @@ const FourthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
         return false;
     }
 
-    const handleSubmit = () => {
+    const saveData = () => {
+        setFormData({
+            ...formData,
+            eventSource: eventSource,
+            eventSourceOther: sanitizeInput(eventSourceOther)
+        });
+    }
+
+    const handleNext = () => {
         if (checkAllFilled()) {
-            setFormData({
-                ...formData,
-                eventSource: eventSource,
-                eventSourceOther: sanitizeInput(eventSourceOther)
-            });
+            saveData();
             onNext();
         }
+
+    }
+
+    const handleBack = () => {
+        saveData();
+        onPrevious();
     }
 
     return (
@@ -464,14 +484,14 @@ const FourthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
                     <div className='mt-6 flex justify-center items-center'>
                     <button
                             type='button'
-                            onClick={onPrevious}
+                            onClick={handleBack}
                             className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
                         >
                             Back
                     </button>
                     <button
                             type='button'
-                            onClick={handleSubmit}
+                            onClick={handleNext}
                             className='bg-primary-3 text-white px-6 py-2 rounded-full'
                         >
                             Next
@@ -487,25 +507,29 @@ const FifthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
     <div>
         <Navbar />
         <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
-                <h1 className='text-3xl font-bold text-white mb-4'>Have you ever participated in a business competition before?</h1>
-                <div className='grid grid-cols-2 gap-4'>
+            <div className='bg-dark-2 p-8 max-w-xl rounded-lg shadow-lg text-center'>
+                <h1 className='text-3xl m-4 font-bold text-white mb-4'>Have you ever participated in a business competition before?</h1>
+                <div className='flex justify-center'>
                     {/* I have - goes to seventh view */}
-                    <button 
-                        className='bg-primary-3 text-white px-6 py-2 rounded-full' 
-                        onClick={onNextHave} 
-                        aria-label='I have'
-                    >
+                    <div className='w-40'>
+                        <button 
+                            className='bg-primary-3 w-full text-white px-6 py-2 rounded-full' 
+                            onClick={onNextHave} 
+                            aria-label='I have'
+                        >
                         I have
-                    </button>
+                        </button>
+                    </div>
                     {/* I have not - goes to eighth view */}
-                    <button 
-                        className='bg-primary-3 text-white px-6 py-2 rounded-full' 
-                        onClick={onNextHaveNot} 
-                        aria-label='I have not'
-                    >
-                        I have not
-                    </button>
+                    <div className='w-40 ml-6'>
+                        <button 
+                            className='bg-primary-3 w-full text-white px-6 py-2 rounded-full' 
+                            onClick={onNextHaveNot} 
+                            aria-label='I have not'
+                        >
+                            I have not
+                        </button>
+                    </div>
                 </div>
                 <button
                     type='button'
@@ -530,14 +554,23 @@ const SixthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
         return false;
     }
 
-    const handleSubmit = () => {
+    const handleNext = () => {
         if (checkAllFilled()) {
-            setFormData({
-                ...formData,
-                experience: sanitizeInput(experience)
-            });
+            saveData();
             onNext();
         }
+    }
+
+    const handleBack = () => {
+        saveData();
+        onPrevious();
+    }
+
+    const saveData = () => {
+        setFormData({
+            ...formData,
+            experience: sanitizeInput(experience)
+        });
     }
 
     return (
@@ -565,14 +598,14 @@ const SixthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext })
                     <div className='mt-6 flex justify-center items-center'>
                     <button
                             type='button'
-                            onClick={onPrevious}
+                            onClick={handleBack}
                             className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
                         >
                             Back
                     </button>
                     <button
                             type='button'
-                            onClick={handleSubmit}
+                            onClick={handleNext}
                             className='bg-primary-3 text-white px-6 py-2 rounded-full'
                         >
                             Next
@@ -595,14 +628,23 @@ const SeventhView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext 
         return false;
     }
     
-    const handleSubmit = () => {
+    const handleNext = () => {
         if (checkAllFilled()) {
-            setFormData({
-                ...formData,
-                expectations: sanitizeInput(expectations)
-            });
+            saveData();
             onNext();
         }
+    }
+
+    const handleBack = () => {
+        saveData();
+        onPrevious();
+    }
+
+    const saveData = () => {
+        setFormData({
+            ...formData,
+            expectations: sanitizeInput(expectations)
+        });
     }
 
     return (
@@ -630,14 +672,14 @@ const SeventhView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext 
                     <div className='mt-6 flex justify-center items-center'>
                     <button
                             type='button'
-                            onClick={onPrevious}
+                            onClick={handleBack}
                             className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
                         >
                             Back
                     </button>
                     <button
                             type='button'
-                            onClick={handleSubmit}
+                            onClick={handleNext}
                             className='bg-primary-3 text-white px-6 py-2 rounded-full'
                         >
                             Next
@@ -660,14 +702,23 @@ const EighthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
         return false;
     }
 
-    const handleSubmit = () => {
+    const handleNext = () => {
         if (checkAllFilled()) {
-            setFormData({
-                ...formData,
-                materials: sanitizeInput(materials)
-            });
+            saveData();
             onNext();
         }
+    }
+
+    const handleBack = () => {
+        saveData();
+        onPrevious();
+    }
+
+    const saveData = () => {
+        setFormData({
+            ...formData,
+            materials: sanitizeInput(materials)
+        });
     }
 
     return (
@@ -695,14 +746,14 @@ const EighthView = ({ formData, setFormData, sanitizeInput, onPrevious, onNext }
                     <div className='mt-6 flex justify-center items-center'>
                     <button
                             type='button'
-                            onClick={onPrevious}
+                            onClick={handleBack}
                             className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
                         >
                             Back
                     </button>
                     <button
                             type='button'
-                            onClick={handleSubmit}
+                            onClick={handleNext}
                             className='bg-primary-3 text-white px-6 py-2 rounded-full'
                         >
                             Next
@@ -841,20 +892,20 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                             </div>
                         </div>
                         <div className='mt-6 flex justify-center items-center'>
-                        <button
-                            type='button'
-                            onClick={onPrevious}
-                            className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
-                        >
-                        Back
-                        </button>
-                        <button
-                            type='button'
-                            onClick={handleSubmit}
-                            className='bg-primary-3 text-white px-6 py-2 rounded-full'
-                        >
-                        Next
-                        </button>
+                            <button
+                                type='button'
+                                onClick={onPrevious}
+                                className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                            >
+                            Back
+                            </button>
+                            <button
+                                type='button'
+                                onClick={handleSubmit}
+                                className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                            >
+                            Next
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -862,6 +913,129 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
         </div>
     );
 };
+
+const PaymentView = ({ eventData, formData, setFormData, onPrevious, onNext }) => {
+    const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
+    const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+
+    const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+    const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+    const [ refCodeValid, setRefCodeValid ] = useState(false);
+
+    //handling file change
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        setFormData((prevState) => ({
+          ...prevState,
+          [name]: files ? files[0] : value,
+        }));
+        setProofPayment(files[0]?.name);
+    };
+
+    //saving referral code
+    useEffect(() => {
+        setFormData({
+            ...formData,
+            referralCode: verifiedRefCode
+        });
+    }, [verifiedRefCode]);
+
+    //checking payment proof
+    const handleNext = () => {
+        if (checkPayment && proofPayment) {
+            onNext();
+        }
+    }
+
+    return (
+        <div>
+        <Navbar />
+        <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-dark-2  flex flex-col text-center max-w-3xl'>
+                <div className='mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+                    <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+                        <p className='text-white mx-4 mb-2 text-center'>
+                            Please transfer the following amount to complete your registration
+                        </p>
+                        <div className='text-white text-left w-40'>
+                            <div className='flex flex-row justify-between'>
+                                <p><strong>Price: </strong></p>
+                                <p>{regularPrice}</p>
+                            </div>
+                        {
+                            verifiedRefCode && refCodeValid && (
+                                <>
+                                <div className='flex flex-row justify-between'>
+                                <p><strong>Discount:</strong></p>
+                                <p>{discount}</p>
+                                </div>
+                                <div className='flex flex-row justify-between'>
+                                <p><strong>Total:</strong></p>
+                                <p><strong>{discountedPrice}</strong></p>
+                                </div>
+                                </>
+                            )
+                        }
+                        </div>
+                        <p className='text-white mx-4 text-center'>
+                            <strong>Bank Account Number: </strong>{bankAccount}
+                        </p>
+                    <div className='mt-4'>
+                        <label className='block text-white mb-2'>
+                            <input
+                                type='checkbox'
+                                name='checkPayment'
+                                checked={checkPayment}
+                                onChange={(e) => setCheckPayment(e.target.checked)}
+                                className='mr-2'
+                            />
+                            I have paid the registration fee
+                        </label>
+                        <div className='my-4 relative'>
+                            <input
+                                type='file'
+                                id='proofPayment'
+                                name='proofPayment'
+                                onChange={handleChange}
+                                className='absolute inset-0 opacity-0 cursor-pointer'
+                            />
+                            <label
+                                htmlFor='proofPayment'
+                                className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                            >
+                                Submit screenshot
+                            </label>
+                            <p className='text-white mt-4'>{proofPayment}</p>
+                        </div>
+                    </div>
+                </div>
+                <ReferralModal 
+                eventName="bmc"
+                referralCode={formData.referralCode ?? ''}
+                setVerifiedRefCode={setVerifiedRefCode} 
+                setRefCodeValid={setRefCodeValid}
+                />
+                <div className='mt-6 flex justify-center items-center'>
+                    <button
+                        type='button'
+                        onClick={onPrevious}
+                        className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                    >
+                    Back
+                    </button>
+                    <button
+                        type='button'
+                        onClick={handleNext}
+                        className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                    >
+                    Next
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
+    )
+}
 
 const Summary = ({ formData, onPrevious }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -928,6 +1102,14 @@ const Summary = ({ formData, onPrevious }) => {
                             <p><strong>Proof of following @SxCIntersummit Instagram:</strong> {formData.screenshot1.name}</p>
                             <p><strong>Proof of reposting BMC poster:</strong> {formData.screenshot2.name}</p>
                             <p><strong>Proof of like & comment on BMC poster:</strong> {formData.screenshot3.name}</p>
+                            <p><strong>Proof of payment: </strong> {formData.proofPayment.name}</p>
+                            {
+                                formData.referralCode && 
+                                <>
+                                    <div className="border-t border-gray-300 my-4"></div>
+                                    <p><strong>Referral Code:</strong> {formData.referralCode}</p>
+                                </>
+                            }
                         </div>
                         <div className='flex mt-6'>
                         <button
@@ -957,7 +1139,11 @@ const EventCard = () => {
 
     const eventData = {
         title: "Business Master Class",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc."
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.",
+        regularPrice: 50000,
+        discountedPrice: 45000,
+        discount: 5000,
+        bankAccount: "BCA - [no rek]",
     };
 
     //All fields for BMC
@@ -995,7 +1181,7 @@ const EventCard = () => {
         case 1:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
         case 2:
-            return <SecondView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} onPrevious={handlePrevious}/>;
+            return <SecondView eventData={eventData} formData={formData} setFormData={setFormData} onNext={handleNext} onPrevious={handlePrevious}/>;
         case 3:
             return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} />;
         case 4:
@@ -1011,6 +1197,8 @@ const EventCard = () => {
         case 9:
             return <NinthView formData={formData} setFormData={setFormData} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 10:
+            return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} onPrevious={handlePrevious} onNext={handleNext}/>;
+        case 11:
             return <Summary formData={formData} onPrevious={handlePrevious}/>
         default:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;

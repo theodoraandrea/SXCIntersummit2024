@@ -222,7 +222,8 @@ const postCheckReferralCode = async (data) => {
     console.log("in postCheckReferralCode");
     console.log("data ", data);
     const response = await axiosInstance.post(API_POST_CHECK_REF_CODE, {
-      referralCode: data
+      referralCode: data.code,
+      eventName: data.eventName
     });
     return response.data;
   } catch (error) {
