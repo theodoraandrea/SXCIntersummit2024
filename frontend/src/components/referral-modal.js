@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { postCheckReferralCode } from "../service/services";
 
 
-const ReferralModal = ({ eventName, referralCode, setVerifiedRefCode, setRefCodeValid }) => {
+const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRefCode, setRefCodeValid }) => {
     const [ code, setCode ] = useState(referralCode ?? "");
     const [ referralDetails, setReferralDetails ] = useState({});
 
@@ -15,7 +15,9 @@ const ReferralModal = ({ eventName, referralCode, setVerifiedRefCode, setRefCode
             setVerifiedRefCode(referralDetails.code);
             setRefCodeValid(true);
         } else {
-            setRefCodeValid(false);
+            if(!verifiedRefCode) {
+                setRefCodeValid(false);
+            }
         }
     }, [referralDetails]);
 

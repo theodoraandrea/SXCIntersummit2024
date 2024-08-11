@@ -104,7 +104,7 @@ export default function NavbarUser({ currentPath }) {
             </div>
           )}
         </li>
-        <li>
+        <li hidden={true}>
           <button
             onClick={handleScrollToSponsorship}
             className="text-white hover:font-semibold hover:text-yellow-500"

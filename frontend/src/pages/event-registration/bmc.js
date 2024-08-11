@@ -9,19 +9,28 @@ import ReferralModal from '../../components/referral-modal';
 
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   const navigate = useNavigate();
-  const { loading, isLoggedIn } = useUser();
+  const { loading, isLoggedIn, registeredEvents } = useUser();
   const [sessionType, setSessionType] = useState(formData.sessionType ?? "");
+  const [ hasRegisteredBcc, setHasRegisteredBcc ] = useState(false);
+  const [ hasRegisteredBpc, setHasRegisteredBpc ] = useState(false);
 
   useEffect(() => {
     if (!loading) {
       if (isLoggedIn) {
-        console.log("Logged in");
       } else {
-        console.log("Cannot sign up because not logged in");
         navigate(LANDING_PAGE);
       }
     }
   }, [isLoggedIn, loading]);
+
+  useEffect(() => {
+    if (registeredEvents.includes(2)) {
+      setHasRegisteredBcc(true);
+    }
+    if (registeredEvents.includes(3)) {
+      setHasRegisteredBpc(true);
+    }
+  }, []);
 
   const checkAllFilled = () => {
     if (sessionType) {
@@ -64,10 +73,10 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
               <option value="" disabled>
                 Select Competition
               </option>
-              <option value="Business Case Competition">
+              <option value="Business Case Competition" disabled={hasRegisteredBcc}>
                 Business Case Competition
               </option>
-              <option value="Business Plan Competition">
+              <option value="Business Plan Competition" disabled={hasRegisteredBpc}>
                 Business Plan Competition
               </option>
             </select>
@@ -1011,7 +1020,7 @@ const PaymentView = ({ eventData, formData, setFormData, onPrevious, onNext }) =
 
     const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
     const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
-    const [ refCodeValid, setRefCodeValid ] = useState(false);
+    const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
     //handling file change
     const handleChange = (e) => {
@@ -1103,6 +1112,7 @@ const PaymentView = ({ eventData, formData, setFormData, onPrevious, onNext }) =
                 <ReferralModal 
                 eventName="bmc"
                 referralCode={formData.referralCode ?? ''}
+                verifiedRefCode={verifiedRefCode}
                 setVerifiedRefCode={setVerifiedRefCode} 
                 setRefCodeValid={setRefCodeValid}
                 />
@@ -1133,10 +1143,19 @@ const Summary = ({ formData, onPrevious }) => {
 
   const navigate = useNavigate();
 
+  const { setRegisteredEvents } = useUser();
+
+  let bmcId; //FOR REGISTER BUTTON PURPOSES
+
+  if (formData.sessionType === "Business Case Competition") {
+    bmcId = 2;
+  } else if (formData.sessionType === "Business Plan Competition") {
+    bmcId = 3;
+  }
+
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      console.log(formData);
       const response = await postBMCRegistration(formData);
       setIsLoading(false);
       if (response.status === 200) {
@@ -1144,6 +1163,7 @@ const Summary = ({ formData, onPrevious }) => {
           /*INSERT SUCCESS INDICATOR*/
         }
         navigate(USER_DASHBOARD_PAGE);
+        setRegisteredEvents((prevData) => [...prevData, bmcId]);
       }
       console.log(response);
     } catch (error) {
@@ -1279,6 +1299,7 @@ const EventCard = () => {
     const eventData = {
         title: "Business Master Class",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.",
+        bmcId: 1,
         regularPrice: 50000,
         discountedPrice: 45000,
         discount: 5000,
@@ -1338,7 +1359,7 @@ const EventCard = () => {
         case 10:
             return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 11:
-            return <Summary formData={formData} onPrevious={handlePrevious}/>
+            return <Summary eventData={eventData} formData={formData} onPrevious={handlePrevious}/>
         default:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }

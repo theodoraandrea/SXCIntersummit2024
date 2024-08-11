@@ -42,7 +42,6 @@ export default function Home() {
     const getEventCards = async () => {
       try {
         const data = await fetchTwoEvents();
-        console.log(data)
         setEventCards(data);
       } catch (error) {
         console.error("Failed to fetch events:", error);
@@ -160,7 +159,7 @@ export default function Home() {
       </section>
 
       {/* Partners Section */}
-      <section id="sponsorship" className="bg-primary-1 py-20">
+      <section id="sponsorship" className="bg-primary-1 py-20" hidden={true}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">

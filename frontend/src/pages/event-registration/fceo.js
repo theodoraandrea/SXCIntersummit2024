@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
 import Spinner from "../../components/elements/spinner";
 import ReferralModal from "../../components/referral-modal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
-import { USER_DASHBOARD_PAGE } from "../../constants/routes";
+import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
 
 const FirstView = ({
@@ -46,7 +46,7 @@ const FirstView = ({
   //REFERRAL & PAYMENT DATA
   const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
   const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
-  const [ refCodeValid, setRefCodeValid ] = useState(false);
+  const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -165,6 +165,11 @@ const FirstView = ({
           </h1>
           <form className="text-left">
             <h1 className="text-lg font-bold text-white">Leader Data</h1>
+            <p className='text-white font-bold mb-2'>You can edit your personal information
+                        <Link to={USER_DETAILS_PAGE}
+                        className='text-yellow-500'
+                        > here</Link>
+            </p>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
                 Full name
@@ -174,6 +179,7 @@ const FirstView = ({
                 id="fullName"
                 name="fullName"
                 value={fullName}
+                disabled={true}
                 onChange={(e) => setFullName(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               />
@@ -186,6 +192,7 @@ const FirstView = ({
                 id="gender"
                 name="gender"
                 value={gender}
+                disabled={true}
                 onChange={(e) => setGender(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               >
@@ -205,6 +212,7 @@ const FirstView = ({
                 id="email"
                 name="email"
                 value={email}
+                disabled={true}
                 onChange={handleEmailChange}
                 className="w-full px-3 py-2 rounded-lg"
               />
@@ -219,6 +227,7 @@ const FirstView = ({
                 id="phoneNumber"
                 name="phoneNumber"
                 value={phoneNumber}
+                disabled={true}
                 onChange={handlePhoneNumberChange}
                 onBlur={formatPhoneNumber}
                 className="w-full px-3 py-2 rounded-lg"
@@ -234,6 +243,7 @@ const FirstView = ({
                 id="school"
                 name="school"
                 value={school}
+                disabled={true}
                 onChange={(e) => setSchool(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               />
@@ -407,7 +417,8 @@ const FirstView = ({
                 </div>
           <ReferralModal 
           eventName="fceo"
-          referralCode={formData.referral ?? ''} 
+          referralCode={formData.referralCode ?? ''} 
+          verifiedRefCode={verifiedRefCode}
           setVerifiedRefCode={setVerifiedRefCode}
           setRefCodeValid={setRefCodeValid}
           />
@@ -820,9 +831,12 @@ const Member2Data = ({
   );
 };
 
-const Summary = ({ formData, members, setCurrentView }) => {
+const Summary = ({ eventData, formData, members, setCurrentView }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { setRegisteredCompetitions } = useUser();
+
+  const { fceoId } = eventData;
 
   const handleSubmit = async () => {
     try {
@@ -850,6 +864,7 @@ const Summary = ({ formData, members, setCurrentView }) => {
                     activeTab: "competitions"
                   }
                 });
+                setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
                 {/*INSERT SUCCESS ALERT*/}
               } catch (memberError) {
                 console.log("Error posting member: ", memberError);
@@ -1042,6 +1057,7 @@ const EventCard = () => {
   const [member2Data, setMember2Data] = useState({});
 
   const eventData = {
+    fceoId: 1,
     bankAccout: "BCA - ",
     discount: 5000,
     regularPrice: 50000,
@@ -1095,6 +1111,7 @@ const EventCard = () => {
     case 4:
       return (
         <Summary
+          eventData={eventData}
           formData={formData}
           members={[member1Data, member2Data]}
           setCurrentView={setCurrentView}

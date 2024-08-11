@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import EventCard from "./../components/elements/event-card";
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
-// import { DummyEventsData as events } from "../constants/dummy/eventsdata";
 import { fetchAllCompetitions, fetchAllEvents } from "../service/services";
 import { normalizeData } from "../service/helpers";
 
