@@ -219,7 +219,7 @@ export default function Landing() {
           !enterNewPasswordMode &&
           activeTab === "login" && (
             <>
-              <form className="w-full max-w-sm" onSubmit={handleLogin}>
+              <form className="w-full max-w-sm text-white" onSubmit={handleLogin}>
                 <input
                   id="email"
                   className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
@@ -265,7 +265,7 @@ export default function Landing() {
           !enterNewPasswordMode &&
           activeTab === "register" && (
             <>
-              <form className="w-full max-w-sm" onSubmit={handleRegister}>
+              <form className="w-full max-w-sm text-white" onSubmit={handleRegister}>
                 <div className="relative w-full mb-4">
                   <input
                     id="email"
@@ -355,7 +355,7 @@ export default function Landing() {
         {/* Forgot password page */}
         {forgotPasswordMode && !otpMode && !enterNewPasswordMode && (
           <>
-            <form className="w-full max-w-sm" onSubmit={handleForgotPassword}>
+            <form className="w-full max-w-sm text-white" onSubmit={handleForgotPassword}>
               <input
                 id="forgotPasswordEmail"
                 className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
@@ -385,7 +385,7 @@ export default function Landing() {
         {/* Enter OTP page */}
         {otpMode && (
           <>
-            <form className="w-full max-w-sm" onSubmit={handleOtpSubmit}>
+            <form className="w-full max-w-sm text-white" onSubmit={handleOtpSubmit}>
               <input
                 id="otp"
                 className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"

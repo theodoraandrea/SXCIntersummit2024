@@ -136,7 +136,7 @@ export default function NavbarUser({ currentPath }) {
                 removeUser();
                 navigate(LANDING_PAGE);
               }}
-              className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer"
+              className="text-white hover:bg-secondary-2 transition duration-300 px-4 py-1 rounded bg-primary-2 cursor-pointer"
             >
               Logout
             </button>
@@ -144,7 +144,7 @@ export default function NavbarUser({ currentPath }) {
         ) : (
           <Link
             to={LANDING_PAGE}
-            className="text-white hover:underline px-4 py-2 rounded bg-primary-2 cursor-pointer"
+            className="text-white hover:bg-secondary-2 transition duration-300 px-4 py-2 rounded bg-primary-2 cursor-pointer"
           >
             Login
           </Link>

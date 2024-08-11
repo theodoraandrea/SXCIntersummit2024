@@ -18,6 +18,7 @@ module.exports = {
         'primary-3': '#D5A141',
         'primary-4': '#004349',
         'primary-5': '#E2E8EA',
+        'secondary-2': '#007e87'
       },
       width: {
         '300': '300px',

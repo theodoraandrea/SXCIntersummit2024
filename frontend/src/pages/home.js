@@ -128,7 +128,7 @@ export default function Home() {
                   </div>
                   <h1 className="text-xl font-bold mt-4 text-white">{card.eventName}</h1>
                   <p className="mt-2 text-white">{card.shortDesc}</p>
-                  <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md">
+                  <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300">
                     View Event
                   </button>
                 </div>
