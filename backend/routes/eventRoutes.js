@@ -14,10 +14,11 @@ router.post(
   "/BMC",
   isAuthenticated,
   upload.fields([
-    { name: "agreement", maxCount: 1 },
-    { name: "screenshot1", maxCount: 1 },
-    { name: "screenshot2", maxCount: 1 },
-    { name: "screenshot3", maxCount: 1 },
+    { name: "agreement", minCount: 1, maxCount: 1 },
+    { name: "screenshot1", minCount: 1, maxCount: 1 },
+    { name: "screenshot2", minCount: 1, maxCount: 1 },
+    { name: "screenshot3", minCount:1, maxCount: 1 },
+    { name: "proofPayment", minCount: 1, maxCount: 1}
   ]),
   [
     body("sessionType")

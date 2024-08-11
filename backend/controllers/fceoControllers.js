@@ -77,28 +77,14 @@ exports.createNewTeam = async (req, res) => {
 
     const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
 
-    console.log("referral code: ", referralCode);
-    let newTeam;
-    if (referralCode) {
-      console.log("referral code exists ", referralCode);
-      newTeam = await FCEO.create({
-        teamName,
-        leaderId: userId,
-        teamCode,
-        proofOfPayment: proofPayment,
-        screenshotFCEO: screenshotFCEO,
-        referralCode,
-      });
-    } else {
-      console.log("no referral code");
-      newTeam = await FCEO.create({
-        teamName,
-        leaderId: userId,
-        teamCode,
-        proofOfPayment: proofPayment,
-        screenshotFCEO: screenshotFCEO,
-      });
-    }
+    const newTeam = await FCEO.create({
+      teamName,
+      leaderId: userId,
+      teamCode,
+      proofOfPayment: proofPayment,
+      screenshotFCEO: screenshotFCEO,
+      referralCode: referralCode
+    });
 
     await CompetitionRegistration.create({
       userId,

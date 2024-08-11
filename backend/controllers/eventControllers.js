@@ -99,6 +99,7 @@ exports.registerBMC = async (req, res) => {
       "screenshot1",
       "screenshot2",
       "screenshot3",
+      "proofPayment"
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -112,28 +113,6 @@ exports.registerBMC = async (req, res) => {
     const userId = req.user.id;
     const body = req.body;
     const files = req.files;
-
-    // if (!files.agreement) {
-    //   console.log("Haven't uploaded agreement");
-    // } else {
-    //   console.log("agreement: ", files.agreement);
-    // }
-
-    // if (!files.screenshot1) {
-    //   console.log("Haven't uploaded screenshot 1");
-    // } else {
-    //   console.log("screenshot 1: ", files.screenshot1);
-    // }
-    // if (!files.screenshot2) {
-    //   console.log("Haven't uploaded screenshot 2");
-    // } else {
-    //   console.log("screenshot 2: ", files.screenshot2);
-    // }
-    // if (!files.screenshot1) {
-    //   console.log("Haven't uploaded screenshot 3");
-    // } else {
-    //   console.log("screenshot 3: ", files.screenshot3);
-    // }
 
     const user = await User.findByPk(userId);
     const email = user.email;
@@ -185,17 +164,12 @@ exports.registerBMC = async (req, res) => {
     const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
 
-    const screenshots = [
-      files.screenshot1,
-      files.screenshot2,
-      files.screenshot3,
-    ];
-
     const agreementURL = await getImageURLsList(files.agreement, folderId);
     const screenshot1 = await getImageURLsList(files.screenshot1, folderId);
     const screenshot2 = await getImageURLsList(files.screenshot2, folderId);
     const screenshot3 = await getImageURLsList(files.screenshot3, folderId);
-    const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3];
+    const proofPayment = await getImageURLsList(files.proofPayment, folderId);
+    const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3, proofPayment];
 
     // Automated Email
     const emailDetails = {
@@ -245,6 +219,7 @@ exports.registerBMC = async (req, res) => {
       sessionType: body.sessionType,
       question: qnaList,
       screenshotBMC: screenshotBMC_URL,
+      referralCode: body.referralCode
     });
 
     res.status(200).json({

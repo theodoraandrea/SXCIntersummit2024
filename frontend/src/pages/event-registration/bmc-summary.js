@@ -101,6 +101,7 @@ const BMCSummary = () => {
                                     <p><strong>Batch:</strong> {userData.batch}</p>
                                     <p><strong>Phone:</strong> {userData.phoneNumber}</p>
                                     <p><strong>Email:</strong> {userData.email}</p>
+                                    <div className="border-t border-gray-300 my-4"></div>
                                     <strong>How did you know this event?</strong>
                                     <p>{bccData.eventSource}</p>
                                     {
@@ -114,6 +115,14 @@ const BMCSummary = () => {
                                     <p>{bccData.expectations}</p>
                                     <strong>What kind of competition materials do you need?</strong>
                                     <p>{bccData.materials}</p>
+                                    {
+                                        bccData.referralCode && (
+                                            <>
+                                            <div className="border-t border-gray-300 my-4"></div>
+                                            <p><strong>Referral Code: </strong>{bccData.referralCode}</p>
+                                            </>
+                                        )
+                                    }
                                 </div>
                                 : <></>
                                 }
@@ -128,6 +137,7 @@ const BMCSummary = () => {
                                     <p><strong>Batch:</strong> {userData.batch}</p>
                                     <p><strong>Phone:</strong> {userData.phoneNumber}</p>
                                     <p><strong>Email:</strong> {userData.email}</p>
+                                    <div className="border-t border-gray-300 my-4"></div>
                                     <strong>How did you know this event?</strong>
                                     <p>{bpcData.eventSource}</p>
                                     {
@@ -141,6 +151,14 @@ const BMCSummary = () => {
                                     <p>{bpcData.expectations}</p>
                                     <strong>What kind of competition materials do you need?</strong>
                                     <p>{bpcData.materials}</p>
+                                    {
+                                        bpcData.referralCode && (
+                                            <>
+                                            <div className="border-t border-gray-300 my-4"></div>
+                                            <p><strong>Referral Code: </strong>{bpcData.referralCode}</p>
+                                            </>
+                                        )
+                                    }
                                 </div>
                                 : <></>
                                 }       
