@@ -109,7 +109,7 @@ export default function Home() {
           sequence of enriching and groundbreaking events.
         </p>
         <button
-          className="w-44 h-10 mx-20 my-5 bg-yellow-500 text-lg font-semibold rounded-md hover:bg-yellow-600 transition duration-300 text-white"
+          className="w-60 h-10 mx-20 my-5 bg-yellow-500 text-lg font-semibold rounded-md hover:bg-yellow-600 transition duration-300 text-white"
           onClick={handleScrollToEvent}
         >
           Explore Our Events
@@ -123,7 +123,7 @@ export default function Home() {
             {eventCards.map((card, index) => (
               <div key={index} className="px-2">
                 <div className="bg-gradient-primary p-4 rounded-xl">
-                  <div className="h-72 bg-white rounded">
+                  <div className="h-72 mb-8 bg-white rounded">
                   <img className="bg-white w-full" src={card.image} alt="Event" />
                   </div>
                   <h1 className="text-xl font-bold mt-4 text-white">{card.eventName}</h1>
