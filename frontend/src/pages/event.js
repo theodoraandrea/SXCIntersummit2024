@@ -14,6 +14,10 @@ const Events = () => {
   const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const query = new URLSearchParams(location.search);
     const category = query.get("category");
     if (category) {

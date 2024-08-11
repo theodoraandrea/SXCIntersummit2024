@@ -95,7 +95,7 @@ export default function NavbarUser({ currentPath }) {
                 Company Visit
               </Link>
               <Link
-                to={`${EVENTS_PAGE}?category=Competitions`}
+                to={`${EVENTS_PAGE}?category=Competition`}
                 className="block px-4 py-2 hover:bg-gray-200"
                 onClick={() => setDropdownOpen(false)}
               >

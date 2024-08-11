@@ -2,17 +2,21 @@ import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 import BgHero from "./../images/bg-home.png";
 import Circle from "./../images/sponsor.png";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Box } from '@mui/material';
 import Dummy from "./../images/bg-about.png";
 import Winner1 from "./../images/winner1.png";
 import Winner2 from "./../images/winner2.png";
 import Elips1 from "./../images/elips1.png";
 import Elips2 from "./../images/elips2.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import { fetchTwoEvents } from "../service/services";
+import { EVENTS_PAGE } from "../constants/routes"; 
 
 export default function Home() {
   const [eventCards, setEventCards] = useState([]);
@@ -39,6 +43,7 @@ export default function Home() {
   ];
 
   useEffect(() => {
+    window.scrollTo(0,0);
     const getEventCards = async () => {
       try {
         const data = await fetchTwoEvents();
@@ -113,21 +118,40 @@ export default function Home() {
 
       {/* Events Section */}
       <section id="event-section" className="bg-primary-1 py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <Slider {...settings}>
+        {/*<div className="max-w-7xl justify-between mx-auto px-4">*/}
+        <div className="grid sm:grid-cols-2 gap-4 mx-8">
             {eventCards.map((card, index) => (
               <div key={index} className="px-2">
                 <div className="bg-gradient-primary p-4 rounded-xl">
+                  <div className="h-72 bg-white rounded">
                   <img className="bg-white w-full" src={card.image} alt="Event" />
+                  </div>
                   <h1 className="text-xl font-bold mt-4 text-white">{card.eventName}</h1>
                   <p className="mt-2 text-white">{card.shortDesc}</p>
                   <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md">
-                    Read More
+                    View Event
                   </button>
                 </div>
               </div>
             ))}
-          </Slider>
+        </div>
+        <div className="mt-16">
+            <Link to={EVENTS_PAGE} className="flex justify-center items-center">
+            <h1 className="text-xl text-white mr-2">View all events</h1>
+            <Box
+              component="div"
+              sx={{
+                color: 'white',
+                display: 'inline-block',
+                transition: 'transform 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateX(5px)', // Moves the icon 5px to the right on hover
+                },
+              }}
+            >
+              <ArrowForwardIcon fontSize="large"/>
+            </Box>
+            </Link>
         </div>
       </section>
 
