@@ -42,7 +42,7 @@ const BusinessMasterClass = sequelize.define(
     }
   },
   {
-    tableName: "businessMasterClasses",
+    tableName: "businessmasterclasses",
     timestamps: true,
   }
 );

@@ -171,6 +171,33 @@ exports.registerBMC = async (req, res) => {
     const proofPayment = await getImageURLsList(files.proofPayment, folderId);
     const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3, proofPayment];
 
+    // BMC Registration
+    let eventRegistration;
+    try {
+      eventRegistration = await EventRegistration.create({
+        userId: userId,
+        eventId: bmcId,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({error});
+    }
+
+    let bmc;
+    try {
+      bmc = await BMC.create({
+        registrationId: eventRegistration.id,
+        agreement: agreementURL,
+        sessionType: body.sessionType,
+        question: qnaList,
+        screenshotBMC: screenshotBMC_URL,
+        referralCode: body.referralCode
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({error});
+    }
+
     // Automated Email
     const emailDetails = {
       from: process.env.EMAIL_USER,
@@ -206,21 +233,6 @@ exports.registerBMC = async (req, res) => {
         .status(500)
         .json({ message: emailResult.message, error: emailResult.error });
     }
-
-    // BMC Registration
-    const eventRegistration = await EventRegistration.create({
-      userId: userId,
-      eventId: bmcId,
-    });
-
-    const bmc = await BMC.create({
-      registrationId: eventRegistration.id,
-      agreement: agreementURL,
-      sessionType: body.sessionType,
-      question: qnaList,
-      screenshotBMC: screenshotBMC_URL,
-      referralCode: body.referralCode
-    });
 
     res.status(200).json({
       message: "Success registering BMC!",

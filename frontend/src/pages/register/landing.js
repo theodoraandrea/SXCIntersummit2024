@@ -343,6 +343,12 @@ export default function Landing() {
                 >
                   {validationMessage}
                 </small>
+                <small
+                  className="text-red-400 mb-4 block"
+                  hidden={!errorMessage}
+                >
+                  {errorMessage}
+                </small>
                 <button
                   className="w-full px-5 py-2 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                   type="submit"

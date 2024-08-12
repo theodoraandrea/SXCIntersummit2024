@@ -52,7 +52,6 @@ const register = async (data) => {
     const userId = response.data.user.id;
     localStorage.setItem("token", token);
     localStorage.setItem("userId", userId);
-    console.log("response from services.js/register:", response);
     return response.data;
   } catch (error) {
     console.error("Error signing up: ", error);
@@ -180,6 +179,7 @@ const postBMCRegistration = async (data) => {
         "Content-Type": "multipart/form-data",
       },
     });
+    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
