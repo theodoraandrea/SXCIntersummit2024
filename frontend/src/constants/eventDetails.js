@@ -3,11 +3,15 @@ import { FCEO_REGIST, BMC_REGIST } from "./routes";
 export const eventDetails = {
   event_1: {
     title: "Business Master Class",
-    description: "Details about BMC",
+    description: "One-hit competition free class with a company partner specifically designed for college students who are eager to excel in business case and business plan competitions.",
     timelineDesc: "Timeline details for BMC",
     registerLink: `${BMC_REGIST}`,
-    faq: ["FAQ 1", "FAQ 2"],
-    faqDesc: ["Description FAQ1", "Description FAQ2"],
+    faq: ["What kind of business lessons will we learn in the Business Master Class?", 
+      "When will the Business Master Class be held?", 
+      "What are the benefits of joining a Business Master Class?"],
+    faqDesc: ["Participants will learn strategies to excel in business competitions and gain practical insights into mastering analysis and problem-solving in business case competitions.",
+      "The Business Master Class will be held online on Saturday, September 21, 2024.", 
+      "Participants will gain valuable insights into business competitions from top-achieving speakers and acquire practical experience by solving case studies."],
     contactPerson: [
       "Diandra Chandra Kusuma",
       "Orang Satu Lagi",
@@ -45,13 +49,17 @@ export const eventDetails = {
 
   comp_1: {
     title: "Future CEO",
-    description: "Details about FCEO",
+    description: "Challenges college students to apply their business acumen and strategic thinking to real-world scenarios through complex business problems analysis and develop innovative solution",
     timelineDesc: "Timeline details for FCEO",
     registerLink: `${FCEO_REGIST}`,
-    faq: ["FAQ A", "FAQ B"],
-    faqDesc: ["Description FAQA", "Description FAQB"],
-    contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
-    contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    faq: ["Will this event be held online or offline?", 
+      "What topics are contested?", 
+      "Do all participants in a team have to be from the same school?"],
+    faqDesc: ["This event will be held fully online.", 
+      "There are 5 topics that will be competed, namely food and beverage, tourism and local culture, education, renewable energy, and health.", 
+      "No, participants in a team are not required to be in the same school. The important thing is that they are still registered as high school students."],
+    contactPerson: ["Primel", "Ell"],
+    contactNumber: ["085156458584", "082258574505"],
     timelineData: [
       {
         title: "Open Registration",
@@ -79,12 +87,16 @@ export const eventDetails = {
   comp_2: {
     title: "SxC International Business Challenge: Business Case Competition",
     description:
-      "Details about SxC International Business Challenge: Business Case Competition",
+      "Challenges college students to apply their business acumen and strategic thinking to real-world scenarios through complex business problems analysis and develop innovative solution",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
     registerLink: ``,
-    faq: ["FAQ A", "FAQ B"],
-    faqDesc: ["Description FAQA", "Description FAQB"],
+    faq: ["How many and what is the format and structure of each stage?", 
+      "How and where do we register for the competition?", 
+      "Where is the venue or platform for the competition?"],
+    faqDesc: ["The competition has three stages. In the Preliminary Round, participants submit a proposal outlining their solution to the given case. In the Semifinal Round, they create a pitch deck based on their proposal and deliver a brief rocket pitch. The Final Round involves solving a new case within one day, creating a pitch deck, and presenting it the next day, testing their ability to deliver a well-structured solution under time pressure.", 
+      "Participants may register from our website www.something.com . The registration is open from 2nd September 2024 to 5th October 2024. Participants can register individually or in groups of maximum 3 people.", 
+      "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
     timelineData: [
@@ -114,12 +126,18 @@ export const eventDetails = {
   comp_3: {
     title: "SxC International Business Challenge: Business Plan Competition",
     description:
-      "Details about SxC International Business Challenge: Business Plan Competition",
+      "Cultivate entrepreneurial skills through their business ideas in a simulated real-world environment, showcasing their creativity, strategic thinking, and ability to execute viable business plans.",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
     registerLink: ``,
-    faq: ["FAQ A", "FAQ B"],
-    faqDesc: ["Description FAQA", "Description FAQB"],
+    faq: ["Who can participate, and what are the eligibility criteria?",
+      "How many stages does this business plan competition have?", 
+      "Is there any specific criteria/requirement regarding the business ideas?", 
+      "Will the competition be held offline or online?"],
+    faqDesc: ["Participants are an active undergraduate students/vocational students from all around the world with one team consist of maximum 3 people who can come from different institution.",
+      "The competition will consist of three stages: the first stage involves the submission of a business model canvas and executive summary, the second stage requires a detailed business proposal, and the final stage includes a pitch deck assessment followed by an offline pitching event at a venue to be announced.", 
+      "There are no prerequisites regarding the business ideas; the competition welcomes business plans from diverse industries. The key to success in our competition is to simply demonstrate creativity, innovation, and a commitment to sustainable business practices.", 
+      "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
     timelineData: [
@@ -148,11 +166,15 @@ export const eventDetails = {
   },
   event_5: {
     title: "Chambers",
-    description: "Details about Chambers",
+    description: "Two-days online expert sessions which will share experiences, recruitment tips, job opportunities, and material related to job vacancies in four industries (Consulting, Start-Up, BUMN, and FMCG).",
     timelineDesc: "Timeline details for Chambers",
     registerLink: ``,
-    faq: ["FAQ A", "FAQ B"],
-    faqDesc: ["Description FAQA", "Description FAQB"],
+    faq: ["What is Chambers?",
+      "Who can join Chambers?", 
+      "What are the benefits of joining Chambers?"],
+    faqDesc: ["The two-day expert talk show will provide valuable insights for career preparation across consulting, start-ups, FMCG, and BUMN industries while featuring unique sessions to enhance participants’ career readiness.",
+      "Open for university students and fresh graduates.", 
+      "Valuable career insights, industry exposure, job opportunities, and personal growth with an exclusive opportunity to receive direct feedback and guidance from experts."],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
     timelineData: [
@@ -181,11 +203,15 @@ export const eventDetails = {
   },
   event_6: {
     title: "Company Visit",
-    description: "Details about Company Visit",
+    description: "Hands-on experience collaborating with company partners to conduct offline and online office tour and talkshow about sustainable work environments and recruitment tips.",
     timelineDesc: "Timeline details for Company Visit",
     registerLink: ``,
-    faq: ["FAQ A", "FAQ B"],
-    faqDesc: ["Description FAQA", "Description FAQB"],
+    faq: ["How many offline and online company visits will be held later ?", 
+      "What activities will be carried out on the offline company visit ?", 
+      "When will the company visit activity be held ?"],
+    faqDesc: ["2 company visits offline and 2 company visits online", 
+      "Workshop or sharing session about the company, work culture, internship opportunities and many more", 
+      "First week of november"],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
     timelineData: [
@@ -214,11 +240,15 @@ export const eventDetails = {
   },
   event_7: {
     title: "Summit",
-    description: "Details about Summit",
+    description: "SxC International Summit is a peak event that provides an opportunity for individuals from all backgrounds to present their perspectives on current economic trends and engage with leading economists and industry experts.",
     timelineDesc: "Timeline details for Summit",
     registerLink: ``,
-    faq: ["FAQ A", "FAQ B"],
-    faqDesc: ["Description FAQA", "Description FAQB"],
+    faq: ["Is the International Summit some kind of seminar event?",
+      "When will the International Summit be held?", 
+      "What is the expected benefit of joining the summit?"],
+    faqDesc: ["The International Summit will be the pinnacle of our event series.This summit goes beyond a typical seminar; it features high-level conferences that present discussions on current economic trends and provide opportunities to engage with leading economists and industry experts. In addition to insightful dialogues, the summit will offer opportunities related to jobs and internships. It serves as a unique platform for everyone to connect directly with top economists and industry leaders",
+      "The International Summit will be held offline in early December.", 
+      "Participants will gain a comprehensive understanding of current economic trends, benefit from the leading economists and industry experts, and access valuable networking opportunities. Also, the summit provides a chance to explore job and internship prospects, making it an essential event for anyone looking to advance their career and expand their professional network."],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
     timelineData: [
