@@ -72,7 +72,7 @@ const Events = () => {
   return (
     <>
       <Navbar currentPath={location.pathname} />
-      <div className="p-8 bg-primary-1 text-white min-h-screen">
+      <div className="p-4 md:p-8 bg-primary-1 text-white min-h-screen">
         <div className="flex mx-auto">
           <div className="flex space-x-4 mb-4 mx-auto">
             {["All", "Workshop", "Company Visit", "Competition"].map(
@@ -80,17 +80,17 @@ const Events = () => {
                 <button
                   key={category}
                   onClick={() => setFilter(category)}
-                  className={`px-4 py-2 rounded ${
+                  className={`px-2 py-2 md:px-4 md:py-2 rounded ${
                     filter === category ? "bg-yellow-500" : "bg-teal-700"
                   }`}
                 >
-                  {category}
+                  <p className="text-xs md:text-sm">{category}</p>
                 </button>
               )
             )}
           </div>
         </div>
-        <div className="space-y-4 my-5 min-h-screen">
+        <div className="space-y-4 my-2 md:my-5 min-h-screen">
           {filteredData && filteredData.length > 0 ? (
             filteredData.map((event, index) => (
               <EventCard
