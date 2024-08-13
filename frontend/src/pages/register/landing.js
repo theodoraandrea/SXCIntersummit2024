@@ -13,6 +13,7 @@ import { USER_DETAILS_PAGE, HOME } from "../../constants/routes";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Swal from "sweetalert2";
+import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 
 export default function Landing() {
   const { loginUser } = useUser();
@@ -193,16 +194,36 @@ export default function Landing() {
     setValidationMessage("");
   };
 
+  const scrollToFormContainer = () => {
+    const formContainer = document.getElementById("form-container");
+
+    if (formContainer) {
+      formContainer.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="flex h-screen">
+    <div className="w-full min-h-screen flex flex-col md:flex-row ">
       {/* Left Side */}
       <div
-        className="w-1/2 bg-cover bg-center"
+        className="relative w-full min-h-screen bg-cover bg-center md:w-1/2"
         style={{ backgroundImage: `url(${bg})` }}
-      />
+      >
+        <button
+          className="md:hidden absolute bottom-5 left-1/2 text-black p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none"
+          onClick={scrollToFormContainer}
+        >
+          <ArrowDropDownCircleIcon style={{ color: "white" }} />
+        </button>
+      </div>
 
       {/* Right Side */}
-      <div className="w-1/2 bg-primary-1 flex flex-col justify-center items-center p-8">
+      <div
+        id="form-container"
+        className="w-full min-h-screen md:h-full md:w-1/2 bg-primary-1 flex flex-col justify-center items-center p-8"
+      >
         <div className="flex justify-center space-x-6 mb-8">
           {/* Login Page or Register page*/}
           {!forgotPasswordMode && !otpMode && !enterNewPasswordMode && (
