@@ -70,7 +70,7 @@ export default function Home() {
         });
 
         // Update state with combined data
-        setEventCards(sortedCombinedData);
+        setEventCards(sortedCombinedData.slice(0, 2));
       } catch (error) {
         console.error("Failed to fetch events:", error);
       }
@@ -145,7 +145,7 @@ export default function Home() {
       <section id="event-section" className="bg-primary-1 py-10">
         {/*<div className="max-w-7xl justify-between mx-auto px-4">*/}
         <div className="grid sm:grid-cols-2 gap-4 mx-4 md:mx-8">
-          {eventCards.slice(0, 2).map((card, index) => (
+          {eventCards.map((card, index) => (
             <>
               <div key={index} className="px-2">
                 <div className="text-3xl text-white font-bold pb-10">
