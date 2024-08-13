@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import bg from "./../../images/Kiri.png";
 import { useNavigate } from "react-router-dom";
 import { putProfileData } from "../../service/services";
-import { HOME, LANDING_PAGE, USER_DASHBOARD_PAGE } from "../../constants/routes";
+import {
+  HOME,
+  LANDING_PAGE,
+  USER_DASHBOARD_PAGE,
+} from "../../constants/routes";
 import { useUser } from "../../contexts/user-context";
+import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
 
 export default function UserDetails() {
   const { isLoggedIn, profileData, loading, setProfileData } = useUser();
@@ -21,6 +26,8 @@ export default function UserDetails() {
       if (!isLoggedIn) {
         navigate(LANDING_PAGE);
       }
+
+      scrollToFormContainer();
 
       if (profileData) {
         setFullName(profileData.fullname);
@@ -122,13 +129,13 @@ export default function UserDetails() {
     if (phoneNumber.length < 10) {
       setErrors({
         ...errors,
-        phoneNumber: "Please enter a valid phone number"
+        phoneNumber: "Please enter a valid phone number",
       });
     } else {
       setErrors({
         ...errors,
-        phoneNumber: undefined
-      });    
+        phoneNumber: undefined,
+      });
     }
     const formattedValue = phoneNumber.replace(
       /(\d{2})(\d{4})(\d{4})(\d*)/,
@@ -145,16 +152,36 @@ export default function UserDetails() {
     (_, i) => oldestBatch + i
   );
 
+  const scrollToFormContainer = () => {
+    const formContainer = document.getElementById("form-container");
+
+    if (formContainer) {
+      formContainer.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen">
       {/* Left Side */}
       <div
-        className="w-1/2 bg-cover bg-center"
+        className="w-full min-h-screen md:w-1/2 bg-cover bg-center"
         style={{ backgroundImage: `url(${bg})` }}
-      ></div>
+      >
+        <button
+          className="md:hidden absolute bottom-5 left-[45%] text-black p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none"
+          onClick={scrollToFormContainer}
+        >
+          <ArrowDropDownCircleIcon style={{ color: "white" }} />
+        </button>
+      </div>
 
       {/* Right Side */}
-      <div className="w-1/2 bg-primary-1 flex justify-center items-center">
+      <div
+        id="form-container"
+        className="w-full min-h-screen md:w-1/2 bg-primary-1 flex justify-center items-center"
+      >
         <form
           onSubmit={handleRegister}
           className="w-full max-w-xl px-6 py-8 rounded-lg shadow-lg text-white"
