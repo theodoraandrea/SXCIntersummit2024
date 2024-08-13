@@ -12,6 +12,7 @@ import { useUser } from "../../contexts/user-context";
 import { USER_DETAILS_PAGE, HOME } from "../../constants/routes";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import Swal from "sweetalert2";
 
 export default function Landing() {
   const { loginUser } = useUser();
@@ -117,6 +118,17 @@ export default function Landing() {
         const response = await postForgotPassword(email);
         console.log(response);
         if (response.status === 201) {
+          Swal.fire({
+            title: "Success!",
+            text: "Please check your email for the OTP!",
+            icon: "success",
+            confirmButtonText: "Okay",
+            customClass: {
+              confirmButton:
+                "bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500",
+            },
+            buttonsStyling: false,
+          });
           setOtpMode(true);
           setForgotPasswordMode(false);
         }
@@ -148,7 +160,17 @@ export default function Landing() {
       try {
         const response = await putResetPassword({ email, password });
         if (response.status === 200) {
-          setValidationMessage("Password reset successfully. Please login.");
+          Swal.fire({
+            title: "Success!",
+            text: "Password Reset Success! please login with your new password.",
+            icon: "success",
+            confirmButtonText: "Okay",
+            customClass: {
+              confirmButton:
+                "bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500",
+            },
+            buttonsStyling: false,
+          });
           setEnterNewPasswordMode(false);
           setForgotPasswordMode(false);
           setOtpMode(false);
@@ -219,7 +241,10 @@ export default function Landing() {
           !enterNewPasswordMode &&
           activeTab === "login" && (
             <>
-              <form className="w-full max-w-sm text-white" onSubmit={handleLogin}>
+              <form
+                className="w-full max-w-sm text-white"
+                onSubmit={handleLogin}
+              >
                 <input
                   id="email"
                   className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
@@ -265,7 +290,10 @@ export default function Landing() {
           !enterNewPasswordMode &&
           activeTab === "register" && (
             <>
-              <form className="w-full max-w-sm text-white" onSubmit={handleRegister}>
+              <form
+                className="w-full max-w-sm text-white"
+                onSubmit={handleRegister}
+              >
                 <div className="relative w-full mb-4">
                   <input
                     id="email"
@@ -361,7 +389,13 @@ export default function Landing() {
         {/* Forgot password page */}
         {forgotPasswordMode && !otpMode && !enterNewPasswordMode && (
           <>
-            <form className="w-full max-w-sm text-white" onSubmit={handleForgotPassword}>
+            <form
+              className="w-full max-w-sm text-white"
+              onSubmit={handleForgotPassword}
+            >
+              <p className="flex text-lg justify-center font-semibold text-yellow-500 pb-5">
+                Forgot Password
+              </p>
               <input
                 id="forgotPasswordEmail"
                 className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
@@ -391,7 +425,10 @@ export default function Landing() {
         {/* Enter OTP page */}
         {otpMode && (
           <>
-            <form className="w-full max-w-sm text-white" onSubmit={handleOtpSubmit}>
+            <form
+              className="w-full max-w-sm text-white"
+              onSubmit={handleOtpSubmit}
+            >
               <input
                 id="otp"
                 className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"

@@ -99,7 +99,7 @@ exports.registerBMC = async (req, res) => {
       "screenshot1",
       "screenshot2",
       "screenshot3",
-      "proofPayment"
+      "proofPayment",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -168,7 +168,12 @@ exports.registerBMC = async (req, res) => {
     const screenshot2 = await getImageURLsList(files.screenshot2, folderId);
     const screenshot3 = await getImageURLsList(files.screenshot3, folderId);
     const proofPayment = await getImageURLsList(files.proofPayment, folderId);
-    const screenshotBMC_URL = [screenshot1, screenshot2, screenshot3, proofPayment];
+    const screenshotBMC_URL = [
+      screenshot1,
+      screenshot2,
+      screenshot3,
+      proofPayment,
+    ];
 
     // BMC Registration
     let eventRegistration;
@@ -179,7 +184,7 @@ exports.registerBMC = async (req, res) => {
       });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({error});
+      return res.status(500).json({ error });
     }
 
     let bmc;
@@ -190,11 +195,11 @@ exports.registerBMC = async (req, res) => {
         sessionType: body.sessionType,
         question: qnaList,
         screenshotBMC: screenshotBMC_URL,
-        referralCode: body.referralCode
+        referralCode: body.referralCode,
       });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({error});
+      return res.status(500).json({ error });
     }
 
     // Automated Email
