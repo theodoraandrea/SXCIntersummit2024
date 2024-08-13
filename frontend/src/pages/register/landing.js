@@ -36,7 +36,7 @@ export default function Landing() {
   const [otpIsValid, setOtpIsValid] = useState(null);
   const [otpTouched, setOtpTouched] = useState(false);
   const [enterNewPasswordMode, setEnterNewPasswordMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
