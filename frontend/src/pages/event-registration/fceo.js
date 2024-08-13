@@ -42,11 +42,15 @@ const FirstView = ({
   const [proofPayment, setProofPayment] = useState(
     formData.proofPayment?.name ?? ""
   );
-  
+
   //REFERRAL & PAYMENT DATA
   const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
-  const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
-  const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+  const [verifiedRefCode, setVerifiedRefCode] = useState(
+    formData.referralCode ?? null
+  );
+  const [refCodeValid, setRefCodeValid] = useState(
+    formData.referralCode ? true : false
+  );
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -74,7 +78,7 @@ const FirstView = ({
   useEffect(() => {
     setFormData({
       ...formData,
-      referralCode: verifiedRefCode
+      referralCode: verifiedRefCode,
     });
   }, [verifiedRefCode]);
 
@@ -165,10 +169,12 @@ const FirstView = ({
           </h1>
           <form className="text-left">
             <h1 className="text-lg font-bold text-white">Leader Data</h1>
-            <p className='text-white font-bold mb-2'>You can edit your personal information
-                        <Link to={USER_DETAILS_PAGE}
-                        className='text-yellow-500'
-                        > here</Link>
+            <p className="text-white font-bold mb-2">
+              You can edit your personal information
+              <Link to={USER_DETAILS_PAGE} className="text-yellow-500">
+                {" "}
+                here
+              </Link>
             </p>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -378,7 +384,11 @@ const FirstView = ({
             <button
               type="button"
               onClick={handleSubmit}
-              className="bg-primary-3 text-white px-6 py-2 rounded-full"
+              className={`text-white px-6 py-2 rounded-full ${
+                !checkAllFilled()
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+              }`}
               disabled={emailError || phoneError}
             >
               Next
@@ -386,41 +396,50 @@ const FirstView = ({
           </div>
         </div>
         <div className="bg-dark-2 p-4 pt-0 rounded-lg shadow-lg text-center">
-        <div className='mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center'>
-                    <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
-                        <p className='text-white mx-4 mb-2 text-center'>
-                            Please transfer the following amount to complete your registration
-                        </p>
-                        <div className='text-white text-left w-40'>
-                            <div className='flex flex-row justify-between'>
-                                <p><strong>Price: </strong></p>
-                                <p>{regularPrice}</p>
-                            </div>
-                        {
-                            verifiedRefCode && refCodeValid && (
-                                <>
-                                <div className='flex flex-row justify-between'>
-                                <p><strong>Discount:</strong></p>
-                                <p>{discount}</p>
-                                </div>
-                                <div className='flex flex-row justify-between'>
-                                <p><strong>Total:</strong></p>
-                                <p><strong>{discountedPrice}</strong></p>
-                                </div>
-                                </>
-                            )
-                        }
-                        </div>
-                        <p className='text-white mx-4 text-center'>
-                            <strong>Bank Account Number: </strong>{bankAccount}
-                        </p>
-                </div>
-          <ReferralModal 
-          eventName="fceo"
-          referralCode={formData.referralCode ?? ''} 
-          verifiedRefCode={verifiedRefCode}
-          setVerifiedRefCode={setVerifiedRefCode}
-          setRefCodeValid={setRefCodeValid}
+          <div className="mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <h1 className="text-3xl font-bold text-white mb-2">
+              Registration Fee
+            </h1>
+            <p className="text-white mx-4 mb-2 text-center">
+              Please transfer the following amount to complete your registration
+            </p>
+            <div className="text-white text-left w-40">
+              <div className="flex flex-row justify-between">
+                <p>
+                  <strong>Price: </strong>
+                </p>
+                <p>{regularPrice}</p>
+              </div>
+              {verifiedRefCode && refCodeValid && (
+                <>
+                  <div className="flex flex-row justify-between">
+                    <p>
+                      <strong>Discount:</strong>
+                    </p>
+                    <p>{discount}</p>
+                  </div>
+                  <div className="flex flex-row justify-between">
+                    <p>
+                      <strong>Total:</strong>
+                    </p>
+                    <p>
+                      <strong>{discountedPrice}</strong>
+                    </p>
+                  </div>
+                </>
+              )}
+            </div>
+            <p className="text-white mx-4 text-center">
+              <strong>Bank Account Number: </strong>
+              {bankAccount}
+            </p>
+          </div>
+          <ReferralModal
+            eventName="fceo"
+            referralCode={formData.referralCode ?? ""}
+            verifiedRefCode={verifiedRefCode}
+            setVerifiedRefCode={setVerifiedRefCode}
+            setRefCodeValid={setRefCodeValid}
           />
         </div>
       </div>
@@ -461,13 +480,7 @@ const Member1Data = ({
   };
 
   const checkAllFilled = () => {
-    if (
-      fullName &&
-      gender &&
-      school && 
-      phoneNumber &&
-      email
-    ) {
+    if (fullName && gender && school && phoneNumber && email) {
       return true;
     }
     return false;
@@ -517,7 +530,9 @@ const Member1Data = ({
       <Navbar />
       <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
         <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4 w-80">Member 1 Data</h1>
+          <h1 className="text-3xl font-bold text-white mb-4 w-80">
+            Member 1 Data
+          </h1>
           <form className="text-left">
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -602,14 +617,18 @@ const Member1Data = ({
               Back
             </button>
             <button
-                type="button"
-                onClick={() => {
-                  handleSubmit();
-                }}
-                className="bg-primary-3 text-white px-6 py-2 rounded-full"
-                disabled={emailError || phoneError}
-              >
-                Next
+              type="button"
+              onClick={() => {
+                handleSubmit();
+              }}
+              className={`text-white px-6 py-2 rounded-full ${
+                !checkAllFilled()
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+              }`}
+              disabled={emailError || phoneError}
+            >
+              Next
             </button>
           </div>
         </div>
@@ -654,7 +673,7 @@ const Member2Data = ({
     if (saveData()) {
       onPrevious();
     }
-  }
+  };
 
   const saveData = () => {
     if (checkAllFilled()) {
@@ -672,13 +691,13 @@ const Member2Data = ({
       }
     }
     return false;
-  }
+  };
 
   const checkAllFilled = () => {
     if (fullName && gender && email && phoneNumber && school) {
       return true;
     }
-    return false; 
+    return false;
   };
 
   const doesNotHaveMemberTwo = () => {
@@ -686,7 +705,7 @@ const Member2Data = ({
       return true;
     }
     return false;
-  }
+  };
 
   const handlePhoneNumberChange = (e) => {
     let inputValue = e.target.value;
@@ -732,7 +751,9 @@ const Member2Data = ({
       <Navbar />
       <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
         <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4 w-80">Member 2 Data</h1>
+          <h1 className="text-3xl font-bold text-white mb-4 w-80">
+            Member 2 Data
+          </h1>
           <form className="text-left">
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -819,7 +840,11 @@ const Member2Data = ({
             <button
               type="button"
               onClick={handleNext}
-              className="bg-primary-3 text-white px-6 py-2 rounded-full"
+              className={`text-white px-6 py-2 rounded-full ${
+                !checkAllFilled()
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+              }`}
               disabled={fullName && (emailError || phoneError)}
             >
               Next
@@ -843,37 +868,41 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
       setIsLoading(true);
       const response = await registerTeam(formData);
       if (response.team.id) {
-          for (const member of members) {
-            if (member.fullName) {
-              console.log("posting member...",member);
-                const memberData = {
-                  teamId: response.team.id,
-                  fullname: member.fullName,
-                  gender: member.gender,
-                  email: member.email,
-                  school: member.school,
-                  phoneNumber: member.phoneNumber
-                };
-              try {
-                await registerMember(memberData);
-                console.log("posted member");
-                setIsLoading(false);
-                //Add this activeTab state for competition registrations
-                //because user-dashboard opens "events" by default
-                navigate(USER_DASHBOARD_PAGE, {
-                  state: {
-                    activeTab: "competitions"
-                  }
-                });
-                setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
-                {/*INSERT SUCCESS ALERT*/}
-              } catch (memberError) {
-                console.log("Error posting member: ", memberError);
-                setIsLoading(false);
-                {/*INSERT ERROR ALERT*/}
+        for (const member of members) {
+          if (member.fullName) {
+            console.log("posting member...", member);
+            const memberData = {
+              teamId: response.team.id,
+              fullname: member.fullName,
+              gender: member.gender,
+              email: member.email,
+              school: member.school,
+              phoneNumber: member.phoneNumber,
+            };
+            try {
+              await registerMember(memberData);
+              console.log("posted member");
+              setIsLoading(false);
+              //Add this activeTab state for competition registrations
+              //because user-dashboard opens "events" by default
+              navigate(USER_DASHBOARD_PAGE, {
+                state: {
+                  activeTab: "competitions",
+                },
+              });
+              setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
+              {
+                /*INSERT SUCCESS ALERT*/
+              }
+            } catch (memberError) {
+              console.log("Error posting member: ", memberError);
+              setIsLoading(false);
+              {
+                /*INSERT ERROR ALERT*/
               }
             }
           }
+        }
       }
     } catch (error) {
       console.log("Error registering team: ", error);
@@ -987,13 +1016,12 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
               <p>
                 <strong>Email:</strong> {formData.email}
               </p>
-              {
-                formData.referralCode && 
+              {formData.referralCode && (
                 <>
                   <p className="text-lg font-semibold mt-2">Referral Code</p>
                   {formData.referralCode}
                 </>
-              }
+              )}
             </div>
             {members.map(
               (member, index) =>
@@ -1062,8 +1090,8 @@ const EventCard = () => {
     bankAccout: "BCA - ",
     discount: 5000,
     regularPrice: 50000,
-    discountedPrice: 45000
-  }
+    discountedPrice: 45000,
+  };
 
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
