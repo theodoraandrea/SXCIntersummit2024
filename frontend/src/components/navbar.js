@@ -128,7 +128,10 @@ export default function NavbarUser({ currentPath }) {
       </ul>
 
       {/* Burger Menu for Mobile View */}
-      <button className="text-white md:hidden ml-auto" onClick={toggleMenu}>
+      <button
+        className="text-yellow-500 md:hidden ml-auto"
+        onClick={toggleMenu}
+      >
         <MenuIcon fontSize="large" />
       </button>
 
