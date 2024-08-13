@@ -14,7 +14,7 @@ const EventCard = ({ title, description, category, id }) => {
             <img
               src={Dummy}
               alt="event"
-              className="w-full h-full object-cover rounded-t-xl md:rounded-lg md:rounded-l-xl"
+              className="w-full h-full object-cover rounded-t-xl md:rounded-lg md:rounded-r-none md:rounded-l-xl"
               style={{ objectFit: "cover" }}
             />
           </div>
