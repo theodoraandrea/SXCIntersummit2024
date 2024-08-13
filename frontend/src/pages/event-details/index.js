@@ -1,14 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./../../components/navbar";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Footer from "./../../components/footer";
 import { eventDetails } from "../../constants/eventDetails";
 import TimelineItem from "../../components/elements/timeline-item";
+import { useUser } from "../../contexts/user-context";
+import Spinner from "../../components/elements/spinner";
 
 export default function DetailEvents() {
   const { eventId } = useParams();
+  const params = eventId.split('_');
+  const type = params[0];
+  const id = Number.parseInt(params[1]);
+
   const [openFAQ, setOpenFAQ] = useState(Array(5).fill(false));
+
+  const { loading, registeredEvents, registeredCompetitions } = useUser();
+
+  const [ registered, setRegistered ] = useState(false);
+
+  useEffect(() => {
+    if (type === "comp") {
+      if (registeredCompetitions.includes(id)) {
+        setRegistered(true);
+      }
+    } else if (type === "event") {
+      if (id === 1) {
+      //for BMC, BCC = 2, BPC = 3
+        if (registeredEvents.includes(2) && registeredEvents.includes(3)) {
+          setRegistered(true);
+        }
+      }
+      if (registeredEvents.includes(id)) {
+        setRegistered(true);  
+      }
+    }
+  }, [loading]);
 
   const toggleFAQ = (index) => {
     const newOpenFAQ = [...openFAQ];
@@ -21,7 +49,10 @@ export default function DetailEvents() {
   return (
     <div>
       <Navbar />
-      <div className="p-8 bg-primary-1 text-white">
+      {
+        loading ?
+        <Spinner/> :
+        <div className="p-8 bg-primary-1 text-white">
         {/* Competition Section */}
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -32,8 +63,12 @@ export default function DetailEvents() {
               {eventData.description || "Event Desc goes here"}
             </p>
             <Link to={eventData.registerLink}>
-              <button className="bg-primary-2 px-5 rounded-lg py-2 text-white mt-4">
-                Register Now
+              <button className="bg-primary-2 px-5 rounded-lg py-2 text-white mt-4"
+              disabled={registered}
+              >
+                {
+                  registered ? "Already registered!" : "Register Now"
+                }
               </button>
             </Link>
           </div>
@@ -55,6 +90,7 @@ export default function DetailEvents() {
                   date={item.date}
                   type={item.type}
                   link={item.link}
+                  registered={registered}
                 />
               ))
             ) : (
@@ -122,6 +158,7 @@ export default function DetailEvents() {
           </div>
         </div>
       </div>
+      }
       <Footer />
     </div>
   );

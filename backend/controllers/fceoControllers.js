@@ -8,26 +8,72 @@ const {
 } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
+const checkRequiredFields = require("../utils/checkRequiredFields");
+const { validationResult } = require("express-validator");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
 // Create a new team
 exports.createNewTeam = async (req, res) => {
   const fceoId = 1;
   try {
-    const { files, body } = req;
-    const { teamName } = body;
-    const userId = req.user.id;
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
 
+    const { files, body } = req;
+    // Check if there any required image not uploaded.
+    const requiredFields = [
+      "proofPayment",
+      "studentIds",
+      "proofTwibbon",
+      "proofFollow",
+      "proofStory",
+    ];
+    if (!checkRequiredFields(req.files, requiredFields)) {
+      return res.status(400).json({
+        message:
+          "Upload incomplete: Please ensure that all required images are uploaded before submitting the form.",
+      });
+    }
+
+    const { teamName, referralCode } = body;
+    const userId = req.user.id;
+    const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
 
+    // Create and upload File/Image
+    const fileNames = [
+      `${teamName}_${user.fullname}_Proof of Follow`,
+      `${teamName}_${user.fullname}_Proof of Twibbon`,
+      `${teamName}_${user.fullname}_Proof of Instastory`,
+      `${teamName}_${user.fullname}_Proof of Student Card`,
+    ];
     const rootFolderId = process.env.FOLDER_FUTURECEO_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
 
     const proofPayment = await getImageURLsList(files.proofPayment, folderId);
-    const proofFollow = await getImageURLsList(files.proofFollow, folderId);
-    const proofTwibbon = await getImageURLsList(files.proofTwibbon, folderId);
-    const proofStory = await getImageURLsList(files.proofStory, folderId);
-    const studentIds = await getImageURLsList(files.studentIds, folderId);
+    const proofFollow = await getImageURLsList(
+      files.proofFollow,
+      folderId,
+      fileNames[0]
+    );
+    const proofTwibbon = await getImageURLsList(
+      files.proofTwibbon,
+      folderId,
+      fileNames[1]
+    );
+    const proofStory = await getImageURLsList(
+      files.proofStory,
+      folderId,
+      fileNames[2]
+    );
+    const studentIds = await getImageURLsList(
+      files.studentIds,
+      folderId,
+      fileNames[3]
+    );
 
     const screenshotFCEO = [proofFollow, proofTwibbon, proofStory, studentIds];
 
@@ -37,6 +83,7 @@ exports.createNewTeam = async (req, res) => {
       teamCode,
       proofOfPayment: proofPayment,
       screenshotFCEO: screenshotFCEO,
+      referralCode: referralCode
     });
 
     await CompetitionRegistration.create({
@@ -57,6 +104,12 @@ exports.createNewTeam = async (req, res) => {
 // Check Team Existence
 exports.checkTeam = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { body } = req;
     const { teamCode } = body;
 
@@ -87,6 +140,12 @@ exports.checkTeam = async (req, res) => {
 // Register a new member
 exports.createNewFCEOMember = async (req, res) => {
   try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
     const { body } = req;
     const { teamId, fullname, gender, school, phoneNumber, email } = body;
     const userId = req.user.id;
@@ -179,6 +238,7 @@ exports.getTeamDetailsByUserId = async (req, res) => {
       teamCode: team.teamCode,
       proofPayment: team.proofOfPayment,
       screenshotFCEO: team.screenshotFCEO,
+      referralCode: team.referralCode,
       members: teamMembers.map((member) => ({
         fullname: member.fullname,
         gender: member.gender,

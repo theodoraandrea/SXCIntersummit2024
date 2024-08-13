@@ -10,7 +10,7 @@ const auth = new google.auth.GoogleAuth({
   scopes: scopes,
 });
 
-const uploadImage = async (fileObject, folderId) => {
+const uploadImage = async (fileObject, folderId, fileName) => {
   const bufferStream = new stream.PassThrough();
   bufferStream.end(fileObject.buffer);
 
@@ -25,7 +25,7 @@ const uploadImage = async (fileObject, folderId) => {
         body: bufferStream,
       },
       requestBody: {
-        name: fileObject.originalname,
+        name: fileName ?? fileObject.originalname,
         parents: [folderId],
       },
       fields: "id,name",
@@ -74,7 +74,7 @@ exports.createFolder = async (name, rootFolderId) => {
   }
 };
 
-exports.getImageURLsList = async (files, folderId) => {
+exports.getImageURLsList = async (files, folderId, fileName) => {
   const publicURL = [];
 
   // Ensure files is an array
@@ -84,7 +84,7 @@ exports.getImageURLsList = async (files, folderId) => {
     const file = fileArray[i];
 
     console.log("uploading image ");
-    const imgFileId = await uploadImage(file, folderId);
+    const imgFileId = await uploadImage(file, folderId, fileName);
     console.log("upload complete");
 
     publicURL.push(await generatePublicLink(imgFileId));

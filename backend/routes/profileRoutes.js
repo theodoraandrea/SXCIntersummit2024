@@ -18,7 +18,7 @@ router.put(
       .isAlpha("en-US", {
         ignore: " ",
       })
-      .withMessage("Fullname must be in alphabets"),
+      .withMessage("Fullname must be in strings"),
     body("gender")
       .optional()
       .isIn(["Male", "Female"])
@@ -27,7 +27,12 @@ router.put(
       .optional()
       .notEmpty()
       .withMessage("Institution is required"),
-    body("major").optional().isString().withMessage("Major must be a text"),
+    body("major")
+      .optional()
+      .isAlpha("en-US", {
+        ignore: " ",
+      })
+      .withMessage("Major must be a strings"),
     body("batch")
       .optional()
       .isInt({

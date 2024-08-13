@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { fetchProfileData } from "../service/services";
+import { fetchProfileData, fetchRegisteredEvents, fetchRegisteredCompetitions } from "../service/services";
 
 const UserContext = createContext();
 
@@ -8,6 +8,9 @@ export const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const [registeredEvents, setRegisteredEvents] = useState([]);
+  const [registeredCompetitions, setRegisteredCompetitions] = useState([]);
+
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
@@ -15,7 +18,7 @@ export const UserProvider = ({ children }) => {
       userId: userId,
       token: token
     }
-    console.log("fetching user data...");
+
     fetchData(data);
   }, []);
   
@@ -35,6 +38,22 @@ export const UserProvider = ({ children }) => {
     try {
       const response = await fetchProfileData(data);
       setProfileData(response);
+
+      const compsRes = await getUserCompetitions();
+      let comps = [];
+      for (let i=0; i < compsRes.length; i++) {
+        const item = compsRes[i];
+        comps.push(item.id);
+      }
+      setRegisteredCompetitions(comps);
+
+      const eventsRes = await getUserEvents();
+      let events = [];
+      for (let i=0; i < eventsRes.length; i++) {
+        const item = eventsRes[i];
+        events.push(item.id);
+      }
+      setRegisteredEvents(events);
     } catch (error) {
       setIsLoggedIn(false);
     } finally {
@@ -43,7 +62,6 @@ export const UserProvider = ({ children }) => {
   }; 
 
   const removeUser = () => {
-    console.log("removeUser");
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     setIsLoggedIn(false);
@@ -51,13 +69,40 @@ export const UserProvider = ({ children }) => {
   };
 
   const loginUser = (data) => {
-    console.log("loginUser");
     setIsLoggedIn(true);
     setProfileData(data);
+  };
+
+  //fetch registered Competitions 
+  const getUserEvents = async () => {
+    try {
+      const response = await fetchRegisteredEvents();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  const getUserCompetitions = async () => {
+    try {
+      const response = await fetchRegisteredCompetitions();
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
   return (
-    <UserContext.Provider value={{ profileData, isLoggedIn, loading, setProfileData, removeUser, loginUser }}>
+    <UserContext.Provider value={{ profileData, 
+    registeredEvents, 
+    registeredCompetitions, 
+    isLoggedIn, 
+    loading, 
+    setProfileData, 
+    setRegisteredEvents,
+    setRegisteredCompetitions,
+    removeUser, 
+    loginUser }}>
       {children}
     </UserContext.Provider>
   );

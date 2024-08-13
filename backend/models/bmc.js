@@ -1,7 +1,5 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
-const User = require("../models/user");
-const EventRegistration = require("../models/eventregistrations");
 
 const BusinessMasterClass = sequelize.define(
   "BusinessMasterClass",
@@ -35,9 +33,16 @@ const BusinessMasterClass = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
+    referralCode: {
+      type: DataTypes.STRING,
+      references: {
+        model: "referralcodes",
+        key: "code"
+      }
+    }
   },
   {
-    tableName: "businessMasterClasses",
+    tableName: "businessmasterclasses",
     timestamps: true,
   }
 );

@@ -7,6 +7,9 @@ yarn-error.log*
 # package-lock
 package-lock.json
 
+# Database
+config/databaseConfig.js 
+
 # Environment variables
 .env
 

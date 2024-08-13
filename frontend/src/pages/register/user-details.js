@@ -109,19 +109,35 @@ export default function UserDetails() {
     let numericValue = inputValue.replace(/\D/g, "");
 
     if (!numericValue.startsWith("62")) {
+      if (numericValue.startsWith("0")) {
+        numericValue = numericValue.slice(1);
+      }
       numericValue = `62${numericValue}`;
     }
 
-    const formattedValue = numericValue.replace(
+    setPhoneNumber(numericValue);
+  };
+
+  const formatPhoneNumber = () => {
+    if (phoneNumber.length < 10) {
+      setErrors({
+        ...errors,
+        phoneNumber: "Please enter a valid phone number"
+      });
+    } else {
+      setErrors({
+        ...errors,
+        phoneNumber: undefined
+      });    
+    }
+    const formattedValue = phoneNumber.replace(
       /(\d{2})(\d{4})(\d{4})(\d*)/,
       "+62 $2 $3 $4"
     );
-
     setPhoneNumber(formattedValue);
   };
-
   // Constants for Batches
-  const oldestBatch = 2016;
+  const oldestBatch = 2019;
   const currentYear = new Date().getFullYear();
 
   const batchesOptions = Array.from(
@@ -181,7 +197,7 @@ export default function UserDetails() {
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
               >
-                <option className="text-black" value="">
+                <option className="text-black" value="" disabled>
                   Select Gender
                 </option>
                 <option className="text-black" value="Male">
@@ -260,6 +276,7 @@ export default function UserDetails() {
                 placeholder="Phone Number"
                 value={phoneNumber}
                 onChange={handlePhoneNumberChange}
+                onBlur={formatPhoneNumber}
               />
               <small className="text-gray-400">
                 Example: +62 812 3456 7890
@@ -284,7 +301,7 @@ export default function UserDetails() {
                 value={batch}
                 onChange={(e) => setBatch(e.target.value)}
               >
-                <option className="text-black" value="">
+                <option className="text-black" value="" disabled>
                   Select Batch
                 </option>
                 {batchesOptions.map((year) => {

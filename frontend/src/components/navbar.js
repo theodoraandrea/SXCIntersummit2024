@@ -95,7 +95,7 @@ export default function NavbarUser({ currentPath }) {
                 Company Visit
               </Link>
               <Link
-                to={`${EVENTS_PAGE}?category=Competitions`}
+                to={`${EVENTS_PAGE}?category=Competition`}
                 className="block px-4 py-2 hover:bg-gray-200"
                 onClick={() => setDropdownOpen(false)}
               >
@@ -104,7 +104,7 @@ export default function NavbarUser({ currentPath }) {
             </div>
           )}
         </li>
-        <li>
+        <li hidden={true}>
           <button
             onClick={handleScrollToSponsorship}
             className="text-white hover:font-semibold hover:text-yellow-500"
@@ -132,8 +132,11 @@ export default function NavbarUser({ currentPath }) {
               My profile
             </Link>
             <button 
-              onClick={removeUser}
-              className="text-white hover:bg-white hover:text-black px-4 py-1 rounded bg-primary-2 cursor-pointer"
+              onClick={() => {
+                removeUser();
+                navigate(LANDING_PAGE);
+              }}
+              className="text-white hover:bg-secondary-2 transition duration-300 px-4 py-1 rounded bg-primary-2 cursor-pointer"
             >
               Logout
             </button>
@@ -141,7 +144,7 @@ export default function NavbarUser({ currentPath }) {
         ) : (
           <Link
             to={LANDING_PAGE}
-            className="text-white hover:underline px-4 py-2 rounded bg-primary-2 cursor-pointer"
+            className="text-white hover:bg-secondary-2 transition duration-300 px-4 py-2 rounded bg-primary-2 cursor-pointer"
           >
             Login
           </Link>

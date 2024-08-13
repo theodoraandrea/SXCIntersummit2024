@@ -101,7 +101,7 @@ export default function UserDashboard() {
         </div>
         <div className="ml-auto">
           <Link to={USER_DETAILS_PAGE}>
-            <button className="bg-primary-2 text-white px-4 py-2 rounded">
+            <button className="bg-primary-2 text-white px-4 py-2 rounded hover:bg-secondary-2 transition duration-300">
               Edit Profile
             </button>
           </Link>
@@ -185,7 +185,7 @@ export default function UserDashboard() {
                         No registered events yet.
                       </p>
                       <button
-                        className="bg-primary-2 text-white px-4 py-2 rounded-full"
+                        className="bg-primary-2 text-white px-4 py-2 rounded-full hover:bg-secondary-2 transition duration-300"
                         onClick={() => {
                           navigate(EVENTS_PAGE);
                         }}
@@ -243,7 +243,7 @@ export default function UserDashboard() {
                         No registered competition yet.
                       </p>
                       <button
-                        className="bg-primary-2 text-white px-4 py-2 rounded-full"
+                        className="bg-primary-2 text-white px-4 py-2 rounded-full hover:bg-secondary-2 transition duration-300"
                         onClick={() => {
                           navigate(`${EVENTS_PAGE}?category=Competition`);
                         }}

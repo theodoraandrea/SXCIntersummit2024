@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import bg from "./../../images/Kiri.png";
-import { login, register } from "../../service/services";
-import { useState } from "react";
+import {
+  login,
+  register,
+  postForgotPassword,
+  postVerifyOtp,
+  putResetPassword,
+} from "../../service/services";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useUser } from "../../contexts/user-context";
 import { USER_DETAILS_PAGE, HOME } from "../../constants/routes";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -25,6 +29,11 @@ export default function Landing() {
   const [errorMessage, setErrorMessage] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
   const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
+  const [otpMode, setOtpMode] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [otpIsValid, setOtpIsValid] = useState(null);
+  const [otpTouched, setOtpTouched] = useState(false);
+  const [enterNewPasswordMode, setEnterNewPasswordMode] = useState(false);
 
   const navigate = useNavigate();
 
@@ -38,7 +47,10 @@ export default function Landing() {
     if (confirmPasswordTouched) {
       setConfirmPasswordIsValid(password === confirmPassword);
     }
-  }, [email, password, confirmPassword]);
+    if (otpTouched) {
+      setOtpIsValid(otp.length === 6); // Assuming OTP is 6 digits
+    }
+  }, [email, password, confirmPassword, otp]);
 
   useEffect(() => {
     if (emailTouched && !emailIsValid) {
@@ -47,6 +59,8 @@ export default function Landing() {
       setValidationMessage("Password must be at least 6 characters long");
     } else if (confirmPasswordTouched && !confirmPasswordIsValid) {
       setValidationMessage("Passwords do not match");
+    } else if (otpTouched && !otpIsValid) {
+      setValidationMessage("Invalid OTP");
     } else {
       setValidationMessage("");
     }
@@ -96,10 +110,65 @@ export default function Landing() {
     }
   };
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
-    // Handle the forgot password logic here
-    alert("Password reset instructions sent to your email.");
+    if (validateEmail(email.trim())) {
+      try {
+        const response = await postForgotPassword(email);
+        console.log(response);
+        if (response.status === 201) {
+          setOtpMode(true);
+          setForgotPasswordMode(false);
+        }
+      } catch (error) {
+        setErrorMessage(
+          "Failed to send password reset email. Please try again."
+        );
+      }
+    }
+  };
+
+  const handleOtpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await postVerifyOtp(otp);
+      console.log(response);
+      if (response.status === 200) {
+        setEnterNewPasswordMode(true);
+        setOtpMode(false);
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    if (validatePassword()) {
+      try {
+        const response = await putResetPassword({ email, password });
+        if (response.status === 200) {
+          setValidationMessage("Password reset successfully. Please login.");
+          setEnterNewPasswordMode(false);
+          setForgotPasswordMode(false);
+          setOtpMode(false);
+          setActiveTab("login");
+        }
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
+    } else {
+      setValidationMessage("Passwords do not match or invalid.");
+    }
+  };
+
+  const resetAllModes = () => {
+    setForgotPasswordMode(false);
+    setOtpMode(false);
+    setEnterNewPasswordMode(false);
+    setActiveTab("login");
+    setErrorMessage("");
+    setValidationMessage("");
   };
 
   return (
@@ -113,7 +182,8 @@ export default function Landing() {
       {/* Right Side */}
       <div className="w-1/2 bg-primary-1 flex flex-col justify-center items-center p-8">
         <div className="flex justify-center space-x-6 mb-8">
-          {!forgotPasswordMode && (
+          {/* Login Page or Register page*/}
+          {!forgotPasswordMode && !otpMode && !enterNewPasswordMode && (
             <>
               <button
                 className={`text-lg font-semibold ${
@@ -121,7 +191,10 @@ export default function Landing() {
                     ? "text-yellow-500 border-b-4 border-yellow-500"
                     : "text-gray-500"
                 }`}
-                onClick={() => setActiveTab("login")}
+                onClick={() => {
+                  resetAllModes();
+                  setActiveTab("login");
+                }}
               >
                 Login
               </button>
@@ -132,8 +205,8 @@ export default function Landing() {
                     : "text-gray-500"
                 }`}
                 onClick={() => {
+                  resetAllModes();
                   setActiveTab("register");
-                  setErrorMessage("");
                 }}
               >
                 Register
@@ -141,149 +214,223 @@ export default function Landing() {
             </>
           )}
         </div>
-        {!forgotPasswordMode && activeTab === "login" && (
-          <>
-            <form className="w-full max-w-sm" onSubmit={handleLogin}>
-              <input
-                id="email"
-                className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                id="password"
-                className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <small className="text-red-400 mb-4 block" hidden={!errorMessage}>
-                {errorMessage}
-              </small>
-              <button
-                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                type="submit"
-              >
-                Login
-              </button>
-              <small
-                className="text-gray-500 hover:text-white hover:underline cursor-pointer"
-                onClick={() => setForgotPasswordMode(true)}
-              >
-                Forgot Password?
-              </small>
-            </form>
-          </>
-        )}
-        {!forgotPasswordMode && activeTab === "register" && (
-          <>
-            <form className="w-full max-w-sm" onSubmit={handleRegister}>
-              <div className="relative w-full mb-4">
+        {!forgotPasswordMode &&
+          !otpMode &&
+          !enterNewPasswordMode &&
+          activeTab === "login" && (
+            <>
+              <form className="w-full max-w-sm text-white" onSubmit={handleLogin}>
                 <input
                   id="email"
-                  className={`w-full px-4 py-2 border rounded-lg bg-opacity-25 bg-white pr-10 ${
-                    emailTouched &&
-                    (emailIsValid ? "border-green-500" : "border-red-500")
-                  }`}
+                  className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  onFocus={() => setEmailTouched(true)}
                 />
-                {emailTouched && (
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    {emailIsValid ? (
-                      <CheckCircleOutlineIcon className="text-green-500" />
-                    ) : (
-                      <ErrorOutlineIcon className="text-red-500" />
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="relative w-full mb-4">
                 <input
                   id="password"
-                  className={`w-full px-4 py-2 border rounded-lg bg-opacity-25 bg-white pr-10 ${
-                    passwordTouched &&
-                    (passwordIsValid ? "border-green-500" : "border-red-500")
-                  }`}
+                  className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  onFocus={() => setPasswordTouched(true)}
                 />
-                {passwordTouched && (
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    {passwordIsValid ? (
-                      <CheckCircleOutlineIcon className="text-green-500" />
-                    ) : (
-                      <ErrorOutlineIcon className="text-red-500" />
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="relative w-full mb-4">
-                <input
-                  id="confirmPassword"
-                  className={`w-full px-4 py-2 border rounded-lg bg-opacity-25 bg-white pr-10 ${
-                    confirmPasswordTouched &&
-                    (confirmPasswordIsValid
-                      ? "border-green-500"
-                      : "border-red-500")
-                  }`}
-                  type="password"
-                  placeholder="Confirm password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  onFocus={() => setConfirmPasswordTouched(true)}
-                />
-                {confirmPasswordTouched && (
-                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                    {confirmPasswordIsValid ? (
-                      <CheckCircleOutlineIcon className="text-green-500" />
-                    ) : (
-                      <ErrorOutlineIcon className="text-red-500" />
-                    )}
-                  </div>
-                )}
-              </div>
-              <small
-                className="text-red-400 mb-4 block"
-                hidden={!validationMessage}
-              >
-                {validationMessage}
-              </small>
-              <small className="text-red-400 mb-4 block" hidden={!errorMessage}>
-                {errorMessage}
-              </small>
-              <button
-                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                type="submit"
-              >
-                Register
-              </button>
-            </form>
-          </>
-        )}
-        {forgotPasswordMode && (
+                <small
+                  className="text-red-400 mb-4 block"
+                  hidden={!errorMessage}
+                >
+                  {errorMessage}
+                </small>
+                <button
+                  className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  type="submit"
+                >
+                  Login
+                </button>
+                <small
+                  className="text-gray-500 hover:text-white hover:underline cursor-pointer"
+                  onClick={() => {
+                    resetAllModes();
+                    setForgotPasswordMode(true);
+                  }}
+                >
+                  Forgot Password?
+                </small>
+              </form>
+            </>
+          )}
+        {!forgotPasswordMode &&
+          !otpMode &&
+          !enterNewPasswordMode &&
+          activeTab === "register" && (
+            <>
+              <form className="w-full max-w-sm text-white" onSubmit={handleRegister}>
+                <div className="relative w-full mb-4">
+                  <input
+                    id="email"
+                    className={`w-full px-4 py-2 border rounded-lg bg-opacity-25 bg-white pr-10 ${
+                      emailTouched &&
+                      (emailIsValid ? "border-green-500" : "border-red-500")
+                    }`}
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setEmailTouched(true)}
+                  />
+                  {emailTouched && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      {emailIsValid ? (
+                        <CheckCircleOutlineIcon className="text-green-500" />
+                      ) : (
+                        <ErrorOutlineIcon className="text-red-500" />
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="relative w-full mb-4">
+                  <input
+                    id="password"
+                    className={`w-full px-4 py-2 border rounded-lg bg-opacity-25 bg-white pr-10 ${
+                      passwordTouched &&
+                      (passwordIsValid ? "border-green-500" : "border-red-500")
+                    }`}
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setPasswordTouched(true)}
+                  />
+                  {passwordTouched && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      {passwordIsValid ? (
+                        <CheckCircleOutlineIcon className="text-green-500" />
+                      ) : (
+                        <ErrorOutlineIcon className="text-red-500" />
+                      )}
+                    </div>
+                  )}
+                </div>
+                <div className="relative w-full mb-4">
+                  <input
+                    id="confirmPassword"
+                    className={`w-full px-4 py-2 border rounded-lg bg-opacity-25 bg-white pr-10 ${
+                      confirmPasswordTouched &&
+                      (confirmPasswordIsValid
+                        ? "border-green-500"
+                        : "border-red-500")
+                    }`}
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onFocus={() => setConfirmPasswordTouched(true)}
+                  />
+                  {confirmPasswordTouched && (
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      {confirmPasswordIsValid ? (
+                        <CheckCircleOutlineIcon className="text-green-500" />
+                      ) : (
+                        <ErrorOutlineIcon className="text-red-500" />
+                      )}
+                    </div>
+                  )}
+                </div>
+                <small
+                  className="text-red-400 mb-4 block"
+                  hidden={!validationMessage}
+                >
+                  {validationMessage}
+                </small>
+                <small
+                  className="text-red-400 mb-4 block"
+                  hidden={!errorMessage}
+                >
+                  {errorMessage}
+                </small>
+                <button
+                  className="w-full px-5 py-2 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  type="submit"
+                >
+                  Register
+                </button>
+              </form>
+            </>
+          )}
+        {/* Forgot password page */}
+        {forgotPasswordMode && !otpMode && !enterNewPasswordMode && (
           <>
-            <p className="text-lg font-semibold text-yellow-500 py-5">
-              Forgot Password
-            </p>
-            <form className="w-full max-w-sm" onSubmit={handleForgotPassword}>
+            <form className="w-full max-w-sm text-white" onSubmit={handleForgotPassword}>
               <input
-                id="email"
+                id="forgotPasswordEmail"
                 className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
                 type="email"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <button
+                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                type="submit"
+              >
+                Send OTP
+              </button>
+              <small
+                className="text-gray-500 hover:text-white hover:underline cursor-pointer"
+                onClick={() => {
+                  resetAllModes();
+                  setActiveTab("login");
+                }}
+              >
+                Back
+              </small>
+            </form>
+          </>
+        )}
+        {/* Enter OTP page */}
+        {otpMode && (
+          <>
+            <form className="w-full max-w-sm text-white" onSubmit={handleOtpSubmit}>
+              <input
+                id="otp"
+                className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+              <button
+                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                type="submit"
+              >
+                Verify OTP
+              </button>
+            </form>
+          </>
+        )}
+        {/* Enter new password page */}
+        {enterNewPasswordMode && (
+          <>
+            <form className="w-full max-w-sm" onSubmit={handleResetPassword}>
+              <input
+                id="newPassword"
+                className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
+                type="password"
+                placeholder="Enter new password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setPasswordTouched(true)}
+              />
+              <input
+                id="confirmNewPassword"
+                className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
+                type="password"
+                placeholder="Confirm new password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onFocus={() => setConfirmPasswordTouched(true)}
+              />
               <small
                 className="text-red-400 mb-4 block"
                 hidden={!validationMessage}
@@ -294,14 +441,8 @@ export default function Landing() {
                 className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 type="submit"
               >
-                Send Reset Link
+                Reset Password
               </button>
-              <small
-                className="text-gray-500 cursor-pointer hover:text-white hover:underline"
-                onClick={() => setForgotPasswordMode(false)}
-              >
-                Back to Login
-              </small>
             </form>
           </>
         )}
