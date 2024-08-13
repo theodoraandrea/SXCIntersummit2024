@@ -36,6 +36,7 @@ export default function Landing() {
   const [otpIsValid, setOtpIsValid] = useState(null);
   const [otpTouched, setOtpTouched] = useState(false);
   const [enterNewPasswordMode, setEnterNewPasswordMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -82,11 +83,14 @@ export default function Landing() {
     e.preventDefault();
     if (validateEmail(email.trim())) {
       try {
+        setIsLoading(true);
         const response = await login({ email, password });
         console.log("Login successful", response);
         loginUser(response.user);
         navigate(HOME);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         setErrorMessage(error.message);
       }
     }
@@ -101,10 +105,13 @@ export default function Landing() {
         password: password,
       };
       try {
+        setIsLoading(true);
         const response = await register(data);
         loginUser();
         navigate(USER_DETAILS_PAGE);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         setErrorMessage(error.message);
       }
     } else {
@@ -116,6 +123,7 @@ export default function Landing() {
     e.preventDefault();
     if (validateEmail(email.trim())) {
       try {
+        setIsLoading(true);
         const response = await postForgotPassword(email);
         console.log(response);
         if (response.status === 201) {
@@ -132,8 +140,10 @@ export default function Landing() {
           });
           setOtpMode(true);
           setForgotPasswordMode(false);
+          setIsLoading(false);
         }
       } catch (error) {
+        setIsLoading(false);
         setErrorMessage(
           "Failed to send password reset email. Please try again."
         );
@@ -144,13 +154,16 @@ export default function Landing() {
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const response = await postVerifyOtp(otp);
       console.log(response);
       if (response.status === 200) {
         setEnterNewPasswordMode(true);
         setOtpMode(false);
+        setIsLoading(false);
       }
     } catch (error) {
+      setIsLoading(false);
       setErrorMessage(error.message);
     }
   };
@@ -159,6 +172,7 @@ export default function Landing() {
     e.preventDefault();
     if (validatePassword()) {
       try {
+        setIsLoading(true);
         const response = await putResetPassword({ email, password });
         if (response.status === 200) {
           Swal.fire({
@@ -176,8 +190,10 @@ export default function Landing() {
           setForgotPasswordMode(false);
           setOtpMode(false);
           setActiveTab("login");
+          setIsLoading(false);
         }
       } catch (error) {
+        setIsLoading(false);
         setErrorMessage(error.message);
       }
     } else {
@@ -289,8 +305,15 @@ export default function Landing() {
                   {errorMessage}
                 </small>
                 <button
-                  className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className={`w-full px-5 py-2 mb-4 text-white font-bold rounded-lg 
+                    ${
+                      isLoading
+                        ? "bg-gray-600 cursor-not-allowed"
+                        : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                    }
+                    focus:outline-none focus:ring-2`}
                   type="submit"
+                  disabled={isLoading}
                 >
                   Login
                 </button>
@@ -399,8 +422,15 @@ export default function Landing() {
                   {errorMessage}
                 </small>
                 <button
-                  className="w-full px-5 py-2 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className={`w-full px-5 py-2 mb-4 text-white font-bold rounded-lg 
+                    ${
+                      isLoading
+                        ? "bg-gray-600 cursor-not-allowed"
+                        : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                    }
+                    focus:outline-none focus:ring-2`}
                   type="submit"
+                  disabled={isLoading}
                 >
                   Register
                 </button>
@@ -426,8 +456,15 @@ export default function Landing() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <button
-                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className={`w-full px-5 py-2 mb-4 text-white font-bold rounded-lg 
+                  ${
+                    isLoading
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                  }
+                  focus:outline-none focus:ring-2`}
                 type="submit"
+                disabled={isLoading}
               >
                 Send OTP
               </button>
@@ -459,8 +496,15 @@ export default function Landing() {
                 onChange={(e) => setOtp(e.target.value)}
               />
               <button
-                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className={`w-full px-5 py-2 mb-4 text-white font-bold rounded-lg 
+                  ${
+                    isLoading
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                  }
+                  focus:outline-none focus:ring-2`}
                 type="submit"
+                disabled={isLoading}
               >
                 Verify OTP
               </button>
@@ -496,8 +540,15 @@ export default function Landing() {
                 {validationMessage}
               </small>
               <button
-                className="w-full px-5 py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className={`w-full px-5 py-2 mb-4 text-white font-bold rounded-lg 
+                  ${
+                    isLoading
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                  }
+                  focus:outline-none focus:ring-2`}
                 type="submit"
+                disabled={isLoading}
               >
                 Reset Password
               </button>
