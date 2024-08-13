@@ -145,12 +145,12 @@ const fetchRegisteredEvents = async () => {
 };
 
 // Get two events for homepage
-const fetchOneEvent = async () => {
+const fetchTwoEvents = async () => {
   try {
     const response = await axiosInstance.get(API_GET_ALL_EVENTS);
     const allEvents = response.data;
 
-    const oneEvents = allEvents.slice(0, 1);
+    const oneEvents = allEvents.slice(0, 2);
     return oneEvents;
   } catch (error) {
     console.error("Error fetching events:", error);
@@ -282,7 +282,7 @@ export {
   putProfileData,
   fetchRegisteredEvents,
   fetchAllEvents,
-  fetchOneEvent,
+  fetchTwoEvents,
   fetchAllCompetitions,
   fetchRegisteredCompetitions,
   postNewFceoMember,

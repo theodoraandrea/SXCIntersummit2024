@@ -15,7 +15,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { fetchAllCompetitions, fetchOneEvent } from "../service/services";
+import { fetchAllCompetitions, fetchTwoEvents } from "../service/services";
 import { EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
 import { normalizeData } from "../service/helpers";
 
@@ -48,18 +48,29 @@ export default function Home() {
     window.scrollTo(0, 0);
     const getEventCards = async () => {
       try {
-        const data = await fetchOneEvent();
+        const data = await fetchTwoEvents();
         const eventData = normalizeData(data, "event");
 
         const dataCompetitions = await fetchAllCompetitions();
-        const oneCompetition = dataCompetitions.slice(0, 1);
+        const twoCompetition = dataCompetitions.slice(0, 2);
         const normalizedOneCompetition = normalizeData(
-          oneCompetition,
+          twoCompetition,
           "competition"
         );
 
+        const combinedData = [
+          ...(eventData ? eventData : []),
+          ...(normalizedOneCompetition ? normalizedOneCompetition : []),
+        ];
+
+        const sortedCombinedData = combinedData.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return dateA - dateB; // Sort by ascending order
+        });
+
         // Update state with combined data
-        setEventCards([...eventData, ...normalizedOneCompetition]);
+        setEventCards(sortedCombinedData);
       } catch (error) {
         console.error("Failed to fetch events:", error);
       }
@@ -134,7 +145,7 @@ export default function Home() {
       <section id="event-section" className="bg-primary-1 py-10">
         {/*<div className="max-w-7xl justify-between mx-auto px-4">*/}
         <div className="grid sm:grid-cols-2 gap-4 mx-4 md:mx-8">
-          {eventCards.map((card, index) => (
+          {eventCards.slice(0, 2).map((card, index) => (
             <>
               <div key={index} className="px-2">
                 <div className="text-3xl text-white font-bold pb-10">
