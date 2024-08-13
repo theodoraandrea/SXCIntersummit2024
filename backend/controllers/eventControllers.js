@@ -115,7 +115,6 @@ exports.registerBMC = async (req, res) => {
     const files = req.files;
 
     const user = await User.findByPk(userId);
-    const email = user.email;
     const event = await Event.findByPk(bmcId);
 
     if (!user && !event) {

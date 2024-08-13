@@ -849,6 +849,7 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
                 const memberData = {
                   teamId: response.team.id,
                   fullname: member.fullName,
+                  gender: member.gender,
                   email: member.email,
                   school: member.school,
                   phoneNumber: member.phoneNumber
