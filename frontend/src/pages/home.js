@@ -15,11 +15,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { fetchTwoEvents } from "../service/services";
+import { fetchAllCompetitions, fetchOneEvent } from "../service/services";
 import { EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
+import { normalizeData } from "../service/helpers";
 
 export default function Home() {
   const [eventCards, setEventCards] = useState([]);
+  const [competitionCard, setCompetitionCard] = useState([]);
   const [showArrows, setShowArrows] = useState(false);
   const location = useLocation();
   const partnershipRef = useRef(null);
@@ -46,8 +48,18 @@ export default function Home() {
     window.scrollTo(0, 0);
     const getEventCards = async () => {
       try {
-        const data = await fetchTwoEvents();
-        setEventCards(data);
+        const data = await fetchOneEvent();
+        const eventData = normalizeData(data, "event");
+
+        const dataCompetitions = await fetchAllCompetitions();
+        const oneCompetition = dataCompetitions.slice(0, 1);
+        const normalizedOneCompetition = normalizeData(
+          oneCompetition,
+          "competition"
+        );
+
+        // Update state with combined data
+        setEventCards([...eventData, ...normalizedOneCompetition]);
       } catch (error) {
         console.error("Failed to fetch events:", error);
       }
@@ -119,33 +131,37 @@ export default function Home() {
       </section>
 
       {/* Events Section */}
-      <section id="event-section" className="bg-primary-1 py-20">
+      <section id="event-section" className="bg-primary-1 py-10">
         {/*<div className="max-w-7xl justify-between mx-auto px-4">*/}
         <div className="grid sm:grid-cols-2 gap-4 mx-4 md:mx-8">
           {eventCards.map((card, index) => (
-            <div key={index} className="px-2">
-              <div className="bg-gradient-primary rounded-xl">
-                <div className="h-60 flex mb-4 bg-white rounded">
-                  <img
-                    className="w-full h-full object-cover rounded-t-xl rounded-b-none md:rounded-lg md:rounded-l-xl"
-                    src={card.image}
-                    alt="Event"
-                    style={{ objectFit: "cover" }}
-                  />
+            <>
+              <div key={index} className="px-2">
+                <div className="text-3xl text-white font-bold pb-10">
+                  Upcoming {card.type}
                 </div>
-                <div className="p-4 pb-8 md:p-8">
-                  <h1 className="text-xl font-bold mt-4 text-white">
-                    {card.eventName}
-                  </h1>
-                  <p className="mt-2 text-white">{card.shortDesc}</p>
-                  <Link to={`${EVENTS_PAGE}`}>
-                    <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300">
-                      View Event
-                    </button>
-                  </Link>
+                <div className="bg-gradient-primary rounded-xl">
+                  <div className="h-60 flex mb-4 bg-white rounded-b-none rounded-t-lg">
+                    <img
+                      className="w-full h-full object-cover rounded-b-none rounded-t-xl"
+                      src={card.image}
+                      alt="Event"
+                    />
+                  </div>
+                  <div className="p-4 pb-8 md:p-8">
+                    <h1 className="text-xl font-bold mt-4 text-white">
+                      {card.title}
+                    </h1>
+                    <p className="mt-2 text-white">{card.description}</p>
+                    <Link to={`${EVENT_DETAILS}/${card.id}`}>
+                      <button className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition duration-300">
+                        View Event
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           ))}
         </div>
         <div className="mt-16">
