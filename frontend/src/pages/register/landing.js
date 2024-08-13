@@ -228,7 +228,7 @@ export default function Landing() {
         style={{ backgroundImage: `url(${bg})` }}
       >
         <button
-          className="md:hidden absolute bottom-5 left-1/2 text-black p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none"
+          className="md:hidden absolute bottom-5 left-[45%] text-black p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none"
           onClick={scrollToFormContainer}
         >
           <ArrowDropDownCircleIcon style={{ color: "white" }} />
