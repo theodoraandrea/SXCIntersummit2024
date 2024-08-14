@@ -1,5 +1,4 @@
-//const API_URL = "http://localhost:3001";
-const API_URL = "https://b660-34-34-219-121.ngrok-free.app";
+const API_URL = "http://localhost:3001";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";
