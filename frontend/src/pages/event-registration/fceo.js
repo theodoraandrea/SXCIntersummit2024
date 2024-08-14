@@ -162,11 +162,60 @@ const FirstView = ({
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen flex justify-center">
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4">
-            FCEO Registration
-          </h1>
+      <div className="bg-gradient-primary text-center py-8">
+        <h1 className="text-3xl font-bold text-white">
+              FCEO Registration
+        </h1>
+      </div>
+      <div className="bg-gradient-primary w-full min-h-screen grid grid-cols-1 lg:grid-cols-3 flex justify-center">
+        <div className="bg-dark-2 col-span-1 p-4 pt-0 rounded-lg shadow-lg text-center">
+          <div className="mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <h1 className="text-xl font-bold text-white mb-2">
+              Registration Fee
+            </h1>
+            <p className="text-white mx-4 mb-2 text-center">
+              Please transfer the following amount to complete your registration
+            </p>
+            <div className="text-white text-left w-40">
+              <div className="flex flex-row justify-between">
+                <p>
+                  <strong>Price: </strong>
+                </p>
+                <p>{regularPrice}</p>
+              </div>
+              {verifiedRefCode && refCodeValid && (
+                <>
+                  <div className="flex flex-row justify-between">
+                    <p>
+                      <strong>Discount:</strong>
+                    </p>
+                    <p>{discount}</p>
+                  </div>
+                  <div className="flex flex-row justify-between">
+                    <p>
+                      <strong>Total:</strong>
+                    </p>
+                    <p>
+                      <strong>{discountedPrice}</strong>
+                    </p>
+                  </div>
+                </>
+              )}
+            </div>
+            <p className="text-white mx-4 text-center">
+              <strong>Bank Account Number: </strong>
+              {bankAccount}
+            </p>
+          </div>
+          <ReferralModal
+            eventName="fceo"
+            referralCode={formData.referralCode ?? ""}
+            verifiedRefCode={verifiedRefCode}
+            setVerifiedRefCode={setVerifiedRefCode}
+            setRefCodeValid={setRefCodeValid}
+          />
+        </div>
+        <div className="bg-dark-2 col-span-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
           <form className="text-left">
             <h1 className="text-lg font-bold text-white">Leader Data</h1>
             <p className="text-white font-bold mb-2">
@@ -394,53 +443,6 @@ const FirstView = ({
               Next
             </button>
           </div>
-        </div>
-        <div className="bg-dark-2 p-4 pt-0 rounded-lg shadow-lg text-center">
-          <div className="mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold text-white mb-2">
-              Registration Fee
-            </h1>
-            <p className="text-white mx-4 mb-2 text-center">
-              Please transfer the following amount to complete your registration
-            </p>
-            <div className="text-white text-left w-40">
-              <div className="flex flex-row justify-between">
-                <p>
-                  <strong>Price: </strong>
-                </p>
-                <p>{regularPrice}</p>
-              </div>
-              {verifiedRefCode && refCodeValid && (
-                <>
-                  <div className="flex flex-row justify-between">
-                    <p>
-                      <strong>Discount:</strong>
-                    </p>
-                    <p>{discount}</p>
-                  </div>
-                  <div className="flex flex-row justify-between">
-                    <p>
-                      <strong>Total:</strong>
-                    </p>
-                    <p>
-                      <strong>{discountedPrice}</strong>
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
-            <p className="text-white mx-4 text-center">
-              <strong>Bank Account Number: </strong>
-              {bankAccount}
-            </p>
-          </div>
-          <ReferralModal
-            eventName="fceo"
-            referralCode={formData.referralCode ?? ""}
-            verifiedRefCode={verifiedRefCode}
-            setVerifiedRefCode={setVerifiedRefCode}
-            setRefCodeValid={setRefCodeValid}
-          />
         </div>
       </div>
     </div>

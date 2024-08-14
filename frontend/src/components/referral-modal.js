@@ -6,6 +6,8 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
     const [ code, setCode ] = useState(referralCode ?? "");
     const [ referralDetails, setReferralDetails ] = useState({});
 
+    const [ isLoading, setIsLoading ] = useState(false); 
+
     const [ error, setError ] = useState(false);
     const [ errorMsg, setErrorMsg ] = useState(null);
     const [ submitTouched, setSubmitTouched ] = useState(false);
@@ -23,6 +25,7 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
 
     const handleSubmit = async () => {
         try {
+            setIsLoading(true);
             const res = await postCheckReferralCode({
                 code: code,
                 eventName: eventName
@@ -32,6 +35,7 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
             setError(true);
             setErrorMsg(error.response?.data?.message);
         } finally {
+            setIsLoading(false);
             setSubmitTouched(true);
         }
     }
@@ -49,15 +53,21 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
             onChange={(e)=>{
                 setCode(e.target.value);
             }}
-            className="max-w-fit px-3 py-2 rounded-lg"
+            className="max-w-fit px-3 py-2 mb-4 rounded-lg"
           />
-          <div className="block sm:inline mt-4">
-          <button
-          className="ml-3 bg-primary-3 text-white px-6 py-2 rounded-full"
-          onClick={handleSubmit}
-          >
-            Use code
-          </button>
+          <div className="block sm:inline">
+            <button
+            className={`ml-3 text-white px-6 py-2 rounded-full
+                ${
+                    isLoading
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                  }
+            `}
+            onClick={handleSubmit}
+            >
+                Use code
+            </button>
           </div>
           </div>
           {error && <p className="text-red-500 mt-2">{errorMsg}</p>}
