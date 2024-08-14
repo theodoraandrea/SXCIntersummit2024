@@ -5,6 +5,7 @@ import {
   register,
   postForgotPassword,
   postVerifyOtp,
+  postVerifyEmail,
   putResetPassword,
 } from "../../service/services";
 import { useNavigate } from "react-router-dom";
@@ -30,12 +31,16 @@ export default function Landing() {
   const [confirmPasswordIsValid, setConfirmPasswordIsValid] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  // Page Modes
   const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
   const [otpMode, setOtpMode] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpIsValid, setOtpIsValid] = useState(null);
   const [otpTouched, setOtpTouched] = useState(false);
   const [enterNewPasswordMode, setEnterNewPasswordMode] = useState(false);
+  const [emailOtp, setEmailOtp] = useState("");
+  const [verifyEmailOtpMode, setVerifyEmailOtpMode] = useState(false);
+  // Loading
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -85,7 +90,7 @@ export default function Landing() {
       try {
         setIsLoading(true);
         const response = await login({ email, password });
-        console.log("Login successful", response);
+        // console.log("Login successful", response);
         loginUser(response.user);
         navigate(HOME);
         setIsLoading(false);
@@ -96,26 +101,71 @@ export default function Landing() {
     }
   };
 
-  const handleRegister = async (e) => {
+  const handleVerifyEmail = async (e) => {
     e.preventDefault();
-
     if (validatePassword()) {
-      const data = {
-        email: email,
-        password: password,
-      };
       try {
         setIsLoading(true);
-        const response = await register(data);
-        loginUser();
-        navigate(USER_DETAILS_PAGE);
+        const response = await postVerifyEmail({ email, password });
+        if (response.status === 201) {
+          Swal.fire({
+            title: "Verification Code Sent!",
+            text: "Please check your email for the Verification Code!",
+            icon: "success",
+            confirmButtonText: "Okay",
+            customClass: {
+              confirmButton:
+                "bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500",
+            },
+            buttonsStyling: false,
+          });
+          setVerifyEmailOtpMode(true);
+        }
         setIsLoading(false);
       } catch (error) {
+        setErrorMessage(error.response.data.message[0].msg);
         setIsLoading(false);
-        setErrorMessage(error.message);
       }
     } else {
       setValidationMessage("Passwords do not match");
+      setIsLoading(false);
+    }
+  };
+
+  // Handle register OTP
+  const handleRegisterOtpSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      const response = await postVerifyOtp(emailOtp);
+      if (response.status === 200) {
+        handleRegister(e);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setErrorMessage(error.message);
+    }
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+    try {
+      setIsLoading(true);
+      const response = await register(data);
+      if (response.status === 440) {
+        setErrorMessage("Session Expired, please try again");
+      }
+      loginUser();
+      navigate(USER_DETAILS_PAGE);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setErrorMessage(error.message);
     }
   };
 
@@ -151,6 +201,7 @@ export default function Landing() {
     }
   };
 
+  // Handle forgot password OTP
   const handleOtpSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -203,6 +254,7 @@ export default function Landing() {
 
   const resetAllModes = () => {
     setForgotPasswordMode(false);
+    setVerifyEmailOtpMode(false);
     setOtpMode(false);
     setEnterNewPasswordMode(false);
     setActiveTab("login");
@@ -332,11 +384,12 @@ export default function Landing() {
         {!forgotPasswordMode &&
           !otpMode &&
           !enterNewPasswordMode &&
+          !verifyEmailOtpMode &&
           activeTab === "register" && (
             <>
               <form
                 className="w-full max-w-sm text-white"
-                onSubmit={handleRegister}
+                onSubmit={handleVerifyEmail}
               >
                 <div className="relative w-full mb-4">
                   <input
@@ -434,6 +487,45 @@ export default function Landing() {
                 >
                   Register
                 </button>
+              </form>
+            </>
+          )}
+        {verifyEmailOtpMode &&
+          !forgotPasswordMode &&
+          !enterNewPasswordMode &&
+          activeTab === "register" && (
+            <>
+              <form
+                className="w-full max-w-sm text-white"
+                onSubmit={handleRegisterOtpSubmit}
+              >
+                <input
+                  id="otp"
+                  className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
+                  type="text"
+                  placeholder="Enter 6 Digit Verification Code"
+                  value={emailOtp}
+                  onChange={(e) => setEmailOtp(e.target.value)}
+                />
+                <button
+                  className={`w-full px-5 py-2 mb-4 text-white font-bold rounded-lg 
+                  ${
+                    isLoading
+                      ? "bg-gray-600 cursor-not-allowed"
+                      : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+                  }
+                  focus:outline-none focus:ring-2`}
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  Verify Email
+                </button>
+                <small
+                  className="text-red-400 mb-4 block"
+                  hidden={!errorMessage}
+                >
+                  {errorMessage}
+                </small>
               </form>
             </>
           )}

@@ -7,6 +7,7 @@ import {
   API_POST_FORGOT_PASSWORD,
   API_POST_VERIFY_OTP,
   API_PUT_RESET_PASSWORD,
+  API_POST_VERIFY_EMAIL,
   // GET DATA
   API_GET_ALL_EVENTS,
   API_GET_USER_REGISTERED_EVENTS,
@@ -81,6 +82,18 @@ const postVerifyOtp = async (otp) => {
   const data = { otpCode: otp };
   try {
     const res = await axiosInstance.post(API_POST_VERIFY_OTP, data);
+    return res;
+  } catch (error) {
+    console.error("Error verifying OTP: ", error);
+    throw error;
+  }
+};
+
+// Verify Email
+const postVerifyEmail = async ({ email, password }) => {
+  const data = { email, password };
+  try {
+    const res = await axiosInstance.post(API_POST_VERIFY_EMAIL, data);
     return res;
   } catch (error) {
     console.error("Error verifying OTP: ", error);
@@ -295,4 +308,5 @@ export {
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,
+  postVerifyEmail,
 };
