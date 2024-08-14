@@ -150,8 +150,8 @@ const fetchTwoEvents = async () => {
     const response = await axiosInstance.get(API_GET_ALL_EVENTS);
     const allEvents = response.data;
 
-    const twoEvents = allEvents.slice(0, 2);
-    return twoEvents;
+    const oneEvents = allEvents.slice(0, 2);
+    return oneEvents;
   } catch (error) {
     console.error("Error fetching events:", error);
     throw error;

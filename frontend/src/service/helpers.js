@@ -44,7 +44,7 @@ const getCompetitionSummaryLink = (competitionId) => {
     default:
       return "#";
   }
-}
+};
 
 const getEventSummaryLink = (eventId) => {
   switch (eventId) {
@@ -53,7 +53,7 @@ const getEventSummaryLink = (eventId) => {
     default:
       return "#";
   }
-}
+};
 
 // Function to format the date
 const formatDate = (dateString) => {
@@ -72,6 +72,7 @@ const normalizeData = (data, type) => {
     if (type === "event") {
       return {
         id: `event_${item.id}`,
+        type: type,
         title: item.eventName,
         description: item.description || item.shortDesc,
         category: item.category,
@@ -81,6 +82,7 @@ const normalizeData = (data, type) => {
     } else if (type === "competition") {
       return {
         id: `comp_${item.id}`,
+        type: type,
         title: item.competitionName,
         description: item.shortDesc,
         category: "Competition",
@@ -93,10 +95,11 @@ const normalizeData = (data, type) => {
   });
 };
 
-export { getDaysUntilEvent, 
-  formatDate, 
-  getTeamDetailsUrl, 
-  normalizeData, 
+export {
+  getDaysUntilEvent,
+  formatDate,
+  getTeamDetailsUrl,
+  normalizeData,
   getCompetitionSummaryLink,
-  getEventSummaryLink
+  getEventSummaryLink,
 };
