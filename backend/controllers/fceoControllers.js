@@ -83,7 +83,7 @@ exports.createNewTeam = async (req, res) => {
       teamCode,
       proofOfPayment: proofPayment,
       screenshotFCEO: screenshotFCEO,
-      referralCode: referralCode
+      referralCode: referralCode,
     });
 
     await CompetitionRegistration.create({
@@ -194,7 +194,12 @@ exports.createNewFCEOMember = async (req, res) => {
       },
     };
 
-    const emailResult = await sendAutomatedEmail({ userId, emailDetails });
+    const subject = `Welcome to SxC Intersummit - ${user.fullname}`;
+    const emailResult = await sendAutomatedEmail({
+      user,
+      subject,
+      emailDetails,
+    });
 
     if (!emailResult.success) {
       return res
