@@ -1,6 +1,40 @@
-import React from 'react';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
+const errorAlert = (message) => {
+    Swal.fire({
+        titleText: 'Error!',
+        text: message,
+        icon: 'error',
+        toast: true,
+        width:'30rem',
+        timer: 2000,
+        position: 'top',
+        padding: '1rem 2rem',
+        showConfirmButton: false
+      });
+}
+
+const successAlert = (message) => {
+    Swal.fire({
+        titleText: 'Success!',
+        text: message,
+        icon: 'success',
+        toast: true,
+        timer: 4000,
+        position: 'top',
+        width:'30em',
+        padding: '1rem 2rem',
+        showConfirmButton: false,
+        showCloseButton:true
+      });
+}
+
+export {
+    errorAlert,
+    successAlert
+}
+
+/*
 const DynamicAlertComponent = ({ isSuccess, message }) => {
     const handleAlert = () => {
         if (isSuccess) {
@@ -15,9 +49,8 @@ const DynamicAlertComponent = ({ isSuccess, message }) => {
     }, [isSuccess, message]);
 
     return null;
-};
+};*/
 
-export default DynamicAlertComponent;
 
 // Implementation : 
 

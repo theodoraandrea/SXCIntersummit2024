@@ -87,7 +87,11 @@ const BMCSummary = () => {
         <div>
             <Navbar/>
             <div className='bg-gradient-primary w-full min-h-screen p-4 text-white'>
-            { isLoading ? <Spinner customStyles={{ margin: "2rem 0"}} /> :
+            { isLoading ?          
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <Spinner/>
+                </div>
+            :
                                 <div className='flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25'>
                                 <p className='text-xl font-bold mb-2'>BMC Registrations</p>
                                 {

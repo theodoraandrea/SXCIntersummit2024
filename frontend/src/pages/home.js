@@ -147,11 +147,11 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 gap-4 mx-4 md:mx-8">
           {eventCards.map((card, index) => (
             <>
-              <div key={index} className="px-2">
-                <div className="text-3xl text-white font-bold pb-10">
+              <div key={index} className="px-2 my-8 md:mt-5">
+                <div className="text-3xl my-4 text-white font-bold">
                   Upcoming {card.type}
                 </div>
-                <div className="bg-gradient-primary rounded-xl">
+                <div className="bg-gradient-primary rounded-xl h-full">
                   <div className="h-60 flex mb-4 bg-white rounded-b-none rounded-t-lg">
                     <img
                       className="w-full h-full object-cover rounded-b-none rounded-t-xl"
@@ -175,7 +175,7 @@ export default function Home() {
             </>
           ))}
         </div>
-        <div className="mt-16">
+        <div className="mt-32">
           <Link to={EVENTS_PAGE} className="flex justify-center items-center">
             <h1 className="text-xl text-white mr-2">View all events</h1>
             <Box

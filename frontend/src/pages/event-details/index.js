@@ -20,6 +20,10 @@ export default function DetailEvents() {
 
   const [registered, setRegistered] = useState(false);
 
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  }, []);
+
   useEffect(() => {
     if (type === "comp") {
       if (registeredCompetitions.includes(id)) {

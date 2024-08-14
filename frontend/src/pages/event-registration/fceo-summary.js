@@ -43,7 +43,11 @@ const FCEOSummary = () => {
         <div>
             <Navbar />
             <div className='bg-gradient-primary w-full min-h-screen p-4 text-white'>
-            { isLoading ? <Spinner customStyles={{ margin: "2rem 0" }} /> :
+            { isLoading ? 
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Spinner/>
+            </div>    
+            :
                 <div className='grid grid-cols-1 lg:grid-cols-4 gap-4'>
                     <div className='rounded-lg shadow-lg p-4 bg-opacity-25'>
                         <p className='text-xl font-semibold mb-2'>Team Information</p>

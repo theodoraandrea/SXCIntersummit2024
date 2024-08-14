@@ -5,9 +5,13 @@ import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 import { fetchAllCompetitions, fetchAllEvents } from "../service/services";
 import { normalizeData } from "../service/helpers";
+import Spinner from "../components/elements/spinner";
 
 const Events = () => {
   const location = useLocation();
+
+  const [ isLoading, setIsLoading ] = useState(true);
+
   const [filter, setFilter] = useState("All");
   const [eventsData, setEventsData] = useState(null);
   const [competitionsData, setCompetitionsData] = useState(null);
@@ -40,6 +44,8 @@ const Events = () => {
       setCompetitionsData(normalizeData(response, "competition"));
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -72,8 +78,15 @@ const Events = () => {
   return (
     <>
       <Navbar currentPath={location.pathname} />
-      <div className="p-4 md:p-8 bg-primary-1 text-white min-h-screen">
-        <div className="flex mx-auto">
+      <div className="p-4 md:p-8 bg-primary-1 text-white h-screen">
+        {
+          isLoading ?
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Spinner/>
+          </div>
+           :
+          <>
+          <div className="flex mx-auto">
           <div className="flex space-x-4 mb-4 mx-auto">
             {["All", "Workshop", "Company Visit", "Competition"].map(
               (category) => (
@@ -107,6 +120,9 @@ const Events = () => {
             </div>
           )}
         </div>
+          </>
+        }
+
       </div>
       <Footer />
     </>

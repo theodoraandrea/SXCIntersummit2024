@@ -40,7 +40,7 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
         <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center">
           <h1 className="text-xl font-bold text-white">Referral Code</h1>
           <p className="text-md text-white mb-4">Enter your referral code to get a discount</p>
-          <div className="mt-8">
+          <div className="mt-8 flex-col">
           <input
             type="text"
             id="code"
@@ -51,12 +51,14 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
             }}
             className="max-w-fit px-3 py-2 rounded-lg"
           />
+          <div className="block sm:inline mt-4">
           <button
-          onClick={handleSubmit}
           className="ml-3 bg-primary-3 text-white px-6 py-2 rounded-full"
+          onClick={handleSubmit}
           >
             Use code
           </button>
+          </div>
           </div>
           {error && <p className="text-red-500 mt-2">{errorMsg}</p>}
           {
