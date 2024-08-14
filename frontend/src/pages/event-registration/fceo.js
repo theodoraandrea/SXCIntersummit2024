@@ -4,8 +4,9 @@ import Spinner from "../../components/elements/spinner";
 import ReferralModal from "../../components/referral-modal";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
-import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
+import { EVENTS_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
+import { errorAlert, successAlert } from "../../components/alert";
 
 const FirstView = ({
   eventData,
@@ -31,6 +32,7 @@ const FirstView = ({
   const [phoneNumber, setPhoneNumber] = useState("+62");
   const [email, setEmail] = useState("");
   const [teamName, setTeamName] = useState(formData.teamName ?? "");
+  const [members, setMembers] = useState(formData.members ?? "");
   const [studentIds, setStudentIds] = useState(formData.studentIds?.name ?? "");
   const [proofFollow, setProofFollow] = useState(
     formData.proofFollow?.name ?? ""
@@ -66,11 +68,14 @@ const FirstView = ({
           phoneNumber: phoneNumber,
           school: sanitizeInput(school),
           teamName: sanitizeInput(teamName),
+          members: members
         };
         setFormData(formData);
         console.log(formData);
         onNext();
       }
+    } else {
+
     }
   };
 
@@ -91,6 +96,7 @@ const FirstView = ({
       phoneNumber &&
       school &&
       teamName &&
+      members && 
       studentIds &&
       proofFollow &&
       proofTwibbon &&
@@ -98,6 +104,7 @@ const FirstView = ({
     ) {
       return true;
     }
+    errorAlert({ message: "All fields are required"});
     return false;
   };
 
@@ -142,22 +149,56 @@ const FirstView = ({
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+    
+    const file = files[0];
+
+    if (!checkFileSize(file)) {
+      return;
+    }
+
+    if (!checkFileType(file)) {
+      return;
+    }
+
     setFormData((prevState) => ({
       ...prevState,
-      [name]: files ? files[0] : value,
+      [name]: files ? file : value,
     }));
     if (name === "studentIds") {
-      setStudentIds(files[0].name);
+      setStudentIds(file.name);
     } else if (name === "proofFollow") {
-      setProofFollow(files[0].name);
+      setProofFollow(file.name);
     } else if (name === "proofTwibbon") {
-      setProofTwibbon(files[0].name);
+      setProofTwibbon(file.name);
     } else if (name === "proofStory") {
-      setProofStory(files[0].name);
+      setProofStory(file.name);
     } else if (name === "proofPayment") {
-      setProofPayment(files[0].name);
+      setProofPayment(file.name);
     }
   };
+
+  const checkFileSize = (file) => {
+    if (file.size <= 5000000) {
+      return true;
+    }
+    const message = "File size has to be 5MB or less";
+    errorAlert({ message: message });
+    console.log(message);
+    return false;
+  }
+  
+  const checkFileType = (file) => {
+    if (file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "application/pdf"
+    ) {
+      return true;
+    }
+    const message = "File has to be pdf, jpg, jpeg, or png";
+    errorAlert({ message: message });
+    console.log(message);
+    return false;
+  }
 
   return (
     <div>
@@ -287,7 +328,7 @@ const FirstView = ({
                 onBlur={formatPhoneNumber}
                 className="w-full px-3 py-2 rounded-lg"
               />
-              {phoneError && <p className="text-red-500">{phoneError}</p>}
+              {phoneError && <p className="text-yellow-500">{phoneError}</p>}
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -317,6 +358,34 @@ const FirstView = ({
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="selectMembers">
+                Number of members
+              </label>
+              <select
+              id="selectMembers"
+              name="selectMembers"
+              className="w-full px-3 py-2 rounded-lg"
+              onChange={(e) => {
+                setMembers(e.target.value)}}
+              value={members}
+            >
+              <option value="" disabled>
+                Select number of members
+              </option>
+              <option value="2">
+                2
+              </option>
+              <option value="3">
+                3
+              </option>
+            </select>
+
+            </div>
+            <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
+            <label className="block text-white mb-4">
+              File has to be pdf, jpeg, or png with size less than 5MB
+            </label>
             <label className="block text-white">Proof of Payment</label>
             <div className="my-4 relative w-fit">
               <input
@@ -422,22 +491,11 @@ const FirstView = ({
               <label className="text-white ml-2">{proofStory}</label>
             </div>
           </form>
-          <div className="mt-6 flex justify-center items-center">
-            <button
-              type="button"
-              onClick={onPrevious}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
-            >
-              Back
-            </button>
+          <div className="mt-6">
             <button
               type="button"
               onClick={handleSubmit}
-              className={`text-white px-6 py-2 rounded-full ${
-                !checkAllFilled()
-                  ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
-              }`}
+              className="text-white px-6 py-2 rounded-full bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
               disabled={emailError || phoneError}
             >
               Next
@@ -449,10 +507,12 @@ const FirstView = ({
   );
 };
 const Member1Data = ({
+  members,
   formData,
   setFormData,
   onPrevious,
-  onNext,
+  goToSummary,
+  goToNext,
   sanitizeInput,
 }) => {
   const [fullName, setFullName] = useState(formData.fullName ?? "");
@@ -477,7 +537,13 @@ const Member1Data = ({
         };
         setFormData(formData);
       }
-      onNext();
+      if (members === "2") {
+        goToSummary();
+      } else if (members === "3") {
+        goToNext();
+      } 
+    } else {
+      errorAlert({ message: "All fields must be filled"});
     }
   };
 
@@ -579,7 +645,7 @@ const Member1Data = ({
                 onChange={handleEmailChange}
                 className="w-full px-3 py-2 rounded-lg"
               />
-              {emailError && <p className="text-red-500">{emailError}</p>}
+              {emailError && <p className="text-yellow-500">{emailError}</p>}
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="phoneNumber">
@@ -594,7 +660,7 @@ const Member1Data = ({
                 onBlur={formatPhoneNumber}
                 className="w-full px-3 py-2 rounded-lg"
               />
-              {phoneError && <p className="text-red-500">{phoneError}</p>}
+              {phoneError && <p className="text-yellow-500">{phoneError}</p>}
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -614,7 +680,7 @@ const Member1Data = ({
             <button
               type="button"
               onClick={onPrevious}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+              className="bg-primary-3 text-white px-6 py-2 mr-6 hover:bg-yellow-600 rounded-full"
             >
               Back
             </button>
@@ -623,11 +689,7 @@ const Member1Data = ({
               onClick={() => {
                 handleSubmit();
               }}
-              className={`text-white px-6 py-2 rounded-full ${
-                !checkAllFilled()
-                  ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
-              }`}
+              className="text-white px-6 py-2 rounded-full bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
               disabled={emailError || phoneError}
             >
               Next
@@ -640,6 +702,7 @@ const Member1Data = ({
 };
 
 const Member2Data = ({
+  members,
   formData,
   setFormData,
   onPrevious,
@@ -659,10 +722,13 @@ const Member2Data = ({
     if (doesNotHaveMemberTwo()) {
       setFormData({});
       onNext();
+      return;
     }
 
     if (saveData()) {
       onNext();
+    } else {
+      errorAlert({ message: "All fields must be asdfasdf"});
     }
   };
 
@@ -705,8 +771,9 @@ const Member2Data = ({
   const doesNotHaveMemberTwo = () => {
     if (!fullName) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   };
 
   const handlePhoneNumberChange = (e) => {
@@ -800,7 +867,7 @@ const Member2Data = ({
                 onChange={handleEmailChange}
                 className="w-full px-3 py-2 rounded-lg"
               />
-              {emailError && <p className="text-red-500">{emailError}</p>}
+              {emailError && <p className="text-yellow-500">{emailError}</p>}
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="phoneNumber">
@@ -815,7 +882,7 @@ const Member2Data = ({
                 onBlur={formatPhoneNumber}
                 className="w-full px-3 py-2 rounded-lg"
               />
-              {phoneError && <p className="text-red-500">{phoneError}</p>}
+              {phoneError && <p className="text-yellow-500">{phoneError}</p>}
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -835,18 +902,14 @@ const Member2Data = ({
             <button
               type="button"
               onClick={handleBack}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+              className="bg-primary-3 text-white px-6 py-2 mr-6 hover:bg-yellow-600 rounded-full"
             >
               Back
             </button>
             <button
               type="button"
               onClick={handleNext}
-              className={`text-white px-6 py-2 rounded-full ${
-                !checkAllFilled()
-                  ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
-              }`}
+              className="text-white px-6 py-2 rounded-full bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
               disabled={fullName && (emailError || phoneError)}
             >
               Next
@@ -858,10 +921,11 @@ const Member2Data = ({
   );
 };
 
-const Summary = ({ eventData, formData, members, setCurrentView }) => {
+const Summary = ({ eventData, formData, members, member1Data, member2Data, setCurrentView }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setRegisteredCompetitions } = useUser();
+  const membersData = [member1Data, member2Data];
 
   const { fceoId } = eventData;
 
@@ -870,9 +934,9 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
       setIsLoading(true);
       const response = await registerTeam(formData);
       if (response.team.id) {
-        for (const member of members) {
+
+        for (const member of membersData) {
           if (member.fullName) {
-            console.log("posting member...", member);
             const memberData = {
               teamId: response.team.id,
               fullname: member.fullName,
@@ -883,7 +947,6 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
             };
             try {
               await registerMember(memberData);
-              console.log("posted member");
               setIsLoading(false);
               //Add this activeTab state for competition registrations
               //because user-dashboard opens "events" by default
@@ -893,15 +956,16 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
                 },
               });
               setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
-              {
-                /*INSERT SUCCESS ALERT*/
-              }
+              successAlert({ title: "Successfully registered for FCEO!",
+                message: "Please check your email and user dashboard for further details."
+              });
             } catch (memberError) {
               console.log("Error posting member: ", memberError);
               setIsLoading(false);
-              {
-                /*INSERT ERROR ALERT*/
-              }
+              errorAlert({
+                message: "Something went wrong. Please try again"
+              });
+              navigate(-1);
             }
           }
         }
@@ -909,9 +973,10 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
     } catch (error) {
       console.log("Error registering team: ", error);
       setIsLoading(false);
-      {
-        /*INSERT ERROR ALERT*/
-      }
+      errorAlert({
+        message: "Something went wrong. Please try again"
+      });
+      navigate(-1);
     }
   };
 
@@ -937,10 +1002,12 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
   };
 
   const onPrevious = () => {
-    if (members.length === 2) {
+    if (formData.members === "2") {
+      setCurrentView((prev) => prev - 2);
+    } else if (formData.members === "3") {
       setCurrentView((prev) => prev - 1);
     } else {
-      setCurrentView((prev) => prev - 2);
+      console.log(formData.members);
     }
   };
 
@@ -1025,7 +1092,7 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
                 </>
               )}
             </div>
-            {members.map(
+            {membersData.map(
               (member, index) =>
                 member.fullName && (
                   <div
@@ -1061,7 +1128,7 @@ const Summary = ({ eventData, formData, members, setCurrentView }) => {
               <button
                 type="button"
                 onClick={onPrevious}
-                className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+                className="bg-primary-3 text-white px-6 py-2 mr-6 hover:bg-yellow-600 rounded-full"
               >
                 Back
               </button>
@@ -1099,9 +1166,13 @@ const EventCard = () => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
   };
 
-  const handleNext = () => {
-    setCurrentView((prevView) => prevView + 1);
-  };
+  const handleNext = (view) => {
+    if (view) {
+      setCurrentView(() => view);
+    } else {
+      setCurrentView((prevView) => prevView + 1);
+    }
+  }
 
   const handlePrevious = () => {
     setCurrentView((prevView) => prevView - 1);
@@ -1123,8 +1194,10 @@ const EventCard = () => {
         <Member1Data
           formData={member1Data}
           setFormData={setMember1Data}
+          members={formData.members}
           member2Data={member2Data}
-          onNext={handleNext}
+          goToNext={()=>{setCurrentView((3))}}
+          goToSummary={()=>(setCurrentView(4))}
           onPrevious={handlePrevious}
           sanitizeInput={sanitizeInput}
         />
@@ -1133,6 +1206,7 @@ const EventCard = () => {
       return (
         <Member2Data
           formData={member2Data}
+          members={formData.members}
           setFormData={setMember2Data}
           onNext={handleNext}
           onPrevious={handlePrevious}
@@ -1144,7 +1218,9 @@ const EventCard = () => {
         <Summary
           eventData={eventData}
           formData={formData}
-          members={[member1Data, member2Data]}
+          members={formData.members}
+          member1Data={member1Data}
+          member2Data={member2Data}
           setCurrentView={setCurrentView}
         />
       );

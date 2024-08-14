@@ -1371,7 +1371,6 @@ const EventCard = () => {
   }
 
   const checkFileTypeImage = (file) => {
-    console.log(file.type);
     if (file.type === "image/jpeg" ||
       file.type === "image/png"
     ) {
@@ -1379,7 +1378,6 @@ const EventCard = () => {
     }
     const message = "File has to be jpg, jpeg, or png";
     errorAlert(message);
-    console.log(message);
     return false;
   }
 

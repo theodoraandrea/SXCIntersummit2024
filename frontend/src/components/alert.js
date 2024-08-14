@@ -1,8 +1,14 @@
 import Swal from 'sweetalert2';
 
-const errorAlert = (message) => {
+const errorAlert = ({ title, message }) => {
+    let titleText;
+    if (!title) {
+        titleText = "Error!";
+    } else {
+        titleText = title;
+    }
     Swal.fire({
-        titleText: 'Error!',
+        titleText: titleText,
         text: message,
         icon: 'error',
         toast: true,
@@ -14,13 +20,18 @@ const errorAlert = (message) => {
       });
 }
 
-const successAlert = (message) => {
+const successAlert = ({ title, message }) => {
+    let titleText;
+    if (!title) {
+        titleText = "Success!";
+    } else {
+        titleText = title;
+    }
     Swal.fire({
-        titleText: 'Success!',
+        titleText: titleText,
         text: message,
         icon: 'success',
         toast: true,
-        timer: 4000,
         position: 'top',
         width:'30em',
         padding: '1rem 2rem',
