@@ -8,11 +8,13 @@ const {
 } = require("../constants/url");
 const { validationResult } = require("express-validator");
 const otpGenerator = require("otp-generator");
-const nodemailer = require("nodemailer");
-const Mailgen = require("mailgen");
+const sendAutomatedEmail = require("../services/automatedEmail");
 
 exports.signup = async (req, res) => {
   try {
+    if (!req.app.locals.resetSession)
+      return res.status(440).json({ message: "Session Expired" });
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
@@ -21,7 +23,7 @@ exports.signup = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    console.log("user from signup: ", user);
+
     const token = generateToken(user);
     return res.status(200).json({ token, user });
   } catch (err) {
@@ -72,28 +74,20 @@ exports.forgotPassword = async (req, res) => {
 
     req.app.locals.otpCode = otpCode;
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
+    const emailDetails = {
+      from: process.env.EMAIL_USER,
+      fromName: "StudentsXCEOs International Summit 2024",
+      mailgenOptions: {
+        theme: "salted",
+        product: {
+          name: "StudentsxCEOs International Summit 2024",
+          link: "#",
+        },
       },
-    });
-
-    var mailGenerator = new Mailgen({
-      theme: "salted",
-      product: {
-        name: "StudentsxCEOs International Summit 2024",
-        link: "https://mailgen.js/",
-      },
-    });
-
-    var otpEmail = {
-      body: {
+      emailContent: {
         name: user.fullname,
         intro:
           "You've requested to reset your password. No worries, you can enter the OTP provided below to proceed with resetting your password.",
-
         action: {
           instructions: "Your OTP",
           button: {
@@ -101,35 +95,98 @@ exports.forgotPassword = async (req, res) => {
             text: otpCode,
           },
         },
-
         outro:
           "Please note, your OTP is valid for only 10 minutes. Ensure you keep it confidential and do not share it with anyone. ",
-
         signature: "Cheers, StudentsxCEOs International Summit 2024",
       },
     };
 
-    const otpHtml = mailGenerator.generate(otpEmail);
+    const subject = `Reset OTP`;
+    const emailResult = await sendAutomatedEmail({
+      user,
+      subject,
+      emailDetails,
+    });
 
-    let mailOptions = {
-      from: `"StudentsxCEOs International Summit 2024" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "OTP Reset Password",
-      text: `Hi, ${user.fullname}.\nYou've requested to reset your password. No worries, you can enter the OTP provided : ${otpCode}\n\nRegards, StudentsxCEOs International Summit 2024`,
-      html: otpHtml,
-    };
+    if (!emailResult.success) {
+      return res
+        .status(500)
+        .json({ message: emailResult.message, error: emailResult.error });
+    }
 
-    transporter.sendMail(mailOptions, function (err, data) {
-      if (err) {
-        return res.status(500).json({ err });
-      } else {
-        return res.status(201).json({
-          message: `OTP has been sent to your email : ${email}`,
-        });
-      }
+    return res.status(201).json({
+      message: emailResult.message,
     });
   } catch (error) {
     console.log(error.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+exports.verifyEmail = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const otpCode = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      specialChars: false,
+      lowerCaseAlphabets: false,
+    });
+
+    req.app.locals.otpCode = otpCode;
+
+    const emailDetails = {
+      from: process.env.EMAIL_USER,
+      fromName: "StudentsXCEOs International Summit 2024",
+      mailgenOptions: {
+        theme: "salted",
+        product: {
+          name: "StudentsxCEOs International Summit 2024",
+          link: "#",
+        },
+      },
+      emailContent: {
+        intro:
+          "Thank you for registering with StudentsxCEOs International Summit 2024! To complete your registration, please use the OTP provided below.",
+        action: {
+          instructions: "Your OTP",
+          button: {
+            color: "#003337",
+            text: otpCode,
+          },
+        },
+        outro:
+          "Please note, your OTP is valid for only 10 minutes. Ensure you keep it confidential and do not share it with anyone. ",
+        signature: "Cheers, StudentsxCEOs International Summit 2024",
+      },
+    };
+
+    const user = {
+      fullname: req.body.email,
+      email: req.body.email,
+      password: req.body.password,
+    };
+    const subject = `Registration OTP`;
+    const emailResult = await sendAutomatedEmail({
+      user,
+      subject,
+      emailDetails,
+    });
+
+    if (!emailResult.success) {
+      return res
+        .status(500)
+        .json({ message: emailResult.message, error: emailResult.error });
+    }
+
+    return res.status(201).json({
+      message: emailResult.message,
+    });
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

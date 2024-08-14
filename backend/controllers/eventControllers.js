@@ -230,7 +230,12 @@ exports.registerBMC = async (req, res) => {
       },
     };
 
-    const emailResult = await sendAutomatedEmail({ userId, emailDetails });
+    const subject = `Welcome to SxC Intersummit - ${user.fullname}`;
+    const emailResult = await sendAutomatedEmail({
+      user,
+      subject,
+      emailDetails,
+    });
 
     if (!emailResult.success) {
       return res

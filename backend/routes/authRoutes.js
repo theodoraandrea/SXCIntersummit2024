@@ -8,6 +8,29 @@ const isAuthenticated = require("../middlewares/isAuthenticated");
 const otplocalVariable = require("../middlewares/otpLocalVariable");
 
 router.post(
+  "/verify-email",
+  otplocalVariable,
+  [
+    body("email")
+      .notEmpty()
+      .withMessage("Email is required")
+      .isEmail()
+      .withMessage("Email must be valid")
+      .custom(async (value) => {
+        const isEmailExist = await User.findOne({ where: { email: value } });
+        if (isEmailExist) throw new Error("Email already in use");
+      }),
+
+    body("password")
+      .notEmpty()
+      .withMessage("Password is required")
+      .isLength({ min: 6 })
+      .withMessage("Password must be at least 6 characters"),
+  ],
+  authController.verifyEmail
+);
+
+router.post(
   "/signup",
   [
     body("email")
@@ -28,6 +51,7 @@ router.post(
   ],
   authController.signup
 );
+
 router.post(
   "/login",
   [

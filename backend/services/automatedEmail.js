@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const { User } = require("../models");
 
-async function sendAutomatedEmail({ userId, emailDetails }) {
+async function sendAutomatedEmail({ user, subject, emailDetails }) {
   try {
     // Create email transporter
     const transporter = nodemailer.createTransport({
@@ -15,12 +15,6 @@ async function sendAutomatedEmail({ userId, emailDetails }) {
 
     // Create email generator with custom options
     const mailGenerator = new Mailgen(emailDetails.mailgenOptions);
-
-    // Find the user by ID
-    const user = await User.findByPk(userId);
-    if (!user) {
-      throw new Error("User not found");
-    }
 
     // Define email content
     const emailBody = {
@@ -37,15 +31,15 @@ async function sendAutomatedEmail({ userId, emailDetails }) {
     const mailOptions = {
       from: `"${emailDetails.fromName}" <${emailDetails.from}>`,
       to: user.email,
-      subject: `Welcome to SxC Intersummit - ${user.fullname}`,
-      text: `Hi, ${user.fullname}.\n${emailDetails.emailContent.intro}\nPlease join the WA group by clicking the link below!`,
+      subject: subject,
+      text: `Hi, ${user.fullname}.\n${emailDetails.emailContent.intro}\n${emailDetails.emailContent.action.instruction}`,
       html: emailHtml,
     };
 
     // Send email
     await transporter.sendMail(mailOptions);
 
-    return { success: true, message: `Email sent to: ${user.email}` };
+    return { success: true, message: `Response sent to: ${user.email}` };
   } catch (err) {
     return { success: false, message: "Error sending email", error: err };
   }
