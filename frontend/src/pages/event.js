@@ -5,9 +5,13 @@ import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 import { fetchAllCompetitions, fetchAllEvents } from "../service/services";
 import { normalizeData } from "../service/helpers";
+import Spinner from "../components/elements/spinner";
 
 const Events = () => {
   const location = useLocation();
+
+  const [ isLoading, setIsLoading ] = useState(true);
+
   const [filter, setFilter] = useState("All");
   const [eventsData, setEventsData] = useState(null);
   const [competitionsData, setCompetitionsData] = useState(null);
@@ -40,6 +44,8 @@ const Events = () => {
       setCompetitionsData(normalizeData(response, "competition"));
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -72,41 +78,53 @@ const Events = () => {
   return (
     <>
       <Navbar currentPath={location.pathname} />
-      <div className="p-4 md:p-8 bg-primary-1 text-white min-h-screen">
-        <div className="flex mx-auto">
-          <div className="flex space-x-4 mb-4 mx-auto">
-            {["All", "Workshop", "Company Visit", "Competition"].map(
-              (category) => (
-                <button
-                  key={category}
-                  onClick={() => setFilter(category)}
-                  className={`px-2 py-2 md:px-4 md:py-2 rounded ${
-                    filter === category ? "bg-yellow-500" : "bg-teal-700"
-                  }`}
-                >
-                  <p className="text-xs md:text-sm">{category}</p>
-                </button>
-              )
+      <div className="p-4 md:p-8 bg-primary-1 text-white h-full">
+        {
+          isLoading ?
+          <div className="h-[80vh]">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Spinner/>
+          </div>
+          </div>
+           :
+          <>
+          <div className="flex mx-auto">
+            <div className="flex space-x-4 mb-4 mx-auto">
+              {["All", "Workshop", "Company Visit", "Competition", "Seminar"].map(
+                (category) => (
+                  <button
+                    key={category}
+                    onClick={() => setFilter(category)}
+                    className={`px-2 py-2 md:px-4 md:py-2 rounded ${
+                      filter === category ? "bg-yellow-500" : "bg-teal-700"
+                    }`}
+                  >
+                    <p className="text-xs md:text-sm">{category}</p>
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+          <div className="space-y-4 my-2 md:my-5">
+            {filteredData && filteredData.length > 0 ? (
+              filteredData.map((event, index) => (
+                <EventCard
+                  key={index}
+                  id={event.id}
+                  title={event.title}
+                  description={event.description}
+                  category={event.category}
+                />
+              ))
+            ) : (
+              <div className="flex w-full min-h-[80vh] items-center justify-center ">
+                <p className="text-3xl">No events posted yet. Stay tuned!</p>
+              </div>
             )}
           </div>
-        </div>
-        <div className="space-y-4 my-2 md:my-5 min-h-screen">
-          {filteredData && filteredData.length > 0 ? (
-            filteredData.map((event, index) => (
-              <EventCard
-                key={index}
-                id={event.id}
-                title={event.title}
-                description={event.description}
-                category={event.category}
-              />
-            ))
-          ) : (
-            <div className="flex w-full min-h-[50vh] items-center justify-center ">
-              <p className="text-3xl">No events posted yet. Stay tuned!</p>
-            </div>
-          )}
-        </div>
+          </>
+        }
+
       </div>
       <Footer />
     </>

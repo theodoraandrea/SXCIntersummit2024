@@ -6,6 +6,7 @@ import { LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../cons
 import { postBMCRegistration } from '../../service/services';
 import Spinner from '../../components/elements/spinner';
 import ReferralModal from '../../components/referral-modal';
+import { errorAlert, successAlert } from '../../components/alert';
 
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     if (sessionType) {
       return true;
     }
+    errorAlert({ message: "Agreement paper required"});
     return false;
   };
 
@@ -93,7 +95,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   );
 };
 
-const SecondView = ({ eventData, formData, setFormData, onNext, onPrevious }) => {
+const SecondView = ({ eventData, formData, setFormData, checkFileSize, onNext, onPrevious }) => {
     
     const [ agreement, setAgreement ] = useState(formData.agreement?.name ?? '');
 
@@ -101,13 +103,32 @@ const SecondView = ({ eventData, formData, setFormData, onNext, onPrevious }) =>
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+
+    const file = files[0];
+    if (!checkFileIsPdf(file)) {
+      return;
+    }
+
+    if (!checkFileSize(file)) {
+      return;
+    }
+
     setFormData((prevState) => ({
       ...prevState,
-      [name]: files ? files[0] : value,
+      [name]: files ? file : value,
     }));
-    console.log(files);
-    setAgreement(files[0].name);
+    console.log(file);
+    setAgreement(file.name);
   };
+
+  const checkFileIsPdf = (file) => {
+    if (file.type === "application/pdf") {
+      return true;
+    }
+    const message = "File type has to be pdf";
+    errorAlert({ message: message });
+    return false;
+  }
 
   const handleDownload = () => {
     const link = document.createElement("a");
@@ -121,6 +142,8 @@ const SecondView = ({ eventData, formData, setFormData, onNext, onPrevious }) =>
   const handleSubmit = () => {
     if (agreement) {
       onNext();
+    } else {
+      errorAlert({ message: "Agreement must be uploaded"});
     }
   };
 
@@ -218,6 +241,7 @@ const ThirdView = ({
     ) {
       return true;
     }
+    errorAlert({ message: "All fields must be filled"});
     return false;
   };
 
@@ -431,6 +455,7 @@ const FourthView = ({
     if (eventSource) {
       return true;
     }
+    errorAlert({ message: "Field must be filled"});
     return false;
   };
 
@@ -463,18 +488,6 @@ const FourthView = ({
           <h1 className="text-3xl font-bold text-white mb-4">
             How did you know this event?
           </h1>
-          {/*
-                    <form className='text-left'>
-                        <div className='mb-4'>
-                            <textarea
-                                name='eventSource'
-                                value={eventSource}
-                                onChange={(e) => setEventSource(e.target.value)}
-                                className='w-full px-3 py-2 rounded-lg'
-                            />
-                        </div>
-                    </form>
-                    */}
           <div className="grid grid-cols-2 gap-4 text-left">
             <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
@@ -529,13 +542,29 @@ const FourthView = ({
                 id="eventSource4"
                 name="eventSourceRadio"
                 type="radio"
+                value="Media Partners"
+                checked={option === "Media Partners"}
+                onChange={handleOptionChange}
+              />
+              <label
+                htmlFor="eventSource4"
+                className="w-full ml-2 text-sm text-gray-800"
+              >
+                Media Partners
+              </label>
+            </div>
+            <div className="flex p-4 col-span-2 items-center bg-gray-100 border-gray-300 rounded">
+              <input
+                id="eventSource5"
+                name="eventSourceRadio"
+                type="radio"
                 value="Other"
                 checked={option === "Other"}
                 onChange={handleOptionChange}
               />
               <input
-                id="eventSource4"
-                className="text-sm ml-2 bg-gray-100"
+                id="eventSource5"
+                className="text-sm ml-2 bg-gray-100 w-full"
                 name="eventSource"
                 type="text"
                 value={eventSourceOther}
@@ -621,6 +650,7 @@ const SixthView = ({
     if (experience) {
       return true;
     }
+    errorAlert({ message: "Field must be filled"});
     return false;
   };
 
@@ -708,6 +738,7 @@ const SeventhView = ({
         if (expectations) {
             return true;
         }
+        errorAlert({ message: "Field must be filled"});
         return false;
     }
     
@@ -788,6 +819,7 @@ const EighthView = ({
     if (materials) {
       return true;
     }
+    errorAlert({ message: "Field must be filled"});
     return false;
   };
 
@@ -854,7 +886,7 @@ const EighthView = ({
     );
 };
 
-const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
+const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
   const [follow1, setFollow1] = useState(formData.screenshot1 ? true : false);
   const [follow2, setFollow2] = useState(formData.screenshot2 ? true : false);
   const [follow3, setFollow3] = useState(formData.screenshot3 ? true : false);
@@ -879,21 +911,33 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
       follow3
     ) {
       onNext();
+    } else {
+      errorAlert({ message: "All proofs must be uploaded"});
     }
   };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+    const file = files[0];
+
+    if (!checkFileSize(file)) {
+      return;
+    }
+
+    if (!checkFileType(file)) {
+      return;
+    }
+
     setFormData((prevState) => ({
       ...prevState,
-      [name]: files ? files[0] : value,
+      [name]: files ? file : value,
     }));
     if (name === "screenshot1") {
-      setScreenshot1(files[0].name);
+      setScreenshot1(file.name);
     } else if (name === "screenshot2") {
-      setScreenshot2(files[0].name);
+      setScreenshot2(file.name);
     } else if (name === "screenshot3") {
-      setScreenshot3(files[0].name);
+      setScreenshot3(file.name);
     }
   };
 
@@ -914,7 +958,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                     onChange={(e) => setFollow1(e.target.checked)}
                                     className='mr-2'
                                 />
-                                I have followed @SxCIntersummit Instagram account
+                                I have followed <strong>@studentsxceosjkt, @sxcintersummit, @sxcintersummitcompetition </strong> on Instagram 
                             </label>
                             <div className='my-4 relative'>
                                 <input
@@ -942,7 +986,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
                                     onChange={(e) => setFollow2(e.target.checked)}
                                     className='mr-2'
                                 />
-                                I have reposted BMC Poster Feed to Instagram Story and tag 3 people
+                                I have reposted BMC Poster Feed to Instagram Story and tagged 3 people
                             </label>
                             <div className='my-4 relative'>
                                 <input
@@ -1014,7 +1058,7 @@ const NinthView = ({ formData, setFormData, onPrevious, onNext }) => {
     );
 };
 
-const PaymentView = ({ eventData, formData, setFormData, onPrevious, onNext }) => {
+const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
     const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
     const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
 
@@ -1025,11 +1069,22 @@ const PaymentView = ({ eventData, formData, setFormData, onPrevious, onNext }) =
     //handling file change
     const handleChange = (e) => {
         const { name, value, files } = e.target;
+
+        const file = files[0];
+        
+        if (!checkFileSize(file)) {
+          return;
+        }
+
+        if (!checkFileType(file)) {
+          return;
+        }
+
         setFormData((prevState) => ({
           ...prevState,
-          [name]: files ? files[0] : value,
+          [name]: files ? file : value,
         }));
-        setProofPayment(files[0]?.name);
+        setProofPayment(file?.name);
     };
 
     //saving referral code
@@ -1044,6 +1099,8 @@ const PaymentView = ({ eventData, formData, setFormData, onPrevious, onNext }) =
     const handleNext = () => {
         if (checkPayment && proofPayment) {
             onNext();
+        } else {
+          errorAlert({ message: "Proof must be uploaded"});
         }
     }
 
@@ -1164,6 +1221,7 @@ const Summary = ({ formData, onPrevious }) => {
         }
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, bmcId]);
+        successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
       }
       console.log(response);
     } catch (error) {
@@ -1298,7 +1356,7 @@ const EventCard = () => {
 
     const eventData = {
         title: "Business Master Class",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.",
+        description: "The StudentsxCEOs International Summit Business Master Class is a one-hit competition free class specifically designed for 300 high school and college students who are eager to excel in business case and business plan competitions. With its interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on “Elevate to Success: Mastering in Business Competition” as the grand theme.",
         bmcId: 1,
         regularPrice: 50000,
         discountedPrice: 45000,
@@ -1309,6 +1367,7 @@ const EventCard = () => {
   //All fields for BMC
   const [formData, setFormData] = useState({});
 
+  //Utility functions
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
   };
@@ -1316,6 +1375,27 @@ const EventCard = () => {
   const sanitizeInputParagraph = (input) => {
     return input.replace(/[^a-zA-Z0-9.,&! "'?\n-]/g, "");
   };
+
+  const checkFileSize = (file) => {
+    if (file.size <= 5000000) {
+      return true;
+    }
+    const message = "File size has to be 5MB or less";
+    errorAlert({ message: message });
+    console.log(message);
+    return false;
+  }
+
+  const checkFileTypeImage = (file) => {
+    if (file.type === "image/jpeg" ||
+      file.type === "image/png"
+    ) {
+      return true;
+    }
+    const message = "File has to be jpg, jpeg, or png";
+    errorAlert({ message: message });
+    return false;
+  }
 
   const handleNext = () => {
     setCurrentView((prevView) => prevView + 1);
@@ -1341,7 +1421,7 @@ const EventCard = () => {
         case 1:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
         case 2:
-            return <SecondView eventData={eventData} formData={formData} setFormData={setFormData} onNext={handleNext} onPrevious={handlePrevious}/>;
+            return <SecondView eventData={eventData} formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} onNext={handleNext} onPrevious={handlePrevious}/>;
         case 3:
             return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} />;
         case 4:
@@ -1355,9 +1435,9 @@ const EventCard = () => {
         case 8:
             return <EighthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 9:
-            return <NinthView formData={formData} setFormData={setFormData} onPrevious={handlePrevious} onNext={handleNext}/>;
+            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 10:
-            return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} onPrevious={handlePrevious} onNext={handleNext}/>;
+            return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 11:
             return <Summary eventData={eventData} formData={formData} onPrevious={handlePrevious}/>
         default:

@@ -87,12 +87,16 @@ const BMCSummary = () => {
         <div>
             <Navbar/>
             <div className='bg-gradient-primary w-full min-h-screen p-4 text-white'>
-            { isLoading ? <Spinner customStyles={{ margin: "2rem 0"}} /> :
-                                <div className='flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25'>
-                                <p className='text-xl font-bold mb-2'>BMC Registrations</p>
+            { isLoading ?          
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <Spinner/>
+                </div>
+            :
+            <div className='m-4 grid md:grid-cols-3'>
+                            <div className='flex items-center flex-col md:col-span-2 rounded-lg bg-opacity-25'>
                                 {
                                     bccData.sessionType ? 
-                                <div className='max-w-md w-full p-4 rounded-lg shadow-lg'>
+                                <div className='max-w-md w-full p-8 rounded-lg shadow-lg'>
                                     <p className='text-center'><strong>{bccData.sessionType}</strong></p>
                                     <p><strong>Full Name:</strong> {userData.fullname}</p>
                                     <p><strong>Gender:</strong> {userData.gender}</p>
@@ -128,7 +132,7 @@ const BMCSummary = () => {
                                 }
                                 {
                                     bpcData.sessionType ?                       
-                                <div className='max-w-md w-full p-4 rounded-lg shadow-lg'>
+                                <div className='max-w-md w-full p-8 rounded-lg shadow-lg'>
                                     <p className='text-center'><strong>{bpcData.sessionType}</strong></p>
                                     <p><strong>Full Name:</strong> {userData.fullname}</p>
                                     <p><strong>Gender:</strong> {userData.gender}</p>
@@ -163,6 +167,24 @@ const BMCSummary = () => {
                                 : <></>
                                 }       
                             </div>
+                            <div className='justify-center flex'>
+                            <div className='max-w-md w-full rounded-lg'>
+                                <div className='flex flex-col rounded-lg shadow-lg p-10 items-center'>
+                                    <p className='text-lg font-bold mb-2 text-center'>Feedback & Submission</p>
+                                    <button
+                                    className='bg-primary-3 w-fit text-white text-sm px-6 py-2 rounded-full hover:bg-yellow-600'
+                                    >Upload</button>
+                                </div>
+                                <div className='flex flex-col rounded-lg shadow-lg p-10 items-center'>
+                                    <p className='text-lg font-bold mb-2 text-center'>Purchase Handbook</p>
+                                    <button
+                                    className='bg-primary-3 w-fit text-white text-sm px-6 py-2 rounded-full hover:bg-yellow-600'
+                                    >Shop</button>
+                                </div>
+                            </div>
+                            </div>
+
+            </div>
             }
             </div>
         </div>

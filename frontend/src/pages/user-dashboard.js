@@ -27,6 +27,10 @@ export default function UserDashboard() {
   const location = useLocation();
   const [fetching, setFetching] = useState(true); // Add a fetching state
 
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  }, []);
+
   useEffect(() => {
     if (isLoggedIn) {
       fetchRegisteredEventsData();
@@ -92,7 +96,10 @@ export default function UserDashboard() {
             {userData?.fullname}
           </h2>
           <p className="text-white">
-            {userData?.email} | {userData?.phoneNumber}{" "}
+            {userData?.email}
+          </p>
+          <p className="text-white">
+            {userData?.phoneNumber}
           </p>
           <p className="text-white">{userData?.institution}</p>
           <p className="text-white">
@@ -139,6 +146,7 @@ export default function UserDashboard() {
             <Spinner customStyles={{ margin: "2rem 0" }} />
           ) : (
             <>
+              <p className="text-white text-center font-bold mb-8">View your registrations and check for updates here!</p>
               {activeTab === "events" && (
                 <>
                   {registeredEventsData && registeredEventsData.length > 0 ? (

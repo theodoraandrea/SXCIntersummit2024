@@ -1,5 +1,4 @@
 const API_URL = "http://localhost:3001";
-//const API_URL = "http://34.34.219.121:8080";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";

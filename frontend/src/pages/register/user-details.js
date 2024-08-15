@@ -21,6 +21,8 @@ export default function UserDetails() {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const [ isLoading, setIsLoading ] = useState(false);
+
   useEffect(() => {
     if (!loading) {
       if (!isLoggedIn) {
@@ -94,6 +96,7 @@ export default function UserDetails() {
     }
 
     try {
+      setIsLoading(true);
       const response = await putProfileData(data);
       if (response.status === 200) {
         console.log("Profile updated successfully");
@@ -103,6 +106,8 @@ export default function UserDetails() {
       }
     } catch (error) {
       console.error("Network error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -347,7 +352,12 @@ export default function UserDetails() {
 
           <button
             type="submit"
-            className="w-full py-2 mb-4 bg-primary-3 text-white font-bold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className={`w-full py-2 mb-4 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500
+            ${
+              isLoading ? 
+                  "bg-gray-600 cursor-not-allowed"
+                : "bg-primary-3 hover:bg-yellow-600"
+            }`}
           >
             Submit
           </button>

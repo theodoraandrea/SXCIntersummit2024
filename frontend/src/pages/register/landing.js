@@ -278,6 +278,7 @@ export default function Landing() {
       <div
         className="relative w-full min-h-screen bg-cover bg-center md:w-1/2"
         style={{ backgroundImage: `url(${bg})` }}
+        onClick={scrollToFormContainer}
       >
         <button
           className="md:hidden absolute bottom-5 left-[45%] text-black p-2 rounded-full shadow-md hover:bg-gray-200 focus:outline-none"
@@ -606,7 +607,7 @@ export default function Landing() {
         {/* Enter new password page */}
         {enterNewPasswordMode && (
           <>
-            <form className="w-full max-w-sm" onSubmit={handleResetPassword}>
+            <form className="w-full max-w-sm text-white" onSubmit={handleResetPassword}>
               <input
                 id="newPassword"
                 className="w-full px-4 py-2 mb-4 border rounded-lg bg-opacity-25 bg-white"
