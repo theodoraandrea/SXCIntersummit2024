@@ -37,7 +37,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     if (sessionType) {
       return true;
     }
-    errorAlert("Agreement paper required");
+    errorAlert({ message: "Agreement paper required"});
     return false;
   };
 
@@ -126,7 +126,7 @@ const SecondView = ({ eventData, formData, setFormData, checkFileSize, onNext, o
       return true;
     }
     const message = "File type has to be pdf";
-    errorAlert(message);
+    errorAlert({ message: message });
     return false;
   }
 
@@ -143,7 +143,7 @@ const SecondView = ({ eventData, formData, setFormData, checkFileSize, onNext, o
     if (agreement) {
       onNext();
     } else {
-      errorAlert("Agreement must be uploaded");
+      errorAlert({ message: "Agreement must be uploaded"});
     }
   };
 
@@ -241,7 +241,7 @@ const ThirdView = ({
     ) {
       return true;
     }
-    errorAlert("All fields must be filled");
+    errorAlert({ message: "All fields must be filled"});
     return false;
   };
 
@@ -455,7 +455,7 @@ const FourthView = ({
     if (eventSource) {
       return true;
     }
-    errorAlert("Field must be filled");
+    errorAlert({ message: "Field must be filled"});
     return false;
   };
 
@@ -542,12 +542,28 @@ const FourthView = ({
                 id="eventSource4"
                 name="eventSourceRadio"
                 type="radio"
+                value="Media Partners"
+                checked={option === "Media Partners"}
+                onChange={handleOptionChange}
+              />
+              <label
+                htmlFor="eventSource4"
+                className="w-full ml-2 text-sm text-gray-800"
+              >
+                Media Partners
+              </label>
+            </div>
+            <div className="flex p-4 col-span-2 items-center bg-gray-100 border-gray-300 rounded">
+              <input
+                id="eventSource5"
+                name="eventSourceRadio"
+                type="radio"
                 value="Other"
                 checked={option === "Other"}
                 onChange={handleOptionChange}
               />
               <input
-                id="eventSource4"
+                id="eventSource5"
                 className="text-sm ml-2 bg-gray-100 w-full"
                 name="eventSource"
                 type="text"
@@ -634,7 +650,7 @@ const SixthView = ({
     if (experience) {
       return true;
     }
-    errorAlert("Field must be filled");
+    errorAlert({ message: "Field must be filled"});
     return false;
   };
 
@@ -722,7 +738,7 @@ const SeventhView = ({
         if (expectations) {
             return true;
         }
-        errorAlert("Field must be filled");
+        errorAlert({ message: "Field must be filled"});
         return false;
     }
     
@@ -803,7 +819,7 @@ const EighthView = ({
     if (materials) {
       return true;
     }
-    errorAlert("Field must be filled");
+    errorAlert({ message: "Field must be filled"});
     return false;
   };
 
@@ -896,7 +912,7 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
     ) {
       onNext();
     } else {
-      errorAlert("All proofs must be uploaded");
+      errorAlert({ message: "All proofs must be uploaded"});
     }
   };
 
@@ -1084,7 +1100,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
         if (checkPayment && proofPayment) {
             onNext();
         } else {
-          errorAlert("Proof must be uploaded");
+          errorAlert({ message: "Proof must be uploaded"});
         }
     }
 
@@ -1205,7 +1221,7 @@ const Summary = ({ formData, onPrevious }) => {
         }
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, bmcId]);
-        successAlert("Successfully registered for BMC. Please check your email for further details!")
+        successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
       }
       console.log(response);
     } catch (error) {
@@ -1340,7 +1356,7 @@ const EventCard = () => {
 
     const eventData = {
         title: "Business Master Class",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in dolor vel semper. Donec augue neque, fermentum sed augue a, cursus fermentum nunc.",
+        description: "The StudentsxCEOs International Summit Business Master Class is a one-hit competition free class specifically designed for 300 high school and college students who are eager to excel in business case and business plan competitions. With its interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on “Elevate to Success: Mastering in Business Competition” as the grand theme.",
         bmcId: 1,
         regularPrice: 50000,
         discountedPrice: 45000,
@@ -1365,7 +1381,7 @@ const EventCard = () => {
       return true;
     }
     const message = "File size has to be 5MB or less";
-    errorAlert(message);
+    errorAlert({ message: message });
     console.log(message);
     return false;
   }
@@ -1377,7 +1393,7 @@ const EventCard = () => {
       return true;
     }
     const message = "File has to be jpg, jpeg, or png";
-    errorAlert(message);
+    errorAlert({ message: message });
     return false;
   }
 

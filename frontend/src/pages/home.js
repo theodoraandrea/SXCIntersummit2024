@@ -137,7 +137,7 @@ export default function Home() {
           className="w-60 h-10 mx-5 md:mx-20 my-5 bg-yellow-500 text-lg font-semibold rounded-md hover:bg-yellow-600 transition duration-300 text-white"
           onClick={handleScrollToEvent}
         >
-          Explore Our Events
+          Explore Our Programs
         </button>
       </section>
 
@@ -177,7 +177,7 @@ export default function Home() {
         </div>
         <div className="mt-32">
           <Link to={EVENTS_PAGE} className="flex justify-center items-center">
-            <h1 className="text-xl text-white mr-2">View all events</h1>
+            <h1 className="text-xl text-white mr-2">View all programs</h1>
             <Box
               component="div"
               sx={{

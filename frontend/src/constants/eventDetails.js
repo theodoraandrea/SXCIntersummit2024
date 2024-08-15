@@ -3,7 +3,7 @@ import { FCEO_REGIST, BMC_REGIST } from "./routes";
 export const eventDetails = {
   event_1: {
     title: "Business Master Class",
-    description: "One-hit competition free class with a company partner specifically designed for college students who are eager to excel in business case and business plan competitions.",
+    description: "The StudentsxCEOs International Summit Business Master Class is a one-hit competition free class specifically designed for 300 high school and college students who are eager to excel in business case and business plan competitions. With its interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on “Elevate to Success: Mastering in Business Competition” as the grand theme.",
     timelineDesc: "Timeline details for BMC",
     registerLink: `${BMC_REGIST}`,
     faq: ["What kind of business lessons will we learn in the Business Master Class?", 

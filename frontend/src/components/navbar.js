@@ -180,7 +180,7 @@ export default function NavbarUser({ currentPath }) {
                     : "hover:text-yellow-500"
                 }`}
               >
-                Events
+                Programs
               </button>
               {dropdownOpen && (
                 <div className="mt-4 space-y-2">
@@ -211,6 +211,13 @@ export default function NavbarUser({ currentPath }) {
                     onClick={toggleMenu}
                   >
                     Competitions
+                  </Link>
+                  <Link
+                    to={`${EVENTS_PAGE}?category=Seminar`}
+                    className="block px-4 py-2 hover:bg-gray-700"
+                    onClick={toggleMenu}
+                  >
+                    Seminar
                   </Link>
                 </div>
               )}
