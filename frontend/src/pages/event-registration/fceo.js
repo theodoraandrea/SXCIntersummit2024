@@ -726,8 +726,6 @@ const Member2Data = ({
 
     if (saveData()) {
       onNext();
-    } else {
-      errorAlert({ message: "All fields must be asdfasdf"});
     }
   };
 
@@ -757,6 +755,7 @@ const Member2Data = ({
         return true;
       }
     }
+    errorAlert({ message: "All fields must be filled"});
     return false;
   };
 
@@ -768,6 +767,12 @@ const Member2Data = ({
   };
 
   const doesNotHaveMemberTwo = () => {
+    if (members == 2){
+      return true;
+    } else if (members == 3) {
+      return false;
+    }
+
     if (!fullName) {
       return true;
     } else {
@@ -934,6 +939,8 @@ const Summary = ({ eventData, formData, members, member1Data, member2Data, setCu
       const response = await registerTeam(formData);
       if (response.team.id) {
 
+        const numberOfMembers = membersData.length;
+        let memberCounter = 0;
         for (const member of membersData) {
           if (member.fullName) {
             const memberData = {
@@ -946,18 +953,22 @@ const Summary = ({ eventData, formData, members, member1Data, member2Data, setCu
             };
             try {
               await registerMember(memberData);
-              setIsLoading(false);
-              //Add this activeTab state for competition registrations
-              //because user-dashboard opens "events" by default
-              navigate(USER_DASHBOARD_PAGE, {
-                state: {
-                  activeTab: "competitions",
-                },
-              });
-              setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
-              successAlert({ title: "Successfully registered for FCEO!",
-                message: "Please check your email and user dashboard for further details."
-              });
+              memberCounter++;
+
+              if (memberCounter === numberOfMembers) {
+                setIsLoading(false);
+                //Add this activeTab state for competition registrations
+                //because user-dashboard opens "events" by default
+                navigate(USER_DASHBOARD_PAGE, {
+                  state: {
+                    activeTab: "competitions",
+                  },
+                });
+                setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
+                successAlert({ title: "Successfully registered for FCEO!",
+                  message: "Please check your email and user dashboard for further details."
+                });
+              }
             } catch (memberError) {
               console.log("Error posting member: ", memberError);
               setIsLoading(false);

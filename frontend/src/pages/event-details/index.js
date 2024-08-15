@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./../../components/navbar";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Footer from "./../../components/footer";
 import { eventDetails } from "../../constants/eventDetails";
@@ -37,11 +37,11 @@ export default function DetailEvents() {
       if (id === 1) {
         //for BMC, BCC = 2, BPC = 3
         if (registeredEvents.includes(2) && registeredEvents.includes(3)) {
+          console.log("bmc full");
           setRegistered(true);
           return;
         }
-      }
-      if (registeredEvents.includes(id)) {
+      } else if (registeredEvents.includes(id)) {
         setRegistered(true);
         return;
       }
