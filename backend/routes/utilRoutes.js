@@ -4,12 +4,11 @@ const utilControllers = require("../controllers/utilControllers");
 
 const router = express.Router();
 
+router.post("/referral", isAuthenticated, utilControllers.checkReferralCode);
+
 router.post(
-    "/referral",
-    isAuthenticated,
-    utilControllers.checkReferralCode
-  );
-
+  "/welcome-email",
+  isAuthenticated,
+  utilControllers.sendWelcomingEmail
+);
 module.exports = router;
-
-

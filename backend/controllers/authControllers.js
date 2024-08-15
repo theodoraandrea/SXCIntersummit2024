@@ -102,11 +102,7 @@ exports.forgotPassword = async (req, res) => {
     };
 
     const subject = `Reset OTP`;
-    const emailResult = await sendAutomatedEmail({
-      user,
-      subject,
-      emailDetails,
-    });
+    const emailResult = await sendAutomatedEmail(user, subject, emailDetails);
 
     if (!emailResult.success) {
       return res
@@ -170,11 +166,7 @@ exports.verifyEmail = async (req, res) => {
       password: req.body.password,
     };
     const subject = `Registration OTP`;
-    const emailResult = await sendAutomatedEmail({
-      user,
-      subject,
-      emailDetails,
-    });
+    const emailResult = await sendAutomatedEmail(user, subject, emailDetails);
 
     if (!emailResult.success) {
       return res

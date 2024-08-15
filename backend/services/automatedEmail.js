@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const { User } = require("../models");
 
-async function sendAutomatedEmail({ user, subject, emailDetails }) {
+async function sendAutomatedEmail(user, subject, emailDetails) {
   try {
     // Create email transporter
     const transporter = nodemailer.createTransport({
