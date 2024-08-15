@@ -925,7 +925,7 @@ const Member2Data = ({
   );
 };
 
-const Summary = ({ eventData, formData, members, member1Data, member2Data, setCurrentView }) => {
+const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Data, setCurrentView }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setRegisteredCompetitions } = useUser();
@@ -939,8 +939,7 @@ const Summary = ({ eventData, formData, members, member1Data, member2Data, setCu
       const response = await registerTeam(formData);
       if (response.team.id) {
 
-        const numberOfMembers = membersData.length;
-        let memberCounter = 0;
+        let memberCounter = 1;
         for (const member of membersData) {
           if (member.fullName) {
             const memberData = {
@@ -954,8 +953,7 @@ const Summary = ({ eventData, formData, members, member1Data, member2Data, setCu
             try {
               await registerMember(memberData);
               memberCounter++;
-
-              if (memberCounter === numberOfMembers) {
+              if (memberCounter == numberOfMembers) {
                 setIsLoading(false);
                 //Add this activeTab state for competition registrations
                 //because user-dashboard opens "events" by default
@@ -1228,7 +1226,7 @@ const EventCard = () => {
         <Summary
           eventData={eventData}
           formData={formData}
-          members={formData.members}
+          numberOfMembers={formData.members}
           member1Data={member1Data}
           member2Data={member2Data}
           setCurrentView={setCurrentView}

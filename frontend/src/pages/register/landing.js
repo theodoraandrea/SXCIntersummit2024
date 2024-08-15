@@ -120,6 +120,7 @@ export default function Landing() {
             buttonsStyling: false,
           });
           setVerifyEmailOtpMode(true);
+          setErrorMessage("");
         }
         setIsLoading(false);
       } catch (error) {
@@ -190,6 +191,7 @@ export default function Landing() {
           });
           setOtpMode(true);
           setForgotPasswordMode(false);
+          setErrorMessage("");
           setIsLoading(false);
         }
       } catch (error) {
@@ -206,16 +208,20 @@ export default function Landing() {
     e.preventDefault();
     try {
       setIsLoading(true);
+      console.log("is loading set to true");
       const response = await postVerifyOtp(otp);
       console.log(response);
       if (response.status === 200) {
         setEnterNewPasswordMode(true);
+        setErrorMessage("");
+        setPassword("");
+        setConfirmPassword("");
         setOtpMode(false);
         setIsLoading(false);
       }
     } catch (error) {
       setIsLoading(false);
-      setErrorMessage(error.message);
+      setErrorMessage(error.response?.data?.message);
     }
   };
 
@@ -601,6 +607,7 @@ export default function Landing() {
               >
                 Verify OTP
               </button>
+              <p className="text-sm text-red-500">{errorMessage}</p>
             </form>
           </>
         )}

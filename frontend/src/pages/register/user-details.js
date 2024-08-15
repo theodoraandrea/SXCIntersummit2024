@@ -352,11 +352,11 @@ export default function UserDetails() {
 
           <button
             type="submit"
-            className={`w-full py-2 mb-4 text-white font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500
+            className={`w-full py-2 mb-4 text-white font-bold rounded-lg 
             ${
               isLoading ? 
                   "bg-gray-600 cursor-not-allowed"
-                : "bg-primary-3 hover:bg-yellow-600"
+                : "bg-primary-3 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             }`}
           >
             Submit
