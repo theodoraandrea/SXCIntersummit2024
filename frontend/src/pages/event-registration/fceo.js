@@ -1041,7 +1041,7 @@ const Summary = ({ eventData, formData, members, member1Data, member2Data, setCu
         ) : (
           <div className="rounded-lg shadow-lg p-4 bg-opacity-25">
             <h1 className="text-xl font-semibold mb-2 text-center">
-              Submitted Data
+              Your Registration
             </h1>
             <div
               className="mb-4 p-4 rounded-lg shadow-lg bg-primary-700 hover:bg-primary-600 transform hover:scale-105 transition duration-300 ease-in-out cursor-pointer"

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./../../components/navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Footer from "./../../components/footer";
 import { eventDetails } from "../../constants/eventDetails";
@@ -13,6 +13,8 @@ export default function DetailEvents() {
   const params = eventId.split("_");
   const type = params[0];
   const id = Number.parseInt(params[1]);
+
+  const navigate = useNavigate();
 
   const [openFAQ, setOpenFAQ] = useState(Array(5).fill(false));
 
@@ -28,17 +30,22 @@ export default function DetailEvents() {
     if (type === "comp") {
       if (registeredCompetitions.includes(id)) {
         setRegistered(true);
+        return;
       }
+      setRegistered(false);
     } else if (type === "event") {
       if (id === 1) {
         //for BMC, BCC = 2, BPC = 3
         if (registeredEvents.includes(2) && registeredEvents.includes(3)) {
           setRegistered(true);
+          return;
         }
       }
       if (registeredEvents.includes(id)) {
         setRegistered(true);
+        return;
       }
+      setRegistered(false);
     }
   }, [loading]);
 
@@ -54,7 +61,11 @@ export default function DetailEvents() {
     <div>
       <Navbar />
       {loading ? (
-        <Spinner />
+          <div className="h-[80vh] bg-primary-1">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <Spinner/>
+          </div>
+          </div>
       ) : (
         <div className="p-4 md:p-8 bg-primary-1 text-white">
           {/* Competition Section */}
@@ -66,14 +77,17 @@ export default function DetailEvents() {
               <p className="mt-4 text-base md:text-lg">
                 {eventData.description || "Event Desc goes here"}
               </p>
-              <Link to={eventData.registerLink}>
                 <button
-                  className="bg-primary-2 px-5 rounded-lg py-2 text-white mt-4"
+                  className="bg-primary-2 w-fit px-5 rounded-lg py-2 text-white mt-4"
+                  onClick={
+                    ()=>{
+                      navigate(eventData.registerLink)
+                    }
+                  }
                   disabled={registered}
                 >
                   {registered ? "Already registered!" : "Register Now"}
                 </button>
-              </Link>
             </div>
             <div className="bg-gray-200 rounded-lg h-64"></div>
           </div>
