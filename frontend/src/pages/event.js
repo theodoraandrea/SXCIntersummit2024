@@ -81,8 +81,10 @@ const Events = () => {
       <div className="p-4 md:p-8 bg-primary-1 text-white h-full">
         {
           isLoading ?
+          <div className="h-[80vh]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Spinner/>
+          </div>
           </div>
            :
           <>

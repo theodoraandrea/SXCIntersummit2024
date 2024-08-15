@@ -146,6 +146,7 @@ export default function UserDashboard() {
             <Spinner customStyles={{ margin: "2rem 0" }} />
           ) : (
             <>
+              <p className="text-white text-center font-bold mb-8">View your registrations and check for updates here!</p>
               {activeTab === "events" && (
                 <>
                   {registeredEventsData && registeredEventsData.length > 0 ? (
