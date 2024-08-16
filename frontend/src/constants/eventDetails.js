@@ -55,17 +55,17 @@ export const eventDetails = {
     "19 August - 1st December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
-    "</br><strong>&emsp;&emsp;1.&emsp;Preliminary:</strong>" +
-    "</br>&emsp;&emsp;&emsp;&emsp;Business Model Canvas Submission" +
-    "</br>&emsp;&emsp;&emsp;&emsp;19th August - 29th September 2024" +
-    "</br><strong>&emsp;&emsp;2.&emsp;Semifinal:</strong>" +
-    "</br>&emsp;&emsp;&emsp;&emsp;Proposal Submission" +
-    "</br>&emsp;&emsp;&emsp;&emsp;1st October - 22nd October 2024" +
-    "</br><strong>&emsp;&emsp;3.&emsp;Final:</strong>" +
-    "</br>&emsp;&emsp;&emsp;&emsp;Deck Submission" +
-    "</br>&emsp;&emsp;&emsp;&emsp;5th November - 23rd November 2024" +
-    "</br>&emsp;&emsp;&emsp;&emsp;Pitching Day" +
-    "</br>&emsp;&emsp;&emsp;&emsp;24th November 2024" +
+    "</br><strong>&emsp;1.&emsp;Preliminary:</strong>" +
+    "</br>&emsp;&emsp;&emsp;Business Model Canvas Submission" +
+    "</br>&emsp;&emsp;&emsp;19th August - 29th September 2024" +
+    "</br><strong>&emsp;2.&emsp;Semifinal:</strong>" +
+    "</br>&emsp;&emsp;&emsp;Proposal Submission" +
+    "</br>&emsp;&emsp;&emsp;1st October - 22nd October 2024" +
+    "</br><strong>&emsp;3.&emsp;Final:</strong>" +
+    "</br>&emsp;&emsp;&emsp;Deck Submission" +
+    "</br>&emsp;&emsp;&emsp;5th November - 23rd November 2024" +
+    "</br>&emsp;&emsp;&emsp;Pitching Day" +
+    "</br>&emsp;&emsp;&emsp;24th November 2024" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +

@@ -67,21 +67,20 @@ export default function DetailEvents() {
           </div>
           </div>
       ) : (
-        <div className="p-4 mx-8 sm:mx-16 md:mx-20 lg:mx-32 my-8 bg-primary-1 text-white">
+        <div className="p-4 sm:mx-16 lg:mx-32 my-8 bg-primary-1 text-white">
           {/* Competition Section */}
           <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-8">
             <div className="flex flex-col md:row-span-4">
-              <h1 className="text-gradient text-3xl md:text-5xl font-bold">
+              <h1 className="text-gradient text-3xl px-4 md:px-0 md:text-5xl font-bold">
                 {eventData.title || "Event Title"}
               </h1>
               <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] my-8 md:hidden mx-auto"></div>
               <div 
-              className="text-justify mt-4"
+              className="text-sm md:text-base text-justify mt-4 px-4 md:px-0"
               dangerouslySetInnerHTML={{ __html: eventData.description     
               }}/>
-              <button
-                  className="bg-primary-2 w-fit px-5 rounded-lg py-2 text-white mt-4"
-                  onClick={
+              <button className="text-sm w-fit mx-4 md:mx-0 md:text-base py-1 px-4 bg-primary-2 md:px-4 md:py-2 rounded-lg text-white mt-4"
+              onClick={
                     ()=>{
                       navigate(eventData.registerLink)
                     }
@@ -91,11 +90,11 @@ export default function DetailEvents() {
                   {registered ? "Already registered!" : "Register Now"}
               </button>
             </div>
-            <div className="bg-gray-200 rounded-lg w-48 h-64 hidden md:block md:w-[25rem] md:h-[32rem] mx-auto"></div>
+            <div className="bg-gray-200 rounded-lg hidden md:block md:w-[20rem] md:h-[28rem] mx-auto"></div>
             <div className="md:mx-15 text-center md:text-left">
-              <h2 className="text-2xl my-8 text-3xl md:text-3xl font-bold">Timeline</h2>
+              <h2 className="text-2xl my-8 text-3xl md:text-3xl xl:mx-[5rem] font-bold">Timeline</h2>
             </div>
-            <div className="md:mx-15">
+            <div className="md:mx-15 xl:mx-[5rem]">
               {eventData.timelineData && eventData.timelineData.length > 0 ? (
                 eventData.timelineData.map((item, index) => (
                   <TimelineItem

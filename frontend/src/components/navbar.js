@@ -201,6 +201,13 @@ export default function NavbarUser({ currentPath }) {
                     All
                   </Link>
                   <Link
+                    to={`${EVENTS_PAGE}?category=Competition`}
+                    className="block px-4 py-2 hover:bg-gray-700"
+                    onClick={toggleMenu}
+                  >
+                    Competitions
+                  </Link>
+                  <Link
                     to={`${EVENTS_PAGE}?category=Workshop`}
                     className="block px-4 py-2 hover:bg-gray-700"
                     onClick={toggleMenu}
@@ -213,13 +220,6 @@ export default function NavbarUser({ currentPath }) {
                     onClick={toggleMenu}
                   >
                     Company Visit
-                  </Link>
-                  <Link
-                    to={`${EVENTS_PAGE}?category=Competition`}
-                    className="block px-4 py-2 hover:bg-gray-700"
-                    onClick={toggleMenu}
-                  >
-                    Competitions
                   </Link>
                   <Link
                     to={`${EVENTS_PAGE}?category=Seminar`}
