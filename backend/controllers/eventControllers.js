@@ -1,4 +1,5 @@
 const express = require("express");
+const { Op } = require("sequelize");
 const {
   User,
   Chamber,
@@ -22,6 +23,55 @@ exports.getAllEvents = async (req, res) => {
     return res.status(500).json({ message: "Failed to fetch events" });
   }
 };
+
+exports.getTwoLatestEvents = async (req, res) => {
+  const today = new Date();
+  try {
+    const events = await Event.findAll({
+      where: {
+        eventDate: {
+          [Op.gt]: today
+        }
+      },
+      order: [
+        ['eventDate', 'ASC']
+      ],
+      limit: 2
+    });
+
+    if (events.length == 1) {
+      try {
+        const moreEvents = await Event.findOne({
+          where: {
+            eventDate: {
+              [Op.lt]: events[0].eventDate
+            }
+          }
+        });
+        events.push(moreEvents);
+      } catch (error) {
+        throw error;
+      }
+    }
+
+    if (events.length == 0) {
+      try {
+        const events = await Event.findAll({
+          order: [
+            ['eventDate', 'DESC']
+          ],
+          limit: 2
+        });
+        return res.status(200).json(events);
+      } catch (error) {
+        throw error;
+      }
+    }
+    return res.status(200).json(events);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to fetch events"});
+  }
+}
 
 exports.getRegisteredEventsByUser = async (req, res) => {
   try {

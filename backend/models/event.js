@@ -30,6 +30,10 @@ const Event = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
+    openRegistration: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 0,
+    },
   },
   {
     tableName: "events",

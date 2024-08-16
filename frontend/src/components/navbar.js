@@ -67,7 +67,7 @@ export default function NavbarUser({ currentPath }) {
                 : "hover:text-yellow-500"
             }`}
           >
-            Events
+            Programs
             <svg
               className={`w-4 h-4 ml-2 transition-transform ${
                 dropdownOpen ? "rotate-180" : "rotate-0"

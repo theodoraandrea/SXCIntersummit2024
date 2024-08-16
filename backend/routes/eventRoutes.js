@@ -9,6 +9,7 @@ const errorHandling = require("../middlewares/errorHandling");
 
 router.get("/", isAuthenticated, eventControllers.getRegisteredEventsByUser);
 router.get("/all", eventControllers.getAllEvents);
+router.get("/twoEvents", eventControllers.getTwoLatestEvents);
 
 router.post(
   "/BMC",

@@ -22,6 +22,8 @@ import {
   // BMC
   API_GET_BMC_REGISTRATION,
   API_POST_BMC_REGISTRATION,
+  API_GET_TWO_EVENTS,
+  API_GET_TWO_COMPETITIONS,
 } from "../config/endpoints";
 
 //Login
@@ -157,19 +159,27 @@ const fetchRegisteredEvents = async () => {
   }
 };
 
-// Get two events for homepage
-const fetchTwoEvents = async () => {
+//Get 2 latest events for homepage
+const fetchTwoLatestEvents = async () => {
   try {
-    const response = await axiosInstance.get(API_GET_ALL_EVENTS);
-    const allEvents = response.data;
-
-    const oneEvents = allEvents.slice(0, 2);
-    return oneEvents;
+    const response = await axiosInstance.get(API_GET_TWO_EVENTS);
+    return response.data;
   } catch (error) {
-    console.error("Error fetching events:", error);
+    console.log("Error fetching 2 events");
     throw error;
   }
-};
+}
+
+//Get 2 latest competitions for homepage
+const fetchTwoLatestCompetitions = async () => {
+  try {
+    const response = await axiosInstance.get(API_GET_TWO_COMPETITIONS);
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching 2 competitions");
+    throw error;
+  }
+}
 
 // Get competitions registered by user
 const fetchRegisteredCompetitions = async () => {
@@ -295,8 +305,9 @@ export {
   putProfileData,
   fetchRegisteredEvents,
   fetchAllEvents,
-  fetchTwoEvents,
+  fetchTwoLatestEvents,
   fetchAllCompetitions,
+  fetchTwoLatestCompetitions,
   fetchRegisteredCompetitions,
   postNewFceoMember,
   postNewFceoTeam,

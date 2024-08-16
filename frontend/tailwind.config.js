@@ -18,6 +18,7 @@ module.exports = {
         'primary-3': '#D5A141',
         'primary-4': '#004349',
         'primary-5': '#E2E8EA',
+        'secondary-4': '#006B6B',
         'secondary-2': '#007e87'
       },
       width: {
@@ -49,6 +50,15 @@ module.exports = {
         '.bg-gradient-primary': {
           background: 'linear-gradient(90deg, #01AFBA 0%, #004349 100%)',
         },
+        '.bg-gradient-primary-2': {
+          background: 'linear-gradient(90deg, #01AFBA 0%, #007373 100%)',
+        },
+        '.bg-gradient-secondary': {
+          background: 'linear-gradient(45deg, #8f6B29, #DF9F28)',
+        },
+        '.bg-gradient-gray': {
+          background: 'linear-gradient(90deg, #808080 0%, #6c6c6c 100%)'
+        }
       };
       addUtilities(newUtilities, ['responsive', 'hover']);
     }),

@@ -10,4 +10,6 @@ router.get(
   competitionControllers.getRegisteredCompetitionsByUser
 );
 router.get("/all", competitionControllers.getAllCompetitions);
+router.get("/twoComps", competitionControllers.getTwoLatestCompetitions);
+
 module.exports = router;
