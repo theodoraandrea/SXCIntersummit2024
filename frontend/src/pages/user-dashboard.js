@@ -90,25 +90,32 @@ export default function UserDashboard() {
     <div>
       <Navbar currentPath={location.pathname} />
       {/* Profile Section */}
-      <section className="bg-primary-4 flex items-center py-12 px-20">
+      <section className="bg-primary-4 flex items-center p-8 md:py-12 md:px-20">
         <div className="ml-5">
-          <h2 className="text-2xl font-bold text-white ">
+          <h2 className="text-lg md:text-2xl font-bold text-white ">
             {userData?.fullname}
           </h2>
-          <p className="text-white">
-            {userData?.email}
-          </p>
-          <p className="text-white">
-            {userData?.phoneNumber}
-          </p>
-          <p className="text-white">{userData?.institution}</p>
-          <p className="text-white">
-            {userData?.major} {userData?.batch}
-          </p>
+          <div className="text-white text-sm md:text-base">
+            <p>
+              {userData?.email}
+            </p>
+            <p>
+              {userData?.phoneNumber}
+            </p>
+            <p>{userData?.institution}</p>
+            <p>
+              {userData?.major} {userData?.batch}
+            </p>
+          </div>
         </div>
         <div className="ml-auto">
           <Link to={USER_DETAILS_PAGE}>
-            <button className="bg-primary-2 text-white px-4 py-2 rounded hover:bg-secondary-2 transition duration-300">
+            <button className="border-2 border-primary-3 text-primary-3 hover:bg-primary-3 hover:text-white transition duration-300 rounded-full
+            px-4 py-1
+            md:px-6 md:py-2
+            md:text-base text-sm
+            
+            ">
               Edit Profile
             </button>
           </Link>

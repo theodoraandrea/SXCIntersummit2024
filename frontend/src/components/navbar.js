@@ -37,7 +37,7 @@ export default function NavbarUser({ currentPath }) {
         <li>
           <Link
             to={HOME}
-            className={`text-white hover:font-semibold ${
+            className={`text-white ${
               currentPath === HOME
                 ? "font-semibold text-yellow-500"
                 : "hover:text-yellow-500"
@@ -49,7 +49,7 @@ export default function NavbarUser({ currentPath }) {
         <li>
           <Link
             to={ABOUT_PAGE}
-            className={`text-white hover:font-semibold ${
+            className={`text-white ${
               currentPath === ABOUT_PAGE
                 ? "font-semibold text-yellow-500"
                 : "hover:text-yellow-500"
@@ -61,7 +61,7 @@ export default function NavbarUser({ currentPath }) {
         <li className="relative">
           <button
             onClick={toggleDropdown}
-            className={`flex items-center text-white hover:font-semibold ${
+            className={`flex items-center text-white ${
               currentPath === EVENTS_PAGE
                 ? "font-semibold text-yellow-500"
                 : "hover:text-yellow-500"
@@ -129,7 +129,7 @@ export default function NavbarUser({ currentPath }) {
         <li>
           <Link
             to={MERCH_LINK}
-            className="text-white hover:font-semibold hover:text-yellow-500"
+            className="text-white hover:text-yellow-500"
           >
             Merchandise
           </Link>
@@ -258,7 +258,7 @@ export default function NavbarUser({ currentPath }) {
                       removeUser();
                       navigate(LANDING_PAGE);
                     }}
-                    className="text-white text-2xl bg-primary-2 px-4 py-2 rounded hover:bg-secondary-2"
+                    className="text-white text-2xl px-4 py-2 rounded hover:text-yellow-500"
                   >
                     Logout
                   </button>
@@ -285,7 +285,7 @@ export default function NavbarUser({ currentPath }) {
           <>
             <Link
               to={USER_DASHBOARD_PAGE}
-              className={`flex items-center text-white hover:font-semibold ${
+              className={`flex items-center text-white ${
                 currentPath === USER_DASHBOARD_PAGE
                   ? "font-semibold text-yellow-500"
                   : "hover:text-yellow-500"
@@ -299,7 +299,7 @@ export default function NavbarUser({ currentPath }) {
                 removeUser();
                 navigate(LANDING_PAGE);
               }}
-              className="text-white hover:bg-secondary-2 transition duration-300 px-4 py-1 rounded bg-primary-2 cursor-pointer"
+              className="text-white hover:text-gradient transition duration-300 cursor-pointer"
             >
               Logout
             </button>
@@ -307,8 +307,8 @@ export default function NavbarUser({ currentPath }) {
         ) : (
           <Link
             to={LANDING_PAGE}
-            className="text-white hover:bg-secondary-2 transition duration-300 px-4 py-2 rounded bg-primary-2 cursor-pointer"
-          >
+            className="text-white hover:text-gradient transition duration-300 cursor-pointer"
+            >
             Login
           </Link>
         )}

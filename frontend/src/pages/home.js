@@ -255,7 +255,7 @@ export default function Home() {
                     )
                   }
 
-                  <Link to={`${EVENT_DETAILS}/comp_${card.id}`}>
+                  <Link to={`${EVENT_DETAILS}/event_${card.id}`}>
                   <div className="bg-white opacity-50 rounded-lg mx-auto
                   w-[16rem] h-[20rem]">
                     <img

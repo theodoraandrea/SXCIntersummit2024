@@ -90,7 +90,7 @@ const Events = () => {
           <>
           <div className="flex mx-auto overflow-scroll">
             <div className="flex space-x-4 mb-4 mx-auto">
-              {["All", "Workshop", "Company Visit", "Competition", "Seminar"].map(
+              {["All", "Competition", "Workshop", "Company Visit", "Seminar"].map(
                 (category) => (
                   <div className="flex w-fit">
                   <button
