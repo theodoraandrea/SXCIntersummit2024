@@ -248,7 +248,6 @@ export default function NavbarUser({ currentPath }) {
                     className="flex items-center text-white text-2xl hover:text-yellow-500"
                     onClick={toggleMenu}
                   >
-                    <AccountCircleIcon className="mr-2" />
                     My profile
                   </Link>
                 </li>
@@ -268,7 +267,7 @@ export default function NavbarUser({ currentPath }) {
               <li>
                 <Link
                   to={LANDING_PAGE}
-                  className="text-white text-2xl bg-primary-2 px-4 py-2 rounded hover:bg-secondary-2"
+                  className="text-white text-2xl px-4 py-2 rounded hover:text-yellow-500 border-2 border-primary-3 rounded-full px-8 py-1"
                   onClick={toggleMenu}
                 >
                   Login
@@ -307,7 +306,7 @@ export default function NavbarUser({ currentPath }) {
         ) : (
           <Link
             to={LANDING_PAGE}
-            className="text-white hover:text-gradient transition duration-300 cursor-pointer"
+            className="text-gradient transition duration-300 cursor-pointer border-2 border-primary-3 rounded-full px-4 py-1"
             >
             Login
           </Link>
