@@ -95,6 +95,13 @@ export default function NavbarUser({ currentPath }) {
                 All
               </Link>
               <Link
+                to={`${EVENTS_PAGE}?category=Competition`}
+                className="block px-4 py-2 hover:bg-gray-200"
+                onClick={() => setDropdownOpen(false)}
+              >
+                Competitions
+              </Link>
+              <Link
                 to={`${EVENTS_PAGE}?category=Workshop`}
                 className="block px-4 py-2 hover:bg-gray-200"
                 onClick={() => setDropdownOpen(false)}
@@ -109,11 +116,11 @@ export default function NavbarUser({ currentPath }) {
                 Company Visit
               </Link>
               <Link
-                to={`${EVENTS_PAGE}?category=Competition`}
+                to={`${EVENTS_PAGE}?category=Seminar`}
                 className="block px-4 py-2 hover:bg-gray-200"
                 onClick={() => setDropdownOpen(false)}
               >
-                Competitions
+                Seminar
               </Link>
             </div>
           )}
@@ -121,7 +128,7 @@ export default function NavbarUser({ currentPath }) {
 
         <li>
           <Link
-            to="#"
+            to={MERCH_LINK}
             className="text-white hover:font-semibold hover:text-yellow-500"
           >
             Merchandise

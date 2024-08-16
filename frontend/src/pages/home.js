@@ -128,10 +128,18 @@ export default function Home() {
         <h2 className="text-2xl md:text-4xl font-semibold mt-4 text-gradient mx-5 md:mx-20">
           Innovate or Obsolete: Thriving in a world of technology disruption
         </h2>
-        <p className="mt-5 text-lg md:text-xl max-w-full mx-5 md:mx-20 text-white">
-          Prepare yourself for a brand new era with SxC International Summit, a
-          Grand Event organized by StudentsxCEOs Jakarta consisting of a
-          sequence of enriching and groundbreaking events.
+        <p class="mt-5 text-md md:text-lg max-w-[72vw] mx-5 md:mx-20 text-white">
+        The StudentsxCEOs (SxC) International Summit is <strong>a grand event</strong> organized by <strong>StudentsxCEOs Jakarta</strong>. 
+        This year, the SxC Summit will embrace the grand theme: <strong>“Elevating Future Leaders: Transcending User-Centricity To Strategic Innovation In The Digital Economy”</strong>. 
+        </p>
+        <p class="mt-5 text-md md:text-lg max-w-[72vw] mx-5 md:mx-20 text-white">
+        This summit will take you on an <strong>unforgettable upskilling journey </strong> with a series of <strong>events </strong> 
+        consisting of <strong>Business Master Class, Chambers, Company Visit, and Summit Talkshow</strong>, 
+        as well as <strong>challenging competitions</strong>, namely,
+        <strong> Future CEO, Business Case Competition, and Business Plan Competition</strong>.
+        </p>
+        <p class="mt-5 text-md md:text-lg max-w-full mx-5 md:mx-20 text-white">
+            We dare you to <strong className="text-gradient text-lg md:text-xl">#Lead the Change, Shape the Future</strong> with us now!
         </p>
         <button
           className="w-60 h-10 mx-5 md:mx-20 my-5 bg-yellow-500 text-lg font-semibold rounded-md hover:bg-yellow-600 transition duration-300 text-white"
