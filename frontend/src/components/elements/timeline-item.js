@@ -11,18 +11,18 @@ const TimelineItem = ({ title, date, type, link, registered }) => {
         {type === "register" && (
           <>
           { registered ? (
-              <button className="bg-primary-2 px-4 py-2 rounded-lg text-white mr-2 mt-2"
+              <button className="text-sm md:text-base py-1 px-4 bg-primary-2 md:px-4 md:py-2 rounded-lg text-white mr-2 mt-2"
               disabled={true}>
               Already registered!
             </button>
           ) :<Link to={link}
           >
-            <button className="bg-primary-2 px-4 py-2 rounded-lg text-white mr-2 mt-2">
+            <button className="text-sm md:text-base py-1 px-4 bg-primary-2 md:px-4 md:py-2 rounded-lg text-white mr-2 mt-2">
               Register Now
             </button>
           </Link>
           }
-            <button className="bg-primary-3 px-4 py-2 rounded-lg text-white mt-2">
+            <button className="text-sm md:text-base bg-primary-3 py-1 px-4 md:py-2 md:px-4 rounded-lg text-white my-2">
               View Booklet
             </button>
           </>

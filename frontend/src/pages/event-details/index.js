@@ -58,7 +58,7 @@ export default function DetailEvents() {
   const eventData = eventDetails[eventId] || {};
 
   return (
-    <div>
+    <div className="bg-primary-1">
       <Navbar />
       {loading ? (
           <div className="h-[80vh] bg-primary-1">
@@ -67,17 +67,19 @@ export default function DetailEvents() {
           </div>
           </div>
       ) : (
-        <div className="p-4 md:p-8 bg-primary-1 text-white">
+        <div className="p-4 mx-8 sm:mx-16 md:mx-20 lg:mx-32 my-8 bg-primary-1 text-white">
           {/* Competition Section */}
-          <div className="flex flex-col-reverse md:grid md:grid-cols-2 gap-4">
-            <div className="flex flex-col">
-              <h1 className="text-2xl md:text-3xl font-bold">
+          <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-8">
+            <div className="flex flex-col md:row-span-4">
+              <h1 className="text-gradient text-3xl md:text-5xl font-bold">
                 {eventData.title || "Event Title"}
               </h1>
-              <p className="mt-4 text-base md:text-lg">
-                {eventData.description || "Event Desc goes here"}
-              </p>
-                <button
+              <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] my-8 md:hidden mx-auto"></div>
+              <div 
+              className="text-justify mt-4"
+              dangerouslySetInnerHTML={{ __html: eventData.description     
+              }}/>
+              <button
                   className="bg-primary-2 w-fit px-5 rounded-lg py-2 text-white mt-4"
                   onClick={
                     ()=>{
@@ -87,20 +89,13 @@ export default function DetailEvents() {
                   disabled={registered}
                 >
                   {registered ? "Already registered!" : "Register Now"}
-                </button>
+              </button>
             </div>
-            <div className="bg-gray-200 rounded-lg h-64"></div>
-          </div>
-
-          {/* Timeline Section */}
-          <div className="mt-16 md:grid md:grid-cols-2 gap-20">
-            <div className="my-auto">
-              <h2 className="text-2xl md:text-3xl font-bold">Timeline</h2>
-              <p className="mt-4 text-base md:text-lg">
-                {eventData.timelineDesc}
-              </p>
+            <div className="bg-gray-200 rounded-lg w-48 h-64 hidden md:block md:w-[25rem] md:h-[32rem] mx-auto"></div>
+            <div className="md:mx-15 text-center md:text-left">
+              <h2 className="text-2xl my-8 text-3xl md:text-3xl font-bold">Timeline</h2>
             </div>
-            <div className="mt-8 space-y-4">
+            <div className="md:mx-15">
               {eventData.timelineData && eventData.timelineData.length > 0 ? (
                 eventData.timelineData.map((item, index) => (
                   <TimelineItem

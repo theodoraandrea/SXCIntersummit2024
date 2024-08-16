@@ -49,8 +49,31 @@ export const eventDetails = {
 
   comp_1: {
     title: "Future CEO",
-    description: "Challenges college students to apply their business acumen and strategic thinking to real-world scenarios through complex business problems analysis and develop innovative solution",
-    timelineDesc: "Timeline details for FCEO",
+    description: "<strong>Future CEO</strong> is <strong>a prestigious business plan competition</strong> exclusively <strong>for high school students</strong>, to showcase their entrepreneurial skills and business acumen with the grand theme <strong>“Shaping Future Pioneers: Embracing Strategic Innovation in Sustainable Digital Era”</strong>. Students are <strong>challenged to present their innovative business idea</strong> that can solve the problems around them." +
+    "</br></br>" +
+    "<strong>When</strong></br>" +
+    "19 August - 1st December 2024" +
+    "</br></br>" +
+    "<strong>Consists of 3 Stages</strong>" +
+    "</br><strong>&emsp;&emsp;1.&emsp;Preliminary:</strong>" +
+    "</br>&emsp;&emsp;&emsp;&emsp;Business Model Canvas Submission" +
+    "</br>&emsp;&emsp;&emsp;&emsp;19th August - 29th September 2024" +
+    "</br><strong>&emsp;&emsp;2.&emsp;Semifinal:</strong>" +
+    "</br>&emsp;&emsp;&emsp;&emsp;Proposal Submission" +
+    "</br>&emsp;&emsp;&emsp;&emsp;1st October - 22nd October 2024" +
+    "</br><strong>&emsp;&emsp;3.&emsp;Final:</strong>" +
+    "</br>&emsp;&emsp;&emsp;&emsp;Deck Submission" +
+    "</br>&emsp;&emsp;&emsp;&emsp;5th November - 23rd November 2024" +
+    "</br>&emsp;&emsp;&emsp;&emsp;Pitching Day" +
+    "</br>&emsp;&emsp;&emsp;&emsp;24th November 2024" +
+    "</br></br>" +
+    "<strong>What You Will Get</strong>" +
+    "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
+    "</br>&emsp;&emsp;<strong>Coaching Clinic 1</strong> is designed to equip <strong>aspiring high school entrepreneurs</strong> who have successfully <strong>qualified as Semi-Finalists</strong> with the skills needed to <strong>craft impactful business proposals</strong>. This session will cover the <strong>fundamentals of proposal writing</strong>, focusing on structure, content, and an in-depth review of each component. The program will place further emphasis on <strong>“Proposal Mastery: Crafting Sustainable and Impactful Business Plans“</strong>, including an in-depth description of key sections of the proposal (such as Marketing, Finance, and Operations) as well as <strong>tips and tricks for creating effective proposals</strong>." +
+    "</br></br><strong>&emsp;&emsp;2.&emsp;Coaching Clinic 2</strong>" +
+    "</br>&emsp;&emsp;<strong>Coaching Clinic 2</strong> is designed to empower <strong>aspiring high school entrepreneurs</strong> who have successfully <strong> qualified as Finalists</strong> with the skills to <strong> transform their innovative ideas into narratives</strong> that resonate with audiences. This session focuses on <strong>the art of pitching to create memorable and persuasive presentations</strong>. The program will focus on <strong>“Ignite Your Pitch: Turning Ideas into Powerful Hear Stories“</strong>, including an <strong>in-depth review of pitching techniques, guidance on creating outstanding decks,</strong> and <strong>tips and tricks for effective pitching.</strong>"
+    ,
+    timelineDesc: "",
     registerLink: `${FCEO_REGIST}`,
     faq: ["Will this event be held online or offline?", 
       "What topics are contested?", 
