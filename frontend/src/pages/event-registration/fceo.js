@@ -46,7 +46,7 @@ const FirstView = ({
   );
 
   //REFERRAL & PAYMENT DATA
-  const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+  const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount } = eventData;
   const [verifiedRefCode, setVerifiedRefCode] = useState(
     formData.referralCode ?? null
   );
@@ -208,45 +208,36 @@ const FirstView = ({
               FCEO Registration
         </h1>
       </div>
-      <div className="bg-gradient-primary w-full min-h-screen grid grid-cols-1 lg:grid-cols-3 flex justify-center">
-        <div className="bg-dark-2 col-span-1 p-4 pt-0 rounded-lg shadow-lg text-center">
-          <div className="mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center">
-            <h1 className="text-xl font-bold text-white mb-2">
+      <div className="bg-gradient-primary space-x-8 gap-y-4 min-h-screen grid px-8 grid-cols-1 lg:grid-cols-3">
+        <div className="bg-dark-2 col-span-1 w-fit mx-auto p-4 pt-0 text-center">
+          <div className="mb-4 p-8 
+          text-white rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <h1 className="text-xl font-bold mb-2">
               Registration Fee
             </h1>
-            <p className="text-white mx-4 mb-2 text-center">
-              Please transfer the following amount to complete your registration
+            <p className="mb-2 text-center text-sm">
+              Please pay the following amount to complete your registration
             </p>
-            <div className="text-white text-left w-40">
-              <div className="flex flex-row justify-between">
-                <p>
-                  <strong>Price: </strong>
-                </p>
-                <p>{regularPrice}</p>
-              </div>
-              {verifiedRefCode && refCodeValid && (
-                <>
-                  <div className="flex flex-row justify-between">
-                    <p>
-                      <strong>Discount:</strong>
-                    </p>
-                    <p>{discount}</p>
-                  </div>
-                  <div className="flex flex-row justify-between">
-                    <p>
-                      <strong>Total:</strong>
-                    </p>
-                    <p>
-                      <strong>{discountedPrice}</strong>
-                    </p>
-                  </div>
-                </>
-              )}
+            <p className="text-3xl"><strong>IDR {
+              (verifiedRefCode && refCodeValid) ? discountedPrice : regularPrice
+              }</strong>
+            </p>
+            <p className="text-sm">
+              {
+              verifiedRefCode && refCodeValid && (
+                "Referral discount applied"
+              )
+              }
+            </p>
+          </div>
+          <div className="text-white rounded-lg shadow-lg p-8 text-left">
+          <p className="text-xl text-center">
+              <strong>Transfer to</strong>
+            </p>
+            <div className="text-sm mt-2 w-fit mx-auto">
+              <p><strong>{bankAccount}</strong> - {bank}</p>
+              <p>{recipient}</p>
             </div>
-            <p className="text-white mx-4 text-center">
-              <strong>Bank Account Number: </strong>
-              {bankAccount}
-            </p>
           </div>
           <ReferralModal
             eventName="fceo"
@@ -256,7 +247,7 @@ const FirstView = ({
             setRefCodeValid={setRefCodeValid}
           />
         </div>
-        <div className="bg-dark-2 col-span-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
+        <div className="bg-dark-2 col-span-2 p-8 lg:w-full rounded-lg shadow-lg text-center">
           <form className="text-left">
             <h1 className="text-lg font-bold text-white">Leader Data</h1>
             <p className="text-white font-bold mb-2">
@@ -1164,10 +1155,12 @@ const EventCard = () => {
 
   const eventData = {
     fceoId: 1,
-    bankAccout: "BCA - ",
-    discount: 5000,
-    regularPrice: 50000,
-    discountedPrice: 45000,
+    bankAccount: "000427101697",
+    bank: "blu by BCA DIGITAL",
+    recipient: "CLAIRINE SABATINI NAYOAN",
+    discount: '5000',
+    regularPrice: '50.000',
+    discountedPrice: '45.000',
   };
 
   const sanitizeInput = (input) => {

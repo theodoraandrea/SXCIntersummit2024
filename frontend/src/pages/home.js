@@ -267,7 +267,7 @@ export default function Home() {
                   </Link>
                   <div className="p-5">
                     <div className="flex flex-row justify-between">
-                    <Link to={`${EVENT_DETAILS}/comp_${card.id}`}>
+                    <Link to={`${EVENT_DETAILS}/event_${card.id}`}>
                     <h1 className="text-2xl md:text-md xl:text-sm font-bold text-white hover:text-gradient transition duration-400">
                       {card.eventName}
                     </h1>

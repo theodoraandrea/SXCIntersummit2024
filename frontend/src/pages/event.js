@@ -78,7 +78,7 @@ const Events = () => {
   return (
     <>
       <Navbar currentPath={location.pathname} />
-      <div className="p-4 md:p-8 bg-primary-1 text-white h-full">
+      <div className="p-8 md:p-8 bg-primary-1 text-white h-full">
         {
           isLoading ?
           <div className="h-[80vh]">
@@ -88,10 +88,11 @@ const Events = () => {
           </div>
            :
           <>
-          <div className="flex mx-auto">
+          <div className="flex mx-auto overflow-scroll">
             <div className="flex space-x-4 mb-4 mx-auto">
               {["All", "Workshop", "Company Visit", "Competition", "Seminar"].map(
                 (category) => (
+                  <div className="flex w-fit">
                   <button
                     key={category}
                     onClick={() => setFilter(category)}
@@ -101,6 +102,7 @@ const Events = () => {
                   >
                     <p className="text-xs md:text-sm">{category}</p>
                   </button>
+                  </div>
                 )
               )}
             </div>
