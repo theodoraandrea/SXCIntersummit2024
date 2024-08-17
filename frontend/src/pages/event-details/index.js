@@ -37,7 +37,6 @@ export default function DetailEvents() {
       if (id === 1) {
         //for BMC, BCC = 2, BPC = 3
         if (registeredEvents.includes(2) && registeredEvents.includes(3)) {
-          console.log("bmc full");
           setRegistered(true);
           return;
         }

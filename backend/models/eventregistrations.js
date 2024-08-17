@@ -25,6 +25,9 @@ const EventRegistration = sequelize.define(
         key: "id",
       },
     },
+    bmcType: {
+      type: DataTypes.TINYINT,
+    },
   },
   {
     timestamps: true,

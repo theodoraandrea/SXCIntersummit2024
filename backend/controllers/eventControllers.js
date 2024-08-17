@@ -15,6 +15,9 @@ const { validationResult } = require("express-validator");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
+const BCC = "Business Case Competition";
+const BPC = "Business Plan Competition";
+
 exports.getAllEvents = async (req, res) => {
   try {
     const events = await Event.findAll();
@@ -145,11 +148,9 @@ exports.registerBMC = async (req, res) => {
 
     // Check if there any required image not uploaded.
     const requiredFields = [
-      "agreement",
       "screenshot1",
       "screenshot2",
       "screenshot3",
-      "proofPayment",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -213,24 +214,31 @@ exports.registerBMC = async (req, res) => {
     const rootFolderId = process.env.FOLDER_BMC_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
 
-    const agreementURL = await getImageURLsList(files.agreement, folderId);
+    //const agreementURL = await getImageURLsList(files.agreement, folderId);
     const screenshot1 = await getImageURLsList(files.screenshot1, folderId);
     const screenshot2 = await getImageURLsList(files.screenshot2, folderId);
     const screenshot3 = await getImageURLsList(files.screenshot3, folderId);
-    const proofPayment = await getImageURLsList(files.proofPayment, folderId);
+    //const proofPayment = await getImageURLsList(files.proofPayment, folderId);
     const screenshotBMC_URL = [
       screenshot1,
       screenshot2,
       screenshot3,
-      proofPayment,
     ];
 
     // BMC Registration
     let eventRegistration;
     try {
+      let bmcType = 0;
+      if (body.sessionType === BCC) {
+        
+        bmcType = 2;
+      } else if (body.sessionType === BPC) {
+        bmcType = 3;
+      }
       eventRegistration = await EventRegistration.create({
         userId: userId,
         eventId: bmcId,
+        bmcType: bmcType,
       });
     } catch (error) {
       console.log(error);
@@ -241,7 +249,6 @@ exports.registerBMC = async (req, res) => {
     try {
       bmc = await BMC.create({
         registrationId: eventRegistration.id,
-        agreement: agreementURL,
         sessionType: body.sessionType,
         question: qnaList,
         screenshotBMC: screenshotBMC_URL,

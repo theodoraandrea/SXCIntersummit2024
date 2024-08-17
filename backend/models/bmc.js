@@ -18,7 +18,7 @@ const BusinessMasterClass = sequelize.define(
     },
     agreement: {
       type: DataTypes.JSON,
-      allowNull: false,
+      allowNull: true,
     },
     sessionType: {
       type: DataTypes.ENUM,

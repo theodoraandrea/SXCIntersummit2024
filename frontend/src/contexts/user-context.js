@@ -51,6 +51,11 @@ export const UserProvider = ({ children }) => {
       let events = [];
       for (let i=0; i < eventsRes.length; i++) {
         const item = eventsRes[i];
+        console.log(item);
+        if (item.id === 1) {
+          console.log(item.EventRegistrations[0].bmcType);
+          events.push(item.EventRegistrations[0].bmcType);
+        }
         events.push(item.id);
       }
       setRegisteredEvents(events);
@@ -58,6 +63,7 @@ export const UserProvider = ({ children }) => {
       setIsLoggedIn(false);
     } finally {
       setLoading(false);
+      console.log("my events", registeredEvents);
     }
   }; 
 
