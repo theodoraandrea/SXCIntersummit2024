@@ -25,6 +25,10 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   }, [isLoggedIn, loading]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  useEffect(() => {
     console.log(registeredEvents);
     if (registeredEvents.includes(2)) {
       setHasRegisteredBcc(true);
@@ -211,6 +215,10 @@ const ThirdView = ({
   onNext,
 }) => {
   const { profileData } = useUser();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
 
   useEffect(() => {
     setFullName(profileData?.fullname);
@@ -441,6 +449,11 @@ const FourthView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [eventSource, setEventSource] = useState(formData.eventSource ?? "");
   const [eventSourceOther, setEventSourceOther] = useState(
     formData.eventSourceOther ?? "Other"
@@ -647,6 +660,11 @@ const SixthView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [experience, setExperience] = useState(formData.experience ?? "");
   const [charCount, setCharCount] = useState(formData.experience?.length ?? 0);
 
@@ -733,6 +751,11 @@ const SeventhView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [expectations, setExpectations] = useState(formData.expectations ?? "");
   const [charCount, setCharCount] = useState(
     formData.expectations?.length ?? 0
@@ -816,6 +839,11 @@ const EighthView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [materials, setMaterials] = useState(formData.materials ?? "");
   const [charCount, setCharCount] = useState(formData.materials?.length ?? 0);
 
@@ -891,6 +919,11 @@ const EighthView = ({
 };
 
 const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [follow1, setFollow1] = useState(formData.screenshot1 ? true : false);
   const [follow2, setFollow2] = useState(formData.screenshot2 ? true : false);
   const [follow3, setFollow3] = useState(formData.screenshot3 ? true : false);
@@ -1200,6 +1233,10 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
 }
 
 const Summary = ({ formData, onPrevious }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();

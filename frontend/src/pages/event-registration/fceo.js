@@ -26,6 +26,10 @@ const FirstView = ({
     setSchool(profileData?.institution);
   }, [profileData]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [fullName, setFullName] = useState("");
   const [gender, setGender] = useState("");
   const [school, setSchool] = useState("");
@@ -506,6 +510,10 @@ const Member1Data = ({
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const handleSubmit = () => {
     if (checkAllFilled()) {
       if (!emailError && !phoneError) {
@@ -699,6 +707,10 @@ const Member2Data = ({
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
 
   const handleNext = () => {
     if (doesNotHaveMemberTwo()) {
@@ -915,6 +927,10 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
   const membersData = [member1Data, member2Data];
 
   const { fceoId } = eventData;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
 
   const handleSubmit = async () => {
     try {
