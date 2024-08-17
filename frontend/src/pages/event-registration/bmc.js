@@ -56,7 +56,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     <div>
       <Navbar />
       <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
-        <div className="bg-primary-4 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
           <h1 className="text-3xl font-bold text-gradient">{title}</h1>
           <p className="text-sm text-white my-6">
             Choose which workshop you would like to participate in
@@ -311,7 +311,7 @@ const ThirdView = ({
         <div>
             <Navbar />
             <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-primary-4 p-8 my-8 rounded-xl shadow-lg max-w-3xl'>
+                <div className='bg-primary-4 mx-2 p-8 my-8 rounded-xl shadow-lg max-w-3xl'>
                     <h1 className='text-3xl font-bold text-gradient text-center mb-2'>Personal Information</h1>
                     <p className='text-white text-center font-bold mb-6'>You can edit your personal information
                         <Link to={USER_DETAILS_PAGE}
@@ -488,7 +488,7 @@ const FourthView = ({
     <div>
       <Navbar />
       <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
-        <div className="bg-primary-4 m-8 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
           <h1 className="text-3xl font-bold text-gradient mb-4">
             How did you know this event?
           </h1>
@@ -504,7 +504,7 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource1"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit Instagram
               </label>
@@ -520,7 +520,7 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource2"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit LinkedIn
               </label>
@@ -536,7 +536,7 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource3"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit Tiktok
               </label>
@@ -552,12 +552,12 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource4"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 Media Partners
               </label>
             </div>
-            <div className="flex p-4 col-span-2 items-center bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 col-span-2 text-xs sm:text-sm items-center bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource5"
                 name="eventSourceRadio"
@@ -568,7 +568,7 @@ const FourthView = ({
               />
               <input
                 id="eventSource5"
-                className="text-sm ml-2 bg-gray-100 w-full"
+                className="ml-2 bg-gray-100 w-full"
                 name="eventSource"
                 type="text"
                 value={eventSourceOther}
@@ -603,14 +603,14 @@ const FourthView = ({
 const FifthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
     <div>
         <Navbar />
-        <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-primary-4 mx-8 p-8 max-w-xl rounded-xl shadow-lg text-center'>
+        <div className='bg-primary-1 w-full px-2 min-h-screen flex items-center justify-center'>
+            <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
                 <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>Have you ever participated in a business competition before?</h1>
-                <div className='flex justify-center'>
+                <div className='flex w-full justify-center'>
                     {/* I have - goes to seventh view */}
                     <div className='w-40'>
                         <button 
-                            className='bg-primary-3 border-2 border-primary-3 w-full text-white px-6 py-2 rounded-full' 
+                            className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
                             onClick={onNextHave} 
                             aria-label='I have'
                         >
@@ -620,7 +620,7 @@ const FifthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
                     {/* I have not - goes to eighth view */}
                     <div className='w-40 ml-6'>
                         <button 
-                            className='border-2 border-yellow-500 w-full text-yellow-500 px-6 py-2 rounded-full' 
+                            className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
                             onClick={onNextHaveNot} 
                             aria-label='I have not'
                         >
@@ -681,8 +681,8 @@ const SixthView = ({
     <div>
       <Navbar />
       <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
-        <div className="bg-primary-4 p-8 m-8 rounded-xl shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl px-12 font-bold text-gradient mb-4">
+        <div className="bg-primary-4 p-8 my-8 mx-2 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient mb-4">
             What was your experience when participating in a business
             competition before?
           </h1>
@@ -769,7 +769,7 @@ const SeventhView = ({
         <div>
             <Navbar />
             <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-primary-4 m-8 p-8 rounded-xl shadow-lg text-center max-w-3xl'>
+                <div className='bg-primary-4 m-8 p-8 my-8 mx-2 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-gradient mb-4'>What are your expectations for this Business Master Class?</h1>
                     <form className='text-left'>
                         <div className='mb-4'>
@@ -850,7 +850,7 @@ const EighthView = ({
         <div>
             <Navbar />
             <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-primary-4 m-8 p-8 rounded-xl shadow-lg text-center max-w-3xl'>
+                <div className='bg-primary-4 my-8 mx-2 p-8 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-gradient mb-4'>What kind of competition materials do you need?</h1>
                     <form className='text-left'>
                         <div className='mb-4'>
@@ -949,7 +949,7 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
         <div>
             <Navbar />
             <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-primary-4 m-8 p-8 rounded-xl shadow-lg text-center max-w-3xl'>
+                <div className='bg-primary-4 my-8 mx-2 p-8 max-w-full md:max-w-xl rounded-xl shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-gradient mb-4'>Connect with us!</h1>
                     <form className='text-left'>
                         {/* setiap selesai chekck list harus upload gambar  */}
@@ -1112,8 +1112,8 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
         <div>
         <Navbar />
         <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-primary-4 flex flex-col text-center max-w-3xl'>
-                <div className='mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+            <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+                <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
                     <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
                         <p className='text-white mx-4 mb-2 text-center'>
                             Please transfer the following amount to complete your registration
@@ -1245,7 +1245,7 @@ const Summary = ({ formData, onPrevious }) => {
               />
             </div>
           ) : (
-            <div className="bg-primary-4 m-8 flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
+            <div className="bg-primary-4 mx-2 my-8 max-w-full md:max-w-lg flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
               <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">BMC Registration Form</p>
               <p className="text-sm text-center font-semibold mb-2">
                 Please make sure all data is correct before submitting
@@ -1268,7 +1268,7 @@ const Summary = ({ formData, onPrevious }) => {
                 <strong>Email</strong>
                 <p>{formData.email}</p>
               </div>
-              <div className="max-w-lg px-16 w-full text-sm md:text-base">
+              <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
                 <div className="border-t border-gray-300 my-4"></div>
                 <strong>How did you know this event?</strong>
                 <p>
@@ -1312,17 +1312,17 @@ const Summary = ({ formData, onPrevious }) => {
                   {formData.screenshot3.name}
                 </p>
               </div>
-              <div className="flex mt-6">
+              <div className="flex w-full mt-6 justify-between">
                 <button
                   type="button"
                   onClick={onPrevious}
-                  className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+                  className="text-white px-6 py-2 mr-6 hover:text-gradient"
                 >
                   Back
                 </button>
                 <button
                   type="button"
-                  className="bg-primary-3 text-white px-6 py-2 rounded-full"
+                  className="text-white px-6 py-2 hover:text-gradient"
                   onClick={handleSubmit}
                 >
                   Submit
