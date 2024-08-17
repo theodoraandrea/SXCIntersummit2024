@@ -93,7 +93,11 @@ const BMCSummary = () => {
                     <Spinner/>
                 </div>
             :
-            <div className='grid md:grid-cols-2 md:gap-x-4'>
+            <div className='grid md:grid-cols-2 md:gap-x-4 md:gap-y-4'>
+                            <div className="grid grid-cols-1 gap-y-4 md:col-span-2 mx-2 sm:mx-8 py-4 md:py-8">
+                            <h1 className='text-gradient font-bold mx-8 text-4xl md:text-5xl text-center'>Business Master Class</h1>
+                            <p className='text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto'>Congratulations! You have been registered for Business Master Class. Please check this page and your email for updates.</p>
+                            </div>
                             <div className='flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25'>
                                 {
                                     bccData.sessionType ? 
@@ -174,7 +178,7 @@ const BMCSummary = () => {
                                 }       
                             </div>
                             <div className='flex flex-col items-start'>
-                            <div className='sm:max-w-md w-full mx-auto rounded-lg'>
+                            <div className='sm:max-w-md w-full mx-auto md:mx-0 rounded-lg'>
                                 <div className='bg-primary-4 flex flex-col rounded-lg shadow-lg mt-4 md:mt-0 md:px-4 py-8 items-center'>
                                     <p className='text-2xl md:text-3xl
                                     text-gradient font-bold mb-2 text-center'>Feedback & Submission</p>
