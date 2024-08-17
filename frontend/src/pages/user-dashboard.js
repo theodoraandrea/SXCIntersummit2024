@@ -90,8 +90,11 @@ export default function UserDashboard() {
     <div>
       <Navbar currentPath={location.pathname} />
       {/* Profile Section */}
-      <section className="bg-primary-4 flex items-center p-8 md:py-12 md:px-20">
-        <div className="ml-5">
+      <section className="bg-primary-4 flex flex-row items-center justify-around 
+      px-2 py-8
+      md:justify-between
+      md:p-8 md:py-12 md:px-20">
+        <div className="overflow-x-scroll max-w-1/2">
           <h2 className="text-lg md:text-2xl font-bold text-white ">
             {userData?.fullname}
           </h2>
@@ -108,12 +111,13 @@ export default function UserDashboard() {
             </p>
           </div>
         </div>
-        <div className="ml-auto">
+        <div>
           <Link to={USER_DETAILS_PAGE}>
             <button className="border-2 border-primary-3 text-primary-3 hover:bg-primary-3 hover:text-white transition duration-300 rounded-full
-            px-4 py-1
+            text-xs px-3 py-1
+            sm:text-sm sm:px-4
             md:px-6 md:py-2
-            md:text-base text-sm
+            md:text-base
             
             ">
               Edit Profile
@@ -185,7 +189,9 @@ export default function UserDashboard() {
                                 status === "started"
                                   ? "bg-green-500"
                                   : "bg-primary-2"
-                              } text-white`}
+                              } text-white
+                              hidden md:block
+                              `}
                             >
                               {message}
                             </button>
@@ -243,7 +249,9 @@ export default function UserDashboard() {
                                 status === "started"
                                   ? "bg-green-500"
                                   : "bg-primary-2"
-                              } text-white`}
+                              } text-white
+                              hidden md:block
+                              `}
                             >
                               {message}
                             </button>

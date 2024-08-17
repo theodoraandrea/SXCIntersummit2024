@@ -9,15 +9,15 @@ export const eventDetails = {
     "</br></br><strong>When</strong>" +
     "</br>21st September 2024" +
     "</br></br><strong>Consists of two classes</strong>" +
-    "</br>&emsp;<strong>1.&emsp;Business Plan Competition Class</strong>" +
+    "</br></br>&emsp;<strong>1.&emsp;Business Plan Competition Class</strong>" +
     "</br>This session will specifically cover Business Plan Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business plan competition" +
-    "</br>&emsp;<strong>2.&emsp;Business Case Competition Class</strong>" +
+    "</br></br>&emsp;<strong>2.&emsp;Business Case Competition Class</strong>" +
     "</br>This session will specifically cover Business Class Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business case competition" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br>&emsp;1.&emsp;Insightful <strong>Competition Materials</strong>" +
-    "</br>&emsp;Practical experience with <strong>Hands-On Study Case</strong" +
-    "</br>&emsp;<strong>Networking</strong> with <strong>High-Achieving Peers</strong>",
+    "</br>&emsp;2.&emsp;Practical experience with <strong>Hands-On Study Case</strong>" +
+    "</br>&emsp;3.&emsp;<strong>Networking</strong> with <strong>High-Achieving Peers</strong>",
     timelineDesc: "",
     registerLink: `${BMC_REGIST}`,
     faq: ["What kind of business lessons will we learn in the Business Master Class?", 
