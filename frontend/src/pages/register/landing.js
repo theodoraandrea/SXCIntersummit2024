@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import bg from "./../../images/Kiri.png";
 import {
   login,
   register,
@@ -15,6 +14,9 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import Swal from "sweetalert2";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
+
+const bg = "/images/Kiri.png";
+
 
 export default function Landing() {
   const { loginUser } = useUser();

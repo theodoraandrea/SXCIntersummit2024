@@ -1,7 +1,9 @@
 import React from "react";
-import Dummy from "./../../images/event1.jpg";
 import { Link } from "react-router-dom";
 import { EVENT_DETAILS } from "../../constants/routes";
+
+const dummy = "/images/event1.jpg";
+
 
 const EventCard = ({ title, description, category, id }) => {
   const eventDetailLink = `${EVENT_DETAILS}/${id}`;
@@ -12,7 +14,7 @@ const EventCard = ({ title, description, category, id }) => {
         <div className="flex-shrink-0 w-full md:w-64 flex-grow">
           <div className="h-full flex">
             <img
-              src={Dummy}
+              src={dummy}
               alt="event"
               className="w-full h-full object-cover rounded-t-xl md:rounded-lg md:rounded-r-none md:rounded-l-xl"
               style={{ objectFit: "cover" }}

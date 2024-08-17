@@ -41,7 +41,7 @@ const ReferralModal = ({ eventName, referralCode, verifiedRefCode, setVerifiedRe
     }
 
     return (
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center">
+        <div className="p-8 rounded-lg shadow-lg text-center">
           <h1 className="text-xl font-bold text-white">Referral Code</h1>
           <p className="text-md text-white mb-4">Enter your referral code to get a discount</p>
           <div className="mt-8 flex-col">

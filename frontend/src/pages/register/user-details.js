@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import bg from "./../../images/Kiri.png";
 import { useNavigate } from "react-router-dom";
 import { putProfileData } from "../../service/services";
 import {
@@ -9,6 +8,8 @@ import {
 } from "../../constants/routes";
 import { useUser } from "../../contexts/user-context";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
+
+const bg = "/images/Kiri.png";
 
 export default function UserDetails() {
   const { isLoggedIn, profileData, loading, setProfileData } = useUser();

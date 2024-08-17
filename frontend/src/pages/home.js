@@ -1,22 +1,20 @@
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
-import BgHero from "./../images/bg-home.png";
-import Circle from "./../images/sponsor.png";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box } from "@mui/material";
-import Dummy from "./../images/bg-about.png";
-import Winner1 from "./../images/winner1.png";
-import Winner2 from "./../images/winner2.png";
-import Elips1 from "./../images/elips1.png";
-import Elips2 from "./../images/elips2.png";
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import { fetchTwoLatestEvents, fetchTwoLatestCompetitions } from "../service/services";
 import { EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
+
+const bgHero = "/images/bg-home.png";
+const circle = "/images/sponsor.png";
+const winner1 = "/images/winner1.png";
+const winner2 = "/images/winner2.png";
+const elips1 = "/images/elips1.png";
+const elips2 = "/images/elips2.png";
 
 export default function Home() {
   const [eventCards, setEventCards] = useState([]);
@@ -26,21 +24,9 @@ export default function Home() {
   const partnershipRef = useRef(null);
 
   const partnerImages = [
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
-    Circle,
+    circle,
+    circle,
+    circle
   ];
 
   useEffect(() => {
@@ -138,7 +124,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         className="bg-cover bg-center xl:h-screen flex flex-col justify-center py-10"
-        style={{ backgroundImage: `url(${BgHero})` }}
+        style={{ backgroundImage: `url(${bgHero})` }}
       >
         <h1 className="text-4xl md:text-5xl font-bold text-white mt-10 mx-10 md:mx-20">
           StudentxCEOs International Summit 2024
@@ -191,7 +177,7 @@ export default function Home() {
                     !card.openRegistration && (
                     <h1 className={`mx-4 mb-4 px-2 py-0.5 h-fit w-fit text-xs font-semibold text-white rounded-md 
                     ${
-                      card.status == "Upcoming" ?
+                      card.status === "Upcoming" ?
                       "bg-gradient-primary-2" :
                       "bg-gradient-gray"
                     }
@@ -245,7 +231,7 @@ export default function Home() {
                     !card.openRegistration && (
                     <h1 className={`mx-4 mb-4 px-2 py-0.5 h-fit w-fit text-xs font-semibold text-white rounded-md 
                     ${
-                      card.status == "Upcoming" ?
+                      card.status === "Upcoming" ?
                       "bg-gradient-primary-2" :
                       "bg-gradient-gray"
                     }
@@ -311,11 +297,11 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col items-center text-center relative">
               <img
-                src={Elips1}
+                src={elips1}
                 alt="Ellipse 1"
                 className="absolute top-0 left-0  -mt-10"
               />
-              <img src={Winner2} alt="Winner 1" className="relative" />
+              <img src={winner2} alt="Winner 1" className="relative" />
               <h3 className=" text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
                 Name of the Winner
               </h3>
@@ -329,11 +315,11 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center text-center relative">
               <img
-                src={Elips2}
+                src={elips2}
                 alt="Ellipse 2"
                 className="absolute top-0 right-0 -mt-10 "
               />
-              <img src={Winner1} alt="Winner 2" className="relative" />
+              <img src={winner1} alt="Winner 2" className="relative" />
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
                 Name of the Winner
               </h3>
