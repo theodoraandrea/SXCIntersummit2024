@@ -20,22 +20,19 @@ export default function About() {
         style={{ backgroundImage: `url(${BgHero})` }}
       >
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20">
-          StudentxCEOs International Summit 2024
+          Part of StudentsxCEOs Jakarta
         </h1>
-        <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold mt-2 sm:mt-4 md:mt-6 text-gradient mx-4 sm:mx-8 md:mx-20">
-          Innovate or Obsolete: Thriving in a world of technology disruption
-        </h2>
+        {/* <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold mt-2 sm:mt-4 md:mt-6 text-gradient mx-4 sm:mx-8 md:mx-20">
+        </h2> */}
         <p className="text-base sm:text-lg md:text-xl mt-3 sm:mt-5 md:mt-6 max-w-full mx-4 sm:mx-8 md:mx-20 text-white">
-          Prepare yourself for a brand new era with SxC International Summit, a
-          Grand Event organized by StudentsxCEOs Jakarta consisting of a
-          sequence of enriching and groundbreaking events.
+          StudentsxCEOs (SxC) was founded in 2010 as an organization for aspiring future business leaders in Indonesia. StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students. With strongly-connected 5 major chapters, 150+ core members linked to 1000+ top  students in over 30+ top universities and 100+ corporate partners, we help corporations and leaders to connect with student-leaders across the nation.
         </p>
       </section>
 
       {/* New Section */}
       <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10">
+          {/* <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10">
             Part of StudentxCEOs
           </h2>
           <div className="flex flex-col sm:flex-row justify-center items-center">
@@ -54,18 +51,376 @@ export default function About() {
               balanced and connected economic leaders, to push the nations
               towards a development country.
             </AboutCard>
+          </div> */}
+
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            SxC International Summit 2024
+          </h2>
+          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20">
+            “Elevating Future Leaders: Transcending User-Centricity To Strategic Innovation In The Digital Economy”
+          </h5>
+          <p
+           className="text-base sm:text-lg md:text-xl my-5 font-normal mb-6 sm:mb-8 md:mb-10 max-w-full mx-4 sm:mx-8 md:mx-20">
+            StudentsxCEOs International Summit is a grand event organized by StudentsxCEOs Jakarta. Its objective is to act as a catalyst for students worldwide, helping them prepare for the workforce and differentiate themselves from their peers. 
+          </p>
+        </div>
+      </section>
+
+      {/* New Section : Vision and Mission */}
+      <div className="bg-teal-800 min-h-screen p-8 flex flex-col items-center justify-center">
+        {/* Section Atas : Our Value */}
+        <div className="w-full mb-10 max-w-4xl p-6 sm:p-10 rounded-lg  relative">
+          <div className="absolute top-[-50px] sm:top-[-60px] left-1/2 transform -translate-x-1/2 w-full max-w-lg bg-white rounded-lg p-4 sm:p-6 shadow-lg flex flex-col sm:flex-row justify-around items-center">
+            <div className="text-center mb-4 sm:mb-0">
+              <div className="bg-gray-200 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2"></div>
+              <div className="text-teal-800 font-bold text-sm sm:text-base">Passion</div>
+            </div>
+            <div className="text-center mb-4 sm:mb-0">
+              <div className="bg-gray-200 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2"></div>
+              <div className="text-teal-800 font-bold text-sm sm:text-base">Synergy</div>
+            </div>
+            <div className="text-center">
+              <div className="bg-gray-200 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2"></div>
+              <div className="text-teal-800 font-bold text-sm sm:text-base">Excellence</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Section Tengah : Tagline */}
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Tagline
+          </h2>
+          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20">
+            Lead The Change, Shape The Future!
+          </h5>
+
+        {/* Section Bawah */}
+        {/* <div className="bg-gray-100 min-h-screen flex items-center justify-center p-8"> */}
+          <div className="w-full max-w-5xl bg-white p-10 rounded-lg shadow-lg flex flex-col sm:flex-row items-center">
+            {/* Bagian Kiri */}
+            <div className="flex-1 flex items-center justify-center mb-8 sm:mb-0">
+              <div className="bg-gradient-to-b from-teal-500 to-teal-800 rounded-full w-72 h-72 flex items-center justify-center">
+                <span className="text-white text-center text-xl sm:text-2xl font-bold">
+                  Our Vision & Mission
+                </span>
+              </div>
+            </div>
+
+            {/* Bagian Kanan */}
+            <div className="flex-1">
+              <div className="mb-8">
+                <h2 className="text-teal-800 text-xl sm:text-2xl font-bold mb-4">Vision</h2>
+                <p className="text-gray-700 text-sm sm:text-base">
+                  Envisions a future where the global economy is driven by innovative and strategic leaders who harness technology as a tool to create sustainable growth, foster collaboration, and address the complex challenges of the modern world.
+                </p>
+              </div>
+              <div>
+                <h2 className="text-teal-800 text-xl sm:text-2xl font-bold mb-4">Mission</h2>
+                <ul className="list-decimal list-inside text-gray-700 space-y-2 text-sm sm:text-base">
+                  <li>Fostering Strategic Thinking</li>
+                  <li>Addressing the Skills Gap</li>
+                  <li>Promoting Sustainability</li>
+                  <li>Encouraging Innovation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        {/* </div> */}
+      </div>
+
+      {/* New Section : Why We Move Amoung Youth? */}
+      <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
+        {/* Why We Move Amoung Youth? */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Why We Move Amoung Youth?
+          </h2>
+          <p
+           className="text-base sm:text-lg md:text-xl my-5 font-normal mb-6 sm:mb-8 md:mb-10 px-2">
+            As Indonesia strides towards Vision 2045, building a strong workforce is crucial. However, statistics show that 1 in 5 young people are still not engaged in meaningful real-world training. The SxC International Summit is committed to bridging this gap by preparing students for successful careers and equipping them with the skills and insights needed to excel in the professional world
+          </p>
+        </div>
+
+        {/* The Challenges We Address */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            The Challenges We Address
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-1" alt="icon 1" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Adapting to rapid technological disruption</div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-2" alt="icon 2" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Filling gaps in essential professional skills</div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-3" alt="icon 3" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Navigating increased competition in the job market</div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-4" alt="icon 4" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Overcoming limited access to relevant work-study opportunities</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Our Focus Area */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Our Focus Area
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-1" alt="icon 1" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Providing career knowledge, networking, and transformation opportunities</div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-2" alt="icon 2" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs"> Offering guidance for career transitions and upskilling</div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-3" alt="icon 3" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Enhancing both soft and hard skills in alignment with technological advancements</div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
+                <img src="path-to-your-icon-4" alt="icon 4" className="w-12 h-12" /> {/* Replace with your icon or image */}
+              </div>
+              <div className="text-white max-w-xs">Cultivating an innovative mindset and personal growth for future leaders</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-10 sm:py-16 md:py-20">
-        <div className="container mx-auto text-center">
-          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 md:mb-8">Vision</h3>
-          <p className="text-base sm:text-lg mb-4 sm:mb-6">Vision content goes here.</p>
-          <h3 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 md:mb-8">Mission</h3>
-          <p className="text-base sm:text-lg">Mission content goes here.</p>
+      {/* New Section : Our Milestone */}
+      <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
+          
+
+          <h2 className="text-2xl my-2 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 text-center">
+            Our Milestone
+          </h2>
+          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20">
+            Participants
+          </h5>
+          
+          <div className="bg-white shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            {/* Future Leaders */}
+            <div className="flex items-center space-x-2">
+                <img src="/path/to/future-leaders-icon.png" alt="Future Leaders Icon" className="h-12 w-12 object-contain" />
+                <div className="text-center">
+                  <div className="text-teal-600 text-2xl font-bold">2000+</div>
+                  <div className="text-gray-600 text-sm">Future Leaders</div>
+                </div>
+              </div>
+
+              {/* University Students */}
+              <div className="flex items-center space-x-2">
+                <img src="/path/to/university-icon.png" alt="University Students Icon" className="h-12 w-12 object-contain" />
+                <div className="text-center">
+                  <div className="text-teal-600 text-2xl font-bold">87%</div>
+                  <div className="text-gray-600 text-sm">University Students</div>
+                </div>
+              </div>
+
+              {/* High School Students */}
+              <div className="flex items-center space-x-2">
+                <img src="/path/to/high-school-icon.png" alt="High School Students Icon" className="h-12 w-12 object-contain" />
+                <div className="text-center">
+                  <div className="text-teal-600 text-2xl font-bold">13%</div>
+                  <div className="text-gray-600 text-sm">High School Students</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        {/* Masukkan Untuk CP, Sponsors, Media Partner */}
+        <div className="flex flex-col lg:flex-row justify-around mx-2">
+            {/* Company Partners */}
+            <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Company Partner</div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/tiket.png" alt="Tiket.com" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/pg.png" alt="P&G" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/traveloka.png" alt="Traveloka" className="h-16 object-contain" />
+                </div>
+                {/* Add other company partner images here */}
+              </div>
+            </div>
+
+            {/* Sponsor */}
+            <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Sponsor</div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/bca.png" alt="BCA" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/loreal.png" alt="L'Oreal" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/natur.png" alt="Natur" className="h-16 object-contain" />
+                </div>
+                {/* Add other sponsor images here */}
+              </div>
+            </div>
+
+            {/* Media Partner */}
+            <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Media Partner</div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/narasi.png" alt="Narasi" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/metrotv.png" alt="MetroTV" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src="/path/to/medcom.png" alt="Medcom" className="h-16 object-contain" />
+                </div>
+                {/* Add other media partner images here */}
+              </div>
+            </div>
+          </div>
+
+      </section>
+
+      {/* New Section : Past Testimony */}
+      <section className="bg-primary-1 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Past Testimony
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="flex flex-col items-center text-center relative">
+              
+              <img src="path-to-winner-image-1.jpg" alt="Winner 1" className="relative z-20" /> {/* Replace with winner image */}
+              <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
+              Ricky Sucitra - Human Capital Strategy Lead at PwC
+              </h3>
+              <p className="mt-2 text-white px-4 text-left mx-5 md:mx-10 z-10 pb-10 md:pb-0">
+              “Wow baru kali ini nih kita collab acara mahasiswa di sesi Q&Anya pertanyaannya sangat berbobot ya, bisa terlihat kualitas dari temen-temen sxc yang luar biasa loh, baru kali ini engga ada yang nanya work life balance dan bedagang ga kak kerja di PwC, yes yes we should definitely collab in another event yaa temen-temen SxC."
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center text-center relative">
+              
+              <img src="path-to-winner-image-2.jpg" alt="Winner 2" className="relative z-20" /> {/* Replace with winner image */}
+              <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
+              Unlimited Potato Team - NDH University Taiwan (International)
+              </h3>
+              <p className="mt-2 text-white px-4 text-right mx-5 md:mx-10 z-10">
+              “It was a good experience, thank you for the opportunity, even though we couldn’t be there offline, would have been so nice to meet you all! Great job, thank you for making this competition!”
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* New Section : Ambassador */}
+      <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Ambassador
+          </h2>
+
+          {/* Image by CVD */}
+          {/* ... */}
+          <div className="flex flex-wrap justify-center">
+            <img src="path-to-ambassador-logo-1.jpg" alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src="path-to-ambassador-logo-2.jpg" alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src="path-to-ambassador-logo-3.jpg" alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src="path-to-ambassador-logo-4.jpg" alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+          </div>
+        </div>
+
+        {/* Our Sponsors and Media Partners */}
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
+          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Our Sponsors and Media Partners
+          </h2>
+
+          {/* Image by CVD */}
+          {/* ... */}
+          {/* give text dump image for image more than one ambassador logo with responsive page*/}
+          <div className="flex flex-wrap justify-center">
+            <img src="path-to-ambassador-logo-1.jpg" alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src="path-to-ambassador-logo-2.jpg" alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src="path-to-ambassador-logo-3.jpg" alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src="path-to-ambassador-logo-4.jpg" alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+          </div>
+        </div>
+         
+      </section>
+
+      {/* New Section : We Are Still Calling for Sponsor */}
+      <section className="bg-teal-900 py-16 text-white">
+        <div className="container mx-auto text-center">
+          <h1 className="text-yellow-500 text-xl md:text-3xl font-bold mb-6">
+            We Are Still Calling for Sponsor and Media Partner!
+          </h1>
+        </div>
+
+        {/* Corporate Partnership Section 1 */}
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
+          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
+            {/* Masukkan Image Corporate dari CVD */}
+            <div className="h-40 bg-gray-400 rounded-lg"></div>
+          </div>
+          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
+            <h2 className="text-yellow-500 text-lg font-semibold mb-4">Corporate Partnership</h2>
+            <p className="text-sm md:text-base leading-relaxed">
+              Looking for a way to create a lasting impact and exposure to the next generation? Establish a partnership with us and support our mission to empower future leaders and innovators in the digital economy. We’d love to explore how we can collaborate to achieve this shared vision. Together, let's elevate the future leaders!
+            </p>
+            <div className="mt-6 text-center">
+              <a href="#" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
+                contact us
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Jabat Tangan Section */}
+        <div className="container mt-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
+          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
+            {/* Masukkan Image Jabat Tangan dari CVD */}
+            <div className="h-40 bg-gray-400 rounded-lg"></div>
+          </div>
+          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
+            <h2 className="text-yellow-500 text-lg font-semibold mb-4">Media Partner</h2>
+            <p className="text-sm md:text-base leading-relaxed">
+              Is your platform dedicated to spotlighting education and development for the youth? Establish a partnership with us and let's nurture the next wave of global leaders in the digital economy. We’d love to discuss how we can work together to amplify this mission. Let’s join forces to broadcast the future with the SxC International Summit 2024!
+            </p>
+            <div className="mt-6 text-center">
+              <a href="#" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
       <Footer/>
     </div>
   );
