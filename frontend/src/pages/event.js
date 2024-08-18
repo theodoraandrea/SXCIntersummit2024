@@ -67,9 +67,18 @@ const Events = () => {
 
     // Sort the combined data by date
     const sortedCombinedData = combinedData.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateA - dateB; // Sort by ascending order
+      const opRegA = a.openRegistration;
+      const opRegB = b.openRegistration;
+      if (opRegA === opRegB) {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateA - dateB; // Sort by ascending order
+      } else {
+        return opRegB - opRegA; //Put programs that are open for registration at the top
+
+      }
+
+
     });
 
     let filteredEvents =

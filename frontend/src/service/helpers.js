@@ -77,6 +77,7 @@ const normalizeData = (data, type) => {
         image: item.image,
         description: item.description || item.shortDesc,
         showDetail: item.showDetail,
+        openRegistration: item.openRegistration,
         category: item.category,
         date: item.eventDate,
         location: item.eventLocation,
@@ -91,6 +92,7 @@ const normalizeData = (data, type) => {
         description: item.shortDesc,
         category: "Competition",
         date: item.competitionDate,
+        openRegistration: item.openRegistration,
         location: item.competitionLocation,
       };
     } else {
