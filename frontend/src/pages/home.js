@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { fetchTwoLatestEvents, fetchTwoLatestCompetitions } from "../service/services";
-import { EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
+import { ABOUT_PAGE, EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
 
 const bgHero = "/images/bg-home.png";
 const circle = "/images/sponsor.png";
@@ -15,6 +15,15 @@ const winner1 = "/images/winner1.png";
 const winner2 = "/images/winner2.png";
 const elips1 = "/images/elips1.png";
 const elips2 = "/images/elips2.png";
+
+const timeline = "/images/timeline.png";
+const totalprize = "/images/totalprize.png";
+
+const mentors = "/images/mentors.png";
+const speaker1 = "/images/speaker.png";
+const speaker2 = "/images/speaker2.png";
+
+const MERCH_LINK = "";
 
 export default function Home() {
   const [eventCards, setEventCards] = useState([]);
@@ -30,7 +39,7 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    //window.scrollTo(0, 0);
     getCompetitionCards();
     getEventCards();
   }, []);
@@ -171,7 +180,7 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden bg-primary-1">
       <Navbar currentPath={location.pathname} />
       {/* Hero Section */}
       <section
@@ -205,8 +214,20 @@ export default function Home() {
         </button>
       </section>
 
+      {/*Bridging Section*/}
+      <section id="bridge-section">
+        <div className="w-full px-4 py-16 sm:py-32 bg-primary-1">
+          <div className="w-lg flex flex-col items-center space-y-8 flex">
+            <h1 className="sm:text-center font-semibold text-gradient text-5xl">Calling Out High Achieving Students</h1>
+            <div className="max-w-lg">
+              <img src={totalprize} className=""/>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Programs Section */}
-      <section id="event-section" className="bg-primary-1 p-10 md:px-0">
+      <section id="event-section" className="bg-primary-1 px-4 sm:p-10 md:px-0">
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-8 md:mx-16 xl:mx-4 xl:gap-x-2">
           <h1 className="text-4xl font-semibold text-center text-gradient xl:col-span-2">Competitions</h1>
           <h1 className="text-4xl font-semibold text-center text-gradient hidden md:block xl:col-span-2">Events</h1>
@@ -215,7 +236,7 @@ export default function Home() {
             <>
               <div key={index} className="px-2 md:mt-5">
                 <div className="bg-primary-4 rounded-xl 
-                w-[75vw] h-full
+                w-lg h-full
                 md:w-full 
                 pt-4 mx-auto
                 transform hover:scale-105 transition duration-300 ease-in-out
@@ -270,7 +291,7 @@ export default function Home() {
             <>
               <div key={index} className="px-2 md:mt-5">
                 <div className="bg-primary-4 rounded-xl 
-                w-[75vw] h-full
+                w-lg h-full
                 md:w-full 
                 pt-4 mx-auto
                 transform hover:scale-105 transition duration-300 ease-in-out
@@ -342,6 +363,92 @@ export default function Home() {
         </div>
       </section>
 
+            
+      {/*Timeline Section*/}
+      <section id="timeline-section">
+        <div className="w-full px-4 py-16 sm:py-16 bg-primary-1">
+          <div className="w-full flex flex-col sm:items-center space-y-16 flex">
+            <h1 className="mx-4 max-w-lg sm:max-w-full sm:text-center font-semibold text-gradient text-5xl">Join Our Summit Roadmap</h1>
+            <div className="max-w-3xl">
+              <img src={timeline}/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/*Mentors & Speakers Section*/}
+      <section id="mentors-section">
+        <div className="w-full px-4 py-8 sm:py-16 w-full flex flex-col sm:flex-row bg-primary-1 space-y-16">
+          <div className="w-full sm:w-[50%] flex flex-col text-center items-center space-y-4 md:space-y-8">
+            <h1 className="font-semibold text-gradient text-3xl md:text-4xl">Meet Our Mentors</h1>
+            <div className="
+            
+            w-64 md:w-80 lg:w-96">
+              <img src={mentors}/>
+            </div>
+          </div>
+          <div className="w-full sm:w-[50%] text-center items-center">
+            <h1 className="font-semibold text-gradient text-3xl md:text-4xl">Meet Our Speakers</h1>
+            <div className="h-[6rem] md:h-[10rem] relative flex flex-row">
+              <div className="absolute 
+              w-28
+              top-[30%] right-[50%]
+              md:w-36
+              lg:w-48">
+                <img src={speaker1}/>
+              </div>
+              <div className="absolute 
+              w-28
+              top-[50%] left-[50%]
+              md:w-36
+              lg:w-48">
+                <img src={speaker2}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/*Merch Section */}
+      <section id="merch-section">
+        <div className="bg-primary-1 w-full px-4 sm:p-16 mt-20 sm:mt-4">
+          <h1 className="text-center text-2xl lg:text-4xl text-gradient">Level Up Your Skill and Connect With Us!</h1>
+          <div className="bg-gray-400 my-4 h-32 w-full rounded-lg">
+          </div>
+          <Link to={MERCH_LINK} className="flex justify-center items-center">
+            <h1 className="text-xl text-white mr-2">Check out now</h1>
+            <Box
+              component="div"
+              sx={{
+                color: "white",
+                display: "inline-block",
+                transition: "transform 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "translateX(5px)", // Moves the icon 5px to the right on hover
+                },
+              }}
+            >
+              <ArrowForwardIcon fontSize="large" />
+            </Box>
+          </Link>
+          
+        </div>
+      </section>
+
+      {/*Partners Section */}
+      <section id="partners-section">
+        <div className="w-full h-[15rem] mt-16">
+          <Link to={ABOUT_PAGE}>
+            <h1 className="text-center text-gradient text-xl border-2 border-primary-3 w-fit rounded-full
+            py-2 px-6 mx-auto
+            md:text-3xl
+            md:py-3 md:px-10
+            ">Know Us Better
+            </h1>
+          </Link>
+        </div>
+      </section>
+
       {/* Winner Section */}
       <section className="bg-primary-1 py-20 hidden">
         <div className="">
@@ -390,9 +497,9 @@ export default function Home() {
       </section>
 
       {/* Partners Section */}
-      <section id="sponsorship" className="bg-primary-1 py-20">
+      <section id="sponsorship" className="bg-primary-1 py-20 hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+          <div className="text-center hidden">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
               Company Partners
             </h2>
@@ -407,7 +514,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <hr className="my-10 border-t border-primary-3" />
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
               Sponsors
