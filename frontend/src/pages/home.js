@@ -155,8 +155,10 @@ export default function Home() {
 
       {/* Programs Section */}
       <section id="event-section" className="bg-primary-1 p-10 md:px-0">
-        {/*<div className="max-w-7xl justify-between mx-auto px-4">*/}
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-8 md:mx-16 xl:mx-4 xl:gap-x-2">
+          <h1 className="text-4xl font-semibold text-center text-gradient xl:col-span-2">Competitions</h1>
+          <h1 className="text-4xl font-semibold text-center text-gradient hidden md:block xl:col-span-2">Events</h1>
+          {/*COMPETITIONS*/}
           {competitionCards.map((card, index) => (
             <>
               <div key={index} className="px-2 md:mt-5">
@@ -211,6 +213,8 @@ export default function Home() {
               </div>
             </>
           ))}
+          {/*EVENTS*/}
+          <h1 className="text-4xl font-semibold text-center text-gradient block md:hidden xl:col-span-2">Events</h1>
           {eventCards.map((card, index) => (
             <>
               <div key={index} className="px-2 md:mt-5">

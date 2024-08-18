@@ -182,10 +182,10 @@ const FirstView = ({
   };
 
   const checkFileSize = (file) => {
-    if (file.size <= 5000000) {
+    if (file.size <= 2000000) {
       return true;
     }
-    const message = "File size has to be 5MB or less";
+    const message = "File size has to be 2MB or less";
     errorAlert({ message: message });
     console.log(message);
     return false;
@@ -380,8 +380,11 @@ const FirstView = ({
 
             </div>
             <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
+            <label className="block text-white">
+              Combile files of <strong>ALL MEMBERS</strong> into 1 PDF file
+            </label>
             <label className="block text-white mb-4">
-              File has to be pdf, jpeg, or png with size less than 5MB
+              File size has to be less than 2MB
             </label>
             <label className="block text-white">Proof of Payment</label>
             <div className="my-4 relative w-fit">
@@ -937,7 +940,6 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
       setIsLoading(true);
       const response = await registerTeam(formData);
       if (response.team.id) {
-
         let memberCounter = 1;
         for (const member of membersData) {
           if (member.fullName) {
@@ -981,7 +983,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
       console.log("Error registering team: ", error);
       setIsLoading(false);
       errorAlert({
-        message: "Something went wrong. Please try again"
+        message: "Something went wrong. Please try to register again."
       });
       navigate(-1);
     }
@@ -992,19 +994,15 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
       const response = await postNewFceoTeam(data);
       return response;
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 
   const registerMember = async (data) => {
     try {
-      console.log("in registerMember");
-      console.log("data ", data);
-
       const response = await postNewFceoMember(data);
-      console.log(response);
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   };
 

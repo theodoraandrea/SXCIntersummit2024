@@ -48,7 +48,7 @@ const FCEOSummary = () => {
                 <Spinner/>
             </div>    
             :
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4 md:mx-16'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4 md:mx-auto md:mt-8 max-w-3xl'>
                     <h1 className='text-gradient font-bold md:col-span-3 text-4xl md:text-5xl text-center'>Future CEO</h1>
                     <p className='md:col-span-3 text-sm md:text-base text-center mx-2 sm:mx-8 md:mx-32'>Congratulations! Your team has been registered for Future CEO. Please check this page and your email for updates.</p>
                     <div className='md:col-span-2'>
@@ -77,7 +77,7 @@ const FCEOSummary = () => {
                         ))}
                     </div>
                     <div>
-                    <div className='bg-primary-4 h-fit rounded-xl shadow-lg p-4 md:mt-10'>
+                    <div className='bg-primary-4 h-fit rounded-xl shadow-lg p-4 md:mt-9'>
                         <p className='text-xl text-gradient font-semibold mb-2'>Team Information</p>
                         <div className='text-xs md:text-sm'>
                         <p><strong>Team Name:</strong> {teamData.teamName}</p>

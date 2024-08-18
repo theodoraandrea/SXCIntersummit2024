@@ -39,23 +39,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register", // field type ini cmn buat conditional rendering mau ada button register atau ngga, bisa diisi asal / ga diisi
         link: `${BMC_REGIST}`,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
@@ -66,20 +66,20 @@ export const eventDetails = {
     description: "<strong>Future CEO</strong> is <strong>a prestigious business plan competition</strong> exclusively <strong>for high school students</strong>, to showcase their entrepreneurial skills and business acumen with the grand theme <strong>“Shaping Future Pioneers: Embracing Strategic Innovation in Sustainable Digital Era”</strong>. Students are <strong>challenged to present their innovative business idea</strong> that can solve the problems around them." +
     "</br></br>" +
     "<strong>When</strong></br>" +
-    "19 August - 1st December 2024" +
+    "19 August - 1 December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
     "</br><strong>&emsp;1.&emsp;Preliminary:</strong>" +
     "</br>&emsp;&emsp;&emsp;Business Model Canvas Submission" +
-    "</br>&emsp;&emsp;&emsp;19th August - 29th September 2024" +
+    "</br>&emsp;&emsp;&emsp;20 August - 22 September 2024" +
     "</br><strong>&emsp;2.&emsp;Semifinal:</strong>" +
     "</br>&emsp;&emsp;&emsp;Proposal Submission" +
-    "</br>&emsp;&emsp;&emsp;1st October - 22nd October 2024" +
+    "</br>&emsp;&emsp;&emsp;1 October - 22 October 2024" +
     "</br><strong>&emsp;3.&emsp;Final:</strong>" +
     "</br>&emsp;&emsp;&emsp;Deck Submission" +
-    "</br>&emsp;&emsp;&emsp;5th November - 23rd November 2024" +
+    "</br>&emsp;&emsp;&emsp;5 November - 23 November 2024" +
     "</br>&emsp;&emsp;&emsp;Pitching Day" +
-    "</br>&emsp;&emsp;&emsp;24th November 2024" +
+    "</br>&emsp;&emsp;&emsp;24 November 2024" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
@@ -100,23 +100,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register",
         link: `${FCEO_REGIST}`,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
@@ -180,23 +180,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register",
         link: ``,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
@@ -217,23 +217,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register",
         link: ``,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
@@ -254,23 +254,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register",
         link: ``,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
@@ -291,23 +291,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register",
         link: ``,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
