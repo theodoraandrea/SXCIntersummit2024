@@ -109,7 +109,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: "#",
+            link: "https://chat.whatsapp.com/DAXnA0cXcYpFvwbVSH4SQr",
           },
         },
         outro:

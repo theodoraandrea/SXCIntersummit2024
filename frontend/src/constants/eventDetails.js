@@ -30,14 +30,13 @@ export const eventDetails = {
       "The Business Master Class will be held online on Saturday, September 21, 2024.", 
       "Participants will gain valuable insights into business competitions from top-achieving speakers and acquire practical experience by solving case studies."],
     contactPerson: [
-      "Diandra Chandra Kusuma",
-      "Orang Satu Lagi",
-      "lagi-lagi orang",
+      "TBA"
+    ],
+    contactLink: [
+      "",
     ],
     contactNumber: [
-      "(+62) 85123 4567 890",
-      "(+62) 37128 2831 202",
-      "(+62) 0987 6789 990",
+      "-",
     ],
     timelineData: [
       {
@@ -101,6 +100,9 @@ export const eventDetails = {
       "No, participants in a team are not required to be in the same school. The important thing is that they are still registered as high school students."],
     contactPerson: ["Primel", "Ell"],
     contactNumber: ["085156458584", "082258574505"],
+    contactLink: ["https://wa.me/6285156458584",
+      "https://wa.me/622258574505"
+    ],
     timelineData: [
       {
         title: "Open Registration",

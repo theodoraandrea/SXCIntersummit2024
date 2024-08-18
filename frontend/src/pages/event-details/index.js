@@ -178,16 +178,21 @@ export default function DetailEvents() {
           {/* Contact Person Section */}
           <div className="mt-16 w-auto">
             <h2 className="text-2xl font-bold text-center">
-              Contact Person(s)
+              Contact Person
             </h2>
             <div className="mt-8 flex">
               {eventData.contactPerson && eventData.contactPerson.length > 0 ? (
                 eventData.contactPerson.map((person, index) => (
                   <div key={index} className="mx-auto pb-5">
                     <p className="flex justify-center">{person}</p>
+                    <a href={eventData.contactLink[index] ?? '#'} className={`${
+                          eventData.contactLink[index] ?
+                          "hover:text-yellow-400" : "cursor-default"
+                    }`}>
                     <p className="flex justify-center">
                       {eventData.contactNumber[index]}
                     </p>
+                    </a>
                   </div>
                 ))
               ) : (
