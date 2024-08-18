@@ -39,7 +39,7 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    //window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     getCompetitionCards();
     getEventCards();
   }, []);
@@ -413,7 +413,7 @@ export default function Home() {
       <section id="merch-section">
         <div className="bg-primary-1 w-full px-4 sm:p-16 mt-20 sm:mt-4">
           <h1 className="text-center text-2xl lg:text-4xl text-gradient">Level Up Your Skill and Connect With Us!</h1>
-          <div className="bg-gray-400 my-4 h-32 w-full rounded-lg">
+          <div className="bg-gray-400 my-4 h-32 sm:max-w-3xl sm:mx-auto w-full rounded-lg">
           </div>
           <Link to={MERCH_LINK} className="flex justify-center items-center">
             <h1 className="text-xl text-white mr-2">Check out now</h1>

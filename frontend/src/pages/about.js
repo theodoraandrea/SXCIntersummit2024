@@ -1,6 +1,7 @@
 import Navbar from "./../components/navbar";
 import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const bgHero = "/images/bg-about.png";
@@ -9,6 +10,10 @@ const logo = "/images/sxc-jakarta.png";
 export default function About() {
 
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
   
   return (
     <div>
