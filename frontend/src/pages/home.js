@@ -23,6 +23,8 @@ const mentors = "/images/mentors.png";
 const speaker1 = "/images/speaker.png";
 const speaker2 = "/images/speaker2.png";
 
+const mediapartners = "/images/mediapartners.png";
+
 const MERCH_LINK = "";
 
 export default function Home() {
@@ -60,7 +62,6 @@ export default function Home() {
       const data = await fetchTwoLatestCompetitions();
       const compsWithDate = getProgramDateStatus(data, "competition");
       const competitions = getProgramImageLink(compsWithDate, "competition");
-      console.log("COMPS", competitions);
       setCompetitionCards(competitions);
     } catch (error) {
       throw error;
@@ -78,7 +79,6 @@ export default function Home() {
     const fceo = location + "/fceo.png";
 
     for (let item of programs) {
-      console.log(item);
       if (type === "event") {
         switch (item.id) {
           case 1:
@@ -112,7 +112,6 @@ export default function Home() {
         }
       }
     }
-    console.log(programs);
     return programs;
   }
 
@@ -120,7 +119,6 @@ export default function Home() {
     const today = new Date();
     const programsWithStatus = [];
     for (let program of programs) {
-      console.log(program);
       let programDate;
       if (type === "event") {
         programDate = new Date(program.eventDate);
@@ -132,7 +130,6 @@ export default function Home() {
           ...program,
           status: "Passed"
         }
-       console.log("passed");
       } else {
         program = {
           ...program,
@@ -216,7 +213,7 @@ export default function Home() {
 
       {/*Bridging Section*/}
       <section id="bridge-section">
-        <div className="w-full px-4 py-16 sm:py-32 bg-primary-1">
+        <div className="w-full px-8 py-16 sm:py-32">
           <div className="w-lg flex flex-col items-center space-y-8 flex">
             <h1 className="sm:text-center font-semibold text-gradient text-5xl">Calling Out High Achieving Students</h1>
             <div className="max-w-lg">
@@ -229,8 +226,8 @@ export default function Home() {
       {/* Programs Section */}
       <section id="event-section" className="bg-primary-1 px-4 sm:p-10 md:px-0">
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4 gap-y-8 md:gap-8 md:mx-16 xl:mx-4 xl:gap-x-2">
-          <h1 className="text-4xl font-semibold text-center text-gradient xl:col-span-2">Competitions</h1>
-          <h1 className="text-4xl font-semibold text-center text-gradient hidden md:block xl:col-span-2">Events</h1>
+          <h1 className="text-5xl font-semibold text-center text-gradient md:col-span-2">Competitions</h1>
+          <h1 className="text-5xl font-semibold text-center text-gradient hidden xl:block md:col-span-2">Events</h1>
           {/*COMPETITIONS*/}
           {competitionCards.map((card, index) => (
             <>
@@ -286,7 +283,7 @@ export default function Home() {
             </>
           ))}
           {/*EVENTS*/}
-          <h1 className="text-4xl font-semibold text-center text-gradient block md:hidden xl:col-span-2">Events</h1>
+          <h1 className="text-5xl font-semibold text-center text-gradient block xl:hidden md:col-span-2 mt-16">Events</h1>
           {eventCards.map((card, index) => (
             <>
               <div key={index} className="px-2 md:mt-5">
@@ -435,9 +432,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/*Partners Section */}
-      <section id="partners-section">
-        <div className="w-full h-[15rem] mt-16">
+      {/*Know Us Better Section */}
+      <section id="know-us-better-section">
+        <div className="w-full h-[15rem] mt-24">
           <Link to={ABOUT_PAGE}>
             <h1 className="text-center text-gradient text-xl border-2 border-primary-3 w-fit rounded-full
             py-2 px-6 mx-auto
@@ -446,6 +443,26 @@ export default function Home() {
             ">Know Us Better
             </h1>
           </Link>
+        </div>
+      </section>
+
+      <section id="partners-section">
+        <div className="w-full h-fit bg-white grid grid-cols-1 sm:grid-cols-2 p-8 sm:p-16 gap-y-8">
+          {
+            /*SPONSORS BLM ADA
+          <div className="text-center p-16 hidden">
+            <h1>Sponsors</h1>
+          </div>
+            */
+          }
+          <div className="text-center sm:col-span-2">
+            <h1 className="text-xl sm:text-4xl text-primary-1">Sponsors & Media Partners</h1>
+            <img src={mediapartners} className="w-full sm:max-w-lg mx-auto"/>
+          </div>
+          <h1 className="w-md text-center sm:col-span-2 text-base sm:text-2xl text-primary-1">We are still calling for sponsors and media partners</h1>
+          <a href="" className="text-center sm:col-span-2 text-base sm:text-2xl text-primary-1 hover:underline">
+            <h1>Contact Us</h1>
+          </a>
         </div>
       </section>
 
@@ -491,58 +508,6 @@ export default function Home() {
                 vulputate. Phasellus ultrices non metus et interdum. Aliquam
                 eleifend odio sed eleifend porttitor.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Partners Section */}
-      <section id="sponsorship" className="bg-primary-1 py-20 hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center hidden">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
-              Company Partners
-            </h2>
-            <div className="flex justify-center space-x-4">
-              {partnerImages.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Company Partner ${index + 1}`}
-                  className="w-12 h-12 md:w-16 md:h-16 rounded-full"
-                />
-              ))}
-            </div>
-          </div>
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
-              Sponsors
-            </h2>
-            <div className="flex justify-center space-x-4">
-              {partnerImages.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Company Partner ${index + 1}`}
-                  className="w-12 h-12 md:w-16 md:h-16 rounded-full"
-                />
-              ))}
-            </div>
-          </div>
-          <hr className="my-10 border-t border-primary-3" />
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-10">
-              Media Partners
-            </h2>
-            <div className="flex justify-center space-x-4">
-              {partnerImages.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Company Partner ${index + 1}`}
-                  className="w-12 h-12 md:w-16 md:h-16 rounded-full"
-                />
-              ))}
             </div>
           </div>
         </div>
