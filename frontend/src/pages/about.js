@@ -3,8 +3,36 @@ import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
 import { useLocation } from "react-router-dom";
 
+
+
 const bgHero = "/images/bg-about.png";
 const logo = "/images/sxc-jakarta.png";
+const Tiketcom = "/images/tiket.com.png";
+const PizzaHut = "/images/PizzaHut.png";
+const PNG = "/images/PNG.png";
+const mi = "/images/mi.png";
+const traveloka = "/images/traveloka.png";
+const puyo = "/images/puyo.png";
+const mandiri = "/images/mandiri.png";
+const rohto = "/images/rohto.png";
+const bukalapak = "/images/bukalapak.png";
+const nutrifood = "/images/nutrifood.png";
+const microsoft = "/images/microsoft.png";
+const tokopedia = "/images/tokopedia.png";
+const bca = "/images/bca.png";
+const loreal = "/images/loreal.png";
+const natur = "/images/natur.png";
+const hangry = "/images/hangry.png";
+const lingotalk = "/images/lingotalk.png";
+const cakap = "/images/cakap.png";
+const prodia = "/images/prodia.png";
+const paragon = "/images/paragon.png";
+const kopisoe = "/images/kopisoe.png";
+const cakeresume = "/images/cakeresume.png";
+const blibli = "/images/blibli.png";
+const lokalate = "/images/lokalate.png";
+const medpar1 = "/images/medpar1.png";
+const medpar2 = "/images/medpar2.png";
 
 export default function About() {
 
@@ -212,12 +240,10 @@ export default function About() {
       {/* New Section : Our Milestone */}
       <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
-          
-
           <h2 className="text-2xl my-2 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 text-center">
             Our Milestone
           </h2>
-          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20">
+          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full">
             Participants
           </h5>
           
@@ -252,19 +278,46 @@ export default function About() {
           </div>
 
         {/* Masukkan Untuk CP, Sponsors, Media Partner */}
-        <div className="flex flex-col lg:flex-row justify-around mx-2">
+        <div className="flex flex-col my-2 lg:flex-row justify-around mx-4">
             {/* Company Partners */}
             <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
               <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Company Partner</div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex justify-center items-center">
-                  <img src="/path/to/tiket.png" alt="Tiket.com" className="h-16 object-contain" />
+                  <img src={Tiketcom} alt="Tiket.com" className="h-16 object-contain" />
                 </div>
                 <div className="flex justify-center items-center">
-                  <img src="/path/to/pg.png" alt="P&G" className="h-16 object-contain" />
+                  <img src={PizzaHut} alt="Pizza Hut" className="h-16 object-contain" />
                 </div>
                 <div className="flex justify-center items-center">
-                  <img src="/path/to/traveloka.png" alt="Traveloka" className="h-16 object-contain" />
+                  <img src={PNG} alt="P&G" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={mi} alt="mi" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={traveloka} alt="Traveloka" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={puyo} alt="Puyo" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={mandiri} alt="mandiri" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={rohto} alt="rohto" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={bukalapak} alt="bukalapak" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={nutrifood} alt="nutrifood" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={microsoft} alt="microsoft" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={tokopedia} alt="tokopedia" className="h-16 object-contain" />
                 </div>
                 {/* Add other company partner images here */}
               </div>
@@ -275,13 +328,40 @@ export default function About() {
               <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Sponsor</div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex justify-center items-center">
-                  <img src="/path/to/bca.png" alt="BCA" className="h-16 object-contain" />
+                  <img src={bca} alt="BCA" className="h-16 object-contain" />
                 </div>
                 <div className="flex justify-center items-center">
-                  <img src="/path/to/loreal.png" alt="L'Oreal" className="h-16 object-contain" />
+                  <img src={natur} alt="Natur" className="h-16 object-contain" />
                 </div>
                 <div className="flex justify-center items-center">
-                  <img src="/path/to/natur.png" alt="Natur" className="h-16 object-contain" />
+                  <img src={loreal} alt="Loreal" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={hangry} alt="hangry" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={lingotalk} alt="lingotalk" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={cakap} alt="cakap" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={prodia} alt="prodia" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={paragon} alt="paragon" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={kopisoe} alt="kopisoe" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={cakeresume} alt="cakeresume" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={blibli} alt="blibli" className="h-16 object-contain" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <img src={lokalate} alt="lokalate" className="h-16 object-contain" />
                 </div>
                 {/* Add other sponsor images here */}
               </div>
@@ -289,18 +369,16 @@ export default function About() {
 
             {/* Media Partner */}
             <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Media Partner</div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="flex justify-center items-center">
-                  <img src="/path/to/narasi.png" alt="Narasi" className="h-16 object-contain" />
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full text-center">
+                Media Partner
+              </div>
+              <div className="grid gap-4 h-[400px] w-full">
+                <div className="flex justify-center items-center h-1/2">
+                  <img src={medpar1} alt="medpar1" className="h-full w-full object-contain" />
                 </div>
-                <div className="flex justify-center items-center">
-                  <img src="/path/to/metrotv.png" alt="MetroTV" className="h-16 object-contain" />
+                <div className="flex justify-center items-center h-1/2">
+                  <img src={medpar2} alt="medpar2" className="h-full w-full object-contain" />
                 </div>
-                <div className="flex justify-center items-center">
-                  <img src="/path/to/medcom.png" alt="Medcom" className="h-16 object-contain" />
-                </div>
-                {/* Add other media partner images here */}
               </div>
             </div>
           </div>
