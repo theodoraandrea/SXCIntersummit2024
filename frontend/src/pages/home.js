@@ -38,7 +38,8 @@ export default function Home() {
   const getEventCards = async () => {
     try {
       const data = await fetchTwoLatestEvents();
-      const events = getProgramDateStatus(data, "event");
+      const eventsWithDate = getProgramDateStatus(data, "event");
+      const events = getProgramImageLink(eventsWithDate, "event");
       setEventCards(events);
     } catch (error) {
       throw error;
@@ -48,11 +49,62 @@ export default function Home() {
   const getCompetitionCards = async () => {
     try {
       const data = await fetchTwoLatestCompetitions();
-      const competitions = getProgramDateStatus(data, "competition");
+      const compsWithDate = getProgramDateStatus(data, "competition");
+      const competitions = getProgramImageLink(compsWithDate, "competition");
+      console.log("COMPS", competitions);
       setCompetitionCards(competitions);
     } catch (error) {
       throw error;
     }
+  }
+
+  const getProgramImageLink = (programs, type) => {
+    const location = "images/programs";
+    const bmc = location + "/bmc.png";
+    const comvis = location + "/comvis.png";
+    const summit = location + "/summit.png";
+    const chambers = location + "/chambers.png";
+    const ibc_bcc = location + "/ibc-bcc.png";
+    const ibc_bpc = location + "/ibc-bpc.png";
+    const fceo = location + "/fceo.png";
+
+    for (let item of programs) {
+      console.log(item);
+      if (type === "event") {
+        switch (item.id) {
+          case 1:
+            item.image = bmc;
+            break;
+          case 5:
+            item.image = chambers;
+            break;
+          case 6:
+            item.image = comvis;
+            break;
+          case 7:
+            item.image = summit;
+            break;
+          default:
+            break;
+        }
+      } else if (type === "competition") {
+        switch (item.id) {
+          case 1:
+            item.image = fceo;
+            break;
+          case 2:
+            item.image = ibc_bcc;
+            break;
+          case 3:
+            item.image = ibc_bpc;
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    console.log(programs);
+    return programs;
   }
 
   const getProgramDateStatus = (programs, type) => {
@@ -190,10 +242,9 @@ export default function Home() {
                   }
 
                   <Link to={`${EVENT_DETAILS}/comp_${card.id}`}>
-                  <div className="bg-white opacity-50 rounded-lg mx-auto
-                  w-[16rem] h-[20rem]">
+                  <div className="rounded-lg mx-4">
                     <img
-                      className="w-full h-full object-cover rounded-b-none rounded-t-xl"
+                      className="w-full h-full object-cover rounded-lg"
                       src={card.image}
                       alt="Comps"
                     />
@@ -246,10 +297,9 @@ export default function Home() {
                   }
 
                   <Link to={`${EVENT_DETAILS}/event_${card.id}`}>
-                  <div className="bg-white opacity-50 rounded-lg mx-auto
-                  w-[16rem] h-[20rem]">
+                  <div className="rounded-lg mx-4">
                     <img
-                      className="w-full h-full object-cover rounded-b-none rounded-t-xl"
+                      className="w-full h-full object-cover rounded-lg"
                       src={card.image}
                       alt="Event"
                     />
