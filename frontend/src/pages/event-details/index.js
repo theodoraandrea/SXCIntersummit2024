@@ -7,6 +7,7 @@ import { eventDetails } from "../../constants/eventDetails";
 import TimelineItem from "../../components/elements/timeline-item";
 import { useUser } from "../../contexts/user-context";
 import Spinner from "../../components/elements/spinner";
+import { LANDING_PAGE } from "../../constants/routes";
 
 export default function DetailEvents() {
   const { eventId } = useParams();
@@ -18,7 +19,7 @@ export default function DetailEvents() {
 
   const [openFAQ, setOpenFAQ] = useState(Array(5).fill(false));
 
-  const { loading, registeredEvents, registeredCompetitions } = useUser();
+  const { loading, registeredEvents, registeredCompetitions, isLoggedIn } = useUser();
 
   const [registered, setRegistered] = useState(false);
 
@@ -37,7 +38,6 @@ export default function DetailEvents() {
       if (id === 1) {
         //for BMC, BCC = 2, BPC = 3
         if (registeredEvents.includes(2) && registeredEvents.includes(3)) {
-          console.log("bmc full");
           setRegistered(true);
           return;
         }
@@ -71,28 +71,39 @@ export default function DetailEvents() {
           {/* Competition Section */}
           <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-8">
             <div className="flex flex-col md:row-span-4">
-              <h1 className="text-gradient text-3xl px-4 md:px-0 md:text-5xl font-bold">
+              <h1 className="text-gradient text-center md:text-left text-4xl px-4 md:px-0 md:text-5xl font-bold">
                 {eventData.title || "Event Title"}
               </h1>
-              <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] my-8 md:hidden mx-auto"></div>
-              <div 
-              className="text-sm md:text-base text-justify mt-4 px-4 md:px-0"
-              dangerouslySetInnerHTML={{ __html: eventData.description     
-              }}/>
-              <button className="text-sm w-fit mx-4 md:mx-0 md:text-base py-1 px-4 bg-primary-2 md:px-4 md:py-2 rounded-lg text-white mt-4"
+              <div className="flex flex-row items-center w-full justify-center md:w-fit space-x-4 my-4">
+              <button className="bg-primary-2 text-sm w-fit rounded-lg text-white py-1 px-4
+              md:mx-0 md:text-base md:px-4 md:py-2"
               onClick={
                     ()=>{
-                      navigate(eventData.registerLink)
+                      isLoggedIn ? 
+                      navigate(eventData.registerLink) :
+                      navigate(LANDING_PAGE)
                     }
                   }
                   disabled={registered}
                 >
                   {registered ? "Already registered!" : "Register Now"}
               </button>
+              <button className="bg-primary-3 text-sm w-fit rounded-lg text-white 
+              py-1 px-4
+              md:mx-0 md:text-base md:px-4 md:py-2">
+                View Booklet
+              </button>
+
+              </div>
+              <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] mt-4 mb-8 md:hidden mx-auto"></div>
+              <div 
+              className="text-sm md:text-base text-justify px-4 md:px-0"
+              dangerouslySetInnerHTML={{ __html: eventData.description     
+              }}/>
             </div>
             <div className="bg-gray-200 rounded-lg hidden md:block md:w-[20rem] md:h-[28rem] mx-auto"></div>
             <div className="md:mx-15 text-center md:text-left">
-              <h2 className="text-2xl my-8 text-3xl md:text-3xl xl:mx-[5rem] font-bold">Timeline</h2>
+              <h2 className="text-2xl mt-8 mb-4 text-3xl md:text-3xl xl:mx-[5rem] font-bold">Timeline</h2>
             </div>
             <div className="md:mx-15 xl:mx-[5rem]">
               {eventData.timelineData && eventData.timelineData.length > 0 ? (

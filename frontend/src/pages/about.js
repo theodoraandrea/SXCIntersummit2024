@@ -1,9 +1,10 @@
 import Navbar from "./../components/navbar";
-import BgHero from "./../images/bg-about.png";
-import logo from "./../images/sxc-jakarta.png";
 import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
 import { useLocation } from "react-router-dom";
+
+const bgHero = "/images/bg-about.png";
+const logo = "/images/sxc-jakarta.png";
 
 export default function About() {
 
@@ -17,7 +18,7 @@ export default function About() {
       {/* Hero Section */}
       <section
         className="bg-cover bg-center h-500 flex flex-col justify-center"
-        style={{ backgroundImage: `url(${BgHero})` }}
+        style={{ backgroundImage: `url(${bgHero})` }}
       >
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20">
           Part of StudentsxCEOs Jakarta

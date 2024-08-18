@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import { useNavigate, Link } from 'react-router-dom';
-import { LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
+import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
 import { postBMCRegistration } from '../../service/services';
 import Spinner from '../../components/elements/spinner';
 import ReferralModal from '../../components/referral-modal';
@@ -25,6 +25,11 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   }, [isLoggedIn, loading]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  useEffect(() => {
+    console.log(registeredEvents);
     if (registeredEvents.includes(2)) {
       setHasRegisteredBcc(true);
     }
@@ -54,10 +59,12 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4">{title}</h1>
-          <p className="text-lg text-white mb-6">{description}</p>
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient">{title}</h1>
+          <p className="text-sm text-white my-6">
+            Choose which workshop you would like to participate in
+          </p>
           <div className="mb-4">
             <label
               className="block text-white mb-2"
@@ -84,7 +91,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
             </select>
           </div>
           <button
-            className="bg-primary-3 text-white px-6 py-2 rounded-full"
+            className="text-white px-6 py-2 rounded-full hover:text-gradient"
             onClick={handleSubmit}
           >
             Next
@@ -95,6 +102,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   );
 };
 
+//UPDATE (17/08): NO AGREEMENT PAPER
 const SecondView = ({ eventData, formData, setFormData, checkFileSize, onNext, onPrevious }) => {
     
     const [ agreement, setAgreement ] = useState(formData.agreement?.name ?? '');
@@ -151,7 +159,7 @@ const SecondView = ({ eventData, formData, setFormData, checkFileSize, onNext, o
     <div>
       <Navbar />
       <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
+        <div className="bg-dark-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
           <h1 className="text-3xl font-bold text-white mb-4">{title}</h1>
           <p className="text-lg text-white mb-6">{description}</p>
           <button
@@ -207,6 +215,10 @@ const ThirdView = ({
   onNext,
 }) => {
   const { profileData } = useUser();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
 
   useEffect(() => {
     setFullName(profileData?.fullname);
@@ -306,9 +318,9 @@ const ThirdView = ({
     return (
         <div>
             <Navbar />
-            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-dark-2 p-8 rounded-lg shadow-lg max-w-3xl'>
-                    <h1 className='text-3xl font-bold text-white text-center mb-2'>Personal Information</h1>
+            <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+                <div className='bg-primary-4 mx-2 p-8 my-8 rounded-xl shadow-lg max-w-3xl'>
+                    <h1 className='text-3xl font-bold text-gradient text-center mb-2'>Personal Information</h1>
                     <p className='text-white text-center font-bold mb-6'>You can edit your personal information
                         <Link to={USER_DETAILS_PAGE}
                         className='text-yellow-500'
@@ -406,18 +418,18 @@ const ThirdView = ({
                             />
                         </div>
                     </div>
-                    <div className='mt-6 flex justify-center items-center'>
+                    <div className='mt-6 flex justify-between items-center'>
                     <button
                             type='button'
                             onClick={onPrevious}
-                            className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                            className='text-white px-6 py-2 mr-6 rounded-full hover:text-gradient'
                         >
                             Back
                     </button>
                     <button
                             type='button'
                             onClick={handleSubmit}
-                            className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                            className='text-white px-6 py-2 rounded-full hover:text-gradient'
                             disabled={emailError || phoneError}
                         >
                             Next
@@ -437,6 +449,11 @@ const FourthView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [eventSource, setEventSource] = useState(formData.eventSource ?? "");
   const [eventSourceOther, setEventSourceOther] = useState(
     formData.eventSourceOther ?? "Other"
@@ -483,9 +500,9 @@ const FourthView = ({
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4">
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient mb-4">
             How did you know this event?
           </h1>
           <div className="grid grid-cols-2 gap-4 text-left">
@@ -500,7 +517,7 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource1"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit Instagram
               </label>
@@ -516,7 +533,7 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource2"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit LinkedIn
               </label>
@@ -532,7 +549,7 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource3"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit Tiktok
               </label>
@@ -548,12 +565,12 @@ const FourthView = ({
               />
               <label
                 htmlFor="eventSource4"
-                className="w-full ml-2 text-sm text-gray-800"
+                className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 Media Partners
               </label>
             </div>
-            <div className="flex p-4 col-span-2 items-center bg-gray-100 border-gray-300 rounded">
+            <div className="flex p-4 col-span-2 text-xs sm:text-sm items-center bg-gray-100 border-gray-300 rounded">
               <input
                 id="eventSource5"
                 name="eventSourceRadio"
@@ -564,7 +581,7 @@ const FourthView = ({
               />
               <input
                 id="eventSource5"
-                className="text-sm ml-2 bg-gray-100 w-full"
+                className="ml-2 bg-gray-100 w-full"
                 name="eventSource"
                 type="text"
                 value={eventSourceOther}
@@ -574,18 +591,18 @@ const FourthView = ({
               />
             </div>
           </div>
-          <div className="mt-6 flex justify-center items-center">
+          <div className="mt-6 flex justify-between items-center">
             <button
               type="button"
               onClick={handleBack}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+              className="hover:text-gradient text-white px-6 py-2 mr-6"
             >
               Back
             </button>
             <button
               type="button"
               onClick={handleNext}
-              className="bg-primary-3 text-white px-6 py-2 rounded-full"
+              className="hover:text-gradient text-white px-6 py-2"
             >
               Next
             </button>
@@ -599,35 +616,35 @@ const FourthView = ({
 const FifthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
     <div>
         <Navbar />
-        <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-dark-2 p-8 max-w-xl rounded-lg shadow-lg text-center'>
-                <h1 className='text-3xl m-4 font-bold text-white mb-4'>Have you ever participated in a business competition before?</h1>
-                <div className='flex justify-center'>
+        <div className='bg-primary-1 w-full px-2 min-h-screen flex items-center justify-center'>
+            <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
+                <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>Have you ever participated in a business competition before?</h1>
+                <div className='flex w-full justify-center'>
                     {/* I have - goes to seventh view */}
                     <div className='w-40'>
                         <button 
-                            className='bg-primary-3 w-full text-white px-6 py-2 rounded-full' 
+                            className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
                             onClick={onNextHave} 
                             aria-label='I have'
                         >
-                        I have
+                        Yes, I have
                         </button>
                     </div>
                     {/* I have not - goes to eighth view */}
                     <div className='w-40 ml-6'>
                         <button 
-                            className='bg-primary-3 w-full text-white px-6 py-2 rounded-full' 
+                            className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
                             onClick={onNextHaveNot} 
                             aria-label='I have not'
                         >
-                            I have not
+                            No, I have not
                         </button>
                     </div>
                 </div>
                 <button
                     type='button'
                     onClick={onPrevious}
-                    className='mt-6 bg-primary-3 text-white px-6 py-2 rounded-full'
+                    className='mt-6 text-white px-6 py-2 hover:text-gradient'
                 >
                     Back
                 </button>
@@ -643,6 +660,11 @@ const SixthView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [experience, setExperience] = useState(formData.experience ?? "");
   const [charCount, setCharCount] = useState(formData.experience?.length ?? 0);
 
@@ -676,9 +698,9 @@ const SixthView = ({
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full min-h-screen flex items-center justify-center">
-        <div className="bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl px-12 font-bold text-white mb-4">
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 p-8 my-8 mx-2 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient mb-4">
             What was your experience when participating in a business
             competition before?
           </h1>
@@ -700,18 +722,18 @@ const SixthView = ({
               </p>
             </div>
           </form>
-          <div className="mt-6 flex justify-center items-center">
+          <div className="mt-6 flex justify-between items-center">
             <button
               type="button"
               onClick={handleBack}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+              className="text-white px-6 py-2 mr-6 hover:text-gradient"
             >
               Back
             </button>
             <button
               type="button"
               onClick={handleNext}
-              className="bg-primary-3 text-white px-6 py-2 rounded-full"
+              className="text-white px-6 py-2 hover:text-gradient"
             >
               Next
             </button>
@@ -729,6 +751,11 @@ const SeventhView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [expectations, setExpectations] = useState(formData.expectations ?? "");
   const [charCount, setCharCount] = useState(
     formData.expectations?.length ?? 0
@@ -764,9 +791,9 @@ const SeventhView = ({
     return (
         <div>
             <Navbar />
-            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
-                    <h1 className='text-3xl font-bold text-white mb-4'>What are your expectations for this Business Master Class?</h1>
+            <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+                <div className='bg-primary-4 m-8 p-8 my-8 mx-2 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl'>
+                    <h1 className='text-3xl font-bold text-gradient mb-4'>What are your expectations for this Business Master Class?</h1>
                     <form className='text-left'>
                         <div className='mb-4'>
                             <textarea
@@ -783,18 +810,18 @@ const SeventhView = ({
                             <p className='text-right text-gray-300 text-sm'>{charCount}/300</p>
                         </div>
                     </form>
-                    <div className='mt-6 flex justify-center items-center'>
+                    <div className='mt-6 flex justify-between items-center'>
                     <button
                             type='button'
                             onClick={handleBack}
-                            className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                            className='text-white px-6 py-2 mr-6 hover:text-gradient'
                         >
                             Back
                     </button>
                     <button
                             type='button'
                             onClick={handleNext}
-                            className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                            className='text-white px-6 py-2 hover:text-gradient'
                         >
                             Next
                     </button>
@@ -812,6 +839,11 @@ const EighthView = ({
   onPrevious,
   onNext,
 }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [materials, setMaterials] = useState(formData.materials ?? "");
   const [charCount, setCharCount] = useState(formData.materials?.length ?? 0);
 
@@ -845,9 +877,9 @@ const EighthView = ({
     return (
         <div>
             <Navbar />
-            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
-                    <h1 className='text-3xl font-bold text-white mb-4'>What kind of competition materials do you need?</h1>
+            <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+                <div className='bg-primary-4 my-8 mx-2 p-8 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl'>
+                    <h1 className='text-3xl font-bold text-gradient mb-4'>What kind of competition materials do you need?</h1>
                     <form className='text-left'>
                         <div className='mb-4'>
                             <textarea
@@ -864,18 +896,18 @@ const EighthView = ({
                             <p className='text-right text-gray-300 text-sm'>{charCount}/300</p>
                         </div>
                     </form>
-                    <div className='mt-6 flex justify-center items-center'>
+                    <div className='mt-6 flex justify-between items-center'>
                     <button
                             type='button'
                             onClick={handleBack}
-                            className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                            className='text-white px-6 py-2 mr-6 hover:text-gradient'
                         >
                             Back
                     </button>
                     <button
                             type='button'
                             onClick={handleNext}
-                            className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                            className='text-white px-6 py-2 hover:text-gradient'
                         >
                             Next
                     </button>
@@ -887,6 +919,11 @@ const EighthView = ({
 };
 
 const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [follow1, setFollow1] = useState(formData.screenshot1 ? true : false);
   const [follow2, setFollow2] = useState(formData.screenshot2 ? true : false);
   const [follow3, setFollow3] = useState(formData.screenshot3 ? true : false);
@@ -944,9 +981,9 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
     return (
         <div>
             <Navbar />
-            <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-                <div className='bg-dark-2 p-8 rounded-lg shadow-lg text-center max-w-3xl'>
-                    <h1 className='text-3xl font-bold text-white mb-4'>Connect with us!</h1>
+            <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+                <div className='bg-primary-4 my-8 mx-2 p-8 max-w-full md:max-w-xl rounded-xl shadow-lg text-center max-w-3xl'>
+                    <h1 className='text-3xl font-bold text-gradient mb-4'>Connect with us!</h1>
                     <form className='text-left'>
                         {/* setiap selesai chekck list harus upload gambar  */}
                         <div className='mb-4'>
@@ -970,11 +1007,11 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
                                 />
                                 <label
                                     htmlFor='screenshot1'
-                                    className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                                    className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                                 >
                                     Submit screenshot
                                 </label>
-                                <label className='text-white ml-2'>{screenshot1}</label>
+                                <label className='text-sm md:text-base text-white ml-2'>{screenshot1}</label>
                             </div>
                         </div>
                         <div className='mb-4'>
@@ -998,11 +1035,11 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
                                 />
                                 <label
                                     htmlFor='screenshot2'
-                                    className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                                    className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                                 >
                                     Submit screenshot
                                 </label>
-                                <label className='text-white ml-2'>{screenshot2}</label>
+                                <label className='text-sm md:text-base text-white ml-2'>{screenshot2}</label>
                             </div>
                         </div>
                         <div className=''>
@@ -1028,25 +1065,25 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
                                 />
                                 <label
                                     htmlFor='screenshot3'
-                                    className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                                    className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                                 >
                                     Submit screenshot
                                 </label>
-                                <label className='text-white ml-2'>{screenshot3}</label>
+                                <label className='text-sm md:text-base text-white ml-2'>{screenshot3}</label>
                             </div>
                         </div>
-                        <div className='mt-6 flex justify-center items-center'>
+                        <div className='mt-6 flex justify-between items-center'>
                             <button
                                 type='button'
                                 onClick={onPrevious}
-                                className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                                className='text-white px-6 py-2 mr-6 hover:text-gradient'
                             >
                             Back
                             </button>
                             <button
                                 type='button'
                                 onClick={handleSubmit}
-                                className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                                className='text-white px-6 py-2 hover:text-gradient'
                             >
                             Next
                             </button>
@@ -1107,9 +1144,9 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
     return (
         <div>
         <Navbar />
-        <div className='bg-gradient-primary w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-dark-2  flex flex-col text-center max-w-3xl'>
-                <div className='mb-4 p-8 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+        <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+            <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+                <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
                     <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
                         <p className='text-white mx-4 mb-2 text-center'>
                             Please transfer the following amount to complete your registration
@@ -1196,6 +1233,10 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
 }
 
 const Summary = ({ formData, onPrevious }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -1216,18 +1257,14 @@ const Summary = ({ formData, onPrevious }) => {
       const response = await postBMCRegistration(formData);
       setIsLoading(false);
       if (response.status === 200) {
-        {
-          /*INSERT SUCCESS INDICATOR*/
-        }
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, bmcId]);
         successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
       }
       console.log(response);
     } catch (error) {
-      {
-        /*INSERT ERROR INDICATOR*/
-      }
+      errorAlert({ message: "Oh no, something happened. Please try again!"});
+      navigate(HOME);
       console.log(error);
     }
   };
@@ -1235,7 +1272,7 @@ const Summary = ({ formData, onPrevious }) => {
   return (
     <div>
       <Navbar />
-      <div className="bg-gradient-primary w-full p-4 text-white">
+      <div className="bg-primary-1 w-full text-white">
         <div className="flex min-h-screen items-center justify-center">
           {isLoading ? (
             <div className="">
@@ -1245,36 +1282,30 @@ const Summary = ({ formData, onPrevious }) => {
               />
             </div>
           ) : (
-            <div className="flex items-center flex-col col-span-2 rounded-lg shadow-lg p-10 bg-opacity-25">
-              <p className="text-xl font-bold mb-2">BMC Registration Form</p>
-              <p className="text-sm font-semibold mb-2">
+            <div className="bg-primary-4 mx-2 my-8 max-w-full md:max-w-lg flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
+              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">BMC Registration Form</p>
+              <p className="text-sm text-center font-semibold mb-2">
                 Please make sure all data is correct before submitting
               </p>
-              <div className="max-w-lg w-full p-4 rounded-lg shadow-lg">
-                <p>
-                  <strong>Session:</strong> {formData.sessionType}
-                </p>
-                <p>
-                  <strong>Full Name:</strong> {formData.fullName}
-                </p>
-                <p>
-                  <strong>Gender:</strong> {formData.gender}
-                </p>
-                <p>
-                  <strong>University:</strong> {formData.university}
-                </p>
-                <p>
-                  <strong>Major:</strong> {formData.major}
-                </p>
-                <p>
-                  <strong>Batch:</strong> {formData.batch}
-                </p>
-                <p>
-                  <strong>Phone:</strong> {formData.phoneNumber}
-                </p>
-                <p>
-                  <strong>Email:</strong> {formData.email}
-                </p>
+              <div className="grid grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
+                <strong>Session</strong>
+                <p>{formData.sessionType}</p>
+                <strong>Full Name</strong> 
+                <p>{formData.fullName}</p>
+                <strong>Gender</strong> 
+                <p>{formData.gender}</p>
+                <strong>University</strong>
+                <p>{formData.university}</p>
+                <strong>Major</strong>
+                <p>{formData.major}</p>
+                <strong>Batch</strong>
+                <p>{formData.batch}</p>
+                <strong>Phone</strong>
+                <p>{formData.phoneNumber}</p>
+                <strong>Email</strong>
+                <p>{formData.email}</p>
+              </div>
+              <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
                 <div className="border-t border-gray-300 my-4"></div>
                 <strong>How did you know this event?</strong>
                 <p>
@@ -1297,6 +1328,7 @@ const Summary = ({ formData, onPrevious }) => {
                 ) : (
                   ""
                 )}
+                
                 <strong>
                   What are your expectations for this Business Master Class?
                 </strong>
@@ -1305,10 +1337,7 @@ const Summary = ({ formData, onPrevious }) => {
                 <p>{formData.materials}</p>
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
-                  <strong>Agreement Paper: </strong> {formData.agreement.name}
-                </p>
-                <p>
-                  <strong>Proof of following @SxCIntersummit Instagram:</strong>{" "}
+                  <strong>Proof of following our Instagram:</strong>{" "}
                   {formData.screenshot1.name}
                 </p>
                 <p>
@@ -1319,26 +1348,18 @@ const Summary = ({ formData, onPrevious }) => {
                   <strong>Proof of like & comment on BMC poster:</strong>{" "}
                   {formData.screenshot3.name}
                 </p>
-                            <p><strong>Proof of payment: </strong> {formData.proofPayment.name}</p>
-                            {
-                                formData.referralCode && 
-                                <>
-                                    <div className="border-t border-gray-300 my-4"></div>
-                                    <p><strong>Referral Code:</strong> {formData.referralCode}</p>
-                                </>
-                            }
               </div>
-              <div className="flex mt-6">
+              <div className="flex w-full mt-6 justify-between">
                 <button
                   type="button"
                   onClick={onPrevious}
-                  className="bg-primary-3 text-white px-6 py-2 mr-6 rounded-full"
+                  className="text-white px-6 py-2 mr-6 hover:text-gradient"
                 >
                   Back
                 </button>
                 <button
                   type="button"
-                  className="bg-primary-3 text-white px-6 py-2 rounded-full"
+                  className="text-white px-6 py-2 hover:text-gradient"
                   onClick={handleSubmit}
                 >
                   Submit
@@ -1356,7 +1377,10 @@ const EventCard = () => {
 
     const eventData = {
         title: "Business Master Class",
-        description: "The StudentsxCEOs International Summit Business Master Class is a one-hit competition free class specifically designed for 300 high school and college students who are eager to excel in business case and business plan competitions. With its interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on “Elevate to Success: Mastering in Business Competition” as the grand theme.",
+        description: "</br>&emsp;<strong>1.&emsp;Business Plan Competition Class</strong>" +
+    "</br>This session will specifically cover Business Plan Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business plan competition" +
+    "</br>&emsp;<strong>2.&emsp;Business Case Competition Class</strong>" +
+    "</br>This session will specifically cover Business Class Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business case competition",
         bmcId: 1,
         regularPrice: 50000,
         discountedPrice: 45000,
@@ -1419,11 +1443,11 @@ const EventCard = () => {
 
     switch (currentView) {
         case 1:
-            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
         case 2:
-            return <SecondView eventData={eventData} formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} onNext={handleNext} onPrevious={handlePrevious}/>;
+            //skipped cus agreement paper is cancelled
         case 3:
-            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} />;
+            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext} />;
         case 4:
             return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 5:
@@ -1435,11 +1459,12 @@ const EventCard = () => {
         case 8:
             return <EighthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 9:
-            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext}/>;
+            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={()=>{setCurrentView(11)}}/>;
         case 10:
-            return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
+            //skipped
+            //return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 11:
-            return <Summary eventData={eventData} formData={formData} onPrevious={handlePrevious}/>
+            return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(9)}}/>
         default:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }

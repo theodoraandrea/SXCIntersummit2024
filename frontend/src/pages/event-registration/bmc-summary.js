@@ -3,6 +3,7 @@ import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import Spinner from '../../components/elements/spinner';
 import { getBmcRegistrationData } from '../../service/services';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const BMCSummary = () => {
     const { profileData, isLoggedIn, loading } = useUser();
@@ -86,18 +87,23 @@ const BMCSummary = () => {
     return (
         <div>
             <Navbar/>
-            <div className='bg-gradient-primary w-full min-h-screen p-4 text-white'>
+            <div className='bg-primary-1 w-full min-h-screen p-4 text-white'>
             { isLoading ?          
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <Spinner/>
                 </div>
             :
-            <div className='m-4 grid md:grid-cols-3'>
-                            <div className='flex items-center flex-col md:col-span-2 rounded-lg bg-opacity-25'>
+            <div className='grid md:grid-cols-2 md:gap-x-4 md:gap-y-4'>
+                            <div className="grid grid-cols-1 gap-y-4 md:col-span-2 mx-2 sm:mx-8 py-4 md:py-8">
+                            <h1 className='text-gradient font-bold mx-8 text-4xl md:text-5xl text-center'>Business Master Class</h1>
+                            <p className='text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto'>Congratulations! You have been registered for Business Master Class. Please check this page and your email for updates.</p>
+                            </div>
+                            <div className='flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25'>
                                 {
                                     bccData.sessionType ? 
-                                <div className='max-w-md w-full p-8 rounded-lg shadow-lg'>
-                                    <p className='text-center'><strong>{bccData.sessionType}</strong></p>
+                                <div className='bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg'>
+                                    <p className='text-xl text-center text-gradient mb-2'><strong>{bccData.sessionType}</strong></p>
+                                    <div className="text-sm md:text-base">
                                     <p><strong>Full Name:</strong> {userData.fullname}</p>
                                     <p><strong>Gender:</strong> {userData.gender}</p>
                                     <p><strong>University:</strong> {userData.institution}</p>
@@ -127,13 +133,15 @@ const BMCSummary = () => {
                                             </>
                                         )
                                     }
+                                    </div>
                                 </div>
                                 : <></>
                                 }
                                 {
                                     bpcData.sessionType ?                       
-                                <div className='max-w-md w-full p-8 rounded-lg shadow-lg'>
-                                    <p className='text-center'><strong>{bpcData.sessionType}</strong></p>
+                                <div className='bg-primary-4 mt-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg'>
+                                    <p className='text-xl text-center text-gradient mb-2'><strong>{bpcData.sessionType}</strong></p>
+                                    <div className="text-sm md:text-base">
                                     <p><strong>Full Name:</strong> {userData.fullname}</p>
                                     <p><strong>Gender:</strong> {userData.gender}</p>
                                     <p><strong>University:</strong> {userData.university}</p>
@@ -163,23 +171,35 @@ const BMCSummary = () => {
                                             </>
                                         )
                                     }
+                                    </div>
+                                    
                                 </div>
                                 : <></>
                                 }       
                             </div>
-                            <div className='justify-center flex'>
-                            <div className='max-w-md w-full rounded-lg'>
-                                <div className='flex flex-col rounded-lg shadow-lg p-10 items-center'>
-                                    <p className='text-lg font-bold mb-2 text-center'>Feedback & Submission</p>
+                            <div className='flex flex-col items-start'>
+                            <div className='sm:max-w-md w-full mx-auto md:mx-0 rounded-lg'>
+                                <div className='bg-primary-4 flex flex-col rounded-lg shadow-lg mt-4 md:mt-0 md:px-4 py-8 items-center'>
+                                    <p className='text-2xl md:text-3xl
+                                    text-gradient font-bold mb-2 text-center'>Feedback & Submission</p>
                                     <button
-                                    className='bg-primary-3 w-fit text-white text-sm px-6 py-2 rounded-full hover:bg-yellow-600'
-                                    >Upload</button>
+                                    className='w-fit text-white text-sm border-2 border-primary-3 rounded-full px-4 py-1
+                                    md:px-6 md:py-2 md:text-base
+                                    hover:bg-primary-3 hover:text-white transition duration-300
+                                    '
+                                    >Go to form
+                                    </button>
                                 </div>
-                                <div className='flex flex-col rounded-lg shadow-lg p-10 items-center'>
-                                    <p className='text-lg font-bold mb-2 text-center'>Purchase Handbook</p>
+                                <div className='bg-primary-4 flex flex-col rounded-lg shadow-lg mt-4 md:px-4 py-8 items-center'>
+                                    <p className='text-2xl md:text-3xl
+                                    text-gradient font-bold mb-2 text-center'>Purchase Booklet</p>
                                     <button
-                                    className='bg-primary-3 w-fit text-white text-sm px-6 py-2 rounded-full hover:bg-yellow-600'
-                                    >Shop</button>
+                                    className='w-fit text-white text-sm border-2 border-primary-3 rounded-full px-4 py-1
+                                    md:px-6 md:py-2 md:text-base
+                                    hover:bg-primary-3 hover:text-white transition duration-300
+                                    '
+                                    >Go to store
+                                    </button>
                                 </div>
                             </div>
                             </div>

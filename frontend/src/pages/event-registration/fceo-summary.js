@@ -42,15 +42,44 @@ const FCEOSummary = () => {
     return (
         <div>
             <Navbar />
-            <div className='bg-gradient-primary w-full min-h-screen p-4 text-white'>
+            <div className='bg-primary-1 w-full min-h-screen p-4 text-white'>
             { isLoading ? 
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <Spinner/>
             </div>    
             :
-                <div className='grid grid-cols-1 lg:grid-cols-4 gap-4'>
-                    <div className='rounded-lg shadow-lg p-4 bg-opacity-25'>
-                        <p className='text-xl font-semibold mb-2'>Team Information</p>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4 md:mx-auto md:mt-8 max-w-3xl'>
+                    <h1 className='text-gradient font-bold md:col-span-3 text-4xl md:text-5xl text-center'>Future CEO</h1>
+                    <p className='md:col-span-3 text-sm md:text-base text-center mx-2 sm:mx-8 md:mx-32'>Congratulations! Your team has been registered for Future CEO. Please check this page and your email for updates.</p>
+                    <div className='md:col-span-2'>
+                    <p className='text-xl text-gradient font-semibold mb-2'>Members Data</p>
+                        <div className='bg-primary-4 mb-4 p-4 rounded-xl shadow-lg '>
+                            <p className='text-lg'>Leader</p>
+                            <div className='text-xs md:text-sm'>
+                            <p><strong>Full Name:</strong> {leaderData.fullname}</p>
+                            <p><strong>Gender:</strong> {leaderData.gender}</p>
+                            <p><strong>School:</strong> {leaderData.institution}</p>
+                            <p><strong>Phone:</strong> {leaderData.phoneNumber}</p>
+                            <p><strong>Email:</strong> {leaderData.email}</p>
+                            </div>
+                        </div>
+                        {teamData?.members?.map((member, index) => (
+                        <div key={index} className='bg-primary-4 mb-4 p-4 rounded-xl shadow-lg '>
+                            <p className='text-lg'>Member</p>
+                            <div className='text-xs md:text-sm'>
+                            <p><strong>Full Name:</strong> {member.fullname}</p>
+                            <p><strong>Gender:</strong> {member.gender}</p>
+                            <p><strong>School:</strong> {member.school}</p>
+                            <p><strong>Phone:</strong> {member.phoneNumber}</p>
+                            <p><strong>Email:</strong> {member.email}</p>
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+                    <div>
+                    <div className='bg-primary-4 h-fit rounded-xl shadow-lg p-4 md:mt-9'>
+                        <p className='text-xl text-gradient font-semibold mb-2'>Team Information</p>
+                        <div className='text-xs md:text-sm'>
                         <p><strong>Team Name:</strong> {teamData.teamName}</p>
                         <p><strong>Members:</strong></p>
                         <ul className='list-disc list-inside'>
@@ -59,35 +88,18 @@ const FCEOSummary = () => {
                                 <li key={index}>{member.fullname}</li>
                             ))}
                         </ul>
-                    </div>
-                    <div className='col-span-2 rounded-lg shadow-lg p-4 bg-opacity-25'>
-                        <p className='text-xl font-semibold mb-2'>Submitted Data</p>
-                        <div className='mb-4 p-4 rounded-lg shadow-lg '>
-                            <p className='text-lg font-semibold mb-2'>Leader Data</p>
-                            <p><strong>Full Name:</strong> {leaderData.fullname}</p>
-                            <p><strong>Gender:</strong> {leaderData.gender}</p>
-                            <p><strong>School:</strong> {leaderData.institution}</p>
-                            <p><strong>Phone:</strong> {leaderData.phoneNumber}</p>
-                            <p><strong>Email:</strong> {leaderData.email}</p>
                         </div>
-                        {teamData?.members?.map((member, index) => (
-                        <div key={index} className='mb-4 p-4 rounded-lg shadow-lg '>
-                            <p className='text-lg font-semibold mb-2'>Member {index + 1} Data</p>
-                            <p><strong>Full Name:</strong> {member.fullname}</p>
-                            <p><strong>Gender:</strong> {member.gender}</p>
-                            <p><strong>School:</strong> {member.school}</p>
-                            <p><strong>Phone:</strong> {member.phoneNumber}</p>
-                            <p><strong>Email:</strong> {member.email}</p>
-                        </div>
-                        ))}
                     </div>
-                    <div className='rounded-lg shadow-lg p-4 bg-opacity-25'>
-                        <p className='text-xl font-semibold mb-2'>Registration Data</p>
+                    <div className='bg-primary-4 h-fit mt-4 rounded-xl shadow-lg p-4'>
+                        <p className='text-xl text-gradient font-semibold mb-2'>Registration Data</p>
+                        <div className='text-xs md:text-sm'>
                         <p><strong>Team Code:</strong> {teamData.teamCode}</p>
                         {
                             teamData.referralCode &&
                             <p><strong>Referral Code:</strong> {teamData.referralCode}</p>
                         }
+                        </div>
+                    </div>
                     </div>
                 </div>
             }
