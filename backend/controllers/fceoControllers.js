@@ -91,6 +91,43 @@ exports.createNewTeam = async (req, res) => {
       competitionId: fceoId,
     });
 
+    const emailDetails = {
+      from: process.env.EMAIL_USER,
+      fromName: "StudentsXCEOs International Summit 2024",
+      mailgenOptions: {
+        theme: "salted",
+        product: {
+          name: "StudentsxCEOs International Summit 2024",
+          link: "#",
+        },
+      },
+      emailContent: {
+        intro:
+          "You've just successfully registered to the FCEO competition. We're excited to have you on board!",
+        action: {
+          instructions: "Join the WA Group by clicking the button below",
+          button: {
+            color: "#003337",
+            text: "Join WA Group",
+            link: "#",
+          },
+        },
+        outro:
+          "We're glad to have you on board! Stay tuned in the group for further information!",
+        signature: "Cheers, StudentsxCEOs International Summit 2024",
+      },
+    };
+
+    const subject = `Welcome to SxC Intersummit - ${user.fullname}`;
+
+    const emailResult = await sendAutomatedEmail(user, subject, emailDetails);
+
+    if (!emailResult.success) {
+      return res
+        .status(500)
+        .json({ message: emailResult.message, error: emailResult.error });
+    }
+
     res.status(201).json({
       message: "Team created successfully",
       team: newTeam,
@@ -166,53 +203,11 @@ exports.createNewFCEOMember = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // // Automated Email details
-    // const emailDetails = {
-    //   from: process.env.EMAIL_USER,
-    //   fromName: "StudentsXCEOs International Summit 2024",
-    //   mailgenOptions: {
-    //     theme: "salted",
-    //     product: {
-    //       name: "StudentsxCEOs International Summit 2024",
-    //       link: "#",
-    //     },
-    //   },
-    //   emailContent: {
-    //     intro:
-    //       "You've just successfully registered to the FCEO competition. We're excited to have you on board!",
-    //     action: {
-    //       instructions: "Join the WA Group by clicking the button below",
-    //       button: {
-    //         color: "#003337",
-    //         text: "Join WA Group",
-    //         link: "#",
-    //       },
-    //     },
-    //     outro:
-    //       "We're glad to have you on board! Stay tuned in the group for further information!",
-    //     signature: "Cheers, StudentsxCEOs International Summit 2024",
-    //   },
-    // };
-
-    // const subject = `Welcome to SxC Intersummit - ${newMember.fullname}`;
-    // const emailResult = await sendAutomatedEmail(
-    //   newMember,
-    //   subject,
-    //   emailDetails
-    // );
-
-    // if (!emailResult.success) {
-    //   return res
-    //     .status(500)
-    //     .json({ message: emailResult.message, error: emailResult.error });
-    // }
-
     return res.status(201).json({
       message: "Success registering FCEO as a new member!",
       member: newMember,
     });
   } catch (error) {
-    console.log("error disini");
     res.status(500).json({ error: error.message });
   }
 };
