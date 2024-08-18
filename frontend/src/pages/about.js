@@ -3,6 +3,10 @@ import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
 import { useLocation } from "react-router-dom";
 
+const challenges1 = "/images/challenges/challenge1.png";
+const challenges2 = "/images/challenges/challenge2.png";
+const challenges3 = "/images/challenges/challenge3.png";
+const challenges4 = "/images/challenges/challenge4.png";
 
 
 const bgHero = "/images/bg-about.png";
@@ -33,6 +37,29 @@ const blibli = "/images/blibli.png";
 const lokalate = "/images/lokalate.png";
 const medpar1 = "/images/medpar1.png";
 const medpar2 = "/images/medpar2.png";
+const synergy = "/images/synergy.png";
+const passion = "/images/passion.png";
+const excellence = "/images/excellence.png";
+const pwc = "/images/ricky-pwc.png";
+const corporate = "/images/Corporate.jpg";
+const medpar = "/images/medpar.jpg";
+const university = "/images/university.png";
+const school = "/images/school.png";
+const participants = "/images/participant.png";
+const najwa = "/images/ambassador/najwa.png";
+const bilgis = "/images/ambassador/bilgis.png";
+const rezita = "/images/ambassador/rezita.png";
+const talita = "/images/ambassador/talita.png";
+const vania = "/images/ambassador/vania.png";
+
+// Medpar
+const CBSAUI = "/images/media-partner/CBSA-UI.png";
+const FPCI = "/images/media-partner/LOGO-FPCI-CHAPTER-BINUS.png";
+const HIMA = "/images/media-partner/LOGO-HIMA-PSIKOLOGI-UNY.png";
+const IIS = "/images/media-partner/Logo-IIS-2024.png";
+const STEM = "/images/media-partner/YouthInSTEM.png";
+
+
 
 export default function About() {
 
@@ -51,8 +78,8 @@ export default function About() {
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20">
           Part of StudentsxCEOs Jakarta
         </h1>
-        {/* <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold mt-2 sm:mt-4 md:mt-6 text-gradient mx-4 sm:mx-8 md:mx-20">
-        </h2> */}
+      
+        <img src={logo} alt="StudentsxCEOs Jakarta" className="ml-20 mx-auto mt-4 sm:mt-6 md:mt-8" />
         <p className="text-base sm:text-lg md:text-xl mt-3 sm:mt-5 md:mt-6 max-w-full mx-4 sm:mx-8 md:mx-20 text-white">
           StudentsxCEOs (SxC) was founded in 2010 as an organization for aspiring future business leaders in Indonesia. StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students. With strongly-connected 5 major chapters, 150+ core members linked to 1000+ top  students in over 30+ top universities and 100+ corporate partners, we help corporations and leaders to connect with student-leaders across the nation.
         </p>
@@ -101,15 +128,17 @@ export default function About() {
         <div className="w-full mb-10 max-w-4xl p-6 sm:p-10 rounded-lg  relative">
           <div className="absolute top-[-50px] sm:top-[-60px] left-1/2 transform -translate-x-1/2 w-full max-w-lg bg-white rounded-lg p-4 sm:p-6 shadow-lg flex flex-col sm:flex-row justify-around items-center">
             <div className="text-center mb-4 sm:mb-0">
-              <div className="bg-gray-200 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2"></div>
+              
+                <img src={passion} alt="Passion" className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" />
+
               <div className="text-teal-800 font-bold text-sm sm:text-base">Passion</div>
             </div>
             <div className="text-center mb-4 sm:mb-0">
-              <div className="bg-gray-200 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2"></div>
+              <img src={synergy} alt="synergy" className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" />
               <div className="text-teal-800 font-bold text-sm sm:text-base">Synergy</div>
             </div>
             <div className="text-center">
-              <div className="bg-gray-200 w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2"></div>
+              <img src={excellence} alt="excellence" className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" />
               <div className="text-teal-800 font-bold text-sm sm:text-base">Excellence</div>
             </div>
           </div>
@@ -178,25 +207,25 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-1" alt="icon 1" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={challenges1} alt="icon 1" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Adapting to rapid technological disruption</div>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-2" alt="icon 2" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={challenges2} alt="icon 2" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Filling gaps in essential professional skills</div>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-3" alt="icon 3" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={challenges3} alt="icon 3" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Navigating increased competition in the job market</div>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-4" alt="icon 4" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={challenges4} alt="icon 4" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Overcoming limited access to relevant work-study opportunities</div>
             </div>
@@ -238,19 +267,19 @@ export default function About() {
       </section>
 
       {/* New Section : Our Milestone */}
-      <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
+      <section className="bg-white py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
           <h2 className="text-2xl my-2 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 text-center">
             Our Milestone
           </h2>
-          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full">
+          <h5 className="text-yellow-500 text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 mx-4 sm:mx-8 md:mx-2 max-w-full">
             Participants
           </h5>
           
           <div className="bg-white shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
             {/* Future Leaders */}
             <div className="flex items-center space-x-2">
-                <img src="/path/to/future-leaders-icon.png" alt="Future Leaders Icon" className="h-12 w-12 object-contain" />
+                <img src={participants} alt="Future Leaders Icon" className="h-12 w-12 object-contain" />
                 <div className="text-center">
                   <div className="text-teal-600 text-2xl font-bold">2000+</div>
                   <div className="text-gray-600 text-sm">Future Leaders</div>
@@ -259,7 +288,7 @@ export default function About() {
 
               {/* University Students */}
               <div className="flex items-center space-x-2">
-                <img src="/path/to/university-icon.png" alt="University Students Icon" className="h-12 w-12 object-contain" />
+                <img src={university} alt="University Students Icon" className="h-12 w-12 object-contain" />
                 <div className="text-center">
                   <div className="text-teal-600 text-2xl font-bold">87%</div>
                   <div className="text-gray-600 text-sm">University Students</div>
@@ -268,7 +297,7 @@ export default function About() {
 
               {/* High School Students */}
               <div className="flex items-center space-x-2">
-                <img src="/path/to/high-school-icon.png" alt="High School Students Icon" className="h-12 w-12 object-contain" />
+                <img src={school} alt="High School Students Icon" className="h-12 w-12 object-contain" />
                 <div className="text-center">
                   <div className="text-teal-600 text-2xl font-bold">13%</div>
                   <div className="text-gray-600 text-sm">High School Students</div>
@@ -281,7 +310,7 @@ export default function About() {
         <div className="flex flex-col my-2 lg:flex-row justify-around mx-4">
             {/* Company Partners */}
             <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Company Partner</div>
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Company Partner</div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex justify-center items-center">
                   <img src={Tiketcom} alt="Tiket.com" className="h-16 object-contain" />
@@ -325,7 +354,7 @@ export default function About() {
 
             {/* Sponsor */}
             <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Sponsor</div>
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Sponsor</div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex justify-center items-center">
                   <img src={bca} alt="BCA" className="h-16 object-contain" />
@@ -369,7 +398,7 @@ export default function About() {
 
             {/* Media Partner */}
             <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full text-center">
+              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full text-center">
                 Media Partner
               </div>
               <div className="grid gap-4 h-[400px] w-full">
@@ -394,7 +423,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col items-center text-center relative">
               
-              <img src="path-to-winner-image-1.jpg" alt="Winner 1" className="relative z-20" /> {/* Replace with winner image */}
+              <img src={pwc} alt="Winner 1" className="relative z-20" />
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
               Ricky Sucitra - Human Capital Strategy Lead at PwC
               </h3>
@@ -427,10 +456,11 @@ export default function About() {
           {/* Image by CVD */}
           {/* ... */}
           <div className="flex flex-wrap justify-center">
-            <img src="path-to-ambassador-logo-1.jpg" alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src="path-to-ambassador-logo-2.jpg" alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src="path-to-ambassador-logo-3.jpg" alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src="path-to-ambassador-logo-4.jpg" alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={najwa} alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={bilgis} alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={rezita} alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={talita} alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={vania} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
           </div>
         </div>
 
@@ -444,10 +474,11 @@ export default function About() {
           {/* ... */}
           {/* give text dump image for image more than one ambassador logo with responsive page*/}
           <div className="flex flex-wrap justify-center">
-            <img src="path-to-ambassador-logo-1.jpg" alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src="path-to-ambassador-logo-2.jpg" alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src="path-to-ambassador-logo-3.jpg" alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src="path-to-ambassador-logo-4.jpg" alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={CBSAUI} alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={FPCI} alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={HIMA} alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={IIS} alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={STEM} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
           </div>
         </div>
          
@@ -464,8 +495,7 @@ export default function About() {
         {/* Corporate Partnership Section 1 */}
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
           <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
-            {/* Masukkan Image Corporate dari CVD */}
-            <div className="h-40 bg-gray-400 rounded-lg"></div>
+              <img src={corporate} alt="Corporate Partnership" className="h-full w-full object-contain" />
           </div>
           <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
             <h2 className="text-yellow-500 text-lg font-semibold mb-4">Corporate Partnership</h2>
@@ -484,7 +514,7 @@ export default function About() {
         <div className="container mt-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
           <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
             {/* Masukkan Image Jabat Tangan dari CVD */}
-            <div className="h-40 bg-gray-400 rounded-lg"></div>
+            <img src={medpar} alt="Corporate Partnership" className="h-full w-full object-contain" />
           </div>
           <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
             <h2 className="text-yellow-500 text-lg font-semibold mb-4">Media Partner</h2>
