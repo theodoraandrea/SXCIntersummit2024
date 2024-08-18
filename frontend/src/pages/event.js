@@ -32,7 +32,9 @@ const Events = () => {
   const fetchAllEventsData = async () => {
     try {
       const response = await fetchAllEvents();
-      setEventsData(normalizeData(response, "event"));
+      const eventsWithImage = getProgramImageLink(response, "event");
+      const events = normalizeData(eventsWithImage, "event");
+      setEventsData(events);
     } catch (error) {
       console.error(error);
     }
@@ -41,7 +43,9 @@ const Events = () => {
   const fetchAllCompetitionsData = async () => {
     try {
       const response = await fetchAllCompetitions();
-      setCompetitionsData(normalizeData(response, "competition"));
+      const compsWithImage = getProgramImageLink(response, "competition");
+      const comps = normalizeData(compsWithImage, "competition");
+      setCompetitionsData(comps);
     } catch (error) {
       console.error(error);
     } finally {
@@ -75,12 +79,59 @@ const Events = () => {
     setFilteredData(filteredEvents);
   }, [eventsData, competitionsData, filter]);
 
+  const getProgramImageLink = (programs, type) => {
+    const location = "/images/programs";
+    const bmc = location + "/bmc.png";
+    const comvis = location + "/comvis.png";
+    const summit = location + "/summit.png";
+    const chambers = location + "/chambers.png";
+    const ibc_bcc = location + "/ibc-bcc.png";
+    const ibc_bpc = location + "/ibc-bpc.png";
+    const fceo = location + "/fceo.png";
+
+    for (let item of programs) {
+      if (type === "event") {
+        switch (item.id) {
+          case 1:
+            item.image = bmc;
+            break;
+          case 5:
+            item.image = chambers;
+            break;
+          case 6:
+            item.image = comvis;
+            break;
+          case 7:
+            item.image = summit;
+            break;
+          default:
+            break;
+        }
+      } else if (type === "competition") {
+        switch (item.id) {
+          case 1:
+            item.image = fceo;
+            break;
+          case 2:
+            item.image = ibc_bcc;
+            break;
+          case 3:
+            item.image = ibc_bpc;
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return programs;
+  }
+
   return (
     <>
       <Navbar currentPath={location.pathname} />
-      <div className="p-8 md:p-8 bg-primary-1 text-white h-full">
+      <div className="p-8 md:p-8 bg-primary-1 text-white h-full min-h-[80vh]">
         {
-          isLoading ?
+          false ?
           <div className="h-[80vh]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Spinner/>
@@ -113,7 +164,9 @@ const Events = () => {
                 <EventCard
                   key={index}
                   id={event.id}
+                  image={event.image}
                   title={event.title}
+                  showDetail={event.showDetail}
                   description={event.description}
                   category={event.category}
                 />

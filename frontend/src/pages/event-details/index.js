@@ -93,15 +93,29 @@ export default function DetailEvents() {
               md:mx-0 md:text-base md:px-4 md:py-2">
                 View Booklet
               </button>
-
               </div>
-              <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] mt-4 mb-8 md:hidden mx-auto"></div>
+              {/*FOR PORTRAIT
+               <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] mt-4 mb-8 md:hidden mx-auto"></div>*/}
+              <div className="bg-gray-200 rounded-lg mt-4 mb-8 md:hidden mx-4 md:mx-0">
+                <img
+                  className="w-full h-full object-cover rounded-lg"
+                  src={eventData.image}
+                />
+              </div>
               <div 
               className="text-sm md:text-base text-justify px-4 md:px-0"
               dangerouslySetInnerHTML={{ __html: eventData.description     
               }}/>
             </div>
+            {/*FOR PORTRAIT
             <div className="bg-gray-200 rounded-lg hidden md:block md:w-[20rem] md:h-[28rem] mx-auto"></div>
+            */}
+            <div className="bg-gray-200 rounded-lg hidden md:block md:w-full mx-8">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={eventData.image}
+              />
+            </div>
             <div className="md:mx-15 text-center md:text-left">
               <h2 className="text-2xl mt-8 mb-4 text-3xl md:text-3xl xl:mx-[5rem] font-bold">Timeline</h2>
             </div>

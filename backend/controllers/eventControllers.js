@@ -20,7 +20,11 @@ const BPC = "Business Plan Competition";
 
 exports.getAllEvents = async (req, res) => {
   try {
-    const events = await Event.findAll();
+    const events = await Event.findAll({
+      order: [
+        ['eventDate', 'ASC']
+      ]
+    });
     return res.status(200).json(events);
   } catch (error) {
     return res.status(500).json({ message: "Failed to fetch events" });

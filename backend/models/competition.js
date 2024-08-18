@@ -28,7 +28,11 @@ const Competition = sequelize.define(
     openRegistration: {
       type: DataTypes.BOOLEAN,
       defaultValue: 0,
-    }
+    },
+    showDetail: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 0,
+    },
   },
   {
     tableName: "competitions",

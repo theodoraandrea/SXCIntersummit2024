@@ -1,8 +1,11 @@
 import { FCEO_REGIST, BMC_REGIST } from "./routes";
 
+const imgLocation = "/images/programs/";
+
 export const eventDetails = {
   event_1: {
     title: "Business Master Class",
+    image: imgLocation + "bmc.png",
     description: "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
     "With its <strong>interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities</strong>  to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on " +
     "<strong>“Elevate to Success: Mastering in Business Competition” as the grand theme.</strong>" +
@@ -63,6 +66,7 @@ export const eventDetails = {
 
   comp_1: {
     title: "Future CEO",
+    image: imgLocation + "fceo.png",
     description: "<strong>Future CEO</strong> is <strong>a prestigious business plan competition</strong> exclusively <strong>for high school students</strong>, to showcase their entrepreneurial skills and business acumen with the grand theme <strong>“Shaping Future Pioneers: Embracing Strategic Innovation in Sustainable Digital Era”</strong>. Students are <strong>challenged to present their innovative business idea</strong> that can solve the problems around them." +
     "</br></br>" +
     "<strong>When</strong></br>" +
@@ -123,6 +127,7 @@ export const eventDetails = {
   },
   comp_2: {
     title: "SxC International Business Challenge: Business Case Competition",
+    image: imgLocation + "ibc-bcc.png",
     description:
       "Challenges college students to apply their business acumen and strategic thinking to real-world scenarios through complex business problems analysis and develop innovative solution",
     timelineDesc:
@@ -162,6 +167,7 @@ export const eventDetails = {
   },
   comp_3: {
     title: "SxC International Business Challenge: Business Plan Competition",
+    image: imgLocation + "ibc-bpc.png",
     description:
       "Cultivate entrepreneurial skills through their business ideas in a simulated real-world environment, showcasing their creativity, strategic thinking, and ability to execute viable business plans.",
     timelineDesc:
@@ -203,6 +209,7 @@ export const eventDetails = {
   },
   event_5: {
     title: "Chambers",
+    image: imgLocation + "chambers.png",
     description: "Two-days online expert sessions which will share experiences, recruitment tips, job opportunities, and material related to job vacancies in four industries (Consulting, Start-Up, BUMN, and FMCG).",
     timelineDesc: "Timeline details for Chambers",
     registerLink: ``,
@@ -240,6 +247,7 @@ export const eventDetails = {
   },
   event_6: {
     title: "Company Visit",
+    image: imgLocation + "comvis.png",
     description: "Hands-on experience collaborating with company partners to conduct offline and online office tour and talkshow about sustainable work environments and recruitment tips.",
     timelineDesc: "Timeline details for Company Visit",
     registerLink: ``,
@@ -277,6 +285,7 @@ export const eventDetails = {
   },
   event_7: {
     title: "Summit",
+    image: imgLocation + "summit.png",
     description: "SxC International Summit is a peak event that provides an opportunity for individuals from all backgrounds to present their perspectives on current economic trends and engage with leading economists and industry experts.",
     timelineDesc: "Timeline details for Summit",
     registerLink: ``,

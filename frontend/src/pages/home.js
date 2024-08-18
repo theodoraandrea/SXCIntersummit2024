@@ -59,7 +59,7 @@ export default function Home() {
   }
 
   const getProgramImageLink = (programs, type) => {
-    const location = "images/programs";
+    const location = "/images/programs";
     const bmc = location + "/bmc.png";
     const comvis = location + "/comvis.png";
     const summit = location + "/summit.png";
