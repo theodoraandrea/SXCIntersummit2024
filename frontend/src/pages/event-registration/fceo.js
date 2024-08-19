@@ -489,7 +489,7 @@ const FirstView = ({
               <label className="text-sm text-white ml-2">{proofStory}</label>
             </div>
           </form>
-          <div className="mt-6 w-fit ml-auto">
+          <div className="mt-6 w-fit py-4 ml-auto">
             <button
               type="button"
               onClick={handleSubmit}
