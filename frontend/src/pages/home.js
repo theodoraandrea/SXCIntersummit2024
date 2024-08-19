@@ -25,7 +25,8 @@ const speaker2 = "/images/speaker2.png";
 
 const mediapartners = "/images/mediapartners.png";
 
-const MERCH_LINK = "";
+const MERCH_LINK = "https://linktr.ee/PurchaseSummit2024";
+const CONTACT_LINK = "https://linktr.ee/SponsorshipandMediaPartner";
 
 export default function Home() {
   const [eventCards, setEventCards] = useState([]);
@@ -460,7 +461,9 @@ export default function Home() {
             <img src={mediapartners} className="w-full sm:max-w-lg mx-auto"/>
           </div>
           <h1 className="w-md text-center sm:col-span-2 text-base sm:text-2xl text-primary-1">We are still calling for sponsors and media partners</h1>
-          <a href="" className="text-center sm:col-span-2 text-base sm:text-2xl text-primary-1 hover:underline">
+          <a href={CONTACT_LINK} className="text-center sm:col-span-2 text-base sm:text-2xl text-white bg-primary-1 w-fit mx-auto 
+          px-4 py-1 rounded-full border-2 border-primary-1 hover:text-primary-1 hover:bg-white transition duration-300
+          ">
             <h1>Contact Us</h1>
           </a>
         </div>
