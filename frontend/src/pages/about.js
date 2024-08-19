@@ -37,9 +37,9 @@ const blibli = "/images/blibli.png";
 const lokalate = "/images/lokalate.png";
 const medpar1 = "/images/medpar1.png";
 const medpar2 = "/images/medpar2.png";
-const synergy = "/images/synergy.png";
-const passion = "/images/passion.png";
-const excellence = "/images/excellence.png";
+const synergy = "/images/valueee1.png";
+const passion = "/images/valueee3.png";
+const excellence = "/images/valueee2.png";
 const pwc = "/images/ricky-pwc.png";
 const corporate = "/images/Corporate.jpg";
 const medpar = "/images/medpar.jpg";
@@ -509,7 +509,7 @@ export default function About() {
               Looking for a way to create a lasting impact and exposure to the next generation? Establish a partnership with us and support our mission to empower future leaders and innovators in the digital economy. We’d love to explore how we can collaborate to achieve this shared vision. Together, let's elevate the future leaders!
             </p>
             <div className="mt-6 text-center">
-              <a href="#" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
+              <a href=" https://wa.me/081288059303" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
                 contact us
               </a>
             </div>
@@ -528,7 +528,7 @@ export default function About() {
               Is your platform dedicated to spotlighting education and development for the youth? Establish a partnership with us and let's nurture the next wave of global leaders in the digital economy. We’d love to discuss how we can work together to amplify this mission. Let’s join forces to broadcast the future with the SxC International Summit 2024!
             </p>
             <div className="mt-6 text-center">
-              <a href="#" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
+              <a href="https://wa.me/085782799445" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
                 Contact Us
               </a>
             </div>
