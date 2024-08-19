@@ -52,6 +52,12 @@ const rezita = "/images/ambassador/rezita.png";
 const talita = "/images/ambassador/talita.png";
 const vania = "/images/ambassador/vania.png";
 
+const value1 = "/images/our-values/value1.png";
+const value2 = "/images/our-values/value2.png";
+const value3 = "/images/our-values/value3.png";
+const value4 = "/images/our-values/value4.png";
+const reviewbca = "/images/review-bca.png";
+
 // Medpar
 const CBSAUI = "/images/media-partner/CBSA-UI.png";
 const FPCI = "/images/media-partner/LOGO-FPCI-CHAPTER-BINUS.png";
@@ -240,25 +246,25 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-1" alt="icon 1" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={value1} alt="icon 1" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Providing career knowledge, networking, and transformation opportunities</div>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-2" alt="icon 2" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={value2} alt="icon 2" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs"> Offering guidance for career transitions and upskilling</div>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-3" alt="icon 3" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={value3} alt="icon 3" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Enhancing both soft and hard skills in alignment with technological advancements</div>
             </div>
             <div className="text-center flex flex-col items-center">
               <div className="bg-gray-300 rounded-full w-24 h-24 flex items-center justify-center mb-4">
-                <img src="path-to-your-icon-4" alt="icon 4" className="w-12 h-12" /> {/* Replace with your icon or image */}
+                <img src={value4} alt="icon 4" className="w-12 h-12" /> {/* Replace with your icon or image */}
               </div>
               <div className="text-white max-w-xs">Cultivating an innovative mindset and personal growth for future leaders</div>
             </div>
@@ -434,12 +440,12 @@ export default function About() {
             
             <div className="flex flex-col items-center text-center relative">
               
-              <img src="path-to-winner-image-2.jpg" alt="Winner 2" className="relative z-20" /> {/* Replace with winner image */}
+              <img src={reviewbca} alt="Winner 2" className="relative z-20" /> {/* Replace with winner image */}
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
-              Unlimited Potato Team - NDH University Taiwan (International)
+              Veigy Pruedensia - Employer Branding at BCA
               </h3>
               <p className="mt-2 text-white px-4 text-right mx-5 md:mx-10 z-10">
-              “It was a good experience, thank you for the opportunity, even though we couldn’t be there offline, would have been so nice to meet you all! Great job, thank you for making this competition!”
+              Terima kasih banyak temen-temen SxCEOs. Jujur kolaborasi bareng kalian adalah pengalaman yang berkesan dan menyenangkan banget juga buat aku. Kalian antusias dan koordinasinya juga lancar. Senang juga bisa kenal kalian semuaa anak- anak baik yang passionate dan berambisi.
               </p>
             </div>
           </div>

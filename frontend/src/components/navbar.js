@@ -26,7 +26,7 @@ export default function NavbarUser({ currentPath }) {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  const MERCH_LINK = "https://forms.gle/YqLjPR983SFAVCaX9";
+  const MERCH_LINK = "https://linktr.ee/PurchaseSummit2024";
 
   return (
     <nav className="bg-primary-1 w-full h-16 flex items-center px-5 md:px-10 sticky top-0 z-50">
