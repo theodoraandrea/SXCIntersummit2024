@@ -2,6 +2,7 @@ import Navbar from "./../components/navbar";
 import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
 import { useLocation } from "react-router-dom";
+import { version } from "react";
 
 const challenges1 = "/images/challenges/challenge1.png";
 const challenges2 = "/images/challenges/challenge2.png";
@@ -51,6 +52,28 @@ const bilgis = "/images/ambassador/bilgis.png";
 const rezita = "/images/ambassador/rezita.png";
 const talita = "/images/ambassador/talita.png";
 const vania = "/images/ambassador/vania.png";
+const alifya = "/images/ambassador/1/alifya.png";
+const denisha = "/images/ambassador/1/Denisha.png";
+const gracia = "/images/ambassador/1/gracia.png";
+const lucas = "/images/ambassador/1/lucas.png";
+const m_alvin = "/images/ambassador/1/M_Alvin.png";
+const m_rizki = "/images/ambassador/1/M_Rizki.png";
+const rahma = "/images/ambassador/1/rahma.png";
+const ratu = "/images/ambassador/1/ratu.png";
+const Veronica = "/images/ambassador/1/Veronica.png";
+const enta = "/images/ambassador/1/Enta.png";
+const yumna = "/images/ambassador/1/yumna.png";
+
+const ajeng = "/images/ambassador/2/ajeng.png";
+const deva = "/images/ambassador/2/deva.png";
+const dhabi = "/images/ambassador/2/dhabi.png";
+const dinda = "/images/ambassador/2/dinda.png";
+const estu = "/images/ambassador/2/estu.png";
+const fahrul = "/images/ambassador/2/fahrul.png";
+const shabrina = "/images/ambassador/2/shabrina.png";
+const syifa = "/images/ambassador/2/syifa.png";
+const varencia = "/images/ambassador/2/varencia.png";
+const yossi = "/images/ambassador/2/yossi.png";
 
 const value1 = "/images/our-values/value1.png";
 const value2 = "/images/our-values/value2.png";
@@ -64,6 +87,44 @@ const FPCI = "/images/media-partner/LOGO-FPCI-CHAPTER-BINUS.png";
 const HIMA = "/images/media-partner/LOGO-HIMA-PSIKOLOGI-UNY.png";
 const IIS = "/images/media-partner/Logo-IIS-2024.png";
 const STEM = "/images/media-partner/YouthInSTEM.png";
+const aisectrisakti = "/images/media-partner/aisec-trisakti.png";
+const atmaconsul = "/images/media-partner/Atma-Jaya-Consulting-Community.png";
+const femipb = "/images/media-partner/BEM-FEM-IPB.png";
+const brandui = "/images/media-partner/Brand-UI.png";
+const cedsui = "/images/media-partner/CEDS-UI.png";
+const fincamp = "/images/media-partner/Fincamp.png";
+const fpci = "/images/media-partner/FPCI-UI.jpeg";
+const growthhub = "/images/media-partner/Growth-Hub.png";
+const himamgtunpad = "/images/media-partner/HIMAMGTUNPAD.jpg";
+const himatika = "/images/media-partner/himatika-umm.png";
+const himmebinus = "/images/media-partner/himme-binus.jpg";
+const imagama = "/images/media-partner/imagama.png";
+const kostaf = "/images/media-partner/kostaf.png";
+const kronika = "/images/media-partner/kronika.png";
+const bemfebunj = "/images/media-partner/bemfebunj.png";
+const cdc = "/images/media-partner/logo_CDC-Gelap.png";
+const magdalene = "/images/media-partner/logo-magdalene.png";
+const ppit = "/images/media-partner/Logo-PPIT-Dark.png";
+const radiountar = "/images/media-partner/radiountar.png";
+const search = "/images/media-partner/Logo-SEARCH.jpg";
+const mss = "/images/media-partner/mss-feb-ui.jpg";
+const sigma = "/images/media-partner/SigmaTvUnj.png";
+const skillup = "/images/media-partner/SkillUp.png";
+const teens = "/images/media-partner/Teens-Educ.png";
+const uidigitalk = "/images/media-partner/UI-DigiTalk.jpg";
+const untirta = "/images/media-partner/Untirta-TV.png";
+const birama = "/images/media-partner/2/birama.jpg";
+const bpreneur = "/images/media-partner/2/bpreneur.png";
+const fiscalcareer = "/images/media-partner/2/fiscalcareer.png";
+const fisipupn = "/images/media-partner/2/fisipupn.png";
+const fkipusd = "/images/media-partner/2/fkipusd.png";
+const fmipaunnes = "/images/media-partner/2/fmipaunnes.png";
+const fpcibinus = "/images/media-partner/2/fpcibinus.png";
+const himiespa = "/images/media-partner/2/himiespa.png";
+const himitepa = "/images/media-partner/2/himitepa.png";
+const husbandry = "/images/media-partner/2/husbandry.png";
+const psikouny = "/images/media-partner/2/psikouny.png";
+
 
 
 
@@ -87,7 +148,7 @@ export default function About() {
       
         <img src={logo} alt="StudentsxCEOs Jakarta" className="ml-20 mx-auto mt-4 sm:mt-6 md:mt-8" />
         <p className="text-base sm:text-lg md:text-xl mt-3 sm:mt-5 md:mt-6 max-w-full mx-4 sm:mx-8 md:mx-20 text-white">
-          StudentsxCEOs (SxC) was founded in 2010 as an organization for aspiring future business leaders in Indonesia. StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students. With strongly-connected 5 major chapters, 150+ core members linked to 1000+ top  students in over 30+ top universities and 100+ corporate partners, we help corporations and leaders to connect with student-leaders across the nation.
+          StudentsxCEOs was founded in 2010 as an organization for aspiring future business leaders in Indonesia. StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students. With strongly-connected 5 major chapters, 150+ core members linked to 1000+ top  students in over 30+ top universities and 100+ corporate partners, we help corporations and leaders to connect with student-leaders across the nation.
         </p>
       </section>
 
@@ -154,9 +215,16 @@ export default function About() {
           <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Tagline
           </h2>
-          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20">
+          <h5
+            className="text-2xl my-5 sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8 md:mb-10 text-white mx-4 sm:mx-8 md:mx-20 p-4 rounded-lg shadow-lg"
+            style={{
+              background: "linear-gradient(90deg, #f3c623, #e0ac00, #c17c00)",
+              color: "#fff",
+            }}
+          >
             Lead The Change, Shape The Future!
           </h5>
+
 
         {/* Section Bawah */}
         {/* <div className="bg-gray-100 min-h-screen flex items-center justify-center p-8"> */}
@@ -196,18 +264,18 @@ export default function About() {
       <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
         {/* Why We Move Amoung Youth? */}
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
-          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+          <h2 className="text-center text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Why We Move Amoung Youth?
           </h2>
           <p
-           className="text-base sm:text-lg md:text-xl my-5 font-normal mb-6 sm:mb-8 md:mb-10 px-2">
+           className="text-center text-base sm:text-lg md:text-xl my-5 font-normal mb-6 sm:mb-8 md:mb-10 px-2">
             As Indonesia strides towards Vision 2045, building a strong workforce is crucial. However, statistics show that 1 in 5 young people are still not engaged in meaningful real-world training. The SxC International Summit is committed to bridging this gap by preparing students for successful careers and equipping them with the skills and insights needed to excel in the professional world
           </p>
         </div>
 
         {/* The Challenges We Address */}
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
-          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+          <h2 className="text-center text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             The Challenges We Address
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -240,7 +308,7 @@ export default function About() {
 
         {/* Our Focus Area */}
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
-          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+          <h2 className="text-center text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Our Focus Area
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -273,7 +341,7 @@ export default function About() {
       </section>
 
       {/* New Section : Our Milestone */}
-      <section className="bg-white py-10 sm:py-16 md:py-20">
+      <section className="bg-white bg-opacity-20 py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
           <h2 className="text-2xl my-2 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 text-center">
             Our Milestone
@@ -282,40 +350,41 @@ export default function About() {
             Participants
           </h5>
           
-          <div className="bg-white shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="bg-white shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4 min-h-30">
             {/* Future Leaders */}
             <div className="flex items-center space-x-2">
-                <img src={participants} alt="Future Leaders Icon" className="h-12 w-12 object-contain" />
+                <img src={participants} alt="Future Leaders Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
-                  <div className="text-teal-600 text-2xl font-bold">2000+</div>
-                  <div className="text-gray-600 text-sm">Future Leaders</div>
+                  <div className="text-teal-600 text-3xl font-bold">2000+</div>
+                  <div className="text-gray-600 text-lg">Future Leaders</div>
                 </div>
               </div>
 
               {/* University Students */}
               <div className="flex items-center space-x-2">
-                <img src={university} alt="University Students Icon" className="h-12 w-12 object-contain" />
+                <img src={university} alt="University Students Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
-                  <div className="text-teal-600 text-2xl font-bold">87%</div>
-                  <div className="text-gray-600 text-sm">University Students</div>
+                  <div className="text-teal-600 text-3xl font-bold">87%</div>
+                  <div className="text-gray-600 text-lg">University Students</div>
                 </div>
               </div>
 
               {/* High School Students */}
               <div className="flex items-center space-x-2">
-                <img src={school} alt="High School Students Icon" className="h-12 w-12 object-contain" />
+                <img src={school} alt="High School Students Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
-                  <div className="text-teal-600 text-2xl font-bold">13%</div>
-                  <div className="text-gray-600 text-sm">High School Students</div>
+                  <div className="text-teal-600 text-3xl font-bold">13%</div>
+                  <div className="text-gray-600 text-lg">High School Students</div>
                 </div>
               </div>
             </div>
           </div>
 
         {/* Masukkan Untuk CP, Sponsors, Media Partner */}
-        <div className="flex flex-col my-2 lg:flex-row justify-around mx-4">
+        <div className="flex flex-col lg:flex-row justify-between space-y-4 lg:space-y-0 lg:space-x-4 mx-4 my-6">
             {/* Company Partners */}
-            <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
+            {/* <div className="bg-white shadow-md rounded-lg ms-10 px-16 w-full lg:w-[30%]"> */}
+            <div className="ms-10 px-16 w-full lg:w-[30%]">
               <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Company Partner</div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex justify-center items-center">
@@ -359,7 +428,8 @@ export default function About() {
             </div>
 
             {/* Sponsor */}
-            <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
+            {/* <div className="bg-white shadow-md rounded-lg px-16 w-full lg:w-[30%]"> */}
+            <div className="px-16 w-full lg:w-[30%]">
               <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Sponsor</div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex justify-center items-center">
@@ -403,16 +473,17 @@ export default function About() {
             </div>
 
             {/* Media Partner */}
-            <div className="bg-white shadow-md rounded-lg p-4 m-2 w-full lg:w-1/3">
+            {/* <div className="bg-white shadow-md rounded-lg mr-24 px-16 w-full lg:w-[30%]"> */}
+            <div className="mr-24 px-16 w-full lg:w-[30%]">
               <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full text-center">
-                Media Partner
+                Media Partner 
               </div>
-              <div className="grid gap-4 h-[400px] w-full">
+              <div className="grid rid-cols-1 gap-4 h-[400px] w-full">
                 <div className="flex justify-center items-center h-1/2">
-                  <img src={medpar1} alt="medpar1" className="h-full w-full object-contain" />
+                  <img src={medpar1} alt="medpar1" className="h-20 w-full object-contain" />
                 </div>
                 <div className="flex justify-center items-center h-1/2">
-                  <img src={medpar2} alt="medpar2" className="h-full w-full object-contain" />
+                  <img src={medpar2} alt="medpar2" className="h-60 w-full object-contain" />
                 </div>
               </div>
             </div>
@@ -467,6 +538,27 @@ export default function About() {
             <img src={rezita} alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
             <img src={talita} alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
             <img src={vania} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={alifya} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={denisha} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={enta} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={gracia} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={lucas} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={m_alvin} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={m_rizki} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={rahma} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={ratu} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={Veronica} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={yumna} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={ajeng} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={deva} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={dhabi} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={dinda} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={estu} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={fahrul} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={shabrina} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={syifa} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={varencia} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={yossi} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
           </div>
         </div>
 
@@ -484,7 +576,44 @@ export default function About() {
             <img src={FPCI} alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
             <img src={HIMA} alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
             <img src={IIS} alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={STEM} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={STEM} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={aisectrisakti} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={atmaconsul} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={femipb} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={brandui} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={cedsui} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fincamp} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fpci} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={growthhub} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={himamgtunpad} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={himatika} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={himmebinus} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={imagama} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={kostaf} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={kronika} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={bemfebunj} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={cdc} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={magdalene} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={ppit} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={radiountar} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={search} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={mss} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={sigma} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={skillup} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={teens} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={uidigitalk} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={untirta} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={birama} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={bpreneur} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fiscalcareer} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fisipupn} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fkipusd} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fmipaunnes} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={fpcibinus} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={himiespa} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={himitepa} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={husbandry} alt="Ambassador 5" className="w-24 h-24 m-4" />
+            <img src={psikouny} alt="Ambassador 5" className="w-24 h-24 m-4" />
           </div>
         </div>
          
@@ -518,10 +647,6 @@ export default function About() {
 
         {/* Jabat Tangan Section */}
         <div className="container mt-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
-          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
-            {/* Masukkan Image Jabat Tangan dari CVD */}
-            <img src={medpar} alt="Corporate Partnership" className="h-full w-full object-contain" />
-          </div>
           <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
             <h2 className="text-yellow-500 text-lg font-semibold mb-4">Media Partner</h2>
             <p className="text-sm md:text-base leading-relaxed">
@@ -532,6 +657,9 @@ export default function About() {
                 Contact Us
               </a>
             </div>
+          </div>
+          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
+            <img src={medpar} alt="Corporate Partnership" className="h-full w-full object-contain" />
           </div>
         </div>
       </section>
