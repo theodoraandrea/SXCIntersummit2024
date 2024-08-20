@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Landing from "./pages/register/landing";
@@ -26,6 +27,16 @@ import {
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
+const ProtectedEventDetails = () => {
+  const { eventId } = useParams();
+  const allowedEventIds = ['event_1', 'event_5', 'event_6', 'event_7', 'comp_1', 'comp_2', 'comp_3'];
+
+  return allowedEventIds.includes(eventId) ? (
+    <DetailEvents />
+  ) : (
+    <Navigate to={HOME} />
+  );
+}
 export default function App() {
   return (
     <UserProvider>
@@ -40,7 +51,7 @@ export default function App() {
           <Route path={EVENTS_PAGE} element={<Events />} />
           <Route
             path={`${EVENT_DETAILS}/:eventId`}
-            element={<DetailEvents />}
+            element={<ProtectedEventDetails />}
           />
           <Route path={BMC_REGIST} element={<BMCRegistration/>} />
           <Route path={BMC_REGIST_SUMMARY} element={<BMCSummary/>}/>

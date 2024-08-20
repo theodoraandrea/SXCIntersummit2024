@@ -25,7 +25,7 @@ const speaker2 = "/images/speaker2.png";
 
 const mediapartners = "/images/mediapartners.png";
 
-const MERCH_LINK = "https://linktr.ee/PurchaseSummit2024";
+const MERCH_LINK = "https://bit.ly/MERCHSXC24B1";
 const CONTACT_LINK = "https://linktr.ee/SponsorshipandMediaPartner";
 
 export default function Home() {
@@ -189,11 +189,10 @@ export default function Home() {
           StudentxCEOs International Summit 2024
         </h1>
         <h2 className="text-2xl md:text-4xl font-semibold mt-4 text-gradient mx-10 md:mx-20">
-          Innovate or Obsolete: Thriving in a world of technology disruption
+          Elevating Future Leaders: Transcending User-Centricity To Strategic Innovation In The Digital Economy
         </h2>
         <p class="mt-5 text-md md:text-lg max-w-[72vw] mx-10 md:mx-20 text-white">
-        The StudentsxCEOs (SxC) International Summit is <strong>a grand event</strong> organized by <strong>StudentsxCEOs Jakarta</strong>. 
-        This year, the SxC Summit will embrace the grand theme: <strong>“Elevating Future Leaders: Transcending User-Centricity To Strategic Innovation In The Digital Economy”</strong>. 
+        The StudentsxCEOs International Summit is <strong>a grand event</strong> organized by <strong>StudentsxCEOs Jakarta</strong>.
         </p>
         <p class="mt-5 text-md md:text-lg max-w-[72vw] mx-10 md:mx-20 text-white">
         This summit will take you on an <strong>unforgettable upskilling journey </strong> with a series of <strong>events </strong> 
@@ -442,7 +441,7 @@ export default function Home() {
             md:text-3xl
             md:py-3 md:px-10
             ">Know Us Better
-            </h1>
+              </h1>
           </Link>
         </div>
       </section>

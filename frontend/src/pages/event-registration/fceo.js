@@ -32,7 +32,8 @@ const FirstView = ({
   const [phoneNumber, setPhoneNumber] = useState("+62");
   const [email, setEmail] = useState("");
   const [teamName, setTeamName] = useState(formData.teamName ?? "");
-  const [members, setMembers] = useState(formData.members ?? "");
+  const [region, setRegion] = useState(formData.region ?? "");
+  const [members, setMembers] = useState(3);
   const [studentIds, setStudentIds] = useState(formData.studentIds?.name ?? "");
   const [proofFollow, setProofFollow] = useState(
     formData.proofFollow?.name ?? ""
@@ -72,7 +73,8 @@ const FirstView = ({
           phoneNumber: phoneNumber,
           school: sanitizeInput(school),
           teamName: sanitizeInput(teamName),
-          members: members
+          region: sanitizeInput(region),
+          members: 3
         };
         setFormData(formData);
         console.log(formData);
@@ -100,6 +102,7 @@ const FirstView = ({
       phoneNumber &&
       school &&
       teamName &&
+      region &&
       members && 
       studentIds &&
       proofFollow &&
@@ -242,6 +245,10 @@ const FirstView = ({
               <p><strong>{bankAccount}</strong> - {bank}</p>
               <p>{recipient}</p>
             </div>
+            <div className="text-sm mt-4 w-fit mx-auto text-center">
+              <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
+              <p>{eventData.recipient_2}</p>
+            </div>
           </div>
           <div className="bg-primary-4 mt-4 rounded-lg">
           <ReferralModal
@@ -356,6 +363,19 @@ const FirstView = ({
               />
             </div>
             <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="region">
+                Region
+              </label>
+              <input
+                type="text"
+                id="region"
+                name="region"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div className="mb-4 hidden">
               <label className="block text-white mb-2" htmlFor="selectMembers">
                 Number of members
               </label>
@@ -381,7 +401,7 @@ const FirstView = ({
             </div>
             <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
             <label className="block text-white">
-              Combile files of <strong>ALL MEMBERS</strong> into 1 PDF file
+              Combine files of <strong>ALL MEMBERS</strong> into 1 PDF file
             </label>
             <label className="block text-white mb-4">
               File size has to be less than 2MB
@@ -539,11 +559,9 @@ const Member1Data = ({
         };
         setFormData(formData);
       }
-      if (members === "2") {
-        goToSummary();
-      } else if (members === "3") {
-        goToNext();
-      } 
+
+      goToNext();
+      
     } else {
       errorAlert({ message: "All fields must be filled"});
     }
@@ -725,23 +743,12 @@ const Member2Data = ({
   },[]);
 
   const handleNext = () => {
-    if (doesNotHaveMemberTwo()) {
-      setFormData({});
-      onNext();
-      return;
-    }
-
     if (saveData()) {
       onNext();
     }
   };
 
   const handleBack = () => {
-    if (doesNotHaveMemberTwo()) {
-      setFormData({});
-      onPrevious();
-    }
-
     if (saveData()) {
       onPrevious();
     }
@@ -771,20 +778,6 @@ const Member2Data = ({
       return true;
     }
     return false;
-  };
-
-  const doesNotHaveMemberTwo = () => {
-    if (members == 2){
-      return true;
-    } else if (members == 3) {
-      return false;
-    }
-
-    if (!fullName) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   const handlePhoneNumberChange = (e) => {
@@ -963,7 +956,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
             try {
               await registerMember(memberData);
               memberCounter++;
-              if (memberCounter == numberOfMembers) {
+              if (memberCounter === numberOfMembers) {
                 setIsLoading(false);
                 //Add this activeTab state for competition registrations
                 //because user-dashboard opens "events" by default
@@ -1016,13 +1009,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
   };
 
   const onPrevious = () => {
-    if (formData.members === "2") {
-      setCurrentView((prev) => prev - 2);
-    } else if (formData.members === "3") {
-      setCurrentView((prev) => prev - 1);
-    } else {
-      console.log(formData.members);
-    }
+    setCurrentView((prev) => prev - 1);
   };
 
   const editData = (index) => {
@@ -1067,6 +1054,9 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               <p className="text-base md:text-lg font-semibold mt-2">Team Data</p>
               <p>
                 <strong>Team Name:</strong> {formData.teamName}
+              </p>
+              <p>
+                <strong>Region:</strong> {formData.region}
               </p>
               <p>
                 <strong>Student IDs:</strong> {formData.studentIds.name}
@@ -1173,6 +1163,9 @@ const EventCard = () => {
     bankAccount: "000427101697",
     bank: "blu by BCA DIGITAL",
     recipient: "CLAIRINE SABATINI NAYOAN",
+    bankAccount_2: "085959773266",
+    bank_2: "GoPay",
+    recipient_2: "DIVO AZRIEL HAKIM",
     discount: '5000',
     regularPrice: '50.000',
     discountedPrice: '45.000',

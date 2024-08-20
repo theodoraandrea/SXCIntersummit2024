@@ -75,8 +75,10 @@ export default function DetailEvents() {
                 {eventData.title || "Event Title"}
               </h1>
               <div className="flex flex-row items-center w-full justify-center md:w-fit space-x-4 my-4">
-              <button className="bg-primary-2 text-sm w-fit rounded-lg text-white py-1 px-4
-              md:mx-0 md:text-base md:px-4 md:py-2"
+              <button className={`text-sm w-fit rounded-lg text-white py-1 px-4
+              md:mx-0 md:text-base md:px-4 md:py-2 ${
+                !eventData.openRegistration ? "bg-gray-400" : "bg-primary-2"
+              }`}
               onClick={
                     ()=>{
                       isLoggedIn ? 
@@ -84,9 +86,9 @@ export default function DetailEvents() {
                       navigate(LANDING_PAGE)
                     }
                   }
-                  disabled={registered}
+              disabled={registered || !eventData.openRegistration}
                 >
-                  {registered ? "Already registered!" : "Register Now"}
+                  {registered ? "Already registered!" : "Register"}
               </button>
               <button className="bg-primary-3 text-sm w-fit rounded-lg text-white 
               py-1 px-4

@@ -13,6 +13,9 @@ const FCEO = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    region: {
+      type: DataTypes.STRING,
+    },
     leaderId: {
       type: DataTypes.INTEGER,
       references: {

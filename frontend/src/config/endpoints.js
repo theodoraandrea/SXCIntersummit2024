@@ -1,4 +1,5 @@
-const API_URL = "https://1a1b-2a00-10-4529-8d01-257e-c047-e2bf-ff70.ngrok-free.app";
+const API_URL = "http://srv582502.hstgr.cloud";
+//const API_URL = "http://localhost:3001";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";
