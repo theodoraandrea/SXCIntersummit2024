@@ -81,6 +81,7 @@ const FCEOSummary = () => {
                         <p className='text-xl text-gradient font-semibold mb-2'>Team Information</p>
                         <div className='text-xs md:text-sm'>
                         <p><strong>Team Name:</strong> {teamData.teamName}</p>
+                        <p><strong>Region:</strong> {teamData.region}</p>
                         <p><strong>Members:</strong></p>
                         <ul className='list-disc list-inside'>
                             <li>{leaderData.fullname}</li>

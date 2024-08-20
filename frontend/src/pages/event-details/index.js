@@ -75,8 +75,10 @@ export default function DetailEvents() {
                 {eventData.title || "Event Title"}
               </h1>
               <div className="flex flex-row items-center w-full justify-center md:w-fit space-x-4 my-4">
-              <button className="bg-primary-2 text-sm w-fit rounded-lg text-white py-1 px-4
-              md:mx-0 md:text-base md:px-4 md:py-2"
+              <button className={`text-sm w-fit rounded-lg text-white py-1 px-4
+              md:mx-0 md:text-base md:px-4 md:py-2 ${
+                !eventData.openRegistration ? "bg-gray-400" : "bg-primary-2"
+              }`}
               onClick={
                     ()=>{
                       isLoggedIn ? 
@@ -84,24 +86,38 @@ export default function DetailEvents() {
                       navigate(LANDING_PAGE)
                     }
                   }
-                  disabled={registered}
+              disabled={registered || !eventData.openRegistration}
                 >
-                  {registered ? "Already registered!" : "Register Now"}
+                  {registered ? "Already registered!" : "Register"}
               </button>
               <button className="bg-primary-3 text-sm w-fit rounded-lg text-white 
               py-1 px-4
               md:mx-0 md:text-base md:px-4 md:py-2">
                 View Booklet
               </button>
-
               </div>
-              <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] mt-4 mb-8 md:hidden mx-auto"></div>
+              {/*FOR PORTRAIT
+               <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] mt-4 mb-8 md:hidden mx-auto"></div>*/}
+              <div className="bg-gray-200 rounded-lg mt-4 mb-8 md:hidden mx-4 md:mx-0">
+                <img
+                  className="w-full h-full object-cover rounded-lg"
+                  src={eventData.image}
+                />
+              </div>
               <div 
               className="text-sm md:text-base text-justify px-4 md:px-0"
               dangerouslySetInnerHTML={{ __html: eventData.description     
               }}/>
             </div>
+            {/*FOR PORTRAIT
             <div className="bg-gray-200 rounded-lg hidden md:block md:w-[20rem] md:h-[28rem] mx-auto"></div>
+            */}
+            <div className="bg-gray-200 rounded-lg hidden md:block md:w-full mx-8">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={eventData.image}
+              />
+            </div>
             <div className="md:mx-15 text-center md:text-left">
               <h2 className="text-2xl mt-8 mb-4 text-3xl md:text-3xl xl:mx-[5rem] font-bold">Timeline</h2>
             </div>
@@ -164,16 +180,21 @@ export default function DetailEvents() {
           {/* Contact Person Section */}
           <div className="mt-16 w-auto">
             <h2 className="text-2xl font-bold text-center">
-              Contact Person(s)
+              Contact Person
             </h2>
             <div className="mt-8 flex">
               {eventData.contactPerson && eventData.contactPerson.length > 0 ? (
                 eventData.contactPerson.map((person, index) => (
                   <div key={index} className="mx-auto pb-5">
                     <p className="flex justify-center">{person}</p>
+                    <a href={eventData.contactLink[index] ?? '#'} className={`${
+                          eventData.contactLink[index] ?
+                          "hover:text-yellow-400" : "cursor-default"
+                    }`}>
                     <p className="flex justify-center">
                       {eventData.contactNumber[index]}
                     </p>
+                    </a>
                   </div>
                 ))
               ) : (

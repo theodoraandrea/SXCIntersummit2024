@@ -4,7 +4,7 @@ import Spinner from "../../components/elements/spinner";
 import ReferralModal from "../../components/referral-modal";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
-import { EVENTS_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
+import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
 import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
 import { errorAlert, successAlert } from "../../components/alert";
 
@@ -26,17 +26,14 @@ const FirstView = ({
     setSchool(profileData?.institution);
   }, [profileData]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  },[]);
-
   const [fullName, setFullName] = useState("");
   const [gender, setGender] = useState("");
   const [school, setSchool] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("+62");
   const [email, setEmail] = useState("");
   const [teamName, setTeamName] = useState(formData.teamName ?? "");
-  const [members, setMembers] = useState(formData.members ?? "");
+  const [region, setRegion] = useState(formData.region ?? "");
+  const [members, setMembers] = useState(3);
   const [studentIds, setStudentIds] = useState(formData.studentIds?.name ?? "");
   const [proofFollow, setProofFollow] = useState(
     formData.proofFollow?.name ?? ""
@@ -61,6 +58,10 @@ const FirstView = ({
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [verifiedRefCode]);
+
   const handleSubmit = () => {
     if (checkAllFilled()) {
       if (!emailError && !phoneError) {
@@ -72,7 +73,8 @@ const FirstView = ({
           phoneNumber: phoneNumber,
           school: sanitizeInput(school),
           teamName: sanitizeInput(teamName),
-          members: members
+          region: sanitizeInput(region),
+          members: 3
         };
         setFormData(formData);
         console.log(formData);
@@ -100,6 +102,7 @@ const FirstView = ({
       phoneNumber &&
       school &&
       teamName &&
+      region &&
       members && 
       studentIds &&
       proofFollow &&
@@ -242,6 +245,10 @@ const FirstView = ({
               <p><strong>{bankAccount}</strong> - {bank}</p>
               <p>{recipient}</p>
             </div>
+            <div className="text-sm mt-4 w-fit mx-auto text-center">
+              <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
+              <p>{eventData.recipient_2}</p>
+            </div>
           </div>
           <div className="bg-primary-4 mt-4 rounded-lg">
           <ReferralModal
@@ -356,6 +363,19 @@ const FirstView = ({
               />
             </div>
             <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="region">
+                Region
+              </label>
+              <input
+                type="text"
+                id="region"
+                name="region"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div className="mb-4 hidden">
               <label className="block text-white mb-2" htmlFor="selectMembers">
                 Number of members
               </label>
@@ -381,51 +401,55 @@ const FirstView = ({
             </div>
             <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
             <label className="block text-white">
-              Combile files of <strong>ALL MEMBERS</strong> into 1 PDF file
+              Combine files of <strong>ALL MEMBERS</strong> into 1 PDF file
             </label>
             <label className="block text-white mb-4">
               File size has to be less than 2MB
             </label>
             <label className="block text-white">Proof of Payment</label>
-            <div className="my-4 relative w-fit">
+            <div className="my-4 w-fit flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">
               <input
-                type="file"
-                id="proofPayment"
-                name="proofPayment"
-                onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer"
-              />
-              <label
-                htmlFor="proofPayment"
-                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
-              >
+                  type="file"
+                  id="proofPayment"
+                  name="proofPayment"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                />
+                <label
+                  htmlFor="proofPayment"
+                  className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+                >
                 Choose file
               </label>
-              <label className="text-sm text-white ml-2">{proofPayment}</label>
+              </div>
+              <div className="text-sm text-white ml-2 max-w-full">{proofPayment}</div>
             </div>
-            <label className="block text-white">Student ID (all members)</label>
-
-            <div className="my-4 relative w-fit">
-              <input
+            <p className="block text-white">Student ID (all members)</p>
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
                 type="file"
                 id="studentIds"
                 name="studentIds"
                 onChange={handleChange}
                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
-              />
-              <label
-                htmlFor="studentIds"
-                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
-              >
-                Choose file
-              </label>
-              <label className="text-sm text-white ml-2">{studentIds}</label>
+                />
+                <label
+                  htmlFor="studentIds"
+                  className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+                >
+                  Choose file
+                </label>
+              </div>
+              <p className="text-sm text-white ml-2 block">{studentIds}</p>
             </div>
             <label className="block text-white">
               Proof of following @sxcintersummit & @sxcintersummitcompetition on IG
               (all members)
             </label>
-            <div className="my-4 relative w-fit">
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
               <input
                 type="file"
                 id="proofFollow"
@@ -439,13 +463,15 @@ const FirstView = ({
               >
                 Choose file
               </label>
+              </div>
               <label className="text-sm text-white ml-2">{proofFollow}</label>
             </div>
             <label className="block text-white">
               Proof of Twibbon post (all members)
             </label>
-            <div className="my-4 relative w-fit">
-              <input
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
                 type="file"
                 id="proofTwibbon"
                 name="proofTwibbon"
@@ -458,13 +484,15 @@ const FirstView = ({
               >
                 Choose file
               </label>
+              </div>
               <label className="text-sm text-white ml-2">{proofTwibbon}</label>
             </div>
             <label className="block text-white">
               Proof of sharing Instagram story posters (all members)
             </label>
-            <div className="my-4 relative w-fit">
-              <input
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
                 type="file"
                 id="proofStory"
                 name="proofStory"
@@ -477,14 +505,15 @@ const FirstView = ({
               >
                 Choose file
               </label>
+              </div>
               <label className="text-sm text-white ml-2">{proofStory}</label>
             </div>
           </form>
-          <div className="mt-6">
+          <div className="mt-6 w-fit py-4 ml-auto">
             <button
               type="button"
               onClick={handleSubmit}
-              className="text-white px-6 py-2 rounded-full bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
               disabled={emailError || phoneError}
             >
               Next
@@ -530,11 +559,9 @@ const Member1Data = ({
         };
         setFormData(formData);
       }
-      if (members === "2") {
-        goToSummary();
-      } else if (members === "3") {
-        goToNext();
-      } 
+
+      goToNext();
+      
     } else {
       errorAlert({ message: "All fields must be filled"});
     }
@@ -589,9 +616,9 @@ const Member1Data = ({
   return (
     <div>
       <Navbar />
-      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
-        <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-lg sm:shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4 w-80">
+      <div className="bg-primary-1 w-full min-h-screen py-16">
+        <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-xl sm:shadow-lg text-center max-w-md mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-4">
             Member 1 Data
           </h1>
           <form className="text-left">
@@ -669,11 +696,11 @@ const Member1Data = ({
               />
             </div>
           </form>
-          <div className="mt-6 flex justify-center items-center">
+          <div className="mt-6 flex justify-between items-center">
             <button
               type="button"
               onClick={onPrevious}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 hover:bg-yellow-600 rounded-full"
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
             >
               Back
             </button>
@@ -682,7 +709,7 @@ const Member1Data = ({
               onClick={() => {
                 handleSubmit();
               }}
-              className="text-white px-6 py-2 rounded-full bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
               disabled={emailError || phoneError}
             >
               Next
@@ -716,23 +743,12 @@ const Member2Data = ({
   },[]);
 
   const handleNext = () => {
-    if (doesNotHaveMemberTwo()) {
-      setFormData({});
-      onNext();
-      return;
-    }
-
     if (saveData()) {
       onNext();
     }
   };
 
   const handleBack = () => {
-    if (doesNotHaveMemberTwo()) {
-      setFormData({});
-      onPrevious();
-    }
-
     if (saveData()) {
       onPrevious();
     }
@@ -762,20 +778,6 @@ const Member2Data = ({
       return true;
     }
     return false;
-  };
-
-  const doesNotHaveMemberTwo = () => {
-    if (members == 2){
-      return true;
-    } else if (members == 3) {
-      return false;
-    }
-
-    if (!fullName) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   const handlePhoneNumberChange = (e) => {
@@ -820,9 +822,9 @@ const Member2Data = ({
   return (
     <div>
       <Navbar />
-      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
-        <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-lg sm:shadow-lg text-center max-w-3xl">
-          <h1 className="text-3xl font-bold text-white mb-4 w-80">
+      <div className="bg-primary-1 w-full min-h-screen py-16">
+        <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-lg sm:shadow-lg text-center max-w-md mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-4">
             Member 2 Data
           </h1>
           <form className="text-left">
@@ -900,18 +902,18 @@ const Member2Data = ({
               />
             </div>
           </form>
-          <div className="mt-6 flex justify-center items-center">
+          <div className="mt-6 flex justify-between items-center">
             <button
               type="button"
               onClick={handleBack}
-              className="bg-primary-3 text-white px-6 py-2 mr-6 hover:bg-yellow-600 rounded-full"
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
             >
               Back
             </button>
             <button
               type="button"
               onClick={handleNext}
-              className="text-white px-6 py-2 rounded-full bg-primary-3 hover:bg-yellow-600 focus:ring-yellow-500"
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
               disabled={fullName && (emailError || phoneError)}
             >
               Next
@@ -954,7 +956,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
             try {
               await registerMember(memberData);
               memberCounter++;
-              if (memberCounter == numberOfMembers) {
+              if (memberCounter === numberOfMembers) {
                 setIsLoading(false);
                 //Add this activeTab state for competition registrations
                 //because user-dashboard opens "events" by default
@@ -1007,13 +1009,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
   };
 
   const onPrevious = () => {
-    if (formData.members === "2") {
-      setCurrentView((prev) => prev - 2);
-    } else if (formData.members === "3") {
-      setCurrentView((prev) => prev - 1);
-    } else {
-      console.log(formData.members);
-    }
+    setCurrentView((prev) => prev - 1);
   };
 
   const editData = (index) => {
@@ -1058,6 +1054,9 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               <p className="text-base md:text-lg font-semibold mt-2">Team Data</p>
               <p>
                 <strong>Team Name:</strong> {formData.teamName}
+              </p>
+              <p>
+                <strong>Region:</strong> {formData.region}
               </p>
               <p>
                 <strong>Student IDs:</strong> {formData.studentIds.name}
@@ -1164,6 +1163,9 @@ const EventCard = () => {
     bankAccount: "000427101697",
     bank: "blu by BCA DIGITAL",
     recipient: "CLAIRINE SABATINI NAYOAN",
+    bankAccount_2: "085959773266",
+    bank_2: "GoPay",
+    recipient_2: "DIVO AZRIEL HAKIM",
     discount: '5000',
     regularPrice: '50.000',
     discountedPrice: '45.000',

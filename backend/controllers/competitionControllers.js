@@ -6,7 +6,11 @@ const { Op } = require("sequelize");
 
 exports.getAllCompetitions = async (req, res) => {
   try {
-    const competitions = await Competition.findAll();
+    const competitions = await Competition.findAll({
+      order: [
+        ['competitionDate', 'ASC']
+      ]
+    });
     return res.status(200).json(competitions);
   } catch (error) {
     return res.status(500).json({ message: "Failed to fetch competitions" });

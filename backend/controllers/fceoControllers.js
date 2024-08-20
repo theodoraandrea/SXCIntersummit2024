@@ -38,7 +38,7 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
-    const { teamName, referralCode } = body;
+    const { teamName, region, referralCode } = body;
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
@@ -79,6 +79,7 @@ exports.createNewTeam = async (req, res) => {
 
     const newTeam = await FCEO.create({
       teamName,
+      region,
       leaderId: userId,
       teamCode,
       proofOfPayment: proofPayment,
@@ -109,7 +110,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: "#",
+            link: "https://chat.whatsapp.com/DAXnA0cXcYpFvwbVSH4SQr",
           },
         },
         outro:
@@ -236,6 +237,7 @@ exports.getTeamDetailsByUserId = async (req, res) => {
     res.status(200).json({
       teamName: team.teamName,
       teamCode: team.teamCode,
+      region: team.region,
       proofPayment: team.proofOfPayment,
       screenshotFCEO: team.screenshotFCEO,
       referralCode: team.referralCode,

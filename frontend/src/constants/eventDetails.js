@@ -1,13 +1,15 @@
 import { FCEO_REGIST, BMC_REGIST } from "./routes";
 
+const imgLocation = "/images/programs/";
+
 export const eventDetails = {
   event_1: {
     title: "Business Master Class",
+    image: imgLocation + "bmc.png",
+    openRegistration: false,
     description: "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
     "With its <strong>interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities</strong>  to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on " +
     "<strong>“Elevate to Success: Mastering in Business Competition” as the grand theme.</strong>" +
-    "</br></br><strong>When</strong>" +
-    "</br>21st September 2024" +
     "</br></br><strong>Consists of two classes</strong>" +
     "</br></br>&emsp;<strong>1.&emsp;Business Plan Competition Class</strong>" +
     "</br>This session will specifically cover Business Plan Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business plan competition" +
@@ -27,42 +29,33 @@ export const eventDetails = {
       "The Business Master Class will be held online on Saturday, September 21, 2024.", 
       "Participants will gain valuable insights into business competitions from top-achieving speakers and acquire practical experience by solving case studies."],
     contactPerson: [
-      "Diandra Chandra Kusuma",
-      "Orang Satu Lagi",
-      "lagi-lagi orang",
+      "TBA"
+    ],
+    contactLink: [
+      "",
     ],
     contactNumber: [
-      "(+62) 85123 4567 890",
-      "(+62) 37128 2831 202",
-      "(+62) 0987 6789 990",
+      "-",
     ],
     timelineData: [
       {
         title: "Open Registration",
-        date: "TBA",
+        date: "1 - 18 September 2024 ",
         type: "register", // field type ini cmn buat conditional rendering mau ada button register atau ngga, bisa diisi asal / ga diisi
         link: `${BMC_REGIST}`,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA",
+        title: "D-Day",
+        date: "21 September 2024",
         type: "meeting",
-      },
-      {
-        title: "Project Progress",
-        date: "TBA",
-        type: "progress",
-      },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
       },
     ],
   },
 
   comp_1: {
     title: "Future CEO",
+    image: imgLocation + "fceo.png",
+    openRegistration: true,
     description: "<strong>Future CEO</strong> is <strong>a prestigious business plan competition</strong> exclusively <strong>for high school students</strong>, to showcase their entrepreneurial skills and business acumen with the grand theme <strong>“Shaping Future Pioneers: Embracing Strategic Innovation in Sustainable Digital Era”</strong>. Students are <strong>challenged to present their innovative business idea</strong> that can solve the problems around them." +
     "</br></br>" +
     "<strong>When</strong></br>" +
@@ -97,32 +90,37 @@ export const eventDetails = {
       "No, participants in a team are not required to be in the same school. The important thing is that they are still registered as high school students."],
     contactPerson: ["Primel", "Ell"],
     contactNumber: ["085156458584", "082258574505"],
+    contactLink: ["https://wa.me/6285156458584",
+      "https://wa.me/622258574505"
+    ],
     timelineData: [
       {
         title: "Open Registration",
-        date: "TBA",
+        date: "20 August - 22 September 2024",
         type: "register",
         link: `${FCEO_REGIST}`,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA",
+        title: "Semifinalist Announcement",
+        date: "20 September 2024",
         type: "meeting",
       },
       {
-        title: "Project Progress",
-        date: "TBA",
-        type: "progress",
+        title: "Finalist Announcement",
+        date: "4 November 2024",
+        type: "meeting",
       },
       {
-        title: "Submit Project",
-        date: "TBA",
+        title: "Pitching Day",
+        date: "24 November 2024",
         type: "submit",
       },
     ],
   },
   comp_2: {
     title: "SxC International Business Challenge: Business Case Competition",
+    image: imgLocation + "ibc-bcc.png",
+    openRegistration: false,
     description:
       "Challenges college students to apply their business acumen and strategic thinking to real-world scenarios through complex business problems analysis and develop innovative solution",
     timelineDesc:
@@ -162,6 +160,8 @@ export const eventDetails = {
   },
   comp_3: {
     title: "SxC International Business Challenge: Business Plan Competition",
+    image: imgLocation + "ibc-bpc.png",
+    openRegistration: false,
     description:
       "Cultivate entrepreneurial skills through their business ideas in a simulated real-world environment, showcasing their creativity, strategic thinking, and ability to execute viable business plans.",
     timelineDesc:
@@ -203,6 +203,8 @@ export const eventDetails = {
   },
   event_5: {
     title: "Chambers",
+    image: imgLocation + "chambers.png",
+    openRegistration: false,
     description: "Two-days online expert sessions which will share experiences, recruitment tips, job opportunities, and material related to job vacancies in four industries (Consulting, Start-Up, BUMN, and FMCG).",
     timelineDesc: "Timeline details for Chambers",
     registerLink: ``,
@@ -240,6 +242,8 @@ export const eventDetails = {
   },
   event_6: {
     title: "Company Visit",
+    image: imgLocation + "comvis.png",
+    openRegistration: false,
     description: "Hands-on experience collaborating with company partners to conduct offline and online office tour and talkshow about sustainable work environments and recruitment tips.",
     timelineDesc: "Timeline details for Company Visit",
     registerLink: ``,
@@ -277,6 +281,8 @@ export const eventDetails = {
   },
   event_7: {
     title: "Summit",
+    image: imgLocation + "summit.png",
+    openRegistration: false,
     description: "SxC International Summit is a peak event that provides an opportunity for individuals from all backgrounds to present their perspectives on current economic trends and engage with leading economists and industry experts.",
     timelineDesc: "Timeline details for Summit",
     registerLink: ``,

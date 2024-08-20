@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { EVENTS_PAGE } from "../constants/routes";
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-const instagram = "images/instagram.png";
-const linkedin = "images/linkedin.png";
-const tiktok = "images/tiktok.png";
+const instagram = "/images/instagram.png";
+const linkedin = "/images/linkedin.png";
+const tiktok = "/images/tiktok.png";
 
 const logo = "/images/logo.png";
 

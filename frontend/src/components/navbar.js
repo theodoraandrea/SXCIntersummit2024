@@ -139,12 +139,20 @@ export default function NavbarUser({ currentPath }) {
       </ul>
 
       {/* Burger Menu for Mobile View */}
+      <div className="md:hidden ml-auto">
+      {
+        isLoggedIn && 
+        <Link to={USER_DASHBOARD_PAGE}>
+          <AccountCircleIcon className="text-primary-3 mr-4"/>
+        </Link>
+      }
       <button
-        className="text-yellow-500 md:hidden ml-auto"
+        className="text-yellow-500 md:hidden"
         onClick={toggleMenu}
       >
         <MenuIcon fontSize="large" />
       </button>
+      </div>
 
       {/* Full-Screen Menu Overlay */}
       {menuOpen && (

@@ -1,6 +1,7 @@
 import Navbar from "./../components/navbar";
 import AboutCard from "../components/elements/about-card";
 import Footer from "./../components/footer";
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { version } from "react";
 
@@ -132,6 +133,10 @@ const psikouny = "/images/media-partner/2/psikouny.png";
 export default function About() {
 
   const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, []);
   
   return (
     <div>

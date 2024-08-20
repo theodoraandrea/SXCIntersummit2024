@@ -34,6 +34,10 @@ const Event = sequelize.define(
       type: DataTypes.BOOLEAN,
       defaultValue: 0,
     },
+    showDetail: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: 0,
+    },
   },
   {
     tableName: "events",

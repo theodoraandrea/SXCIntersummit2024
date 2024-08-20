@@ -74,7 +74,10 @@ const normalizeData = (data, type) => {
         id: `event_${item.id}`,
         type: type,
         title: item.eventName,
+        image: item.image,
         description: item.description || item.shortDesc,
+        showDetail: item.showDetail,
+        openRegistration: item.openRegistration,
         category: item.category,
         date: item.eventDate,
         location: item.eventLocation,
@@ -84,9 +87,12 @@ const normalizeData = (data, type) => {
         id: `comp_${item.id}`,
         type: type,
         title: item.competitionName,
+        image: item.image,
+        showDetail: item.showDetail,
         description: item.shortDesc,
         category: "Competition",
         date: item.competitionDate,
+        openRegistration: item.openRegistration,
         location: item.competitionLocation,
       };
     } else {

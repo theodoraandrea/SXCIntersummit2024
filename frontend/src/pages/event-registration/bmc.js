@@ -1287,7 +1287,7 @@ const Summary = ({ formData, onPrevious }) => {
               <p className="text-sm text-center font-semibold mb-2">
                 Please make sure all data is correct before submitting
               </p>
-              <div className="grid grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
+              <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
                 <strong>Session</strong>
                 <p>{formData.sessionType}</p>
                 <strong>Full Name</strong> 
