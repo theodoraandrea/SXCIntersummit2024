@@ -1167,7 +1167,7 @@ const EventCard = () => {
     bank_2: "GoPay",
     recipient_2: "DIVO AZRIEL HAKIM",
     discount: '5000',
-    regularPrice: '50.000',
+    regularPrice: '70.000',
     discountedPrice: '45.000',
   };
 
