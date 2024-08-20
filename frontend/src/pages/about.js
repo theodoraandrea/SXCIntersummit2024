@@ -11,7 +11,8 @@ const challenges4 = "/images/challenges/challenge4.png";
 
 
 const bgHero = "/images/bg-about.png";
-const logo = "/images/sxc-jakarta.png";
+const logo = "/images/logo-fix/sxcjkt.png";
+const logointersummit = "/images/logo-fix/intersummit.png";
 const Tiketcom = "/images/tiket.com.png";
 const PizzaHut = "/images/PizzaHut.png";
 const PNG = "/images/PNG.png";
@@ -79,7 +80,7 @@ const value1 = "/images/our-values/value1.png";
 const value2 = "/images/our-values/value2.png";
 const value3 = "/images/our-values/value3.png";
 const value4 = "/images/our-values/value4.png";
-const reviewbca = "/images/review-bca.png";
+const reviewbca = "/images/reviewbca2.png";
 
 // Medpar
 const CBSAUI = "/images/media-partner/CBSA-UI.png";
@@ -142,123 +143,109 @@ export default function About() {
         className="bg-cover bg-center h-500 flex flex-col justify-center"
         style={{ backgroundImage: `url(${bgHero})` }}
       >
-        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20">
-          Part of StudentsxCEOs Jakarta
+        <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20 text-gradient mx-4 sm:mx-8 md:mx-2">
+          StudentsxCEOs International Summit
         </h1>
       
-        <img src={logo} alt="StudentsxCEOs Jakarta" className="ml-20 mx-auto mt-4 sm:mt-6 md:mt-8" />
         <p className="text-base sm:text-lg md:text-xl mt-3 sm:mt-5 md:mt-6 max-w-full mx-4 sm:mx-8 md:mx-20 text-white">
-          StudentsxCEOs was founded in 2010 as an organization for aspiring future business leaders in Indonesia. StudentsxCEOs is a leadership accelerator, guild boardroom and think-tank for future business leaders designed for students. With strongly-connected 5 major chapters, 150+ core members linked to 1000+ top  students in over 30+ top universities and 100+ corporate partners, we help corporations and leaders to connect with student-leaders across the nation.
+        Unlock your potential at the StudentsxCEOs International Summit, where Indonesia's brightest minds converge to innovate, inspire, and lead. Dive into transformative programs tailored to elevate your future. Be the change-maker our nation needs—your journey starts here.
         </p>
       </section>
 
       {/* New Section */}
       <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
-          {/* <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10">
             Part of StudentxCEOs
           </h2>
-          <div className="flex flex-col sm:flex-row justify-center items-center">
-            <AboutCard logo={logo} header={"StudentsxCEOs Jakarta"}>
-              StudentsxCEOs Jakarta is a non-governmental and non-profit
-              organization to support college students as an incubator for
-              self-development and learning platform. Vision to be the home of
-              balanced and connected economic leaders, to push the nations
-              towards a development country.
+          <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-stretch space-y-4 sm:space-y-0 sm:space-x-0 mx-4 sm:mx-8">
+            <AboutCard
+              logo={logo}
+              header="StudentsxCEOs Jakarta"
+              logoClassName="w-32 h-32 object-cover mx-auto"
+              className="flex-1"
+            >
+              StudentsxCEOs was founded in 2010 as an organization for aspiring future business leaders in Indonesia. StudentsxCEOs is a leadership accelerator, guild boardroom, and think-tank for future business leaders designed for students. With strongly connected 5 major chapters, 150+ core members linked to 1000+ top students in over 30+ top universities and 100+ corporate partners, we help corporations and leaders to connect with student-leaders across the nation.
             </AboutCard>
 
-            <AboutCard logo={logo} header={"StudentsxCEOs Jakarta"}>
-              StudentsxCEOs Jakarta is a non-governmental and non-profit
-              organization to support college students as an incubator for
-              self-development and learning platform. Vision to be the home of
-              balanced and connected economic leaders, to push the nations
-              towards a development country.
+            <AboutCard
+              logo={logointersummit}
+              header="SxC International Summit 2024"
+              logoClassName="w-32 h-32 object-cover mx-auto"
+              className="flex-1"
+            >
+              StudentsxCEOs International Summit is a grand event organized by StudentsxCEOs Jakarta. Its objective is to act as a catalyst for students worldwide, helping them prepare for the workforce and differentiate themselves from their peers. SxC International Summit invited the participants to help prepare themselves to enter the work environment and distinguish themselves from their competitors.
             </AboutCard>
-          </div> */}
-
-          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
-            SxC International Summit 2024
-          </h2>
-          <h5 className="text-2xl my-5 sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20">
-            “Elevating Future Leaders: Transcending User-Centricity To Strategic Innovation In The Digital Economy”
-          </h5>
-          <p
-           className="text-base sm:text-lg md:text-xl my-5 font-normal mb-6 sm:mb-8 md:mb-10 max-w-full mx-4 sm:mx-8 md:mx-20">
-            StudentsxCEOs International Summit is a grand event organized by StudentsxCEOs Jakarta. Its objective is to act as a catalyst for students worldwide, helping them prepare for the workforce and differentiate themselves from their peers. 
-          </p>
+          </div>
         </div>
       </section>
 
       {/* New Section : Vision and Mission */}
       <div className="bg-teal-800 min-h-screen p-8 flex flex-col items-center justify-center">
         {/* Section Atas : Our Value */}
-        <div className="w-full mb-10 max-w-4xl p-6 sm:p-10 rounded-lg  relative">
-          <div className="absolute top-[-50px] sm:top-[-60px] left-1/2 transform -translate-x-1/2 w-full max-w-lg bg-white rounded-lg p-4 sm:p-6 shadow-lg flex flex-col sm:flex-row justify-around items-center">
-            <div className="text-center mb-4 sm:mb-0">
-              
-                <img src={passion} alt="Passion" className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" />
-
-              <div className="text-teal-800 font-bold text-sm sm:text-base">Passion</div>
-            </div>
-            <div className="text-center mb-4 sm:mb-0">
-              <img src={synergy} alt="synergy" className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" />
-              <div className="text-teal-800 font-bold text-sm sm:text-base">Synergy</div>
+        <div className="w-full mb-10 max-w-4xl p-6 sm:p-10 rounded-lg relative">
+          <div className="absolute top-[-60px] sm:top-[-80px] left-1/2 transform -translate-x-1/2 w-full max-w-lg sm:max-w-2xl bg-primary-4 rounded-lg p-6 sm:p-8 shadow-lg flex justify-around items-center space-x-6 sm:space-x-8">
+            <div className="text-center">
+              <img src={passion} alt="Passion" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4" />
+              <div className="text-white font-bold text-base sm:text-lg">Passion</div>
             </div>
             <div className="text-center">
-              <img src={excellence} alt="excellence" className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-2" />
-              <div className="text-teal-800 font-bold text-sm sm:text-base">Excellence</div>
+              <img src={synergy} alt="Synergy" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4" />
+              <div className="text-white font-bold text-base sm:text-lg">Synergy</div>
+            </div>
+            <div className="text-center">
+              <img src={excellence} alt="Excellence" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4" />
+              <div className="text-white font-bold text-base sm:text-lg">Excellence</div>
             </div>
           </div>
         </div>
+
 
         {/* Section Tengah : Tagline */}
           <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Tagline
           </h2>
           <h5
-            className="text-2xl my-5 sm:text-3xl md:text-4xl font-semibold mb-6 sm:mb-8 md:mb-10 text-white mx-4 sm:mx-8 md:mx-20 p-4 rounded-lg shadow-lg"
-            style={{
-              background: "linear-gradient(90deg, #f3c623, #e0ac00, #c17c00)",
-              color: "#fff",
-            }}
+            className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-6 sm:mb-8 md:mb-10 text-white p-4 rounded-3xl shadow-lg bg-primary-4 mx-auto overflow-hidden text-ellipsis"
           >
             Lead The Change, Shape The Future!
           </h5>
 
 
-        {/* Section Bawah */}
-        {/* <div className="bg-gray-100 min-h-screen flex items-center justify-center p-8"> */}
-          <div className="w-full max-w-5xl bg-white p-10 rounded-lg shadow-lg flex flex-col sm:flex-row items-center">
-            {/* Bagian Kiri */}
-            <div className="flex-1 flex items-center justify-center mb-8 sm:mb-0">
-              <div className="bg-gradient-to-b from-teal-500 to-teal-800 rounded-full w-72 h-72 flex items-center justify-center">
-                <span className="text-white text-center text-xl sm:text-2xl font-bold">
-                  Our Vision & Mission
-                </span>
-              </div>
-            </div>
 
-            {/* Bagian Kanan */}
-            <div className="flex-1">
-              <div className="mb-8">
-                <h2 className="text-teal-800 text-xl sm:text-2xl font-bold mb-4">Vision</h2>
-                <p className="text-gray-700 text-sm sm:text-base">
-                  Envisions a future where the global economy is driven by innovative and strategic leaders who harness technology as a tool to create sustainable growth, foster collaboration, and address the complex challenges of the modern world.
-                </p>
-              </div>
-              <div>
-                <h2 className="text-teal-800 text-xl sm:text-2xl font-bold mb-4">Mission</h2>
-                <ul className="list-decimal list-inside text-gray-700 space-y-2 text-sm sm:text-base">
-                  <li>Fostering Strategic Thinking</li>
-                  <li>Addressing the Skills Gap</li>
-                  <li>Promoting Sustainability</li>
-                  <li>Encouraging Innovation</li>
-                </ul>
-              </div>
-            </div>
+
+        {/* Section Bawah */}
+      <div className="w-full max-w-5xl bg-teal-100 p-10 rounded-lg shadow-lg flex flex-col sm:flex-row items-center">
+        {/* Bagian Kiri */}
+        <div className="flex-1 flex items-center justify-center mb-8 sm:mb-0">
+          <div className="bg-gradient-to-b from-teal-500 to-teal-800 rounded-full w-72 h-72 flex items-center justify-center">
+            <span className="text-white text-center text-xl sm:text-2xl font-bold">
+              Our Vision & Mission
+            </span>
           </div>
-        {/* </div> */}
+        </div>
+
+        {/* Bagian Kanan */}
+        <div className="flex-1">
+          <div className="mb-8">
+            <h2 className="text-teal-800 text-xl sm:text-2xl font-bold mb-4">Vision</h2>
+            <p className="text-gray-700 text-sm sm:text-base">
+              Envisions a future where the global economy is driven by innovative and strategic leaders who harness technology as a tool to create sustainable growth, foster collaboration, and address the complex challenges of the modern world.
+            </p>
+          </div>
+          <div>
+            <h2 className="text-teal-800 text-xl sm:text-2xl font-bold mb-4">Mission</h2>
+            <ul className="list-decimal list-inside text-gray-700 space-y-2 text-sm sm:text-base">
+              <li>Fostering Strategic Thinking</li>
+              <li>Addressing the Skills Gap</li>
+              <li>Promoting Sustainability</li>
+              <li>Encouraging Innovation</li>
+            </ul>
+          </div>
+        </div>
       </div>
+      </div>  
+
 
       {/* New Section : Why We Move Amoung Youth? */}
       <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
@@ -338,25 +325,23 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* New Section : Our Milestone */}
-      <section className="bg-white bg-opacity-20 py-10 sm:py-16 md:py-20">
+        
+        {/* Our Milestone */}
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-white">
-          <h2 className="text-2xl my-2 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2 text-center">
+          <h2 className="text-center text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Our Milestone
           </h2>
           <h5 className="text-yellow-500 text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 mx-4 sm:mx-8 md:mx-2 max-w-full">
             Participants
           </h5>
           
-          <div className="bg-white shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4 min-h-30">
+          <div className="bg-primary-4 shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4 min-h-30">
             {/* Future Leaders */}
             <div className="flex items-center space-x-2">
                 <img src={participants} alt="Future Leaders Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
                   <div className="text-teal-600 text-3xl font-bold">2000+</div>
-                  <div className="text-gray-600 text-lg">Future Leaders</div>
+                  <div className="text-white text-lg">Future Leaders</div>
                 </div>
               </div>
 
@@ -365,7 +350,7 @@ export default function About() {
                 <img src={university} alt="University Students Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
                   <div className="text-teal-600 text-3xl font-bold">87%</div>
-                  <div className="text-gray-600 text-lg">University Students</div>
+                  <div className="text-white text-lg">University Students</div>
                 </div>
               </div>
 
@@ -374,133 +359,138 @@ export default function About() {
                 <img src={school} alt="High School Students Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
                   <div className="text-teal-600 text-3xl font-bold">13%</div>
-                  <div className="text-gray-600 text-lg">High School Students</div>
+                  <div className="text-white text-lg">High School Students</div>
                 </div>
               </div>
-            </div>
           </div>
+        </div>
+      </section>
+
+      {/* New Section : Our Milestone */}
+      <section className="bg-primary-1 py-2 sm:py-16 md:py-20">
+        
 
         {/* Masukkan Untuk CP, Sponsors, Media Partner */}
-        <div className="flex flex-col lg:flex-row justify-between space-y-4 lg:space-y-0 lg:space-x-4 mx-4 my-6">
-            {/* Company Partners */}
-            {/* <div className="bg-white shadow-md rounded-lg ms-10 px-16 w-full lg:w-[30%]"> */}
-            <div className="ms-10 px-16 w-full lg:w-[30%]">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Company Partner</div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="flex justify-center items-center">
-                  <img src={Tiketcom} alt="Tiket.com" className="h-16 object-contain" />
+        <section className="bg-primary-4 py-5 sm:py-16 md:py-20">
+            {/* Bagian 2 */}
+            <div className="flex flex-col lg:flex-row justify-between space-y-4 lg:space-y-0 lg:space-x-4 mx-4 my-6">
+              {/* Company Partners */}
+              <div className="bg-white shadow-md rounded-lg px-16 w-full lg:w-[30%] lg:ml-10">
+                <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 text-center">Company Partner</div>
+                <div className="grid grid-cols-3 gap-4 mb-7">
+                  <div className="flex justify-center items-center">
+                    <img src={Tiketcom} alt="Tiket.com" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={PizzaHut} alt="Pizza Hut" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={PNG} alt="P&G" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={mi} alt="mi" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={traveloka} alt="Traveloka" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={puyo} alt="Puyo" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={mandiri} alt="mandiri" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={rohto} alt="rohto" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={bukalapak} alt="bukalapak" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={nutrifood} alt="nutrifood" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={microsoft} alt="microsoft" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={tokopedia} alt="tokopedia" className="h-16 object-contain" />
+                  </div>
                 </div>
-                <div className="flex justify-center items-center">
-                  <img src={PizzaHut} alt="Pizza Hut" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={PNG} alt="P&G" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={mi} alt="mi" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={traveloka} alt="Traveloka" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={puyo} alt="Puyo" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={mandiri} alt="mandiri" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={rohto} alt="rohto" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={bukalapak} alt="bukalapak" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={nutrifood} alt="nutrifood" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={microsoft} alt="microsoft" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={tokopedia} alt="tokopedia" className="h-16 object-contain" />
-                </div>
-                {/* Add other company partner images here */}
               </div>
-            </div>
 
-            {/* Sponsor */}
-            {/* <div className="bg-white shadow-md rounded-lg px-16 w-full lg:w-[30%]"> */}
-            <div className="px-16 w-full lg:w-[30%]">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full mx-4 sm:mx-8 md:mx-20 text-center">Sponsor</div>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="flex justify-center items-center">
-                  <img src={bca} alt="BCA" className="h-16 object-contain" />
+              {/* Sponsor */}
+              <div className="bg-white shadow-md rounded-lg px-16 w-full lg:w-[30%]">
+                <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 text-center">Sponsor</div>
+                <div className="grid grid-cols-3 gap-4 mb-7">
+                  <div className="flex justify-center items-center">
+                    <img src={bca} alt="BCA" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={natur} alt="Natur" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={loreal} alt="Loreal" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={hangry} alt="hangry" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={lingotalk} alt="lingotalk" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={cakap} alt="cakap" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={prodia} alt="prodia" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={paragon} alt="paragon" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={kopisoe} alt="kopisoe" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={cakeresume} alt="cakeresume" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={blibli} alt="blibli" className="h-16 object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img src={lokalate} alt="lokalate" className="h-16 object-contain" />
+                  </div>
                 </div>
-                <div className="flex justify-center items-center">
-                  <img src={natur} alt="Natur" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={loreal} alt="Loreal" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={hangry} alt="hangry" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={lingotalk} alt="lingotalk" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={cakap} alt="cakap" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={prodia} alt="prodia" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={paragon} alt="paragon" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={kopisoe} alt="kopisoe" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={cakeresume} alt="cakeresume" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={blibli} alt="blibli" className="h-16 object-contain" />
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={lokalate} alt="lokalate" className="h-16 object-contain" />
-                </div>
-                {/* Add other sponsor images here */}
               </div>
-            </div>
 
-            {/* Media Partner */}
-            {/* <div className="bg-white shadow-md rounded-lg mr-24 px-16 w-full lg:w-[30%]"> */}
-            <div className="mr-24 px-16 w-full lg:w-[30%]">
-              <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 mx-4 sm:mx-8 md:mx-2 max-w-full text-center">
-                Media Partner 
-              </div>
-              <div className="grid rid-cols-1 gap-4 h-[400px] w-full">
-                <div className="flex justify-center items-center h-1/2">
-                  <img src={medpar1} alt="medpar1" className="h-20 w-full object-contain" />
-                </div>
-                <div className="flex justify-center items-center h-1/2">
-                  <img src={medpar2} alt="medpar2" className="h-60 w-full object-contain" />
+              {/* Media Partner */}
+              <div className="bg-white shadow-md rounded-lg px-16 w-full lg:w-[30%] lg:mr-10">
+                <div className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-yellow-500 text-center">Media Partner</div>
+                <div className="grid grid-cols-1 gap-4 mb-7">
+                  <div className="flex justify-center items-center h-auto">
+                    <img src={medpar1} alt="medpar1" className="max-h-20 sm:max-h-24 md:max-h-32 w-auto object-contain" />
+                  </div>
+                  <div className="flex justify-center items-center h-auto">
+                    <img src={medpar2} alt="medpar2" className="max-h-60 sm:max-h-72 md:max-h-80 w-auto object-contain"/>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            {/* end of */}
+
+
+          
+        </section>
 
       </section>
 
       {/* New Section : Past Testimony */}
       <section className="bg-primary-1 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
-          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+          <h2 className="text-2xl my-auto sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Past Testimony
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col items-center text-center relative">
               
-              <img src={pwc} alt="Winner 1" className="relative z-20" />
+              <img src={pwc} alt="Winner 1" className="relative z-20 mb-[15px]" />
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
               Ricky Sucitra - Human Capital Strategy Lead at PwC
               </h3>
@@ -511,7 +501,7 @@ export default function About() {
             
             <div className="flex flex-col items-center text-center relative">
               
-              <img src={reviewbca} alt="Winner 2" className="relative z-20" /> {/* Replace with winner image */}
+              <img src={reviewbca} alt="Winner 2" className="relative z-20 mb-[-20px]" />
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
               Veigy Pruedensia - Employer Branding at BCA
               </h3>
@@ -521,6 +511,8 @@ export default function About() {
             </div>
           </div>
         </div>
+      
+
       </section>
 
       {/* New Section : Ambassador */}
@@ -530,36 +522,35 @@ export default function About() {
             Ambassador
           </h2>
 
-          {/* Image by CVD */}
-          {/* ... */}
           <div className="flex flex-wrap justify-center">
-            <img src={najwa} alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={bilgis} alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={rezita} alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={talita} alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={vania} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={alifya} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={denisha} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={enta} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={gracia} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={lucas} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={m_alvin} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={m_rizki} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={rahma} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={ratu} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={Veronica} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={yumna} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={ajeng} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={deva} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={dhabi} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={dinda} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={estu} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={fahrul} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={shabrina} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={syifa} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={varencia} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={yossi} alt="Ambassador 5" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
+            <img src={najwa} alt="Ambassador 1" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={bilgis} alt="Ambassador 2" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={rezita} alt="Ambassador 3" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={talita} alt="Ambassador 4" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={vania} alt="Ambassador 5" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={alifya} alt="Ambassador 6" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={denisha} alt="Ambassador 7" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={enta} alt="Ambassador 8" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={gracia} alt="Ambassador 9" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={lucas} alt="Ambassador 10" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={m_alvin} alt="Ambassador 11" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={m_rizki} alt="Ambassador 12" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={rahma} alt="Ambassador 13" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={ratu} alt="Ambassador 14" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={Veronica} alt="Ambassador 15" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={yumna} alt="Ambassador 16" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={ajeng} alt="Ambassador 17" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={deva} alt="Ambassador 18" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={dhabi} alt="Ambassador 19" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={dinda} alt="Ambassador 20" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={estu} alt="Ambassador 21" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={fahrul} alt="Ambassador 22" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={shabrina} alt="Ambassador 23" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={syifa} alt="Ambassador 24" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={varencia} alt="Ambassador 25" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={yossi} alt="Ambassador 26" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
           </div>
+
         </div>
 
         {/* Our Sponsors and Media Partners */}
@@ -568,52 +559,49 @@ export default function About() {
             Our Sponsors and Media Partners
           </h2>
 
-          {/* Image by CVD */}
-          {/* ... */}
-          {/* give text dump image for image more than one ambassador logo with responsive page*/}
           <div className="flex flex-wrap justify-center">
-            <img src={CBSAUI} alt="Ambassador 1" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={FPCI} alt="Ambassador 2" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={HIMA} alt="Ambassador 3" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={IIS} alt="Ambassador 4" className="w-24 h-24 m-4" /> {/* Replace with ambassador logo */}
-            <img src={STEM} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={aisectrisakti} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={atmaconsul} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={femipb} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={brandui} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={cedsui} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fincamp} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fpci} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={growthhub} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={himamgtunpad} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={himatika} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={himmebinus} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={imagama} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={kostaf} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={kronika} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={bemfebunj} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={cdc} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={magdalene} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={ppit} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={radiountar} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={search} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={mss} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={sigma} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={skillup} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={teens} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={uidigitalk} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={untirta} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={birama} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={bpreneur} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fiscalcareer} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fisipupn} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fkipusd} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fmipaunnes} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={fpcibinus} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={himiespa} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={himitepa} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={husbandry} alt="Ambassador 5" className="w-24 h-24 m-4" />
-            <img src={psikouny} alt="Ambassador 5" className="w-24 h-24 m-4" />
+          <img src={CBSAUI} alt="Ambassador 1" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={FPCI} alt="Ambassador 2" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={HIMA} alt="Ambassador 3" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={IIS} alt="Ambassador 4" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={STEM} alt="Ambassador 5" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={aisectrisakti} alt="Ambassador 6" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={atmaconsul} alt="Ambassador 7" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={femipb} alt="Ambassador 8" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={brandui} alt="Ambassador 9" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={cedsui} alt="Ambassador 10" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={fincamp} alt="Ambassador 11" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={fpci} alt="Ambassador 12" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={growthhub} alt="Ambassador 13" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={himamgtunpad} alt="Ambassador 14" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={himatika} alt="Ambassador 15" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={himmebinus} alt="Ambassador 16" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={imagama} alt="Ambassador 17" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={kostaf} alt="Ambassador 18" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={kronika} alt="Ambassador 19" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={bemfebunj} alt="Ambassador 20" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={cdc} alt="Ambassador 21" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={magdalene} alt="Ambassador 22" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={ppit} alt="Ambassador 23" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={radiountar} alt="Ambassador 24" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={search} alt="Ambassador 25" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={mss} alt="Ambassador 26" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={sigma} alt="Ambassador 27" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={skillup} alt="Ambassador 28" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={teens} alt="Ambassador 29" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={uidigitalk} alt="Ambassador 30" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={untirta} alt="Ambassador 31" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={birama} alt="Ambassador 32" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={bpreneur} alt="Ambassador 33" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={fiscalcareer} alt="Ambassador 34" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={fisipupn} alt="Ambassador 35" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={fkipusd} alt="Ambassador 36" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={fmipaunnes} alt="Ambassador 37" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+            <img src={fpcibinus} alt="Ambassador 38" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+            <img src={himiespa} alt="Ambassador 39" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+            <img src={himitepa} alt="Ambassador 40" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+            <img src={husbandry} alt="Ambassador 41" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+            <img src={psikouny} alt="Ambassador " className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
           </div>
         </div>
          
@@ -621,47 +609,48 @@ export default function About() {
 
       {/* New Section : We Are Still Calling for Sponsor */}
       <section className="bg-teal-900 py-16 text-white">
-        <div className="container mx-auto text-center">
-          <h1 className="text-yellow-500 text-xl md:text-3xl font-bold mb-6">
-            We Are Still Calling for Sponsor and Media Partner!
-          </h1>
-        </div>
+      <div className="container mx-auto text-center">
+        <h1 className="text-yellow-500 text-xl md:text-3xl font-bold mb-6">
+          We Are Still Calling for Sponsor and Media Partner!
+        </h1>
+      </div>
 
-        {/* Corporate Partnership Section 1 */}
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
-          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
-              <img src={corporate} alt="Corporate Partnership" className="h-full w-full object-contain" />
-          </div>
-          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
-            <h2 className="text-yellow-500 text-lg font-semibold mb-4">Corporate Partnership</h2>
+      {/* Corporate Partnership Section 1 */}
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
+        <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
+          <img src={corporate} alt="Corporate Partnership" className="h-full w-full object-contain" />
+        </div>
+        <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
+          <h2 className="text-yellow-500 text-lg font-semibold mb-4">Corporate Partnership</h2>
             <p className="text-sm md:text-base leading-relaxed">
               Looking for a way to create a lasting impact and exposure to the next generation? Establish a partnership with us and support our mission to empower future leaders and innovators in the digital economy. We’d love to explore how we can collaborate to achieve this shared vision. Together, let's elevate the future leaders!
             </p>
-            <div className="mt-6 text-center">
-              <a href=" https://wa.me/081288059303" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
-                contact us
-              </a>
-            </div>
+          <div className="mt-6 text-center">
+            <a href="https://wa.me/081288059303" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
+              Contact Us
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* Jabat Tangan Section */}
-        <div className="container mt-10 mx-auto flex flex-col md:flex-row items-center justify-center gap-6">
-          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
-            <h2 className="text-yellow-500 text-lg font-semibold mb-4">Media Partner</h2>
-            <p className="text-sm md:text-base leading-relaxed">
-              Is your platform dedicated to spotlighting education and development for the youth? Establish a partnership with us and let's nurture the next wave of global leaders in the digital economy. We’d love to discuss how we can work together to amplify this mission. Let’s join forces to broadcast the future with the SxC International Summit 2024!
-            </p>
-            <div className="mt-6 text-center">
-              <a href="https://wa.me/085782799445" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
-                Contact Us
-              </a>
-            </div>
-          </div>
-          <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
-            <img src={medpar} alt="Corporate Partnership" className="h-full w-full object-contain" />
+      {/* Jabat Tangan Section */}
+      <div className="container mt-10 mx-auto flex flex-col-reverse md:flex-row items-center justify-center gap-6">
+        <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2">
+          <h2 className="text-yellow-500 text-lg font-semibold mb-4">Media Partner</h2>
+          <p className="text-sm md:text-base leading-relaxed">
+            Is your platform dedicated to spotlighting education and development for the youth? Establish a partnership with us and let's nurture the next wave of global leaders in the digital economy. We’d love to discuss how we can work together to amplify this mission. Let’s join forces to broadcast the future with the SxC International Summit 2024!
+          </p>
+          <div className="mt-6 text-center">
+            <a href="https://wa.me/085782799445" className="bg-yellow-500 text-teal-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-600">
+              Contact Us
+            </a>
           </div>
         </div>
+        <div className="bg-teal-800 p-6 rounded-lg shadow-lg w-full md:w-1/2 text-center">
+          <img src={medpar} alt="Corporate Partnership" className="h-full w-full object-contain" />
+        </div>
+      </div>
+
       </section>
       
       <Footer/>
