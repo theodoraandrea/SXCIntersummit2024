@@ -165,7 +165,6 @@ const fetchTwoLatestEvents = async () => {
     const response = await axiosInstance.get(API_GET_TWO_EVENTS);
     return response.data;
   } catch (error) {
-    console.log("Error fetching 2 events");
     throw error;
   }
 }
@@ -176,7 +175,6 @@ const fetchTwoLatestCompetitions = async () => {
     const response = await axiosInstance.get(API_GET_TWO_COMPETITIONS);
     return response.data;
   } catch (error) {
-    console.log("Error fetching 2 competitions");
     throw error;
   }
 }
@@ -202,7 +200,6 @@ const postBMCRegistration = async (data) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.error(error);
@@ -213,7 +210,6 @@ const postBMCRegistration = async (data) => {
 const fetchAllCompetitions = async () => {
   try {
     const response = await axiosInstance.get(API_GET_ALL_COMPETITIONS);
-    // console.log(response);
     return response.data;
   } catch (error) {
     console.error("Error fetching competition(s):", error);
@@ -226,7 +222,6 @@ const getBmcRegistrationData = async (data) => {
     const response = await axiosInstance.get(API_GET_BMC_REGISTRATION, data);
     return response.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
@@ -234,7 +229,6 @@ const getBmcRegistrationData = async (data) => {
 // FCEO
 const postNewFceoMember = async (data) => {
   try {
-    console.log("in postNewFceoMember ", data);
     const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data, {
       headers: {
         "Content-Type": "application/json",
@@ -266,7 +260,6 @@ const getFceoRegistrationData = async (data) => {
     const response = await axiosInstance.get(API_GET_FCEO_REGISTRATION, data);
     return response.data;
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };

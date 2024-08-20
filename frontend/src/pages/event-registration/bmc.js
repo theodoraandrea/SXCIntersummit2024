@@ -29,7 +29,6 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   },[]);
 
   useEffect(() => {
-    console.log(registeredEvents);
     if (registeredEvents.includes(2)) {
       setHasRegisteredBcc(true);
     }
@@ -125,7 +124,6 @@ const SecondView = ({ eventData, formData, setFormData, checkFileSize, onNext, o
       ...prevState,
       [name]: files ? file : value,
     }));
-    console.log(file);
     setAgreement(file.name);
   };
 
@@ -265,7 +263,6 @@ const ThirdView = ({
     if (!numericValue.startsWith("62")) {
       if (numericValue.startsWith("0")) {
         numericValue = numericValue.slice(1);
-        console.log(numericValue);
       }
       numericValue = `62${numericValue}`;
     }
@@ -1261,11 +1258,9 @@ const Summary = ({ formData, onPrevious }) => {
         setRegisteredEvents((prevData) => [...prevData, bmcId]);
         successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
       }
-      console.log(response);
     } catch (error) {
       errorAlert({ message: "Oh no, something happened. Please try again!"});
       navigate(HOME);
-      console.log(error);
     }
   };
 
@@ -1406,7 +1401,6 @@ const EventCard = () => {
     }
     const message = "File size has to be 5MB or less";
     errorAlert({ message: message });
-    console.log(message);
     return false;
   }
 

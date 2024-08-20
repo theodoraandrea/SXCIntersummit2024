@@ -412,11 +412,11 @@ export default function Home() {
       <section id="merch-section">
         <div className="bg-primary-1 w-full px-4 sm:p-16 mt-20 sm:mt-4">
           <h1 className="text-center text-2xl lg:text-4xl text-gradient">Level Up Your Skill and Connect With Us!</h1>
-          <div className="bg-gray-400 my-4 sm:max-w-3xl sm:mx-auto w-full rounded-lg">
+          <div className="my-12 sm:max-w-3xl sm:mx-auto w-full rounded-xl">
             <img
               src={catalogweb}
               alt="Catalog"
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full object-cover rounded-lg"
             >
             </img>
           </div>

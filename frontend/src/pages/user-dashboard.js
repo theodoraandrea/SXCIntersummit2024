@@ -40,7 +40,6 @@ export default function UserDashboard() {
   
   useEffect(() => {
     if (!loading) {
-      console.log(profileData);
       if (isLoggedIn) {
         setUserData(profileData);
 

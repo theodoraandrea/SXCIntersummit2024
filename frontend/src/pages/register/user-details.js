@@ -100,7 +100,6 @@ export default function UserDetails() {
       setIsLoading(true);
       const response = await putProfileData(data);
       if (response.status === 200) {
-        console.log("Profile updated successfully");
         const updatedProfile = response.data.completedProfile;
         setProfileData(updatedProfile);
         navigate(USER_DASHBOARD_PAGE);

@@ -46,7 +46,6 @@ const BMCSummary = () => {
             const item = response[i];
             if (item.sessionType === "Business Case Competition") {
                 const answers = handleQuestions(item.question);
-                console.log(answers);
                 setBccData({
                     ...item,
                     eventSource: answers[0],
@@ -55,7 +54,6 @@ const BMCSummary = () => {
                     expectations: answers[3],
                     materials: answers[4]
                 });
-                console.log(bccData);
             } else if (item.sessionType === "Business Plan Competition") {
                 const answers = handleQuestions(item.question);
                 setBpcData({
@@ -66,7 +64,6 @@ const BMCSummary = () => {
                     expectations: answers[3],
                     materials: answers[4]
                 });
-                console.log(bpcData);
             }
         }
     }

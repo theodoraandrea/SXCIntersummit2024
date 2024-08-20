@@ -77,7 +77,6 @@ const FirstView = ({
           members: 3
         };
         setFormData(formData);
-        console.log(formData);
         onNext();
       }
     } else {
@@ -123,7 +122,6 @@ const FirstView = ({
     if (!numericValue.startsWith("62")) {
       if (numericValue.startsWith("0")) {
         numericValue = numericValue.slice(1);
-        console.log(numericValue);
       }
       numericValue = `62${numericValue}`;
     }
@@ -190,7 +188,6 @@ const FirstView = ({
     }
     const message = "File size has to be 2MB or less";
     errorAlert({ message: message });
-    console.log(message);
     return false;
   }
   
@@ -203,7 +200,6 @@ const FirstView = ({
     }
     const message = "File has to be pdf, jpg, jpeg, or png";
     errorAlert({ message: message });
-    console.log(message);
     return false;
   }
 
@@ -582,7 +578,6 @@ const Member1Data = ({
     if (!numericValue.startsWith("62")) {
       if (numericValue.startsWith("0")) {
         numericValue = numericValue.slice(1);
-        console.log(numericValue);
       }
       numericValue = `62${numericValue}`;
     }
@@ -788,7 +783,6 @@ const Member2Data = ({
     if (!numericValue.startsWith("62")) {
       if (numericValue.startsWith("0")) {
         numericValue = numericValue.slice(1);
-        console.log(numericValue);
       }
       numericValue = `62${numericValue}`;
     }
@@ -971,7 +965,6 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 });
               }
             } catch (memberError) {
-              console.log("Error posting member: ", memberError);
               setIsLoading(false);
               errorAlert({
                 message: "Something went wrong. Please try again"
@@ -982,7 +975,6 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
         }
       }
     } catch (error) {
-      console.log("Error registering team: ", error);
       setIsLoading(false);
       errorAlert({
         message: "Something went wrong. Please try to register again."

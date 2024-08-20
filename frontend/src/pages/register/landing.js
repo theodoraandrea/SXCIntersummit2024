@@ -92,7 +92,6 @@ export default function Landing() {
       try {
         setIsLoading(true);
         const response = await login({ email, password });
-        // console.log("Login successful", response);
         loginUser(response.user);
         navigate(HOME);
         setIsLoading(false);
@@ -178,7 +177,6 @@ export default function Landing() {
       try {
         setIsLoading(true);
         const response = await postForgotPassword(email);
-        console.log(response);
         if (response.status === 201) {
           Swal.fire({
             title: "Success!",
@@ -210,9 +208,7 @@ export default function Landing() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      console.log("is loading set to true");
       const response = await postVerifyOtp(otp);
-      console.log(response);
       if (response.status === 200) {
         setEnterNewPasswordMode(true);
         setErrorMessage("");
