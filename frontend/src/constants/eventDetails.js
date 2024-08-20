@@ -62,13 +62,13 @@ export const eventDetails = {
     "19 August - 1 December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
-    "</br><strong>&emsp;1.&emsp;Preliminary:</strong>" +
+    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
     "</br>&emsp;&emsp;&emsp;Business Model Canvas Submission" +
     "</br>&emsp;&emsp;&emsp;20 August - 22 September 2024" +
-    "</br><strong>&emsp;2.&emsp;Semifinal:</strong>" +
+    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
     "</br>&emsp;&emsp;&emsp;Proposal Submission" +
     "</br>&emsp;&emsp;&emsp;1 October - 22 October 2024" +
-    "</br><strong>&emsp;3.&emsp;Final:</strong>" +
+    "</br><strong>&emsp;3.&emsp;Final</strong>" +
     "</br>&emsp;&emsp;&emsp;Deck Submission" +
     "</br>&emsp;&emsp;&emsp;5 November - 23 November 2024" +
     "</br>&emsp;&emsp;&emsp;Pitching Day" +
@@ -86,7 +86,7 @@ export const eventDetails = {
       "What topics are contested?", 
       "Do all participants in a team have to be from the same school?"],
     faqDesc: ["This event will be held fully online.", 
-      "There are 5 topics that will be competed, namely food and beverage, tourism and local culture, education, renewable energy, and health.", 
+      "There are 5 topics that will be competed, namely food and beverage, tourism and local culture, education, environment, and health.", 
       "No, participants in a team are not required to be in the same school. The important thing is that they are still registered as high school students."],
     contactPerson: ["Primel", "Ell"],
     contactNumber: ["085156458584", "082258574505"],
@@ -134,6 +134,7 @@ export const eventDetails = {
       "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
@@ -177,6 +178,7 @@ export const eventDetails = {
       "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
     contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
     contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
@@ -214,8 +216,9 @@ export const eventDetails = {
     faqDesc: ["The two-day expert talk show will provide valuable insights for career preparation across consulting, start-ups, FMCG, and BUMN industries while featuring unique sessions to enhance participants’ career readiness.",
       "Open for university students and fresh graduates.", 
       "Valuable career insights, industry exposure, job opportunities, and personal growth with an exclusive opportunity to receive direct feedback and guidance from experts."],
-    contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
-    contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactPerson: ["TBA"],
+    contactNumber: ["-"],
+    contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
@@ -253,8 +256,9 @@ export const eventDetails = {
     faqDesc: ["2 company visits offline and 2 company visits online", 
       "Workshop or sharing session about the company, work culture, internship opportunities and many more", 
       "First week of november"],
-    contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
-    contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactPerson: ["TBA"],
+    contactNumber: ["-"],
+    contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
@@ -292,8 +296,9 @@ export const eventDetails = {
     faqDesc: ["The International Summit will be the pinnacle of our event series.This summit goes beyond a typical seminar; it features high-level conferences that present discussions on current economic trends and provide opportunities to engage with leading economists and industry experts. In addition to insightful dialogues, the summit will offer opportunities related to jobs and internships. It serves as a unique platform for everyone to connect directly with top economists and industry leaders",
       "The International Summit will be held offline in early December.", 
       "Participants will gain a comprehensive understanding of current economic trends, benefit from the leading economists and industry experts, and access valuable networking opportunities. Also, the summit provides a chance to explore job and internship prospects, making it an essential event for anyone looking to advance their career and expand their professional network."],
-    contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
-    contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactPerson: ["TBA"],
+    contactNumber: ["-"],
+    contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
