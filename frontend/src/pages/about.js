@@ -189,7 +189,12 @@ export default function About() {
       <div className="bg-teal-800 min-h-screen p-8 flex flex-col items-center justify-center">
         {/* Section Atas : Our Value */}
         <div className="w-full mb-10 max-w-4xl p-6 sm:p-10 rounded-lg relative">
-          <div className="absolute top-[-60px] sm:top-[-80px] left-1/2 transform -translate-x-1/2 w-full max-w-lg sm:max-w-2xl bg-primary-4 rounded-lg p-6 sm:p-8 shadow-lg flex justify-around items-center space-x-6 sm:space-x-8">
+        <div className="absolute top-[-60px] sm:top-[-80px] left-1/2 transform -translate-x-1/2 w-full max-w-lg sm:max-w-2xl bg-primary-4 rounded-lg p-6 sm:p-8 shadow-lg">
+          <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+            Our Value
+          </h2>
+
+          <div className="flex justify-around items-center space-x-6 sm:space-x-8">
             <div className="text-center">
               <img src={passion} alt="Passion" className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 sm:mb-4" />
               <div className="text-white font-bold text-base sm:text-lg">Passion</div>
@@ -205,13 +210,16 @@ export default function About() {
           </div>
         </div>
 
+        </div>
+
+
 
         {/* Section Tengah : Tagline */}
-          <h2 className="text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
+          <h2 className="text-2xl mt-24 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Tagline
           </h2>
           <h5
-            className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-6 sm:mb-8 md:mb-10 text-white p-4 rounded-3xl shadow-lg bg-primary-4 mx-auto overflow-hidden text-ellipsis"
+            className="text-2xl sm:text-3xl md:text-4xl font-semibold text-center mb-6 sm:mb-8 md:mb-10 p-4 rounded-3xl shadow-lg bg-primary-4 mx-auto overflow-hidden text-ellipsis text-gradient mx-4 sm:mx-8 md:mx-2"
           >
             Lead The Change, Shape The Future!
           </h5>
@@ -339,9 +347,9 @@ export default function About() {
           <h5 className="text-yellow-500 text-2xl my-5 sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 mx-4 sm:mx-8 md:mx-2 max-w-full">
             Participants
           </h5>
-          
+
           <div className="bg-primary-4 shadow-md rounded-lg p-4 mx-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 sm:space-x-4 min-h-30">
-            {/* Future Leaders */}
+            
             <div className="flex items-center space-x-2">
                 <img src={participants} alt="Future Leaders Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
@@ -350,7 +358,7 @@ export default function About() {
                 </div>
               </div>
 
-              {/* University Students */}
+              
               <div className="flex items-center space-x-2">
                 <img src={university} alt="University Students Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
@@ -359,7 +367,7 @@ export default function About() {
                 </div>
               </div>
 
-              {/* High School Students */}
+              
               <div className="flex items-center space-x-2">
                 <img src={school} alt="High School Students Icon" className="h-20 w-20 object-contain sm:h-16 sm:w-16 md:h-12 md:w-12" />
                 <div className="text-center">
@@ -539,7 +547,7 @@ export default function About() {
             <img src={gracia} alt="Ambassador 9" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={lucas} alt="Ambassador 10" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={m_alvin} alt="Ambassador 11" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
-            <img src={m_rizki} alt="Ambassador 12" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={m_rizki} alt="Ambassador 12" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4 object-cover bg-center" />
             <img src={rahma} alt="Ambassador 13" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={ratu} alt="Ambassador 14" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={Veronica} alt="Ambassador 15" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
@@ -565,48 +573,48 @@ export default function About() {
           </h2>
 
           <div className="flex flex-wrap justify-center">
-          <img src={CBSAUI} alt="Ambassador 1" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={FPCI} alt="Ambassador 2" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={HIMA} alt="Ambassador 3" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={IIS} alt="Ambassador 4" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={STEM} alt="Ambassador 5" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={aisectrisakti} alt="Ambassador 6" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={atmaconsul} alt="Ambassador 7" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={femipb} alt="Ambassador 8" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={brandui} alt="Ambassador 9" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={cedsui} alt="Ambassador 10" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={fincamp} alt="Ambassador 11" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={fpci} alt="Ambassador 12" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={growthhub} alt="Ambassador 13" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={himamgtunpad} alt="Ambassador 14" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={himatika} alt="Ambassador 15" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={himmebinus} alt="Ambassador 16" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={imagama} alt="Ambassador 17" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={kostaf} alt="Ambassador 18" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={kronika} alt="Ambassador 19" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={bemfebunj} alt="Ambassador 20" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={cdc} alt="Ambassador 21" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={magdalene} alt="Ambassador 22" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={ppit} alt="Ambassador 23" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={radiountar} alt="Ambassador 24" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={search} alt="Ambassador 25" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={mss} alt="Ambassador 26" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={sigma} alt="Ambassador 27" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={skillup} alt="Ambassador 28" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={teens} alt="Ambassador 29" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={uidigitalk} alt="Ambassador 30" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={untirta} alt="Ambassador 31" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={birama} alt="Ambassador 32" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={bpreneur} alt="Ambassador 33" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={fiscalcareer} alt="Ambassador 34" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={fisipupn} alt="Ambassador 35" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={fkipusd} alt="Ambassador 36" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-          <img src={fmipaunnes} alt="Ambassador 37" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-            <img src={fpcibinus} alt="Ambassador 38" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-            <img src={himiespa} alt="Ambassador 39" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-            <img src={himitepa} alt="Ambassador 40" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-            <img src={husbandry} alt="Ambassador 41" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
-            <img src={psikouny} alt="Ambassador " className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4" />
+          <img src={CBSAUI} alt="Ambassador 1" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={FPCI} alt="Ambassador 2" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={HIMA} alt="Ambassador 3" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={IIS} alt="Ambassador 4" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={STEM} alt="Ambassador 5" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={aisectrisakti} alt="Ambassador 6" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={atmaconsul} alt="Ambassador 7" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={femipb} alt="Ambassador 8" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={brandui} alt="Ambassador 9" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={cedsui} alt="Ambassador 10" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={fincamp} alt="Ambassador 11" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={fpci} alt="Ambassador 12" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={growthhub} alt="Ambassador 13" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={himamgtunpad} alt="Ambassador 14" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={himatika} alt="Ambassador 15" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={himmebinus} alt="Ambassador 16" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={imagama} alt="Ambassador 17" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={kostaf} alt="Ambassador 18" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={kronika} alt="Ambassador 19" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4  object-contain" />
+          <img src={bemfebunj} alt="Ambassador 20" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={cdc} alt="Ambassador 21" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={magdalene} alt="Ambassador 22" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={ppit} alt="Ambassador 23" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={radiountar} alt="Ambassador 24" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={search} alt="Ambassador 25" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={mss} alt="Ambassador 26" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={sigma} alt="Ambassador 27" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={skillup} alt="Ambassador 28" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={teens} alt="Ambassador 29" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={uidigitalk} alt="Ambassador 30" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={untirta} alt="Ambassador 31" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={birama} alt="Ambassador 32" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={bpreneur} alt="Ambassador 33" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={fiscalcareer} alt="Ambassador 34" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={fisipupn} alt="Ambassador 35" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={fkipusd} alt="Ambassador 36" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+          <img src={fmipaunnes} alt="Ambassador 37" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+            <img src={fpcibinus} alt="Ambassador 38" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+            <img src={himiespa} alt="Ambassador 39" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+            <img src={himitepa} alt="Ambassador 40" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+            <img src={husbandry} alt="Ambassador 41" className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
+            <img src={psikouny} alt="Ambassador " className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 m-2 sm:m-3 md:m-4 object-contain" />
           </div>
         </div>
          

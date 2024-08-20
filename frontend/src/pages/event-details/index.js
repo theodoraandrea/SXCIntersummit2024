@@ -90,11 +90,21 @@ export default function DetailEvents() {
                 >
                   {registered ? "Already registered!" : "Register"}
               </button>
-              <button className="bg-primary-3 text-sm w-fit rounded-lg text-white 
+              {/* <button className="bg-primary-3 text-sm w-fit rounded-lg text-white 
               py-1 px-4
               md:mx-0 md:text-base md:px-4 md:py-2">
                 View Booklet
-              </button>
+              </button> */}
+              <a
+                href="https://drive.google.com/file/d/1qZnZ0ATeWR-bm1Tl3lw3Y65c-fOvSWXZ/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary-3 text-sm w-fit rounded-lg text-white 
+                            py-1 px-4
+                            md:mx-0 md:text-base md:px-4 md:py-2"
+              >
+                View Booklet
+              </a>
               </div>
               {/*FOR PORTRAIT
                <div className="bg-gray-200 rounded-lg w-[20rem] h-[25rem] mt-4 mb-8 md:hidden mx-auto"></div>*/}
