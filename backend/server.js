@@ -42,7 +42,7 @@ db.authenticate()
 //     console.log(err.message);
 //   });
 
-// IBCCMember.sync()
+// IBCC.sync({ alter: true })
 //   .then(() => {
 //     console.log("Update Database IBCCmember");
 //   })

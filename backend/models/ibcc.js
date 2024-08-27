@@ -27,7 +27,6 @@ const IBCC = sequelize.define(
     },
     teamCode: {
       type: DataTypes.STRING(6),
-      allowNull: false,
       unique: true,
     },
     question: {
