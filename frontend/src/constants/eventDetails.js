@@ -6,7 +6,7 @@ export const eventDetails = {
   event_1: {
     title: "Business Master Class",
     image: imgLocation + "bmc.png",
-    openRegistration: true,
+    openRegistration: false,
     description: "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
     "With its <strong>interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities</strong>  to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on " +
     "<strong>“Elevate to Success: Mastering in Business Competition” as the grand theme.</strong>" +
