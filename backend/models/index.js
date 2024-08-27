@@ -13,6 +13,8 @@ const User = require("./user");
 const ReferralCode = require("./referralcode");
 const IBPC = require("./ibpc");
 const IBPCMember = require("./ibpcMember");
+const IBCC = require("./ibcc");
+const IBCCMember = require("./ibccMember");
 
 module.exports = {
   BMC,
@@ -29,4 +31,6 @@ module.exports = {
   ReferralCode,
   IBPC,
   IBPCMember,
+  IBCC,
+  IBCCMember,
 };

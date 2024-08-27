@@ -11,8 +11,8 @@ const path = require("path");
 const user = require("./models/user");
 const db = require("./config/databaseConfig");
 const FCEOMember = require("./models/fceomember");
-const IBPC = require("./models/ibpc");
-const IBPCMember = require("./models/ibpcMember");
+const IBCC = require("./models/ibcc");
+const IBCCMember = require("./models/ibccMember");
 
 require("./associations/association").eventAssociations();
 require("./associations/association").competitionAssociations();
@@ -33,18 +33,18 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// IBPC.sync({alter:true})
+// db.sync({ alter: true })
 //   .then(() => {
-//     console.log("Update Database IBPC");
+//     console.log("Update db");
 //   })
 //   .catch((err) => {
 //     console.log("ERROR");
 //     console.log(err.message);
 //   });
 
-// IBPCMember.sync()
+// IBCCMember.sync()
 //   .then(() => {
-//     console.log("Update Database IBPCmember");
+//     console.log("Update Database IBCCmember");
 //   })
 //   .catch((err) => {
 //     console.log("ERROR");
