@@ -6,7 +6,7 @@ export const eventDetails = {
   event_1: {
     title: "Business Master Class",
     image: imgLocation + "bmc.png",
-    openRegistration: false,
+    openRegistration: true,
     description: "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
     "With its <strong>interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities</strong>  to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on " +
     "<strong>“Elevate to Success: Mastering in Business Competition” as the grand theme.</strong>" +
@@ -122,7 +122,37 @@ export const eventDetails = {
     image: imgLocation + "ibc-bcc.png",
     openRegistration: false,
     description:
-      "Challenges college students to apply their business acumen and strategic thinking to real-world scenarios through complex business problems analysis and develop innovative solution",
+      "<strong>The SxC International Business Case Competition</strong> is a global event designed to challenge students to apply their analytical and problem-solving skills to real-world business scenarios. <strong>Each team will analyze complex case studies</strong> of business problems and develop strategic solutions. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
+      "</br></br>" +
+    "<strong>When</strong></br>" +
+    "2nd September - 1st December 2024" +
+    "</br></br>" +
+    "<strong>Consists of 3 Stages</strong>" +
+    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
+    "</br>&emsp;&emsp;&emsp;Case 1 Release: 5th October 2024" +
+    "</br>&emsp;&emsp;&emsp;Proposal Submission Phase: 6th October - 17th October 2024" +
+    "</br>&emsp;&emsp;&emsp;Scoring Proposal Phase: 18 October - 29 October 2024" +
+    "</br>&emsp;&emsp;&emsp;Semi-Finalist Announcement: 30th October 2024" +
+    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
+    "</br>&emsp;&emsp;&emsp;Deck & Video Submission Phase: 31st October - 16th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Technical Meeting: 2nd November 2024" +
+    "</br>&emsp;&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Scoring Deck & Video Phase: 17th November - 25th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Finalist Announcement: 26th November 2024" +
+    "</br><strong>&emsp;3.&emsp;Final</strong>" +
+    "</br>&emsp;&emsp;&emsp;Technical Meeting for Final Stage: 27th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Case Release for Finalist: 29th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Deck Submission: 29th November 2024" +
+    "</br>&emsp;&emsp;&emsp;D-Day Final Pitch: 30th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Winner Awarding: 1st December 2024" +
+    "</br></br>" +
+    "<strong>What You Will Get</strong>" +
+    "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
+    "</br>&emsp;&emsp;For Participants who have <strong>successfully advanced as semifinalists,</strong> This coaching session is designed to help participants <strong>develop a robust and strategic business proposal.</strong> The session will include a detailed presentation of essential materials and offer an interactive Q&A session, providing participants with the opportunity to clarify doubts and refine their proposal-building skills. The program will place further emphasis on <strong>“Creating a Compelling Pitch Deck: Strategies and Practical Tips.“</strong> The insights shared in this clinic will be instrumental in laying the foundation for a successful business proposal and setting the stage for the upcoming competition." +
+    "</br></br><strong>&emsp;&emsp;2.&emsp;Coaching Clinic 2</strong>" +
+    "</br>&emsp;&emsp;For participants who have<strong>successfully advanced through the final stage,</strong> This coaching clinic will focus on perfecting the art of pitching ideas to captivate judges and make a lasting impression. <strong>Participants will receive personalized mentoring in a group setting, where each team will be paired with a mentor.</strong>  The session will also include a review of participants' pitches, providing valuable feedback and tips for enhancement. This clinic is designed and will focus on <strong>“Mastering Case Solutions: Expert Time Management and Analytical Techniques“</strong> to help participants refine their delivery and content, ensuring they present their ideas with clarity and impact during the competition." +
+    "</br></br><strong>&emsp;&emsp;3.&emsp;Networking Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
     registerLink: ``,
@@ -132,8 +162,8 @@ export const eventDetails = {
     faqDesc: ["The competition has three stages. In the Preliminary Round, participants submit a proposal outlining their solution to the given case. In the Semifinal Round, they create a pitch deck based on their proposal and deliver a brief rocket pitch. The Final Round involves solving a new case within one day, creating a pitch deck, and presenting it the next day, testing their ability to deliver a well-structured solution under time pressure.", 
       "Participants may register from our website www.something.com . The registration is open from 2nd September 2024 to 5th October 2024. Participants can register individually or in groups of maximum 3 people.", 
       "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
-    contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
-    contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactPerson: ["Salsabila"],
+    contactNumber: ["(+62) 85814703305"],
     contactLink: [],
     timelineData: [
       {
@@ -164,7 +194,39 @@ export const eventDetails = {
     image: imgLocation + "ibc-bpc.png",
     openRegistration: false,
     description:
-      "Cultivate entrepreneurial skills through their business ideas in a simulated real-world environment, showcasing their creativity, strategic thinking, and ability to execute viable business plans.",
+      "<strong>The SxC International Business Plan Competition</strong> is a global event designed to foster entrepreneurial skills and innovation among students. <strong>Participants are encouraged to present their innovative business models,</strong> turning them into viable businesses. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
+      "</br></br>" +
+    "<strong>When</strong></br>" +
+    "2nd September - 1st December 2024" +
+    "</br></br>" +
+    "<strong>Consists of 3 Stages</strong>" +
+    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
+    "</br>&emsp;&emsp;&emsp;BMC+Executive Summary Submission" +
+    "</br>&emsp;&emsp;&emsp;Submission Phase: 2nd September - 1st October 2024" +
+    "</br>&emsp;&emsp;&emsp;Scoring Phase: 2nd October - 13rd October 2024" +
+    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
+    "</br>&emsp;&emsp;&emsp;Proposal Submission" +
+    "</br>&emsp;&emsp;&emsp;Submission Phase: 15th October - 30th October 2024" +
+    "</br>&emsp;&emsp;&emsp;Coaching Clinic 1: 19th October 2024" +
+    "</br>&emsp;&emsp;&emsp;Topic: Blueprint for Success: Crafting a Strategic Business Proposal" +
+    "</br>&emsp;&emsp;&emsp;Scoring Phase: 1st November - 9th November 2024" +
+    "</br><strong>&emsp;3.&emsp;Final</strong>" +
+    "</br>&emsp;&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
+    "</br>&emsp;&emsp;&emsp;Submission Phase: 11th November - 22nd November 2024" +
+    "</br>&emsp;&emsp;&emsp;Technical Meeting: 15th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
+    "</br>&emsp;&emsp;&emsp;Topic: Pitch Perfect: Captivate the Judges with Your Ideas" +
+    "</br>&emsp;&emsp;&emsp;Final Pitch: 23rd November 2024" +
+    "</br>&emsp;&emsp;&emsp;Winner Awarding: 1st December 2024" +
+    "</br></br>" +
+    "<strong>What You Will Get</strong>" +
+    "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
+    "</br>&emsp;&emsp;For Participants who have <strong>successfully advanced as semifinalists,</strong> This coaching session is designed to help participants <strong>develop a robust and strategic business proposal.</strong> The session will include a detailed presentation of essential materials and offer an interactive Q&A session, providing participants with the opportunity to clarify doubts and refine their proposal-building skills. The insights shared in this clinic will be instrumental in laying the foundation for a successful business proposal and setting the stage for the upcoming competition." +
+    "</br></br><strong>&emsp;&emsp;2.&emsp;Coaching Clinic 2</strong>" +
+    "</br>&emsp;&emsp;For participants who have<strong>successfully advanced through the final stage,</strong> This coaching clinic will focus on perfecting the art of pitching ideas to captivate judges and make a lasting impression. <strong>Participants will receive personalized mentoring in a group setting, where each team will be paired with a mentor.</strong>  The session will also include a review of participants' pitches, providing valuable feedback and tips for enhancement. This clinic is designed to help participants refine their delivery and content, ensuring they present their ideas with clarity and impact during the competition." +
+    "</br></br><strong>&emsp;&emsp;3.&emsp;Scholarships Opportunities</strong>" +
+    "</br></br><strong>&emsp;&emsp;4.&emsp;International Networking</strong>" +
+    "</br></br><strong>&emsp;&emsp;5.&emsp;Funding Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
     registerLink: ``,
@@ -176,8 +238,8 @@ export const eventDetails = {
       "The competition will consist of three stages: the first stage involves the submission of a business model canvas and executive summary, the second stage requires a detailed business proposal, and the final stage includes a pitch deck assessment followed by an offline pitching event at a venue to be announced.", 
       "There are no prerequisites regarding the business ideas; the competition welcomes business plans from diverse industries. The key to success in our competition is to simply demonstrate creativity, innovation, and a commitment to sustainable business practices.", 
       "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
-    contactPerson: ["Diandra Chandra Kusuma", "Orang Satu Lagi"],
-    contactNumber: ["(+62) 85123 4567 890", "(+62) 37128 2831 202"],
+    contactPerson: ["Aisha Inaya"],
+    contactNumber: ["(+62) 81288480732"],
     contactLink: [],
     timelineData: [
       {
