@@ -11,6 +11,8 @@ const CompetitionRegistration = require("./competitionregistrations");
 const Summit = require("./summit");
 const User = require("./user");
 const ReferralCode = require("./referralcode");
+const IBPC = require("./ibpc");
+const IBPCMember = require("./ibpcMember");
 
 module.exports = {
   BMC,
@@ -24,5 +26,7 @@ module.exports = {
   FCEO,
   Summit,
   User,
-  ReferralCode
+  ReferralCode,
+  IBPC,
+  IBPCMember,
 };

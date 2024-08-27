@@ -5,6 +5,8 @@ const {
   Event,
   FCEOMember,
   FCEO,
+  IBPCMember,
+  IBPC,
   EventRegistration,
   Competition,
   CompetitionRegistration,
@@ -62,6 +64,24 @@ exports.eventAssociations = () => {
     as: "teamLeader",
   });
   FCEO.belongsTo(User, {
+    foreignKey: "leaderId",
+  });
+
+  // IBPC and IBPCMember associations
+  IBPC.hasMany(IBPCMember, {
+    foreignKey: "teamId",
+    as: "ibpcmembers",
+  });
+  IBPCMember.belongsTo(IBPC, {
+    foreignKey: "teamId",
+  });
+
+  // User and IBPC/IBPCMember associations
+  User.hasOne(IBPC, {
+    foreignKey: "leaderId",
+    as: "ibpcteamLeader",
+  });
+  IBPC.belongsTo(User, {
     foreignKey: "leaderId",
   });
 };
