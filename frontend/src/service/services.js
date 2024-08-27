@@ -264,6 +264,45 @@ const getFceoRegistrationData = async (data) => {
   }
 };
 
+
+// IBPC APInya belum diganti
+const postNewIbpcMember = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_FCEO_MEMBER, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const postNewIbpcTeam = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_FCEO_TEAM, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const getIbpcRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_FCEO_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
@@ -305,6 +344,9 @@ export {
   postNewFceoMember,
   postNewFceoTeam,
   getFceoRegistrationData,
+  postNewIbpcMember,
+  postNewIbpcTeam,
+  getIbpcRegistrationData,
   postCheckTeamCode,
   postCheckReferralCode,
   postBMCRegistration,
