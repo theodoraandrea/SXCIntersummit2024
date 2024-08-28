@@ -11,6 +11,8 @@ import BMCRegistration from "./pages/event-registration/bmc";
 import BMCSummary from "./pages/event-registration/bmc-summary";
 import FCEORegistration from "./pages/event-registration/fceo";
 import FCEOSummary from "./pages/event-registration/fceo-summary";
+import IBPCRegistration from "./pages/event-registration/ibpc";
+import IBPCSummary from "./pages/event-registration/ibpc-summary";
 
 import {
   HOME,
@@ -57,6 +59,8 @@ export default function App() {
           <Route path={BMC_REGIST_SUMMARY} element={<BMCSummary/>}/>
           <Route path={FCEO_REGIST} element={<FCEORegistration />} />
           <Route path={FCEO_REGIST_SUMMARY} element={<FCEOSummary />} />
+          <Route path="/ibpcregist" element={<IBPCRegistration />} />
+          <Route path="/ibpcsummary" element={<IBPCSummary />} />
         </Routes>
       </Router>
     </UserProvider>
