@@ -56,6 +56,7 @@ export const eventDetails = {
     title: "Future CEO",
     image: imgLocation + "fceo.png",
     openRegistration: true,
+    linkBooklet: "https://drive.google.com/file/d/1Pbhq9gaN-Guztj4c866fWb3u9IY_UecN/view?usp=sharing",
     description: "<strong>Future CEO</strong> is <strong>a prestigious business plan competition</strong> exclusively <strong>for high school students</strong>, to showcase their entrepreneurial skills and business acumen with the grand theme <strong>“Shaping Future Pioneers: Embracing Strategic Innovation in Sustainable Digital Era”</strong>. Students are <strong>challenged to present their innovative business idea</strong> that can solve the problems around them." +
     "</br></br>" +
     "<strong>When</strong></br>" +
@@ -168,23 +169,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "15 July 2024 - 19 July 2024",
+        date: "TBA",
         type: "register",
         link: ``,
       },
       {
         title: "Technical Meeting",
-        date: "20 July 2024",
+        date: "TBA4",
         type: "meeting",
       },
       {
         title: "Project Progress",
-        date: "21 July 2024 - 30 July 2024",
+        date: "TBA",
         type: "progress",
       },
       {
         title: "Submit Project",
-        date: "31 July 2024",
+        date: "TBA",
         type: "submit",
       },
     ],
