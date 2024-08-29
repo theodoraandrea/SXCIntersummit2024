@@ -26,4 +26,31 @@ router.post(
   ibpcControllers.createNewTeam
 );
 
+router.post(
+  "/member",
+  isAuthenticated,
+  [
+    body("fullname")
+      .notEmpty()
+      .withMessage("Fullname is required")
+      .isAlpha("en-US", {
+        ignore: " ",
+      })
+      .withMessage("Fullname must be in strings"),
+    body("email")
+      .notEmpty()
+      .withMessage("Email is required")
+      .isEmail()
+      .withMessage("Email must be valid"),
+    body("institution").notEmpty().withMessage("School/University is required"),
+    body("batch")
+      .isInt({
+        min: 1,
+      })
+      .withMessage("Batch must be a valid number"),
+    body("phoneNumber").notEmpty().withMessage("Phone number is required"),
+  ],
+  ibpcControllers.createNewIBPCMember
+);
+
 module.exports = router;

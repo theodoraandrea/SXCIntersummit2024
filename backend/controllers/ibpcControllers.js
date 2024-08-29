@@ -38,7 +38,7 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
-    const { teamName, question } = body;
+    const { teamName, question, referralCode } = body;
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
@@ -105,6 +105,7 @@ exports.createNewTeam = async (req, res) => {
       proofOfPayment,
       originality: originalityStatement,
       screenshotIBPC,
+      referralCode,
     });
 
     await CompetitionRegistration.create({
@@ -157,6 +158,38 @@ exports.createNewTeam = async (req, res) => {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Something went wrong", error: error.message });
+      .json({ message: "Failed to create a new team", error: error.message });
+  }
+};
+
+exports.createNewIBPCMember = async (req, res) => {
+  try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const { body } = req;
+    const { teamId, fullname, email, institution, batch, phoneNumber } = body;
+
+    // Create a new IBPCMember
+    const newMember = await IBPCMember.create({
+      teamId,
+      fullname,
+      email,
+      institution,
+      batch,
+      phoneNumber,
+    });
+
+    return res.status(201).json({
+      message: "Success registering FCEO as a new member!",
+      member: newMember,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to create a new member", error: error.message });
   }
 };
