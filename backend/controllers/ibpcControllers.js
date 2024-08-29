@@ -193,3 +193,40 @@ exports.createNewIBPCMember = async (req, res) => {
       .json({ message: "Failed to create a new member", error: error.message });
   }
 };
+
+exports.checkTeam = async (req, res) => {
+  try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const { body } = req;
+    const { teamCode } = body;
+
+    const team = await IBPC.findOne({ where: { teamCode: teamCode } });
+    if (!team) {
+      return res
+        .status(404)
+        .json({ message: "Team not found. Please check your Code" });
+    }
+
+    const teamLeaderId = team.leaderId;
+    const teamLeader = await User.findOne({
+      where: {
+        id: teamLeaderId,
+      },
+    });
+    res.status(200).json({
+      message: "Team found",
+      teamName: team.teamName,
+      teamCode: team.teamCode,
+      leader: teamLeader.fullname,
+    });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Something went wrong", error: error.message });
+  }
+};

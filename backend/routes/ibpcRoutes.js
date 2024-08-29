@@ -53,4 +53,17 @@ router.post(
   ibpcControllers.createNewIBPCMember
 );
 
+router.post(
+  "/team/check",
+  isAuthenticated,
+  [
+    body("teamCode")
+      .notEmpty()
+      .withMessage("Team code is required")
+      .isLength({ min: 6, max: 6 })
+      .withMessage("Team codes consists of 6 characters"),
+  ],
+  ibpcControllers.checkTeam
+);
+
 module.exports = router;
