@@ -42,6 +42,13 @@ const IBPC = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
+    referralCode: {
+      type: DataTypes.STRING,
+      references: {
+        model: "referralcodes",
+        key: "code",
+      },
+    },
   },
   {
     tableName: "ibpc",
