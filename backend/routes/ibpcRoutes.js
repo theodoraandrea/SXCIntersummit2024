@@ -66,4 +66,6 @@ router.post(
   ibpcControllers.checkTeam
 );
 
+router.get("/summary", isAuthenticated, ibpcControllers.getTeamDetailsByUserId);
+
 module.exports = router;

@@ -184,7 +184,7 @@ exports.createNewIBPCMember = async (req, res) => {
     });
 
     return res.status(201).json({
-      message: "Success registering FCEO as a new member!",
+      message: "Success registering IBPC as a new member!",
       member: newMember,
     });
   } catch (error) {
@@ -228,5 +228,44 @@ exports.checkTeam = async (req, res) => {
     res
       .status(400)
       .json({ message: "Something went wrong", error: error.message });
+  }
+};
+
+exports.getTeamDetailsByUserId = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    // Find team details using the teamId
+    const team = await IBPC.findOne({
+      where: { leaderId: userId },
+    });
+
+    if (!team) {
+      return res.status(404).json({ message: "Team not found" });
+    }
+
+    const teamId = team.id;
+
+    // Find all members of the same team
+    const teamMembers = await IBPCMember.findAll({
+      where: { teamId },
+    });
+
+    res.status(200).json({
+      teamName: team.teamName,
+      teamCode: team.teamCode,
+      proofPayment: team.proofOfPayment,
+      screenshotIBPC: team.screenshotIBPC,
+      referralCode: team.referralCode,
+      members: teamMembers.map((member) => ({
+        fullname: member.fullname,
+        email: member.email,
+        phoneNumber: member.phoneNumber,
+        institution: member.institution,
+        batch: member.batch,
+      })),
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
