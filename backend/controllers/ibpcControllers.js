@@ -248,6 +248,7 @@ exports.getTeamDetailsByUserId = async (req, res) => {
       teamName: team.teamName,
       teamCode: team.teamCode,
       proofPayment: team.proofOfPayment,
+      proofOfTwibbon: team.proofOfTwibbon,
       screenshotIBPC: team.screenshotIBPC,
       referralCode: team.referralCode,
       members: teamMembers.map((member) => ({
