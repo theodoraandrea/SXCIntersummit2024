@@ -161,7 +161,7 @@ export default function About() {
       <section className="bg-primary-1 py-10 sm:py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10">
-            Part of StudentxCEOs
+            Part of StudentxCEOs Jakarta
           </h2>
           <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-stretch space-y-4 sm:space-y-0 sm:space-x-0 mx-4 sm:mx-8">
             <AboutCard
@@ -502,8 +502,7 @@ export default function About() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="flex flex-col items-center text-center relative">
-              
-              <img src={pwc} alt="Winner 1" className="relative z-20 mb-[15px]" />
+              <img src={pwc} alt="Winner 1" className="relative z-20 mb-[15px] w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72" />
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
               Ricky Sucitra - Human Capital Strategy Lead at PwC
               </h3>
@@ -513,8 +512,7 @@ export default function About() {
             </div>
             
             <div className="flex flex-col items-center text-center relative">
-              
-              <img src={reviewbca} alt="Winner 2" className="relative z-20 mb-[-20px]" />
+              <img src={reviewbca} alt="Winner 1" className="relative z-20 mb-[15px] w-32 h-32 sm:w-40 sm:h-40 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72" />
               <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
               Veigy Pruedensia - Employer Branding at BCA
               </h3>
@@ -535,7 +533,37 @@ export default function About() {
             Ambassador
           </h2>
 
-          <div className="flex flex-wrap justify-center">
+          <div className="flex overflow-x-auto whitespace-nowrap scrollbar-hide">  
+            <img src={najwa} alt="Ambassador 1" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={bilgis} alt="Ambassador 2" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={rezita} alt="Ambassador 3" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={talita} alt="Ambassador 4" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={vania} alt="Ambassador 5" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={alifya} alt="Ambassador 6" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={denisha} alt="Ambassador 7" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={enta} alt="Ambassador 8" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={gracia} alt="Ambassador 9" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={lucas} alt="Ambassador 10" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={m_alvin} alt="Ambassador 11" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={m_rizki} alt="Ambassador 12" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4 object-cover bg-center" />
+            <img src={rahma} alt="Ambassador 13" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={ratu} alt="Ambassador 14" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={Veronica} alt="Ambassador 15" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={yumna} alt="Ambassador 16" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={ajeng} alt="Ambassador 17" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={deva} alt="Ambassador 18" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={dhabi} alt="Ambassador 19" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={dinda} alt="Ambassador 20" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={estu} alt="Ambassador 21" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={fahrul} alt="Ambassador 22" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={shabrina} alt="Ambassador 23" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={syifa} alt="Ambassador 24" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={varencia} alt="Ambassador 25" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+            <img src={yossi} alt="Ambassador 26" className="inline-block w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
+          </div>
+
+
+          {/* <div className="flex flex-wrap justify-center">
             <img src={najwa} alt="Ambassador 1" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={bilgis} alt="Ambassador 2" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={rezita} alt="Ambassador 3" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
@@ -562,8 +590,7 @@ export default function About() {
             <img src={syifa} alt="Ambassador 24" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={varencia} alt="Ambassador 25" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
             <img src={yossi} alt="Ambassador 26" className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 m-2 sm:m-3 md:m-4" />
-          </div>
-
+          </div> */}
         </div>
 
         {/* Our Sponsors and Media Partners */}
