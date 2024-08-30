@@ -9,6 +9,37 @@ import { useUser } from "../../contexts/user-context";
 import Spinner from "../../components/elements/spinner";
 import { LANDING_PAGE } from "../../constants/routes";
 
+function ConfirmationModal({ isOpen, onClose, onConfirm }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-primary-1 p-6 rounded-lg w-80">
+        <h2 className="text-xl font-semibold mb-4 text-center">
+          Confirmation
+        </h2>
+        <p className="mb-6 text-center">
+          You must be a high school student to join this competition. are you a high school student?
+        </p>
+        <div className="flex justify-center space-x-4">
+          <button
+            className="bg-red-500 text-white px-4 py-2 hover:bg-yellow-600 transition duration-300 rounded-full"
+            onClick={onClose}
+          >
+            Cancel
+          </button>
+          <button
+            className="bg-primary-3 text-white px-4 py-2 mr-2 hover:bg-yellow-600 transition duration-300 rounded-full"
+            onClick={onConfirm}
+          >
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function DetailEvents() {
   const { eventId } = useParams();
   const params = eventId.split("_");
@@ -18,7 +49,7 @@ export default function DetailEvents() {
   const navigate = useNavigate();
 
   const [openFAQ, setOpenFAQ] = useState(Array(5).fill(false));
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { loading, registeredEvents, registeredCompetitions, isLoggedIn } = useUser();
 
   const [registered, setRegistered] = useState(false);
@@ -55,6 +86,27 @@ export default function DetailEvents() {
     setOpenFAQ(newOpenFAQ);
   };
 
+  const handleRegisterClick = () => {
+    if (isLoggedIn) {
+      if (eventId === 'comp_1'){
+        setIsModalOpen(true);
+      }else{
+        window.open(eventData.registerLink, "_blank");
+      }
+    } else {
+      navigate(LANDING_PAGE);
+    }
+  };
+
+  const handleConfirm = () => {
+    setIsModalOpen(false);
+    window.open(eventData.registerLink, "_blank");
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const eventData = eventDetails[eventId] || {};
 
   return (
@@ -68,6 +120,12 @@ export default function DetailEvents() {
           </div>
       ) : (
         <div className="p-4 sm:mx-16 lg:mx-32 my-8 bg-primary-1 text-white">
+          {/* Confirmation Modal */}
+          <ConfirmationModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            onConfirm={handleConfirm}
+          />
           {/* Competition Section */}
           <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-8">
             <div className="flex flex-col md:row-span-4">
@@ -79,13 +137,7 @@ export default function DetailEvents() {
               md:mx-0 md:text-base md:px-4 md:py-2 ${
                 !eventData.openRegistration ? "bg-gray-400" : "bg-primary-2"
               }`}
-              onClick={
-                    ()=>{
-                      isLoggedIn ? 
-                      navigate(eventData.registerLink) :
-                      navigate(LANDING_PAGE)
-                    }
-                  }
+              onClick={handleRegisterClick}
               disabled={registered || !eventData.openRegistration}
                 >
                   {registered ? "Already registered!" : "Register"}
