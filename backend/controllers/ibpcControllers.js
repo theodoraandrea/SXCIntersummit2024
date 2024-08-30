@@ -27,7 +27,6 @@ exports.createNewTeam = async (req, res) => {
       "studentIds",
       "proofOfFollow",
       "originalityStatement",
-      "proofOfTwibbon",
       "proofOfStory",
       "proofOfComment",
     ];
@@ -38,7 +37,7 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
-    const { teamName, question, referralCode } = body;
+    const { teamName, question, referralCode, proofOfTwibbon } = body;
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
@@ -47,7 +46,6 @@ exports.createNewTeam = async (req, res) => {
 
     const fileNames = [
       `${teamName}_${user.fullname}_Proof of Follow`,
-      `${teamName}_${user.fullname}_Proof of Twibbon`,
       `${teamName}_${user.fullname}_Proof of Instastory`,
       `${teamName}_${user.fullname}_Proof of Student Card`,
       `${teamName}_${user.fullname}_Proof of Comment`,
@@ -68,30 +66,24 @@ exports.createNewTeam = async (req, res) => {
       folderId,
       fileNames[0]
     );
-    const proofOfTwibbon = await getImageURLsList(
-      files.proofOfTwibbon,
-      folderId,
-      fileNames[1]
-    );
     const proofOfStory = await getImageURLsList(
       files.proofOfStory,
       folderId,
-      fileNames[2]
+      fileNames[1]
     );
     const studentIds = await getImageURLsList(
       files.studentIds,
       folderId,
-      fileNames[3]
+      fileNames[2]
     );
     const proofOfComment = await getImageURLsList(
       files.proofOfComment,
       folderId,
-      fileNames[4]
+      fileNames[3]
     );
 
     const screenshotIBPC = [
       proofOfFollow,
-      proofOfTwibbon,
       proofOfStory,
       studentIds,
       proofOfComment,
@@ -103,6 +95,7 @@ exports.createNewTeam = async (req, res) => {
       teamCode,
       question: qnaList,
       proofOfPayment,
+      proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
       referralCode,
