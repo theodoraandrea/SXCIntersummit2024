@@ -1159,8 +1159,8 @@ const EventCard = () => {
     bank_2: "GoPay",
     recipient_2: "DIVO AZRIEL HAKIM",
     discount: '5000',
-    regularPrice: '70.000',
-    discountedPrice: '65.000',
+    regularPrice: '90.000',
+    discountedPrice: '85.000',
   };
 
   const sanitizeInput = (input) => {

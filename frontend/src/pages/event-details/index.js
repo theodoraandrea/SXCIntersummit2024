@@ -96,7 +96,7 @@ export default function DetailEvents() {
                 View Booklet
               </button> */}
               <a
-                href="https://drive.google.com/file/d/1qZnZ0ATeWR-bm1Tl3lw3Y65c-fOvSWXZ/view?usp=drive_link"
+                href={eventData.linkBooklet ?? "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-primary-3 text-sm w-fit rounded-lg text-white 
