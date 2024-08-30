@@ -1,15 +1,14 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 
-const IBCCMember = sequelize.define(
-  "IBCCMember",
+const IBCC_Member = sequelize.define(
+  "IBCC_Member",
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-
     teamId: {
       type: DataTypes.INTEGER,
       references: {
@@ -22,7 +21,7 @@ const IBCCMember = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    personalEmail: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -32,21 +31,25 @@ const IBCCMember = sequelize.define(
     },
     phoneNumber: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
-    institution: {
+    university: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     batch: {
       type: DataTypes.INTEGER,
+      allowNull: false,
     },
     major: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {
-    tableName: "ibccmembers",
+    tableName: "ibccMembers",
     timestamps: true,
   }
 );
 
-module.exports = IBCCMember;
+module.exports = IBCC_Member;

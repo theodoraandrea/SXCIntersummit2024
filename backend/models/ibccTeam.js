@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/databaseConfig");
 
-const IBCC = sequelize.define(
-  "IBCC",
+const IBCC_Team = sequelize.define(
+  "IBCC_Team",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -17,11 +17,11 @@ const IBCC = sequelize.define(
       },
       allowNull: false,
     },
-    ibccType: {
-      type: DataTypes.ENUM,
-      values: ["Team", "Individual"],
-    },
     teamName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    personalEmail: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -29,7 +29,11 @@ const IBCC = sequelize.define(
       type: DataTypes.STRING(6),
       unique: true,
     },
-    question: {
+    eventSource: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    twibbonLinks: {
       type: DataTypes.JSON,
       allowNull: false,
     },
@@ -49,11 +53,40 @@ const IBCC = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
+    paymentType: {
+      type: DataTypes.ENUM,
+      values: ["Referral", "Early", "Normal", "Late"],
+      allowNull: false,
+    },
+    referralCode: {
+      type: DataTypes.STRING,
+      references : {
+        model: "referralcodes",
+        key: "code"
+      },
+      allowNull: true,
+    },
+    paymentChannel: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    paymentBank: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    payerBankAccName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    transferDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
   },
   {
-    tableName: "ibcc",
+    tableName: "ibccTeam",
     timestamps: true,
   }
 );
 
-module.exports = IBCC;
+module.exports = IBCC_Team;

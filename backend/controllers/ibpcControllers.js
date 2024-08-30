@@ -11,6 +11,8 @@ const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
+const IBPC_WA_LINK = "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t";
+
 exports.createNewTeam = async (req, res) => {
   try {
     const ibpcId = 3;
@@ -131,7 +133,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: "https://chat.whatsapp.com/DAXnA0cXcYpFvwbVSH4SQr",
+            link: {IBPC_WA_LINK},
           },
         },
         outro:
