@@ -230,8 +230,6 @@ const FirstView = ({
       return false;
   }
 
-
-
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "{LINK}"; // REPLACE LINK
@@ -240,6 +238,36 @@ const FirstView = ({
     link.click();
     document.body.removeChild(link);
   };
+
+  const getPrice = (refCodeValid) => {
+    const currentDate = new Date();
+    let price = 0;
+
+    // 2 8 9 25 26 1 
+
+    const earlyBirdStart = new Date("2024-08-31"); 
+    const earlyBirdEnd = new Date("2024-09-08");
+    const regularStart = new Date("2024-09-09");
+    const regularEnd = new Date("2024-09-25");
+    const lateStart = new Date("2024-09-26");
+    const lateEnd = new Date("2024-10-01");
+
+    if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
+      price += 150000;
+    } else if (currentDate >= regularStart && currentDate <= regularEnd) {
+      price += 175000;
+    } else if (currentDate >= lateStart && currentDate <= lateEnd) {
+      price += 200000;
+    }
+
+    if (refCodeValid){
+      price -= discount;
+    }
+
+    return price;
+  }
+
+  const price = getPrice(refCodeValid);
 
   return (
     <div>
@@ -259,9 +287,10 @@ const FirstView = ({
             <p className="mb-2 text-center text-sm">
               Please pay the following amount to complete your registration
             </p>
-            <p className="text-3xl"><strong>IDR {
-              (verifiedRefCode && refCodeValid) ? discountedPrice : regularPrice
-              }</strong>
+            <p className="text-3xl">
+              <strong>
+                IDR {price.toLocaleString()}
+              </strong>
             </p>
             <p className="text-sm">
               {
@@ -1329,7 +1358,7 @@ const EventCard = () => {
     bankAccount_2: "xxx",
     bank_2: "xxx",
     recipient_2: "xxx",
-    discount: 'xxx',
+    discount: '5.000',
     regularPrice: '150.000',
     discountedPrice: 'xxx',
   };
