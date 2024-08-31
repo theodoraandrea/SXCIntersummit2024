@@ -1309,9 +1309,9 @@ const Summary = ({ formData, onPrevious }) => {
 
   let bmcId; //FOR REGISTER BUTTON PURPOSES
 
-  if (formData.sessionType === "Business Case Competition") {
+  if (formData.sessionType === "SxC International Business Challenge: Business Case Competition") {
     bmcId = 2;
-  } else if (formData.sessionType === "Business Plan Competition") {
+  } else if (formData.sessionType === "SxC International Business Challenge: Business Case Competition") {
     bmcId = 3;
   }
 
@@ -1323,7 +1323,7 @@ const Summary = ({ formData, onPrevious }) => {
       if (response.status === 200) {
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, bmcId]);
-        successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
+        successAlert({ message: "Successfully registered for IBCC. Please check your email for further details!"})
       }
     } catch (error) {
       errorAlert({ message: "Oh no, something happened. Please try again!"});
@@ -1345,7 +1345,7 @@ const Summary = ({ formData, onPrevious }) => {
             </div>
           ) : (
             <div className="bg-primary-4 mx-2 my-8 max-w-full md:max-w-lg flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
-              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">BMC Registration Form</p>
+              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2 text-center">SxC International Business Challenge: Business Case Competition</p>
               <p className="text-sm text-center font-semibold mb-2">
                 Please make sure all data is correct before submitting
               </p>
@@ -1382,7 +1382,7 @@ const Summary = ({ formData, onPrevious }) => {
                 {formData.experience ? (
                   <>
                     <strong>
-                      What are your main goals for participating in this business case competition?
+                        What are your main goals for participating in this business case competition?
                     </strong>
                     <p>{formData.experience}</p>
                   </>
@@ -1391,10 +1391,10 @@ const Summary = ({ formData, onPrevious }) => {
                 )}
                 
                 <strong>
-                  What are your expectations for this Business Master Class?
+                Is there any other information about your background, such as skills, or interests, that you think would be helpful for matchmaking purposes?
                 </strong>
                 <p>{formData.expectations}</p>
-                <strong>What kind of competition materials do you need?</strong>
+                <strong>Briefly describe your experience</strong>
                 <p>{formData.materials}</p>
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
@@ -1520,10 +1520,10 @@ const EventCard = () => {
         case 8:
             return <EighthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 9:
-            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={()=>{setCurrentView(11)}}/>;
+            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext} />;
         case 10:
             //skipped
-            //return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
+            return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 11:
             return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(9)}}/>
         default:
