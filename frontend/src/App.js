@@ -26,6 +26,8 @@ import {
   BMC_REGIST_SUMMARY,
   FCEO_REGIST,
   FCEO_REGIST_SUMMARY,
+  IBPC_REGIST,
+  IBPC_REGIST_SUMMARY,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -59,8 +61,8 @@ export default function App() {
           <Route path={BMC_REGIST_SUMMARY} element={<BMCSummary/>}/>
           <Route path={FCEO_REGIST} element={<FCEORegistration />} />
           <Route path={FCEO_REGIST_SUMMARY} element={<FCEOSummary />} />
-          <Route path="/ibpcregist" element={<IBPCRegistration />} />
-          <Route path="/ibpcsummary" element={<IBPCSummary />} />
+          <Route path={IBPC_REGIST} element={<IBPCRegistration />} />
+          <Route path={IBPC_REGIST_SUMMARY} element={<IBPCSummary />} />
         </Routes>
       </Router>
     </UserProvider>

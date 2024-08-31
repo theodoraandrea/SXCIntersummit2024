@@ -47,12 +47,23 @@ const FirstView = ({
   const [proofPayment, setProofPayment] = useState(
     formData.proofPayment?.name ?? ""
   );
-  const [recognizeEvent, setRecognizeEvent] = useState(
-    formData.recognizeEvent?.name ?? ""
-  );
   const [originalityStatement, setOriginalityStatement] = useState(
     formData.originalityStatement?.name ?? ""
   )
+
+  const [eventSource, setEventSource] = useState(formData.eventSource ?? "");
+  const [eventSourceOther, setEventSourceOther] = useState(
+    formData.eventSourceOther ?? "Other"
+  );
+  const [option, setOption] = useState(formData.eventSource ?? "");
+
+  const handleOptionChange = (e) => {
+    setOption(e.target.value);
+    setEventSource(e.target.value);
+    if (e.target.value !== 4) {
+      setEventSourceOther("");
+    }
+  };
 
   //REFERRAL & PAYMENT DATA
   const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount } = eventData;
@@ -81,7 +92,9 @@ const FirstView = ({
           school: sanitizeInput(school),
           batch : batch,
           teamName: sanitizeInput(teamName),
-          members: 3
+          members: 3,
+          eventSource : eventSource,
+          eventSourceOther : eventSourceOther,
         };
         setFormData(formData);
         onNext();
@@ -114,7 +127,7 @@ const FirstView = ({
       proofTwibbon &&
       proofStory && 
       proofComment && 
-      recognizeEvent &&
+      eventSource &&
       originalityStatement
     ) {
       return true;
@@ -190,8 +203,8 @@ const FirstView = ({
       setProofComment(file.name);
     } else if (name === "proofPayment") {
       setProofPayment(file.name);
-    } else if (name === "recognizeEvent") {
-      setRecognizeEvent(file.name);
+    } else if (name === "eventSource") {
+      setEventSource(file.name);
     } else if (name === "originalityStatement") {
       setOriginalityStatement(file.name);
     }
@@ -207,16 +220,17 @@ const FirstView = ({
   }
   
   const checkFileType = (file) => {
-    if (file.type === "image/jpeg" ||
-      file.type === "image/png" ||
-      file.type === "application/pdf"
-    ) {
-      return true;
-    }
-    const message = "File has to be pdf, jpg, jpeg, or png";
-    errorAlert({ message: message });
-    return false;
+      if (
+        file.type === "application/pdf"
+      ) {
+        return true;
+      }
+      const message = "File has to be pdf";
+      errorAlert({ message: message });
+      return false;
   }
+
+
 
   const handleDownload = () => {
     const link = document.createElement("a");
@@ -226,23 +240,6 @@ const FirstView = ({
     link.click();
     document.body.removeChild(link);
   };
-
-  const [eventSource, setEventSource] = useState(formData.eventSource ?? "");
-  const [eventSourceOther, setEventSourceOther] = useState(
-    formData.eventSourceOther ?? "Other"
-  );
-  const [option, setOption] = useState(formData.eventSource ?? "");
-
-  const handleOptionChange = (e) => {
-    setOption(e.target.value);
-    setEventSource(e.target.value);
-    if (e.target.value !== 4) {
-      setEventSourceOther("");
-    }
-  };
-
-  const [ agreement, setAgreement ] = useState(formData.agreement?.name ?? '');
-
 
   return (
     <div>
@@ -553,6 +550,7 @@ const FirstView = ({
                 Choose file
               </label>
               </div>
+              <label className="text-sm text-white ml-2">{proofComment}</label>
             </div>
 
             {/* originalityStatement */}
@@ -567,18 +565,18 @@ const FirstView = ({
                 <div className="relative inline-block mb-5">
                   <input
                     type="file"
-                    id="agreement"
-                    name="agreement"
+                    id="originalityStatement"
+                    name="originalityStatement"
                     onChange={handleChange}
                     className="absolute inset-0 opacity-0 cursor-pointer"
                   />
                   <label
-                    htmlFor="agreement"
-                    className="bg-primary-3 text-white px-5 py-3 rounded-full"
+                    htmlFor="originalityStatement"
+                    className="bg-primary-3 text-white px-5 py-2 my-2 rounded-full cursor-pointer z-20"
                   >
-                    Submit Agreement Paper
+                    Submit Originality Statement Paper
                   </label>
-                  <label className="block text-white mt-6">{agreement}</label>
+                <label className="mx-5 text-white mt-6">{originalityStatement}</label>
                 </div>
               </div>
 
@@ -1325,15 +1323,15 @@ const EventCard = () => {
 
   const eventData = {
     fceoId: 1,
-    bankAccount: "000427101697",
-    bank: "blu by BCA DIGITAL",
-    recipient: "CLAIRINE SABATINI NAYOAN",
-    bankAccount_2: "085959773266",
-    bank_2: "GoPay",
-    recipient_2: "DIVO AZRIEL HAKIM",
-    discount: '5000',
-    regularPrice: '70.000',
-    discountedPrice: '65.000',
+    bankAccount: "xxx",
+    bank: "xxx",
+    recipient: "xxx",
+    bankAccount_2: "xxx",
+    bank_2: "xxx",
+    recipient_2: "xxx",
+    discount: 'xxx',
+    regularPrice: '150.000',
+    discountedPrice: 'xxx',
   };
 
   const sanitizeInput = (input) => {
