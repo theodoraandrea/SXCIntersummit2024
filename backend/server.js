@@ -10,7 +10,6 @@ const path = require("path");
 
 const user = require("./models/user");
 const db = require("./config/databaseConfig");
-const FCEOMember = require("./models/fceomember");
 
 require("./associations/association").eventAssociations();
 require("./associations/association").competitionAssociations();
@@ -31,9 +30,9 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// FCEOMember.sync()
+// db.sync({ alter: true })
 //   .then(() => {
-//     console.log("Update Database");
+//     console.log("Update db");
 //   })
 //   .catch((err) => {
 //     console.log("ERROR");

@@ -26,7 +26,7 @@ const speaker2 = "/images/speaker2.png";
 const mediapartners = "/images/mediapartners.png";
 const catalogweb = "/images/catalog-website.png";
 
-const MERCH_LINK = "https://bit.ly/MERCHSXC24B1";
+const MERCH_LINK = "https://linktr.ee/PurchaseSummit2024";
 const CONTACT_LINK = "https://linktr.ee/SponsorshipandMediaPartner";
 
 
