@@ -992,7 +992,7 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
                                     onChange={(e) => setFollow1(e.target.checked)}
                                     className='mr-2'
                                 />
-                                I have followed <strong>@studentsxceosjkt, @sxcintersummit, @sxcintersummitcompetition </strong> on Instagram 
+                                I have followed <strong>@studentsxceosjkt, @sxcintersummit, @sxcintersummitcompetition</strong> on Instagram 
                             </label>
                             <div className='my-4 relative'>
                                 <input
