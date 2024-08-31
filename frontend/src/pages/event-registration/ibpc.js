@@ -245,7 +245,7 @@ const FirstView = ({
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = new Date("2024-08-31"); 
+    const earlyBirdStart = new Date("2024-09-02"); 
     const earlyBirdEnd = new Date("2024-09-08");
     const regularStart = new Date("2024-09-09");
     const regularEnd = new Date("2024-09-25");
