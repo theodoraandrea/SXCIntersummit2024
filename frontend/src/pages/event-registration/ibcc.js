@@ -55,6 +55,28 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     }
   };
 
+  // const handleSubmit = () => {
+  //   if (checkAllFilled()) {
+  //     setFormData({
+  //       ...formData,
+  //       sessionType: sessionType,
+  //     });
+
+  //     console.log(sessionType);
+  //     console.log("rindu");
+
+  //     // if value is Individual, go to third view
+  //     if (sessionType === "Individual") {
+  //       onNext(3);
+  //     } else {
+  //       // navigate(FCEO_REGIST);
+  //       // location replace to /fceo/register
+  //       // navigate(`/fceo/register`);
+  //       onNext(10);
+  //     }
+  //   }
+  // };
+
   return (
     <div>
       <Navbar />
@@ -1159,142 +1181,816 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
     );
 };
 
-const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
-    const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
-    const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+// for team regist
+const TenView = ({
+  formData,
+  setFormData,
+  sanitizeInput,
+  onPrevious,
+  onNext,
+}) => {
+  const { profileData } = useUser();
 
-    const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
-    const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
-    const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
 
-    //handling file change
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
+  useEffect(() => {
+    setFullName(profileData?.fullname);
+    setGender(profileData?.gender);
+    setEmail(profileData?.email);
+    setPhoneNumber(profileData?.phoneNumber);
+    setUniversity(profileData?.institution);
+    setMajor(profileData?.major);
+    setBatch(profileData?.batch);
+  }, [profileData]);
 
-        const file = files[0];
-        
-        if (!checkFileSize(file)) {
-          return;
-        }
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("+62 ");
+  const [university, setUniversity] = useState("");
+  const [major, setMajor] = useState("");
+  const [batch, setBatch] = useState("");
 
-        if (!checkFileType(file)) {
-          return;
-        }
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
-        setFormData((prevState) => ({
-          ...prevState,
-          [name]: files ? file : value,
-        }));
-        setProofPayment(file?.name);
-    };
-
-    //saving referral code
-    useEffect(() => {
-        setFormData({
-            ...formData,
-            referralCode: verifiedRefCode
-        });
-    }, [verifiedRefCode]);
-
-    //checking payment proof
-    const handleNext = () => {
-        if (checkPayment && proofPayment) {
-            onNext();
-        } else {
-          errorAlert({ message: "Proof must be uploaded"});
-        }
+  const checkAllFilled = () => {
+    if (
+      fullName &&
+      gender &&
+      email &&
+      phoneNumber &&
+      university &&
+      major &&
+      batch
+    ) {
+      return true;
     }
+    errorAlert({ message: "All fields must be filled"});
+    return false;
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    let inputValue = e.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, "");
+
+    if (!numericValue.startsWith("62")) {
+      if (numericValue.startsWith("0")) {
+        numericValue = numericValue.slice(1);
+      }
+      numericValue = `62${numericValue}`;
+    }
+
+    setPhoneNumber(numericValue);
+  };
+
+  const formatPhoneNumber = () => {
+    if (phoneNumber.length < 10) {
+      setPhoneError("Please enter a valid phone number");
+    } else {
+      setPhoneError("");
+    }
+    const formattedValue = phoneNumber.replace(
+      /(\d{2})(\d{4})(\d{4})(\d*)/,
+      "+62 $2 $3 $4"
+    );
+    setPhoneNumber(formattedValue);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e.target.value)) {
+      setEmailError("Email must be a valid email address");
+    } else {
+      setEmailError("");
+    }
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (checkAllFilled()) {
+      if (!emailError && !phoneError) {
+        formData = {
+          ...formData,
+          fullName: sanitizeInput(fullName),
+          gender: sanitizeInput(gender),
+          email: email,
+          phoneNumber: phoneNumber,
+          university: sanitizeInput(university),
+          major: sanitizeInput(major),
+          batch: batch,
+        };
+        setFormData(formData);
+        onNext();
+      }
+    }
+  };
 
     return (
         <div>
-        <Navbar />
-        <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
-                <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
-                    <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
-                        <p className='text-white mx-4 mb-2 text-center'>
-                            Please transfer the following amount to complete your registration
-                        </p>
-                        <div className='text-white text-left w-40'>
-                            <div className='flex flex-row justify-between'>
-                                <p><strong>Price: </strong></p>
-                                <p>{regularPrice}</p>
-                            </div>
-                        {
-                            verifiedRefCode && refCodeValid && (
-                                <>
-                                <div className='flex flex-row justify-between'>
-                                <p><strong>Discount:</strong></p>
-                                <p>{discount}</p>
-                                </div>
-                                <div className='flex flex-row justify-between'>
-                                <p><strong>Total:</strong></p>
-                                <p><strong>{discountedPrice}</strong></p>
-                                </div>
-                                </>
-                            )
-                        }
-                        </div>
-                        <p className='text-white mx-4 text-center'>
-                            <strong>Bank Account Number: </strong>{bankAccount}
-                        </p>
-                    <div className='mt-4'>
-                        <label className='block text-white mb-2'>
+            <Navbar />
+            <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+                <div className='bg-primary-4 mx-2 p-8 my-8 rounded-xl shadow-lg max-w-3xl'>
+                    <h1 className='text-3xl font-bold text-gradient text-center mb-2'>Team Registrant</h1>
+                    <p className='text-white text-center font-bold mb-6'>You can edit your personal information
+                        <Link to={USER_DETAILS_PAGE}
+                        className='text-yellow-500'
+                        > here</Link>
+                    </p>
+                    <div className='my-2 px-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Full Name</label>
                             <input
-                                type='checkbox'
-                                name='checkPayment'
-                                checked={checkPayment}
-                                onChange={(e) => setCheckPayment(e.target.checked)}
-                                className='mr-2'
+                                type='text'
+                                id='fullName'
+                                name='fullName'
+                                value={fullName}
+                                disabled={true}
+                                onChange={(e) => setFullName(e.target.value)}
+                                className='w-full px-3 py-2 rounded-lg'
                             />
-                            I have paid the registration fee
-                        </label>
-                        <div className='my-4 relative'>
-                            <input
-                                type='file'
-                                id='proofPayment'
-                                name='proofPayment'
-                                onChange={handleChange}
-                                className='absolute inset-0 opacity-0 cursor-pointer'
-                            />
-                            <label
-                                htmlFor='proofPayment'
-                                className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 text-left">
+                        <div className='mb-4 md:w-80'>
+                            <label className='block text-white mb-2' htmlFor='gender'>Gender</label>
+                            <select
+                                id='gender'
+                                name='gender'
+                                value={gender}
+                                onChange={(e) => setGender(e.target.value)}
+                                disabled={true}
+                                className='w-full px-3 py-2 rounded-lg'
                             >
-                                Submit screenshot
-                            </label>
-                            <p className='text-white mt-4'>{proofPayment}</p>
+                                <option value="" disabled>Select Gender</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='email'>Email</label>
+                            <input
+                                type='email'
+                                id='email'
+                                name='email'
+                                value={email}
+                                disabled={true}
+                                onChange={handleEmailChange}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                            {emailError && <p className='text-red-500'>{emailError}</p>}
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='phoneNumber'>Phone Number</label>
+                            <input
+                                type='text'
+                                id='phoneNumber'
+                                name='phoneNumber'
+                                value={phoneNumber}
+                                onChange={handlePhoneNumberChange}
+                                disabled={true}
+                                onBlur={formatPhoneNumber}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                            {phoneError && <p className='text-red-500'>{phoneError}</p>}
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>University</label>
+                            <input
+                                type='text'
+                                id='university'
+                                name='university'
+                                value={university}
+                                onChange={(e) => setUniversity(e.target.value)}
+                                disabled={true}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Major</label>
+                            <input
+                                type='text'
+                                id='major'
+                                name='major'
+                                value={major}
+                                onChange={(e) => setMajor(e.target.value)}
+                                disabled={true}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Batch</label>
+                            <input
+                                type='text'
+                                id='batch'
+                                name='batch'
+                                value={batch}
+                                disabled={true}
+                                onChange={(e) => setBatch(e.target.value.replace(/\D/g, "").slice(0,4))}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
                         </div>
                     </div>
-                </div>
-                <ReferralModal 
-                eventName="bmc"
-                referralCode={formData.referralCode ?? ''}
-                verifiedRefCode={verifiedRefCode}
-                setVerifiedRefCode={setVerifiedRefCode} 
-                setRefCodeValid={setRefCodeValid}
-                />
-                <div className='mt-6 flex justify-center items-center'>
+                    <div className='mt-6 flex justify-between items-center'>
                     <button
-                        type='button'
-                        onClick={onPrevious}
-                        className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
-                    >
-                    Back
+                            type='button'
+                            onClick={onPrevious}
+                            className='text-white px-6 py-2 mr-6 rounded-full hover:text-gradient'
+                        >
+                            Back
                     </button>
                     <button
-                        type='button'
-                        onClick={handleNext}
-                        className='bg-primary-3 text-white px-6 py-2 rounded-full'
-                    >
-                    Next
+                            type='button'
+                            onClick={handleSubmit}
+                            className='text-white px-6 py-2 rounded-full hover:text-gradient'
+                            disabled={emailError || phoneError}
+                        >
+                            Next
                     </button>
+                    </div>
+               
                 </div>
             </div>
         </div>
+    );
+};
+
+// for member1data
+const Member1Data = ({
+  members,
+  formData,
+  setFormData,
+  onPrevious,
+  goToSummary,
+  goToNext,
+  sanitizeInput,
+}) => {
+  const { profileData } = useUser();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  // useEffect(() => {
+  //   setFullName(profileData?.fullname);
+  //   setGender(profileData?.gender);
+  //   setEmail(profileData?.email);
+  //   setPhoneNumber(profileData?.phoneNumber);
+  //   setUniversity(profileData?.institution);
+  //   setMajor(profileData?.major);
+  //   setBatch(profileData?.batch);
+  // }, [profileData]);
+
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("+62 ");
+  const [university, setUniversity] = useState("");
+  const [major, setMajor] = useState("");
+  const [batch, setBatch] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+
+  const handleSubmit = () => {
+    if (checkAllFilled()) {
+      if (!emailError && !phoneError) {
+        formData = {
+          ...formData,
+          fullName: sanitizeInput(fullName),
+          gender: sanitizeInput(gender),
+          email: email,
+          phoneNumber: phoneNumber,
+          university: sanitizeInput(university),
+          major: sanitizeInput(major),
+          batch: batch,
+        };
+        setFormData(formData);
+      }
+
+      goToNext();
+      
+    } else {
+      errorAlert({ message: "All fields must be filled"});
+    }
+  };
+
+  const checkAllFilled = () => {
+    if (fullName && gender && university && major && batch && phoneNumber && email) {
+      return true;
+    }
+    return false;
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    let inputValue = e.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, "");
+
+    if (!numericValue.startsWith("62")) {
+      if (numericValue.startsWith("0")) {
+        numericValue = numericValue.slice(1);
+      }
+      numericValue = `62${numericValue}`;
+    }
+
+    setPhoneNumber(numericValue);
+  };
+
+  const formatPhoneNumber = () => {
+    if (phoneNumber.length < 10) {
+      setPhoneError("Please enter a valid phone number");
+    } else {
+      setPhoneError("");
+    }
+    const formattedValue = phoneNumber.replace(
+      /(\d{2})(\d{4})(\d{4})(\d*)/,
+      "+62 $2 $3 $4"
+    );
+    setPhoneNumber(formattedValue);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e.target.value)) {
+      setEmailError("Email must be a valid email address");
+    } else {
+      setEmailError("");
+    }
+    setEmail(e.target.value);
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen py-16">
+        <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-xl sm:shadow-lg text-center max-w-md mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-4">
+            Member 1 Data
+          </h1>
+          <form className="text-left">
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="fullName">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="gender">
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              >
+                <option value="" disabled>
+                  Select Gender
+                </option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+              {emailError && <p className="text-red-500">{emailError}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="phoneNumber">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                onBlur={formatPhoneNumber}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+              {phoneError && <p className="text-red-500">{phoneError}</p>}
+            </div>
+            <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>University</label>
+                            <input
+                                type='text'
+                                id='university'
+                                name='university'
+                                value={university}
+                                onChange={(e) => setUniversity(e.target.value)}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Major</label>
+                            <input
+                                type='text'
+                                id='major'
+                                name='major'
+                                value={major}
+                                onChange={(e) => setMajor(e.target.value)}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Batch</label>
+                            <input
+                                type='text'
+                                id='batch'
+                                name='batch'
+                                value={batch}
+                                onChange={(e) => setBatch(e.target.value.replace(/\D/g, "").slice(0,4))}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+          </form>
+          <div className="mt-6 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={onPrevious}
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                handleSubmit();
+              }}
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
+              disabled={emailError || phoneError}
+            >
+              Next
+            </button>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
+};
+
+//for member2 data
+const Member2Data = ({
+  members,
+  formData,
+  setFormData,
+  onPrevious,
+  goToSummary,
+  goToNext,
+  sanitizeInput,
+}) => {
+  const { profileData } = useUser();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("+62 ");
+  const [university, setUniversity] = useState("");
+  const [major, setMajor] = useState("");
+  const [batch, setBatch] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+
+  const handleSubmit = () => {
+    if (checkAllFilled()) {
+      if (!emailError && !phoneError) {
+        formData = {
+          ...formData,
+          fullName: sanitizeInput(fullName),
+          gender: sanitizeInput(gender),
+          email: email,
+          phoneNumber: phoneNumber,
+          university: sanitizeInput(university),
+          major: sanitizeInput(major),
+          batch: batch,
+        };
+        setFormData(formData);
+      }
+
+      goToNext();
+      
+    } else {
+      errorAlert({ message: "All fields must be filled"});
+    }
+  };
+
+  const checkAllFilled = () => {
+    if (fullName && gender && university && major && batch && phoneNumber && email) {
+      return true;
+    }
+    return false;
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    let inputValue = e.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, "");
+
+    if (!numericValue.startsWith("62")) {
+      if (numericValue.startsWith("0")) {
+        numericValue = numericValue.slice(1);
+      }
+      numericValue = `62${numericValue}`;
+    }
+
+    setPhoneNumber(numericValue);
+  };
+
+  const formatPhoneNumber = () => {
+    if (phoneNumber.length < 10) {
+      setPhoneError("Please enter a valid phone number");
+    } else {
+      setPhoneError("");
+    }
+    const formattedValue = phoneNumber.replace(
+      /(\d{2})(\d{4})(\d{4})(\d*)/,
+      "+62 $2 $3 $4"
+    );
+    setPhoneNumber(formattedValue);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e.target.value)) {
+      setEmailError("Email must be a valid email address");
+    } else {
+      setEmailError("");
+    }
+    setEmail(e.target.value);
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen py-16">
+        <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-xl sm:shadow-lg text-center max-w-md mx-auto">
+          <h1 className="text-3xl font-bold text-white mb-4">
+            Member 2 Data
+          </h1>
+          <form className="text-left">
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="fullName">
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="gender">
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              >
+                <option value="" disabled>
+                  Select Gender
+                </option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+              {emailError && <p className="text-red-500">{emailError}</p>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="phoneNumber">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                onBlur={formatPhoneNumber}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+              {phoneError && <p className="text-red-500">{phoneError}</p>}
+            </div>
+            <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>University</label>
+                            <input
+                                type='text'
+                                id='university'
+                                name='university'
+                                value={university}
+                                onChange={(e) => setUniversity(e.target.value)}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Major</label>
+                            <input
+                                type='text'
+                                id='major'
+                                name='major'
+                                value={major}
+                                onChange={(e) => setMajor(e.target.value)}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+                        <div className='mb-4'>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Batch</label>
+                            <input
+                                type='text'
+                                id='batch'
+                                name='batch'
+                                value={batch}
+                                onChange={(e) => setBatch(e.target.value.replace(/\D/g, "").slice(0,4))}
+                                className='w-full px-3 py-2 rounded-lg'
+                            />
+                        </div>
+          </form>
+          <div className="mt-6 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={onPrevious}
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                handleSubmit();
+              }}
+              className="text-white px-6 py-2 rounded-full hover:text-gradient"
+              disabled={emailError || phoneError}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
+  const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
+  const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+  const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+  const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+
+  // Menentukan harga berdasarkan sessionType
+  const sessionPrice = formData.sessionType === "Team" ? 200000 : 50000;
+
+  // Handling file change
+  const handleChange = (e) => {
+      const { name, files } = e.target;
+      const file = files[0];
+
+      if (!checkFileSize(file) || !checkFileType(file)) return;
+
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: file,
+      }));
+      setProofPayment(file?.name);
+  };
+
+  // Saving referral code
+  useEffect(() => {
+      setFormData({
+          ...formData,
+          referralCode: verifiedRefCode
+      });
+  }, [verifiedRefCode]);
+
+  // Checking payment proof
+  const handleNext = () => {
+      if (checkPayment && proofPayment) {
+          onNext();
+      } else {
+        errorAlert({ message: "Proof must be uploaded"});
+      }
+  }
+
+  return (
+      <div>
+          <Navbar />
+          <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+              <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+                  <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+                      <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+                      <p className='text-white mx-4 mb-2 text-center'>
+                          Please transfer the following amount to complete your registration
+                      </p>
+                      <div className='text-white text-left w-40'>
+                          <div className='flex flex-row justify-between'>
+                              <p><strong>Price: </strong></p>
+                              <p>Rp {sessionPrice.toLocaleString('id-ID')}</p>
+                          </div>
+                      </div>
+                      <p className='text-white mx-4 text-center'>
+                          <strong>Bank Account Number: </strong>{eventData.bankAccount}
+                      </p>
+                      <div className='mt-4'>
+                          <label className='block text-white mb-2'>
+                              <input
+                                  type='checkbox'
+                                  name='checkPayment'
+                                  checked={checkPayment}
+                                  onChange={(e) => setCheckPayment(e.target.checked)}
+                                  className='mr-2'
+                              />
+                              I have paid the registration fee
+                          </label>
+                          <div className='my-4 relative'>
+                              <input
+                                  type='file'
+                                  id='proofPayment'
+                                  name='proofPayment'
+                                  onChange={handleChange}
+                                  className='absolute inset-0 opacity-0 cursor-pointer'
+                              />
+                              <label
+                                  htmlFor='proofPayment'
+                                  className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                              >
+                                  Submit screenshot
+                              </label>
+                              <p className='text-white mt-4'>{proofPayment}</p>
+                          </div>
+                      </div>
+                  </div>
+                  <ReferralModal 
+                      eventName="bmc"
+                      referralCode={formData.referralCode ?? ''}
+                      verifiedRefCode={verifiedRefCode}
+                      setVerifiedRefCode={setVerifiedRefCode} 
+                      setRefCodeValid={setRefCodeValid}
+                  />
+                  <div className='mt-6 flex justify-center items-center'>
+                      <button
+                          type='button'
+                          onClick={onPrevious}
+                          className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                      >
+                      Back
+                      </button>
+                      <button
+                          type='button'
+                          onClick={handleNext}
+                          className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                      >
+                      Next
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  )
 }
+
 
 const Summary = ({ formData, onPrevious }) => {
   useEffect(() => {
@@ -1503,8 +2199,18 @@ const EventCard = () => {
   };
 
     switch (currentView) {
-        case 1:
-            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
+        case 1: 
+            // return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
+            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{
+                if (formData.sessionType === "Individual") {
+                  setCurrentView(3);
+              } else if (formData.sessionType === "Team") {
+                  setCurrentView(10);
+              } else {
+                  // Handle the case where sessionType is not set or invalid
+                  console.error("Invalid sessionType");
+              }
+            }} />;
         case 2:
             //skipped cus agreement paper is cancelled
         case 3:
@@ -1520,11 +2226,17 @@ const EventCard = () => {
         case 8:
             return <EighthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 9:
-            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext} />;
+            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={setCurrentView(13)} />;
         case 10:
+          return <TenView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext} />;
+        case 11:
+          return <Member1Data formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(10)}} goToNext={()=>{setCurrentView((12))}}/>;
+        case 12:
+          return <Member2Data formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(11)}} goToNext={()=>{setCurrentView((13))}}/>;
+        case 13:
             //skipped
             return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
-        case 11:
+        case 14:
             return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(9)}}/>
         default:
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
