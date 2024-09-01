@@ -5,7 +5,7 @@ import ReferralModal from "../../components/referral-modal";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
-import { postNewFceoMember, postNewFceoTeam } from "../../service/services";
+import { postNewIbpcMember, postNewIbpcTeam } from "../../service/services";
 import { errorAlert, successAlert } from "../../components/alert";
 
 const FirstView = ({
@@ -22,46 +22,46 @@ const FirstView = ({
     setFullName(profileData?.fullname);
     setEmail(profileData?.email);
     setPhoneNumber(profileData?.phoneNumber);
-    setSchool(profileData?.institution);
+    setinstitution(profileData?.institution);
     setBatch(profileData?.batch);
   }, [profileData]);
 
   const [fullName, setFullName] = useState("");
-  const [school, setSchool] = useState("");
+  const [institution, setinstitution] = useState("");
   const [batch, setBatch] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("+62");
   const [email, setEmail] = useState("");
   const [teamName, setTeamName] = useState(formData.teamName ?? "");
   const [members, setMembers] = useState(3);
   const [studentIds, setStudentIds] = useState(formData.studentIds?.name ?? "");
-  const [proofFollow, setProofFollow] = useState(
-    formData.proofFollow?.name ?? ""
+  const [proofOfFollow, setproofOfFollow] = useState(
+    formData.proofOfFollow?.name ?? ""
   );
-  const [proofTwibbon, setProofTwibbon] = useState(
-    formData.proofTwibbon?.name ?? ""
+  const [proofOfTwibbon, setproofOfTwibbon] = useState(
+    formData.proofOfTwibbon ?? ""
   );
-  const [proofStory, setProofStory] = useState(formData.proofStory?.name ?? ""
+  const [proofOfStory, setproofOfStory] = useState(formData.proofOfStory?.name ?? ""
   );
-  const [proofComment, setProofComment] = useState(formData.proofComment?.name ?? ""
+  const [proofOfComment, setproofOfComment] = useState(formData.proofOfComment?.name ?? ""
   );
-  const [proofPayment, setProofPayment] = useState(
-    formData.proofPayment?.name ?? ""
+  const [proofOfPayment, setproofOfPayment] = useState(
+    formData.proofOfPayment?.name ?? ""
   );
   const [originalityStatement, setOriginalityStatement] = useState(
     formData.originalityStatement?.name ?? ""
   )
 
-  const [eventSource, setEventSource] = useState(formData.eventSource ?? "");
-  const [eventSourceOther, setEventSourceOther] = useState(
-    formData.eventSourceOther ?? "Other"
+  const [question, setquestion] = useState(formData.question?.name ?? "");
+  const [questionOther, setquestionOther] = useState(
+    formData.questionOther?.name ?? "Other"
   );
-  const [option, setOption] = useState(formData.eventSource ?? "");
+  const [option, setOption] = useState(formData.question?.name ?? "");
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
-    setEventSource(e.target.value);
+    setquestion(e.target.value);
     if (e.target.value !== 4) {
-      setEventSourceOther("");
+      setquestionOther("");
     }
   };
 
@@ -89,12 +89,13 @@ const FirstView = ({
           fullName: sanitizeInput(fullName),
           email: email,
           phoneNumber: phoneNumber,
-          school: sanitizeInput(school),
+          institution: sanitizeInput(institution),
           batch : batch,
           teamName: sanitizeInput(teamName),
           members: 3,
-          eventSource : eventSource,
-          eventSourceOther : eventSourceOther,
+          proofOfTwibbon: sanitizeInput(proofOfTwibbon),
+          question : question,
+          questionOther : questionOther,
         };
         setFormData(formData);
         onNext();
@@ -114,20 +115,20 @@ const FirstView = ({
 
   const checkAllFilled = () => {
     if (
-      proofPayment &&
+      proofOfPayment &&
       fullName &&
       email &&
       phoneNumber &&
-      school &&
+      institution &&
       batch &&
       teamName &&
       members && 
       studentIds &&
-      proofFollow &&
-      proofTwibbon &&
-      proofStory && 
-      proofComment && 
-      eventSource &&
+      proofOfFollow &&
+      proofOfTwibbon &&
+      proofOfStory && 
+      proofOfComment && 
+      question &&
       originalityStatement
     ) {
       return true;
@@ -193,18 +194,18 @@ const FirstView = ({
     }));
     if (name === "studentIds") {
       setStudentIds(file.name);
-    } else if (name === "proofFollow") {
-      setProofFollow(file.name);
-    } else if (name === "proofTwibbon") {
-      setProofTwibbon(file.name);
-    } else if (name === "proofStory") {
-      setProofStory(file.name);
-    } else if (name === "proofComment") {
-      setProofComment(file.name);
-    } else if (name === "proofPayment") {
-      setProofPayment(file.name);
-    } else if (name === "eventSource") {
-      setEventSource(file.name);
+    } else if (name === "proofOfFollow") {
+      setproofOfFollow(file.name);
+    // } else if (name === "proofOfTwibbon") {
+    //   setproofOfTwibbon(file.name);
+    } else if (name === "proofOfStory") {
+      setproofOfStory(file.name);
+    } else if (name === "proofOfComment") {
+      setproofOfComment(file.name);
+    } else if (name === "proofOfPayment") {
+      setproofOfPayment(file.name);
+    } else if (name === "question") {
+      setquestion(file.name);
     } else if (name === "originalityStatement") {
       setOriginalityStatement(file.name);
     }
@@ -221,7 +222,7 @@ const FirstView = ({
   
   const checkFileType = (file) => {
       if (
-        file.type === "application/pdf"
+        file.type === "application/pdf" 
       ) {
         return true;
       }
@@ -273,8 +274,8 @@ const FirstView = ({
     <div>
       <Navbar />
       <div className="bg-primary-1 text-center py-8">
-        <h1 className="text-3xl font-bold text-white">
-              Business Plan Competition Registration
+        <h1 className="text-2xl font-bold text-white">
+              Internasional Business Plan Competition Registration
         </h1>
       </div>
       <div className="bg-primary-1 lg:space-x-8 lg:gap-y-4 lg:px-16 min-h-screen grid grid-cols-1 lg:grid-cols-3">
@@ -315,7 +316,7 @@ const FirstView = ({
           </div>
           <div className="bg-primary-4 mt-4 rounded-lg">
           <ReferralModal
-            eventName="fceo"
+            eventName="ibc_bpc"
             referralCode={formData.referralCode ?? ""}
             verifiedRefCode={verifiedRefCode}
             setVerifiedRefCode={setVerifiedRefCode}
@@ -380,16 +381,16 @@ const FirstView = ({
               {phoneError && <p className="text-yellow-500">{phoneError}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="school">
-                School
+              <label className="block text-white mb-2" htmlFor="institution">
+                Institution
               </label>
               <input
                 type="text"
-                id="school"
-                name="school"
-                value={school}
+                id="institution"
+                name="institution"
+                value={institution}
                 disabled={true}
-                onChange={(e) => setSchool(e.target.value)}
+                onChange={(e) => setinstitution(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
@@ -463,19 +464,19 @@ const FirstView = ({
               <div className="relative">
               <input
                   type="file"
-                  id="proofPayment"
-                  name="proofPayment"
+                  id="proofOfPayment"
+                  name="proofOfPayment"
                   onChange={handleChange}
                   className="absolute inset-0 opacity-0 cursor-pointer"
                 />
                 <label
-                  htmlFor="proofPayment"
+                  htmlFor="proofOfPayment"
                   className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
                 >
                 Choose file
               </label>
               </div>
-              <div className="text-sm text-white ml-2 max-w-full">{proofPayment}</div>
+              <div className="text-sm text-white ml-2 max-w-full">{proofOfPayment}</div>
             </div>
             <p className="block text-white">Student ID (all members)</p>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
@@ -504,40 +505,35 @@ const FirstView = ({
               <div className="relative">              
               <input
                 type="file"
-                id="proofFollow"
-                name="proofFollow"
+                id="proofOfFollow"
+                name="proofOfFollow"
                 onChange={handleChange}
                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
               />
               <label
-                htmlFor="proofFollow"
+                htmlFor="proofOfFollow"
                 className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
               >
                 Choose file
               </label>
               </div>
-              <label className="text-sm text-white ml-2">{proofFollow}</label>
+              <label className="text-sm text-white ml-2">{proofOfFollow}</label>
             </div>
             <label className="block text-white">
               Proof of Twibbon post (all members)
             </label>
-            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
-              <div className="relative">              
-                <input
-                type="file"
-                id="proofTwibbon"
-                name="proofTwibbon"
-                onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer z-10"
-              />
-              <label
-                htmlFor="proofTwibbon"
-                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
-              >
-                Choose file
+            <div className="mb-4">
+              <label className="block text-white mb-2" htmlFor="proofOfTwibbon">
+                Link:
               </label>
-              </div>
-              <label className="text-sm text-white ml-2">{proofTwibbon}</label>
+              <input
+                type="text"
+                id="proofOfTwibbon"
+                name="proofOfTwibbon"
+                value={proofOfTwibbon}
+                onChange={(e) => setproofOfTwibbon(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
             </div>
             <label className="block text-white">
               Proof of sharing Instagram story posters (all members)
@@ -546,19 +542,19 @@ const FirstView = ({
               <div className="relative">              
                 <input
                 type="file"
-                id="proofStory"
-                name="proofStory"
+                id="proofOfStory"
+                name="proofOfStory"
                 onChange={handleChange}
                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
               />
               <label
-                htmlFor="proofStory"
+                htmlFor="proofOfStory"
                 className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
               >
                 Choose file
               </label>
               </div>
-              <label className="text-sm text-white ml-2">{proofStory}</label>
+              <label className="text-sm text-white ml-2">{proofOfStory}</label>
             </div>
             <label className="block text-white">
             Proof Tag 3 friends in the Open Registration Feeds comment Section (all members)
@@ -567,19 +563,19 @@ const FirstView = ({
               <div className="relative">              
                 <input
                 type="file"
-                id="proofComment"
-                name="proofComment"
+                id="proofOfComment"
+                name="proofOfComment"
                 onChange={handleChange}
                 className="absolute inset-0 opacity-0 cursor-pointer z-10"
               />
               <label
-                htmlFor="proofComment"
+                htmlFor="proofOfComment"
                 className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
               >
                 Choose file
               </label>
               </div>
-              <label className="text-sm text-white ml-2">{proofComment}</label>
+              <label className="text-sm text-white ml-2">{proofOfComment}</label>
             </div>
 
             {/* originalityStatement */}
@@ -615,15 +611,15 @@ const FirstView = ({
               <div className="grid grid-cols-2 gap-4 text-left">
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
-                    id="eventSource1"
-                    name="eventSourceRadio"
+                    id="question1"
+                    name="questionRadio"
                     type="radio"
                     value="Instagram"
                     checked={option === "Instagram"}
                     onChange={handleOptionChange}
                   />
                   <label
-                    htmlFor="eventSource1"
+                    htmlFor="question1"
                     className="w-full ml-2 text-xs sm:text-sm text-gray-800"
                   >
                     SxC InterSummit Instagram
@@ -631,15 +627,15 @@ const FirstView = ({
                 </div>
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
-                    id="eventSource2"
-                    name="eventSourceRadio"
+                    id="question2"
+                    name="questionRadio"
                     type="radio"
                     value="LinkedIn"
                     checked={option === "LinkedIn"}
                     onChange={handleOptionChange}
                   />
                   <label
-                    htmlFor="eventSource2"
+                    htmlFor="question2"
                     className="w-full ml-2 text-xs sm:text-sm text-gray-800"
                   >
                     SxC InterSummit LinkedIn
@@ -647,15 +643,15 @@ const FirstView = ({
                 </div>
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
-                    id="eventSource3"
-                    name="eventSourceRadio"
+                    id="question3"
+                    name="questionRadio"
                     type="radio"
                     value="Tiktok"
                     checked={option === "Tiktok"}
                     onChange={handleOptionChange}
                   />
                   <label
-                    htmlFor="eventSource3"
+                    htmlFor="question3"
                     className="w-full ml-2 text-xs sm:text-sm text-gray-800"
                   >
                     SxC InterSummit Tiktok
@@ -663,15 +659,15 @@ const FirstView = ({
                 </div>
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
-                    id="eventSource4"
-                    name="eventSourceRadio"
+                    id="question4"
+                    name="questionRadio"
                     type="radio"
                     value="Media Partners"
                     checked={option === "Media Partners"}
                     onChange={handleOptionChange}
                   />
                   <label
-                    htmlFor="eventSource4"
+                    htmlFor="question4"
                     className="w-full ml-2 text-xs sm:text-sm text-gray-800"
                   >
                     Media Partners
@@ -679,21 +675,21 @@ const FirstView = ({
                 </div>
                 <div className="flex p-4 col-span-2 text-xs sm:text-sm items-center bg-gray-100 border-gray-300 rounded">
                   <input
-                    id="eventSource5"
-                    name="eventSourceRadio"
+                    id="question5"
+                    name="questionRadio"
                     type="radio"
                     value="Other"
                     checked={option === "Other"}
                     onChange={handleOptionChange}
                   />
                   <input
-                    id="eventSource5"
+                    id="question5"
                     className="ml-2 bg-gray-100 w-full"
-                    name="eventSource"
+                    name="question"
                     type="text"
-                    value={eventSourceOther}
+                    value={questionOther}
                     placeholder="Other"
-                    onChange={(e) => setEventSourceOther(e.target.value)}
+                    onChange={(e) => setquestionOther(e.target.value)}
                     disabled={option !== "Other"}
                   />
                 </div>
@@ -725,7 +721,7 @@ const Member1Data = ({
   sanitizeInput,
 }) => {
   const [fullName, setFullName] = useState(formData.fullName ?? "");
-  const [school, setSchool] = useState(formData.school ?? "");
+  const [institution, setinstitution] = useState(formData.institution ?? "");
   const [batch, setBatch] = useState(formData.batch ?? "");
   const [phoneNumber, setPhoneNumber] = useState(formData.phoneNumber ?? "+62");
   const [email, setEmail] = useState(formData.email ?? "");
@@ -745,7 +741,7 @@ const Member1Data = ({
           fullName: sanitizeInput(fullName),
           email: email,
           phoneNumber: phoneNumber,
-          school: sanitizeInput(school),
+          institution: sanitizeInput(institution),
           batch: batch,
         };
         setFormData(formData);
@@ -759,7 +755,7 @@ const Member1Data = ({
   };
 
   const checkAllFilled = () => {
-    if (fullName && batch && school && phoneNumber && email) {
+    if (fullName && batch && institution && phoneNumber && email) {
       return true;
     }
     return false;
@@ -856,14 +852,14 @@ const Member1Data = ({
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
-                School
+                institution
               </label>
               <input
                 type="text"
-                id="school"
-                name="school"
-                value={school}
-                onChange={(e) => setSchool(e.target.value)}
+                id="institution"
+                name="institution"
+                value={institution}
+                onChange={(e) => setinstitution(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
@@ -922,7 +918,7 @@ const Member2Data = ({
   sanitizeInput,
 }) => {
   const [fullName, setFullName] = useState(formData.fullName ?? "");
-  const [school, setSchool] = useState(formData.school ?? "");
+  const [institution, setInstitution] = useState(formData.institution ?? "");
   const [batch, setBatch] = useState(formData.batch ?? "");
   const [phoneNumber, setPhoneNumber] = useState(formData.phoneNumber ?? "+62");
   const [email, setEmail] = useState(formData.email ?? "");
@@ -954,7 +950,7 @@ const Member2Data = ({
           fullName: sanitizeInput(fullName),
           email: email,
           phoneNumber: phoneNumber,
-          school: sanitizeInput(school),
+          institution: sanitizeInput(institution),
           batch: batch,
         };
         setFormData(formData);
@@ -966,7 +962,7 @@ const Member2Data = ({
   };
 
   const checkAllFilled = () => {
-    if (fullName && batch && email && phoneNumber && school) {
+    if (fullName && batch && email && phoneNumber && institution) {
       return true;
     }
     return false;
@@ -1063,14 +1059,14 @@ const Member2Data = ({
             </div>
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
-                School
+                Institution
               </label>
               <input
                 type="text"
-                id="school"
-                name="school"
-                value={school}
-                onChange={(e) => setSchool(e.target.value)}
+                id="institution"
+                name="institution"
+                value={institution}
+                onChange={(e) => setInstitution(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
@@ -1079,6 +1075,7 @@ const Member2Data = ({
                 Batch
               </label>
               <select
+                type="integer"
                 id="batch"
                 name="batch"
                 value={batch}
@@ -1124,7 +1121,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
   const { setRegisteredCompetitions } = useUser();
   const membersData = [member1Data, member2Data];
 
-  const { fceoId } = eventData;
+  const { ibpcId } = eventData;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1134,15 +1131,15 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
     try {
       setIsLoading(true);
       const response = await registerTeam(formData);
-      if (response.team.id) {
+      if (response.teamId) {
         let memberCounter = 1;
         for (const member of membersData) {
           if (member.fullName) {
             const memberData = {
-              teamId: response.team.id,
+              teamId: response.teamId,
               fullname: member.fullName,
               email: member.email,
-              school: member.school,
+              institution: member.institution,
               batch: member.batch,
               phoneNumber: member.phoneNumber,
             };
@@ -1158,8 +1155,8 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                     activeTab: "competitions",
                   },
                 });
-                setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
-                successAlert({ title: "Successfully registered for Business Plan Competition!",
+                setRegisteredCompetitions((prevData) => [...prevData, ibpcId]);
+                successAlert({ title: "Successfully registered for International Business Plan Competition!",
                   message: "Please check your email and user dashboard for further details."
                 });
               }
@@ -1184,7 +1181,8 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   const registerTeam = async (data) => {
     try {
-      const response = await postNewFceoTeam(data);
+      const response = await postNewIbpcTeam(data);
+      console.log(response);
       return response;
     } catch (error) {
       throw error;
@@ -1193,7 +1191,8 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   const registerMember = async (data) => {
     try {
-      const response = await postNewFceoMember(data);
+      const response = await postNewIbpcMember(data);
+      console.log(response);
     } catch (error) {
       throw error;
     }
@@ -1247,30 +1246,42 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 <strong>Team Name:</strong> {formData.teamName}
               </p>
               <p>
-                <strong>Student IDs:</strong> {formData.studentIds.name}
+                <strong>Student IDs:</strong> {formData.studentIds?.name}
+              </p>
+              <p>
+                <strong>Proof of Payment:</strong>{" "}
+                {formData.proofOfPayment?.name}
               </p>
               <p>
                 <strong>Proof of Following Instagram:</strong>{" "}
-                {formData.proofFollow.name}
+                {formData.proofOfFollow?.name}
               </p>
               <p>
-                <strong>Proof of Twibbon Post:</strong>{" "}
-                {formData.proofTwibbon.name}
+                <strong>Proof of Twibbon Post:</strong>
+                {formData.proofOfTwibbon}
               </p>
               <p>
                 <strong>Proof of Sharing Instagram Story Posters:</strong>{" "}
-                {formData.proofStory.name}
+                {formData.proofOfStory?.name}
               </p>
               <p>
                 <strong>Proof of Tag 3 friends in the Open Registration Feeds comment Section:</strong>{" "}
-                {formData.proofComment.name}
+                {formData.proofOfComment?.name}
+              </p>
+              <p>
+                <strong>Proof of Originality Statement</strong>{" "}
+                {formData.originalityStatement?.name}
+              </p>
+              <p>
+                <strong>How did you know this event?</strong>{" "}
+                {formData.question}
               </p>
               <p className="text-base md:text-lg font-semibold mt-2">Team Leader</p>
               <p>
                 <strong>Full Name:</strong> {formData.fullName}
               </p>
               <p>
-                <strong>School:</strong> {formData.school}
+                <strong>institution:</strong> {formData.institution}
               </p>
               <p>
                 <strong>Batch:</strong> {formData.batch}
@@ -1305,7 +1316,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                       <strong>Full Name:</strong> {member.fullName}
                     </p>
                     <p>
-                      <strong>School:</strong> {member.school}
+                      <strong>institution:</strong> {member.institution}
                     </p>
                     <p>
                       <strong>Batch:</strong> {member.batch}
@@ -1351,7 +1362,7 @@ const EventCard = () => {
   const [member2Data, setMember2Data] = useState({});
 
   const eventData = {
-    fceoId: 1,
+    ibpcId: 3,
     bankAccount: "xxx",
     bank: "xxx",
     recipient: "xxx",

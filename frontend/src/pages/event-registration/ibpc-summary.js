@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import Spinner from '../../components/elements/spinner';
-import { getFceoRegistrationData } from '../../service/services';
+import { getIbpcRegistrationData } from '../../service/services';
 
 const IBPCSummary = () => {
     const { profileData, isLoggedIn, loading } = useUser();
@@ -26,8 +26,9 @@ const IBPCSummary = () => {
     const fetchRegistrationData = async () => {
         try {
             setIsLoading(true);
-            const response = await getFceoRegistrationData();
+            const response = await getIbpcRegistrationData();
             setTeamData(response);
+            console.log(response)
           } catch (error) {
             // Handle error
           } finally {
@@ -49,8 +50,8 @@ const IBPCSummary = () => {
             </div>    
             :
                 <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-4 md:mx-auto md:mt-8 max-w-3xl'>
-                    <h1 className='text-gradient font-bold md:col-span-3 text-4xl md:text-5xl text-center'>Business Plan Competition</h1>
-                    <p className='md:col-span-3 text-sm md:text-base text-center mx-2 sm:mx-8 md:mx-32'>Congratulations! Your team has been registered for Business Plan Competition. Please check this page and your email for updates.</p>
+                    <h1 className='text-gradient font-bold md:col-span-3 text-4xl md:text-5xl text-center'>International Business Plan Competition</h1>
+                    <p className='md:col-span-3 text-sm md:text-base text-center mx-2 sm:mx-8 md:mx-32'>Congratulations! Your team has been registered for International Business Plan Competition. Please check this page and your email for updates.</p>
                     <div className='md:col-span-2'>
                     <p className='text-xl text-gradient font-semibold mb-2'>Members Data</p>
                         <div className='bg-primary-4 mb-4 p-4 rounded-xl shadow-lg '>
@@ -68,7 +69,7 @@ const IBPCSummary = () => {
                             <p className='text-lg'>Member</p>
                             <div className='text-xs md:text-sm'>
                             <p><strong>Full Name:</strong> {member.fullname}</p>
-                            <p><strong>School:</strong> {member.school}</p>
+                            <p><strong>School:</strong> {member.institution}</p>
                             <p><strong>Batch:</strong> {member.batch}</p>
                             <p><strong>Phone:</strong> {member.phoneNumber}</p>
                             <p><strong>Email:</strong> {member.email}</p>
