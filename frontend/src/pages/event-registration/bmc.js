@@ -379,7 +379,7 @@ const ThirdView = ({
                             {phoneError && <p className='text-red-500'>{phoneError}</p>}
                         </div>
                         <div className='mb-4'>
-                            <label className='block text-white mb-2' htmlFor='fullName'>University</label>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Institution</label>
                             <input
                                 type='text'
                                 id='university'
@@ -1291,7 +1291,7 @@ const Summary = ({ formData, onPrevious }) => {
                 <p>{formData.fullName}</p>
                 <strong>Gender</strong> 
                 <p>{formData.gender}</p>
-                <strong>University</strong>
+                <strong>Institution</strong>
                 <p>{formData.university}</p>
                 <strong>Major</strong>
                 <p>{formData.major}</p>
