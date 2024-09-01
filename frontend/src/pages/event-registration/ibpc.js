@@ -38,8 +38,15 @@ const FirstView = ({
     formData.proofOfFollow?.name ?? ""
   );
   const [proofOfTwibbon, setproofOfTwibbon] = useState(
-    formData.proofOfTwibbon ?? ""
+    formData.proofOfTwibbon ?? ["", "", ""]
   );
+
+  const handleProofOfTwibbonChange = (index, value) => {
+    const updatedProofs = [...proofOfTwibbon]; // Copy the current array
+    updatedProofs[index] = value; // Update the value at the specific index
+    setproofOfTwibbon(updatedProofs); // Update the state with the modified array
+  };
+
   const [proofOfStory, setproofOfStory] = useState(formData.proofOfStory?.name ?? ""
   );
   const [proofOfComment, setproofOfComment] = useState(formData.proofOfComment?.name ?? ""
@@ -93,7 +100,7 @@ const FirstView = ({
           batch : batch,
           teamName: sanitizeInput(teamName),
           members: 3,
-          proofOfTwibbon: sanitizeInput(proofOfTwibbon),
+          proofOfTwibbon: proofOfTwibbon,
           question : question,
           questionOther : questionOther,
         };
@@ -246,7 +253,7 @@ const FirstView = ({
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = new Date("2024-09-02"); 
+    const earlyBirdStart = new Date("2024-09-01"); 
     const earlyBirdEnd = new Date("2024-09-08");
     const regularStart = new Date("2024-09-09");
     const regularEnd = new Date("2024-09-25");
@@ -526,14 +533,19 @@ const FirstView = ({
               <label className="block text-white mb-2" htmlFor="proofOfTwibbon">
                 Link:
               </label>
-              <input
-                type="text"
-                id="proofOfTwibbon"
-                name="proofOfTwibbon"
-                value={proofOfTwibbon}
-                onChange={(e) => setproofOfTwibbon(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg"
-              />
+              {[0, 1, 2].map((index) => (
+              <div key={index}>
+                <label className="text-white my-1">Proof of Twibbon {index + 1}</label>
+                <input
+                  type="text"
+                  id={`proofOfTwibbon${index}`} // Use unique IDs for each input
+                  name="proofOfTwibbon"
+                  value={proofOfTwibbon[index]} // Bind to the specific index
+                  onChange={(e) => handleProofOfTwibbonChange(index, e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg"
+                />
+              </div>
+            ))}
             </div>
             <label className="block text-white">
               Proof of sharing Instagram story posters (all members)
@@ -1257,8 +1269,8 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 {formData.proofOfFollow?.name}
               </p>
               <p>
-                <strong>Proof of Twibbon Post:</strong>
-                {formData.proofOfTwibbon}
+                <strong>Proof of Twibbon Post 1:</strong>
+                {formData.proofOfTwibbon.join(", ")}
               </p>
               <p>
                 <strong>Proof of Sharing Instagram Story Posters:</strong>{" "}
@@ -1363,13 +1375,13 @@ const EventCard = () => {
 
   const eventData = {
     ibpcId: 3,
-    bankAccount: "xxx",
-    bank: "xxx",
-    recipient: "xxx",
-    bankAccount_2: "xxx",
-    bank_2: "xxx",
-    recipient_2: "xxx",
-    discount: '5.000',
+    bankAccount: "000427101697",
+    bank: "blu by BCA DIGITAL",
+    recipient: "CLAIRINE SABATINI NAYOAN",
+    bankAccount_2: "085959773266",
+    bank_2: "GoPay",
+    recipient_2: "DIVO AZRIEL HAKIM",
+    discount: '5000',
     regularPrice: '150.000',
     discountedPrice: 'xxx',
   };
