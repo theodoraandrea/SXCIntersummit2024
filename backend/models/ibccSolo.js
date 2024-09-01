@@ -92,7 +92,7 @@ const IBCC_Solo = sequelize.define(
     }
   },
   {
-    tableName: "ibccSolo",
+    tableName: "ibccsolo",
     timestamps: true,
   }
 );

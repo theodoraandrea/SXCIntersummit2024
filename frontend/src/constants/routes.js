@@ -13,4 +13,4 @@ export const BMC_REGIST = "/bmc/register";
 export const BMC_REGIST_SUMMARY = "/bmc/summary";
 export const FCEO_REGIST = "/fceo/register";
 export const FCEO_REGIST_SUMMARY = "/fceo/summary";
-export const IBCC = "/ibcc/register";
+export const IBCC_REGIST = "/ibcc/register";

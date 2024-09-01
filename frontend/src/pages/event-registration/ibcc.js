@@ -321,7 +321,9 @@ const IndividualView = ({}) => {
     <div>
       <Navbar/>
       <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-        <div></div>
+        <div>
+
+        </div>
       </div>
     </div>
   );
@@ -794,8 +796,10 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
   const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
   const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
-  // Menentukan harga berdasarkan sessionType
-  const sessionPrice = formData.sessionType === "Team" ? 200000 : 50000;
+  const { teamPrice, individualPrice, bankAccount } = eventData;
+
+  // Show price based on registrationType
+  const price = formData.registrationType === "Team" ? teamPrice : individualPrice;
 
   // Handling file change
   const handleChange = (e) => {
@@ -841,11 +845,11 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
                       <div className='text-white text-left w-40'>
                           <div className='flex flex-row justify-between'>
                               <p><strong>Price: </strong></p>
-                              <p>Rp {sessionPrice.toLocaleString('id-ID')}</p>
+                              <p>IDR {price}</p>
                           </div>
                       </div>
                       <p className='text-white mx-4 text-center'>
-                          <strong>Bank Account Number: </strong>{eventData.bankAccount}
+                          <strong>Bank Account Number: </strong>{bankAccount}
                       </p>
                       <div className='mt-4'>
                           <label className='block text-white mb-2'>
@@ -1049,10 +1053,10 @@ const EventCard = () => {
     const eventData = {
         title: "SxC International Business Challenge: Business Case Competition",
         bccId: 2,
-        // regularPrice: 50000,
-        // discountedPrice: 45000,
-        // discount: 5000,
-        // bankAccount: "BCA - [no rek]",
+        teamPrice: 200000,
+        individualPrice: 50000,
+        bankAccount: "",
+        discount: 5000
     };
 
   //All fields for BMC
@@ -1087,50 +1091,71 @@ const EventCard = () => {
     return false;
   }
 
+  const checkFileTypePdf = (file) => {
+    if (file.type === "application/pdf") {
+      return true;
+    }
+    const message = "File has to be PDF";
+    errorAlert({ message: message });
+    return false;
+  }
+
   const handleNext = () => {
     setCurrentView((prevView) => prevView + 1);
   };
 
   const handlePrevious = () => {
-    if (currentView === 7 && !formData.experience) {
-      setCurrentView((prevView) => prevView - 2);
+    if (currentView === 50) {
+      if (formData.registrationType === "Individual") {
+        setCurrentView(14);
+      } else if (formData.registrationType === "Team") {
+        setCurrentView(4);
+      }
     } else {
-      setCurrentView((prevView) => prevView - 1);
+      setCurrentView((prev) => prev - 1);
     }
-  };
-
-  const handleNext2 = () => {
-    setFormData({
-      ...formData,
-      experience: "",
-    });
-    setCurrentView((prevView) => prevView + 2);
-    
   };
 
     switch (currentView) {
         case 1: 
             // return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
             return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{
-                if (formData.sessionType === "Individual") {
-                  setCurrentView(3);
-              } else if (formData.sessionType === "Team") {
+                if (formData.registrationType === "Individual") {
                   setCurrentView(10);
+              } else if (formData.registrationType === "Team") {
+                  setCurrentView(2);
               } else {
                   // Handle the case where sessionType is not set or invalid
-                  console.error("Invalid sessionType");
+                  console.error("Invalid registration type");
               }
             }} />;
+        //TEAM REGISTRATION BRANCH
         case 2:
-          return <TenView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext} />;
+          return <TeamView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext}/>;
         case 3:
-          return <Member1Data formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(10)}} goToNext={()=>{setCurrentView((12))}}/>;
+          return <Member1Data formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={()=>{handleNext}}/>;
         case 4:
-          return <Member2Data formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(11)}} goToNext={()=>{setCurrentView((13))}}/>;
-        case 5:
-          return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
+          return <Member2Data formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={()=>{()=>{setCurrentView(50)}}}/>;
+        //////////////////////////////////
+        //INDIVIDUAL REGISTRATION BRANCH
+        case 10:
+          return <IndividualView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext}/>;
+        case 11:
+          return <SkillsQuestionnaire1 formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext}/>;
+        case 12:
+          return <SkillsQuestionnaire2 formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext}/>;
+        case 13:
+          return <SkillsQuestionnaire3 formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext}/>;
         case 14:
-          return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(9)}}/>
+          return <CommitmentQuestionnaire formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={()=>{setCurrentView(50)}}/>;
+        //////////////////////////////////
+        case 50:
+          //Upload screenshots, CV, student ID
+          return <UploadsView formData={formData} setFormData={setFormData} checkFileType={checkFileTypePdf} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
+        case 51:
+          return <PaymentView eventData={eventData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
+        case 52:
+          return <Summary eventData={eventData} formData={formData} onPrevious={handlePrevious}/>
         default:
           return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }

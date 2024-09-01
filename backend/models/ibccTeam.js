@@ -84,7 +84,7 @@ const IBCC_Team = sequelize.define(
     }
   },
   {
-    tableName: "ibccTeam",
+    tableName: "ibccteam",
     timestamps: true,
   }
 );

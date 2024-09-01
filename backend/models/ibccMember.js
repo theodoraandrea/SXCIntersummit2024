@@ -47,7 +47,7 @@ const IBCC_Member = sequelize.define(
     },
   },
   {
-    tableName: "ibccMembers",
+    tableName: "ibccmembers",
     timestamps: true,
   }
 );
