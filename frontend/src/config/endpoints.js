@@ -24,6 +24,7 @@ const GET_TWO_COMPETITIONS = "/competitions/twoComps";
 // BMC
 const BMC_REGISTRATION = "/events/BMC";
 const BMC_SUMMARY = "/events/BMC/summary";
+
 // FCEO
 const POST_NEW_FCEO_MEMBER = "/fceo/member";
 const POST_NEW_FCEO_TEAM = "/fceo/team";
