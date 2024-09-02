@@ -99,7 +99,7 @@ const FirstView = ({
           twibbon3: twibbon3,
           proofOfTwibbon: JSON.stringify([twibbon1, twibbon2, twibbon3]),
           question : question,
-          questionOther : questionOther,
+          questionOther: questionOther
         };
         setFormData(formData);
         onNext();
@@ -1149,10 +1149,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    formData = {
-      ...formData,
-      question: formData.questionOther ?? formData.question
-    }
+    console.log(formData);
   },[]);
 
   const handleSubmit = async () => {
@@ -1208,7 +1205,6 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   const registerTeam = async (data) => {
     try {
-      console.log(data);
       const response = await postNewIbpcTeam(data);
       console.log(response);
       return response;
@@ -1287,12 +1283,12 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               </p>
               <p>
                 <strong>Proof of Twibbon:</strong>
-                <ul>
+              </p>
+              <ul>
                   <li>1. {formData.twibbon1}</li>
                   <li>2. {formData.twibbon2}</li>
                   <li>3. {formData.twibbon3}</li>
                 </ul>
-              </p>
               <p>
                 <strong>Proof of Sharing Instagram Story Posters:</strong>{" "}
                 {formData.proofOfStory?.name}
