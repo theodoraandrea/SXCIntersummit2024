@@ -1,5 +1,5 @@
-const API_URL = "https://srv582502.hstgr.cloud";
-//const API_URL = "http://localhost:3001";
+//const API_URL = "https://srv582502.hstgr.cloud";
+const API_URL = "http://localhost:3001";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";
@@ -71,7 +71,7 @@ const API_POST_NEW_IBCC_INDIVIDUAL = `${API_URL}${POST_NEW_IBCC_INDIVIDUAL}`;
 const API_GET_IBCC_TEAM_SUMMARY = `${API_URL}${IBCC_TEAM_SUMMARY}`;
 const API_GET_IBCC_INDIVIDUAL_SUMMARY = `${API_URL}${IBCC_INDIVIDUAL_SUMMARY}`;
 //IBPC 
-const API_POST_NEW_IBPC_MEMBER =  `${API_URL}${POST_NEW_IBPC_TEAM}`;
+const API_POST_NEW_IBPC_MEMBER =  `${API_URL}${POST_NEW_IBPC_MEMBER}`;
 const API_POST_NEW_IBPC_TEAM = `${API_URL}${POST_NEW_IBPC_TEAM}`;
 const API_GET_IBPC_REGISTRATION = `${API_URL}${IBPC_SUMMARY}`;
 const API_POST_CHECK_IBPC_TEAMCODE = `${API_URL}${POST_CHECK_IBPC_TEAMCODE}`;

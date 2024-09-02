@@ -12,7 +12,6 @@ const FirstView = ({
   eventData,
   formData,
   setFormData,
-  onPrevious,
   onNext,
   sanitizeInput,
 }) => {
@@ -37,15 +36,10 @@ const FirstView = ({
   const [proofOfFollow, setproofOfFollow] = useState(
     formData.proofOfFollow?.name ?? ""
   );
-  const [proofOfTwibbon, setproofOfTwibbon] = useState(
-    formData.proofOfTwibbon ?? ["", "", ""]
-  );
 
-  const handleProofOfTwibbonChange = (index, value) => {
-    const updatedProofs = [...proofOfTwibbon]; // Copy the current array
-    updatedProofs[index] = value; // Update the value at the specific index
-    setproofOfTwibbon(updatedProofs); // Update the state with the modified array
-  };
+  const [twibbon1, setTwibbon1] = useState(formData.twibbon1 ?? "");
+  const [twibbon2, setTwibbon2] = useState(formData.twibbon2 ?? "");
+  const [twibbon3, setTwibbon3] = useState(formData.twibbon3 ?? "");
 
   const [proofOfStory, setproofOfStory] = useState(formData.proofOfStory?.name ?? ""
   );
@@ -58,11 +52,11 @@ const FirstView = ({
     formData.originalityStatement?.name ?? ""
   )
 
-  const [question, setquestion] = useState(formData.question?.name ?? "");
+  const [question, setquestion] = useState(formData.question ?? "");
   const [questionOther, setquestionOther] = useState(
-    formData.questionOther?.name ?? "Other"
+    formData.questionOther ?? "Other"
   );
-  const [option, setOption] = useState(formData.question?.name ?? "");
+  const [option, setOption] = useState(formData.question ?? "");
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
@@ -100,7 +94,10 @@ const FirstView = ({
           batch : batch,
           teamName: sanitizeInput(teamName),
           members: 3,
-          proofOfTwibbon: proofOfTwibbon,
+          twibbon1: twibbon1,
+          twibbon2: twibbon2,
+          twibbon3: twibbon3,
+          proofOfTwibbon: JSON.stringify([twibbon1, twibbon2, twibbon3]),
           question : question,
           questionOther : questionOther,
         };
@@ -132,7 +129,9 @@ const FirstView = ({
       members && 
       studentIds &&
       proofOfFollow &&
-      proofOfTwibbon &&
+      twibbon1 &&
+      twibbon2 &&
+      twibbon3 &&
       proofOfStory && 
       proofOfComment && 
       question &&
@@ -191,8 +190,14 @@ const FirstView = ({
       return;
     }
 
-    if (!checkFileType(file)) {
-      return;
+    if (name === "proofOfPayment") {
+      if (!checkFileTypeImageOrPdf(file)) {
+        return;
+      }
+    } else {
+      if (!checkFileType(file)) {
+        return;
+      }
     }
 
     setFormData((prevState) => ({
@@ -203,8 +208,6 @@ const FirstView = ({
       setStudentIds(file.name);
     } else if (name === "proofOfFollow") {
       setproofOfFollow(file.name);
-    // } else if (name === "proofOfTwibbon") {
-    //   setproofOfTwibbon(file.name);
     } else if (name === "proofOfStory") {
       setproofOfStory(file.name);
     } else if (name === "proofOfComment") {
@@ -226,7 +229,19 @@ const FirstView = ({
     errorAlert({ message: message });
     return false;
   }
-  
+
+  const checkFileTypeImageOrPdf = (file) => {
+    if (file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "application/pdf"
+    ) {
+      return true;
+    }
+    const message = "File has to be jpg, jpeg, png, or pdf";
+    errorAlert({ message: message });
+    return false;
+  }
+
   const checkFileType = (file) => {
       if (
         file.type === "application/pdf" 
@@ -435,38 +450,10 @@ const FirstView = ({
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
-            <div className="mb-4 hidden">
-              <label className="block text-white mb-2" htmlFor="selectMembers">
-                Number of members
-              </label>
-              <select
-              id="selectMembers"
-              name="selectMembers"
-              className="w-full px-3 py-2 rounded-lg"
-              onChange={(e) => {
-                setMembers(e.target.value)}}
-              value={members}
-            >
-              <option value="" disabled>
-                Select number of members
-              </option>
-              <option value="2" disabled>
-                2
-              </option>
-              <option value="3">
-                3
-              </option>
-            </select>
-
-            </div>
-            <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
-            <label className="block text-white">
-              Combine files of <strong>ALL MEMBERS</strong> into 1 PDF file
-            </label>
+            <h1 className="text-lg font-bold text-white mt-10">Proof of Payment</h1>
             <label className="block text-white mb-4">
               File size has to be less than 2MB
             </label>
-            <label className="block text-white">Proof of Payment</label>
             <div className="my-4 w-fit flex flex-col space-y-2 sm:flex-row">
               <div className="relative">
               <input
@@ -485,6 +472,13 @@ const FirstView = ({
               </div>
               <div className="text-sm text-white ml-2 max-w-full">{proofOfPayment}</div>
             </div>
+            <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
+            <label className="block text-white">
+              Combine files of <strong>ALL MEMBERS</strong> into 1 PDF file
+            </label>
+            <label className="block text-white mb-4">
+              File size has to be less than 2MB
+            </label>
             <p className="block text-white">Student ID (all members)</p>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              
@@ -533,19 +527,39 @@ const FirstView = ({
               <label className="block text-white mb-2" htmlFor="proofOfTwibbon">
                 Link:
               </label>
-              {[0, 1, 2].map((index) => (
-              <div key={index}>
-                <label className="text-white my-1">Proof of Twibbon {index + 1}</label>
-                <input
-                  type="text"
-                  id={`proofOfTwibbon${index}`} // Use unique IDs for each input
-                  name="proofOfTwibbon"
-                  value={proofOfTwibbon[index]} // Bind to the specific index
-                  onChange={(e) => handleProofOfTwibbonChange(index, e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg"
-                />
-              </div>
-            ))}
+            <div>
+              <label className="text-white my-1">Proof of Twibbon 1</label>
+              <input
+                type="text"
+                id="twibbon1" // Use unique IDs for each input
+                name="twibbon1"
+                value={twibbon1}
+                onChange={(e) => setTwibbon1(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="text-white my-1">Proof of Twibbon 2</label>
+              <input
+                type="text"
+                id="twibbon2" // Use unique IDs for each input
+                name="twibbon2"
+                value={twibbon2}
+                onChange={(e) => setTwibbon2(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="text-white my-1">Proof of Twibbon 3</label>
+              <input
+                type="text"
+                id="twibbon3" // Use unique IDs for each input
+                name="twibbon3"
+                value={twibbon3}
+                onChange={(e) => setTwibbon3(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
             </div>
             <label className="block text-white">
               Proof of sharing Instagram story posters (all members)
@@ -591,13 +605,14 @@ const FirstView = ({
             </div>
 
             {/* originalityStatement */}
-            <div className="py-10">
+            <div className="py-4">
               <div className="space-x-4">
+                <p className="text-white py-4">Please download the Originality Statement paper and upload it with your signature</p>
                 <button
                   className="border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4"
                   onClick={handleDownload}
                 >
-                  Download Agreement Paper
+                  Download Originality Statement
                 </button>
                 <div className="relative inline-block mb-5">
                   <input
@@ -724,11 +739,9 @@ const FirstView = ({
   );
 };
 const Member1Data = ({
-  members,
   formData,
   setFormData,
   onPrevious,
-  goToSummary,
   goToNext,
   sanitizeInput,
 }) => {
@@ -863,8 +876,8 @@ const Member1Data = ({
               {phoneError && <p className="text-red-500">{phoneError}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="fullName">
-                institution
+              <label className="block text-white mb-2" htmlFor="institution">
+                Institution
               </label>
               <input
                 type="text"
@@ -922,7 +935,6 @@ const Member1Data = ({
 };
 
 const Member2Data = ({
-  members,
   formData,
   setFormData,
   onPrevious,
@@ -1137,18 +1149,21 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    formData = {
+      ...formData,
+      question: formData.questionOther ?? formData.question
+    }
   },[]);
 
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
       const response = await registerTeam(formData);
-      if (response.teamId) {
+      if (response.team.id) {
         let memberCounter = 1;
         for (const member of membersData) {
-          if (member.fullName) {
             const memberData = {
-              teamId: response.teamId,
+              teamId: response.team.id,
               fullname: member.fullName,
               email: member.email,
               institution: member.institution,
@@ -1173,13 +1188,13 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 });
               }
             } catch (memberError) {
+              console.log(memberError)
               setIsLoading(false);
               errorAlert({
                 message: "Something went wrong. Please try again"
               });
               navigate(-1);
             }
-          }
         }
       }
     } catch (error) {
@@ -1193,6 +1208,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   const registerTeam = async (data) => {
     try {
+      console.log(data);
       const response = await postNewIbpcTeam(data);
       console.log(response);
       return response;
@@ -1206,6 +1222,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
       const response = await postNewIbpcMember(data);
       console.log(response);
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -1269,8 +1286,12 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 {formData.proofOfFollow?.name}
               </p>
               <p>
-                <strong>Proof of Twibbon Post 1:</strong>
-                {formData.proofOfTwibbon.join(", ")}
+                <strong>Proof of Twibbon:</strong>
+                <ul>
+                  <li>1. {formData.twibbon1}</li>
+                  <li>2. {formData.twibbon2}</li>
+                  <li>3. {formData.twibbon3}</li>
+                </ul>
               </p>
               <p>
                 <strong>Proof of Sharing Instagram Story Posters:</strong>{" "}
@@ -1286,14 +1307,14 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               </p>
               <p>
                 <strong>How did you know this event?</strong>{" "}
-                {formData.question}
+                {formData.questionOther ?? formData.question}
               </p>
               <p className="text-base md:text-lg font-semibold mt-2">Team Leader</p>
               <p>
                 <strong>Full Name:</strong> {formData.fullName}
               </p>
               <p>
-                <strong>institution:</strong> {formData.institution}
+                <strong>Institution:</strong> {formData.institution}
               </p>
               <p>
                 <strong>Batch:</strong> {formData.batch}
@@ -1328,7 +1349,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                       <strong>Full Name:</strong> {member.fullName}
                     </p>
                     <p>
-                      <strong>institution:</strong> {member.institution}
+                      <strong>Institution:</strong> {member.institution}
                     </p>
                     <p>
                       <strong>Batch:</strong> {member.batch}

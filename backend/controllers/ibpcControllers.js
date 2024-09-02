@@ -100,7 +100,7 @@ exports.createNewTeam = async (req, res) => {
       proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
-      referralCode,
+      referralCode: referralCode
     });
 
     await CompetitionRegistration.create({
