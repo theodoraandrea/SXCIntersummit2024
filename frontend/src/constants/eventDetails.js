@@ -30,13 +30,14 @@ export const eventDetails = {
       "The Business Master Class will be held online on Saturday, September 21, 2024.", 
       "Participants will gain valuable insights into business competitions from top-achieving speakers and acquire practical experience by solving case studies."],
     contactPerson: [
-      "TBA"
+      "Kezia", "Naufal"
     ],
     contactLink: [
-      "",
+      "https://wa.me/6281289550200", 
+      "https://wa.me/62895321468029"
     ],
     contactNumber: [
-      "-",
+      "+6281289550200", "+62895321468029",
     ],
     timelineData: [
       {
