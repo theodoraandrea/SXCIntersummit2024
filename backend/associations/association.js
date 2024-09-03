@@ -88,6 +88,7 @@ exports.eventAssociations = () => {
   });
 
   // IBCC and IBCCMember associations
+  /*
   IBCC.hasMany(IBCCMember, {
     foreignKey: "teamId",
     as: "ibccmembers",
@@ -103,7 +104,7 @@ exports.eventAssociations = () => {
   });
   IBCC.belongsTo(User, {
     foreignKey: "leaderId",
-  });
+  });*/
 };
 
 exports.competitionAssociations = () => {
