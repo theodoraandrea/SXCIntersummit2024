@@ -25,6 +25,11 @@ const BusinessMasterClass = sequelize.define(
       values: ["Business Case Competition", "Business Plan Competition"],
       allowNull: false,
     },
+    studentType: {
+      type: DataTypes.ENUM,
+      values: ["High school", "University", "General Public"],
+      allowNull: false,
+    },
     question: {
       type: DataTypes.JSON,
       allowNull: false,

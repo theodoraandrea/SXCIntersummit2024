@@ -1541,7 +1541,7 @@ const EventCard = () => {
         // case 2:
             //skipped cus agreement paper is cancelled
         case 3:
-            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext} />;
+            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(2)}} onNext={handleNext} />;
         case 4:
             return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 5:
