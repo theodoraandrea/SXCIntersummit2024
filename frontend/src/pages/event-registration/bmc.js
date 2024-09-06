@@ -11,7 +11,7 @@ import { errorAlert, successAlert } from '../../components/alert';
 const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
   const navigate = useNavigate();
   const { loading, isLoggedIn, registeredEvents } = useUser();
-  const [sessionType, setSessionType] = useState(formData.sessionType ?? "");
+  const [studentType, setStudentType] = useState(formData.studentType ?? "");
   const [ hasRegisteredBcc, setHasRegisteredBcc ] = useState(false);
   const [ hasRegisteredBpc, setHasRegisteredBpc ] = useState(false);
 
@@ -38,7 +38,7 @@ const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
   }, []);
 
   const checkAllFilled = () => {
-    if (sessionType) {
+    if (studentType) {
       return true;
     }
     errorAlert({ message: "Agreement paper required"});
@@ -49,7 +49,7 @@ const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
     if (checkAllFilled()) {
       setFormData({
         ...formData,
-        sessionType: sessionType,
+        studentType: studentType,
       });
       onNext();
     }
@@ -74,9 +74,9 @@ const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
               name="selectType"
               className="w-full px-3 py-2 rounded-lg"
               onChange={(e) => {
-                setSessionType(e.target.value);
+                setStudentType(e.target.value);
               }}
-              value={sessionType}
+              value={studentType}
             >
               <option value="" disabled>
                 Select your institution
@@ -1389,6 +1389,8 @@ const Summary = ({ formData, onPrevious }) => {
                 <p>{formData.gender}</p>
                 <strong>Institution</strong>
                 <p>{formData.university}</p>
+                <strong>Institution Type</strong>
+                <p>{formData.studentType}</p>
                 <strong>Major</strong>
                 <p>{formData.major}</p>
                 <strong>Batch</strong>
