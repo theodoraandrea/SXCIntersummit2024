@@ -24,6 +24,11 @@ import {
   API_POST_BMC_REGISTRATION,
   API_GET_TWO_EVENTS,
   API_GET_TWO_COMPETITIONS,
+  // IBPC 
+  API_GET_IBPC_REGISTRATION,
+  API_POST_NEW_IBPC_MEMBER,
+  API_POST_NEW_IBPC_TEAM,
+  API_POST_CHECK_IBPC_TEAMCODE,
 } from "../config/endpoints";
 
 //Login
@@ -264,6 +269,45 @@ const getFceoRegistrationData = async (data) => {
   }
 };
 
+
+// IBPC
+const postNewIbpcMember = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_IBPC_MEMBER, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const postNewIbpcTeam = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_IBPC_TEAM, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const getIbpcRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_IBPC_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
@@ -305,6 +349,9 @@ export {
   postNewFceoMember,
   postNewFceoTeam,
   getFceoRegistrationData,
+  postNewIbpcMember,
+  postNewIbpcTeam,
+  getIbpcRegistrationData,
   postCheckTeamCode,
   postCheckReferralCode,
   postBMCRegistration,

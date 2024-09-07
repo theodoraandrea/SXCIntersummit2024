@@ -25,7 +25,7 @@
     "tailwindcss-text-fill": "^0.2.0",
     "web-vitals": "^2.1.4"
   },
-    "scripts": {
+  "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "daisyui": "^4.12.10",
     "tailwindcss": "^3.4.6"
   }
 }

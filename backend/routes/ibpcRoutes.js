@@ -13,7 +13,6 @@ router.post(
     { name: "proofOfPayment", maxCount: 1 },
     { name: "studentIds", maxCount: 1 },
     { name: "proofOfFollow", maxCount: 1 },
-    { name: "proofOfTwibbon", maxCount: 1 },
     { name: "proofOfStory", maxCount: 1 },
     { name: "originalityStatement", maxCount: 1 },
     { name: "proofOfComment", maxCount: 1 },
@@ -21,6 +20,9 @@ router.post(
   [
     body("teamName").notEmpty().withMessage("Team name is required"),
     body("question").notEmpty().withMessage("Question is required"),
+    body("proofOfTwibbon")
+      .notEmpty()
+      .withMessage("Proof Of Twibon is required"),
   ],
   errorHandling,
   ibpcControllers.createNewTeam

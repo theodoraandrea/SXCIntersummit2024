@@ -12,7 +12,7 @@ const IBCC_Member = sequelize.define(
     teamId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "ibcc",
+        model: "ibccTeam",
         key: "id",
       },
       allowNull: false,

@@ -8,6 +8,102 @@ import Spinner from '../../components/elements/spinner';
 import ReferralModal from '../../components/referral-modal';
 import { errorAlert, successAlert } from '../../components/alert';
 
+const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
+  const navigate = useNavigate();
+  const { loading, isLoggedIn, registeredEvents } = useUser();
+  const [studentType, setStudentType] = useState(formData.studentType ?? "");
+  const [ hasRegisteredBcc, setHasRegisteredBcc ] = useState(false);
+  const [ hasRegisteredBpc, setHasRegisteredBpc ] = useState(false);
+
+  useEffect(() => {
+    if (!loading) {
+      if (isLoggedIn) {
+      } else {
+        navigate(LANDING_PAGE);
+      }
+    }
+  }, [isLoggedIn, loading]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  useEffect(() => {
+    if (registeredEvents.includes(2)) {
+      setHasRegisteredBcc(true);
+    }
+    if (registeredEvents.includes(3)) {
+      setHasRegisteredBpc(true);
+    }
+  }, []);
+
+  const checkAllFilled = () => {
+    if (studentType) {
+      return true;
+    }
+    errorAlert({ message: "Agreement paper required"});
+    return false;
+  };
+
+  const handleSubmit = () => {
+    if (checkAllFilled()) {
+      setFormData({
+        ...formData,
+        studentType: studentType,
+      });
+      onNext();
+    }
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient">{title}</h1>
+          <p className="text-sm text-white my-6">
+            Select the institution you are from
+          </p>
+          <div className="mb-4">
+            <label
+              className="block text-white mb-2"
+              htmlFor="selectType"
+            ></label>
+            <select
+              id="selectType"
+              name="selectType"
+              className="w-full px-3 py-2 rounded-lg"
+              onChange={(e) => {
+                setStudentType(e.target.value);
+              }}
+              value={studentType}
+            >
+              <option value="" disabled>
+                Select your institution
+              </option>
+              <option value="Highschool">
+                High school
+              </option>
+              <option value="University">
+                University
+              </option>
+              <option value="General Public">
+                General Public
+              </option>
+            </select>
+          </div>
+          <button
+            className="text-white px-6 py-2 rounded-full hover:text-gradient"
+            onClick={handleSubmit}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   const navigate = useNavigate();
   const { loading, isLoggedIn, registeredEvents } = useUser();
@@ -379,7 +475,7 @@ const ThirdView = ({
                             {phoneError && <p className='text-red-500'>{phoneError}</p>}
                         </div>
                         <div className='mb-4'>
-                            <label className='block text-white mb-2' htmlFor='fullName'>University</label>
+                            <label className='block text-white mb-2' htmlFor='fullName'>Institution</label>
                             <input
                                 type='text'
                                 id='university'
@@ -1256,7 +1352,9 @@ const Summary = ({ formData, onPrevious }) => {
       if (response.status === 200) {
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, bmcId]);
-        successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
+        successAlert({ 
+          eventId: "event_1",
+          message: "Successfully registered for BMC. Please check your email for further details!"})
       }
     } catch (error) {
       errorAlert({ message: "Oh no, something happened. Please try again!"});
@@ -1289,8 +1387,10 @@ const Summary = ({ formData, onPrevious }) => {
                 <p>{formData.fullName}</p>
                 <strong>Gender</strong> 
                 <p>{formData.gender}</p>
-                <strong>University</strong>
+                <strong>Institution</strong>
                 <p>{formData.university}</p>
+                <strong>Institution Type</strong>
+                <p>{formData.studentType}</p>
                 <strong>Major</strong>
                 <p>{formData.major}</p>
                 <strong>Batch</strong>
@@ -1437,11 +1537,13 @@ const EventCard = () => {
 
     switch (currentView) {
         case 1:
-            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
+            return <ZeroView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
         case 2:
+            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
+        // case 2:
             //skipped cus agreement paper is cancelled
         case 3:
-            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(1)}} onNext={handleNext} />;
+            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(2)}} onNext={handleNext} />;
         case 4:
             return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 5:
@@ -1460,7 +1562,7 @@ const EventCard = () => {
         case 11:
             return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(9)}}/>
         default:
-            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+            return <ZeroView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }
 };
 

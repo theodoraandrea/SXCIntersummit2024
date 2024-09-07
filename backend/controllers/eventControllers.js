@@ -256,6 +256,7 @@ exports.registerBMC = async (req, res) => {
       bmc = await BMC.create({
         registrationId: eventRegistration.id,
         sessionType: body.sessionType,
+        studentType: body.studentType,
         question: qnaList,
         screenshotBMC: screenshotBMC_URL,
         referralCode: body.referralCode,

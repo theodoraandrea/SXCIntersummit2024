@@ -217,7 +217,7 @@ export default function Home() {
       <section id="bridge-section">
         <div className="w-full px-8 py-16 sm:py-32">
           <div className="w-lg flex flex-col items-center space-y-8 flex">
-            <h1 className="sm:text-center font-semibold text-gradient text-5xl">Calling Out High Achieving Students</h1>
+            <h1 className="sm:text-center font-semibold text-gradient text-5xl p-2">Calling Out High Achieving Students</h1>
             <div className="max-w-lg">
               <img src={totalprize} className=""/>
             </div>

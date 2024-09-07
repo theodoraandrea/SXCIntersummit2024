@@ -6,7 +6,8 @@ export const eventDetails = {
   event_1: {
     title: "Business Master Class",
     image: imgLocation + "bmc.png",
-    openRegistration: false,
+    openRegistration: true,
+    linkBooklet: "https://bit.ly/GuidebookBusineesMasterClass",
     description: "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
     "With its <strong>interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities</strong>  to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on " +
     "<strong>“Elevate to Success: Mastering in Business Competition” as the grand theme.</strong>" +
@@ -29,13 +30,14 @@ export const eventDetails = {
       "The Business Master Class will be held online on Saturday, September 21, 2024.", 
       "Participants will gain valuable insights into business competitions from top-achieving speakers and acquire practical experience by solving case studies."],
     contactPerson: [
-      "TBA"
+      "Kezia", "Naufal"
     ],
     contactLink: [
-      "",
+      "https://wa.me/6281289550200", 
+      "https://wa.me/62895321468029"
     ],
     contactNumber: [
-      "-",
+      "+6281289550200", "+62895321468029",
     ],
     timelineData: [
       {

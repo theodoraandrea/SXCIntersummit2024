@@ -38,6 +38,10 @@ const IBPC = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
+    proofOfTwibbon: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     originality: {
       type: DataTypes.JSON,
       allowNull: false,

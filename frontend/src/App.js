@@ -11,7 +11,10 @@ import BMCRegistration from "./pages/event-registration/bmc";
 import BMCSummary from "./pages/event-registration/bmc-summary";
 import FCEORegistration from "./pages/event-registration/fceo";
 import FCEOSummary from "./pages/event-registration/fceo-summary";
-import IBCC from "./pages/event-registration/ibcc";
+import IBPCRegistration from "./pages/event-registration/ibpc";
+import IBPCSummary from "./pages/event-registration/ibpc-summary";
+import IBCCRegistration from "./pages/event-registration/ibcc";
+import IBCCSummary from "./pages/event-registration/ibcc-sumary";
 
 import {
   HOME,
@@ -25,7 +28,8 @@ import {
   BMC_REGIST_SUMMARY,
   FCEO_REGIST,
   FCEO_REGIST_SUMMARY,
-  IBCC_REGIST
+  IBPC_REGIST,
+  IBPC_REGIST_SUMMARY,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -59,7 +63,10 @@ export default function App() {
           <Route path={BMC_REGIST_SUMMARY} element={<BMCSummary/>}/>
           <Route path={FCEO_REGIST} element={<FCEORegistration />} />
           <Route path={FCEO_REGIST_SUMMARY} element={<FCEOSummary />} />
-          <Route path={IBCC_REGIST} element={<IBCC />} />
+          <Route path={IBPC_REGIST} element={<IBPCRegistration />} />
+          <Route path={IBPC_REGIST_SUMMARY} element={<IBPCSummary />} />
+          <Route path={IBCC_REGIST} element={<IBCCRegistration/>} />
+          <Route path={IBCC_REGIST_SUMMARY} element={<IBCCSummary />} />
         </Routes>
       </Router>
     </UserProvider>
