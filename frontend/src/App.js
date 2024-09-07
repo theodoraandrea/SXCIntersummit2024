@@ -14,7 +14,7 @@ import FCEOSummary from "./pages/event-registration/fceo-summary";
 import IBPCRegistration from "./pages/event-registration/ibpc";
 import IBPCSummary from "./pages/event-registration/ibpc-summary";
 import IBCCRegistration from "./pages/event-registration/ibcc";
-import IBCCSummary from "./pages/event-registration/ibcc-sumary";
+import IBCCSummary from "./pages/event-registration/ibcc-summary";
 
 import {
   HOME,
