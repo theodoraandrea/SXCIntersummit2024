@@ -1,4 +1,4 @@
-import { FCEO_REGIST, BMC_REGIST } from "./routes";
+import { FCEO_REGIST, BMC_REGIST, IBCC_REGIST, IBPC_REGIST } from "./routes";
 
 const imgLocation = "/images/programs/";
 
@@ -158,7 +158,7 @@ export const eventDetails = {
     "</br></br><strong>&emsp;&emsp;3.&emsp;Networking Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
-    registerLink: ``,
+    registerLink: `${IBCC_REGIST}`,
     faq: ["How many and what is the format and structure of each stage?", 
       "How and where do we register for the competition?", 
       "Where is the venue or platform for the competition?"],
@@ -232,7 +232,7 @@ export const eventDetails = {
     "</br></br><strong>&emsp;&emsp;5.&emsp;Funding Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
-    registerLink: ``,
+    registerLink: `${IBPC_REGIST}`,
     faq: ["Who can participate, and what are the eligibility criteria?",
       "How many stages does this business plan competition have?", 
       "Is there any specific criteria/requirement regarding the business ideas?", 

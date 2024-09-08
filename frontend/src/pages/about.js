@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { version } from "react";
 
-const CORPORATE_PARTNERSHIP_CONTACT = "https://wa.me/081288059303";
-const MEDIA_PARTNERSHIP_CONTACT = "https://wa.me/085782799445";
+const CORPORATE_PARTNERSHIP_CONTACT = "https://wa.me/+6281288059303";
+const MEDIA_PARTNERSHIP_CONTACT = "https://wa.me/+6285782799445";
 
 const challenges1 = "/images/challenges/challenge1.png";
 const challenges2 = "/images/challenges/challenge2.png";
@@ -34,9 +34,6 @@ const companyPartners = "/images/about/companyPartners.png";
 const sponsors = "/images/about/sponsors.png";
 const mediaPartners = "/images/about/mediaPartners.png";
 
-const lokalate = "/images/lokalate.png";
-const medpar1 = "/images/medpar1.png";
-const medpar2 = "/images/medpar2.png";
 const synergy = "/images/value1.png";
 const passion = "/images/value3.png";
 const excellence = "/images/value2.png";
@@ -80,8 +77,6 @@ const value3 = "/images/our-values/value3.png";
 const value4 = "/images/our-values/value4.png";
 const reviewbca = "/images/reviewbca.png";
 
-// Medpar
-
 export default function About() {
 
   const location = useLocation();
@@ -91,13 +86,13 @@ export default function About() {
   }, []);
   
   return (
-    <div>
+    <div className="overflow-hidden">
       <Navbar 
         currentPath={location.pathname}
       />
       {/* Hero Section */}
       <section
-        className="bg-cover bg-center py-32 flex flex-col justify-center"
+        className="bg-cover bg-center px-2 py-32 flex flex-col justify-center"
         style={{ backgroundImage: `url(${bgHero})`}}
       >
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mx-4 sm:mx-8 md:mx-20 text-gradient mx-4 sm:mx-8 md:mx-2">
@@ -110,14 +105,14 @@ export default function About() {
       </section>
 
       {/* New Section */}
-      <section className="bg-primary-4 py-16 md:py-32"
+      <section className="bg-primary-1 py-16 md:py-32"
 max-w-5xl      >
         <div className="text-center">
-          <h2 className="text-white mb-8 sm:mb-16 text-xl mx-8 sm:mx-32 md:mx-auto md:text-3xl font-bold">
+          <h2 className="text-white mb-8 sm:mb-16 text-3xl mx-8 sm:mx-32 md:mx-auto md:text-3xl font-bold">
             Part of StudentsxCEOs Jakarta
           </h2>
-            <div className="mx-auto w-fit gap-y-8 justify-center flex flex-col gap-x-16 lg:flex-row">
-            <div className="mx-8 px-8 py-8 sm:py-12 sm:px-12 bg-gray-200 max-w-md rounded-2xl shadow-md text-primary-1">
+            <div className="mx-auto w-fit gap-y-2 sm:gap-y-8 justify-center flex flex-col gap-x-16 lg:flex-row">
+            <div className="mx-2 sm:mx-8 px-8 py-8 sm:py-12 sm:px-12 bg-gray-200 max-w-md rounded-2xl shadow-md text-primary-1">
             <img src={logo} className="mx-auto object-contain sm:w-1/2"/>
             <div>
               <h1 className="text-primary-4 text-xl py-2 font-bold">StudentsxCEOs Jakarta</h1>
@@ -126,7 +121,7 @@ max-w-5xl      >
               </p>
             </div>
             </div>
-            <div className="mx-8 px-8 py-8 sm:py-12 sm:px-12 bg-gradient-secondary-2 max-w-md rounded-2xl shadow-md text-gray-200">
+            <div className="mx-2 sm:mx-8 px-8 py-8 sm:py-12 sm:px-12 bg-gradient-secondary-2 max-w-md rounded-2xl shadow-md text-gray-200">
               <img src={logointersummit} className="mx-auto object-contain sm:w-1/2"/>
               <div>
               <h1 className="text-xl font-bold py-2">SxC International Summit 2024</h1>
@@ -141,11 +136,11 @@ max-w-5xl      >
       </section>
       
       <section>
-      <div className="min-h-screen py-32 bg-primary-1 flex flex-col items-center justify-center">
+      <div className="min-h-screen py-16 sm:py-32 bg-primary-1 flex flex-col items-center justify-center">
         {/* Section Atas : Our Value */}
         <div className="w-full">
           <div className="w-fit mx-auto px-12 py-6 sm:px-16 sm:py-12 text-primary-3 font-semibold
-          bg-white
+          bg-gray-200 bg-opacity-20
           rounded-3xl shadow-lg">
           <h2 className="text-center text-2xl sm:text-4xl pb-4 sm:pb-8">
             Our Values
@@ -167,9 +162,9 @@ max-w-5xl      >
           </div>
         </div>
         {/* Section Tengah : Tagline */}
-        <div className="my-24 sm:my-48">
+        <div className="my-36 sm:my-48">
           <p className="text-gray-400 mx-auto w-fit mb-4 text-xl">TAGLINE</p>
-          <div className="mx-4 text-4xl sm:text-6xl lg:text-7xl text-gradient italic font-semibold">
+          <div className="mx-4 text-3xl sm:text-6xl lg:text-7xl text-gradient italic font-semibold">
           <h1>❞ Lead the Change,</h1>
           <h1 className="ml-[10px] sm:ml-[70px] lg:ml-[100px] px-2">Shape the Future❞</h1>
           </div>
@@ -299,26 +294,26 @@ max-w-5xl      >
           Participants
           </h2>
 
-          <div className="bg-primary-4 shadow-md mx-auto max-w-4xl rounded-lg px-8 py-4 flex flex-row justify-between items-center gap-x-4 min-h-30">
+          <div className="grid grid-cols-1 gap-y-4 bg-primary-4 shadow-md mx-auto max-w-4xl rounded-lg px-4 py-4 sm:px-8 sm:py-4 sm:flex sm:flex-row sm:justify-between sm:items-center sm:gap-x-4 min-h-30">
             <div className="flex items-center gap-x-2">
-                <img src={participants} alt="Future Leaders Icon" className="h-12 w-12 sm:h-16 sm:w-16 mx-2 object-contain" />
-                <div className="text-center">
-                  <div className="text-gradient w-fit mx-auto text-lg sm:text-3xl font-bold">2000+</div>
-                  <div className="text-white text-xs sm:text-lg">Future Leaders</div>
+                <img src={participants} alt="Future Leaders Icon" className="h-12 sm:h-16 sm:w-16 mx-2 object-contain" />
+                <div className="text-left sm:text-center">
+                  <div className="text-gradient w-fit sm:mx-auto text-lg sm:text-3xl font-bold">2000+</div>
+                  <div className="text-white text-base sm:text-lg">Future Leaders</div>
                 </div>
               </div>
               <div className="flex items-center gap-x-2">
-                <img src={university} alt="University Students Icon" className="h-8 w-8 sm:h-12 sm:w-12 mx-2 object-contain" />
+                <img src={university} alt="University Students Icon" className="h-12 sm:h-12 sm:w-12 mx-2 object-contain" />
                 <div className="text-left"> 
                   <div className="text-primary-2 w-fit text-lg sm:text-3xl font-bold">87%</div>
-                  <div className="text-white text-xs sm:text-lg">University Students</div>
+                  <div className="text-white text-base sm:text-lg">University Students</div>
                 </div>
               </div>
               <div className="flex items-center gap-x-2">
-                <img src={school} alt="High School Students Icon" className="h-8 w-8 sm:h-12 sm:w-12 mx-2 object-contain" />
+                <img src={school} alt="High School Students Icon" className="h-12 sm:h-12 sm:w-12 mx-2 object-contain" />
                 <div className="text-left">
                   <div className="text-primary-2 w-fit text-lg sm:text-3xl font-bold">13%</div>
-                  <div className="text-white text-xs sm:text-lg">High School Students</div>
+                  <div className="text-white text-base sm:text-lg">High School Students</div>
                 </div>
               </div>
           </div>
@@ -339,18 +334,18 @@ max-w-5xl      >
       </section>
 
         {/* Masukkan Untuk CP, Sponsors, Media Partner */}
-      <section className="bg-primary-4 px-32 pb-32 lg:px-16">
+      <section className="bg-primary-4 px-4 sm:px-32 pb-32 lg:px-16">
         <div className="bg-primary-4 h-400 flex flex-col md:flex-row md:justify-center shadow-lg">
           <div className="bg-white flex flex-col px-4 py-8 lg:py-12 lg:px-16">
-            <h1 className="text-center text-primary-4 text-lg lg:text-2xl mx-auto font-semibold pb-4">Company Partners</h1>
+            <h1 className="text-center text-primary-4 text-2xl mx-auto font-semibold pb-4">Company Partners</h1>
             <img src={companyPartners} className="object-contain"/>
           </div>
           <div className="bg-white flex flex-col px-4 py-8 lg:py-12 lg:px-16">
-            <h1 className="text-center text-primary-4 text-lg lg:text-2xl mx-auto font-semibold pb-4">Sponsors</h1>
+            <h1 className="text-center text-primary-4 text-2xl mx-auto font-semibold pb-4">Sponsors</h1>
             <img src={sponsors} className="object-contain"/>
           </div>
           <div className="bg-white flex flex-col px-4 py-8 lg:py-12 lg:px-16">
-            <h1 className="text-center text-primary-4 text-lg lg:text-2xl mx-auto font-semibold pb-4">Media Partners</h1>
+            <h1 className="text-center text-primary-4 text-2xl mx-auto font-semibold pb-4">Media Partners</h1>
             <img src={mediaPartners} className="object-contain"/>
           </div>
         </div>
@@ -358,33 +353,33 @@ max-w-5xl      >
 
 
       {/* New Section : Past Testimony */}
-      <section className="bg-primary-1 sm:py-16 md:py-20">
+      <section className="bg-primary-1 py-16 md:py-20">
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
           <h2 className="text-2xl my-auto sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Past Testimonies
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="flex flex-row md:flex-col items-center text-center relative">
+            <div className="flex flex-col sm:flex-row md:flex-col items-center text-center relative">
               <img src={pwc} alt="Ricky Sucitra-PwC" className="h-200 lg:h-300 my-12" />
               <div>
-              <h3 className="text-xl font-bold text-white px-4 rounded-2xl z-10">
+              <h3 className="text-xl font-bold text-white w-fit mx-auto">
               Ricky Sucitra
               </h3>
               <h1 className="text-gradient">Human Capital Strategy Lead at PwC</h1>
-              <p className="mt-2 text-white text-xs lg:text-sm text-justify px-4 text-left mx-5 lg:mx-10 pb-10 md:pb-0">
+              <p className="mt-2 text-white text-xs lg:text-sm text-justify sm:px-4 text-left mx-5 lg:mx-10 pb-10 md:pb-0">
               <i>Wow</i>, baru kali ini nih kita collab acara mahasiswa dan pertanyaan di sesi Q&Anya sangat berbobot, bisa terlihat kualitas dari temen-temen SxC yang luar biasa. Baru kali ini engga ada yang nanya <i>work-life balance</i> dan <i>"begadang ga kak kerja di PwC?"</i>. We should definitely collab in another event ya, temen-temen SxC!
               </p>
               </div>
             </div>
             
-            <div className="flex flex-row md:flex-col items-center text-center relative">
+            <div className="flex flex-col sm:flex-row md:flex-col items-center text-center relative">
               <img src={reviewbca} alt="Veigy Pruedensia-BCA" className="h-200 lg:h-300 my-12"/>
               <div>
-              <h3 className="text-xl font-bold text-white px-4 z-10">
+              <h3 className="text-xl font-bold text-white w-fit mx-auto">
               Veigy Pruedensia
               </h3>
               <h1 className="text-gradient">Employer Branding at BCA</h1>
-              <p className="mt-2 text-white text-xs lg:text-sm text-justify px-4 text-left mx-5 lg:mx-10 pb-10 md:pb-0">
+              <p className="mt-2 text-white text-xs lg:text-sm text-justify sm:px-4 text-left mx-5 lg:mx-10 pb-10 md:pb-0">
               Terima kasih banyak, temen-temen SxC. Jujur kolaborasi bareng kalian adalah pengalaman yang berkesan dan menyenangkan banget juga buat aku. Kalian antusias dan koordinasinya juga lancar. Senang juga bisa kenal kalian semuaa anak- anak baik yang passionate dan berambisi.
               </p>
               </div>

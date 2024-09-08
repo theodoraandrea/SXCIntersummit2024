@@ -10,6 +10,7 @@ import { fetchTwoLatestEvents, fetchTwoLatestCompetitions } from "../service/ser
 import { ABOUT_PAGE, EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
 
 const bgHero = "/images/bg-home.png";
+const bgKnowUsBetter = "/images/knowusbetter.png";
 const circle = "/images/sponsor.png";
 const winner1 = "/images/winner1.png";
 const winner2 = "/images/winner2.png";
@@ -441,16 +442,24 @@ export default function Home() {
       </section>
 
       {/*Know Us Better Section */}
-      <section id="know-us-better-section">
-        <div className="w-full h-[15rem] mt-24">
-          <Link to={ABOUT_PAGE}>
-            <h1 className="text-center text-gradient text-xl border-2 border-primary-3 w-fit rounded-full
+      <section id="know-us-better-section"
+      style={{ backgroundImage: `url(${bgKnowUsBetter})`,
+      backgroundSize: "contain"
+      }}
+      className="py-48"
+      >
+        <div className="w-full"
+        >
+
+            <div className="text-center bg-gray-400 bg-opacity-40 hover:bg-primary-2 transition duration-300 text-xl border-2 border-gray-400 hover:border-primary-2 w-fit rounded-full
             py-2 px-6 mx-auto
             md:text-3xl
             md:py-3 md:px-10
-            ">Know Us Better
-              </h1>
-          </Link>
+            ">
+            <a className="text-white w-fit"
+            href={ABOUT_PAGE}
+            >Know Us Better</a>
+            </div>
         </div>
       </section>
 
