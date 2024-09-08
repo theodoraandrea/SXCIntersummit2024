@@ -1342,6 +1342,8 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
       setProofOfStory(file.name);
     } else if (name === "proofOfComment") {
       setProofOfComment(file.name);
+    } else if (name === "proofOfBroadcast") {
+      setProofOfBroadcast(file.name);
     }
   };
 
