@@ -525,7 +525,7 @@ max-w-5xl      >
 
       {/* Media Partner Section */}
       <div className="flex flex-row-reverse">
-      <div className="md:w-1/2"
+        <div className="md:w-1/2"
         style={{
           backgroundImage: `url(${medpar})`,
           backgroundSize: "cover",
