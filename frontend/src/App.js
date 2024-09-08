@@ -30,6 +30,8 @@ import {
   FCEO_REGIST_SUMMARY,
   IBPC_REGIST,
   IBPC_REGIST_SUMMARY,
+  IBCC_REGIST,
+  IBCC_REGIST_SUMMARY
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 

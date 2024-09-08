@@ -11,6 +11,7 @@ const {
   const checkRequiredFields = require("../utils/checkRequiredFields");
   const { validationResult } = require("express-validator");
   const sendAutomatedEmail = require("../services/automatedEmail");
+const { file } = require("googleapis/build/src/apis/file");
   
   const IBCC_WA_LINK = "https://chat.whatsapp.com/Gut5M6ilA9QCydC4vTPuD7";
 
@@ -27,7 +28,6 @@ const {
         const requiredFields = [
             "proofOfPayment",
             "studentId",
-            "cv",
             "proofOfFollow",
             "proofOfStory",
             "proofOfComment"
@@ -39,19 +39,20 @@ const {
             });
         }
 
-        const { teamName, personalEmail, twibbonLink1, twibbonLink2, twibbonLink3, eventSource, referralCode, paymentType, paymentChannel, paymentBank, payerBankAccName, transferDate } = body;
+        const { teamName, email, twibbonLink1, twibbonLink2, twibbonLink3, eventSource, referralCode, paymentType, paymentChannel, paymentBank, payerBankAccName, transferDate } = body;
         const leaderId = req.user.id;
         const leader = await User.findByPk(leaderId);
         const teamCode = generateTeamCode(6);
 
+        
         const fileNames = [
-            `${teamName}_${leader.fullname}_Proof of Follow`,
-            `${teamName}_${leader.fullname}_Proof of Instastory`,
-            `${teamName}_${leader.fullname}_Proof of Comment`,
-            `${teamName}_${leader.fullname}_CVs`,
-            `${teamName}_${leader.fullname}_Student IDs`
-            `${teamName}_${leader.fullname}_Proof of Payment`
+            teamName + "_" + leader.fullname + "_Proof of Follow",
+            teamName + "_" + leader.fullname + "_Proof of Instastory",
+            teamName + "_" + leader.fullname + "_Proof of Comment",
+            teamName + "_" + leader.fullname + "_Student IDs",
+            teamName + "_" + leader.fullname + "_Proof of Payment",
         ];
+        console.log(fileNames);
 
         const rootFolderId = process.env.FOLDER_BUSINESS_CASE_ID;
         const folderId = await createFolder("Team " + teamName, rootFolderId);
@@ -59,37 +60,32 @@ const {
         const proofOfPayment = await getImageURLsList(
             files.proofOfPayment,
             folderId,
-            fileNames[5]
+            "proof of payment"
         );
 
         const proofOfFollow = await getImageURLsList(
             files.proofOfFollow,
             folderId,
-            fileNames[0]
+            "proof of instastory"
         );
 
         const proofOfStory = await getImageURLsList(
             files.proofOfStory,
             folderId,
-            fileNames[1]
+          
+            //fileNames[1]
         );
 
         const proofOfComment = await getImageURLsList(
             files.proofOfComment,
             folderId,
-            fileNames[2]
-        );
-
-        const cvLink = await getImageURLsList(
-            files.cv,
-            folderId,
-            fileNames[3],
+            //fileNames[2]
         );
 
         const studentIdLink = await getImageURLsList(
             files.studentId,
             folderId,
-            fileNames[4],
+            //fileNames[3],
         )
 
         const screenshotIBCC = [
@@ -107,13 +103,12 @@ const {
         const newTeam = await IBCC_Team.create({
             leaderId,
             teamName,
-            personalEmail,
+            personalEmail: email,
             teamCode,
             eventSource,
             twibbonLinks,
             screenshotIBCC,
             proofOfPayment,
-            cv: cvLink,
             studentId: studentIdLink,
             paymentType,
             referralCode,
@@ -124,7 +119,7 @@ const {
         });
 
         await CompetitionRegistration.create({
-            leaderId,
+            userId: req.user.id,
             competitionId: ibccId
         });
 
@@ -180,24 +175,20 @@ const {
   
   exports.createNewIBCCMember = async (req, res) => {
     try {
-        // Body Validation Checking
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-        return res.status(400).json({ message: errors.array() });
-        }
-
         const { body } = req;
         const { teamId, fullname, personalEmail, phoneNumber, university, batch, major } = body;
 
+        console.log(body);
+
         // Create a new IBCC member
         const newMember = await IBCC_Member.create({
-            teamId,
-            fullname,
-            personalEmail,
-            phoneNumber,
-            university,
-            batch,
-            major
+            teamId: teamId,
+            fullname: fullname,
+            personalEmail: personalEmail,
+            phoneNumber: phoneNumber,
+            university: university,
+            batch: batch,
+            major: major
         });
 
         return res.status(201).json({
@@ -236,9 +227,9 @@ const {
             });
         }
 
-        const { personalEmail, twibbonLink, eventSource, mbti, experience, goals, background, commitment1, commitment2, referralCode, paymentType, paymentChannel, paymentBank, payerBankAccName, transferDate } = body;
+        const { email, twibbonLink1, eventSource, mbti, experience, goals, background, commitment1, commitment2, referralCode, paymentType, paymentChannel, paymentBank, payerBankAccName, transferDate } = body;
         const userId = req.user.id;
-        const user = await User.findByPk(leaderId);
+        const user = await User.findByPk(userId);
 
         const fileNames = [
             `${user.fullname}_Proof of Follow`,
@@ -313,10 +304,9 @@ const {
 
         const newSolo = await IBCC_Solo.create({
             userId,
-            personalEmail,
-            teamCode,
+            personalEmail: email,
             eventSource,
-            twibbonLink,
+            twibbonLink: twibbonLink1,
             mbti,
             skillsQuestionnaire,
             commitmentQuestionnaire,
@@ -376,8 +366,6 @@ const {
 
           return res.status(201).json({
             message: "Registered successfully",
-            team: newTeam,
-            teamCode: teamCode,
           });
     } catch (error) {
         return res

@@ -25,9 +25,6 @@ const IBCC_Member = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     phoneNumber: {
       type: DataTypes.STRING,
@@ -47,7 +44,7 @@ const IBCC_Member = sequelize.define(
     },
   },
   {
-    tableName: "ibccmembers",
+    tableName: "ibccMembers",
     timestamps: true,
   }
 );
