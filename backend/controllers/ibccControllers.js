@@ -30,7 +30,8 @@ const { file } = require("googleapis/build/src/apis/file");
             "studentId",
             "proofOfFollow",
             "proofOfStory",
-            "proofOfComment"
+            "proofOfComment",
+            "proofOfBroadcast",
         ];
         if (!checkRequiredFields(req.files, requiredFields)) {
             return res.status(400).json({
@@ -51,47 +52,53 @@ const { file } = require("googleapis/build/src/apis/file");
             teamName + "_" + leader.fullname + "_Proof of Comment",
             teamName + "_" + leader.fullname + "_Student IDs",
             teamName + "_" + leader.fullname + "_Proof of Payment",
+            teamName + "_" + leader.fullname + "_Proof of Broadcast"
         ];
-        console.log(fileNames);
 
         const rootFolderId = process.env.FOLDER_BUSINESS_CASE_ID;
         const folderId = await createFolder("Team " + teamName, rootFolderId);
 
-        const proofOfPayment = await getImageURLsList(
-            files.proofOfPayment,
-            folderId,
-            "proof of payment"
-        );
-
         const proofOfFollow = await getImageURLsList(
             files.proofOfFollow,
             folderId,
-            "proof of instastory"
+            fileNames[0]
         );
 
         const proofOfStory = await getImageURLsList(
             files.proofOfStory,
             folderId,
-          
-            //fileNames[1]
+            fileNames[1]
         );
 
         const proofOfComment = await getImageURLsList(
             files.proofOfComment,
             folderId,
-            //fileNames[2]
+            fileNames[2]
         );
 
         const studentIdLink = await getImageURLsList(
             files.studentId,
             folderId,
-            //fileNames[3],
-        )
+            fileNames[3],
+        );
+
+        const proofOfPayment = await getImageURLsList(
+          files.proofOfPayment,
+          folderId,
+          fileNames[4]
+      );
+
+      const proofOfBroadcast = await getImageURLsList(
+        files.proofOfBroadcast,
+        folderId,
+        fileNames[5]
+      );
 
         const screenshotIBCC = [
             proofOfFollow,
             proofOfStory,
-            proofOfComment
+            proofOfComment,
+            proofOfBroadcast
         ];
 
         const twibbonLinks = [
@@ -218,7 +225,8 @@ const { file } = require("googleapis/build/src/apis/file");
             "cv",
             "proofOfFollow",
             "proofOfStory",
-            "proofOfComment"
+            "proofOfComment",
+            "proofOfBroadcast"
         ];
         if (!checkRequiredFields(req.files, requiredFields)) {
             return res.status(400).json({
@@ -237,7 +245,8 @@ const { file } = require("googleapis/build/src/apis/file");
             `${user.fullname}_Proof of Comment`,
             `${user.fullname}_Proof of Payment`,
             `${user.fullname}_CV`,
-            `${user.fullname}_Student ID`
+            `${user.fullname}_Student ID`,
+            `${user.fullname}_Proof of Broadcast`,
         ];
 
         const rootFolderId = process.env.FOLDER_BUSINESS_CASE_ID;
@@ -277,12 +286,19 @@ const { file } = require("googleapis/build/src/apis/file");
             files.studentId,
             folderId,
             fileNames[5],
-        )
+        );
+
+        const proofOfBroadcast = await getImageURLsList(
+            files.proofOfBroadcast,
+            folderId,
+            fileNames[6],
+        );
 
         const screenshotIBCC = [
             proofOfFollow,
             proofOfStory,
-            proofOfComment
+            proofOfComment,
+            proofOfBroadcast
         ];
 
         const skillsQuestionnaire = [

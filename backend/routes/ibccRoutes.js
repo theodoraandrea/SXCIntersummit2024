@@ -15,6 +15,7 @@ router.post(
     { name: "proofOfFollow", maxCount: 1 },
     { name: "proofOfStory", maxCount: 1 },
     { name: "proofOfComment", maxCount: 1 },
+    { name: "proofOfBroadcast", maxCount: 1},
   ]),
   errorHandling,
   ibccControllers.createNewTeam
@@ -36,6 +37,7 @@ router.post(
         { name: "proofOfFollow", maxCount: 1 },
         { name: "proofOfStory", maxCount: 1 },
         { name: "proofOfComment", maxCount: 1 },
+        { name: "proofOfBroadcast", maxCount: 1},
       ]),
       errorHandling,
       ibccControllers.createNewSolo

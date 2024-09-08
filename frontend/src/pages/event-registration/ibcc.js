@@ -1268,6 +1268,7 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
   );
   const [proofOfComment, setProofOfComment] = useState(formData.proofOfComment?.name ?? ""
   );
+  const [proofOfBroadcast, setProofOfBroadcast] = useState(formData.proofOfBroadcast?.name ?? "");
   const [twibbon1, setTwibbon1] = useState(formData.twibbonLink1 ?? "");
   const [twibbon2, setTwibbon2] = useState(formData.twibbonLink2 ?? "");
   const [twibbon3, setTwibbon3] = useState(formData.twibbonLink3 ?? "");
@@ -1294,7 +1295,7 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
   };
 
   const checkAllFilled = () => {
-    if (studentId && proofOfComment && proofOfFollow && proofOfStory) {
+    if (studentId && proofOfComment && proofOfFollow && proofOfStory && proofOfBroadcast) {
       if (formData.registrationType === "Individual") {
         if (cv && twibbon1) {
           return true;
@@ -1355,6 +1356,9 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
             </label>
             <label className="block text-white mb-4">
               File size has to be less than 2MB
+            </label>
+            <label className="block text-white mb-4">
+              Each requirement will be reviewed and participants will be contacted if any are not met.
             </label>
             <p className="block text-white">Student ID</p>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
@@ -1465,6 +1469,32 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
               </div>
               <label className="text-sm text-white ml-2">{proofOfComment}</label>
             </div>
+            <label className="block text-white">
+            Proof of sharing the IBC poster and broadcast to 1 group 
+            </label>
+            <label className="block text-white">
+            Material can be accessed <a className="font-bold text-primary-3"
+            target="_blank"
+            href="https://drive.google.com/drive/folders/1ixXX3dGcRoXFknLqHASzl0sZOTrKF64D?usp=drive_link">here</a>         
+            </label>
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
+                type="file"
+                id="proofOfBroadcast"
+                name="proofOfBroadcast"
+                onChange={handleChange}
+                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+              />
+              <label
+                htmlFor="proofOfBroadcast"
+                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+              >
+                Choose file
+              </label>
+              </div>
+              <label className="text-sm text-white ml-2">{proofOfBroadcast}</label>
+            </div>
             <label className="text-white"
             hidden={formData.registrationType === "Individual"}
             >
@@ -1547,18 +1577,12 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
   const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
   const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
-  const { teamPrice, individualPrice, discount, bankAccount } = eventData;
+  const { teamPrice, individualPrice, discount, bankAccount1, bankAccount2 } = eventData;
 
-  const [ paymentType, setPaymentType ] = useState(formData.paymentType ?? "");
   const [ paymentChannel, setPaymentChannel ] = useState(formData.paymentChannel ?? "");
   const [ paymentBank, setPaymentBank ] = useState(formData.paymentBank ?? "");
   const [ payerBankAccName, setPayerBankAccName ] = useState(formData.payerBankAccName ?? "");
   const [ transferDate, setTransferDate ] = useState(formData.transferDate ?? "");
-
-  // Getting payment type 
-  useEffect(() => {
-    setPaymentType(getPaymentType(false));
-  }, []);
 
   // Handling file change
   const handleChange = (e) => {
@@ -1580,13 +1604,13 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
           ...formData,
           referralCode: verifiedRefCode
       });
-      setPaymentType("Referral");
       window.scrollTo(0,0);
   }, [verifiedRefCode]);
 
   // Checking payment proof
   const handleNext = () => {
       if (checkAllFilled()) {
+          const paymentType = getPaymentType(refCodeValid);
           setFormData({
             ...formData,
             paymentChannel: paymentChannel,
@@ -1643,9 +1667,9 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
 
 
   const getPrice = (refCodeValid) => {
-    let price;
-
     const type = formData.registrationType;
+
+    let price = type === "Team" ? "200000" : "70000";
 
     const currentDate = new Date();
 
@@ -1676,7 +1700,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
       } else {
         price = 85000;
       }   
-    }
+    } 
 
     if (refCodeValid){
       price -= discount;
@@ -1693,16 +1717,43 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
           <div className="bg-primary-1 w-full min-h-screen py-16">  
           <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-xl sm:shadow-lg max-w-3xl mx-auto">
                   <div className='mb-4 py-8 shadow-md rounded-lg flex flex-col items-center justify-center'>
-                      <h1 className='text-xl font-bold text-white mb-2'>Registration Fee</h1>
+                      <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
                       <p className='text-white mx-4 mb-2 text-center'>
                           Please transfer the following amount to complete your registration
                       </p>
-                      <div className='text-white text-center font-bold text-xl'>
+                      <div className='text-white text-center font-bold text-3xl'>
                           <p>IDR {price.toLocaleString()}</p>
                       </div>
-                      <p className='text-white mx-4 text-center'>
-                          {bankAccount}
-                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+                        <div className="flex flex-col justify-center px-5 py-3 bg-gray-500 bg-opacity-60 shadow-lg rounded-2xl">
+                        <p className='text-white mx-4'>
+                            {bankAccount1[0]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount1[1]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount1[2]}
+                        </p>
+                        </div>
+                        <div className="flex flex-col justify-center px-5 py-4 bg-gray-500 bg-opacity-60 shadow-lg rounded-2xl">
+                        <p className='text-white mx-4'>
+                            {bankAccount2[0]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount2[1]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount2[2]}
+                        </p>
+                        <a className='underline text-white mx-4'
+                        href={bankAccount2[3]}
+                        target="_blank"
+                        >
+                            {bankAccount2[3]}
+                        </a>
+                        </div>
+                      </div>
                       <div className='mb-4 w-full'>
                           <label className='block text-white' htmlFor='fullName'>Where did you pay?</label>
                           <small className="text-white">blu / Paypal</small>
@@ -2460,7 +2511,16 @@ const EventCard = () => {
         bccId: 2,
         teamPrice: 200000,
         individualPrice: 60000,
-        bankAccount: "",
+        bankAccount1:[ "000427101697",
+          "blu by BCA DIGITAL",
+          "a.n. CLAIRINE SABATINI NAYOAN"
+        ],
+        bankAccount2: [
+          "Username: @Intersummit2024",
+          "Email: Clairinenayoan93@gmail.com",
+          "Phone number: +621256356856",
+          "https://paypal.me/Intersummit2024"
+        ],
         discount: 5000
     };
 
