@@ -1616,7 +1616,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
   }
 
   const getPaymentType = (refCodeValid) => {
-    if (refCodeValid) {
+    if (refCodeValid && verifiedRefCode) {
       return "Referral";
     } else {
       const currentDate = new Date();
@@ -1631,7 +1631,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
       if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
         return "Early Bird";
       } else if (currentDate >= regularStart && currentDate <= regularEnd) {
-        return "Regular";
+        return "Normal";
       } else if (currentDate >= lateStart && currentDate <= lateEnd) {
         return "Late";
       } else {
@@ -1643,7 +1643,10 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
 
 
   const getPrice = (refCodeValid) => {
-    let price = formData.registrationType === "Team" ? teamPrice : individualPrice;;
+    let price;
+
+    const type = formData.registrationType;
+
     const currentDate = new Date();
 
     // 2 8 9 25 26 1 
@@ -1656,11 +1659,23 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
     const lateEnd = new Date("2024-10-01");
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
-      price -= 50000;
+      if (type === "Team") {
+        price = 180000;
+      } else {
+        price = 60000;
+      }
     } else if (currentDate >= regularStart && currentDate <= regularEnd) {
-      price -= 25000;
+      if (type === "Team") {
+        price = 200000;
+      } else {
+        price = 70000;
+      }    
     } else if (currentDate >= lateStart && currentDate <= lateEnd) {
-      price -= 0;
+      if (type === "Team") {
+        price = 230000;
+      } else {
+        price = 85000;
+      }   
     }
 
     if (refCodeValid){
