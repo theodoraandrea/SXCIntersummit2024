@@ -1053,8 +1053,8 @@ const EventCard = () => {
     const eventData = {
         title: "SxC International Business Challenge: Business Case Competition",
         bccId: 2,
-        teamPrice: 200000,
-        individualPrice: 50000,
+        teamPrice: 180000,
+        individualPrice: 60000,
         bankAccount: "",
         discount: 5000
     };

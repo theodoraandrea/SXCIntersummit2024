@@ -64,6 +64,9 @@ const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
           <p className="text-sm text-white my-6">
             Select the institution you are from
           </p>
+          <p className="text-sm text-white my-6">
+            If you are not university students, you may answer the next question with "No Major"
+          </p>
           <div className="mb-4">
             <label
               className="block text-white mb-2"
