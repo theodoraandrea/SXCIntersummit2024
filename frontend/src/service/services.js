@@ -29,6 +29,12 @@ import {
   API_POST_NEW_IBPC_MEMBER,
   API_POST_NEW_IBPC_TEAM,
   API_POST_CHECK_IBPC_TEAMCODE,
+  //IBCC
+  API_GET_IBCC_INDIVIDUAL_SUMMARY,
+  API_GET_IBCC_TEAM_SUMMARY,
+  API_POST_NEW_IBCC_INDIVIDUAL,
+  API_POST_NEW_IBCC_TEAM,
+  API_POST_NEW_IBCC_MEMBER
 } from "../config/endpoints";
 
 //Login
@@ -202,7 +208,7 @@ const postBMCRegistration = async (data) => {
   try {
     const response = await axiosInstance.post(API_POST_BMC_REGISTRATION, data, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
     return response;
@@ -308,6 +314,68 @@ const getIbpcRegistrationData = async (data) => {
   }
 };
 
+// IBCC
+const postNewIbccTeam = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_IBCC_TEAM, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const postNewIbccMember = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_IBCC_MEMBER, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+const postNewIbccIndividual = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_NEW_IBCC_INDIVIDUAL, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+const getIbccIndividualRegistration = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_IBCC_INDIVIDUAL_SUMMARY, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+const getIbccTeamRegistration = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_IBCC_TEAM_SUMMARY, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
@@ -352,6 +420,11 @@ export {
   postNewIbpcMember,
   postNewIbpcTeam,
   getIbpcRegistrationData,
+  postNewIbccMember,
+  postNewIbccTeam,
+  postNewIbccIndividual,
+  getIbccIndividualRegistration,
+  getIbccTeamRegistration,
   postCheckTeamCode,
   postCheckReferralCode,
   postBMCRegistration,

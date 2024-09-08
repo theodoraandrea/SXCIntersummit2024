@@ -297,7 +297,7 @@ const FirstView = ({
       <Navbar />
       <div className="bg-primary-1 text-center py-8">
         <h1 className="text-2xl font-bold text-white">
-              Internasional Business Plan Competition Registration
+              International Business Plan Competition Registration
         </h1>
       </div>
       <div className="bg-primary-1 lg:space-x-8 lg:gap-y-4 lg:px-16 min-h-screen grid grid-cols-1 lg:grid-cols-3">
@@ -1149,7 +1149,6 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(formData);
   },[]);
 
   const handleSubmit = async () => {

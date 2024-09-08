@@ -91,7 +91,7 @@ exports.eventAssociations = () => {
   // IBCC and IBCCMember associations
   IBCC_Team.hasMany(IBCC_Member, {
     foreignKey: "teamId",
-    as: "ibccmembers",
+    as: "ibccMembers",
   });
   IBCC_Member.belongsTo(IBCC_Team, {
     foreignKey: "teamId",
@@ -100,7 +100,7 @@ exports.eventAssociations = () => {
   // User and IBCC/IBCCMember associations
   User.hasOne(IBCC_Team, {
     foreignKey: "leaderId",
-    as: "ibccteamLeader",
+    as: "ibccTeamLeader",
   });
   IBCC_Team.belongsTo(User, {
     foreignKey: "leaderId",
