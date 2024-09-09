@@ -1,5 +1,5 @@
 const API_URL = "https://srv582502.hstgr.cloud";
-//const API_URL = "http://localhost:3001";
+// const API_URL = "http://localhost:3001";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";

@@ -89,7 +89,7 @@ exports.createNewTeam = async (req, res) => {
     const proofOfBroadcast = await getImageURLsList(
       files.proofOfBroadcast,
       folderId,
-      fileNames[5]
+      fileNames[4]
     );
 
     const screenshotIBPC = [
@@ -100,20 +100,13 @@ exports.createNewTeam = async (req, res) => {
       proofOfBroadcast
     ];
 
-    const twibbonLinks = [
-      twibbonLink1,
-      twibbonLink2,
-      twibbonLink3
-  ]
-
     const newTeam = await IBPC.create({
       leaderId: userId,
       teamName,
       teamCode,
       question: qnaList,
       proofOfPayment,
-      // proofOfTwibbon,
-      twibbonLinks,
+      proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
       referralCode: referralCode
@@ -266,8 +259,8 @@ exports.getTeamDetailsByUserId = async (req, res) => {
       teamName: team.teamName,
       teamCode: team.teamCode,
       proofPayment: team.proofOfPayment,
-      // proofOfTwibbon: team.proofOfTwibbon,
-      twibbonLinks : team.twibbonLinks,
+      proofOfTwibbon: team.proofOfTwibbon,
+      // twibbonLinks : team.twibbonLinks,
       screenshotIBPC: team.screenshotIBPC,
       referralCode: team.referralCode,
       members: teamMembers.map((member) => ({
