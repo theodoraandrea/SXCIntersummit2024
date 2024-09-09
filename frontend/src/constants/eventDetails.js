@@ -195,7 +195,7 @@ export const eventDetails = {
   comp_3: {
     title: "SxC International Business Challenge: Business Plan Competition",
     image: imgLocation + "ibc-bpc.png",
-    openRegistration: true,
+    openRegistration: false,
     description:
       "<strong>The SxC International Business Plan Competition</strong> is a global event designed to foster entrepreneurial skills and innovation among students. <strong>Participants are encouraged to present their innovative business models,</strong> turning them into viable businesses. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
       "</br></br>" +

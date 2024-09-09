@@ -25,6 +25,7 @@ const speaker1 = "/images/speaker.png";
 const speaker2 = "/images/speaker2.png";
 
 const mediapartners = "/images/mediapartners.png";
+const sponsors = "/images/sponsors.png";
 const catalogweb = "/images/catalog-website.png";
 
 const MERCH_LINK = "https://linktr.ee/PurchaseSummit2024";
@@ -464,21 +465,18 @@ export default function Home() {
       </section>
 
       <section id="partners-section">
-        <div className="w-full h-fit bg-white grid grid-cols-1 sm:grid-cols-2 p-8 sm:p-16 gap-y-8">
-          {
-            /*SPONSORS BLM ADA
-          <div className="text-center p-16 hidden">
-            <h1>Sponsors</h1>
+        <div className="w-full h-fit bg-primary-1 grid grid-cols-1 sm:grid-cols-2 p-8 md:p-16 gap-x-8 gap-y-8">
+          <div className="text-center">
+            <h1 className="text-xl sm:text-4xl text-gradient w-fit mx-auto py-8">Sponsors</h1>
+            <img src={sponsors} className="w-full sm:max-w-lg mx-auto"/>
           </div>
-            */
-          }
-          <div className="text-center sm:col-span-2">
-            <h1 className="text-xl sm:text-4xl text-primary-1">Sponsors & Media Partners</h1>
+          <div className="text-center">
+            <h1 className="text-xl sm:text-4xl text-gradient w-fit mx-auto py-8">Media Partners</h1>
             <img src={mediapartners} className="w-full sm:max-w-lg mx-auto"/>
           </div>
-          <h1 className="w-md text-center sm:col-span-2 text-base sm:text-2xl text-primary-1">We are still calling for sponsors and media partners</h1>
-          <a href={CONTACT_LINK} className="text-center sm:col-span-2 text-base sm:text-2xl text-white bg-primary-1 w-fit mx-auto 
-          px-4 py-1 rounded-full border-2 border-primary-1 hover:text-primary-1 hover:bg-white transition duration-300
+          <h1 className="w-md text-center sm:col-span-2 text-base sm:text-2xl py-4 text-gradient">We are still calling for Sponsors and Media Partners</h1>
+          <a href={CONTACT_LINK} className="text-center sm:col-span-2 text-base sm:text-2xl hover:text-white hover:bg-primary-4 w-fit mx-auto 
+          px-5 py-1 rounded-full border-2 text-primary-1 bg-white transition duration-300
           ">
             <h1>Contact Us</h1>
           </a>
