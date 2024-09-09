@@ -1409,7 +1409,7 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
             </div>
             </div>
             <label className="block text-white">
-              Proof of following @sxcintersummit & @sxcintersummitcompetition on IG
+              Proof of following @studentsxceosjkt, @sxcintersummit, & @sxcintersummitcompetition on IG
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              
@@ -1430,7 +1430,7 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
               <label className="text-sm text-white ml-2">{proofOfFollow}</label>
             </div>
             <label className="block text-white">
-            Proof of sharing open registration feeds to IG story and tag @sxcintersummit @sxcintersummitcompetition            
+            Proof of sharing open registration feeds to IG story and tag @studentsxceosjkt, @sxcintersummit, & @sxcintersummitcompetition            
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              

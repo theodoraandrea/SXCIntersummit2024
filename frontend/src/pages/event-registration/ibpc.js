@@ -36,7 +36,7 @@ const FirstView = ({
   const [proofOfFollow, setproofOfFollow] = useState(
     formData.proofOfFollow?.name ?? ""
   );
-
+  const [proofOfBroadcast, setProofOfBroadcast] = useState(formData.proofOfBroadcast?.name ?? "");
   const [twibbon1, setTwibbon1] = useState(formData.twibbon1 ?? "");
   const [twibbon2, setTwibbon2] = useState(formData.twibbon2 ?? "");
   const [twibbon3, setTwibbon3] = useState(formData.twibbon3 ?? "");
@@ -67,7 +67,7 @@ const FirstView = ({
   };
 
   //REFERRAL & PAYMENT DATA
-  const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount } = eventData;
+  const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount, bankAccount1, bankAccount2 } = eventData;
   const [verifiedRefCode, setVerifiedRefCode] = useState(
     formData.referralCode ?? null
   );
@@ -135,6 +135,7 @@ const FirstView = ({
       proofOfStory && 
       proofOfComment && 
       question &&
+      proofOfBroadcast &&
       originalityStatement
     ) {
       return true;
@@ -214,6 +215,8 @@ const FirstView = ({
       setproofOfComment(file.name);
     } else if (name === "proofOfPayment") {
       setproofOfPayment(file.name);
+    } else if (name === "proofOfBroadcast"){
+      setProofOfBroadcast(file.name);
     } else if (name === "question") {
       setquestion(file.name);
     } else if (name === "originalityStatement") {
@@ -263,17 +266,29 @@ const FirstView = ({
   };
 
   const getPrice = (refCodeValid) => {
-    const currentDate = new Date();
+    // const currentDate = new Date();
+    
+    const resetTime = (date) => {
+      date.setHours(0, 0, 0, 0); // Set jam ke 00:00:00 untuk mengabaikan waktu
+      return date;
+    }
+    const currentDate = resetTime(new Date());
     let price = 0;
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = new Date("2024-09-01"); 
-    const earlyBirdEnd = new Date("2024-09-08");
-    const regularStart = new Date("2024-09-09");
-    const regularEnd = new Date("2024-09-25");
-    const lateStart = new Date("2024-09-26");
-    const lateEnd = new Date("2024-10-01");
+    const earlyBirdStart = resetTime(new Date("2024-09-01")); 
+    const earlyBirdEnd = resetTime(new Date("2024-09-08"));
+    const regularStart = resetTime(new Date("2024-09-09"));
+    const regularEnd = resetTime(new Date("2024-09-25"));
+    const lateStart = resetTime(new Date("2024-09-26"));
+    const lateEnd = resetTime(new Date("2024-10-01"));
+    // const earlyBirdStart = new Date("2024-09-01"); 
+    // const earlyBirdEnd = new Date("2024-09-08");
+    // const regularStart = new Date("2024-09-09");
+    // const regularEnd = new Date("2024-09-25");
+    // const lateStart = new Date("2024-09-26");
+    // const lateEnd = new Date("2024-10-01");
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
       price += 150000;
@@ -323,19 +338,48 @@ const FirstView = ({
               }
             </p>
           </div>
+          {/* transfer bank */}
           <div className="text-white bg-primary-4 rounded-lg shadow-lg p-8 text-left">
           <p className="text-xl text-center">
               <strong>Transfer to</strong>
             </p>
             <div className="text-sm mt-2 w-fit mx-auto text-center">
-              <p><strong>{bankAccount}</strong> - {bank}</p>
+              {/* <p><strong>{bankAccount}</strong> - {bank}</p>
               <p>{recipient}</p>
+               */}
+               <h3> <strong>Local</strong></h3>
+              <p className='text-white mx-4'>
+                {bankAccount1[0]}
+              </p>
+              <p className='text-white mx-4'>
+                {bankAccount1[1]}
+              </p>
+              <p className='text-white mx-4'>
+                {bankAccount1[2]}
+              </p>
             </div>
             <div className="text-sm mt-4 w-fit mx-auto text-center">
-              <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
-              <p>{eventData.recipient_2}</p>
+              {/* <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
+              <p>{eventData.recipient_2}</p> */}
+              <h3> <strong>International</strong></h3>
+              <p className='text-white mx-4'>
+                            {bankAccount2[0]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount2[1]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount2[2]}
+                        </p>
+                        <a className='underline text-white mx-4'
+                        href={bankAccount2[3]}
+                        target="_blank"
+                        >
+                            {bankAccount2[3]}
+                        </a>
             </div>
           </div>
+
           <div className="bg-primary-4 mt-4 rounded-lg">
           <ReferralModal
             eventName="ibc_bpc"
@@ -479,6 +523,9 @@ const FirstView = ({
             <label className="block text-white mb-4">
               File size has to be less than 2MB
             </label>
+            <label className="block text-white mb-4">
+              Each requirement will be reviewed and participants will be contacted if any are not met.
+            </label>
             <p className="block text-white">Student ID (all members)</p>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              
@@ -499,7 +546,7 @@ const FirstView = ({
               <p className="text-sm text-white ml-2 block">{studentIds}</p>
             </div>
             <label className="block text-white">
-              Proof of following @sxcintersummit & @sxcintersummitcompetition on IG
+              Proof of following @studentsxceosjkt, @sxcintersummit, & @sxcintersummitcompetition on IG
               (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
@@ -562,7 +609,7 @@ const FirstView = ({
             </div>
             </div>
             <label className="block text-white">
-              Proof of sharing Instagram story posters (all members)
+            Proof of Sharing Open Registration Feeds on your story and tag @studentsxceosjkt, @sxcintersummit, @sxcintersummitcompetition (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              
@@ -602,6 +649,32 @@ const FirstView = ({
               </label>
               </div>
               <label className="text-sm text-white ml-2">{proofOfComment}</label>
+            </div>
+            <label className="block text-white">
+            Proof of sharing the IBC poster and broadcast to 1 group 
+            </label>
+            <label className="block text-white">
+            Material can be accessed <a className="font-bold text-primary-3"
+            target="_blank"
+            href="https://drive.google.com/drive/folders/1ixXX3dGcRoXFknLqHASzl0sZOTrKF64D?usp=drive_link">here</a>         
+            </label>
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
+                type="file"
+                id="proofOfBroadcast"
+                name="proofOfBroadcast"
+                onChange={handleChange}
+                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+              />
+              <label
+                htmlFor="proofOfBroadcast"
+                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+              >
+                Choose file
+              </label>
+              </div>
+              <label className="text-sm text-white ml-2">{proofOfBroadcast}</label>
             </div>
 
             {/* originalityStatement */}
@@ -1297,6 +1370,10 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 {formData.proofOfComment?.name}
               </p>
               <p>
+                <strong>Proof of Broadcast</strong>{" "}
+                {formData.proofOfBroadcast?.name}
+              </p>
+              <p>
                 <strong>Proof of Originality Statement</strong>{" "}
                 {formData.originalityStatement?.name}
               </p>
@@ -1391,15 +1468,17 @@ const EventCard = () => {
 
   const eventData = {
     ibpcId: 3,
-    bankAccount: "000427101697",
-    bank: "blu by BCA DIGITAL",
-    recipient: "CLAIRINE SABATINI NAYOAN",
-    bankAccount_2: "085959773266",
-    bank_2: "GoPay",
-    recipient_2: "DIVO AZRIEL HAKIM",
-    discount: '5.000',
-    regularPrice: '150.000',
-    discountedPrice: '145.000',
+    bankAccount1:[ "000427101697",
+      "blu by BCA DIGITAL",
+      "a.n. CLAIRINE SABATINI NAYOAN"
+    ],
+    bankAccount2: [
+      "Username: @Intersummit2024",
+      "Email: Clairinenayoan93@gmail.com",
+      "Phone number: +621256356856",
+      "https://paypal.me/Intersummit2024"
+    ],
+    discount: 5000
   };
 
   const sanitizeInput = (input) => {
