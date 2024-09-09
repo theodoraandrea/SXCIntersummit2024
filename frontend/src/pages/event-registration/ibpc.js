@@ -697,15 +697,15 @@ const FirstView = ({
                   />
                   <label
                     htmlFor="originalityStatement"
-                    className="bg-primary-3 text-white px-5 py-2 my-2 rounded-full cursor-pointer z-20"
+                    className="bg-primary-3 text-white px-6 py-3 my-2 rounded-full cursor-pointer z-20"
                   >
-                    Submit Originality Statement Paper
+                    Submit Originality Statement
                   </label>
-                <label className="mx-5 text-white mt-6">{originalityStatement}</label>
                 </div>
               </div>
+              <label className="block w-fit mx-auto text-white">{originalityStatement}</label>
 
-              <h1 className="text-3xl font-bold text-gradient mb-4">
+              <h1 className="text-3xl font-bold text-gradient my-4">
                 How did you know this event?
               </h1>
               <div className="grid grid-cols-2 gap-4 text-left">
@@ -1229,35 +1229,19 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
       setIsLoading(true);
       const response = await registerTeam(formData);
       if (response.team.id) {
-        let memberCounter = 1;
         for (const member of membersData) {
-            const memberData = {
-              teamId: response.team.id,
-              fullname: member.fullName,
-              email: member.email,
-              institution: member.institution,
-              batch: member.batch,
-              phoneNumber: member.phoneNumber,
-            };
             try {
+              const memberData = {
+                teamId: response.team.id,
+                fullname: member.fullName,
+                email: member.email,
+                institution: member.institution,
+                batch: member.batch,
+                phoneNumber: member.phoneNumber,
+              };
               await registerMember(memberData);
-              memberCounter++;
-              if (memberCounter === numberOfMembers) {
-                setIsLoading(false);
-                //Add this activeTab state for competition registrations
-                //because user-dashboard opens "events" by default
-                navigate(USER_DASHBOARD_PAGE, {
-                  state: {
-                    activeTab: "competitions",
-                  },
-                });
-                setRegisteredCompetitions((prevData) => [...prevData, ibpcId]);
-                successAlert({ title: "Successfully registered for International Business Plan Competition!",
-                  message: "Please check your email and user dashboard for further details."
-                });
-              }
             } catch (memberError) {
-              console.log(memberError)
+              console.log(memberError);
               setIsLoading(false);
               errorAlert({
                 message: "Something went wrong. Please try again"
@@ -1265,6 +1249,17 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               navigate(-1);
             }
         }
+        setIsLoading(false);
+        //Add this activeTab state for competition registrations
+        //because user-dashboard opens "events" by default
+        navigate(USER_DASHBOARD_PAGE, {
+          state: {
+            activeTab: "competitions",
+          },
+        });
+        successAlert({ title: "Successfully registered for International Business Plan Competition!",
+          message: "Please check your email and user dashboard for further details."
+        });
       }
     } catch (error) {
       setIsLoading(false);
@@ -1379,7 +1374,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               </p>
               <p>
                 <strong>How did you know this event?</strong>{" "}
-                {formData.questionOther ?? formData.question}
+                {!formData.questionOther ? formData.question : formData.questionOther}
               </p>
               <p className="text-base md:text-lg font-semibold mt-2">Team Leader</p>
               <p>

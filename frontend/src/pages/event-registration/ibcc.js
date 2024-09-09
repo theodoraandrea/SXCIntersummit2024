@@ -2307,7 +2307,6 @@ const Summary = ({ formData, member1Data, member2Data, onPrevious }) => {
                 major: member.major
                };
               const newMember = await registerMember(memberData);
-              console.log("SUCCESS");
              } catch (memberError) {
               setIsLoading(false);
               errorAlert({
