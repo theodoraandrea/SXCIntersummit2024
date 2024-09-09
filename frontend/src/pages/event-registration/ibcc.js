@@ -1677,12 +1677,12 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = new Date("2024-09-01"); 
-    const earlyBirdEnd = new Date("2024-09-08");
-    const regularStart = new Date("2024-09-09");
-    const regularEnd = new Date("2024-09-25");
-    const lateStart = new Date("2024-09-26");
-    const lateEnd = new Date("2024-10-01");
+    const earlyBirdStart = new Date("2024-09-09"); 
+    const earlyBirdEnd = new Date("2024-09-22");
+    const regularStart = new Date("2024-09-23");
+    const regularEnd = new Date("2024-10-10");
+    const lateStart = new Date("2024-10-11");
+    const lateEnd = new Date("2024-10-22");
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
       if (type === "Team") {
@@ -1699,9 +1699,10 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
     } else if (currentDate >= lateStart && currentDate <= lateEnd) {
       if (type === "Team") {
         price = 230000;
-      } else {
-        price = 85000;
-      }   
+      } 
+      // else {
+      //   price = 85000;
+      // }   
     } 
 
     if (refCodeValid){
@@ -2510,7 +2511,7 @@ const EventCard = () => {
     const eventData = {
         title: "SxC International Business Challenge: Business Case Competition",
         bccId: 2,
-        teamPrice: 200000,
+        teamPrice: 180000,
         individualPrice: 60000,
         bankAccount1:[ "000427101697",
           "blu by BCA DIGITAL",

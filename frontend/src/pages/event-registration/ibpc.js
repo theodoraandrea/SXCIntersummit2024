@@ -277,12 +277,12 @@ const FirstView = ({
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = resetTime(new Date("2024-09-01")); 
-    const earlyBirdEnd = resetTime(new Date("2024-09-08"));
-    const regularStart = resetTime(new Date("2024-09-09"));
-    const regularEnd = resetTime(new Date("2024-09-25"));
-    const lateStart = resetTime(new Date("2024-09-26"));
-    const lateEnd = resetTime(new Date("2024-10-01"));
+    const earlyBirdStart = resetTime(new Date("2024-09-09")); 
+    const earlyBirdEnd = resetTime(new Date("2024-09-14"));
+    const regularStart = resetTime(new Date("2024-09-15"));
+    const regularEnd = resetTime(new Date("2024-09-30"));
+    const lateStart = resetTime(new Date("2024-10-01"));
+    const lateEnd = resetTime(new Date("2024-10-06"));
     // const earlyBirdStart = new Date("2024-09-01"); 
     // const earlyBirdEnd = new Date("2024-09-08");
     // const regularStart = new Date("2024-09-09");
