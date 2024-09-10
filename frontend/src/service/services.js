@@ -208,7 +208,7 @@ const postBMCRegistration = async (data) => {
   try {
     const response = await axiosInstance.post(API_POST_BMC_REGISTRATION, data, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     });
     return response;

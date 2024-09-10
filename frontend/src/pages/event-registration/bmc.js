@@ -84,7 +84,7 @@ const ZeroView = ({ title, description, formData, setFormData, onNext }) => {
               <option value="" disabled>
                 Select your institution
               </option>
-              <option value="Highschool">
+              <option value="High school">
                 High school
               </option>
               <option value="University">
