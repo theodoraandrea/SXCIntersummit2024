@@ -258,8 +258,8 @@ const FirstView = ({
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "{LINK}"; // REPLACE LINK
-    link.download = "IBPC-OriginalityStatement.pdf";
+    link.href = "https://docs.google.com/document/d/1arNDoC-R2gT8agqmsRQ43ZF1MVrmhAi1zq51Sydu6pQ/edit"; // REPLACE LINK
+    // link.download = "IBPC-OriginalityStatement.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -273,7 +273,8 @@ const FirstView = ({
       return date;
     }
     const currentDate = resetTime(new Date());
-    let price = 0;
+    let priceIDR = 0;
+    let priceUSD = 0.0;
 
     // 2 8 9 25 26 1 
 
@@ -291,21 +292,24 @@ const FirstView = ({
     // const lateEnd = new Date("2024-10-01");
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
-      price += 150000;
+      priceIDR += 150000;
+      priceUSD += 10.0;
     } else if (currentDate >= regularStart && currentDate <= regularEnd) {
-      price += 175000;
+      priceIDR += 175000;
+      priceUSD += 11.5;
     } else if (currentDate >= lateStart && currentDate <= lateEnd) {
-      price += 200000;
+      priceIDR += 200000;
+      priceUSD += 13.0;
     }
 
     if (refCodeValid){
-      price -= discount;
+      priceIDR -= discount;
     }
 
-    return price;
+    return { priceIDR, priceUSD };
   }
 
-  const price = getPrice(refCodeValid);
+  const {priceIDR, priceUSD} = getPrice(refCodeValid);
 
   return (
     <div>
@@ -327,7 +331,17 @@ const FirstView = ({
             </p>
             <p className="text-3xl">
               <strong>
-                IDR {price.toLocaleString()}
+                IDR {priceIDR.toLocaleString()}
+              </strong>
+            </p>
+            
+            <p className="text-lg">
+                or
+            </p>
+
+            <p className="text-3xl">
+              <strong>
+                ${priceUSD.toFixed(2)}
               </strong>
             </p>
             <p className="text-sm">
@@ -681,12 +695,20 @@ const FirstView = ({
             <div className="py-4">
               <div className="space-x-4">
                 <p className="text-white py-4">Please download the Originality Statement paper and upload it with your signature</p>
-                <button
+                {/* <button
                   className="border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4"
                   onClick={handleDownload}
                 >
                   Download Originality Statement
-                </button>
+                </button> */}
+                <a
+                  href="https://docs.google.com/document/d/1arNDoC-R2gT8agqmsRQ43ZF1MVrmhAi1zq51Sydu6pQ/edit"
+                  target="_blank" // Membuka link di tab baru
+                  rel="noopener noreferrer" // Untuk keamanan
+                  className="border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4 inline-block"
+                >
+                  Download Originality Statement
+                </a>
                 <div className="relative inline-block mb-5">
                   <input
                     type="file"

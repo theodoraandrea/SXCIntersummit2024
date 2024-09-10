@@ -167,7 +167,8 @@ export default function DetailEvents() {
                 />
               </div>
               <div 
-              className="text-sm md:text-base text-justify px-4 md:px-0"
+              // className="text-sm md:text-base text-justify px-4 md:px-0"
+              className="text-sm md:text-base text-left leading-relaxed px-4 md:px-0 whitespace-normal"
               dangerouslySetInnerHTML={{ __html: eventData.description     
               }}/>
             </div>
@@ -202,10 +203,11 @@ export default function DetailEvents() {
           </div>
 
           {/* FAQ Section */}
-          <div className="mt-16">
+          {/* <div className="mt-16">
             <h2 className="text-2xl font-bold">FAQ</h2>
             <div className="mt-8 space-y-4">
               {(eventData.faq || []).map((faqItem, index) => (
+                eventDetails !== 'comp_2' && eventDetails !== 'comp_3' && (
                 <div key={index} className="bg-primary-5 text-black p-2">
                   <button
                     onClick={() => toggleFAQ(index)}
@@ -235,9 +237,50 @@ export default function DetailEvents() {
                     </div>
                   )}
                 </div>
+                )
               ))}
             </div>
-          </div>
+          </div> */}
+
+<div className="mt-16">
+  <h2 className="text-2xl font-bold">FAQ</h2>
+  <div className="mt-8 space-y-4">
+    {(eventData.faq && !['comp_2', 'comp_3'].includes(eventDetails)) ? (
+      (eventData.faq || []).map((faqItem, index) => (
+        <div key={index} className="bg-primary-5 text-black p-2">
+          <button
+            onClick={() => toggleFAQ(index)}
+            className="w-full text-left text-lg flex items-center justify-between"
+          >
+            <span className="font-bold">{faqItem}</span>
+            <svg
+              className={`w-6 h-6 transform transition-transform ${openFAQ[index] ? 'rotate-180' : 'rotate-90'}`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </button>
+          {openFAQ[index] && (
+            <div className="mt-2">
+              <p>{eventData.faqDesc[index]}</p>
+            </div>
+          )}
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-500">FAQ is not available for this event.</p>
+    )}
+  </div>
+</div>
+
 
           {/* Contact Person Section */}
           <div className="mt-16 w-auto">
