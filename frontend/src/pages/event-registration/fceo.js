@@ -47,7 +47,14 @@ const FirstView = ({
   );
 
   //REFERRAL & PAYMENT DATA
-  const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount } = eventData;
+  const {
+    regularPrice,
+    bankAccount,
+    bank,
+    recipient,
+    discountedPrice,
+    discount,
+  } = eventData;
   const [verifiedRefCode, setVerifiedRefCode] = useState(
     formData.referralCode ?? null
   );
@@ -74,13 +81,12 @@ const FirstView = ({
           school: sanitizeInput(school),
           teamName: sanitizeInput(teamName),
           region: sanitizeInput(region),
-          members: 3
+          members: 3,
         };
         setFormData(formData);
         onNext();
       }
     } else {
-
     }
   };
 
@@ -102,7 +108,7 @@ const FirstView = ({
       school &&
       teamName &&
       region &&
-      members && 
+      members &&
       studentIds &&
       proofFollow &&
       proofTwibbon &&
@@ -110,7 +116,7 @@ const FirstView = ({
     ) {
       return true;
     }
-    errorAlert({ message: "All fields are required"});
+    errorAlert({ message: "All fields are required" });
     return false;
   };
 
@@ -154,7 +160,7 @@ const FirstView = ({
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    
+
     const file = files[0];
 
     if (!checkFileSize(file)) {
@@ -189,10 +195,11 @@ const FirstView = ({
     const message = "File size has to be 2MB or less";
     errorAlert({ message: message });
     return false;
-  }
-  
+  };
+
   const checkFileType = (file) => {
-    if (file.type === "image/jpeg" ||
+    if (
+      file.type === "image/jpeg" ||
       file.type === "image/png" ||
       file.type === "application/pdf"
     ) {
@@ -201,62 +208,75 @@ const FirstView = ({
     const message = "File has to be pdf, jpg, jpeg, or png";
     errorAlert({ message: message });
     return false;
-  }
+  };
 
   return (
     <div>
       <Navbar />
       <div className="bg-primary-1 text-center py-8">
-        <h1 className="text-3xl font-bold text-white">
-              FCEO Registration
-        </h1>
+        <h1 className="text-3xl font-bold text-white">FCEO Registration</h1>
       </div>
       <div className="bg-primary-1 lg:space-x-8 lg:gap-y-4 lg:px-16 min-h-screen grid grid-cols-1 lg:grid-cols-3">
         <div className="col-span-1 w-fit mx-auto p-4 pt-0 text-center">
-          <div className="mb-4 p-8 bg-primary-4
-          text-white rounded-lg shadow-lg flex flex-col items-center justify-center">
-            <h1 className="text-xl font-bold mb-2">
-              Registration Fee
-            </h1>
+          <div className="mb-4 p-8 bg-primary-4 text-white rounded-lg shadow-lg flex flex-col items-center justify-center">
+            <h1 className="text-xl font-bold mb-2">Registration Fee</h1>
             <p className="mb-2 text-center text-sm">
               Please pay the following amount to complete your registration
             </p>
-            <p className="text-3xl"><strong>IDR {
-              (verifiedRefCode && refCodeValid) ? discountedPrice : regularPrice
-              }</strong>
+
+            <p className="text-3xl">
+              <strong>
+                {verifiedRefCode && refCodeValid ? (
+                  <>
+                    <div className="pb-4">
+                      <span className="line-through text-gray-400 text-[18px] ">
+                        IDR {regularPrice}
+                      </span>
+                    </div>
+                    <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
+                      IDR {discountedPrice}
+                    </span>
+                  </>
+                ) : (
+                  regularPrice
+                )}
+              </strong>
             </p>
+
             <p className="text-sm">
-              {
-              verifiedRefCode && refCodeValid && (
-                "Referral discount applied"
-              )
-              }
+              {verifiedRefCode && refCodeValid && "Referral discount applied"}
             </p>
           </div>
+
           <div className="text-white bg-primary-4 rounded-lg shadow-lg p-8 text-left">
-          <p className="text-xl text-center">
+            <p className="text-xl text-center">
               <strong>Transfer to</strong>
             </p>
             <div className="text-sm mt-2 w-fit mx-auto text-center">
-              <p><strong>{bankAccount}</strong> - {bank}</p>
+              <p>
+                <strong>{bankAccount}</strong> - {bank}
+              </p>
               <p>{recipient}</p>
             </div>
             <div className="text-sm mt-4 w-fit mx-auto text-center">
-              <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
+              <p>
+                <strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}
+              </p>
               <p>{eventData.recipient_2}</p>
             </div>
           </div>
-          <div className="bg-primary-4 mt-4 rounded-lg">
-          <ReferralModal
-            eventName="fceo"
-            referralCode={formData.referralCode ?? ""}
-            verifiedRefCode={verifiedRefCode}
-            setVerifiedRefCode={setVerifiedRefCode}
-            setRefCodeValid={setRefCodeValid}
-          />
-          </div>
 
+          <div className="bg-primary-4 mt-4 rounded-lg">
+            <ReferralModal
+              eventName="fceo"
+              referralCode={formData.referralCode ?? ""}
+              verifiedRefCode={verifiedRefCode}
+              setVerifiedRefCode={setVerifiedRefCode}
+              setRefCodeValid={setRefCodeValid}
+            />
+          </div>
         </div>
+
         <div className="bg-dark-2 col-span-2 p-4 px-8 md:py-8 md:px-16 lg:p-0 lg:w-full rounded-lg lg:shadow-lg text-center">
           <form className="text-left">
             <h1 className="text-lg font-bold text-white">Leader Data</h1>
@@ -376,24 +396,22 @@ const FirstView = ({
                 Number of members
               </label>
               <select
-              id="selectMembers"
-              name="selectMembers"
-              className="w-full px-3 py-2 rounded-lg"
-              onChange={(e) => {
-                setMembers(e.target.value)}}
-              value={members}
-            >
-              <option value="" disabled>
-                Select number of members
-              </option>
-              <option value="2" disabled>
-                2
-              </option>
-              <option value="3">
-                3
-              </option>
-            </select>
-
+                id="selectMembers"
+                name="selectMembers"
+                className="w-full px-3 py-2 rounded-lg"
+                onChange={(e) => {
+                  setMembers(e.target.value);
+                }}
+                value={members}
+              >
+                <option value="" disabled>
+                  Select number of members
+                </option>
+                <option value="2" disabled>
+                  2
+                </option>
+                <option value="3">3</option>
+              </select>
             </div>
             <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
             <label className="block text-white">
@@ -405,7 +423,7 @@ const FirstView = ({
             <label className="block text-white">Proof of Payment</label>
             <div className="my-4 w-fit flex flex-col space-y-2 sm:flex-row">
               <div className="relative">
-              <input
+                <input
                   type="file"
                   id="proofPayment"
                   name="proofPayment"
@@ -416,20 +434,22 @@ const FirstView = ({
                   htmlFor="proofPayment"
                   className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
                 >
-                Choose file
-              </label>
+                  Choose file
+                </label>
               </div>
-              <div className="text-sm text-white ml-2 max-w-full">{proofPayment}</div>
+              <div className="text-sm text-white ml-2 max-w-full">
+                {proofPayment}
+              </div>
             </div>
             <p className="block text-white">Student ID (all members)</p>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
-              <div className="relative">              
+              <div className="relative">
                 <input
-                type="file"
-                id="studentIds"
-                name="studentIds"
-                onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                  type="file"
+                  id="studentIds"
+                  name="studentIds"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10"
                 />
                 <label
                   htmlFor="studentIds"
@@ -441,24 +461,24 @@ const FirstView = ({
               <p className="text-sm text-white ml-2 block">{studentIds}</p>
             </div>
             <label className="block text-white">
-              Proof of following @sxcintersummit & @sxcintersummitcompetition on IG
-              (all members)
+              Proof of following @sxcintersummit & @sxcintersummitcompetition on
+              IG (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
-              <div className="relative">              
-              <input
-                type="file"
-                id="proofFollow"
-                name="proofFollow"
-                onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer z-10"
-              />
-              <label
-                htmlFor="proofFollow"
-                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
-              >
-                Choose file
-              </label>
+              <div className="relative">
+                <input
+                  type="file"
+                  id="proofFollow"
+                  name="proofFollow"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                />
+                <label
+                  htmlFor="proofFollow"
+                  className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+                >
+                  Choose file
+                </label>
               </div>
               <label className="text-sm text-white ml-2">{proofFollow}</label>
             </div>
@@ -466,20 +486,20 @@ const FirstView = ({
               Proof of Twibbon post (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
-              <div className="relative">              
+              <div className="relative">
                 <input
-                type="file"
-                id="proofTwibbon"
-                name="proofTwibbon"
-                onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer z-10"
-              />
-              <label
-                htmlFor="proofTwibbon"
-                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
-              >
-                Choose file
-              </label>
+                  type="file"
+                  id="proofTwibbon"
+                  name="proofTwibbon"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                />
+                <label
+                  htmlFor="proofTwibbon"
+                  className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+                >
+                  Choose file
+                </label>
               </div>
               <label className="text-sm text-white ml-2">{proofTwibbon}</label>
             </div>
@@ -487,20 +507,20 @@ const FirstView = ({
               Proof of sharing Instagram story posters (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
-              <div className="relative">              
+              <div className="relative">
                 <input
-                type="file"
-                id="proofStory"
-                name="proofStory"
-                onChange={handleChange}
-                className="absolute inset-0 opacity-0 cursor-pointer z-10"
-              />
-              <label
-                htmlFor="proofStory"
-                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
-              >
-                Choose file
-              </label>
+                  type="file"
+                  id="proofStory"
+                  name="proofStory"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                />
+                <label
+                  htmlFor="proofStory"
+                  className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+                >
+                  Choose file
+                </label>
               </div>
               <label className="text-sm text-white ml-2">{proofStory}</label>
             </div>
@@ -540,7 +560,7 @@ const Member1Data = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  },[]);
+  }, []);
 
   const handleSubmit = () => {
     if (checkAllFilled()) {
@@ -557,9 +577,8 @@ const Member1Data = ({
       }
 
       goToNext();
-      
     } else {
-      errorAlert({ message: "All fields must be filled"});
+      errorAlert({ message: "All fields must be filled" });
     }
   };
 
@@ -613,9 +632,7 @@ const Member1Data = ({
       <Navbar />
       <div className="bg-primary-1 w-full min-h-screen py-16">
         <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-xl sm:shadow-lg text-center max-w-md mx-auto">
-          <h1 className="text-3xl font-bold text-white mb-4">
-            Member 1 Data
-          </h1>
+          <h1 className="text-3xl font-bold text-white mb-4">Member 1 Data</h1>
           <form className="text-left">
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -735,7 +752,7 @@ const Member2Data = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  },[]);
+  }, []);
 
   const handleNext = () => {
     if (saveData()) {
@@ -764,7 +781,7 @@ const Member2Data = ({
         return true;
       }
     }
-    errorAlert({ message: "All fields must be filled"});
+    errorAlert({ message: "All fields must be filled" });
     return false;
   };
 
@@ -818,9 +835,7 @@ const Member2Data = ({
       <Navbar />
       <div className="bg-primary-1 w-full min-h-screen py-16">
         <div className="bg-primary-1 sm:bg-primary-4 p-8 rounded-lg sm:shadow-lg text-center max-w-md mx-auto">
-          <h1 className="text-3xl font-bold text-white mb-4">
-            Member 2 Data
-          </h1>
+          <h1 className="text-3xl font-bold text-white mb-4">Member 2 Data</h1>
           <form className="text-left">
             <div className="mb-4">
               <label className="block text-white mb-2" htmlFor="fullName">
@@ -919,7 +934,14 @@ const Member2Data = ({
   );
 };
 
-const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Data, setCurrentView }) => {
+const Summary = ({
+  eventData,
+  formData,
+  numberOfMembers,
+  member1Data,
+  member2Data,
+  setCurrentView,
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setRegisteredCompetitions } = useUser();
@@ -929,7 +951,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  },[]);
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -960,14 +982,16 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                   },
                 });
                 setRegisteredCompetitions((prevData) => [...prevData, fceoId]);
-                successAlert({ title: "Successfully registered for FCEO!",
-                  message: "Please check your email and user dashboard for further details."
+                successAlert({
+                  title: "Successfully registered for FCEO!",
+                  message:
+                    "Please check your email and user dashboard for further details.",
                 });
               }
             } catch (memberError) {
               setIsLoading(false);
               errorAlert({
-                message: "Something went wrong. Please try again"
+                message: "Something went wrong. Please try again",
               });
               navigate(-1);
             }
@@ -977,7 +1001,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
     } catch (error) {
       setIsLoading(false);
       errorAlert({
-        message: "Something went wrong. Please try to register again."
+        message: "Something went wrong. Please try to register again.",
       });
       navigate(-1);
     }
@@ -1043,7 +1067,9 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 editData(0);
               }}
             >
-              <p className="text-base md:text-lg font-semibold mt-2">Team Data</p>
+              <p className="text-base md:text-lg font-semibold mt-2">
+                Team Data
+              </p>
               <p>
                 <strong>Team Name:</strong> {formData.teamName}
               </p>
@@ -1065,7 +1091,9 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 <strong>Proof of Sharing Instagram Story Posters:</strong>{" "}
                 {formData.proofStory.name}
               </p>
-              <p className="text-base md:text-lg font-semibold mt-2">Team Leader</p>
+              <p className="text-base md:text-lg font-semibold mt-2">
+                Team Leader
+              </p>
               <p>
                 <strong>Full Name:</strong> {formData.fullName}
               </p>
@@ -1083,7 +1111,9 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
               </p>
               {formData.referralCode && (
                 <>
-                  <p className="text-base md:text-lg font-semibold mt-2">Referral Code</p>
+                  <p className="text-base md:text-lg font-semibold mt-2">
+                    Referral Code
+                  </p>
                   {formData.referralCode}
                 </>
               )}
@@ -1158,9 +1188,9 @@ const EventCard = () => {
     bankAccount_2: "085959773266",
     bank_2: "GoPay",
     recipient_2: "DIVO AZRIEL HAKIM",
-    discount: '5000',
-    regularPrice: '90.000',
-    discountedPrice: '85.000',
+    discount: "5000",
+    regularPrice: "90.000",
+    discountedPrice: "70.000",
   };
 
   const sanitizeInput = (input) => {
@@ -1173,7 +1203,7 @@ const EventCard = () => {
     } else {
       setCurrentView((prevView) => prevView + 1);
     }
-  }
+  };
 
   const handlePrevious = () => {
     setCurrentView((prevView) => prevView - 1);
@@ -1197,8 +1227,10 @@ const EventCard = () => {
           setFormData={setMember1Data}
           members={formData.members}
           member2Data={member2Data}
-          goToNext={()=>{setCurrentView((3))}}
-          goToSummary={()=>(setCurrentView(4))}
+          goToNext={() => {
+            setCurrentView(3);
+          }}
+          goToSummary={() => setCurrentView(4)}
           onPrevious={handlePrevious}
           sanitizeInput={sanitizeInput}
         />
