@@ -285,7 +285,7 @@ exports.registerBMC = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: `${BMC_WA_LINK}`,
+            link: "https://chat.whatsapp.com/Hwg157Dbv3UFMX50rEg6aZ"
           },
         },
         outro:

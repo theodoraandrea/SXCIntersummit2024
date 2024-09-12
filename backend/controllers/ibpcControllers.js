@@ -135,7 +135,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: `${IBPC_WA_LINK}`,
+            link: "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t,
           },
         },
         outro:
