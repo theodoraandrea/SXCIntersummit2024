@@ -52,8 +52,8 @@ const FirstView = ({
     bankAccount,
     bank,
     recipient,
-    discountedPrice,
-    discount,
+    earlyBirdPrice,
+    referralPrice
   } = eventData;
   const [verifiedRefCode, setVerifiedRefCode] = useState(
     formData.referralCode ?? null
@@ -224,26 +224,32 @@ const FirstView = ({
               Please pay the following amount to complete your registration
             </p>
 
-            <p className="text-3xl">
-              <strong>
-                {verifiedRefCode && refCodeValid ? (
-                  <>
-                    <div className="pb-4">
-                      <span className="line-through text-gray-400 text-[18px] ">
-                        IDR {regularPrice}
-                      </span>
-                    </div>
-                    <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
-                      IDR {discountedPrice}
-                    </span>
-                  </>
-                ) : (
-                  regularPrice
-                )}
-              </strong>
-            </p>
 
-            <p className="text-sm">
+            {verifiedRefCode && refCodeValid ? (
+                  <>
+                  <div className="pb-4">
+                    <span className="line-through text-gray-400 text-[18px] ">
+                      IDR {earlyBirdPrice.toLocaleString()}
+                    </span>
+                  </div>
+                  <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
+                    IDR {referralPrice.toLocaleString()}
+                  </span>
+                </>
+                ) : (
+                  <>
+                  <div className="pb-4">
+                    <span className="line-through text-gray-400 text-[18px] ">
+                      IDR {regularPrice}
+                    </span>
+                  </div>
+                  <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
+                    IDR {earlyBirdPrice}
+                  </span>
+                </>
+            )}
+
+            <p className="text-sm mt-4">
               {verifiedRefCode && refCodeValid && "Referral discount applied"}
             </p>
           </div>
@@ -1188,9 +1194,9 @@ const EventCard = () => {
     bankAccount_2: "085959773266",
     bank_2: "GoPay",
     recipient_2: "DIVO AZRIEL HAKIM",
-    discount: "5000",
-    regularPrice: "90.000",
-    discountedPrice: "70.000",
+    regularPrice: 90000,
+    referralPrice: 65000,
+    earlyBirdPrice: 70000,
   };
 
   const sanitizeInput = (input) => {

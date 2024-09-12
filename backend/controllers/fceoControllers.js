@@ -112,7 +112,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: {FCEO_WA_LINK},
+            link: `${FCEO_WA_LINK}`,
           },
         },
         outro:

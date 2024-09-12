@@ -361,7 +361,7 @@ const { file } = require("googleapis/build/src/apis/file");
                 button: {
                   color: "#003337",
                   text: "Join WA Group",
-                  link: {IBCC_WA_LINK},
+                  link: `${IBCC_WA_LINK}`,
                 },
               },
               outro:
