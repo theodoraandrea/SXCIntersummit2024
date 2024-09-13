@@ -12,6 +12,7 @@ const { generateTeamCode } = require("../utils/generateTeamCode");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 
+// Register new company visit
 exports.registerCompanyVisit = async (req, res) => {
   const companyVisitId = 6;
   try {
@@ -85,7 +86,7 @@ exports.registerCompanyVisit = async (req, res) => {
         registrationId: eventRegistration.id,
         company,
         attendanceType,
-        gpa,
+        GPA: gpa,
         semester,
         domicile,
         question: qnaList,
@@ -95,6 +96,12 @@ exports.registerCompanyVisit = async (req, res) => {
       console.log(error);
       return res.status(500).json({ error });
     }
+
+    res.status(200).json({
+      message: "Success registering Company Visit!",
+      companyVisitDetails: newCompanyVisit,
+      email: emailResult.message,
+    });
   } catch (error) {
     res.status(500).json(error.message);
   }
