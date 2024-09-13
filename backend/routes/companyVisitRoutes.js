@@ -25,6 +25,7 @@ router.post(
     body("domicile")
       .notEmpty()
       .withMessage("Registrant's domicile is required"),
+    body("question").notEmpty().withMessage("Please answer all questions"),
   ],
   errorHandling,
   companyVisitControllers.registerCompanyVisit
@@ -33,6 +34,7 @@ router.post(
 router.get(
   "/summary",
   isAuthenticated,
+  errorHandling,
   companyVisitControllers.getCompanyVisitSummary
 );
 
