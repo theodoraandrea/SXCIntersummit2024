@@ -32,7 +32,7 @@ exports.createNewTeam = async (req, res) => {
       "originalityStatement",
       "proofOfStory",
       "proofOfComment",
-      "proofOfBroadcast"
+      "proofOfBroadcast",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -41,7 +41,15 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
-    const { teamName, question, referralCode, proofOfTwibbon, twibbonLink1, twibbonLink2, twibbonLink3 } = body;
+    const {
+      teamName,
+      question,
+      referralCode,
+      proofOfTwibbon,
+      twibbonLink1,
+      twibbonLink2,
+      twibbonLink3,
+    } = body;
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
@@ -97,7 +105,7 @@ exports.createNewTeam = async (req, res) => {
       proofOfStory,
       studentIds,
       proofOfComment,
-      proofOfBroadcast
+      proofOfBroadcast,
     ];
 
     const newTeam = await IBPC.create({
@@ -109,7 +117,7 @@ exports.createNewTeam = async (req, res) => {
       proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
-      referralCode: referralCode
+      referralCode: referralCode,
     });
 
     await CompetitionRegistration.create({
@@ -135,7 +143,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t,
+            link: "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t",
           },
         },
         outro:
