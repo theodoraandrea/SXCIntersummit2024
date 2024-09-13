@@ -32,16 +32,28 @@ exports.registerCompanyVisit = async (req, res) => {
     }
 
     const { company, attendanceType, gpa, semester, domicile } = body;
+
     const userId = req.user.id;
     const user = await User.findByPk(userId);
 
+    const qnaList = [
+      {
+        "Are you part of the StudentsxCEOs International Summit Committee?":
+          body.partOfCommittee ? "Yes" : "No",
+      },
+      {
+        "What motivates you to join the StudentsxCEOs International Summit Company Visit 2024? ":
+          body.motivation ?? "-",
+      },
+    ];
+
     // Create and upload File/Image
     const fileNames = [
-      `${teamName}_${user.fullname}_Proof of Follow`,
-      `${teamName}_${user.fullname}_Proof of Instastory`,
+      `${user.fullname}_Proof of Follow`,
+      `${user.fullname}_Proof of Instastory`,
     ];
     const rootFolderId = process.env.FOLDER_COMPANYVISIT_ID;
-    const folderId = await createFolder("Team " + teamName, rootFolderId);
+    const folderId = await createFolder(user.fullname, rootFolderId);
 
     const proofFollow = await getImageURLsList(
       files.proofFollow,
@@ -76,6 +88,8 @@ exports.registerCompanyVisit = async (req, res) => {
         gpa,
         semester,
         domicile,
+        question: qnaList,
+        screenshotCompanyVisit,
       });
     } catch (error) {
       console.log(error);
