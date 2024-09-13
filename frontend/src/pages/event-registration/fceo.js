@@ -240,11 +240,11 @@ const FirstView = ({
                   <>
                   <div className="pb-4">
                     <span className="line-through text-gray-400 text-[18px] ">
-                      IDR {regularPrice}
+                      IDR {regularPrice.toLocaleString()}
                     </span>
                   </div>
                   <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
-                    IDR {earlyBirdPrice}
+                    IDR {earlyBirdPrice.toLocaleString()}
                   </span>
                 </>
             )}
