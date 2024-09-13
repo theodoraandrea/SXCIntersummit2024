@@ -27,9 +27,13 @@ router.post(
       .withMessage("Registrant's domicile is required"),
   ],
   errorHandling,
-  companyVisitControllers.register
+  companyVisitControllers.registerCompanyVisit
 );
 
-router.get("/summary", isAuthenticated, companyVisitControllers);
+router.get(
+  "/summary",
+  isAuthenticated,
+  companyVisitControllers.getCompanyVisitSummary
+);
 
 module.exports = router;

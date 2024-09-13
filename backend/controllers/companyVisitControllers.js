@@ -1,20 +1,14 @@
 const express = require("express");
-const {
-  FCEOMember,
-  FCEO,
-  User,
-  Event,
-  EventRegistration,
-  CompanyVisit,
-} = require("../models");
+const { User, EventRegistration, CompanyVisit } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 
+const companyVisitId = 6;
+
 // Register new company visit
 exports.registerCompanyVisit = async (req, res) => {
-  const companyVisitId = 6;
   try {
     // Body Validation Checking
     const errors = validationResult(req);
@@ -101,6 +95,50 @@ exports.registerCompanyVisit = async (req, res) => {
       message: "Success registering Company Visit!",
       companyVisitDetails: newCompanyVisit,
       email: emailResult.message,
+    });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+exports.getCompanyVisitSummary = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    let eventRegistration;
+    try {
+      eventRegistration = await EventRegistration.findOne({
+        where: {
+          userId: userId,
+          eventId: companyVisitId,
+        },
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+
+    const registrationId = eventRegistration.id;
+
+    let companyVisitDetails;
+    try {
+      companyVisitDetails = await CompanyVisit.findOne({
+        where: { registrationId: registrationId },
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+
+    // If no registration is found return error
+    if (!eventRegistration) {
+      return res.status(404).json({
+        message: `No company visit registration found with Registration ID : ${registrationId}`,
+      });
+    }
+
+    // Respond with the event registration details
+    res.status(200).json({
+      message: "Company visit registration details retrieved successfully!",
+      companyVisitDetails: companyVisitDetails,
     });
   } catch (error) {
     res.status(500).json(error.message);
