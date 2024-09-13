@@ -148,7 +148,7 @@ const { file } = require("googleapis/build/src/apis/file");
                 button: {
                   color: "#003337",
                   text: "Join WA Group",
-                  link: {IBCC_WA_LINK},
+                  link: "https://chat.whatsapp.com/Gut5M6ilA9QCydC4vTPuD7",
                 },
               },
               outro:
@@ -361,7 +361,7 @@ const { file } = require("googleapis/build/src/apis/file");
                 button: {
                   color: "#003337",
                   text: "Join WA Group",
-                  link: {IBCC_WA_LINK},
+                  link: "https://chat.whatsapp.com/Gut5M6ilA9QCydC4vTPuD7",
                 },
               },
               outro:
