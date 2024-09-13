@@ -26,7 +26,7 @@ exports.registerCompanyVisit = async (req, res) => {
       });
     }
 
-    const { company, attendanceType, gpa, semester, domicile } = body;
+    const { company, attendanceType, gpa, semester, domicile, question } = body;
 
     const userId = req.user.id;
     const user = await User.findByPk(userId);
@@ -34,11 +34,11 @@ exports.registerCompanyVisit = async (req, res) => {
     const qnaList = [
       {
         "Are you part of the StudentsxCEOs International Summit Committee?":
-          body.partOfCommittee ? "Yes" : "No",
+          question[0],
       },
       {
         "What motivates you to join the StudentsxCEOs International Summit Company Visit 2024? ":
-          body.motivation ?? "-",
+          question[1],
       },
     ];
 
@@ -94,7 +94,6 @@ exports.registerCompanyVisit = async (req, res) => {
     res.status(200).json({
       message: "Success registering Company Visit!",
       companyVisitDetails: newCompanyVisit,
-      email: emailResult.message,
     });
   } catch (error) {
     res.status(500).json(error.message);
@@ -112,6 +111,24 @@ exports.getCompanyVisitSummary = async (req, res) => {
           userId: userId,
           eventId: companyVisitId,
         },
+        attributes: {
+          exclude: ["bmcType"],
+        },
+        include: [
+          {
+            model: CompanyVisit,
+            attributes: [
+              "company",
+              "attendanceType",
+              "GPA",
+              "semester",
+              "domicile",
+              "question",
+              "screenshotCompanyVisit",
+            ],
+          },
+        ],
+        order: [["createdAt", "DESC"]],
       });
     } catch (error) {
       res.status(500).json(error);
