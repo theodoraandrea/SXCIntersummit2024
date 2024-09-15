@@ -158,5 +158,44 @@ exports.registerChamber = async (req, res) => {
 };
 
 exports.getChamberRegistration = async (req, res) => {
-  return;
+  try {
+    const chamberId = 5;
+    const userId = req.user.id;
+
+    const registration = await EventRegistration.findOne({
+      where: {
+        userId: userId,
+        eventId: chamberId,
+      },
+    });
+
+    if (!registration)
+      return res
+        .status(404)
+        .json({ message: "Chamber registration not found" });
+
+    const chamber = await Chamber.findOne({
+      where: {
+        registrationId: registration.id,
+      },
+    });
+
+    if (!chamber)
+      return res
+        .status(404)
+        .json({ message: "Chamber registration not found" });
+
+    res.status(200).json({
+      data: {
+        chamber,
+      },
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: "Failed to get chamber registration",
+        error: error.message,
+      });
+  }
 };
