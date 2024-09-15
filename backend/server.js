@@ -30,14 +30,14 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-Chamber.sync({ alter: true })
-  .then(() => {
-    console.log("Update db");
-  })
-  .catch((err) => {
-    console.log("ERROR");
-    console.log(err.message);
-  });
+// Chamber.sync({ alter: true })
+//   .then(() => {
+//     console.log("Update db");
+//   })
+//   .catch((err) => {
+//     console.log("ERROR");
+//     console.log(err.message);
+//   });
 
 // CORS configuration
 app.use(corsMiddleware);
