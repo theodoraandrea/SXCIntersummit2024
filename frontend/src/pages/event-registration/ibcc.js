@@ -1672,46 +1672,53 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
     const type = formData.registrationType;
 
     let price = type === "Team" ? "200000" : "70000";
+    let priceUSD = 0.0;
 
     const currentDate = new Date();
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = new Date("2024-09-01"); 
-    const earlyBirdEnd = new Date("2024-09-08");
-    const regularStart = new Date("2024-09-09");
-    const regularEnd = new Date("2024-09-25");
-    const lateStart = new Date("2024-09-26");
-    const lateEnd = new Date("2024-10-01");
+    const earlyBirdStart = new Date("2024-09-09"); 
+    const earlyBirdEnd = new Date("2024-09-22");
+    const regularStart = new Date("2024-09-23");
+    const regularEnd = new Date("2024-10-10");
+    const lateStart = new Date("2024-10-11");
+    const lateEnd = new Date("2024-10-22");
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
       if (type === "Team") {
         price = 180000;
+        priceUSD = 12;
       } else {
         price = 60000;
+        priceUSD = 4;
       }
     } else if (currentDate >= regularStart && currentDate <= regularEnd) {
       if (type === "Team") {
         price = 200000;
+        priceUSD = 13;
       } else {
         price = 70000;
+        priceUSD = 5;
       }    
     } else if (currentDate >= lateStart && currentDate <= lateEnd) {
       if (type === "Team") {
         price = 230000;
-      } else {
-        price = 85000;
-      }   
+        priceUSD = 15;
+      } 
+      // else {
+      //   price = 85000;
+      // }   
     } 
 
     if (refCodeValid){
       price -= discount;
     }
 
-    return price;
+    return {price, priceUSD};
   }
 
-  let price = getPrice(refCodeValid);
+  const {price, priceUSD } = getPrice(refCodeValid);
 
   return (
       <div>
@@ -1725,7 +1732,9 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
                       </p>
                       <div className='text-white text-center font-bold text-3xl'>
                           <p>IDR {price.toLocaleString()}</p>
-                      </div>
+                          <p>or</p>
+                          <p>${priceUSD.toFixed(2)}</p>
+                      </div>                      
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
                         <div className="flex flex-col justify-center px-5 py-3 bg-gray-500 bg-opacity-60 shadow-lg rounded-2xl">
                         <p className='text-white mx-4'>
@@ -2510,7 +2519,7 @@ const EventCard = () => {
     const eventData = {
         title: "SxC International Business Challenge: Business Case Competition",
         bccId: 2,
-        teamPrice: 200000,
+        teamPrice: 180000,
         individualPrice: 60000,
         bankAccount1:[ "000427101697",
           "blu by BCA DIGITAL",
