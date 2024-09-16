@@ -26,8 +26,8 @@ const mentors = "/images/mentors.png";
 const speaker1 = "/images/speaker.png";
 const speaker2 = "/images/speaker2.png";
 
-const mediapartners = "/images/mediapartners.png";
 const sponsors = "/images/sponsors.png";
+const medpar = "/images/medpar.jpg";
 const catalogweb = "/images/catalog-website.png";
 
 const MERCH_LINK = "https://linktr.ee/PurchaseSummit2024";
@@ -483,7 +483,7 @@ export default function Home() {
           </div>
           <div className="text-center">
             <h1 className="text-xl sm:text-4xl text-gradient w-fit mx-auto py-8">Media Partners</h1>
-            <img src={mediapartners} className="w-full sm:max-w-lg mx-auto"/>
+            <img src={medpar} className="w-full sm:max-w-lg mx-auto"/>
           </div>
           <h1 className="w-md text-center sm:col-span-2 text-base sm:text-2xl py-4 text-gradient">We are still calling for Sponsors and Media Partners</h1>
           <a href={CONTACT_LINK} className="text-center sm:col-span-2 text-base sm:text-2xl hover:text-white hover:bg-primary-4 w-fit mx-auto 
