@@ -1,11 +1,12 @@
 const express = require("express");
 const { User, EventRegistration, CompanyVisit } = require("../models");
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
-const { generateTeamCode } = require("../utils/generateTeamCode");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
+const sendAutomatedEmail = require("../services/automatedEmail");
 
 const companyVisitId = 6;
+const companyVisitWAGroup = "#";
 
 // Register new company visit
 exports.registerCompanyVisit = async (req, res) => {
@@ -91,9 +92,47 @@ exports.registerCompanyVisit = async (req, res) => {
       return res.status(500).json({ error });
     }
 
+    const emailDetails = {
+      from: process.env.EMAIL_USER,
+      fromName: "StudentsXCEOs International Summit 2024",
+      mailgenOptions: {
+        theme: "salted",
+        product: {
+          name: "StudentsxCEOs International Summit 2024",
+          link: "#",
+        },
+      },
+      emailContent: {
+        intro:
+          "You've just successfully registered to the Company Visit program by SxC. We're excited to have you on board!",
+        action: {
+          instructions: "Join the WA Group by clicking the button below",
+          button: {
+            color: "#003337",
+            text: "Join WA Group",
+            link: companyVisitWAGroup,
+          },
+        },
+        outro:
+          "We're glad to have you on board! Stay tuned in the group for further information!",
+        signature: "Cheers, StudentsxCEOs International Summit 2024",
+      },
+    };
+
+    const subject = `Welcome to SxC Intersummit - ${user.fullname}`;
+
+    const emailResult = await sendAutomatedEmail(user, subject, emailDetails);
+
+    if (!emailResult.success) {
+      return res
+        .status(500)
+        .json({ message: emailResult.message, error: emailResult.error });
+    }
+
     res.status(200).json({
       message: "Success registering Company Visit!",
       companyVisitDetails: newCompanyVisit,
+      email: emailResult.message,
     });
   } catch (error) {
     res.status(500).json(error.message);

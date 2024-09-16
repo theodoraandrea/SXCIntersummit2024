@@ -10,8 +10,8 @@ router.post(
   "/register",
   isAuthenticated,
   upload.fields([
-    { name: "proofFollow", maxCount: 1 },
-    { name: "proofStory", maxCount: 1 },
+    { name: "proofFollow", minCount: 1, maxCount: 1 },
+    { name: "proofStory", minCount: 1, maxCount: 1 },
   ]),
   [
     body("company").notEmpty().withMessage("Company name is required"),
