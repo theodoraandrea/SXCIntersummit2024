@@ -11,6 +11,8 @@ import { ABOUT_PAGE, EVENT_DETAILS, EVENTS_PAGE } from "../constants/routes";
 
 const bgHero = "/images/bg-home.png";
 const bgKnowUsBetter = "/images/knowusbetter.png";
+const bg1 = "/images/background1.png";
+const bg2 = "/images/background2.png";
 const circle = "/images/sponsor.png";
 const winner1 = "/images/winner1.png";
 const winner2 = "/images/winner2.png";
@@ -182,7 +184,11 @@ export default function Home() {
   };
 
   return (
-    <div className="overflow-hidden bg-primary-1">
+    <div className="overflow-hidden"
+    style={{ backgroundImage: `url(${bg1})`,
+              backgroundSize: "contain"
+  }}
+    >
       <Navbar currentPath={location.pathname} />
       {/* Hero Section */}
       <section
@@ -216,7 +222,11 @@ export default function Home() {
       </section>
 
       {/*Bridging Section*/}
-      <section id="bridge-section">
+      <section id="bridge-section"
+              style={{ backgroundImage: `url(${bg1})`, 
+              backgroundSize: "contain"
+              }}
+>
         <div className="w-full px-8 py-16 sm:py-32">
           <div className="w-lg flex flex-col items-center space-y-8 flex">
             <h1 className="sm:text-center font-semibold text-gradient text-5xl p-2">Calling Out High Achieving Students</h1>
@@ -366,8 +376,13 @@ export default function Home() {
 
             
       {/*Timeline Section*/}
-      <section id="timeline-section">
-        <div className="w-full px-4 py-16 sm:py-16 bg-primary-1">
+      <section id="timeline-section"
+            style={{ backgroundImage: `url(${bg1})`,
+            backgroundSize: "cover"
+            }}
+            className="py-16"
+      >
+        <div className="w-full px-4 sm:py-16">
           <div className="w-full flex flex-col sm:items-center space-y-16 flex">
             <h1 className="mx-4 max-w-lg sm:max-w-full sm:text-center font-semibold text-gradient text-5xl">Join Our Summit Roadmap</h1>
             <div className="max-w-3xl">
@@ -375,11 +390,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
 
       {/*Mentors & Speakers Section*/}
-      <section id="mentors-section">
-        <div className="w-full px-4 py-8 sm:py-16 w-full flex flex-col sm:flex-row bg-primary-1 space-y-16">
+        <div className="w-full px-4 py-8 sm:py-16 w-full flex flex-col sm:flex-row space-y-16">
           <div className="w-full sm:w-[50%] flex flex-col text-center items-center space-y-4 md:space-y-8">
             <h1 className="font-semibold text-gradient text-3xl md:text-4xl">Meet Our Mentors</h1>
             <div className="
@@ -408,11 +421,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
 
       {/*Merch Section */}
-      <section id="merch-section">
-        <div className="bg-primary-1 w-full px-4 sm:p-16 mt-20 sm:mt-4">
+        <div className="w-full px-4 sm:p-16 mt-20 sm:mt-4">
           <h1 className="text-center text-2xl lg:text-4xl text-gradient">Level Up Your Skill and Connect With Us!</h1>
           <div className="my-12 sm:max-w-3xl sm:mx-auto w-full rounded-xl">
             <img
@@ -480,53 +491,6 @@ export default function Home() {
           ">
             <h1>Contact Us</h1>
           </a>
-        </div>
-      </section>
-
-      {/* Winner Section */}
-      <section className="bg-primary-1 py-20 hidden">
-        <div className="">
-          <h2 className="text-3xl md:text-5xl font-bold text-white text-center mb-10">
-            Winner of 2023
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="flex flex-col items-center text-center relative">
-              <img
-                src={elips1}
-                alt="Ellipse 1"
-                className="absolute top-0 left-0  -mt-10"
-              />
-              <img src={winner2} alt="Winner 1" className="relative" />
-              <h3 className=" text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
-                Name of the Winner
-              </h3>
-              <p className="mt-2 text-white px-4 text-left mx-5 md:mx-10 z-10 pb-10 md:pb-0">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                cursus in dolor vel semper. Donec augue neque, fermentum sed
-                augue a, cursus fermentum nunc. Ut sollicitudin vel arcu eu
-                vulputate. Phasellus ultrices non metus et interdum. Aliquam
-                eleifend odio sed eleifend porttitor.
-              </p>
-            </div>
-            <div className="flex flex-col items-center text-center relative">
-              <img
-                src={elips2}
-                alt="Ellipse 2"
-                className="absolute top-0 right-0 -mt-10 "
-              />
-              <img src={winner1} alt="Winner 2" className="relative" />
-              <h3 className="text-xl font-bold text-white bg-primary-3 px-4 rounded-2xl z-10">
-                Name of the Winner
-              </h3>
-              <p className="mt-2 text-white px-4 text-right mx-5 md:mx-10 z-10">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                cursus in dolor vel semper. Donec augue neque, fermentum sed
-                augue a, cursus fermentum nunc. Ut sollicitudin vel arcu eu
-                vulputate. Phasellus ultrices non metus et interdum. Aliquam
-                eleifend odio sed eleifend porttitor.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
       <Footer />
