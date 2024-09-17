@@ -8,6 +8,9 @@ import { version } from "react";
 const CORPORATE_PARTNERSHIP_CONTACT = "https://wa.me/+6281288059303";
 const MEDIA_PARTNERSHIP_CONTACT = "https://wa.me/+6285782799445";
 
+const bg1 = "/images/background1.png";
+const bg2 = "/images/background2.png";
+
 const challenges1 = "/images/challenges/challenge1.png";
 const challenges2 = "/images/challenges/challenge2.png";
 const challenges3 = "/images/challenges/challenge3.png";
@@ -106,7 +109,12 @@ export default function About() {
 
       {/* New Section */}
       <section className="bg-primary-1 py-16 md:py-32"
-max-w-5xl      >
+max-w-5xl      
+style={{ backgroundImage: `url(${bg1})`,
+        backgroundSize: "cover",
+
+}}
+>
         <div className="text-center">
           <h2 className="text-white mb-8 sm:mb-16 text-3xl mx-8 sm:mx-32 md:mx-auto md:text-3xl font-bold">
             Part of StudentsxCEOs Jakarta
@@ -133,15 +141,14 @@ max-w-5xl      >
           </div>
 
         </div>
-      </section>
       
-      <section>
-      <div className="min-h-screen py-16 sm:py-32 bg-primary-1 flex flex-col items-center justify-center">
+      <div className="min-h-screen py-16 sm:py-32 flex flex-col items-center justify-center">
         {/* Section Atas : Our Value */}
         <div className="w-full">
-          <div className="w-fit mx-auto px-12 py-6 sm:px-16 sm:py-12 text-primary-3 font-semibold
-          bg-gray-200 bg-opacity-20
-          rounded-3xl shadow-lg">
+          <div className="w-fit mx-auto px-12 py-6 sm:px-16 sm:py-12 text-white font-semibold
+          bg-white bg-opacity-20 backdrop-blur-md
+          rounded-3xl shadow-lg"
+          >
           <h2 className="text-center text-2xl sm:text-4xl pb-4 sm:pb-8">
             Our Values
           </h2>
@@ -191,9 +198,8 @@ max-w-5xl      >
         </div>
       </div>
       </div>  
-      </section>
+
       {/* New Section : Why We Move Amoung Youth? */}
-      <section className="bg-primary-4 py-24 sm:py-32 sm:mx-auto">
         {/* Why We Move Amoung Youth? */}
         <div className="container mx-auto pb-8 px-4 sm:px-6 md:px-12 text-white">
           <h2 className="w-fit mx-auto text-gradient font-bold text-xl sm:text-3xl mb-4">
@@ -239,9 +245,13 @@ max-w-5xl      >
             </div>
           </div>
         </div>
-
+        </section>
+      
+        <section
+        className="bg-primary-1"
+        >
         {/* Our Focus Area */}
-        <div className="max-w-5xl mx-auto pb-16 px-4 sm:px-6 md:px-12 text-white">
+        <div className="max-w-5xl mx-auto pb-16 px-4 py-32 sm:px-6 md:px-12 text-white">
           <h2 className="w-fit mx-auto text-gradient text-xl sm:text-3xl mb-4 font-semibold">
             Our Focus Area
           </h2>
@@ -285,7 +295,7 @@ max-w-5xl      >
           Our Milestones
         </h2>
         {/* Our Milestone */}
-        <div className="w-full my-16 px-4 py-32 sm:px-6 md:px-12 text-white"
+        <div className="w-full mt-16 px-4 py-32 sm:px-6 md:px-12 text-white"
           style={{ backgroundImage: `url(${bgParticipants})`,
           backgroundSize: "cover"        }}
         >
@@ -334,7 +344,7 @@ max-w-5xl      >
       </section>
 
         {/* Masukkan Untuk CP, Sponsors, Media Partner */}
-      <section className="bg-primary-4 px-4 sm:px-32 pb-32 lg:px-16">
+      <section className="bg-primary-4 px-4 sm:px-32 py-32 lg:px-16">
         <div className="bg-primary-4 h-400 flex flex-col md:flex-row md:justify-center shadow-lg">
           <div className="bg-white flex flex-col px-4 py-8 lg:py-12 lg:px-16">
             <h1 className="text-center text-primary-4 text-2xl mx-auto font-semibold pb-4">Company Partners</h1>
@@ -353,7 +363,10 @@ max-w-5xl      >
 
 
       {/* New Section : Past Testimony */}
-      <section className="bg-primary-1 py-16 md:py-20">
+      <section className="py-16 md:py-20"
+      style={{ backgroundImage: `url(${bg2})`,
+      backgroundSize: "contain"    }}
+      >
         <div className="container mx-auto px-4 sm:px-6 md:px-12 text-center text-white">
           <h2 className="text-2xl my-auto sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 md:mb-10 text-gradient mx-4 sm:mx-8 md:mx-2">
             Past Testimonies
@@ -488,7 +501,7 @@ max-w-5xl      >
       </section>
 
       {/* New Section : We Are Still Calling for Sponsor */}
-      <section className="bg-primary-1 py-16 text-white">
+      <section className="bg-primary-4 py-16 text-white">
       <div className="container mx-auto text-center">
         <h1 className="text-gradient text-3xl">
           We are still calling for Sponsors and Media Partners!
