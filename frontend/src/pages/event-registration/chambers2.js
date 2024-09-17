@@ -1,3 +1,5 @@
+//  INI BACKUP SBLM CHAMBERS DIUBAH UBAH VIEWNYA
+
 import React, { useState, useEffect } from "react";
 import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
@@ -651,7 +653,6 @@ const FourthView = ({ formData, setFormData, checkFileSize, checkFileType, onPre
   const [follow1, setFollow1] = useState(formData.screenshot1 ? true : false);
   const [follow2, setFollow2] = useState(formData.screenshot2 ? true : false);
   const [follow3, setFollow3] = useState(formData.screenshot3 ? true : false);
-  const [cv, setCV ] = useState(formData.cv?.name ?? "");
 
   const [screenshot1, setScreenshot1] = useState(
     formData.screenshot1?.name ?? ""
@@ -670,8 +671,7 @@ const FourthView = ({ formData, setFormData, checkFileSize, checkFileType, onPre
       screenshot3 &&
       follow1 &&
       follow2 &&
-      follow3 &&
-      cv
+      follow3
     ) {
       onNext();
     } else {
@@ -701,8 +701,6 @@ const FourthView = ({ formData, setFormData, checkFileSize, checkFileType, onPre
       setScreenshot2(file.name);
     } else if (name === "screenshot3") {
       setScreenshot3(file.name);
-    } else if (name === "cv") {
-      setCV(file.name);
     }
   };
 
@@ -800,39 +798,6 @@ const FourthView = ({ formData, setFormData, checkFileSize, checkFileType, onPre
                                 <label className='text-sm md:text-base text-white ml-2'>{screenshot3}</label>
                             </div>
                         </div>
-
-                        {/* CV Upload */}
-                        <div className=''>
-                          <label className='block text-white mb-2'>
-                                <input
-                                    type='checkbox'
-                                    name='cv'
-                                    checked={cv}
-                                    onChange={(e) => setCV(e.target.checked)}
-                                    className='mr-2'
-                                />
-                                I have uploaded CV
-                                <p className='text-sm text-gray-400'>If you are lucky, it will be
-                                  reviewed in a unique session!</p>
-                          </label>
-                          <div className='my-4 relative'>
-                            <input
-                              type='file'
-                              id='cv'
-                              name='cv'
-                              onChange={handleChange}
-                              className='absolute inset-0 opacity-0 cursor-pointer'
-                            />
-                            <label
-                              htmlFor='cv'
-                              className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
-                            >
-                              Submit CV
-                            </label>
-                            <label className='text-sm md:text-base text-white ml-2'>{cv}</label>
-                          </div>
-                        </div>
-
                         <div className='mt-6 flex justify-between items-center'>
                             <button
                                 type='button'
@@ -856,6 +821,144 @@ const FourthView = ({ formData, setFormData, checkFileSize, checkFileType, onPre
     );
 };
 
+// No Payment
+// const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFileType, onPrevious, onNext }) => {
+//     const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
+//     const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+
+//     const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+//     const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+//     const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+
+//     //handling file change
+//     const handleChange = (e) => {
+//         const { name, value, files } = e.target;
+
+//         const file = files[0];
+        
+//         if (!checkFileSize(file)) {
+//           return;
+//         }
+
+//         if (!checkFileType(file)) {
+//           return;
+//         }
+
+//         setFormData((prevState) => ({
+//           ...prevState,
+//           [name]: files ? file : value,
+//         }));
+//         setProofPayment(file?.name);
+//     };
+
+//     //saving referral code
+//     useEffect(() => {
+//         setFormData({
+//             ...formData,
+//             referralCode: verifiedRefCode
+//         });
+//     }, [verifiedRefCode]);
+
+//     //checking payment proof
+//     const handleNext = () => {
+//         if (checkPayment && proofPayment) {
+//             onNext();
+//         } else {
+//           errorAlert({ message: "Proof must be uploaded"});
+//         }
+//     }
+
+//     return (
+//         <div>
+//         <Navbar />
+//         <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+//             <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+//                 <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+//                     <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+//                         <p className='text-white mx-4 mb-2 text-center'>
+//                             Please transfer the following amount to complete your registration
+//                         </p>
+//                         <div className='text-white text-left w-40'>
+//                             <div className='flex flex-row justify-between'>
+//                                 <p><strong>Price: </strong></p>
+//                                 <p>{regularPrice}</p>
+//                             </div>
+//                         {
+//                             verifiedRefCode && refCodeValid && (
+//                                 <>
+//                                 <div className='flex flex-row justify-between'>
+//                                 <p><strong>Discount:</strong></p>
+//                                 <p>{discount}</p>
+//                                 </div>
+//                                 <div className='flex flex-row justify-between'>
+//                                 <p><strong>Total:</strong></p>
+//                                 <p><strong>{discountedPrice}</strong></p>
+//                                 </div>
+//                                 </>
+//                             )
+//                         }
+//                         </div>
+//                         <p className='text-white mx-4 text-center'>
+//                             <strong>Bank Account Number: </strong>{bankAccount}
+//                         </p>
+//                     <div className='mt-4'>
+//                         <label className='block text-white mb-2'>
+//                             <input
+//                                 type='checkbox'
+//                                 name='checkPayment'
+//                                 checked={checkPayment}
+//                                 onChange={(e) => setCheckPayment(e.target.checked)}
+//                                 className='mr-2'
+//                             />
+//                             I have paid the registration fee
+//                         </label>
+//                         <div className='my-4 relative'>
+//                             <input
+//                                 type='file'
+//                                 id='proofPayment'
+//                                 name='proofPayment'
+//                                 onChange={handleChange}
+//                                 className='absolute inset-0 opacity-0 cursor-pointer'
+//                             />
+//                             <label
+//                                 htmlFor='proofPayment'
+//                                 className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+//                             >
+//                                 Submit screenshot
+//                             </label>
+//                             <p className='text-white mt-4'>{proofPayment}</p>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <ReferralModal 
+//                 eventName="bmc"
+//                 referralCode={formData.referralCode ?? ''}
+//                 verifiedRefCode={verifiedRefCode}
+//                 setVerifiedRefCode={setVerifiedRefCode} 
+//                 setRefCodeValid={setRefCodeValid}
+//                 />
+//                 <div className='mt-6 flex justify-center items-center'>
+//                     <button
+//                         type='button'
+//                         onClick={onPrevious}
+//                         className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+//                     >
+//                     Back
+//                     </button>
+//                     <button
+//                         type='button'
+//                         onClick={handleNext}
+//                         className='bg-primary-3 text-white px-6 py-2 rounded-full'
+//                     >
+//                     Next
+//                     </button>
+//                 </div>
+//             </div>
+//         </div>
+//         </div>
+//     )
+// }
+
 const Summary = ({ formData, onPrevious }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -867,7 +970,7 @@ const Summary = ({ formData, onPrevious }) => {
 
   const { setRegisteredEvents } = useUser();
 
-  let chambersId; //FOR REGISTER BUTTON PURPOSES
+  let bmcId; //FOR REGISTER BUTTON PURPOSES
 
   const handleSubmit = async () => {
     try {
@@ -876,7 +979,7 @@ const Summary = ({ formData, onPrevious }) => {
       setIsLoading(false);
       if (response.status === 200) {
         navigate(USER_DASHBOARD_PAGE);
-        setRegisteredEvents((prevData) => [...prevData, chambersId]);
+        setRegisteredEvents((prevData) => [...prevData, bmcId]);
         successAlert({ 
           eventId: "event_5",
           message: "Successfully registered for Chambers. Please check your email for further details!"})
@@ -912,6 +1015,8 @@ const Summary = ({ formData, onPrevious }) => {
                 <p>{formData.gender}</p>
                 <strong>Institution</strong>
                 <p>{formData.university}</p>
+                <strong>Institution Type</strong>
+                <p>{formData.studentType}</p>
                 <strong>Major</strong>
                 <p>{formData.major}</p>
                 <strong>Batch</strong>
@@ -920,15 +1025,19 @@ const Summary = ({ formData, onPrevious }) => {
                 <p>{formData.phoneNumber}</p>
                 <strong>Email</strong>
                 <p>{formData.email}</p>
-                <strong>Selected Industries</strong>
-                <ul className="list-disc list-inside">
-                      {formData.selectedIndustries.map((industry, index) => (
-                        <li key={index}>{industry}</li>
-                      ))}
-                    </ul>
               </div>
               <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
                 <div className="border-t border-gray-300 my-4"></div>
+                <strong>How did you know this event?</strong>
+                <p>
+                  {formData.eventSource === "Other"
+                    ? `${formData.eventSource}${
+                        formData.eventSourceOther !== ""
+                          ? `: ${formData.eventSourceOther}`
+                          : ""
+                      }`
+                    : `SxC InterSummit ${formData.eventSource}`}
+                </p>
                 {formData.experience ? (
                   <>
                     <strong>
@@ -957,11 +1066,6 @@ const Summary = ({ formData, onPrevious }) => {
                   <strong>Proof of share poster to 3 groups:</strong>{" "}
                   {formData.screenshot3.name}
                 </p>
-                <p>
-                  <strong>CV :</strong>{" "}
-                  {formData.cv.name}
-                </p>
-                
               </div>
               <div className="flex w-full mt-6 justify-between">
                 <button
@@ -995,11 +1099,11 @@ const EventCard = () => {
     "</br>This session will specifically cover Business Plan Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business plan competition" +
     "</br>&emsp;<strong>2.&emsp;Business Case Competition Class</strong>" +
     "</br>This session will specifically cover Business Class Competition with <strong>two experienced speakers</strong>. There will be <strong>two different materials</strong>, with <strong>each speaker presenting one</strong>. At the end of the presentations, we will have <strong>a practical experience</strong> for business case competition",
-        chambersId: 5,
-        regularPrice: 0,
-        discountedPrice: 0,
-        discount: 0,
-        bankAccount: "",
+        bmcId: 1,
+        regularPrice: 50000,
+        discountedPrice: 45000,
+        discount: 5000,
+        bankAccount: "BCA - [no rek]",
     };
 
   //All fields for BMC
@@ -1055,18 +1159,33 @@ const EventCard = () => {
   };
 
     switch (currentView) {
-        case 1:
-            return <FirstView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onNext={handleNext} />;
-        case 2:
-            return <SecondView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+        // case 1:
+        //     return <ZeroView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+        // case 2:
+        //     return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(3)}} />;
+        // case 2:
+            //skipped cus agreement paper is cancelled
         case 3:
-            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+            return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onNext={handleNext} />;
         case 4:
-            return <FourthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext}/>;
-        case 5:
-            return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(4)}}/>
+            return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+        // case 5:
+        //     return <FifthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext2} />;
+        case 6:
+            return <SixthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+        case 7:
+            return <SeventhView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+        // case 8:
+        //     return <EighthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+        case 9:
+            return <NinthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={()=>{setCurrentView(11)}}/>;
+        // case 10:
+            //skipped
+            //return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileType={checkFileTypeImage} checkFileSize={checkFileSize} onPrevious={handlePrevious} onNext={handleNext}/>;
+        case 11:
+            return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(9)}}/>
         default:
-            return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+            return <SixthView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     }
 };
 
