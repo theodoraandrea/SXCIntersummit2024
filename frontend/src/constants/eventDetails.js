@@ -124,32 +124,32 @@ export const eventDetails = {
     title: "SxC International Business Challenge: Business Case Competition",
     image: imgLocation + "ibc-bcc.png",
     openRegistration: true,
-    linkBooklet: "https://bit.ly/BookletSxCIBCC2024",
+    linkBooklet: "https://bit.ly/SxCIBCC2024Booklet",
     description:
       "<strong>The SxC International Business Case Competition</strong> is a global event designed to challenge students to apply their analytical and problem-solving skills to real-world business scenarios. <strong>Each team will analyze complex case studies</strong> of business problems and develop strategic solutions. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
       "</br></br>" +
     "<strong>When</strong></br>" +
-    "2nd September - 1st December 2024" +
+    "9th September - 1st December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
-    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
-    "</br>&emsp;&emsp;&emsp;Case 1 Release: 5th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Proposal Submission Phase: 6th October - 17th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Scoring Proposal Phase: 18 October - 29 October 2024" +
-    "</br>&emsp;&emsp;&emsp;Semi-Finalist Announcement: 30th October 2024" +
-    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
-    "</br>&emsp;&emsp;&emsp;Deck & Video Submission Phase: 31st October - 16th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Technical Meeting: 2nd November 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Scoring Deck & Video Phase: 17th November - 25th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Finalist Announcement: 26th November 2024" +
-    "</br><strong>&emsp;3.&emsp;Final</strong>" +
-    "</br>&emsp;&emsp;&emsp;Technical Meeting for Final Stage: 27th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Case Release for Finalist: 29th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Deck Submission: 29th November 2024" +
-    "</br>&emsp;&emsp;&emsp;D-Day Final Pitch: 30th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Winner Awarding: 1st December 2024" +
+    "</br><strong>1.&emsp;Preliminary</strong>" +
+    "</br>&emsp;&emsp;Case 1 Release: 13th October 2024" +
+    "</br>&emsp;&emsp;Proposal Submission: 13th - 24th October 2024" +
+    "</br>&emsp;&emsp;Scoring: 25th October - 4th November 2024" +
+    "</br>&emsp;&emsp;Semi-Final Announcement: 5th November 2024" +
+    "</br><strong>2.&emsp;Semifinal</strong>" +
+    "</br>&emsp;&emsp;Submission: 5th - 18th November 2024" +
+    "</br>&emsp;&emsp;Technical Meeting: 6th November 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
+    "</br>&emsp;&emsp;Scoring: 19th - 25th November 2024" +
+    "</br>&emsp;&emsp;Finalist Announcement: 26th November 2024" +
+    "</br><strong>3.&emsp;Final</strong>" +
+    "</br>&emsp;&emsp;Technical Meeting: 27th November 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
+    "</br>&emsp;&emsp;Case Release for Finalist: 29th November 2024" +
+    "</br>&emsp;&emsp;Deck Submission: 29th November 2024" +
+    "</br>&emsp;&emsp;D-Day Final Pitch: 30th November 2024" +
+    "</br>&emsp;&emsp;Winner Awarding: 1st December 2024" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
@@ -160,36 +160,38 @@ export const eventDetails = {
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
     registerLink: `${IBCC_REGIST}`,
-    faq: ["How many and what is the format and structure of each stage?", 
-      "How and where do we register for the competition?", 
-      "Where is the venue or platform for the competition?"],
-    faqDesc: ["The competition has three stages. In the Preliminary Round, participants submit a proposal outlining their solution to the given case. In the Semifinal Round, they create a pitch deck based on their proposal and deliver a brief rocket pitch. The Final Round involves solving a new case within one day, creating a pitch deck, and presenting it the next day, testing their ability to deliver a well-structured solution under time pressure.", 
-      "Participants may register from our website www.something.com . The registration is open from 2nd September 2024 to 5th October 2024. Participants can register individually or in groups of maximum 3 people.", 
-      "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
+    // faq: ["-"],
+    // faq: ["How many and what is the format and structure of each stage?", 
+    //   "How and where do we register for the competition?", 
+    //   "Where is the venue or platform for the competition?"],
+    // faqDesc: [""],
+    // faqDesc: ["The competition has three stages. In the Preliminary Round, participants submit a proposal outlining their solution to the given case. In the Semifinal Round, they create a pitch deck based on their proposal and deliver a brief rocket pitch. The Final Round involves solving a new case within one day, creating a pitch deck, and presenting it the next day, testing their ability to deliver a well-structured solution under time pressure.", 
+    //   "Participants may register from our website www.something.com . The registration is open from 2nd September 2024 to 5th October 2024. Participants can register individually or in groups of maximum 3 people.", 
+    //   "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
     contactPerson: ["Salsabila"],
     contactNumber: ["(+62) 85814703305"],
     contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
-        date: "TBA",
+        date: "9th September - 22nd October 2024",
+        type: "submit",
+      },
+      {
+        title: "Preliminary Stages",
+        date: "13th October - 5th November 2024",
         type: "register",
         link: ``,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA4",
+        title: "Semi-Finalist Stages",
+        date: "5th - 26th November 2024",
         type: "meeting",
       },
       {
-        title: "Project Progress",
-        date: "TBA",
+        title: "Final Stages",
+        date: "27th November - 1st December 2024",
         type: "progress",
-      },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
       },
     ],
   },
@@ -197,32 +199,32 @@ export const eventDetails = {
     title: "SxC International Business Challenge: Business Plan Competition",
     image: imgLocation + "ibc-bpc.png",
     openRegistration: true,
-    linkBooklet: "https://bit.ly/BookletSxCIBPC2024",
+    linkBooklet: "https://bit.ly/SxCIBPC2024Booklet",
     description:
       "<strong>The SxC International Business Plan Competition</strong> is a global event designed to foster entrepreneurial skills and innovation among students. <strong>Participants are encouraged to present their innovative business models,</strong> turning them into viable businesses. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
       "</br></br>" +
     "<strong>When</strong></br>" +
-    "2nd September - 1st December 2024" +
+    "9th September - 1st December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
-    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
-    "</br>&emsp;&emsp;&emsp;BMC+Executive Summary Submission" +
-    "</br>&emsp;&emsp;&emsp;Submission Phase: 2nd September - 1st October 2024" +
-    "</br>&emsp;&emsp;&emsp;Scoring Phase: 2nd October - 13rd October 2024" +
-    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
-    "</br>&emsp;&emsp;&emsp;Proposal Submission" +
-    "</br>&emsp;&emsp;&emsp;Submission Phase: 15th October - 30th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 1: 19th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Topic: Blueprint for Success: Crafting a Strategic Business Proposal" +
-    "</br>&emsp;&emsp;&emsp;Scoring Phase: 1st November - 9th November 2024" +
-    "</br><strong>&emsp;3.&emsp;Final</strong>" +
-    "</br>&emsp;&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
-    "</br>&emsp;&emsp;&emsp;Submission Phase: 11th November - 22nd November 2024" +
-    "</br>&emsp;&emsp;&emsp;Technical Meeting: 15th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Topic: Pitch Perfect: Captivate the Judges with Your Ideas" +
-    "</br>&emsp;&emsp;&emsp;Final Pitch: 23rd November 2024" +
-    "</br>&emsp;&emsp;&emsp;Winner Awarding: 1st December 2024" +
+    "</br><strong>1.&emsp;Preliminary</strong>" +
+    "</br>&emsp;&emsp;BMC+Executive Summary Submission" +
+    "</br>&emsp;&emsp;Submission: 9th September - 6th October 2024" +
+    "</br>&emsp;&emsp;Scoring Phase: 7th - 18th October 2024" +
+    "</br>&emsp;&emsp;Semi-Finalist Announcement: 19th October 2024" +
+    "</br><strong>2.&emsp;Semifinal</strong>" +
+    "</br>&emsp;&emsp;Proposal Submission" +
+    "</br>&emsp;&emsp;Submission Phase: 20th - 31st October 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 1: 26th October 2024" +
+    "</br>&emsp;&emsp;Scoring Phase: 1st - 9th November 2024" +
+    "</br>&emsp;&emsp;Finalist Announcement: 10th November 2024" +
+    "</br><strong>3.&emsp;Final</strong>" +
+    "</br>&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
+    "</br>&emsp;&emsp;Submission Phase: 11th - 22nd November 2024" +
+    "</br>&emsp;&emsp;Technical Meeting: 15th November 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
+    "</br>&emsp;&emsp;Final Pitch: 23rd November 2024" +
+    "</br>&emsp;&emsp;Winner Awarding: 1st December 2024" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
@@ -235,39 +237,44 @@ export const eventDetails = {
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
     registerLink: `${IBPC_REGIST}`,
-    faq: ["Who can participate, and what are the eligibility criteria?",
-      "How many stages does this business plan competition have?", 
-      "Is there any specific criteria/requirement regarding the business ideas?", 
-      "Will the competition be held offline or online?"],
-    faqDesc: ["Participants are an active undergraduate students/vocational students from all around the world with one team consist of maximum 3 people who can come from different institution.",
-      "The competition will consist of three stages: the first stage involves the submission of a business model canvas and executive summary, the second stage requires a detailed business proposal, and the final stage includes a pitch deck assessment followed by an offline pitching event at a venue to be announced.", 
-      "There are no prerequisites regarding the business ideas; the competition welcomes business plans from diverse industries. The key to success in our competition is to simply demonstrate creativity, innovation, and a commitment to sustainable business practices.", 
-      "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
+    // faq: ["Who can participate, and what are the eligibility criteria?",
+    //   "How many stages does this business plan competition have?", 
+    //   "Is there any specific criteria/requirement regarding the business ideas?", 
+    //   "Will the competition be held offline or online?"],
+    // faqDesc: ["Participants are an active undergraduate students/vocational students from all around the world with one team consist of maximum 3 people who can come from different institution.",
+    //   "The competition will consist of three stages: the first stage involves the submission of a business model canvas and executive summary, the second stage requires a detailed business proposal, and the final stage includes a pitch deck assessment followed by an offline pitching event at a venue to be announced.", 
+    //   "There are no prerequisites regarding the business ideas; the competition welcomes business plans from diverse industries. The key to success in our competition is to simply demonstrate creativity, innovation, and a commitment to sustainable business practices.", 
+    //   "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
     contactPerson: ["Aisha Inaya"],
     contactNumber: ["(+62) 81288480732"],
     contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
-        date: "TBA",
+        date: "9th September - 6th October 2024",
+        type: "submit",
+      },
+      {
+        title: "Preliminary Stage",
+        date: "9th September - 19th October 2024",
         type: "register",
         link: ``,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA",
+        title: "Semi-Final Stage",
+        date: "20th October - 10th November 2024",
         type: "meeting",
       },
       {
-        title: "Project Progress",
-        date: "TBA",
+        title: "Final Stage",
+        date: "11th November - 1st December 2024",
         type: "progress",
       },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
-      },
+      // {
+      //   title: "",
+      //   date: "",
+      //   type: "submit",
+      // },
     ],
   },
   event_5: {
