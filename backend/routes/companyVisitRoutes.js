@@ -10,6 +10,7 @@ router.post(
   "/register",
   isAuthenticated,
   upload.fields([
+    { name: "cv", minCount: 1, maxCount: 1 },
     { name: "proofFollow", minCount: 1, maxCount: 1 },
     { name: "proofStory", minCount: 1, maxCount: 1 },
   ]),
