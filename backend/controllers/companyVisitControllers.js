@@ -19,7 +19,7 @@ exports.registerCompanyVisit = async (req, res) => {
 
     const { files, body } = req;
 
-    const requiredFields = ["proofFollow", "proofStory"];
+    const requiredFields = ["cv", "proofFollow", "proofStory"];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
         message:
@@ -45,24 +45,27 @@ exports.registerCompanyVisit = async (req, res) => {
 
     // Create and upload File/Image
     const fileNames = [
+      `${user.fullname}_Curriculum Vitae`,
       `${user.fullname}_Proof of Follow`,
       `${user.fullname}_Proof of Instastory`,
     ];
     const rootFolderId = process.env.FOLDER_COMPANYVISIT_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
 
+    const cv = await getImageURLsList(files.cv, folderId, fileNames[0]);
+
     const proofFollow = await getImageURLsList(
       files.proofFollow,
       folderId,
-      fileNames[0]
+      fileNames[1]
     );
     const proofStory = await getImageURLsList(
       files.proofStory,
       folderId,
-      fileNames[1]
+      fileNames[2]
     );
 
-    const screenshotCompanyVisit = [proofFollow, proofStory];
+    const screenshotCompanyVisit = [cv, proofFollow, proofStory];
 
     let eventRegistration;
     try {
