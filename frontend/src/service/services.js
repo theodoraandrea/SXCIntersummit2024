@@ -34,7 +34,10 @@ import {
   API_GET_IBCC_TEAM_SUMMARY,
   API_POST_NEW_IBCC_INDIVIDUAL,
   API_POST_NEW_IBCC_TEAM,
-  API_POST_NEW_IBCC_MEMBER
+  API_POST_NEW_IBCC_MEMBER,
+  // CHAMBERS
+  API_GET_CHAMBERS_REGISTRATION,
+  API_POST_CHAMBERS_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -237,6 +240,30 @@ const getBmcRegistrationData = async (data) => {
   }
 };
 
+// CHAMBERS
+const postChambersRegistration = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_CHAMBERS_REGISTRATION, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const getChambersRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_CHAMBERS_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // FCEO
 const postNewFceoMember = async (data) => {
   try {
@@ -429,6 +456,8 @@ export {
   postCheckReferralCode,
   postBMCRegistration,
   getBmcRegistrationData,
+  postChambersRegistration,
+  getChambersRegistrationData,
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,

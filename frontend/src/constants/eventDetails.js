@@ -1,4 +1,4 @@
-import { FCEO_REGIST, BMC_REGIST, IBCC_REGIST, IBPC_REGIST } from "./routes";
+import { FCEO_REGIST, BMC_REGIST, IBCC_REGIST, IBPC_REGIST, CHAMBERS_REGIST } from "./routes";
 
 const imgLocation = "/images/programs/";
 
@@ -280,7 +280,8 @@ export const eventDetails = {
   event_5: {
     title: "Chambers",
     image: imgLocation + "chambers.png",
-    openRegistration: false,
+    openRegistration: true,
+    registerLink: `${CHAMBERS_REGIST}`,
     description: "Two-days online expert sessions which will share experiences, recruitment tips, job opportunities, and material related to job vacancies in four industries (Consulting, Start-Up, BUMN, and FMCG).",
     timelineDesc: "Timeline details for Chambers",
     registerLink: ``,
