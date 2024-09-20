@@ -282,7 +282,34 @@ export const eventDetails = {
     image: imgLocation + "chambers.png",
     openRegistration: true,
     registerLink: `${CHAMBERS_REGIST}`,
-    description: "Two-days online expert sessions which will share experiences, recruitment tips, job opportunities, and material related to job vacancies in four industries (Consulting, Start-Up, BUMN, and FMCG).",
+    description: "<strong>Chambers</strong> is an <strong>international webinar</strong> that promises to deliver <strong>captivating insights and experiences in the professional world.</strong> Centered around the theme <strong>“Innovative Career Paths: Beyond User-Centricity to Strategic Brilliance,“</strong> this event features distinguished speakers from leading companies. Over the webinar of <strong>two days, participants will explore four dynamic industries: Start-Up, FMCG, BUMN, and Consulting.</strong> Join us for this unique <strong>opportunity to enhance your career</strong> trejectory, <strong>gain valuable knowledge, and connect with industry experts</strong> who can help shape your <strong>professional journey.</strong>" +
+    "</br></br>" +
+    "<strong>When</strong></br>" +
+    "26th - 27th October 2024" +
+    "</br></br>" +
+    "<strong>4 Industries:</strong>" +
+    "</br><strong>1.&emsp;Start Up</strong>" +
+    "</br>&emsp;&emsp;Gaining insight into building a career at a startup involves understanding the high growth potential and risk-taking nature. A fast-paced, collaborative culture encourages innovation and requires skills such as creative thinking and problem solving." + 
+    "</br><strong>2.&emsp;FMCG</strong>" +
+    "</br>&emsp;&emsp;As the FMCG industry evolves, professionals must transition from user-centric roles to strategic leadership. This program offers valuable insights into navigating market dynamics and understanding consumer behavior while implementing effective strategic planning. Participants will learn to leverage data-driven decision-making and foster innovation, highlighting the importance of confident team leadership." + 
+    "</br><strong>3.&emsp;BUMN</strong>" +
+    "</br>&emsp;&emsp;Explore the importance of understanding BUMN's mission, setting clear career objectives, and aligning personal ambitions with organizational strategies. Participants will learn practical techniques to overcome alignment challenges, utilize data-driven decision-making, and foster innovation and leadership within BUMN." + 
+    "</br><strong>4.&emsp;Consulting</strong>" +
+    "</br>&emsp;&emsp;Gain valuable insights from some of the world's leading companies through training  webinars and hands-on projects. Many top consulting firms offer access to industry leaders and experts, providing opportunities to learn from real-world experiences.. This is a golden opportunity to grow and gain a deep understanding of the rapidly changing market dynamics." +
+    "</br></br>" +
+    "<strong>What Will You Get</strong></br>" +
+    "</br></br><strong>&emsp;&emsp;1.&emsp;Virtual Job Fair</strong>" +
+    "</br>&emsp;&emsp;The Virtual Job Fair is a key event that brings together students and professionals from around the world on an innovative virtual platform. This event aims to open job opportunities, build networks, and facilitate dialogue between enthusiastic young individuals and experienced industry leaders. It features major companies that will provide job opportunities for you in the future." +
+    "</br></br><strong>&emsp;&emsp;2.&emsp;1 on 3 Season (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;1 on 3 Season is an engaging session where professionals gather to discuss and explore important topics. In this interactive setting, you'll have the chance to exchange ideas, share experiences, and gain valuable insights from industry experts. This session is designed to foster collaboration and innovation, allowing each participant to expand their knowledge and network." +
+    "</br></br><strong>&emsp;&emsp;3.&emsp;CV Review (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;CV Review is a golden opportunity where you receive direct feedback from seasoned professionals in your field. In this session, you can discuss and analyze your CV in-depth, gaining insights that will enhance its appeal and effectiveness. With expert guidance, you'll learn how to highlight your skills and experiences, significantly increasing your chances of catching a recruiter’s attention." +
+    "</br></br><strong>&emsp;&emsp;4.&emsp;Mock Up Interview (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;Mock Up Interview is an exciting opportunity where you can engage in simulated interviews guided by experienced professionals in your field. In this supportive environment, you'll practice your interviewing skills, receive constructive feedback, and learn effective techniques to present yourself confidently. This hands-on experience not only helps you refine your responses but also boosts your self-assurance, preparing you to tackle real interviews with ease." +
+    "</br></br><strong>&emsp;&emsp;5.&emsp;Case Study Analysis (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;Case Study Analysis offers an exhilarating chance to dive deep into real-world business challenges, evaluated by seasoned professionals from leading companies. In this engaging session, you'll analyze complex scenarios, brainstorm innovative solutions, and present your findings, all while receiving invaluable feedback from industry experts. This hands-on experience not only sharpens your analytical and problem-solving skills but also provides insight into the decision-making processes of successful organizations. " +
+    "</br></br><strong>&emsp;&emsp;6.&emsp;E-Certificate</strong>" +
+    "</br></br><strong>&emsp;&emsp;7.&emsp;Networking with expert from top company</strong>",
     timelineDesc: "Timeline details for Chambers",
     registerLink: ``,
     faq: ["What is Chambers?",
@@ -291,8 +318,8 @@ export const eventDetails = {
     faqDesc: ["The two-day expert talk show will provide valuable insights for career preparation across consulting, start-ups, FMCG, and BUMN industries while featuring unique sessions to enhance participants’ career readiness.",
       "Open for university students and fresh graduates.", 
       "Valuable career insights, industry exposure, job opportunities, and personal growth with an exclusive opportunity to receive direct feedback and guidance from experts."],
-    contactPerson: ["TBA"],
-    contactNumber: ["-"],
+    contactPerson: ["Audrey Putri"],
+    contactNumber: ["08581700632"],
     contactLink: [],
     timelineData: [
       {
