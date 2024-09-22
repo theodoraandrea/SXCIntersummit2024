@@ -1671,8 +1671,11 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
   const getPrice = (refCodeValid) => {
     const type = formData.registrationType;
 
-    let price = type === "Team" ? "200000" : "70000";
-    let priceUSD = 0.0;
+    let price = type === "Team" ? "180000" : "60000";
+    let priceUSD = type === "Team" ? 12 : 4;
+
+    // let price;
+    // let priceUSD;
 
     const currentDate = new Date();
 
