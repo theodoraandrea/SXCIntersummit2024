@@ -2288,6 +2288,7 @@ const Summary = ({ formData, member1Data, member2Data, onPrevious }) => {
             },
           });
           successAlert({ 
+            compId: "comp_2",
             message: "Successfully registered for International Business Case Competition. Please check your email for further details!"
           })
         }
