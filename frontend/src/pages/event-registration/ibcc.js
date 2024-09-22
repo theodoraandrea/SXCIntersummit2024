@@ -1672,7 +1672,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
     const type = formData.registrationType;
 
     let price = type === "Team" ? "200000" : "70000";
-    let priceUSD = 0.0;
+    let priceUSD = type === "Team" ? 13 : 5;
 
     const currentDate = new Date();
 
