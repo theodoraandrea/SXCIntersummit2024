@@ -1279,7 +1279,9 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
             activeTab: "competitions",
           },
         });
-        successAlert({ title: "Successfully registered for International Business Plan Competition!",
+        successAlert({
+          compId: "comp_3",
+          title: "Successfully registered for International Business Plan Competition!",
           message: "Please check your email and user dashboard for further details."
         });
       }
