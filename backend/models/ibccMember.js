@@ -12,7 +12,7 @@ const IBCC_Member = sequelize.define(
     teamId: {
       type: DataTypes.INTEGER,
       references: {
-        model: "ibcc",
+        model: "ibccTeam",
         key: "id",
       },
       allowNull: false,
@@ -25,9 +25,6 @@ const IBCC_Member = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     phoneNumber: {
       type: DataTypes.STRING,

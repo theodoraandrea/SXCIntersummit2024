@@ -10,6 +10,7 @@ const { generateTeamCode } = require("../utils/generateTeamCode");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 const sendAutomatedEmail = require("../services/automatedEmail");
+// const { file } = require("googleapis/build/src/apis/file");
 
 const IBPC_WA_LINK = "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t";
 
@@ -31,6 +32,7 @@ exports.createNewTeam = async (req, res) => {
       "originalityStatement",
       "proofOfStory",
       "proofOfComment",
+      "proofOfBroadcast",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -39,7 +41,15 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
-    const { teamName, question, referralCode, proofOfTwibbon } = body;
+    const {
+      teamName,
+      question,
+      referralCode,
+      proofOfTwibbon,
+      twibbonLink1,
+      twibbonLink2,
+      twibbonLink3,
+    } = body;
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
@@ -51,6 +61,7 @@ exports.createNewTeam = async (req, res) => {
       `${teamName}_${user.fullname}_Proof of Instastory`,
       `${teamName}_${user.fullname}_Proof of Student Card`,
       `${teamName}_${user.fullname}_Proof of Comment`,
+      `${teamName}_${user.fullname}_Proof of Broadcast`,
     ];
     const rootFolderId = process.env.FOLDER_BUSINESS_PLAN_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
@@ -83,12 +94,18 @@ exports.createNewTeam = async (req, res) => {
       folderId,
       fileNames[3]
     );
+    const proofOfBroadcast = await getImageURLsList(
+      files.proofOfBroadcast,
+      folderId,
+      fileNames[4]
+    );
 
     const screenshotIBPC = [
       proofOfFollow,
       proofOfStory,
       studentIds,
       proofOfComment,
+      proofOfBroadcast,
     ];
 
     const newTeam = await IBPC.create({
@@ -100,7 +117,7 @@ exports.createNewTeam = async (req, res) => {
       proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
-      referralCode,
+      referralCode: referralCode,
     });
 
     await CompetitionRegistration.create({
@@ -126,7 +143,7 @@ exports.createNewTeam = async (req, res) => {
           button: {
             color: "#003337",
             text: "Join WA Group",
-            link: {IBPC_WA_LINK},
+            link: "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t",
           },
         },
         outro:
@@ -251,6 +268,7 @@ exports.getTeamDetailsByUserId = async (req, res) => {
       teamCode: team.teamCode,
       proofPayment: team.proofOfPayment,
       proofOfTwibbon: team.proofOfTwibbon,
+      // twibbonLinks : team.twibbonLinks,
       screenshotIBPC: team.screenshotIBPC,
       referralCode: team.referralCode,
       members: teamMembers.map((member) => ({

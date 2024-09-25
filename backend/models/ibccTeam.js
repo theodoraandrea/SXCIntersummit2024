@@ -45,10 +45,6 @@ const IBCC_Team = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
-    cv: {
-      type: DataTypes.JSON,
-      allowNull: false,
-    },
     studentId: {
       type: DataTypes.JSON,
       allowNull: false,

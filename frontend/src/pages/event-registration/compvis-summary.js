@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import Spinner from '../../components/elements/spinner';
-import { getBmcRegistrationData } from '../../service/services';
+import { getCompvisRegistrationData } from '../../service/services';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const CompvisSummary = () => {
@@ -28,7 +28,7 @@ const CompvisSummary = () => {
     const fetchRegistrationData = async () => {
         try {
             setIsLoading(true);
-            const response = await getBmcRegistrationData(); 
+            const response = await getCompvisRegistrationData(); 
             setResponse(response);
         } catch (error) {
             //Handle error

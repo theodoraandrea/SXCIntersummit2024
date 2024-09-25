@@ -7,8 +7,9 @@ const {
   FCEO,
   IBPCMember,
   IBPC,
-  IBCCMember,
-  IBCC,
+  IBCC_Team,
+  IBCC_Solo,
+  IBCC_Member,
   EventRegistration,
   Competition,
   CompetitionRegistration,
@@ -88,21 +89,27 @@ exports.eventAssociations = () => {
   });
 
   // IBCC and IBCCMember associations
-  IBCC.hasMany(IBCCMember, {
+  IBCC_Team.hasMany(IBCC_Member, {
     foreignKey: "teamId",
-    as: "ibccmembers",
+    as: "ibccMembers",
   });
-  IBCCMember.belongsTo(IBCC, {
+  IBCC_Member.belongsTo(IBCC_Team, {
     foreignKey: "teamId",
   });
 
   // User and IBCC/IBCCMember associations
-  User.hasOne(IBCC, {
+  User.hasOne(IBCC_Team, {
     foreignKey: "leaderId",
-    as: "ibccteamLeader",
+    as: "ibccTeamLeader",
   });
-  IBCC.belongsTo(User, {
+  IBCC_Team.belongsTo(User, {
     foreignKey: "leaderId",
+  });
+  User.hasOne(IBCC_Solo, {
+    foreignKey: "userId"
+  });
+  IBCC_Solo.belongsTo(User, {
+    foreignKey: "userId"
   });
 };
 

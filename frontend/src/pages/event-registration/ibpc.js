@@ -12,7 +12,6 @@ const FirstView = ({
   eventData,
   formData,
   setFormData,
-  onPrevious,
   onNext,
   sanitizeInput,
 }) => {
@@ -37,15 +36,10 @@ const FirstView = ({
   const [proofOfFollow, setproofOfFollow] = useState(
     formData.proofOfFollow?.name ?? ""
   );
-  const [proofOfTwibbon, setproofOfTwibbon] = useState(
-    formData.proofOfTwibbon ?? ["", "", ""]
-  );
-
-  const handleProofOfTwibbonChange = (index, value) => {
-    const updatedProofs = [...proofOfTwibbon]; // Copy the current array
-    updatedProofs[index] = value; // Update the value at the specific index
-    setproofOfTwibbon(updatedProofs); // Update the state with the modified array
-  };
+  const [proofOfBroadcast, setProofOfBroadcast] = useState(formData.proofOfBroadcast?.name ?? "");
+  const [twibbon1, setTwibbon1] = useState(formData.twibbon1 ?? "");
+  const [twibbon2, setTwibbon2] = useState(formData.twibbon2 ?? "");
+  const [twibbon3, setTwibbon3] = useState(formData.twibbon3 ?? "");
 
   const [proofOfStory, setproofOfStory] = useState(formData.proofOfStory?.name ?? ""
   );
@@ -58,11 +52,11 @@ const FirstView = ({
     formData.originalityStatement?.name ?? ""
   )
 
-  const [question, setquestion] = useState(formData.question?.name ?? "");
+  const [question, setquestion] = useState(formData.question ?? "");
   const [questionOther, setquestionOther] = useState(
-    formData.questionOther?.name ?? "Other"
+    formData.questionOther ?? "Other"
   );
-  const [option, setOption] = useState(formData.question?.name ?? "");
+  const [option, setOption] = useState(formData.question ?? "");
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
@@ -73,7 +67,7 @@ const FirstView = ({
   };
 
   //REFERRAL & PAYMENT DATA
-  const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount } = eventData;
+  const { regularPrice, bankAccount, bank, recipient, discountedPrice, discount, bankAccount1, bankAccount2 } = eventData;
   const [verifiedRefCode, setVerifiedRefCode] = useState(
     formData.referralCode ?? null
   );
@@ -100,9 +94,12 @@ const FirstView = ({
           batch : batch,
           teamName: sanitizeInput(teamName),
           members: 3,
-          proofOfTwibbon: proofOfTwibbon,
+          twibbon1: twibbon1,
+          twibbon2: twibbon2,
+          twibbon3: twibbon3,
+          proofOfTwibbon: JSON.stringify([twibbon1, twibbon2, twibbon3]),
           question : question,
-          questionOther : questionOther,
+          questionOther: questionOther
         };
         setFormData(formData);
         onNext();
@@ -132,10 +129,13 @@ const FirstView = ({
       members && 
       studentIds &&
       proofOfFollow &&
-      proofOfTwibbon &&
+      twibbon1 &&
+      twibbon2 &&
+      twibbon3 &&
       proofOfStory && 
       proofOfComment && 
       question &&
+      proofOfBroadcast &&
       originalityStatement
     ) {
       return true;
@@ -191,8 +191,14 @@ const FirstView = ({
       return;
     }
 
-    if (!checkFileType(file)) {
-      return;
+    if (name === "proofOfPayment") {
+      if (!checkFileTypeImageOrPdf(file)) {
+        return;
+      }
+    } else {
+      if (!checkFileType(file)) {
+        return;
+      }
     }
 
     setFormData((prevState) => ({
@@ -209,6 +215,8 @@ const FirstView = ({
       setproofOfComment(file.name);
     } else if (name === "proofOfPayment") {
       setproofOfPayment(file.name);
+    } else if (name === "proofOfBroadcast"){
+      setProofOfBroadcast(file.name);
     } else if (name === "question") {
       setquestion(file.name);
     } else if (name === "originalityStatement") {
@@ -224,7 +232,19 @@ const FirstView = ({
     errorAlert({ message: message });
     return false;
   }
-  
+
+  const checkFileTypeImageOrPdf = (file) => {
+    if (file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "application/pdf"
+    ) {
+      return true;
+    }
+    const message = "File has to be jpg, jpeg, png, or pdf";
+    errorAlert({ message: message });
+    return false;
+  }
+
   const checkFileType = (file) => {
       if (
         file.type === "application/pdf" 
@@ -238,49 +258,65 @@ const FirstView = ({
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "{LINK}"; // REPLACE LINK
-    link.download = "IBPC-OriginalityStatement.pdf";
+    link.href = "https://docs.google.com/document/d/1arNDoC-R2gT8agqmsRQ43ZF1MVrmhAi1zq51Sydu6pQ/edit"; // REPLACE LINK
+    // link.download = "IBPC-OriginalityStatement.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const getPrice = (refCodeValid) => {
-    const currentDate = new Date();
-    let price = 0;
+    // const currentDate = new Date();
+    
+    const resetTime = (date) => {
+      date.setHours(0, 0, 0, 0); // Set jam ke 00:00:00 untuk mengabaikan waktu
+      return date;
+    }
+    const currentDate = resetTime(new Date());
+    let priceIDR = 0;
+    let priceUSD = 0.0;
 
     // 2 8 9 25 26 1 
 
-    const earlyBirdStart = new Date("2024-09-01"); 
-    const earlyBirdEnd = new Date("2024-09-08");
-    const regularStart = new Date("2024-09-09");
-    const regularEnd = new Date("2024-09-25");
-    const lateStart = new Date("2024-09-26");
-    const lateEnd = new Date("2024-10-01");
+    const earlyBirdStart = resetTime(new Date("2024-09-09")); 
+    const earlyBirdEnd = resetTime(new Date("2024-09-14"));
+    const regularStart = resetTime(new Date("2024-09-15"));
+    const regularEnd = resetTime(new Date("2024-09-30"));
+    const lateStart = resetTime(new Date("2024-10-01"));
+    const lateEnd = resetTime(new Date("2024-10-06"));
+    // const earlyBirdStart = new Date("2024-09-01"); 
+    // const earlyBirdEnd = new Date("2024-09-08");
+    // const regularStart = new Date("2024-09-09");
+    // const regularEnd = new Date("2024-09-25");
+    // const lateStart = new Date("2024-09-26");
+    // const lateEnd = new Date("2024-10-01");
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
-      price += 150000;
+      priceIDR += 150000;
+      priceUSD += 10.0;
     } else if (currentDate >= regularStart && currentDate <= regularEnd) {
-      price += 175000;
+      priceIDR += 175000;
+      priceUSD += 11.5;
     } else if (currentDate >= lateStart && currentDate <= lateEnd) {
-      price += 200000;
+      priceIDR += 200000;
+      priceUSD += 13.0;
     }
 
     if (refCodeValid){
-      price -= discount;
+      priceIDR -= discount;
     }
 
-    return price;
+    return { priceIDR, priceUSD };
   }
 
-  const price = getPrice(refCodeValid);
+  const {priceIDR, priceUSD} = getPrice(refCodeValid);
 
   return (
     <div>
       <Navbar />
       <div className="bg-primary-1 text-center py-8">
         <h1 className="text-2xl font-bold text-white">
-              Internasional Business Plan Competition Registration
+              International Business Plan Competition Registration
         </h1>
       </div>
       <div className="bg-primary-1 lg:space-x-8 lg:gap-y-4 lg:px-16 min-h-screen grid grid-cols-1 lg:grid-cols-3">
@@ -295,7 +331,17 @@ const FirstView = ({
             </p>
             <p className="text-3xl">
               <strong>
-                IDR {price.toLocaleString()}
+                IDR {priceIDR.toLocaleString()}
+              </strong>
+            </p>
+            
+            <p className="text-lg">
+                or
+            </p>
+
+            <p className="text-3xl">
+              <strong>
+                ${priceUSD.toFixed(2)}
               </strong>
             </p>
             <p className="text-sm">
@@ -306,19 +352,48 @@ const FirstView = ({
               }
             </p>
           </div>
+          {/* transfer bank */}
           <div className="text-white bg-primary-4 rounded-lg shadow-lg p-8 text-left">
           <p className="text-xl text-center">
               <strong>Transfer to</strong>
             </p>
             <div className="text-sm mt-2 w-fit mx-auto text-center">
-              <p><strong>{bankAccount}</strong> - {bank}</p>
+              {/* <p><strong>{bankAccount}</strong> - {bank}</p>
               <p>{recipient}</p>
+               */}
+               <h3> <strong>Local</strong></h3>
+              <p className='text-white mx-4'>
+                {bankAccount1[0]}
+              </p>
+              <p className='text-white mx-4'>
+                {bankAccount1[1]}
+              </p>
+              <p className='text-white mx-4'>
+                {bankAccount1[2]}
+              </p>
             </div>
             <div className="text-sm mt-4 w-fit mx-auto text-center">
-              <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
-              <p>{eventData.recipient_2}</p>
+              {/* <p><strong>{eventData.bankAccount_2}</strong> - {eventData.bank_2}</p>
+              <p>{eventData.recipient_2}</p> */}
+              <h3> <strong>International</strong></h3>
+              <p className='text-white mx-4'>
+                            {bankAccount2[0]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount2[1]}
+                        </p>
+                        <p className='text-white mx-4'>
+                            {bankAccount2[2]}
+                        </p>
+                        <a className='underline text-white mx-4'
+                        href={bankAccount2[3]}
+                        target="_blank"
+                        >
+                            {bankAccount2[3]}
+                        </a>
             </div>
           </div>
+
           <div className="bg-primary-4 mt-4 rounded-lg">
           <ReferralModal
             eventName="ibc_bpc"
@@ -433,38 +508,10 @@ const FirstView = ({
                 className="w-full px-3 py-2 rounded-lg"
               />
             </div>
-            <div className="mb-4 hidden">
-              <label className="block text-white mb-2" htmlFor="selectMembers">
-                Number of members
-              </label>
-              <select
-              id="selectMembers"
-              name="selectMembers"
-              className="w-full px-3 py-2 rounded-lg"
-              onChange={(e) => {
-                setMembers(e.target.value)}}
-              value={members}
-            >
-              <option value="" disabled>
-                Select number of members
-              </option>
-              <option value="2" disabled>
-                2
-              </option>
-              <option value="3">
-                3
-              </option>
-            </select>
-
-            </div>
-            <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
-            <label className="block text-white">
-              Combine files of <strong>ALL MEMBERS</strong> into 1 PDF file
-            </label>
+            <h1 className="text-lg font-bold text-white mt-10">Proof of Payment</h1>
             <label className="block text-white mb-4">
               File size has to be less than 2MB
             </label>
-            <label className="block text-white">Proof of Payment</label>
             <div className="my-4 w-fit flex flex-col space-y-2 sm:flex-row">
               <div className="relative">
               <input
@@ -483,6 +530,16 @@ const FirstView = ({
               </div>
               <div className="text-sm text-white ml-2 max-w-full">{proofOfPayment}</div>
             </div>
+            <h1 className="text-lg font-bold text-white mt-10">Uploads</h1>
+            <label className="block text-white">
+              Combine files of <strong>ALL MEMBERS</strong> into 1 PDF file
+            </label>
+            <label className="block text-white mb-4">
+              File size has to be less than 2MB
+            </label>
+            <label className="block text-white mb-4">
+              Each requirement will be reviewed and participants will be contacted if any are not met.
+            </label>
             <p className="block text-white">Student ID (all members)</p>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              
@@ -503,7 +560,7 @@ const FirstView = ({
               <p className="text-sm text-white ml-2 block">{studentIds}</p>
             </div>
             <label className="block text-white">
-              Proof of following @sxcintersummit & @sxcintersummitcompetition on IG
+              Proof of following @studentsxceosjkt, @sxcintersummit, & @sxcintersummitcompetition on IG
               (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
@@ -531,22 +588,42 @@ const FirstView = ({
               <label className="block text-white mb-2" htmlFor="proofOfTwibbon">
                 Link:
               </label>
-              {[0, 1, 2].map((index) => (
-              <div key={index}>
-                <label className="text-white my-1">Proof of Twibbon {index + 1}</label>
-                <input
-                  type="text"
-                  id={`proofOfTwibbon${index}`} // Use unique IDs for each input
-                  name="proofOfTwibbon"
-                  value={proofOfTwibbon[index]} // Bind to the specific index
-                  onChange={(e) => handleProofOfTwibbonChange(index, e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg"
-                />
-              </div>
-            ))}
+            <div>
+              <label className="text-white my-1">Proof of Twibbon 1</label>
+              <input
+                type="text"
+                id="twibbon1" // Use unique IDs for each input
+                name="twibbon1"
+                value={twibbon1}
+                onChange={(e) => setTwibbon1(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="text-white my-1">Proof of Twibbon 2</label>
+              <input
+                type="text"
+                id="twibbon2" // Use unique IDs for each input
+                name="twibbon2"
+                value={twibbon2}
+                onChange={(e) => setTwibbon2(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
+            <div>
+              <label className="text-white my-1">Proof of Twibbon 3</label>
+              <input
+                type="text"
+                id="twibbon3" // Use unique IDs for each input
+                name="twibbon3"
+                value={twibbon3}
+                onChange={(e) => setTwibbon3(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg"
+              />
+            </div>
             </div>
             <label className="block text-white">
-              Proof of sharing Instagram story posters (all members)
+            Proof of Sharing Open Registration Feeds on your story and tag @studentsxceosjkt, @sxcintersummit, @sxcintersummitcompetition (all members)
             </label>
             <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
               <div className="relative">              
@@ -587,16 +664,51 @@ const FirstView = ({
               </div>
               <label className="text-sm text-white ml-2">{proofOfComment}</label>
             </div>
+            <label className="block text-white">
+            Proof of sharing the IBC poster and broadcast to 1 group 
+            </label>
+            <label className="block text-white">
+            Material can be accessed <a className="font-bold text-primary-3"
+            target="_blank"
+            href="https://drive.google.com/drive/folders/1ixXX3dGcRoXFknLqHASzl0sZOTrKF64D?usp=drive_link">here</a>         
+            </label>
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
+                type="file"
+                id="proofOfBroadcast"
+                name="proofOfBroadcast"
+                onChange={handleChange}
+                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+              />
+              <label
+                htmlFor="proofOfBroadcast"
+                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+              >
+                Choose file
+              </label>
+              </div>
+              <label className="text-sm text-white ml-2">{proofOfBroadcast}</label>
+            </div>
 
             {/* originalityStatement */}
-            <div className="py-10">
+            <div className="py-4">
               <div className="space-x-4">
-                <button
+                <p className="text-white py-4">Please download the Originality Statement paper and upload it with your signature</p>
+                {/* <button
                   className="border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4"
                   onClick={handleDownload}
                 >
-                  Download Agreement Paper
-                </button>
+                  Download Originality Statement
+                </button> */}
+                <a
+                  href="https://docs.google.com/document/d/1arNDoC-R2gT8agqmsRQ43ZF1MVrmhAi1zq51Sydu6pQ/edit"
+                  target="_blank" // Membuka link di tab baru
+                  rel="noopener noreferrer" // Untuk keamanan
+                  className="border-2 border-primary-3 text-primary-3 px-6 py-2 rounded-full mb-4 inline-block"
+                >
+                  Download Originality Statement
+                </a>
                 <div className="relative inline-block mb-5">
                   <input
                     type="file"
@@ -607,15 +719,15 @@ const FirstView = ({
                   />
                   <label
                     htmlFor="originalityStatement"
-                    className="bg-primary-3 text-white px-5 py-2 my-2 rounded-full cursor-pointer z-20"
+                    className="bg-primary-3 text-white px-6 py-3 my-2 rounded-full cursor-pointer z-20"
                   >
-                    Submit Originality Statement Paper
+                    Submit Originality Statement
                   </label>
-                <label className="mx-5 text-white mt-6">{originalityStatement}</label>
                 </div>
               </div>
+              <label className="block w-fit mx-auto text-white">{originalityStatement}</label>
 
-              <h1 className="text-3xl font-bold text-gradient mb-4">
+              <h1 className="text-3xl font-bold text-gradient my-4">
                 How did you know this event?
               </h1>
               <div className="grid grid-cols-2 gap-4 text-left">
@@ -722,11 +834,9 @@ const FirstView = ({
   );
 };
 const Member1Data = ({
-  members,
   formData,
   setFormData,
   onPrevious,
-  goToSummary,
   goToNext,
   sanitizeInput,
 }) => {
@@ -861,8 +971,8 @@ const Member1Data = ({
               {phoneError && <p className="text-red-500">{phoneError}</p>}
             </div>
             <div className="mb-4">
-              <label className="block text-white mb-2" htmlFor="fullName">
-                institution
+              <label className="block text-white mb-2" htmlFor="institution">
+                Institution
               </label>
               <input
                 type="text"
@@ -920,7 +1030,6 @@ const Member1Data = ({
 };
 
 const Member2Data = ({
-  members,
   formData,
   setFormData,
   onPrevious,
@@ -1141,45 +1250,38 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
     try {
       setIsLoading(true);
       const response = await registerTeam(formData);
-      console.log(response)
-      if (response.teamId) {
-        let memberCounter = 1;
+      if (response.team.id) {
         for (const member of membersData) {
-          if (member.fullName) {
-            const memberData = {
-              teamId: response.teamId,
-              fullname: member.fullName,
-              email: member.email,
-              institution: member.institution,
-              batch: member.batch,
-              phoneNumber: member.phoneNumber,
-            };
             try {
+              const memberData = {
+                teamId: response.team.id,
+                fullname: member.fullName,
+                email: member.email,
+                institution: member.institution,
+                batch: member.batch,
+                phoneNumber: member.phoneNumber,
+              };
               await registerMember(memberData);
-              memberCounter++;
-              if (memberCounter === numberOfMembers) {
-                setIsLoading(false);
-                //Add this activeTab state for competition registrations
-                //because user-dashboard opens "events" by default
-                navigate(USER_DASHBOARD_PAGE, {
-                  state: {
-                    activeTab: "competitions",
-                  },
-                });
-                setRegisteredCompetitions((prevData) => [...prevData, ibpcId]);
-                successAlert({ title: "Successfully registered for International Business Plan Competition!",
-                  message: "Please check your email and user dashboard for further details."
-                });
-              }
             } catch (memberError) {
+              console.log(memberError);
               setIsLoading(false);
               errorAlert({
                 message: "Something went wrong. Please try again"
               });
               navigate(-1);
             }
-          }
         }
+        setIsLoading(false);
+        //Add this activeTab state for competition registrations
+        //because user-dashboard opens "events" by default
+        navigate(USER_DASHBOARD_PAGE, {
+          state: {
+            activeTab: "competitions",
+          },
+        });
+        successAlert({ title: "Successfully registered for International Business Plan Competition!",
+          message: "Please check your email and user dashboard for further details."
+        });
       }
     } catch (error) {
       setIsLoading(false);
@@ -1205,6 +1307,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
       const response = await postNewIbpcMember(data);
       console.log(response);
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };
@@ -1268,9 +1371,13 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 {formData.proofOfFollow?.name}
               </p>
               <p>
-                <strong>Proof of Twibbon Post 1:</strong>
-                {formData.proofOfTwibbon.join(", ")}
+                <strong>Proof of Twibbon:</strong>
               </p>
+              <ul>
+                  <li>1. {formData.twibbon1}</li>
+                  <li>2. {formData.twibbon2}</li>
+                  <li>3. {formData.twibbon3}</li>
+                </ul>
               <p>
                 <strong>Proof of Sharing Instagram Story Posters:</strong>{" "}
                 {formData.proofOfStory?.name}
@@ -1280,19 +1387,23 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                 {formData.proofOfComment?.name}
               </p>
               <p>
+                <strong>Proof of Broadcast</strong>{" "}
+                {formData.proofOfBroadcast?.name}
+              </p>
+              <p>
                 <strong>Proof of Originality Statement</strong>{" "}
                 {formData.originalityStatement?.name}
               </p>
               <p>
                 <strong>How did you know this event?</strong>{" "}
-                {formData.question}
+                {!formData.questionOther ? formData.question : formData.questionOther}
               </p>
               <p className="text-base md:text-lg font-semibold mt-2">Team Leader</p>
               <p>
                 <strong>Full Name:</strong> {formData.fullName}
               </p>
               <p>
-                <strong>institution:</strong> {formData.institution}
+                <strong>Institution:</strong> {formData.institution}
               </p>
               <p>
                 <strong>Batch:</strong> {formData.batch}
@@ -1327,7 +1438,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
                       <strong>Full Name:</strong> {member.fullName}
                     </p>
                     <p>
-                      <strong>institution:</strong> {member.institution}
+                      <strong>Institution:</strong> {member.institution}
                     </p>
                     <p>
                       <strong>Batch:</strong> {member.batch}
@@ -1374,15 +1485,17 @@ const EventCard = () => {
 
   const eventData = {
     ibpcId: 3,
-    bankAccount: "000427101697",
-    bank: "blu by BCA DIGITAL",
-    recipient: "CLAIRINE SABATINI NAYOAN",
-    bankAccount_2: "085959773266",
-    bank_2: "GoPay",
-    recipient_2: "DIVO AZRIEL HAKIM",
-    discount: '5000',
-    regularPrice: '150.000',
-    discountedPrice: '145.000',
+    bankAccount1:[ "000427101697",
+      "blu by BCA DIGITAL",
+      "a.n. CLAIRINE SABATINI NAYOAN"
+    ],
+    bankAccount2: [
+      "Username: @Intersummit2024",
+      "Email: Clairinenayoan93@gmail.com",
+      "Phone number: +621256356856",
+      "https://paypal.me/Intersummit2024"
+    ],
+    discount: 5000
   };
 
   const sanitizeInput = (input) => {

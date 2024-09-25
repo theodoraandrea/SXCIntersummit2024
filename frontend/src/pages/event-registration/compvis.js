@@ -3,7 +3,7 @@ import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import { useNavigate, Link } from 'react-router-dom';
 import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
-import { postBMCRegistration } from '../../service/services';
+import { postCompvisRegistration } from '../../service/services';
 import Spinner from '../../components/elements/spinner';
 import ReferralModal from '../../components/referral-modal';
 import { errorAlert, successAlert } from '../../components/alert';
@@ -1265,7 +1265,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
                     </div>
                 </div>
                 <ReferralModal 
-                eventName="bmc"
+                eventName="comvis"
                 referralCode={formData.referralCode ?? ''}
                 verifiedRefCode={verifiedRefCode}
                 setVerifiedRefCode={setVerifiedRefCode} 
@@ -1304,23 +1304,23 @@ const Summary = ({ formData, onPrevious }) => {
 
   const { setRegisteredEvents } = useUser();
 
-  let bmcId; //FOR REGISTER BUTTON PURPOSES
+  let compvisId; //FOR REGISTER BUTTON PURPOSES
 
-  if (formData.sessionType === "Business Case Competition") {
-    bmcId = 2;
-  } else if (formData.sessionType === "Business Plan Competition") {
-    bmcId = 3;
+  if (formData.sessionType === "Company Visit") {
+    compvisId = 6;
+  } else if (formData.sessionType === "Company Visit") {
+    compvisId = 6;
   }
 
   const handleSubmit = async () => {
     try {
       setIsLoading(true);
-      const response = await postBMCRegistration(formData);
+      const response = await postCompvisRegistration(formData);
       setIsLoading(false);
       if (response.status === 200) {
         navigate(USER_DASHBOARD_PAGE);
-        setRegisteredEvents((prevData) => [...prevData, bmcId]);
-        successAlert({ message: "Successfully registered for BMC. Please check your email for further details!"})
+        setRegisteredEvents((prevData) => [...prevData, compvisId]);
+        successAlert({ message: "Successfully registered for Company Visit. Please check your email for further details!"})
       }
     } catch (error) {
       errorAlert({ message: "Oh no, something happened. Please try again!"});
@@ -1342,7 +1342,8 @@ const Summary = ({ formData, onPrevious }) => {
             </div>
           ) : (
             <div className="bg-primary-4 mx-2 my-8 max-w-full md:max-w-lg flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
-              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">BMC Registration Form</p>
+              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2"
+              >Company Visit Registration Form</p>
               <p className="text-sm text-center font-semibold mb-2">
                 Please make sure all data is correct before submitting
               </p>
@@ -1400,11 +1401,11 @@ const Summary = ({ formData, onPrevious }) => {
                   {formData.screenshot1.name}
                 </p>
                 <p>
-                  <strong>Proof of reposting BMC poster:</strong>{" "}
+                  <strong>Proof of reposting Company Visit poster:</strong>{" "}
                   {formData.screenshot2.name}
                 </p>
                 <p>
-                  <strong>Proof of like & comment on BMC poster:</strong>{" "}
+                  <strong>Proof of like & comment on Company Visit poster:</strong>{" "}
                   {formData.screenshot3.name}
                 </p>
               </div>
@@ -1437,14 +1438,14 @@ const EventCard = () => {
     const eventData = {
         title: "Company Visit",
         description: "xxx",
-        bmcId: 1,
+        compvisId: 6,
         regularPrice: 0,
         discountedPrice: 0,
         discount: 0,
         bankAccount: "BCA - [no rek]",
     };
 
-  //All fields for BMC
+  //All fields for Company Visit
   const [formData, setFormData] = useState({});
 
   //Utility functions

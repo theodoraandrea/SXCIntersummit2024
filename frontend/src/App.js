@@ -13,8 +13,13 @@ import FCEORegistration from "./pages/event-registration/fceo";
 import FCEOSummary from "./pages/event-registration/fceo-summary";
 import IBPCRegistration from "./pages/event-registration/ibpc";
 import IBPCSummary from "./pages/event-registration/ibpc-summary";
+<<<<<<< HEAD
 import CompvisRegistration from "./pages/event-registration/compvis";
 import CompvisSummary from "./pages/event-registration/compvis-summary";
+=======
+import IBCCRegistration from "./pages/event-registration/ibcc";
+import IBCCSummary from "./pages/event-registration/ibcc-summary";
+>>>>>>> de1af9671d433d1262336e273c6e1412c5e5e3bd
 
 import {
   HOME,
@@ -30,8 +35,8 @@ import {
   FCEO_REGIST_SUMMARY,
   IBPC_REGIST,
   IBPC_REGIST_SUMMARY,
-  COMPVIS_REGIST, 
-  COMPVIS_REGIST_SUMMARY,
+  IBCC_REGIST,
+  IBCC_REGIST_SUMMARY
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -67,8 +72,8 @@ export default function App() {
           <Route path={FCEO_REGIST_SUMMARY} element={<FCEOSummary />} />
           <Route path={IBPC_REGIST} element={<IBPCRegistration />} />
           <Route path={IBPC_REGIST_SUMMARY} element={<IBPCSummary />} />
-          <Route path={COMPVIS_REGIST} element={<CompvisRegistration />} />
-          <Route path={COMPVIS_REGIST_SUMMARY} element={<CompvisSummary />} />
+          <Route path={IBCC_REGIST} element={<IBCCRegistration/>} />
+          <Route path={IBCC_REGIST_SUMMARY} element={<IBCCSummary />} />
         </Routes>
       </Router>
     </UserProvider>

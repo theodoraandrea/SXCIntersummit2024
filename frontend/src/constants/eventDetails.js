@@ -1,4 +1,4 @@
-import { FCEO_REGIST, BMC_REGIST } from "./routes";
+import { FCEO_REGIST, BMC_REGIST, IBCC_REGIST, IBPC_REGIST } from "./routes";
 
 const imgLocation = "/images/programs/";
 
@@ -6,7 +6,8 @@ export const eventDetails = {
   event_1: {
     title: "Business Master Class",
     image: imgLocation + "bmc.png",
-    openRegistration: false,
+    openRegistration: true,
+    linkBooklet: "https://bit.ly/GuidebookBusineesMasterClass",
     description: "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
     "With its <strong>interactive masterclass with expert-led materials presentation , and practical experience, and networking opportunities</strong>  to equip students with the knowledge, skills, and strategies needed to excel in business competitions. This event series will be having further discussion on " +
     "<strong>“Elevate to Success: Mastering in Business Competition” as the grand theme.</strong>" +
@@ -29,13 +30,14 @@ export const eventDetails = {
       "The Business Master Class will be held online on Saturday, September 21, 2024.", 
       "Participants will gain valuable insights into business competitions from top-achieving speakers and acquire practical experience by solving case studies."],
     contactPerson: [
-      "TBA"
+      "Kezia", "Naufal"
     ],
     contactLink: [
-      "",
+      "https://wa.me/6281289550200", 
+      "https://wa.me/62895321468029"
     ],
     contactNumber: [
-      "-",
+      "+6281289550200", "+62895321468029",
     ],
     timelineData: [
       {
@@ -121,32 +123,33 @@ export const eventDetails = {
   comp_2: {
     title: "SxC International Business Challenge: Business Case Competition",
     image: imgLocation + "ibc-bcc.png",
-    openRegistration: false,
+    openRegistration: true,
+    linkBooklet: "https://bit.ly/SxCIBCC2024Booklet",
     description:
       "<strong>The SxC International Business Case Competition</strong> is a global event designed to challenge students to apply their analytical and problem-solving skills to real-world business scenarios. <strong>Each team will analyze complex case studies</strong> of business problems and develop strategic solutions. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
       "</br></br>" +
     "<strong>When</strong></br>" +
-    "2nd September - 1st December 2024" +
+    "9th September - 1st December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
-    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
-    "</br>&emsp;&emsp;&emsp;Case 1 Release: 5th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Proposal Submission Phase: 6th October - 17th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Scoring Proposal Phase: 18 October - 29 October 2024" +
-    "</br>&emsp;&emsp;&emsp;Semi-Finalist Announcement: 30th October 2024" +
-    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
-    "</br>&emsp;&emsp;&emsp;Deck & Video Submission Phase: 31st October - 16th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Technical Meeting: 2nd November 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Scoring Deck & Video Phase: 17th November - 25th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Finalist Announcement: 26th November 2024" +
-    "</br><strong>&emsp;3.&emsp;Final</strong>" +
-    "</br>&emsp;&emsp;&emsp;Technical Meeting for Final Stage: 27th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Case Release for Finalist: 29th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Deck Submission: 29th November 2024" +
-    "</br>&emsp;&emsp;&emsp;D-Day Final Pitch: 30th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Winner Awarding: 1st December 2024" +
+    "</br><strong>1.&emsp;Preliminary</strong>" +
+    "</br>&emsp;&emsp;Case 1 Release: 13th October 2024" +
+    "</br>&emsp;&emsp;Proposal Submission: 13th - 24th October 2024" +
+    "</br>&emsp;&emsp;Scoring: 25th October - 4th November 2024" +
+    "</br>&emsp;&emsp;Semi-Final Announcement: 5th November 2024" +
+    "</br><strong>2.&emsp;Semifinal</strong>" +
+    "</br>&emsp;&emsp;Submission: 5th - 18th November 2024" +
+    "</br>&emsp;&emsp;Technical Meeting: 6th November 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
+    "</br>&emsp;&emsp;Scoring: 19th - 25th November 2024" +
+    "</br>&emsp;&emsp;Finalist Announcement: 26th November 2024" +
+    "</br><strong>3.&emsp;Final</strong>" +
+    "</br>&emsp;&emsp;Technical Meeting: 27th November 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
+    "</br>&emsp;&emsp;Case Release for Finalist: 29th November 2024" +
+    "</br>&emsp;&emsp;Deck Submission: 29th November 2024" +
+    "</br>&emsp;&emsp;D-Day Final Pitch: 30th November 2024" +
+    "</br>&emsp;&emsp;Winner Awarding: 1st December 2024" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
@@ -156,69 +159,72 @@ export const eventDetails = {
     "</br></br><strong>&emsp;&emsp;3.&emsp;Networking Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
-    registerLink: ``,
-    faq: ["How many and what is the format and structure of each stage?", 
-      "How and where do we register for the competition?", 
-      "Where is the venue or platform for the competition?"],
-    faqDesc: ["The competition has three stages. In the Preliminary Round, participants submit a proposal outlining their solution to the given case. In the Semifinal Round, they create a pitch deck based on their proposal and deliver a brief rocket pitch. The Final Round involves solving a new case within one day, creating a pitch deck, and presenting it the next day, testing their ability to deliver a well-structured solution under time pressure.", 
-      "Participants may register from our website www.something.com . The registration is open from 2nd September 2024 to 5th October 2024. Participants can register individually or in groups of maximum 3 people.", 
-      "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
+    registerLink: `${IBCC_REGIST}`,
+    // faq: ["-"],
+    // faq: ["How many and what is the format and structure of each stage?", 
+    //   "How and where do we register for the competition?", 
+    //   "Where is the venue or platform for the competition?"],
+    // faqDesc: [""],
+    // faqDesc: ["The competition has three stages. In the Preliminary Round, participants submit a proposal outlining their solution to the given case. In the Semifinal Round, they create a pitch deck based on their proposal and deliver a brief rocket pitch. The Final Round involves solving a new case within one day, creating a pitch deck, and presenting it the next day, testing their ability to deliver a well-structured solution under time pressure.", 
+    //   "Participants may register from our website www.something.com . The registration is open from 2nd September 2024 to 5th October 2024. Participants can register individually or in groups of maximum 3 people.", 
+    //   "The competition will be held online for the preliminary and semi final stages. The final stage will take place at a venue that will be announced soon."],
     contactPerson: ["Salsabila"],
     contactNumber: ["(+62) 85814703305"],
     contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
-        date: "TBA",
+        date: "9th September - 22nd October 2024",
+        type: "submit",
+      },
+      {
+        title: "Preliminary Stages",
+        date: "13th October - 5th November 2024",
         type: "register",
         link: ``,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA4",
+        title: "Semi-Finalist Stages",
+        date: "5th - 26th November 2024",
         type: "meeting",
       },
       {
-        title: "Project Progress",
-        date: "TBA",
+        title: "Final Stages",
+        date: "27th November - 1st December 2024",
         type: "progress",
-      },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
       },
     ],
   },
   comp_3: {
     title: "SxC International Business Challenge: Business Plan Competition",
     image: imgLocation + "ibc-bpc.png",
-    openRegistration: false,
+    openRegistration: true,
+    linkBooklet: "https://bit.ly/SxCIBPC2024Booklet",
     description:
       "<strong>The SxC International Business Plan Competition</strong> is a global event designed to foster entrepreneurial skills and innovation among students. <strong>Participants are encouraged to present their innovative business models,</strong> turning them into viable businesses. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
       "</br></br>" +
     "<strong>When</strong></br>" +
-    "2nd September - 1st December 2024" +
+    "9th September - 1st December 2024" +
     "</br></br>" +
     "<strong>Consists of 3 Stages</strong>" +
-    "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
-    "</br>&emsp;&emsp;&emsp;BMC+Executive Summary Submission" +
-    "</br>&emsp;&emsp;&emsp;Submission Phase: 2nd September - 1st October 2024" +
-    "</br>&emsp;&emsp;&emsp;Scoring Phase: 2nd October - 13rd October 2024" +
-    "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
-    "</br>&emsp;&emsp;&emsp;Proposal Submission" +
-    "</br>&emsp;&emsp;&emsp;Submission Phase: 15th October - 30th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 1: 19th October 2024" +
-    "</br>&emsp;&emsp;&emsp;Topic: Blueprint for Success: Crafting a Strategic Business Proposal" +
-    "</br>&emsp;&emsp;&emsp;Scoring Phase: 1st November - 9th November 2024" +
-    "</br><strong>&emsp;3.&emsp;Final</strong>" +
-    "</br>&emsp;&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
-    "</br>&emsp;&emsp;&emsp;Submission Phase: 11th November - 22nd November 2024" +
-    "</br>&emsp;&emsp;&emsp;Technical Meeting: 15th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
-    "</br>&emsp;&emsp;&emsp;Topic: Pitch Perfect: Captivate the Judges with Your Ideas" +
-    "</br>&emsp;&emsp;&emsp;Final Pitch: 23rd November 2024" +
-    "</br>&emsp;&emsp;&emsp;Winner Awarding: 1st December 2024" +
+    "</br><strong>1.&emsp;Preliminary</strong>" +
+    "</br>&emsp;&emsp;BMC+Executive Summary Submission" +
+    "</br>&emsp;&emsp;Submission: 9th September - 6th October 2024" +
+    "</br>&emsp;&emsp;Scoring Phase: 7th - 18th October 2024" +
+    "</br>&emsp;&emsp;Semi-Finalist Announcement: 19th October 2024" +
+    "</br><strong>2.&emsp;Semifinal</strong>" +
+    "</br>&emsp;&emsp;Proposal Submission" +
+    "</br>&emsp;&emsp;Submission Phase: 20th - 31st October 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 1: 26th October 2024" +
+    "</br>&emsp;&emsp;Scoring Phase: 1st - 9th November 2024" +
+    "</br>&emsp;&emsp;Finalist Announcement: 10th November 2024" +
+    "</br><strong>3.&emsp;Final</strong>" +
+    "</br>&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
+    "</br>&emsp;&emsp;Submission Phase: 11th - 22nd November 2024" +
+    "</br>&emsp;&emsp;Technical Meeting: 15th November 2024" +
+    "</br>&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
+    "</br>&emsp;&emsp;Final Pitch: 23rd November 2024" +
+    "</br>&emsp;&emsp;Winner Awarding: 1st December 2024" +
     "</br></br>" +
     "<strong>What You Will Get</strong>" +
     "</br></br><strong>&emsp;&emsp;1.&emsp;Coaching Clinic 1</strong>" +
@@ -230,47 +236,79 @@ export const eventDetails = {
     "</br></br><strong>&emsp;&emsp;5.&emsp;Funding Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
-    registerLink: ``,
-    faq: ["Who can participate, and what are the eligibility criteria?",
-      "How many stages does this business plan competition have?", 
-      "Is there any specific criteria/requirement regarding the business ideas?", 
-      "Will the competition be held offline or online?"],
-    faqDesc: ["Participants are an active undergraduate students/vocational students from all around the world with one team consist of maximum 3 people who can come from different institution.",
-      "The competition will consist of three stages: the first stage involves the submission of a business model canvas and executive summary, the second stage requires a detailed business proposal, and the final stage includes a pitch deck assessment followed by an offline pitching event at a venue to be announced.", 
-      "There are no prerequisites regarding the business ideas; the competition welcomes business plans from diverse industries. The key to success in our competition is to simply demonstrate creativity, innovation, and a commitment to sustainable business practices.", 
-      "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
+    registerLink: `${IBPC_REGIST}`,
+    // faq: ["Who can participate, and what are the eligibility criteria?",
+    //   "How many stages does this business plan competition have?", 
+    //   "Is there any specific criteria/requirement regarding the business ideas?", 
+    //   "Will the competition be held offline or online?"],
+    // faqDesc: ["Participants are an active undergraduate students/vocational students from all around the world with one team consist of maximum 3 people who can come from different institution.",
+    //   "The competition will consist of three stages: the first stage involves the submission of a business model canvas and executive summary, the second stage requires a detailed business proposal, and the final stage includes a pitch deck assessment followed by an offline pitching event at a venue to be announced.", 
+    //   "There are no prerequisites regarding the business ideas; the competition welcomes business plans from diverse industries. The key to success in our competition is to simply demonstrate creativity, innovation, and a commitment to sustainable business practices.", 
+    //   "The competition will be held online for the preliminary and semi final stages. The final stage will take place offline at a venue that will be announced soon."],
     contactPerson: ["Aisha Inaya"],
     contactNumber: ["(+62) 81288480732"],
     contactLink: [],
     timelineData: [
       {
         title: "Open Registration",
-        date: "TBA",
+        date: "9th September - 6th October 2024",
+        type: "submit",
+      },
+      {
+        title: "Preliminary Stage",
+        date: "9th September - 19th October 2024",
         type: "register",
         link: ``,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA",
+        title: "Semi-Final Stage",
+        date: "20th October - 10th November 2024",
         type: "meeting",
       },
       {
-        title: "Project Progress",
-        date: "TBA",
+        title: "Final Stage",
+        date: "11th November - 1st December 2024",
         type: "progress",
       },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
-      },
+      // {
+      //   title: "",
+      //   date: "",
+      //   type: "submit",
+      // },
     ],
   },
   event_5: {
     title: "Chambers",
     image: imgLocation + "chambers.png",
     openRegistration: false,
-    description: "Two-days online expert sessions which will share experiences, recruitment tips, job opportunities, and material related to job vacancies in four industries (Consulting, Start-Up, BUMN, and FMCG).",
+    description: "<strong>Chambers</strong> is an <strong>international webinar</strong> that promises to deliver <strong>captivating insights and experiences in the professional world.</strong> Centered around the theme <strong>“Innovative Career Paths: Beyond User-Centricity to Strategic Brilliance,“</strong> this event features distinguished speakers from leading companies. Over the webinar of <strong>two days, participants will explore four dynamic industries: Start-Up, FMCG, BUMN, and Consulting.</strong> Join us for this unique <strong>opportunity to enhance your career</strong> trejectory, <strong>gain valuable knowledge, and connect with industry experts</strong> who can help shape your <strong>professional journey.</strong>" +
+    "</br></br>" +
+    "<strong>When</strong></br>" +
+    "26th - 27th October 2024" +
+    "</br></br>" +
+    "<strong>4 Industries:</strong>" +
+    "</br><strong>1.&emsp;Start Up</strong>" +
+    "</br>&emsp;&emsp;Gaining insight into building a career at a startup involves understanding the high growth potential and risk-taking nature. A fast-paced, collaborative culture encourages innovation and requires skills such as creative thinking and problem solving." + 
+    "</br><strong>2.&emsp;FMCG</strong>" +
+    "</br>&emsp;&emsp;As the FMCG industry evolves, professionals must transition from user-centric roles to strategic leadership. This program offers valuable insights into navigating market dynamics and understanding consumer behavior while implementing effective strategic planning. Participants will learn to leverage data-driven decision-making and foster innovation, highlighting the importance of confident team leadership." + 
+    "</br><strong>3.&emsp;BUMN</strong>" +
+    "</br>&emsp;&emsp;Explore the importance of understanding BUMN's mission, setting clear career objectives, and aligning personal ambitions with organizational strategies. Participants will learn practical techniques to overcome alignment challenges, utilize data-driven decision-making, and foster innovation and leadership within BUMN." + 
+    "</br><strong>4.&emsp;Consulting</strong>" +
+    "</br>&emsp;&emsp;Gain valuable insights from some of the world's leading companies through training  webinars and hands-on projects. Many top consulting firms offer access to industry leaders and experts, providing opportunities to learn from real-world experiences.. This is a golden opportunity to grow and gain a deep understanding of the rapidly changing market dynamics." +
+    "</br></br>" +
+    "<strong>What Will You Get</strong></br>" +
+    "</br></br><strong>&emsp;&emsp;1.&emsp;Virtual Job Fair</strong>" +
+    "</br>&emsp;&emsp;The Virtual Job Fair is a key event that brings together students and professionals from around the world on an innovative virtual platform. This event aims to open job opportunities, build networks, and facilitate dialogue between enthusiastic young individuals and experienced industry leaders. It features major companies that will provide job opportunities for you in the future." +
+    "</br></br><strong>&emsp;&emsp;2.&emsp;1 on 3 Season (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;1 on 3 Season is an engaging session where professionals gather to discuss and explore important topics. In this interactive setting, you'll have the chance to exchange ideas, share experiences, and gain valuable insights from industry experts. This session is designed to foster collaboration and innovation, allowing each participant to expand their knowledge and network." +
+    "</br></br><strong>&emsp;&emsp;3.&emsp;CV Review (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;CV Review is a golden opportunity where you receive direct feedback from seasoned professionals in your field. In this session, you can discuss and analyze your CV in-depth, gaining insights that will enhance its appeal and effectiveness. With expert guidance, you'll learn how to highlight your skills and experiences, significantly increasing your chances of catching a recruiter’s attention." +
+    "</br></br><strong>&emsp;&emsp;4.&emsp;Mock Up Interview (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;Mock Up Interview is an exciting opportunity where you can engage in simulated interviews guided by experienced professionals in your field. In this supportive environment, you'll practice your interviewing skills, receive constructive feedback, and learn effective techniques to present yourself confidently. This hands-on experience not only helps you refine your responses but also boosts your self-assurance, preparing you to tackle real interviews with ease." +
+    "</br></br><strong>&emsp;&emsp;5.&emsp;Case Study Analysis (Lucky Participant)</strong>" +
+    "</br>&emsp;&emsp;Case Study Analysis offers an exhilarating chance to dive deep into real-world business challenges, evaluated by seasoned professionals from leading companies. In this engaging session, you'll analyze complex scenarios, brainstorm innovative solutions, and present your findings, all while receiving invaluable feedback from industry experts. This hands-on experience not only sharpens your analytical and problem-solving skills but also provides insight into the decision-making processes of successful organizations. " +
+    "</br></br><strong>&emsp;&emsp;6.&emsp;E-Certificate</strong>" +
+    "</br></br><strong>&emsp;&emsp;7.&emsp;Networking with expert from top company</strong>",
     timelineDesc: "Timeline details for Chambers",
     registerLink: ``,
     faq: ["What is Chambers?",

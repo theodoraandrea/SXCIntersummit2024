@@ -19,8 +19,11 @@ const Chamber = sequelize.define(
       },
     },
     industryType: {
-      type: DataTypes.ENUM,
-      values: ["Start Up", "BUMN", "FMCG", "Consulting"],
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+    cv: {
+      type: DataTypes.JSON,
       allowNull: false,
     },
     question: {

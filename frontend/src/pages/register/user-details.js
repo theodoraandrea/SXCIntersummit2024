@@ -287,6 +287,8 @@ export default function UserDetails() {
                 onChange={(e) => setMajor(e.target.value)}
               />
               <small className="text-gray-400">Example: Computer Science</small>
+              <br/>
+              <small className="text-gray-400">High school students that have no major can enter "No Major"</small>
               {errors.major && (
                 <p className="text-red-500 text-xs mt-1">{errors.major}</p>
               )}

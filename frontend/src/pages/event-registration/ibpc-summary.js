@@ -11,6 +11,8 @@ const IBPCSummary = () => {
     const [ leaderData, setLeaderData ] = useState({});
     const [ isLoading, setIsLoading ] = useState(false);
 
+    const IBPC_WA_LINK = "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t";
+
     useEffect(() => {
         if (isLoggedIn) {
             fetchRegistrationData();
@@ -79,6 +81,12 @@ const IBPCSummary = () => {
                     </div>
                     <div>
                     <div className='bg-primary-4 h-fit rounded-xl shadow-lg p-4 md:mt-9'>
+                        <p className='text-xl text-gradient font-semibold mb-2'>WhatsApp Group</p>
+                        <div className='text-xs md:text-sm'>
+                        <a href={IBPC_WA_LINK}>Join group →</a>
+                        </div>
+                    </div>
+                    <div className='bg-primary-4 h-fit rounded-xl shadow-lg p-4 mt-4'>
                         <p className='text-xl text-gradient font-semibold mb-2'>Team Information</p>
                         <div className='text-xs md:text-sm'>
                         <p><strong>Team Name:</strong> {teamData.teamName}</p>

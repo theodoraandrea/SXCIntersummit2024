@@ -20,23 +20,34 @@ const errorAlert = ({ title, message }) => {
       });
 }
 
-const successAlert = ({ title, message }) => {
+const successAlert = ({ eventId, title, message }) => {
     let titleText;
     if (!title) {
         titleText = "Success!";
     } else {
         titleText = title;
     }
+
+    let additionalHtml = '';
+    if (eventId === "event_1") {
+        additionalHtml = `
+        <br>
+        <a href="https://chat.whatsapp.com/Hwg157Dbv3UFMX50rEg6aZ" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
+    }
+
+    console.log("Additional HTML:", additionalHtml);
+
     Swal.fire({
         titleText: titleText,
-        text: message,
+        html: `${message}${additionalHtml}`,
+        // text: message,
         icon: 'success',
         toast: true,
         position: 'top',
         width:'30em',
         padding: '1rem 2rem',
         showConfirmButton: false,
-        showCloseButton:true
+        showCloseButton:true,
       });
 }
 
