@@ -15,3 +15,5 @@ export const FCEO_REGIST = "/fceo/register";
 export const FCEO_REGIST_SUMMARY = "/fceo/summary";
 export const IBPC_REGIST = "/ibpc/register";
 export const IBPC_REGIST_SUMMARY = "/ibpc/summary";
+export const COMPVIS_REGIST ="/compvis/register";
+export const COMPVIS_REGIST_SUMMARY ="/compvis/summary";

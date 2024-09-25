@@ -13,6 +13,8 @@ import FCEORegistration from "./pages/event-registration/fceo";
 import FCEOSummary from "./pages/event-registration/fceo-summary";
 import IBPCRegistration from "./pages/event-registration/ibpc";
 import IBPCSummary from "./pages/event-registration/ibpc-summary";
+import CompvisRegistration from "./pages/event-registration/compvis";
+import CompvisSummary from "./pages/event-registration/compvis-summary";
 
 import {
   HOME,
@@ -28,6 +30,8 @@ import {
   FCEO_REGIST_SUMMARY,
   IBPC_REGIST,
   IBPC_REGIST_SUMMARY,
+  COMPVIS_REGIST, 
+  COMPVIS_REGIST_SUMMARY,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -63,6 +67,8 @@ export default function App() {
           <Route path={FCEO_REGIST_SUMMARY} element={<FCEOSummary />} />
           <Route path={IBPC_REGIST} element={<IBPCRegistration />} />
           <Route path={IBPC_REGIST_SUMMARY} element={<IBPCSummary />} />
+          <Route path={COMPVIS_REGIST} element={<CompvisRegistration />} />
+          <Route path={COMPVIS_REGIST_SUMMARY} element={<CompvisSummary />} />
         </Routes>
       </Router>
     </UserProvider>

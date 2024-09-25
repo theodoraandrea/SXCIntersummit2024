@@ -203,8 +203,6 @@ const FirstView = ({
       setStudentIds(file.name);
     } else if (name === "proofOfFollow") {
       setproofOfFollow(file.name);
-    // } else if (name === "proofOfTwibbon") {
-    //   setproofOfTwibbon(file.name);
     } else if (name === "proofOfStory") {
       setproofOfStory(file.name);
     } else if (name === "proofOfComment") {
@@ -1143,6 +1141,7 @@ const Summary = ({ eventData, formData, numberOfMembers, member1Data, member2Dat
     try {
       setIsLoading(true);
       const response = await registerTeam(formData);
+      console.log(response)
       if (response.teamId) {
         let memberCounter = 1;
         for (const member of membersData) {
@@ -1383,7 +1382,7 @@ const EventCard = () => {
     recipient_2: "DIVO AZRIEL HAKIM",
     discount: '5000',
     regularPrice: '150.000',
-    discountedPrice: 'xxx',
+    discountedPrice: '145.000',
   };
 
   const sanitizeInput = (input) => {
