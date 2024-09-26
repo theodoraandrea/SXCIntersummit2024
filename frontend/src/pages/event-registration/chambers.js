@@ -757,7 +757,7 @@ const Summary = ({ formData, onPrevious }) => {
 
   const navigate = useNavigate();
 
-  const { setRegisteredEvents } = useUser();
+  const { setRegisteredEvents, profileData } = useUser();
 
   let chambersId; //FOR REGISTER BUTTON PURPOSES
 
@@ -803,19 +803,19 @@ const Summary = ({ formData, onPrevious }) => {
               </p>
               <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
                 <strong>Full Name</strong>
-                <p>{formData.fullName}</p>
+                <p>{profileData.fullname}</p>
                 <strong>Gender</strong>
-                <p>{formData.gender}</p>
+                <p>{profileData.gender}</p>
                 <strong>Institution</strong>
-                <p>{formData.university}</p>
+                <p>{profileData.institution}</p>
                 <strong>Major</strong>
-                <p>{formData.major}</p>
+                <p>{profileData.major}</p>
                 <strong>Batch</strong>
-                <p>{formData.batch}</p>
+                <p>{profileData.batch}</p>
                 <strong>Phone</strong>
-                <p>{formData.phoneNumber}</p>
+                <p>{profileData.phoneNumber}</p>
                 <strong>Email</strong>
-                <p>{formData.email}</p>
+                <p>{profileData.email}</p>
                 <strong>Selected Industries</strong>
                 <ul className="list-disc list-inside">
                   {formData.industryType.map((industry, index) => (
