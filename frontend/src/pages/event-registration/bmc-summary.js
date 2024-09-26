@@ -184,6 +184,7 @@ const BMCSummary = () => {
                                     md:px-6 md:py-2 md:text-base
                                     hover:bg-primary-3 hover:text-white transition duration-300
                                     '
+                                    onClick={() => window.location.href = 'https://bit.ly/FeedbackBMCInterSummit2024'}
                                     >Go to form
                                     </button>
                                 </div>
@@ -195,6 +196,7 @@ const BMCSummary = () => {
                                     md:px-6 md:py-2 md:text-base
                                     hover:bg-primary-3 hover:text-white transition duration-300
                                     '
+                                    onClick={() => window.location.href = 'https://bit.ly/HANDBOOKSXC24'}
                                     >Go to store
                                     </button>
                                 </div>
