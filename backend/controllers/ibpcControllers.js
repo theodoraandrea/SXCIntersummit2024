@@ -8,7 +8,7 @@ const {
 const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { generateTeamCode } = require("../utils/generateTeamCode");
 const checkRequiredFields = require("../utils/checkRequiredFields");
-const { validationResult } = require("express-validator");
+const { validationResult, header } = require("express-validator");
 const sendAutomatedEmail = require("../services/automatedEmail");
 // const { file } = require("googleapis/build/src/apis/file");
 
@@ -17,7 +17,7 @@ const IBPC_WA_LINK = "https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t";
 exports.createNewTeam = async (req, res) => {
   try {
     const ibpcId = 3;
-    // Body Validation Checking
+    //Body Validation Checking
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
@@ -132,12 +132,22 @@ exports.createNewTeam = async (req, res) => {
         theme: "salted",
         product: {
           name: "StudentsxCEOs International Summit 2024",
-          link: "#",
+          link: "https://intersummitsxc.com/",
         },
       },
       emailContent: {
-        intro:
-          "You've just successfully registered to the International Business Plan Competition. We're excited to have you on board!",
+        intro: `
+          <div style="background-color:#003337; padding:1.2rem; color:#ffffff; text-align:center; border-radius:3px">
+
+            <p >
+              You've just successfully registered to the International Business Plan Competition. We're excited to have you on board!
+            </p>
+            <a href="https://bit.ly/SxCIBPC_PRELIM_SUBMISSION"
+               style="text-decoration:none; font-weight:400; color:white; background-color: #dcb43e; padding: 10px 20px; display: inline-block; border-radius: 3px;">
+               Submission Link for IBPC
+            </a>
+          </div>
+        `,
         action: {
           instructions: "Join the WA Group by clicking the button below",
           button: {
