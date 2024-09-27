@@ -68,18 +68,24 @@ const ChambersSummary = () => {
                       <strong>Industry Types:</strong>{" "}
                       {response?.industryType?.join(", ")}
                     </p>
-                    <p>
-                      <strong>CV:</strong>{" "}
-                      <a
-                        href={handleFileLinks(response?.cv)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:underline"
-                      >
-                        View CV
-                      </a>
-                    </p>
 
+                    {response.cv ? (
+                      <>
+                        <p>
+                          <strong>CV:</strong>{" "}
+                          <a
+                            href={handleFileLinks(response?.cv)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline"
+                          >
+                            View CV
+                          </a>
+                        </p>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                     <div className="mt-4">
                       <strong>Questions:</strong>
                       {response?.question?.map((q, index) => (
