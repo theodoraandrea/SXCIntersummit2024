@@ -24,7 +24,7 @@ import {
   API_POST_BMC_REGISTRATION,
   API_GET_TWO_EVENTS,
   API_GET_TWO_COMPETITIONS,
-  // IBPC 
+  // IBPC
   API_GET_IBPC_REGISTRATION,
   API_POST_NEW_IBPC_MEMBER,
   API_POST_NEW_IBPC_TEAM,
@@ -181,7 +181,7 @@ const fetchTwoLatestEvents = async () => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 //Get 2 latest competitions for homepage
 const fetchTwoLatestCompetitions = async () => {
@@ -191,7 +191,7 @@ const fetchTwoLatestCompetitions = async () => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 // Get competitions registered by user
 const fetchRegisteredCompetitions = async () => {
@@ -243,11 +243,15 @@ const getBmcRegistrationData = async (data) => {
 // CHAMBERS
 const postChambersRegistration = async (data) => {
   try {
-    const response = await axiosInstance.post(API_POST_CHAMBERS_REGISTRATION, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axiosInstance.post(
+      API_POST_CHAMBERS_REGISTRATION,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     return response;
   } catch (error) {
     console.error(error);
@@ -255,9 +259,9 @@ const postChambersRegistration = async (data) => {
   }
 };
 
-const getChambersRegistrationData = async (data) => {
+const getChambersRegistrationData = async () => {
   try {
-    const response = await axiosInstance.get(API_GET_CHAMBERS_REGISTRATION, data);
+    const response = await axiosInstance.get(API_GET_CHAMBERS_REGISTRATION);
     return response.data;
   } catch (error) {
     throw error;
@@ -301,7 +305,6 @@ const getFceoRegistrationData = async (data) => {
     throw error;
   }
 };
-
 
 // IBPC
 const postNewIbpcMember = async (data) => {
@@ -368,31 +371,38 @@ const postNewIbccMember = async (data) => {
     console.error(error);
     throw error;
   }
-}
+};
 
 const postNewIbccIndividual = async (data) => {
   try {
-    const response = await axiosInstance.post(API_POST_NEW_IBCC_INDIVIDUAL, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axiosInstance.post(
+      API_POST_NEW_IBCC_INDIVIDUAL,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     console.log(response);
     return response;
   } catch (error) {
     console.error(error);
     throw error;
   }
-}
+};
 
 const getIbccIndividualRegistration = async (data) => {
   try {
-    const response = await axiosInstance.get(API_GET_IBCC_INDIVIDUAL_SUMMARY, data);
+    const response = await axiosInstance.get(
+      API_GET_IBCC_INDIVIDUAL_SUMMARY,
+      data
+    );
     return response.data;
   } catch (error) {
     throw error;
   }
-}
+};
 
 const getIbccTeamRegistration = async (data) => {
   try {
@@ -401,7 +411,7 @@ const getIbccTeamRegistration = async (data) => {
   } catch (error) {
     throw error;
   }
-}
+};
 
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
