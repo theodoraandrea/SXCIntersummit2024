@@ -64,6 +64,13 @@ const ChambersSummary = () => {
               {response ? (
                 <div className="bg-primary-4 mt-4 md:mx-5 max-w-full sm:max-w-md p-8 rounded-lg shadow-lg">
                   <div className="text-sm md:text-base">
+                    <p><strong>Full Name:</strong> {userData.fullname}</p>
+                    <p><strong>Gender:</strong> {userData.gender}</p>
+                    <p><strong>University:</strong> {userData.institution}</p>
+                    <p><strong>Major:</strong> {userData.major}</p>
+                    <p><strong>Batch:</strong> {userData.batch}</p>
+                                    <p><strong>Phone:</strong> {userData.phoneNumber}</p>
+                                    <p><strong>Email:</strong> {userData.email}</p>
                     <p>
                       <strong>Industry Types:</strong>{" "}
                       {response?.industryType?.join(", ")}
