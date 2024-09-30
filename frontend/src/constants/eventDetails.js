@@ -337,25 +337,15 @@ export const eventDetails = {
     contactLink: [],
     timelineData: [
       {
-        title: "Open Registration",
-        date: "TBA",
+        title: "Start Up & FMCG",
+        date: "26 October 2024",
         type: "register",
         link: ``,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA",
+        title: "Consulting & BUMN",
+        date: "27 October 2024",
         type: "meeting",
-      },
-      {
-        title: "Project Progress",
-        date: "TBA",
-        type: "progress",
-      },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
       },
     ],
   },
