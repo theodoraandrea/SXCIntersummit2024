@@ -333,7 +333,7 @@ export const eventDetails = {
       "Valuable career insights, industry exposure, job opportunities, and personal growth with an exclusive opportunity to receive direct feedback and guidance from experts.",
     ],
     contactPerson: ["Audrey Putri"],
-    contactNumber: ["08581700632"],
+    contactNumber: ["085817600632"],
     contactLink: [],
     timelineData: [
       {
