@@ -15,6 +15,8 @@ import IBPCRegistration from "./pages/event-registration/ibpc";
 import IBPCSummary from "./pages/event-registration/ibpc-summary";
 import IBCCRegistration from "./pages/event-registration/ibcc";
 import IBCCSummary from "./pages/event-registration/ibcc-summary";
+import ChambersRegistration from "./pages/event-registration/chambers";
+import ChambersSummary from "./pages/event-registration/chambers-summary";
 
 import {
   HOME,
@@ -31,7 +33,9 @@ import {
   IBPC_REGIST,
   IBPC_REGIST_SUMMARY,
   IBCC_REGIST,
-  IBCC_REGIST_SUMMARY
+  IBCC_REGIST_SUMMARY,
+  CHAMBERS_REGIST,
+  CHAMBERS_REGIST_SUMMARY
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -69,6 +73,8 @@ export default function App() {
           <Route path={IBPC_REGIST_SUMMARY} element={<IBPCSummary />} />
           <Route path={IBCC_REGIST} element={<IBCCRegistration/>} />
           <Route path={IBCC_REGIST_SUMMARY} element={<IBCCSummary />} />
+          <Route path={CHAMBERS_REGIST} element={<ChambersRegistration />} />
+          <Route path={CHAMBERS_REGIST_SUMMARY} element={<ChambersSummary />} />
         </Routes>
       </Router>
     </UserProvider>

@@ -1,5 +1,11 @@
 import { API_GET_FCEO_REGISTRATION } from "../config/endpoints";
-import { BMC_REGIST_SUMMARY, FCEO_REGIST_SUMMARY, IBCC_REGIST_SUMMARY, IBPC_REGIST_SUMMARY } from "../constants/routes";
+import {
+  BMC_REGIST_SUMMARY,
+  CHAMBERS_REGIST_SUMMARY,
+  FCEO_REGIST_SUMMARY,
+  IBCC_REGIST_SUMMARY,
+  IBPC_REGIST_SUMMARY,
+} from "../constants/routes";
 
 // Function to calculate days and hours until the event
 const getDaysUntilEvent = (eventDate) => {
@@ -54,6 +60,8 @@ const getEventSummaryLink = (eventId) => {
   switch (eventId) {
     case 1:
       return BMC_REGIST_SUMMARY;
+    case 5:
+      return CHAMBERS_REGIST_SUMMARY;
     default:
       return "#";
   }
