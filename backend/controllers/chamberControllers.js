@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
-const chamberWhatsappGroup = "#";
+const chamberWhatsappGroup = "https://chat.whatsapp.com/Cx46vK2imNtDBGlVxVTuxU";
 
 exports.registerChamber = async (req, res) => {
   try {
