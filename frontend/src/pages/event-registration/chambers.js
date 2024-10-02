@@ -917,10 +917,10 @@ const EventCard = () => {
   };
 
   const checkFileTypeImage = (file) => {
-    if (file.type === "image/jpeg" || file.type === "image/png") {
+    if (file.type === "image/jpeg" || file.type === "image/png" || file.type === "application/pdf") {
       return true;
     }
-    const message = "File has to be jpg, jpeg, or png";
+    const message = "File has to be jpg, jpeg, png, or pdf";
     errorAlert({ message: message });
     return false;
   };
