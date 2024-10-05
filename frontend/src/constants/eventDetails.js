@@ -76,13 +76,13 @@ export const eventDetails = {
       "<strong>Consists of 3 Stages</strong>" +
       "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
       "</br>&emsp;&emsp;&emsp;Business Model Canvas Submission" +
-      "</br>&emsp;&emsp;&emsp;20 August - 22 September 2024" +
+      "</br>&emsp;&emsp;&emsp;20 August - 7 October 2024" +
       "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
       "</br>&emsp;&emsp;&emsp;Proposal Submission" +
-      "</br>&emsp;&emsp;&emsp;1 October - 22 October 2024" +
+      "</br>&emsp;&emsp;&emsp;14 October - 27 October 2024" +
       "</br><strong>&emsp;3.&emsp;Final</strong>" +
       "</br>&emsp;&emsp;&emsp;Deck Submission" +
-      "</br>&emsp;&emsp;&emsp;5 November - 23 November 2024" +
+      "</br>&emsp;&emsp;&emsp;8 November - 23 November 2024" +
       "</br>&emsp;&emsp;&emsp;Pitching Day" +
       "</br>&emsp;&emsp;&emsp;24 November 2024" +
       "</br></br>" +
@@ -109,18 +109,18 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "20 August - 22 September 2024",
+        date: "20 August - 7 October 2024",
         type: "register",
         link: `${FCEO_REGIST}`,
       },
       {
         title: "Semifinalist Announcement",
-        date: "20 September 2024",
+        date: "14 October 2024",
         type: "meeting",
       },
       {
         title: "Finalist Announcement",
-        date: "4 November 2024",
+        date: "8 November 2024",
         type: "meeting",
       },
       {
@@ -219,21 +219,21 @@ export const eventDetails = {
       "<strong>Consists of 3 Stages</strong>" +
       "</br><strong>1.&emsp;Preliminary</strong>" +
       "</br>&emsp;&emsp;BMC+Executive Summary Submission" +
-      "</br>&emsp;&emsp;Submission: 9th September - 6th October 2024" +
-      "</br>&emsp;&emsp;Scoring Phase: 7th - 18th October 2024" +
-      "</br>&emsp;&emsp;Semi-Finalist Announcement: 19th October 2024" +
+      "</br>&emsp;&emsp;Submission: 9th September - 22nd October 2024" +
+      "</br>&emsp;&emsp;Scoring Phase: 23rd October - 3rd November 2024" +
+      "</br>&emsp;&emsp;Semi-Finalist Announcement: 4th November 2024" +
       "</br><strong>2.&emsp;Semifinal</strong>" +
       "</br>&emsp;&emsp;Proposal Submission" +
-      "</br>&emsp;&emsp;Submission Phase: 20th - 31st October 2024" +
-      "</br>&emsp;&emsp;Coaching Clinic 1: 26th October 2024" +
-      "</br>&emsp;&emsp;Scoring Phase: 1st - 9th November 2024" +
-      "</br>&emsp;&emsp;Finalist Announcement: 10th November 2024" +
+      "</br>&emsp;&emsp;Submission Phase: 5th -14th November 2024" +
+      "</br>&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
+      "</br>&emsp;&emsp;Scoring Phase: 15th - 23rd November 2024" +
+      "</br>&emsp;&emsp;Finalist Announcement: 24th November 2024" +
       "</br><strong>3.&emsp;Final</strong>" +
       "</br>&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
-      "</br>&emsp;&emsp;Submission Phase: 11th - 22nd November 2024" +
-      "</br>&emsp;&emsp;Technical Meeting: 15th November 2024" +
-      "</br>&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
-      "</br>&emsp;&emsp;Final Pitch: 23rd November 2024" +
+      "</br>&emsp;&emsp;Submission Phase: 24th - 30nd November 2024" +
+      "</br>&emsp;&emsp;Technical Meeting: 25th November 2024" +
+      "</br>&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
+      "</br>&emsp;&emsp;Final Pitch: 30rd November 2024" +
       "</br>&emsp;&emsp;Winner Awarding: 1st December 2024" +
       "</br></br>" +
       "<strong>What You Will Get</strong>" +
@@ -261,23 +261,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "9th September - 6th October 2024",
+        date: "9th September - 22nd October 2024",
         type: "submit",
       },
       {
         title: "Preliminary Stage",
-        date: "9th September - 19th October 2024",
+        date: "9th September - 4th November 2024",
         type: "register",
         link: ``,
       },
       {
         title: "Semi-Final Stage",
-        date: "20th October - 10th November 2024",
+        date: "5th - 24th November 2024",
         type: "meeting",
       },
       {
         title: "Final Stage",
-        date: "11th November - 1st December 2024",
+        date: "24th November - 1st December 2024",
         type: "progress",
       },
       // {
