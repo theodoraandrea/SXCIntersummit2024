@@ -5,8 +5,29 @@ const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
+// WA Group Links
+const BCAWAGroup = "#";
+const BoschWAGroup = "#";
+const ShopeeWAGroup = "#";
+const AccountingFirmWAGroup = "#";
+
+// Function to select the WA group link based on the company
+const getWAGroupLinkByCompany = (company) => {
+  switch (company) {
+    case "BCA":
+      return BCAWAGroup;
+    case "Bosch":
+      return BoschWAGroup;
+    case "Shopee":
+      return ShopeeWAGroup;
+    case "Accounting Firm":
+      return AccountingFirmWAGroup;
+    default:
+      return "#"; // Fallback, maybe taro WA Group default kalo ada?? or contact person
+  }
+};
+
 const companyVisitId = 6;
-const companyVisitWAGroup = "#";
 
 // Register new company visit
 exports.registerCompanyVisit = async (req, res) => {
@@ -95,6 +116,9 @@ exports.registerCompanyVisit = async (req, res) => {
       return res.status(500).json({ error });
     }
 
+    const companyVisitWAGroup = getWAGroupLinkByCompany(company);
+
+    // Email Details
     const emailDetails = {
       from: process.env.EMAIL_USER,
       fromName: "StudentsXCEOs International Summit 2024",
@@ -109,10 +133,10 @@ exports.registerCompanyVisit = async (req, res) => {
         intro:
           "You've just successfully registered to the Company Visit program by SxC. We're excited to have you on board!",
         action: {
-          instructions: "Join the WA Group by clicking the button below",
+          instructions: `Join the ${company} Company Visit WA Group by clicking the button below`,
           button: {
             color: "#003337",
-            text: "Join WA Group",
+            text: `Join ${company} WA Group`,
             link: companyVisitWAGroup,
           },
         },
