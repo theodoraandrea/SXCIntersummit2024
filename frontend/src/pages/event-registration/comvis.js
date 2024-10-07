@@ -12,7 +12,7 @@ import { errorAlert, successAlert } from '../../components/alert';
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   const navigate = useNavigate();
   const { loading, isLoggedIn, registeredEvents } = useUser();
-  const [sessionType, setSessionType] = useState(formData.sessionType ?? "");
+  const [ attendanceType, setAttendanceType] = useState(formData.attendanceType ?? "");
   const [ hasRegisteredOnline, setHasRegisteredOnline ] = useState(false);
   const [ hasRegisteredOffline, setHasRegisteredOffline ] = useState(false);
 
@@ -39,7 +39,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   }, []);
 
   const checkAllFilled = () => {
-    if (sessionType) {
+    if (attendanceType) {
       return true;
     }
     errorAlert({ message: "Agreement paper required"});
@@ -50,7 +50,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     if (checkAllFilled()) {
       setFormData({
         ...formData,
-        sessionType: sessionType,
+        AttendanceType: attendanceType,
       });
       onNext();
     }
@@ -75,9 +75,9 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
               name="selectType"
               className="w-full px-3 py-2 rounded-lg"
               onChange={(e) => {
-                setSessionType(e.target.value);
+                setAttendanceType(e.target.value);
               }}
-              value={sessionType}
+              value={attendanceType}
             >
               <option value="" disabled>
                 Select Session
@@ -345,183 +345,160 @@ const ThirdView = ({
   onPrevious,
   onNext,
   checkFileSize,
-  checkFileType
+  checkFileType,
 }) => {
-  const { profileData } = useUser();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  },[]);
-
-  const [gpa, setGpa] = useState("");
-  const [domicile, setDomicile] = useState("");
-  const [cv, setCv] = useState(
-    formData.cv?.name ?? ""
-  );
-
-
-  const checkAllFilled = () => {
-    if (
-      gpa &&
-      cv &&
-      domicile
-    ) {
-      return true;
-    }
-    errorAlert({ message: "All fields must be filled"});
-    return false;
-  };
-
-const handleNext = () => {
-    if (checkAllFilled()) {
-        onNext();
-    }
-
-}
-
-const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    const file = files[0];
-
-    if (!checkFileSize(file)) {
-      return;
-    }
-
-    if (!checkFileType(file)) {
-      return;
-    }
-
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: files ? file : value,
-    }));
-    if (name === "cv") {
-      setCv(file.name);
-    }
-  };
-
-
-//   const handleSubmit = () => {
-//     if (checkAllFilled()) {
-//       if (!emailError && !phoneError) {
-//         formData = {
-//           ...formData,
-//           gpa: sanitizeInput(gpa),
-//           semester: sanitizeInput(semester),
-//           email: email,
-//           phoneNumber: phoneNumber,
-//           university: sanitizeInput(university),
-//           major: sanitizeInput(major),
-//           batch: batch,
-//         };
-//         setFormData(formData);
-//         onNext();
-//       }
-//     }
-//   };
-
-  return (
-    <div>
-        <Navbar />
-        <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-            <div className='bg-primary-4 mx-2 p-8 my-8 rounded-xl shadow-lg max-w-3xl'>
-                <h1 className='text-3xl font-bold text-gradient text-center mb-2'>Personal Information 2</h1>
-                <div className='my-2 px-4'>
-                    <label className='block text-white mb-2' htmlFor='gpa'>Current GPA</label>
-                    <input
-                        type='text'
-                        id='gpa'
-                        name='gpa'
-                        value={gpa}
-                        onChange={(e) => setGpa(e.target.value)}
-                        className='w-full px-3 py-2 rounded-lg'
-                    />
-                </div>
-                <div className='my-2 px-4'>
-                    <label className='block text-white mb-2' htmlFor='domicile'>Domisili</label>
-                    <input
-                        type='text'
-                        id='domicile'
-                        name='domicile'
-                        value={domicile}
-                        onChange={(e) => setDomicile(e.target.value)}
-                        className='w-full px-3 py-2 rounded-lg'
-                    />
-                </div>
-                
-                <div className='my-5 px-4 relative'>
-                    <input
-                        type='file'
-                        id='cv'
-                        name='cv'
-                        onChange={handleChange}
-                        className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer'
-                    />
-                    <label
-                        htmlFor='cv'
-                        className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
-                    >
-                        Submit CV
-                    </label>
-                    <span className='text-sm md:text-base text-white ml-2'>{cv}</span>
-                </div>
-                
-                <div className='mt-6 flex justify-between items-center'>
-                    <button
-                        type='button'
-                        onClick={onPrevious}
-                        className='text-white px-6 py-2 mr-6 rounded-full hover:text-gradient transition duration-300'
-                    >
-                        Back
-                    </button>
-                    <button
-                        type='button'
-                        onClick={handleNext}
-                        className='text-white px-6 py-2 rounded-full hover:text-gradient transition duration-300'
-                    >
-                        Next
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-  );
-
-
-};
-
-// choose company
-const FourthView = ({
-  formData,
-  setFormData,
-  sanitizeInput,
-  onPrevious,
-  onNext,
-  sessionType, // Added to determine whether the session is online or offline
-}) => {
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const [selectedCompany, setSelectedCompany] = useState(formData.selectedCompany ?? "");
-  const [semester, setSemester] = useState(formData.semester ?? ""); // For offline version
+  useEffect(() => {
+    setGpa(formData?.gpa || "");
+    setDomicile(formData?.domicile || "");
+    setCv(formData?.cv?.name || ""); // Only set the file name, not the file object
+  }, [formData]);
+
+  const [gpa, setGpa] = useState("");
+  const [domicile, setDomicile] = useState("");
+  const [cv, setCv] = useState("");
 
   const checkAllFilled = () => {
-    if (sessionType === "Company Visit Online" && selectedCompany) {
-      return true;
-    } else if (sessionType === "Company Visit Offline" && selectedCompany && semester) {
+    if (gpa && cv && domicile) {
       return true;
     }
     errorAlert({ message: "All fields must be filled" });
     return false;
   };
 
+  const handleNext = () => {
+    if (checkAllFilled()) {
+      onNext();
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    const file = files ? files[0] : null;
+
+    if (file) {
+      if (!checkFileSize(file) || !checkFileType(file)) {
+        return;
+      }
+    }
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: file || value, // Store the file object for submission
+    }));
+
+    if (name === "cv") {
+      setCv(file ? file.name : "");
+    } else if (name === "gpa") {
+      setGpa(value);
+    } else if (name === "domicile") {
+      setDomicile(value);
+    }
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 mx-2 p-8 my-8 rounded-xl shadow-lg max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient text-center mb-2">
+            Personal Information 2
+          </h1>
+          <div className="my-2 px-4">
+            <label className="block text-white mb-2" htmlFor="gpa">
+              Current GPA
+            </label>
+            <input
+              type="text"
+              id="gpa"
+              name="gpa"
+              value={gpa}
+              onChange={handleChange}
+              className="w-full px-3 py-2 rounded-lg"
+            />
+          </div>
+          <div className="my-2 px-4">
+            <label className="block text-white mb-2" htmlFor="domicile">
+              Domisili
+            </label>
+            <input
+              type="text"
+              id="domicile"
+              name="domicile"
+              value={domicile}
+              onChange={handleChange}
+              className="w-full px-3 py-2 rounded-lg"
+            />
+          </div>
+
+          <div className="my-5 px-4 relative">
+            <input
+              type="file"
+              id="cv"
+              name="cv"
+              onChange={handleChange}
+              className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            <label
+              htmlFor="cv"
+              className="text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer"
+            >
+              Submit CV
+            </label>
+            <span className="text-sm md:text-base text-white ml-2">{cv}</span>
+          </div>
+
+          <div className="mt-6 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={onPrevious}
+              className="text-white px-6 py-2 mr-6 rounded-full hover:text-gradient transition duration-300"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="text-white px-6 py-2 rounded-full hover:text-gradient transition duration-300"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+const FourthView = ({
+  formData,
+  setFormData,
+  sanitizeInput,
+  onPrevious,
+  onNext,
+  attendanceType,
+}) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const [selectedCompany, setSelectedCompany] = useState(formData.selectedCompany ?? "");
+  const [semester, setSemester] = useState(formData.semester ?? "");
+
+  // Validate fields before proceeding
+  const checkAllFilled = () => {
+    return semester && selectedCompany;
+  };
+
   const saveData = () => {
     setFormData({
       ...formData,
       selectedCompany: sanitizeInput(selectedCompany),
-      semester: sanitizeInput(semester), // Save semester data for offline version
+      semester: sanitizeInput(semester),
     });
   };
 
@@ -529,6 +506,8 @@ const FourthView = ({
     if (checkAllFilled()) {
       saveData();
       onNext();
+    } else {
+      alert("All fields must be filled");
     }
   };
 
@@ -543,14 +522,30 @@ const FourthView = ({
       <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
         <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
           <h1 className="text-3xl font-bold text-gradient mb-4">
-            {sessionType === "Company Visit Online"
+            {attendanceType === "Company Visit Online"
               ? "Which company do you wish to participate in our Company Visit Event?"
               : "Select the company you wish to visit for the offline event"}
           </h1>
 
-          {sessionType === "Company Visit Online" ? (
-            // ONLINE VERSION
+          {/* Online version */}
+          {attendanceType === "Company Visit Online" ? (
             <div className="grid grid-cols-1 gap-4 text-left">
+              <div className="mb-4">
+                <label className="block text-white mb-2" htmlFor="semesterInput">
+                  Enter your current semester
+                </label>
+                <input
+                  id="semesterInput"
+                  name="semester"
+                  className="w-full px-3 py-2 rounded-lg"
+                  type="number"
+                  min="1"
+                  max="10"
+                  value={semester}
+                  onChange={(e) => setSemester(e.target.value)}
+                  placeholder="Enter your semester"
+                />
+              </div>
               <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                 <input
                   id="companyFMCG"
@@ -560,10 +555,7 @@ const FourthView = ({
                   checked={selectedCompany === "FMCG Industry"}
                   onChange={(e) => setSelectedCompany(e.target.value)}
                 />
-                <label
-                  htmlFor="companyFMCG"
-                  className="w-full ml-2 text-xs sm:text-sm text-gray-800"
-                >
+                <label htmlFor="companyFMCG" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
                   FMCG Industry
                 </label>
               </div>
@@ -576,22 +568,16 @@ const FourthView = ({
                   checked={selectedCompany === "2nd company tba"}
                   onChange={(e) => setSelectedCompany(e.target.value)}
                 />
-                <label
-                  htmlFor="companyTBA"
-                  className="w-full ml-2 text-xs sm:text-sm text-gray-800"
-                >
+                <label htmlFor="companyTBA" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
                   2nd company tba
                 </label>
               </div>
             </div>
           ) : (
-            // OFFLINE VERSION
+            // Offline version
             <div>
               <div className="mb-4">
-                <label
-                  className="block text-white mb-2"
-                  htmlFor="semesterInput"
-                >
+                <label className="block text-white mb-2" htmlFor="semesterInput">
                   Enter your current semester
                 </label>
                 <input
@@ -615,13 +601,9 @@ const FourthView = ({
                     value="Bosch"
                     checked={selectedCompany === "Bosch"}
                     onChange={(e) => setSelectedCompany(e.target.value)}
-                    disabled={semester < 5} // Restrict selection if semester < 5
                   />
-                  <label
-                    htmlFor="companyBosch"
-                    className="w-full ml-2 text-xs sm:text-sm text-gray-800"
-                  >
-                    Bosch (Only for final year students, above 5th semester)
+                  <label htmlFor="companyBosch" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
+                    Bosch (Only for students in 5th semester or above)
                   </label>
                 </div>
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
@@ -632,32 +614,21 @@ const FourthView = ({
                     value="BCA"
                     checked={selectedCompany === "BCA"}
                     onChange={(e) => setSelectedCompany(e.target.value)}
-                    disabled={semester < 6} // Restrict selection if semester < 6
                   />
-                  <label
-                    htmlFor="companyBCA"
-                    className="w-full ml-2 text-xs sm:text-sm text-gray-800"
-                  >
-                    BCA (Only for final year students, minimum 6th or 7th semester)
+                  <label htmlFor="companyBCA" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
+                    BCA (Only for students in 6th semester or above)
                   </label>
                 </div>
               </div>
             </div>
           )}
 
+          {/* Buttons */}
           <div className="mt-6 flex justify-between items-center">
-            <button
-              type="button"
-              onClick={handleBack}
-              className="hover:text-gradient text-white px-6 py-2 mr-6"
-            >
+            <button type="button" onClick={handleBack} className="hover:text-gradient text-white px-6 py-2 mr-6">
               Back
             </button>
-            <button
-              type="button"
-              onClick={handleNext}
-              className="hover:text-gradient text-white px-6 py-2"
-            >
+            <button type="button" onClick={handleNext} className="hover:text-gradient text-white px-6 py-2">
               Next
             </button>
           </div>
@@ -668,46 +639,80 @@ const FourthView = ({
 };
 
 
-const FifthView = ({ onPrevious, onNextHave, onNextHaveNot }) => (
+
+
+
+const FifthView = ({ 
+  onPrevious, 
+  onNextHave, 
+  onNextHaveNot, 
+  formData, 
+  setFormData 
+}) => {
+  const [isCommittee, setIsCommittee] = useState(formData?.isCommittee ?? "");
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Pindah scroll ke atas saat komponen dirender
+  }, []);
+
+  // Function to handle selection
+  const handleSelection = (selection) => {
+    setIsCommittee(selection); 
+    setFormData({ ...formData, isCommittee: selection }); // Update formData
+
+    // Navigate to the next step
+    if (selection === 'Yes') {
+      onNextHave(); // Navigate for 'Yes'
+    } else {
+      onNextHaveNot(); // Navigate for 'No'
+    }
+  };
+
+  return (
     <div>
-        <Navbar />
-        <div className='bg-primary-1 w-full px-2 min-h-screen flex items-center justify-center'>
-            <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
-                <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>Are you from the StudentsxCEOs International Summit Committee?
-                </h1>
-                <div className='flex w-full justify-center'>
-                    {/* I have - goes to seventh view */}
-                    <div className='w-40'>
-                        <button 
-                            className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
-                            onClick={onNextHave} 
-                            aria-label='I am'
-                        >
-                        Yes, I am
-                        </button>
-                    </div>
-                    {/* I have not - goes to seventh view */}
-                    <div className='w-40 ml-6'>
-                        <button 
-                            className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
-                            onClick={onNextHaveNot} 
-                            aria-label='I am not'
-                        >
-                            No, I am not
-                        </button>
-                    </div>
-                </div>
-                <button
-                    type='button'
-                    onClick={onPrevious}
-                    className='mt-6 text-white px-6 py-2 hover:text-gradient'
-                >
-                    Back
-                </button>
+      <Navbar />
+      <div className='bg-primary-1 w-full px-2 min-h-screen flex items-center justify-center'>
+        <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
+          <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>
+            Are you from the StudentsxCEOs International Summit Committee?
+          </h1>
+          <div className='flex w-full justify-center'>
+            {/* Button for Yes */}
+            <div className='w-40'>
+              <button 
+                className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
+                onClick={() => handleSelection('Yes')} 
+                aria-label='I am'
+              >
+                Yes, I am
+              </button>
             </div>
+            {/* Button for No */}
+            <div className='w-40 ml-6'>
+              <button 
+                className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
+                onClick={() => handleSelection('No')} 
+                aria-label='I am not'
+              >
+                No, I am not
+              </button>
+            </div>
+          </div>
+          <button
+            type='button'
+            onClick={onPrevious}
+            className='mt-6 text-white px-6 py-2 hover:text-gradient'
+          >
+            Back
+          </button>
         </div>
+      </div>
     </div>
-);
+  );
+};
+
+
+
 
 const SixthView = ({
   formData,
@@ -1301,11 +1306,7 @@ const Summary = ({ formData, onPrevious }) => {
 
   let compvisId; //FOR REGISTER BUTTON PURPOSES
 
-  if (formData.sessionType === "Company Visit") {
-    compvisId = 6;
-  } else if (formData.sessionType === "Company Visit") {
-    compvisId = 6;
-  }
+  compvisId = 6;
 
   const handleSubmit = async () => {
     try {
@@ -1338,7 +1339,7 @@ const Summary = ({ formData, onPrevious }) => {
                         <p className="text-sm text-center font-semibold mb-2">Please make sure all data is correct before submitting</p>
                         
                         {/* Section for basic information */}
-                        <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
+                        <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-5 text-sm md:text-base">
                             <strong>Full Name</strong>
                             <p>{formData.fullName}</p>
                             
@@ -1349,7 +1350,7 @@ const Summary = ({ formData, onPrevious }) => {
                             <p>{formData.phoneNumber}</p>
 
                             <strong>Which company do you wish to participate in our Company Visit Event?</strong>
-                            <p>{formData.company}</p>
+                            <p>{formData.selectedCompany}</p>
 
                             <strong>Are you from the StudentsxCEOs International Summit Committee?</strong>
                             <p>{formData.isCommittee}</p>
@@ -1381,7 +1382,7 @@ const Summary = ({ formData, onPrevious }) => {
                             <div className="border-t border-gray-300 my-4"></div>
                             
                             <strong>Motivation to join the StudentsxCEOs International Summit Company Visit 2024</strong>
-                            <p>{formData.expectations}</p>
+                            <p>{formData.experience}</p>
 
                             <div className="border-t border-gray-300 my-4"></div>
 
@@ -1507,9 +1508,9 @@ const EventCard = () => {
         case 3:
             return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} checkFileSize={checkFileSize} checkFileType={checkFileTypePdf} />;
         case 4:
-          return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} checkFileSize={checkFileSize} checkFileType={checkFileTypePdf} sessionType={formData.sessionType} />;
+          return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} checkFileSize={checkFileSize} checkFileType={checkFileTypePdf} AttendanceType={formData.AttendanceType} />;
         case 5:
-            return <FifthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext} />;
+            return <FifthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext} formData={formData} setFormData={setFormData} />;
         case 6:
             return <SixthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
         case 7:
