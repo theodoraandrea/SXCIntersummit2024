@@ -38,6 +38,9 @@ import {
   // CHAMBERS
   API_GET_CHAMBERS_REGISTRATION,
   API_POST_CHAMBERS_REGISTRATION,
+  // COMVIS
+  API_GET_COMPVIS_REGISTRATION,
+  API_POST_COMPVIS_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -413,6 +416,42 @@ const getIbccTeamRegistration = async (data) => {
   }
 };
 
+//Compvis 
+const postCompvisRegistration = async (data) => {
+  try {
+    const response = await axiosInstance.post(API_POST_COMPVIS_REGISTRATION, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+  console.log(data);
+};
+
+// const fetchAllCompvis = async () => {
+//   try {
+//     const response = await axiosInstance.get(API_GET_ALL_COMPETITIONS);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching competition(s):", error);
+//     throw error;
+//   }
+// };
+
+const getCompvisRegistrationData = async (data) => {
+  try {
+    const response = await axiosInstance.get(API_GET_BMC_REGISTRATION, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+  console.log(data);
+};
+
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
@@ -468,6 +507,8 @@ export {
   getBmcRegistrationData,
   postChambersRegistration,
   getChambersRegistrationData,
+  postCompvisRegistration,
+  getCompvisRegistrationData,
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,
