@@ -491,23 +491,38 @@ const FourthView = ({
 
   // Validate fields before proceeding
   const checkAllFilled = () => {
-    return semester && selectedCompany;
+    if (!semester || !selectedCompany) {
+      alert("All fields must be filled");
+      return false;
+    }
+
+    // Validate semester based on selected company
+    if (selectedCompany === "Bosch" && semester < 5) {
+      alert("Bosch is only available for students in 5th semester or above");
+      return false;
+    }
+    if (selectedCompany === "BCA" && semester < 6) {
+      alert("BCA is only available for students in 6th semester or above");
+      return false;
+    }
+
+    return true;
   };
 
   const saveData = () => {
+    const sanitizedCompany = sanitizeInput(selectedCompany);
     setFormData({
       ...formData,
-      selectedCompany: sanitizeInput(selectedCompany),
-      semester: sanitizeInput(semester),
+      selectedCompany: sanitizedCompany,
+      semester: semester,
     });
+    console.log('Data Saved:', { selectedCompany: sanitizedCompany, semester });
   };
 
   const handleNext = () => {
     if (checkAllFilled()) {
       saveData();
       onNext();
-    } else {
-      alert("All fields must be filled");
     }
   };
 
@@ -542,7 +557,10 @@ const FourthView = ({
                   min="1"
                   max="10"
                   value={semester}
-                  onChange={(e) => setSemester(e.target.value)}
+                  onChange={(e) => {
+                    setSemester(e.target.value);
+                    console.log('Semester Updated:', e.target.value);
+                  }}
                   placeholder="Enter your semester"
                 />
               </div>
@@ -553,7 +571,10 @@ const FourthView = ({
                   type="radio"
                   value="FMCG Industry"
                   checked={selectedCompany === "FMCG Industry"}
-                  onChange={(e) => setSelectedCompany(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedCompany(e.target.value);
+                    console.log('Selected Company Updated:', e.target.value);
+                  }}
                 />
                 <label htmlFor="companyFMCG" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
                   FMCG Industry
@@ -566,7 +587,10 @@ const FourthView = ({
                   type="radio"
                   value="2nd company tba"
                   checked={selectedCompany === "2nd company tba"}
-                  onChange={(e) => setSelectedCompany(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedCompany(e.target.value);
+                    console.log('Selected Company Updated:', e.target.value);
+                  }}
                 />
                 <label htmlFor="companyTBA" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
                   2nd company tba
@@ -577,7 +601,7 @@ const FourthView = ({
             // Offline version
             <div>
               <div className="mb-4">
-                <label className="block text-white mb-2" htmlFor="semesterInput">
+                <label className="block text-white mb-2" htmlFor="semesterInput ">
                   Enter your current semester
                 </label>
                 <input
@@ -585,22 +609,26 @@ const FourthView = ({
                   name="semester"
                   className="w-full px-3 py-2 rounded-lg"
                   type="number"
-                  min="1"
-                  max="10"
                   value={semester}
-                  onChange={(e) => setSemester(e.target.value)}
+                  onChange={(e) => {
+                    setSemester(e.target.value);
+                    console.log('Semester Updated:', e.target.value);
+                  }}
                   placeholder="Enter your semester"
                 />
               </div>
               <div className="grid grid-cols-1 gap-4 text-left">
-                <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+                <div className="flex p-4 items center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBosch"
                     name="companyVisit"
                     type="radio"
                     value="Bosch"
                     checked={selectedCompany === "Bosch"}
-                    onChange={(e) => setSelectedCompany(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedCompany(e.target.value);
+                      console.log('Selected Company Updated:', e.target.value);
+                    }}
                   />
                   <label htmlFor="companyBosch" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
                     Bosch (Only for students in 5th semester or above)
@@ -613,7 +641,10 @@ const FourthView = ({
                     type="radio"
                     value="BCA"
                     checked={selectedCompany === "BCA"}
-                    onChange={(e) => setSelectedCompany(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedCompany(e.target.value);
+                      console.log('Selected Company Updated:', e.target.value);
+                    }}
                   />
                   <label htmlFor="companyBCA" className="w-full ml-2 text-xs sm:text-sm text-gray-800">
                     BCA (Only for students in 6th semester or above)
@@ -637,10 +668,6 @@ const FourthView = ({
     </div>
   );
 };
-
-
-
-
 
 const FifthView = ({ 
   onPrevious, 
@@ -1508,7 +1535,7 @@ const EventCard = () => {
         case 3:
             return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} checkFileSize={checkFileSize} checkFileType={checkFileTypePdf} />;
         case 4:
-          return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} checkFileSize={checkFileSize} checkFileType={checkFileTypePdf} AttendanceType={formData.AttendanceType} />;
+          return <FourthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={handlePrevious} onNext={handleNext} attendanceType={formData.attendanceType} />;
         case 5:
             return <FifthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext} formData={formData} setFormData={setFormData} />;
         case 6:
