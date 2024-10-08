@@ -10,7 +10,7 @@ const path = require("path");
 
 const user = require("./models/user");
 const db = require("./config/databaseConfig");
-const Chamber = require("./models/chamber");
+const Summit = require("./models/summit");
 require("./associations/association").eventAssociations();
 require("./associations/association").competitionAssociations();
 
@@ -30,7 +30,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// db.sync()
+// Summit.sync({ alter: true })
 //   .then(() => {
 //     console.log("Update db");
 //   })
