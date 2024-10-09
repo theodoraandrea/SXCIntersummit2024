@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
   const navigate = useNavigate();
   const { loading, isLoggedIn, registeredEvents } = useUser();
-  const [ attendanceType, setAttendanceType] = useState(formData.attendanceType ?? "");
+  const [ attendanceType, setAttendanceType] = useState("");
   const [ hasRegisteredOnline, setHasRegisteredOnline ] = useState(false);
   const [ hasRegisteredOffline, setHasRegisteredOffline ] = useState(false);
 
@@ -52,7 +52,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
     if (checkAllFilled()) {
       setFormData({
         ...formData,
-        AttendanceType: attendanceType,
+        attendanceType: attendanceType,
       });
       onNext();
     }
