@@ -30,7 +30,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// Chamber.sync({ alter: true })
+// db.sync()
 //   .then(() => {
 //     console.log("Update db");
 //   })

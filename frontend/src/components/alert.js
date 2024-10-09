@@ -20,7 +20,7 @@ const errorAlert = ({ title, message }) => {
       });
 }
 
-const successAlert = ({ eventId, title, message }) => {
+const successAlert = ({ compId, eventId, title, message }) => {
     let titleText;
     if (!title) {
         titleText = "Success!";
@@ -33,6 +33,18 @@ const successAlert = ({ eventId, title, message }) => {
         additionalHtml = `
         <br>
         <a href="https://chat.whatsapp.com/Hwg157Dbv3UFMX50rEg6aZ" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
+    } else if (compId === "comp_2") {
+        additionalHtml = `
+        <br>
+        <a href="https://chat.whatsapp.com/Gut5M6ilA9QCydC4vTPuD7" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
+    } else if (compId === "comp_3") {
+        additionalHtml = `
+        <br>
+        <a href="https://chat.whatsapp.com/IL6ixCcOWVg8rTJbeGF47t" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
+    } else if (eventId === "event_5") {
+        additionalHtml = `
+        <br>
+        <a href="https://chat.whatsapp.com/Cx46vK2imNtDBGlVxVTuxU" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
     }
 
     console.log("Additional HTML:", additionalHtml);

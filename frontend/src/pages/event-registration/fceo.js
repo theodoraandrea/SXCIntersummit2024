@@ -224,8 +224,33 @@ const FirstView = ({
               Please pay the following amount to complete your registration
             </p>
 
-
-            {verifiedRefCode && refCodeValid ? (
+            {refCodeValid && verifiedRefCode === "JUARAFCEO1" ? (
+                                <>
+                                <div className="pb-4">
+                                  <span className="line-through text-gray-400 text-[18px] ">
+                                    IDR {earlyBirdPrice.toLocaleString()}
+                                  </span>
+                                </div>
+                                <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
+                                  IDR 0
+                                </span>
+                              </>
+            ) : <></>
+            }
+            {refCodeValid && verifiedRefCode === "FUTURECEO50" ? (
+                                <>
+                                <div className="pb-4">
+                                  <span className="line-through text-gray-400 text-[18px] ">
+                                    IDR {earlyBirdPrice.toLocaleString()}
+                                  </span>
+                                </div>
+                                <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
+                                  IDR 40,000
+                                </span>
+                              </>
+            ) : <></>
+            }
+            {verifiedRefCode && refCodeValid && !(verifiedRefCode === "FUTURECEO50") && !(verifiedRefCode === "JUARAFCEO1") ? (
                   <>
                   <div className="pb-4">
                     <span className="line-through text-gray-400 text-[18px] ">
@@ -237,17 +262,24 @@ const FirstView = ({
                   </span>
                 </>
                 ) : (
-                  <>
-                  <div className="pb-4">
-                    <span className="line-through text-gray-400 text-[18px] ">
-                      IDR {regularPrice.toLocaleString()}
-                    </span>
-                  </div>
-                  <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
-                    IDR {earlyBirdPrice.toLocaleString()}
-                  </span>
-                </>
+                 <></>
             )}
+            {!verifiedRefCode && !refCodeValid ? (
+                <>
+                <div className="pb-4">
+                  <span className="line-through text-gray-400 text-[18px] ">
+                    IDR {regularPrice.toLocaleString()}
+                  </span>
+                </div>
+                <span className="ml-2 bg-primary-3 px-2 py-1 rounded-md shadow-sm">
+                  IDR {earlyBirdPrice.toLocaleString()}
+                </span>
+                </>
+                ) : (
+                 <></>
+            )}
+
+            
 
             <p className="text-sm mt-4">
               {verifiedRefCode && refCodeValid && "Referral discount applied"}
@@ -1194,9 +1226,9 @@ const EventCard = () => {
     bankAccount_2: "085959773266",
     bank_2: "GoPay",
     recipient_2: "DIVO AZRIEL HAKIM",
-    regularPrice: 90000,
-    referralPrice: 65000,
-    earlyBirdPrice: 70000,
+    regularPrice: 110000,
+    referralPrice: 85000,
+    earlyBirdPrice: 90000,
   };
 
   const sanitizeInput = (input) => {
