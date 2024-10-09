@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useUser } from "../../contexts/user-context";
+import { useUser  } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import Spinner from '../../components/elements/spinner';
 import { getCompvisRegistrationData } from '../../service/services';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const CompvisSummary = () => {
-    const { profileData, isLoggedIn, loading } = useUser();
+    const { profileData, isLoggedIn, loading } = useUser ();
     const [response, setResponse] = useState([]);
     const [userData, setUserData] = useState({});
     const [compvisData, setCompvisData] = useState([]);
@@ -30,14 +29,16 @@ const CompvisSummary = () => {
             const response = await getCompvisRegistrationData();
             setResponse(response);
         } catch (error) {
-            //Handle error
+            console.error("Error fetching registration data:", error);
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        setFormData();
+        if (response.length > 0) {
+            setFormData();
+        }
     }, [response]);
 
     const setFormData = () => {
@@ -56,9 +57,13 @@ const CompvisSummary = () => {
     };
 
     const handleQuestions = (string) => {
-        const qna = JSON.parse(string);
-        const answers = qna.map(i => Object.values(i)[0]);
-        return answers;
+        try {
+            const qna = JSON.parse(string);
+            return qna.map(i => Object.values(i)[0]);
+        } catch (error) {
+            console.error("Error parsing questions:", error);
+            return [];
+        }
     };
 
     return (
@@ -83,7 +88,7 @@ const CompvisSummary = () => {
                                 <div className='bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg'>
                                     <p className='text-xl text-center text-gradient mb-2'><strong>{data.sessionType}</strong></p>
                                     <div className="text-sm md:text-base">
-                                        <p><strong>Offline/Online:</strong>{userData.attendanceType}</p>
+                                        <p><strong>Offline/Online:</strong> {userData.attendanceType}</p>
                                         <p><strong>Company:</strong> {data.company}</p>
                                         <p><strong>Full Name:</strong> {userData.fullname}</p>
                                         <p><strong>Gender:</strong> {userData.gender}</p>
@@ -93,7 +98,7 @@ const CompvisSummary = () => {
                                         <p><strong>Phone:</strong> {userData.phoneNumber}</p>
                                         <p><strong>Email:</strong> {userData.email}</p>
                                         <div className="border-t border-gray-300 my-4"></div>
-                                        <p><strong>GPA:</strong> {userData.gpa}</p>
+                                        <p><strong>GPA:</strong> { userData?.gpa}</p>
                                         <p><strong>Semester:</strong> {userData.semester}</p>
                                         <p><strong>Domicile:</strong> {userData.domicile}</p>
                                         <p><strong>CV:</strong> {userData.cv}</p>

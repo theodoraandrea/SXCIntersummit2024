@@ -7,6 +7,8 @@ import { postCompvisRegistration } from '../../service/services';
 import Spinner from '../../components/elements/spinner';
 import ReferralModal from '../../components/referral-modal';
 import { errorAlert, successAlert } from '../../components/alert';
+import Swal from 'sweetalert2';
+
 
 // option online / offline
 const FirstView = ({ title, description, formData, setFormData, onNext }) => {
@@ -490,24 +492,41 @@ const FourthView = ({
   const [semester, setSemester] = useState(formData.semester ?? "");
 
   // Validate fields before proceeding
-  const checkAllFilled = () => {
-    if (!semester || !selectedCompany) {
-      alert("All fields must be filled");
-      return false;
-    }
+const checkAllFilled = () => {
+  if (!semester || !selectedCompany) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Incomplete Fields',
+      text: 'All fields must be filled',
+      confirmButtonText: 'OK'
+    });
+    return false;
+  }
 
-    // Validate semester based on selected company
-    if (selectedCompany === "Bosch" && semester < 5) {
-      alert("Bosch is only available for students in 5th semester or above");
-      return false;
-    }
-    if (selectedCompany === "BCA" && semester < 6) {
-      alert("BCA is only available for students in 6th semester or above");
-      return false;
-    }
+  // Validate semester based on selected company
+  if (selectedCompany === "Bosch" && semester < 5) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Semester Requirement',
+      text: 'Bosch is only available for students in 5th semester or above',
+      confirmButtonText: 'OK'
+    });
+    return false;
+  }
+  
+  if (selectedCompany === "BCA" && semester < 6) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Semester Requirement',
+      text: 'BCA is only available for students in 6th semester or above',
+      confirmButtonText: 'OK'
+    });
+    return false;
+  }
 
-    return true;
-  };
+  return true;
+};
+
 
   const saveData = () => {
     const sanitizedCompany = sanitizeInput(selectedCompany);
@@ -570,6 +589,8 @@ const FourthView = ({
                   name="companyVisit"
                   type="radio"
                   value="FMCG Industry"
+                  disabled={semester < 1}  
+                  //  Disabled jika semester kurang dari 1 
                   checked={selectedCompany === "FMCG Industry"}
                   onChange={(e) => {
                     setSelectedCompany(e.target.value);
@@ -586,6 +607,8 @@ const FourthView = ({
                   name="companyVisit"
                   type="radio"
                   value="2nd company tba"
+                  disabled={semester < 1}  
+                  // Disabled jika semester kurang dari 1
                   checked={selectedCompany === "2nd company tba"}
                   onChange={(e) => {
                     setSelectedCompany(e.target.value);
@@ -601,7 +624,7 @@ const FourthView = ({
             // Offline version
             <div>
               <div className="mb-4">
-                <label className="block text-white mb-2" htmlFor="semesterInput ">
+                <label className="block text-white mb-2" htmlFor="semesterInput">
                   Enter your current semester
                 </label>
                 <input
@@ -624,6 +647,8 @@ const FourthView = ({
                     name="companyVisit"
                     type="radio"
                     value="Bosch"
+                    disabled={semester < 5}  
+                    // {/* Disabled jika semester kurang dari 5 */}
                     checked={selectedCompany === "Bosch"}
                     onChange={(e) => {
                       setSelectedCompany(e.target.value);
@@ -640,6 +665,8 @@ const FourthView = ({
                     name="companyVisit"
                     type="radio"
                     value="BCA"
+                    disabled={semester < 6}  
+                    // {/* Disabled jika semester kurang dari 6 */}
                     checked={selectedCompany === "BCA"}
                     onChange={(e) => {
                       setSelectedCompany(e.target.value);

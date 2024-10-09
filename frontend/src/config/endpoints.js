@@ -48,8 +48,8 @@ const IBPC_SUMMARY = "/ibpc/summary";
 const CHAMBERS_REGISTRATION = "/chamber";
 const CHAMBERS_SUMMARY = "/chamber/summary";
 
-const COMVIS_REGISTRATION = "/comvis";
-const COMVIS_SUMMARY = "/comvis/summary";
+const COMVIS_REGISTRATION = "/comvis/register";
+const COMVIS_SUMMARY = "/comvis/summary"
 
 // Concat URLs
 const API_SIGNUP = `${API_URL}${SIGNUP}`;
