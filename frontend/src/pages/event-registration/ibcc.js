@@ -1579,7 +1579,7 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
   const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
   const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
-  const { teamPrice, individualPrice, discount, bankAccount1, bankAccount2 } = eventData;
+  const { teamPrice, individualPrice, discountUSD, discount, bankAccount1, bankAccount2 } = eventData;
 
   const [ paymentChannel, setPaymentChannel ] = useState(formData.paymentChannel ?? "");
   const [ paymentBank, setPaymentBank ] = useState(formData.paymentBank ?? "");
@@ -1711,7 +1711,38 @@ const PaymentView = ({ eventData, formData, setFormData, checkFileSize, checkFil
       // }   
     } 
 
-    if (refCodeValid){
+  //   refCodeValid = refCodeValid.trim().toUpperCase();
+  //   // Pengecekan apakah refCode valid
+  //   if (refCodeValid === "FS25" || refCodeValid === "FS35") {
+  //     let discount;
+  //     // Atur diskon berdasarkan refCodeValid
+  //     if (refCodeValid === "FS25") {
+  //       discount = type === "Team" ? eventData.discountFS25.team : eventData.discountFS25.individual;
+  //     } else if (refCodeValid === "FS35") {
+  //       discount = type === "Team" ? eventData.discountFS35.team : eventData.discountFS35.individual;
+  //     }
+  //   // Kurangi harga berdasarkan diskon yang didapat dari refCode
+  //   price -= discount;
+
+  // } else {
+  //   // Jika refcode tidak valid, terapkan diskon default
+  //   price -= eventData.discountReferral; // Diskon default (untuk referral selain FS25 dan FS35)
+  // }
+
+    let discount = eventData.discountDefault; // Default diskon (selain FS25 dan FS35)
+    let discountUSD = eventData.discountDefaultUSD;
+  
+    if (refCodeValid && verifiedRefCode === "FS25") {
+      discount = type === "Team" ? eventData.discountFS25.team : eventData.discountFS25.individual;
+      price -= discount;
+      discountUSD = type === "Team" ? eventData.discountFS25.teamUSD : eventData.discountFS25.individualUSD;
+      priceUSD -= discountUSD;
+    } else if (refCodeValid && verifiedRefCode === "FS35") {
+      discount = type === "Team" ? eventData.discountFS35.team : eventData.discountFS35.individual;
+      price -= discount;
+      discountUSD = type === "Team" ? eventData.discountFS35.teamUSD : eventData.discountFS35.individualUSD;
+      priceUSD -= discountUSD;
+    } else if (refCodeValid){
       price -= discount;
     }
 
@@ -2532,7 +2563,20 @@ const EventCard = () => {
           "Phone number: +621256356856",
           "https://paypal.me/Intersummit2024"
         ],
-        discount: 5000
+        discountDefault: 5000,
+        discountDefaultUSD: 0,
+        discountFS25: {
+          team: 50000,           // Diskon untuk team dengan refcode FS25
+          individual: 17000,      // Diskon untuk individual dengan refcode FS25
+          teamUSD: 0,            // Diskon USD untuk team dengan refcode FS25
+          individualUSD: 0.5
+        },
+        discountFS35: {
+          team: 70000,           // Diskon untuk team dengan refcode FS35
+          individual: 24000,      // Diskon untuk individual dengan refcode FS35
+          teamUSD: 4.5,          // Diskon USD untuk team dengan refcode FS35
+          individualUSD: 2.0     // Diskon USD untuk individual dengan refcode FS35
+        }
     };
 
   const [formData, setFormData] = useState({});

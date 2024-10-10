@@ -281,15 +281,9 @@ const FirstView = ({
     const earlyBirdStart = resetTime(new Date("2024-09-09")); 
     const earlyBirdEnd = resetTime(new Date("2024-09-14"));
     const regularStart = resetTime(new Date("2024-09-15"));
-    const regularEnd = resetTime(new Date("2024-09-30"));
-    const lateStart = resetTime(new Date("2024-10-01"));
-    const lateEnd = resetTime(new Date("2024-10-06"));
-    // const earlyBirdStart = new Date("2024-09-01"); 
-    // const earlyBirdEnd = new Date("2024-09-08");
-    // const regularStart = new Date("2024-09-09");
-    // const regularEnd = new Date("2024-09-25");
-    // const lateStart = new Date("2024-09-26");
-    // const lateEnd = new Date("2024-10-01");
+    const regularEnd = resetTime(new Date("2024-10-10"));
+    const lateStart = resetTime(new Date("2024-10-11"));
+    const lateEnd = resetTime(new Date("2024-10-22"));
 
     if (currentDate >= earlyBirdStart && currentDate <= earlyBirdEnd) {
       priceIDR += 150000;
@@ -302,10 +296,18 @@ const FirstView = ({
       priceUSD += 13.0;
     }
 
-    if (refCodeValid){
-      priceIDR -= discount;
-    }
+  if (refCodeValid && verifiedRefCode === "FS25"){
+    priceIDR -= eventData.discountFS25;
+  } else if (refCodeValid && verifiedRefCode === "FS35"){
+    priceIDR -= eventData.discountFS35
+    priceUSD -= eventData.discountUSDF35
+  } else if (refCodeValid) {
+    priceIDR -= eventData.discountReferral;
+  }
 
+    // if (refCodeValid){
+    //   priceIDR -= discount;
+    // }
     return { priceIDR, priceUSD };
   }
 
@@ -329,6 +331,8 @@ const FirstView = ({
             <p className="mb-2 text-center text-sm">
               Please pay the following amount to complete your registration
             </p>
+
+           {/* SEBELUM DIOTAK ATIK */}
             <p className="text-3xl">
               <strong>
                 IDR {priceIDR.toLocaleString()}
@@ -351,6 +355,70 @@ const FirstView = ({
               )
               }
             </p>
+          
+          
+          {/* AFTER PERUBAHAN */}
+            {/* Render harga tergantung dari refCodeValid dan verifiedRefCode
+            {refCodeValid === "FS25" && verifiedRefCode === "FS25" ? (
+              <>
+                <p className="text-3xl">
+                  <strong>
+                    IDR 114,000
+                  </strong>
+                </p>
+                <p className="text-lg">
+                  or
+                </p>
+                <p className="text-3xl">
+                  <strong>
+                    $7.50
+                  </strong>
+                </p>
+                <p className="text-sm">
+                  Referral discount applied
+                </p>
+              </>
+            ) : refCodeValid === "FS35" && verifiedRefCode === "FS35" ? (
+              <>
+                <p className="text-3xl">
+                  <strong>
+                    IDR 130,000
+                  </strong>
+                </p>
+                <p className="text-lg">
+                  or
+                </p>
+                <p className="text-3xl">
+                  <strong>
+                    $8.50
+                  </strong>
+                </p>
+                <p className="text-sm">
+                  Referral discount applied
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-3xl">
+                  <strong>
+                    IDR {priceIDR.toLocaleString()}
+                  </strong>
+                </p>
+                <p className="text-lg">
+                  or
+                </p>
+                <p className="text-3xl">
+                  <strong>
+                    ${priceUSD.toFixed(2)}
+                  </strong>
+                </p>
+                {verifiedRefCode && refCodeValid && (
+                  <p className="text-sm">
+                    Referral discount applied
+                  </p>
+                )}
+              </>
+            )} */}
           </div>
           {/* transfer bank */}
           <div className="text-white bg-primary-4 rounded-lg shadow-lg p-8 text-left">
@@ -1497,7 +1565,10 @@ const EventCard = () => {
       "Phone number: +621256356856",
       "https://paypal.me/Intersummit2024"
     ],
-    discount: 5000
+    discountReferral: 5000,
+    discountFS25: 43000,
+    discountFS35: 61000,
+    discountUSDF35: 4,
   };
 
   const sanitizeInput = (input) => {
