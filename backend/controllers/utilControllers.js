@@ -1,4 +1,4 @@
-const ReferralCode = require("../models/referralcode");
+const ReferralCode = require("../models/referralCode");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
 // Check referral code
