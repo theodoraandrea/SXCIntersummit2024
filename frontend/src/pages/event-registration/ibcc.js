@@ -2566,16 +2566,16 @@ const EventCard = () => {
         discountDefault: 5000,
         discountDefaultUSD: 0,
         discountFS25: {
-          team: 50000,           // Diskon untuk team dengan refcode FS25
+          team: 57000,           // Diskon untuk team dengan refcode FS25
           individual: 17000,      // Diskon untuk individual dengan refcode FS25
           teamUSD: 0,            // Diskon USD untuk team dengan refcode FS25
           individualUSD: 0.5
         },
         discountFS35: {
-          team: 70000,           // Diskon untuk team dengan refcode FS35
+          team: 80000,           // Diskon untuk team dengan refcode FS35
           individual: 24000,      // Diskon untuk individual dengan refcode FS35
-          teamUSD: 4.5,          // Diskon USD untuk team dengan refcode FS35
-          individualUSD: 2.0     // Diskon USD untuk individual dengan refcode FS35
+          teamUSD: 5,          // Diskon USD untuk team dengan refcode FS35
+          individualUSD: 2     // Diskon USD untuk individual dengan refcode FS35
         }
     };
 

@@ -1566,9 +1566,9 @@ const EventCard = () => {
       "https://paypal.me/Intersummit2024"
     ],
     discountReferral: 5000,
-    discountFS25: 43000,
-    discountFS35: 61000,
-    discountUSDF35: 4,
+    discountFS25: 50000,
+    discountFS35: 70000,
+    discountUSDF35: 4.5,
   };
 
   const sanitizeInput = (input) => {
