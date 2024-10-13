@@ -84,11 +84,11 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
               <option value="" disabled>
                 Select Session
               </option>
-              <option value="Company Visit Online" disabled={hasRegisteredOnline}>
+              <option value="Company Visit Online" disabled={true}>
                 Online
               </option>
               <option value="Company Visit Offline" disabled={hasRegisteredOffline}>
-                Offline
+                Offline (BCA/Bosch)
               </option>
             </select>
           </div>
