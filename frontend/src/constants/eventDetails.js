@@ -295,8 +295,8 @@ export const eventDetails = {
     title: "Chambers",
     image: imgLocation + "chambers.png",
     openRegistration: true,
-    // registerLink: `${CHAMBERS_REGIST}`,
-    registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdIGGuMZzQiJaU0nIz16ixVLLSXJ2M23bcjP9Eiew3O0TefYw/viewform`,
+    registerLink: `${CHAMBERS_REGIST}`,
+    //registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdIGGuMZzQiJaU0nIz16ixVLLSXJ2M23bcjP9Eiew3O0TefYw/viewform`,
     description:
       "<strong>Chambers</strong> is an <strong>international webinar</strong> that promises to deliver <strong>captivating insights and experiences in the professional world.</strong> Centered around the theme <strong>“Innovative Career Paths: Beyond User-Centricity to Strategic Brilliance,“</strong> this event features distinguished speakers from leading companies. Over the webinar of <strong>two days, participants will explore four dynamic industries: Start-Up, FMCG, BUMN, and Consulting.</strong> Join us for this unique <strong>opportunity to enhance your career</strong> trejectory, <strong>gain valuable knowledge, and connect with industry experts</strong> who can help shape your <strong>professional journey.</strong>" +
       "</br></br>" +
