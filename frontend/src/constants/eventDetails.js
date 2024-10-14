@@ -4,6 +4,7 @@ import {
   IBCC_REGIST,
   IBPC_REGIST,
   CHAMBERS_REGIST,
+  COMPVIS_REGISTRATION
 } from "./routes";
 
 const imgLocation = "/images/programs/";
@@ -352,11 +353,11 @@ export const eventDetails = {
   event_6: {
     title: "Company Visit",
     image: imgLocation + "comvis.png",
-    openRegistration: false,
+    openRegistration: true,
     description:
       "Hands-on experience collaborating with company partners to conduct offline and online office tour and talkshow about sustainable work environments and recruitment tips.",
     timelineDesc: "Timeline details for Company Visit",
-    registerLink: ``,
+    registerLink: `${COMPVIS_REGISTRATION}`,
     faq: [
       "How many offline and online company visits will be held later ?",
       "What activities will be carried out on the offline company visit ?",

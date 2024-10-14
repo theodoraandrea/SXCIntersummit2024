@@ -1,1 +1,5 @@
+# Node modules
+node_modules/
+
+# Environment variable file for deployment
 backend/.env.deploy
