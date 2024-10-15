@@ -416,22 +416,27 @@ const getIbccTeamRegistration = async (data) => {
   }
 };
 
-// Compvis 
+// Compvis
 const postCompvisRegistration = async (data) => {
   try {
-    const response = await axiosInstance.post(API_POST_COMPVIS_REGISTRATION, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    return response.data; // return response.data instead of response
+    const response = await axiosInstance.post(
+      API_POST_COMPVIS_REGISTRATION,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response;
   } catch (error) {
-    console.error("Error registering for Compvis:", error); // Added specific error log
+    console.error("Error registering for Compvis:", error);
     throw error;
   }
 };
 
-const getCompvisRegistrationData = async () => { // Removed data parameter as it is not used
+const getCompvisRegistrationData = async () => {
+  // Removed data parameter as it is not used
   try {
     const response = await axiosInstance.get(API_GET_COMPVIS_REGISTRATION);
     return response.data; // return response.data instead of response
@@ -440,7 +445,6 @@ const getCompvisRegistrationData = async () => { // Removed data parameter as it
     throw error;
   }
 };
-
 
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
