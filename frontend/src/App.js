@@ -17,6 +17,8 @@ import IBCCRegistration from "./pages/event-registration/ibcc";
 import IBCCSummary from "./pages/event-registration/ibcc-summary";
 import ChambersRegistration from "./pages/event-registration/chambers";
 import ChambersSummary from "./pages/event-registration/chambers-summary";
+import CompvisRegistration from "./pages/event-registration/comvis";
+import CompvisSummary from "./pages/event-registration/comvis-summary";
 
 import {
   HOME,
@@ -35,7 +37,9 @@ import {
   IBCC_REGIST,
   IBCC_REGIST_SUMMARY,
   CHAMBERS_REGIST,
-  CHAMBERS_REGIST_SUMMARY
+  CHAMBERS_REGIST_SUMMARY,
+  COMPVIS_REGISTRATION,
+  COMPVIS_REGIST_SUMMARY
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -75,6 +79,8 @@ export default function App() {
           <Route path={IBCC_REGIST_SUMMARY} element={<IBCCSummary />} />
           <Route path={CHAMBERS_REGIST} element={<ChambersRegistration />} />
           <Route path={CHAMBERS_REGIST_SUMMARY} element={<ChambersSummary />} />
+          <Route path={COMPVIS_REGISTRATION} element={<CompvisRegistration />} />
+          <Route path={COMPVIS_REGIST_SUMMARY} element={<CompvisSummary />} />
         </Routes>
       </Router>
     </UserProvider>
