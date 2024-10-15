@@ -450,7 +450,7 @@ const ThirdView = ({
           </div>
           <div className="my-2 px-4">
             <label className="block text-white mb-2" htmlFor="domicile">
-              Domisili
+              Domicile
             </label>
             <input
               type="text"
@@ -584,7 +584,7 @@ const FourthView = ({
           <h1 className="text-3xl font-bold text-gradient mb-4">
             {attendanceType === "Company Visit Online"
               ? "Which company do you wish to participate in our Company Visit Event?"
-              : "Select the company you wish to visit for the offline event"}
+              : "Select the company"}
           </h1>
 
           {/* Online version */}
@@ -670,6 +670,8 @@ const FourthView = ({
                   name="semester"
                   className="w-full px-3 py-2 rounded-lg"
                   type="number"
+                  min="1"
+                  max="8"
                   value={semester}
                   onChange={(e) => {
                     setSemester(e.target.value);
@@ -1207,8 +1209,7 @@ const NinthView = ({
                   onChange={(e) => setFollow2(e.target.checked)}
                   className="mr-2"
                 />
-                I have reposted Company Visit Post Feed to IG story and mention
-                3 of your friends in the post
+                I have liked and reposted Company Visit Post Feed to IG Story
               </label>
               <div className="my-4 relative">
                 <input
@@ -1238,7 +1239,7 @@ const NinthView = ({
                   onChange={(e) => setFollow3(e.target.checked)}
                   className="mr-2"
                 />
-                I have liked and commented on Company Visit Poster Feed
+                I have mentioned 3 people in the comment section
               </label>
             </div>
             <div className="flex gap-3">
