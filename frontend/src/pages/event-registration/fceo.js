@@ -458,7 +458,13 @@ const FirstView = ({
             <label className="block text-white mb-4">
               File size has to be less than 2MB
             </label>
-            <label className="block text-white">Proof of Payment</label>
+            <label className="block text-white">
+              Proof of Payment
+              <p className="text-sm text-gray-400">
+                  If you get school partner registration flow, just screenshot the reffcode result
+                </p>
+            </label>
+            
             <div className="my-4 w-fit flex flex-col space-y-2 sm:flex-row">
               <div className="relative">
                 <input
@@ -1227,8 +1233,8 @@ const EventCard = () => {
     bank_2: "GoPay",
     recipient_2: "DIVO AZRIEL HAKIM",
     regularPrice: 110000,
-    referralPrice: 85000,
-    earlyBirdPrice: 90000,
+    referralPrice: 40000,
+    earlyBirdPrice: 40000,
   };
 
   const sanitizeInput = (input) => {

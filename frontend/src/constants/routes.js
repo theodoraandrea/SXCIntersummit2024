@@ -19,3 +19,5 @@ export const IBCC_REGIST = "/ibcc/register";
 export const IBCC_REGIST_SUMMARY = "/ibcc/summary";
 export const CHAMBERS_REGIST = "/chambers/register";
 export const CHAMBERS_REGIST_SUMMARY = "/chambers/summary";
+export const COMPVIS_REGISTRATION = "/comvis/register";
+export const COMPVIS_REGIST_SUMMARY = "/comvis/summary";

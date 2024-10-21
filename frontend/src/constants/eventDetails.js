@@ -4,6 +4,7 @@ import {
   IBCC_REGIST,
   IBPC_REGIST,
   CHAMBERS_REGIST,
+  COMPVIS_REGISTRATION
 } from "./routes";
 
 const imgLocation = "/images/programs/";
@@ -76,13 +77,13 @@ export const eventDetails = {
       "<strong>Consists of 3 Stages</strong>" +
       "</br><strong>&emsp;1.&emsp;Preliminary</strong>" +
       "</br>&emsp;&emsp;&emsp;Business Model Canvas Submission" +
-      "</br>&emsp;&emsp;&emsp;20 August - 22 September 2024" +
+      "</br>&emsp;&emsp;&emsp;20 August - 7 October 2024" +
       "</br><strong>&emsp;2.&emsp;Semifinal</strong>" +
       "</br>&emsp;&emsp;&emsp;Proposal Submission" +
-      "</br>&emsp;&emsp;&emsp;1 October - 22 October 2024" +
+      "</br>&emsp;&emsp;&emsp;14 October - 27 October 2024" +
       "</br><strong>&emsp;3.&emsp;Final</strong>" +
       "</br>&emsp;&emsp;&emsp;Deck Submission" +
-      "</br>&emsp;&emsp;&emsp;5 November - 23 November 2024" +
+      "</br>&emsp;&emsp;&emsp;8 November - 23 November 2024" +
       "</br>&emsp;&emsp;&emsp;Pitching Day" +
       "</br>&emsp;&emsp;&emsp;24 November 2024" +
       "</br></br>" +
@@ -93,6 +94,7 @@ export const eventDetails = {
       "</br>&emsp;&emsp;<strong>Coaching Clinic 2</strong> is designed to empower <strong>aspiring high school entrepreneurs</strong> who have successfully <strong> qualified as Finalists</strong> with the skills to <strong> transform their innovative ideas into narratives</strong> that resonate with audiences. This session focuses on <strong>the art of pitching to create memorable and persuasive presentations</strong>. The program will focus on <strong>“Ignite Your Pitch: Turning Ideas into Powerful Hear Stories“</strong>, including an <strong>in-depth review of pitching techniques, guidance on creating outstanding decks,</strong> and <strong>tips and tricks for effective pitching.</strong>",
     timelineDesc: "",
     registerLink: `${FCEO_REGIST}`,
+    //registerLink: `https://docs.google.com/forms/d/e/1FAIpQLScR5tita2B13cscxuF0QmN2kBfH2r1N28La8Pdgx3l2xu6zYA/viewform`,
     faq: [
       "Will this event be held online or offline?",
       "What topics are contested?",
@@ -109,18 +111,18 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "20 August - 22 September 2024",
+        date: "20 August - 7 October 2024",
         type: "register",
         link: `${FCEO_REGIST}`,
       },
       {
         title: "Semifinalist Announcement",
-        date: "20 September 2024",
+        date: "14 October 2024",
         type: "meeting",
       },
       {
         title: "Finalist Announcement",
-        date: "4 November 2024",
+        date: "8 November 2024",
         type: "meeting",
       },
       {
@@ -170,6 +172,7 @@ export const eventDetails = {
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
     registerLink: `${IBCC_REGIST}`,
+    //registerLink: `https://bit.ly/SxCIBCCRegistrationForm`,
     // faq: ["-"],
     // faq: ["How many and what is the format and structure of each stage?",
     //   "How and where do we register for the competition?",
@@ -219,21 +222,21 @@ export const eventDetails = {
       "<strong>Consists of 3 Stages</strong>" +
       "</br><strong>1.&emsp;Preliminary</strong>" +
       "</br>&emsp;&emsp;BMC+Executive Summary Submission" +
-      "</br>&emsp;&emsp;Submission: 9th September - 6th October 2024" +
-      "</br>&emsp;&emsp;Scoring Phase: 7th - 18th October 2024" +
-      "</br>&emsp;&emsp;Semi-Finalist Announcement: 19th October 2024" +
+      "</br>&emsp;&emsp;Submission: 9th September - 22nd October 2024" +
+      "</br>&emsp;&emsp;Scoring Phase: 23rd October - 3rd November 2024" +
+      "</br>&emsp;&emsp;Semi-Finalist Announcement: 4th November 2024" +
       "</br><strong>2.&emsp;Semifinal</strong>" +
       "</br>&emsp;&emsp;Proposal Submission" +
-      "</br>&emsp;&emsp;Submission Phase: 20th - 31st October 2024" +
-      "</br>&emsp;&emsp;Coaching Clinic 1: 26th October 2024" +
-      "</br>&emsp;&emsp;Scoring Phase: 1st - 9th November 2024" +
-      "</br>&emsp;&emsp;Finalist Announcement: 10th November 2024" +
+      "</br>&emsp;&emsp;Submission Phase: 5th -14th November 2024" +
+      "</br>&emsp;&emsp;Coaching Clinic 1: 9th November 2024" +
+      "</br>&emsp;&emsp;Scoring Phase: 15th - 23rd November 2024" +
+      "</br>&emsp;&emsp;Finalist Announcement: 24th November 2024" +
       "</br><strong>3.&emsp;Final</strong>" +
       "</br>&emsp;&emsp;Pitching Deck Submission & Offline Pitching" +
-      "</br>&emsp;&emsp;Submission Phase: 11th - 22nd November 2024" +
-      "</br>&emsp;&emsp;Technical Meeting: 15th November 2024" +
-      "</br>&emsp;&emsp;Coaching Clinic 2: 16th November 2024" +
-      "</br>&emsp;&emsp;Final Pitch: 23rd November 2024" +
+      "</br>&emsp;&emsp;Submission Phase: 24th - 30nd November 2024" +
+      "</br>&emsp;&emsp;Technical Meeting: 25th November 2024" +
+      "</br>&emsp;&emsp;Coaching Clinic 2: 28th November 2024" +
+      "</br>&emsp;&emsp;Final Pitch: 30rd November 2024" +
       "</br>&emsp;&emsp;Winner Awarding: 1st December 2024" +
       "</br></br>" +
       "<strong>What You Will Get</strong>" +
@@ -247,6 +250,7 @@ export const eventDetails = {
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
     registerLink: `${IBPC_REGIST}`,
+    //registerLink: `https://bit.ly/SxCIBPCRegistrationForm`,
     // faq: ["Who can participate, and what are the eligibility criteria?",
     //   "How many stages does this business plan competition have?",
     //   "Is there any specific criteria/requirement regarding the business ideas?",
@@ -261,23 +265,23 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "9th September - 6th October 2024",
+        date: "9th September - 22nd October 2024",
         type: "submit",
       },
       {
         title: "Preliminary Stage",
-        date: "9th September - 19th October 2024",
+        date: "9th September - 4th November 2024",
         type: "register",
         link: ``,
       },
       {
         title: "Semi-Final Stage",
-        date: "20th October - 10th November 2024",
+        date: "5th - 24th November 2024",
         type: "meeting",
       },
       {
         title: "Final Stage",
-        date: "11th November - 1st December 2024",
+        date: "24th November - 1st December 2024",
         type: "progress",
       },
       // {
@@ -292,6 +296,7 @@ export const eventDetails = {
     image: imgLocation + "chambers.png",
     openRegistration: true,
     registerLink: `${CHAMBERS_REGIST}`,
+    //registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdIGGuMZzQiJaU0nIz16ixVLLSXJ2M23bcjP9Eiew3O0TefYw/viewform`,
     description:
       "<strong>Chambers</strong> is an <strong>international webinar</strong> that promises to deliver <strong>captivating insights and experiences in the professional world.</strong> Centered around the theme <strong>“Innovative Career Paths: Beyond User-Centricity to Strategic Brilliance,“</strong> this event features distinguished speakers from leading companies. Over the webinar of <strong>two days, participants will explore four dynamic industries: Start-Up, FMCG, BUMN, and Consulting.</strong> Join us for this unique <strong>opportunity to enhance your career</strong> trejectory, <strong>gain valuable knowledge, and connect with industry experts</strong> who can help shape your <strong>professional journey.</strong>" +
       "</br></br>" +
@@ -352,11 +357,56 @@ export const eventDetails = {
   event_6: {
     title: "Company Visit",
     image: imgLocation + "comvis.png",
-    openRegistration: false,
+    openRegistration: true,
     description:
-      "Hands-on experience collaborating with company partners to conduct offline and online office tour and talkshow about sustainable work environments and recruitment tips.",
+      "Company visit is <strong>an organized event to learn about a company's operations, culture, and career paths</strong> that includes <strong>office tours, discussions on work environments, and recruitment tips.</strong> The goal is to provide first-hand experience and networking opportunities to gain a deeper understanding of the industry and potential career paths."+
+      "</br></br>" +
+      "<strong>When and Where</strong></br>" +
+      "<strong>OFFLINE</strong>" +
+      "</br>1.&emsp;Bosch: Thursday, November 7th 2024" +
+      "</br>&emsp;&emsp;10.00 - 13.30" +
+      "</br>&emsp;&emsp;Arkadia Green Park - Tower G / Floor: 7, Jl. TB Simatupang No.88, Kebagusan, Ps. Minggu, Daerah Khusus Ibukota Jakarta 12520" +
+      "</br>2.&emsp;BCA: Friday, November 15th 2024" +
+      "</br>&emsp;&emsp;14.00 - 16.30" +
+      "</br>&emsp;&emsp;Menara BCA Grand Indonesia, Jl. M.H. Thamrin No.1, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310" +
+      "</br></br>" +
+      "</br><strong>Participant Requirements:</strong>" +
+      "</br>&emsp;&emsp;- <strong>Minimum Required Semester for Bosch</strong>: Final year students <strong>(above 5th semester).</strong>" +
+      "</br>&emsp;&emsp;- <strong>Minimum Required Semester for BCA</strong>: Final year students <strong>(minimum 6th or 7th semester).</strong>" +
+      "</br>&emsp;&emsp;- Registrants can only choose <strong>one company.</strong>" +
+      "</br>&emsp;&emsp;- All participants are required to like, comment, and tag five people, as well as share the SxC Intersummit 2024 Company Visit poster on their Instagram story." +
+      "</br></br>"+
+      "<strong>What Will You Get from Offline Company Visit</strong></br>" +
+      "&emsp;&emsp;- Insight into Career Pathways: Discover various career paths and opportunities within key industries such as banking, consulting, FMCG, and startups." +
+      "</br>&emsp;&emsp;- Networking Opportunities: Connect directly with professionals and industry leaders, building valuable relationships that could benefit your future career." +
+      "</br>&emsp;&emsp;- Knowledge of Current Industry Trends: Learn about the latest trends, technologies, and innovations shaping the industries you are interested in." +
+      "</br>&emsp;&emsp;- Office Tour: Experience a guided tour of the company’s facilities, providing a real-world view of the work environment, culture, and operational practices." +
+      "</br>&emsp;&emsp;- Mini Case Study Experience: Participate in a case study workshop where you can apply theoretical knowledge to real-life business challenges, enhancing your problem-solving and analytical skills." +
+      "</br>&emsp;&emsp;- Networking Lunch: Enjoy a networking lunch with industry professionals, allowing for informal discussions and the chance to forge connections in a relaxed setting." +
+      "</br>&emsp;&emsp;- Exclusive Behind-the-Scenes Access: Gain unique insights into company processes, strategies, and cultures that are not typically available to the public." +
+      "</br>&emsp;&emsp;- Practical Understanding of Industry Practices: Observe firsthand how leading companies operate and implement best practices within their industries." +
+      "</br></br>" +
+
+      "<strong>ONLINE</strong>" +
+      "</br>1.&emsp;FMCG Industry" +
+      "</br>&emsp;&emsp;November 10th 2024" +
+      "</br>&emsp;&emsp;Online Zoom Conference" +
+      "</br>2.&emsp;Second Company TBA" +
+
+      "</br><strong>Participant Requirements:</strong>" +
+      "</br>&emsp;&emsp;Participants are required to like, comment, and tag five people, as well as share the SxC Intersummit 2024 Company Visit poster on their Instagram story." +
+      "</br></br>" +
+      "<strong>What Will You Get</strong></br>" +
+      "&emsp;&emsp;- Insight into Career Pathways: Understand potential career paths and opportunities within various industries such as banking, consulting, FMCG, and startups." +
+      "</br>&emsp;&emsp;- Networking Opportunities: Connect with professionals and industry leaders to build valuable relationships for future career opportunities." +
+      "</br>&emsp;&emsp;- Knowledge of Current Industry Trends: Learn about the latest trends, technologies, and innovations driving the industries." +
+      "</br>&emsp;&emsp;- Exposure to Real-World Industry Practices: Gain firsthand experience of the work environment and operational practices in leading industries." +
+      "</br>&emsp;&emsp;- Exclusive Behind-the-Scenes Access: Gain a unique perspective on company culture, processes, and strategies not usually available to the public." +
+      "</br>&emsp;&emsp;- CV Review: Receive personalised feedback on your CV from experienced professionals to help improve your job application success." +
+      "</br>&emsp;&emsp;- Division Sharing Session: Participate in a session where different divisions share their insights, offering a deeper understanding of various roles within the company.",
     timelineDesc: "Timeline details for Company Visit",
-    registerLink: ``,
+    registerLink: `${COMPVIS_REGISTRATION}`,
+    //registerLink: "https://docs.google.com/forms/d/e/1FAIpQLSc_C3G8OFLFpq-fvjNM8YjcXKbbQcY0VYXiNRWXnVqnqsq8PA/viewform",
     faq: [
       "How many offline and online company visits will be held later ?",
       "What activities will be carried out on the offline company visit ?",
@@ -367,31 +417,31 @@ export const eventDetails = {
       "Workshop or sharing session about the company, work culture, internship opportunities and many more",
       "First week of november",
     ],
-    contactPerson: ["TBA"],
-    contactNumber: ["-"],
+    contactPerson: ["Caryn Joy Angel (Offline Company Visit)", "Kiemas Arryasa (Online Company Visit)"],
+    contactNumber: ["+6282177707575", "+6281289413552"],
     contactLink: [],
     timelineData: [
       {
-        title: "Open Registration",
-        date: "TBA",
+        title: "Bosch",
+        date: "Thursday, November 7th 2024",
         type: "register",
         link: ``,
       },
       {
-        title: "Technical Meeting",
-        date: "TBA",
+        title: "BCA",
+        date: "Friday, November 15th 2024",
         type: "meeting",
       },
-      {
-        title: "Project Progress",
-        date: "TBA",
-        type: "progress",
-      },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
-      },
+      // {
+      //   title: "Project Progress",
+      //   date: "TBA",
+      //   type: "progress",
+      // },
+      // {
+      //   title: "Submit Project",
+      //   date: "TBA",
+      //   type: "submit",
+      // },
     ],
   },
   event_7: {

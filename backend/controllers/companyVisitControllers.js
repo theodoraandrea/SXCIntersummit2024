@@ -5,8 +5,29 @@ const checkRequiredFields = require("../utils/checkRequiredFields");
 const { validationResult } = require("express-validator");
 const sendAutomatedEmail = require("../services/automatedEmail");
 
+// WA Group Links
+const BCAWAGroup = "#";
+const BoschWAGroup = "#";
+const ShopeeWAGroup = "#";
+const AccountingFirmWAGroup = "#";
+
+// Function to select the WA group link based on the company
+const getWAGroupLinkByCompany = (company) => {
+  switch (company) {
+    case "BCA":
+      return BCAWAGroup;
+    case "Bosch":
+      return BoschWAGroup;
+    case "Shopee":
+      return ShopeeWAGroup;
+    case "Accounting Firm":
+      return AccountingFirmWAGroup;
+    default:
+      return "#"; // Fallback, maybe taro WA Group default kalo ada?? or contact person
+  }
+};
+
 const companyVisitId = 6;
-const companyVisitWAGroup = "#";
 
 // Register new company visit
 exports.registerCompanyVisit = async (req, res) => {
@@ -19,7 +40,7 @@ exports.registerCompanyVisit = async (req, res) => {
 
     const { files, body } = req;
 
-    const requiredFields = ["cv", "proofFollow", "proofStory"];
+    const requiredFields = ["cv", "proofFollow", "proofStory", "proofPoster"];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
         message:
@@ -27,7 +48,15 @@ exports.registerCompanyVisit = async (req, res) => {
       });
     }
 
-    const { company, attendanceType, gpa, semester, domicile, question } = body;
+    const {
+      company,
+      attendanceType,
+      gpa,
+      semester,
+      domicile,
+      isCommittee,
+      motivation,
+    } = body;
 
     const userId = req.user.id;
     const user = await User.findByPk(userId);
@@ -35,11 +64,11 @@ exports.registerCompanyVisit = async (req, res) => {
     const qnaList = [
       {
         "Are you part of the StudentsxCEOs International Summit Committee?":
-          question[0],
+          isCommittee,
       },
       {
         "What motivates you to join the StudentsxCEOs International Summit Company Visit 2024? ":
-          question[1],
+          motivation,
       },
     ];
 
@@ -65,7 +94,13 @@ exports.registerCompanyVisit = async (req, res) => {
       fileNames[2]
     );
 
-    const screenshotCompanyVisit = [cv, proofFollow, proofStory];
+    const proofPoster = await getImageURLsList(
+      files.proofPoster,
+      folderId,
+      fileNames[3]
+    );
+
+    const screenshotCompanyVisit = [cv, proofFollow, proofStory, proofPoster];
 
     let eventRegistration;
     try {
@@ -95,6 +130,9 @@ exports.registerCompanyVisit = async (req, res) => {
       return res.status(500).json({ error });
     }
 
+    const companyVisitWAGroup = getWAGroupLinkByCompany(company);
+
+    // Email Details
     const emailDetails = {
       from: process.env.EMAIL_USER,
       fromName: "StudentsXCEOs International Summit 2024",
@@ -108,16 +146,10 @@ exports.registerCompanyVisit = async (req, res) => {
       emailContent: {
         intro:
           "You've just successfully registered to the Company Visit program by SxC. We're excited to have you on board!",
-        action: {
-          instructions: "Join the WA Group by clicking the button below",
-          button: {
-            color: "#003337",
-            text: "Join WA Group",
-            link: companyVisitWAGroup,
-          },
-        },
+          "You have just successfully registered to the Company Visit program by StudentsxCEOs Intersummit 2024. Your registration is under review!",
+        action:[],
         outro:
-          "We're glad to have you on board! Stay tuned in the group for further information!",
+          "Stay tuned for updates via email for the further information! Selected participant will be informed via email at November 4th 2024 for Bosch and November 10th 2024 for BCA.",
         signature: "Cheers, StudentsxCEOs International Summit 2024",
       },
     };

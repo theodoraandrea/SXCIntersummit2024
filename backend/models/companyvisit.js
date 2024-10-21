@@ -49,7 +49,7 @@ const CompanyVisit = sequelize.define(
     },
   },
   {
-    tableName: "companyvisits",
+    tableName: "companyvisit",
     timestamps: true,
   }
 );

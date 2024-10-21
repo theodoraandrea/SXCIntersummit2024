@@ -38,6 +38,9 @@ import {
   // CHAMBERS
   API_GET_CHAMBERS_REGISTRATION,
   API_POST_CHAMBERS_REGISTRATION,
+  // COMVIS
+  API_GET_COMPVIS_REGISTRATION,
+  API_POST_COMPVIS_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -413,6 +416,36 @@ const getIbccTeamRegistration = async (data) => {
   }
 };
 
+// Compvis
+const postCompvisRegistration = async (data) => {
+  try {
+    const response = await axiosInstance.post(
+      API_POST_COMPVIS_REGISTRATION,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error registering for Compvis:", error);
+    throw error;
+  }
+};
+
+const getCompvisRegistrationData = async () => {
+  // Removed data parameter as it is not used
+  try {
+    const response = await axiosInstance.get(API_GET_COMPVIS_REGISTRATION);
+    return response.data; // return response.data instead of response
+  } catch (error) {
+    console.error("Error fetching Compvis registration data:", error); // Added specific error log
+    throw error;
+  }
+};
+
 //LATER RECYCLE FOR REFERRAL CODE
 const postCheckTeamCode = async (data) => {
   try {
@@ -468,6 +501,8 @@ export {
   getBmcRegistrationData,
   postChambersRegistration,
   getChambersRegistrationData,
+  postCompvisRegistration,
+  getCompvisRegistrationData,
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,
