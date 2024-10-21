@@ -146,16 +146,10 @@ exports.registerCompanyVisit = async (req, res) => {
       emailContent: {
         intro:
           "You've just successfully registered to the Company Visit program by SxC. We're excited to have you on board!",
-        action: {
-          instructions: `Join the ${company} Company Visit WA Group by clicking the button below`,
-          button: {
-            color: "#003337",
-            text: `Join ${company} WA Group`,
-            link: companyVisitWAGroup,
-          },
-        },
+          "You have just successfully registered to the Company Visit program by StudentsxCEOs Intersummit 2024. Your registration is under review!",
+        action:[],
         outro:
-          "We're glad to have you on board! Stay tuned in the group for further information!",
+          "Stay tuned for updates via email for the further information! Selected participant will be informed via email at November 4th 2024 for Bosch and November 10th 2024 for BCA.",
         signature: "Cheers, StudentsxCEOs International Summit 2024",
       },
     };

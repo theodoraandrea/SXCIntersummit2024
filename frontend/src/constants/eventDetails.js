@@ -364,15 +364,11 @@ export const eventDetails = {
       "<strong>When and Where</strong></br>" +
       "<strong>OFFLINE</strong>" +
       "</br>1.&emsp;Bosch: Thursday, November 7th 2024" +
-      "</br>&emsp;&emsp;10.00 - 13.00" +
+      "</br>&emsp;&emsp;10.00 - 13.30" +
       "</br>&emsp;&emsp;Arkadia Green Park - Tower G / Floor: 7, Jl. TB Simatupang No.88, Kebagusan, Ps. Minggu, Daerah Khusus Ibukota Jakarta 12520" +
       "</br>2.&emsp;BCA: Friday, November 15th 2024" +
       "</br>&emsp;&emsp;14.00 - 16.30" +
       "</br>&emsp;&emsp;Menara BCA Grand Indonesia, Jl. M.H. Thamrin No.1, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310" +
-      "</br>3.&emsp;Shopee: Friday, Week 3 of November 2024" +
-      "</br>&emsp;&emsp;10.00 - 13.00" +
-      "</br>&emsp;&emsp;Pakuwon Tower, Jl. Raya Casablanca No.Raya Lt. 46, RT.3/RW.14, Menteng Dalam, Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12870" +
-      "</br>4.&emsp;Consulting/Accounting Firm" +
       "</br></br>" +
       "</br><strong>Participant Requirements:</strong>" +
       "</br>&emsp;&emsp;- <strong>Minimum Required Semester for Bosch</strong>: Final year students <strong>(above 5th semester).</strong>" +
@@ -424,29 +420,29 @@ export const eventDetails = {
     contactPerson: ["Caryn Joy Angel (Offline Company Visit)", "Kiemas Arryasa (Online Company Visit)"],
     contactNumber: ["+6282177707575", "+6281289413552"],
     contactLink: [],
-    // timelineData: [
-    //   {
-    //     title: "Open Registration",
-    //     date: "TBA",
-    //     type: "register",
-    //     link: ``,
-    //   },
-    //   {
-    //     title: "Technical Meeting",
-    //     date: "TBA",
-    //     type: "meeting",
-    //   },
-    //   {
-    //     title: "Project Progress",
-    //     date: "TBA",
-    //     type: "progress",
-    //   },
-    //   {
-    //     title: "Submit Project",
-    //     date: "TBA",
-    //     type: "submit",
-    //   },
-    // ],
+    timelineData: [
+      {
+        title: "Bosch",
+        date: "Thursday, November 7th 2024",
+        type: "register",
+        link: ``,
+      },
+      {
+        title: "BCA",
+        date: "Friday, November 15th 2024",
+        type: "meeting",
+      },
+      // {
+      //   title: "Project Progress",
+      //   date: "TBA",
+      //   type: "progress",
+      // },
+      // {
+      //   title: "Submit Project",
+      //   date: "TBA",
+      //   type: "submit",
+      // },
+    ],
   },
   event_7: {
     title: "Summit",
