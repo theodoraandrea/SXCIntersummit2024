@@ -187,7 +187,7 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "9th September - 22nd October 2024",
+        date: "9th September - 24th October 2024",
         type: "submit",
       },
       {
@@ -265,7 +265,7 @@ export const eventDetails = {
     timelineData: [
       {
         title: "Open Registration",
-        date: "9th September - 22nd October 2024",
+        date: "9th September - 28th October 2024",
         type: "submit",
       },
       {
