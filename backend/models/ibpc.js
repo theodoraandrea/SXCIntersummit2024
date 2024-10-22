@@ -36,7 +36,6 @@ const IBPC = sequelize.define(
     },
     proofOfPayment: {
       type: DataTypes.JSON,
-      allowNull: false,
     },
     proofOfTwibbon: {
       type: DataTypes.STRING,
