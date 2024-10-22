@@ -521,4 +521,379 @@ const ThirdView = ({
   );
 };
 
+const FourthView = ({ 
+  onPrevious, 
+  onNextHave, 
+  onNextHaveNot 
+}) => (
+
+  <div>
+      <Navbar />
+      <div className='bg-primary-1 w-full px-2 min-h-screen flex items-center justify-center'>
+          <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
+              <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>Do you have any allergies or dietary restrictions?</h1>
+              <div className='flex w-full justify-center'>
+                  {/* I have - goes to fifth view */}
+                  <div className='w-40'>
+                      <button 
+                          className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
+                          onClick={onNextHave} 
+                          aria-label='I have'
+                      >
+                      Yes, I have
+                      </button>
+                  </div>
+                  {/* I have not - goes to sixth view */}
+                  <div className='w-40 ml-6'>
+                      <button 
+                          className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
+                          onClick={onNextHaveNot} 
+                          aria-label='I have not'
+                      >
+                          No, I have not
+                      </button>
+                  </div>
+              </div>
+              <button
+                  type='button'
+                  onClick={onPrevious}
+                  className='mt-6 text-white px-6 py-2 hover:text-gradient'
+              >
+                  Back
+              </button>
+          </div>
+      </div>
+  </div>
+);
+
+const FifthView = ({
+  formData,
+  setFormData,
+  sanitizeInput,
+  onPrevious,
+  onNext
+}) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  const [allergy, setAllergy] = useState(formData.allergy ?? "");
+  const [charCount, setCharCount] = useState(formData.allergy?.length ?? 0);
+
+  const checkAllFilled = () => {
+    if (allergy) {
+      return true;
+    }
+    errorAlert({ message: "Field must be filled"});
+    return false;
+  };
+
+  const saveData = () => {
+    setFormData({
+        ...formData,
+        expectation: sanitizeInput(expectation)
+    });
+  }
+
+  const handleNext = () => {
+    if (checkAllFilled()) {
+        saveData();
+        onNext();
+    }
+  }
+
+  const handleBack = () => {
+    saveData();
+    onPrevious();
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 p-8 my-8 mx-2 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient mb-4">
+            Please list your allergies and/or dietary restrictions.
+          </h1>
+          <form className="text-left">
+            <div className="mb-4">
+              <textarea
+                name="allergy"
+                value={allergy}
+                onChange={(e) => {
+                  if (e.target.value.length <= 186) {
+                    setAllergy(e.target.value);
+                    setCharCount(e.target.value.length);
+                  }
+                }}
+                className="w-full h-40 px-3 py-2 rounded-lg text-sm"
+              />
+              <p className="text-right text-gray-300 text-sm">
+                {charCount}/186
+              </p>
+            </div>
+          </form>
+          <div className="mt-6 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={handleBack}
+              className="text-white px-6 py-2 mr-6 hover:text-gradient"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="text-white px-6 py-2 hover:text-gradient"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SixthView = ({
+  formData,
+  setFormData,
+  checkFileSize,
+  checkFileType,
+  onPrevious,
+  onNext
+}) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  const [follow1, setFollow1] = useState(formData.screenshot1 ? true : false);
+  const [follow2, setFollow2] = useState(formData.screenshot2 ? true : false);
+  const [follow3, setFollow3] = useState(formData.screenshot3 ? true : false);
+
+  const [screenshot1, setScreenshot1] = useState(
+    formData.screenshot1?.name ?? ""
+  );
+  const [screenshot2, setScreenshot2] = useState(
+    formData.screenshot2?.name ?? ""
+  );
+  const [screenshot3, setScreenshot3] = useState(
+    formData.screenshot3?.name ?? ""
+  );
+
+  const handleSubmit = () => {
+    if (
+      screenshot1 &&
+      screenshot2 &&
+      screenshot3 &&
+      follow1 &&
+      follow2 &&
+      follow3
+    ) {
+      onNext();
+    } else {
+      errorAlert({ message: "All proofs must be uploaded"});
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    const file = files[0];
+
+    if (!checkFileSize(file)) {
+      return;
+    }
+
+    if (!checkFileType(file)) {
+      return;
+    }
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: files ? file : value,
+    }));
+    if (name === "screenshot1") {
+      setScreenshot1(file.name);
+    } else if (name === "screenshot2") {
+      setScreenshot2(file.name);
+    } else if (name === "screenshot3") {
+      setScreenshot3(file.name);
+    }
+  };
+
+  const checkAllFilled = () => {
+    if(
+        proofFollow &&
+        proofIntersummit &&
+        proofLike && 
+        proofPayment
+      ){
+        return true;
+      }
+      errorAlert({ message: "All fields are required" });
+      return false;
+    };
+
+  const checkFileSize = (file) => {
+    if (file.size <= 2000000) {
+      return true;
+    }
+    const message = "File size has to be 2MB or less";
+    errorAlert({ message: message });
+    return false;
+  };
+
+  const checkFileType = (file) => {
+    if (
+      file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "application/pdf"
+    ) {
+      return true;
+    }
+    const message = "File has to be pdf, jpg, jpeg, or png";
+    errorAlert({ message: message });
+    return false;
+  };
+
+  const saveData = () => {
+    setFormData({
+        ...formData,
+        expectation: sanitizeInput(expectation)
+    });
+  }
+
+  const handleNext = () => {
+    if (checkAllFilled()) {
+        saveData();
+        onNext();
+    }
+  }
+
+  const handleBack = () => {
+    saveData();
+    onPrevious();
+  }
+
+  return(
+    <div>
+      <Navbar />
+      <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+          <div className='bg-primary-4 my-8 mx-2 p-8 max-w-full md:max-w-xl rounded-xl shadow-lg text-center max-w-3xl'>
+              <h1 className='text-3xl font-bold text-gradient mb-4'>Connect with us!</h1>
+              <form className='text-left'>
+                  {/* setiap selesai check list harus upload gambar  */}
+                  <div className='mb-4'>
+                      <label className='block text-white mb-2'>
+                          <input
+                              type='checkbox'
+                              name='follow1'
+                              checked={follow1}
+                              onChange={(e) => setFollow1(e.target.checked)}
+                              className='mr-2'
+                          />
+                          I have followed <strong>@studentsxceosjkt, @sxcintersummit, @sxcintersummitcompetition</strong> on Instagram 
+                      </label>
+                      <div className='my-4 relative'>
+                          <input
+                              type='file'
+                              id='screenshot1'
+                              name='screenshot1'
+                              onChange={handleChange}
+                              className='absolute inset-0 opacity-0 cursor-pointer'
+                          />
+                          <label
+                              htmlFor='screenshot1'
+                              className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
+                          >
+                              Submit screenshot
+                          </label>
+                          <label className='text-sm md:text-base text-white ml-2'>{screenshot1}</label>
+                      </div>
+                  </div>
+                  <div className='mb-4'>
+                      <label className='block text-white mb-2'>
+                          <input
+                              type='checkbox'
+                              name='follow2'
+                              checked={follow2}
+                              onChange={(e) => setFollow2(e.target.checked)}
+                              className='mr-2'
+                          />
+                          I have reposted the Intersummit Poster Feed to Instagram Story and tagged 3 people
+                      </label>
+                      <div className='my-4 relative'>
+                          <input
+                              type='file'
+                              id='screenshot2'
+                              name='screenshot2'
+                              onChange={handleChange}
+                              className='absolute inset-0 opacity-0 cursor-pointer'
+                          />
+                          <label
+                              htmlFor='screenshot2'
+                              className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
+                          >
+                              Submit screenshot
+                          </label>
+                          <label className='text-sm md:text-base text-white ml-2'>{screenshot2}</label>
+                      </div>
+                  </div>
+                  <div className=''>
+                      <label className='block text-white'>
+                          <input
+                              type='checkbox'
+                              name='follow3'
+                              checked={follow3}
+                              onChange={(e) => setFollow3(e.target.checked)}
+                              className='mr-2'
+                          />
+                          I have liked and commented on the Intersummit Poster Feed
+                      </label>
+                  </div>
+                  <div className='flex gap-3'>
+                      <div className='my-4 relative'>
+                          <input
+                              type='file'
+                              id='screenshot3'
+                              name='screenshot3'
+                              onChange={handleChange}
+                              className='absolute inset-0 opacity-0 cursor-pointer'
+                          />
+                          <label
+                              htmlFor='screenshot3'
+                              className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
+                          >
+                              Submit screenshot
+                          </label>
+                          <label className='text-sm md:text-base text-white ml-2'>{screenshot3}</label>
+                      </div>
+                  </div>
+                  <div className='mt-6 flex justify-between items-center'>
+                      <button
+                          type='button'
+                          onClick={onPrevious}
+                          className='text-white px-6 py-2 mr-6 hover:text-gradient'
+                      >
+                      Back
+                      </button>
+                      <button
+                          type='button'
+                          onClick={handleSubmit}
+                          className='text-white px-6 py-2 hover:text-gradient'
+                      >
+                      Next
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  );
+};
+
+
+
 export default EventCard;

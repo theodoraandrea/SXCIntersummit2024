@@ -146,7 +146,7 @@ exports.registerCompanyVisit = async (req, res) => {
       emailContent: {
         intro:
           "You've just successfully registered to the Company Visit program by SxC. We're excited to have you on board!",
-          "You have just successfully registered to the Company Visit program by StudentsxCEOs Intersummit 2024. Your registration is under review!",
+          // "You have just successfully registered to the Company Visit program by StudentsxCEOs Intersummit 2024. Your registration is under review!",
         action:[],
         outro:
           "Stay tuned for updates via email for the further information! Selected participant will be informed via email at November 4th 2024 for Bosch and November 10th 2024 for BCA.",
