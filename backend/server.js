@@ -30,8 +30,7 @@ db.authenticate()
   });
 
 // Database Table synchronizing
-// ibpc
-//   .sync({ alter: true })
+// Summit.sync({ alter: true })
 //   .then(() => {
 //     console.log("Update db");
 //   })
