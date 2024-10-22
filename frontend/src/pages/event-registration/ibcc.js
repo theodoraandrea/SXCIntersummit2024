@@ -71,7 +71,7 @@ const FirstView = ({ title, formData, setFormData, onNext }) => {
               <option value="" disabled>
                 Select registration type
               </option>
-              <option value="Individual"> 
+              <option value="Individual" disabled> 
                 Individual
               </option>
               <option value="Team">
