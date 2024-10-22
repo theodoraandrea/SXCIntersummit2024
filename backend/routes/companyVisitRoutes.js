@@ -13,6 +13,7 @@ router.post(
     { name: "cv", minCount: 1, maxCount: 1 },
     { name: "proofFollow", minCount: 1, maxCount: 1 },
     { name: "proofStory", minCount: 1, maxCount: 1 },
+    { name: "proofPoster", minCount: 1, maxCount: 1 },
   ]),
   [
     body("company").notEmpty().withMessage("Company name is required"),
@@ -26,7 +27,8 @@ router.post(
     body("domicile")
       .notEmpty()
       .withMessage("Registrant's domicile is required"),
-    body("question").notEmpty().withMessage("Please answer all questions"),
+    body("isCommittee").notEmpty().withMessage("Please answer all questions"),
+    body("motivation").notEmpty().withMessage("Please answer all questions"),
   ],
   errorHandling,
   companyVisitControllers.registerCompanyVisit

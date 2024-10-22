@@ -93,8 +93,8 @@ export const eventDetails = {
       "</br></br><strong>&emsp;&emsp;2.&emsp;Coaching Clinic 2</strong>" +
       "</br>&emsp;&emsp;<strong>Coaching Clinic 2</strong> is designed to empower <strong>aspiring high school entrepreneurs</strong> who have successfully <strong> qualified as Finalists</strong> with the skills to <strong> transform their innovative ideas into narratives</strong> that resonate with audiences. This session focuses on <strong>the art of pitching to create memorable and persuasive presentations</strong>. The program will focus on <strong>“Ignite Your Pitch: Turning Ideas into Powerful Hear Stories“</strong>, including an <strong>in-depth review of pitching techniques, guidance on creating outstanding decks,</strong> and <strong>tips and tricks for effective pitching.</strong>",
     timelineDesc: "",
-    // registerLink: `${FCEO_REGIST}`,
-    registerLink: `https://docs.google.com/forms/d/e/1FAIpQLScR5tita2B13cscxuF0QmN2kBfH2r1N28La8Pdgx3l2xu6zYA/viewform`,
+    registerLink: `${FCEO_REGIST}`,
+    //registerLink: `https://docs.google.com/forms/d/e/1FAIpQLScR5tita2B13cscxuF0QmN2kBfH2r1N28La8Pdgx3l2xu6zYA/viewform`,
     faq: [
       "Will this event be held online or offline?",
       "What topics are contested?",
@@ -171,8 +171,8 @@ export const eventDetails = {
       "</br></br><strong>&emsp;&emsp;3.&emsp;Networking Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Case Competition",
-    // registerLink: `${IBCC_REGIST}`,
-    registerLink: `https://bit.ly/SxCIBCCRegistrationForm`,
+    registerLink: `${IBCC_REGIST}`,
+    //registerLink: `https://bit.ly/SxCIBCCRegistrationForm`,
     // faq: ["-"],
     // faq: ["How many and what is the format and structure of each stage?",
     //   "How and where do we register for the competition?",
@@ -249,8 +249,8 @@ export const eventDetails = {
       "</br></br><strong>&emsp;&emsp;5.&emsp;Funding Opportunities</strong>",
     timelineDesc:
       "Timeline details for SxC International Business Challenge: Business Plan Competition",
-    // registerLink: `${IBPC_REGIST}`,
-    registerLink: `https://bit.ly/SxCIBPCRegistrationForm`,
+    registerLink: `${IBPC_REGIST}`,
+    //registerLink: `https://bit.ly/SxCIBPCRegistrationForm`,
     // faq: ["Who can participate, and what are the eligibility criteria?",
     //   "How many stages does this business plan competition have?",
     //   "Is there any specific criteria/requirement regarding the business ideas?",
@@ -364,15 +364,11 @@ export const eventDetails = {
       "<strong>When and Where</strong></br>" +
       "<strong>OFFLINE</strong>" +
       "</br>1.&emsp;Bosch: Thursday, November 7th 2024" +
-      "</br>&emsp;&emsp;10.00 - 13.00" +
+      "</br>&emsp;&emsp;10.00 - 13.30" +
       "</br>&emsp;&emsp;Arkadia Green Park - Tower G / Floor: 7, Jl. TB Simatupang No.88, Kebagusan, Ps. Minggu, Daerah Khusus Ibukota Jakarta 12520" +
       "</br>2.&emsp;BCA: Friday, November 15th 2024" +
       "</br>&emsp;&emsp;14.00 - 16.30" +
       "</br>&emsp;&emsp;Menara BCA Grand Indonesia, Jl. M.H. Thamrin No.1, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310" +
-      "</br>3.&emsp;Shopee: Friday, Week 3 of November 2024" +
-      "</br>&emsp;&emsp;10.00 - 13.00" +
-      "</br>&emsp;&emsp;Pakuwon Tower, Jl. Raya Casablanca No.Raya Lt. 46, RT.3/RW.14, Menteng Dalam, Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12870" +
-      "</br>4.&emsp;Consulting/Accounting Firm" +
       "</br></br>" +
       "</br><strong>Participant Requirements:</strong>" +
       "</br>&emsp;&emsp;- <strong>Minimum Required Semester for Bosch</strong>: Final year students <strong>(above 5th semester).</strong>" +
@@ -410,6 +406,7 @@ export const eventDetails = {
       "</br>&emsp;&emsp;- Division Sharing Session: Participate in a session where different divisions share their insights, offering a deeper understanding of various roles within the company.",
     timelineDesc: "Timeline details for Company Visit",
     registerLink: `${COMPVIS_REGISTRATION}`,
+    //registerLink: "https://docs.google.com/forms/d/e/1FAIpQLSc_C3G8OFLFpq-fvjNM8YjcXKbbQcY0VYXiNRWXnVqnqsq8PA/viewform",
     faq: [
       "How many offline and online company visits will be held later ?",
       "What activities will be carried out on the offline company visit ?",
@@ -423,29 +420,29 @@ export const eventDetails = {
     contactPerson: ["Caryn Joy Angel (Offline Company Visit)", "Kiemas Arryasa (Online Company Visit)"],
     contactNumber: ["+6282177707575", "+6281289413552"],
     contactLink: [],
-    // timelineData: [
-    //   {
-    //     title: "Open Registration",
-    //     date: "TBA",
-    //     type: "register",
-    //     link: ``,
-    //   },
-    //   {
-    //     title: "Technical Meeting",
-    //     date: "TBA",
-    //     type: "meeting",
-    //   },
-    //   {
-    //     title: "Project Progress",
-    //     date: "TBA",
-    //     type: "progress",
-    //   },
-    //   {
-    //     title: "Submit Project",
-    //     date: "TBA",
-    //     type: "submit",
-    //   },
-    // ],
+    timelineData: [
+      {
+        title: "Bosch",
+        date: "Thursday, November 7th 2024",
+        type: "register",
+        link: ``,
+      },
+      {
+        title: "BCA",
+        date: "Friday, November 15th 2024",
+        type: "meeting",
+      },
+      // {
+      //   title: "Project Progress",
+      //   date: "TBA",
+      //   type: "progress",
+      // },
+      // {
+      //   title: "Submit Project",
+      //   date: "TBA",
+      //   type: "submit",
+      // },
+    ],
   },
   event_7: {
     title: "Summit",
