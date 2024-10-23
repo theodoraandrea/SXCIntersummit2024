@@ -26,7 +26,6 @@ exports.createNewTeam = async (req, res) => {
     const { files, body } = req;
     // Check if there any required image not uploaded.
     const requiredFields = [
-      "proofOfPayment",
       "studentIds",
       "proofOfFollow",
       "originalityStatement",
@@ -41,10 +40,12 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
+    console.log(req.files);
+    console.log("=================");
+
     const {
       teamName,
       question,
-      referralCode,
       proofOfTwibbon,
       twibbonLink1,
       twibbonLink2,
@@ -53,6 +54,9 @@ exports.createNewTeam = async (req, res) => {
     const userId = req.user.id;
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
+
+    console.log(req.body);
+    console.log("============");
 
     const qnaList = { "How did you know this event?": question };
 
@@ -66,10 +70,6 @@ exports.createNewTeam = async (req, res) => {
     const rootFolderId = process.env.FOLDER_BUSINESS_PLAN_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
 
-    const proofOfPayment = await getImageURLsList(
-      files.proofOfPayment,
-      folderId
-    );
     const originalityStatement = await getImageURLsList(
       files.originalityStatement,
       folderId
@@ -113,12 +113,12 @@ exports.createNewTeam = async (req, res) => {
       teamName,
       teamCode,
       question: qnaList,
-      proofOfPayment,
       proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
-      referralCode: referralCode,
     });
+
+    console.log(newTeam);
 
     await CompetitionRegistration.create({
       userId,
@@ -276,11 +276,11 @@ exports.getTeamDetailsByUserId = async (req, res) => {
     res.status(200).json({
       teamName: team.teamName,
       teamCode: team.teamCode,
-      proofPayment: team.proofOfPayment,
+      proofPayment: team.proofOfPayment ? team.proofOfPayment : "",
       proofOfTwibbon: team.proofOfTwibbon,
       // twibbonLinks : team.twibbonLinks,
       screenshotIBPC: team.screenshotIBPC,
-      referralCode: team.referralCode,
+      referralCode: team.referralCode ? team.referralCode : "",
       members: teamMembers.map((member) => ({
         fullname: member.fullname,
         email: member.email,
