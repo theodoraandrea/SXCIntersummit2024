@@ -77,12 +77,18 @@ const FirstView = ({
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [verifiedRefCode]);
 
   const handleSubmit = () => {
+    if (!isTermsChecked) {
+      errorAlert({ message: "You must agree to the terms and conditions to proceed." });
+      return;
+    }
+
     if (checkAllFilled()) {
       if (!emailError && !phoneError) {
         formData = {
@@ -335,10 +341,11 @@ const FirstView = ({
            {/* SEBELUM DIOTAK ATIK */}
             <p className="text-3xl">
               <strong>
-                IDR {priceIDR.toLocaleString()}
+                {/* IDR {priceIDR.toLocaleString()} */}
+                Free
               </strong>
             </p>
-            
+{/*             
             <p className="text-lg">
                 or
             </p>
@@ -347,7 +354,7 @@ const FirstView = ({
               <strong>
                 ${priceUSD.toFixed(2)}
               </strong>
-            </p>
+            </p> */}
             <p className="text-sm">
               {
               verifiedRefCode && refCodeValid && (
@@ -575,10 +582,21 @@ const FirstView = ({
                 onChange={(e) => setTeamName(e.target.value)}
                 className="w-full px-3 py-2 rounded-lg"
               />
+              <div className="mb-4">
+            <label className="block text-white mt-5">
+              <input
+                type="checkbox"
+                className="mr-2"
+                checked={isTermsChecked}
+                onChange={(e) => setIsTermsChecked(!isTermsChecked)}
+              />
+              I hereby agree to re-register and pay the required registration fee if I qualify for the seminfinals.
+            </label>
+          </div>
             </div>
             <h1 className="text-lg font-bold text-white mt-10">Proof of Payment</h1>
             <label className="block text-white mb-4">
-              File size has to be less than 2MB
+              No proof of payment is required as the payment is now free. You may upload any file to proceed.
             </label>
             <div className="my-4 w-fit flex flex-col space-y-2 sm:flex-row">
               <div className="relative">
