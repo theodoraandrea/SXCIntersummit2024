@@ -997,7 +997,7 @@ const Summary =({
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setRegisteredEvents } = useUser();
-  const {intersummitID} = eventData;
+  const { intersummitId } = eventData;
 
   const handleSubmit = async () => {
     try{
@@ -1005,18 +1005,202 @@ const Summary =({
       const response = await postBMCRegistration(formData);
       setIsLoading(false);
       if(response.status === 200){
-        
-
+        navigate(USER_DASHBOARD_PAGE);
+        setRegisteredEvents((prevData) => [...prevData, intersummitId]);
+        successAlert({ 
+          eventId: "event_1",
+          message: "Successfully registered for Intersummit. Please check your email for further details!"})
       }
     } catch (error){
       errorAlert({ message: "Oh no, something happened. Please try again!"});
       navigate(HOME);
     }
-  }
+  };
 
-
-
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full text-white">
+        <div className="flex min-h-screen items-center justify-center">
+          {isLoading ? (
+            <div className="">
+              <Spinner
+                text="Uploading files... Please don't leave the page"
+                longText="This might take a while..."
+              />
+            </div>
+          ) : (
+            <div className="bg-primary-4 mx-2 my-8 max-w-full md:max-w-lg flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
+              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">International Summit Registration Form</p>
+              <p className="text-sm text-center font-semibold mb-2">
+                Please make sure all data is correct before submitting
+              </p>
+              <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
+                <strong>Session</strong>
+                <p>{formData.sessionType}</p>
+                <strong>Full Name</strong> 
+                <p>{formData.fullName}</p>
+                <strong>Gender</strong> 
+                <p>{formData.gender}</p>
+                <strong>Institution</strong>
+                <p>{formData.university}</p>
+                <strong>Major</strong>
+                <p>{formData.major}</p>
+                <strong>Batch</strong>
+                <p>{formData.batch}</p>
+                <strong>Phone</strong>
+                <p>{formData.phoneNumber}</p>
+                <strong>Email</strong>
+                <p>{formData.email}</p>
+              </div>
+              <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
+                <div className="border-t border-gray-300 my-4"></div>
+                <strong>How did you know this event?</strong>
+                <p>
+                  {formData.eventSource === "Other"
+                    ? `${formData.eventSource}${
+                        formData.eventSourceOther !== ""
+                          ? `: ${formData.eventSourceOther}`
+                          : ""
+                      }`
+                    : `SxC InterSummit ${formData.eventSource}`}
+                </p>
+                {formData.experience ? (
+                  <>
+                    <strong>
+                      What are your expectations for this event?
+                    </strong>
+                    <p>{formData.expectation}</p>
+                  </>
+                ) : (
+                  ""
+                )}
+                
+                <strong>
+                  Do you have any allergies or dietary restrictions?
+                </strong>
+                <p>{formData.allergy}
+                </p>
+                <div className="border-t border-gray-300 my-4"></div>
+                <p>
+                  <strong>Proof of following our Instagram:</strong>{" "}
+                  {formData.screenshot1.name}
+                </p>
+                <p>
+                  <strong>Proof of reposting the Internation Summit poster:</strong>{" "}
+                  {formData.screenshot2.name}
+                </p>
+                <p>
+                  <strong>Proof of like & comment on the International Summit poster:</strong>{" "}
+                  {formData.screenshot3.name}
+                </p>
+              </div>
+              <div className="flex w-full mt-6 justify-between">
+                <button
+                  type="button"
+                  onClick={onPrevious}
+                  className="text-white px-6 py-2 mr-6 hover:text-gradient"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  className="text-white px-6 py-2 hover:text-gradient"
+                  onClick={handleSubmit}
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
+const EventCard = () => {
+  const [currentView, setCurrentView] = useState(1);
+
+    const eventData = {
+      title: "International Summit",
+      description:"",
+      intersummitId: 1,
+      regularPrice: 0,
+      bankAccount: "BCA - ",
+    };
+
+  //all fields
+  const [formData, setFormData] = useState({});
+
+  const sanitizeInput = (input) => {
+    return input.trim().replace(/[^a-zA-Z\s]/g, "");
+  };
+
+  const sanitizeInputParagraph = (input) => {
+    return input.trim().replace(/[^a-zA-Z0-9.,&! "'?\n-]/g, "");
+  };
+
+  const checkFileSize = (file) => {
+    if(file.size <= 5000000) {
+      return true;
+    }
+    const message = "File size has to be 5MB or less";
+    errorAlert({message: message});
+    return false;
+  }
+
+  const checkFileTypeImage = (file) => {
+    if(file.type === "image/jpeg" || file.type === "image/png"){
+      return true;
+    }
+    const meesage = "File has to be jpg, jpeg, or png";
+    errorAlert({message: message});
+    return false;
+  }
+
+  const handleNext = () => {
+    setCurrentView((prevView) => prevView + 1);
+  };
+
+  const handlePrevious = () => {
+    if(currentView === 5 && !formData.allergy){
+      setCurrentView((prevView) => prevView - 2);
+    }else{
+      setCurrentView((prevView) => prevView - 1);
+    }
+  };
+
+  const handleNext2 = () => {
+    setFormData({
+      ...formData,
+      allergy: "",
+    });
+    setCurrentView((prevView) => prevView + 2);
+  };
+
+  switch (currentView){
+    case 1:
+      return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+    case 2:
+      return <SecondView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(2)}} />;
+    case 3:
+      return
+    case 4:
+      return
+    case 5:
+      return
+    case 6:
+      return
+    case 7:
+      return
+    case 8:
+      return
+    default:
+      return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+
+  }
+
+};
 
 export default EventCard;
