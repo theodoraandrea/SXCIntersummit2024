@@ -41,6 +41,9 @@ import {
   // COMVIS
   API_GET_COMPVIS_REGISTRATION,
   API_POST_COMPVIS_REGISTRATION,
+  // INTERSUMMIT
+  API_GET_INTERSUMMIT_REGISTRATION,
+  API_POST_INTERSUMMIT_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -469,6 +472,38 @@ const postCheckReferralCode = async (data) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+};
+
+// INTERSUMMIT
+const postIntersummitRegistration = async (data) => {
+  try{
+    const response = await axiosInstance.post(
+      API_POST_INTERSUMMIT_REGISTRATION,
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error registering for Intersummit:", error);
+    throw error;
+  }
+};
+
+
+const getIntersummitRegistrationData = async () =>{
+  try{
+    const response = await axiosInstance.get(
+      API_GET_INTERSUMMIT_REGISTRATION,
+      data
+    );
+    return response.data;
+  } catch (error) {
     throw error;
   }
 };

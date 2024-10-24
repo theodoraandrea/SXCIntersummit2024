@@ -1470,6 +1470,7 @@ const Summary = ({ formData, onPrevious }) => {
     </div>
   );
 };
+
 const EventCard = () => {
   const [currentView, setCurrentView] = useState(1);
 

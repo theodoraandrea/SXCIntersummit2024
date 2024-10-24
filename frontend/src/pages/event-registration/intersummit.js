@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar";
 import Spinner from "../../components/elements/spinner";
+import { useNavigate, Link } from "react-router-dom";
+import { useUser } from "../../contexts/user-context";
+import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
+import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
 import { errorAlert, successAlert } from '../../components/alert';
 
 
+// user data
 const FirstView = ({
-    eventData,
+    // eventData,
     formData,
     setFormData,
     onPrevious,
@@ -31,21 +36,6 @@ const FirstView = ({
   const [university, setUniversity] = useState("");
   const [major, setMajor] = useState("");
   const [batch, setBatch] = useState("");
-  // const [proofFollowIG, setProofFollowIG] = useState(
-  //   formData.proofFollowIG?.name ?? ""
-  // );
-  // const [proofOfPostCompany, setproofOfPostCompany] = useState(
-  //   formData.proofOfPostCompany?.name ?? ""
-  // );  
-  // const [proofStory, setProofStory] = useState(
-  //   formData.proofStory?.name ?? ""
-  // );
-  // const [proofOfLike, setProofOfLike] = useState(
-  //   formData.proofOfLike?.name ?? ""
-  // );
-  // const [proofPayment, setProofPayment] = useState(
-  //   formData.proofPayment?.name ?? ""
-  // );
 
 
   const [emailError, setEmailError] = useState("");
@@ -75,11 +65,6 @@ const FirstView = ({
         gender &&
         email &&
         phoneNumber
-        // proofFollowIG &&
-        // proofOfPostCompany &&
-        // proofStory &&
-        // proofOfLike &&
-        // proofPayment 
     ){
         return true;
     }
@@ -238,6 +223,7 @@ const FirstView = ({
   );
 };
 
+// how know event
 const SecondView = ({
   formData,
   setFormData,
@@ -263,28 +249,6 @@ const SecondView = ({
       setEventSourceOther("");
     }
   };
-
-  // const checkFileSize = (file) => {
-  //   if (file.size <= 2000000) {
-  //     return true;
-  //   }
-  //   const message = "File size has to be 2MB or less";
-  //   errorAlert({ message: message });
-  //   return false;
-  // };
-
-  // const checkFileType = (file) => {
-  //   if (
-  //     file.type === "image/jpeg" ||
-  //     file.type === "image/png" ||
-  //     file.type === "application/pdf"
-  //   ) {
-  //     return true;
-  //   }
-  //   const message = "File has to be pdf, jpg, jpeg, or png";
-  //   errorAlert({ message: message });
-  //   return false;
-  // };
 
   const checkAllFilled = () => {
     if (eventSource) {
@@ -431,6 +395,7 @@ const SecondView = ({
   );
 };
 
+// event expectations
 const ThirdView = ({
   formData,
   setFormData,
@@ -521,6 +486,7 @@ const ThirdView = ({
   );
 };
 
+// dietary restriction 
 const FourthView = ({ 
   onPrevious, 
   onNextHave, 
@@ -592,7 +558,7 @@ const FifthView = ({
   const saveData = () => {
     setFormData({
         ...formData,
-        expectation: sanitizeInput(expectation)
+        allergy: sanitizeInput(allergy)
     });
   }
 
@@ -669,25 +635,25 @@ const SixthView = ({
     window.scrollTo(0, 0);
   },[]);
 
-  const [follow1, setFollow1] = useState(formData.screenshot1 ? true : false);
-  const [follow2, setFollow2] = useState(formData.screenshot2 ? true : false);
-  const [follow3, setFollow3] = useState(formData.screenshot3 ? true : false);
+  const [follow1, setFollow1] = useState(formData.proofFollow ? true : false);
+  const [follow2, setFollow2] = useState(formData.proofStory ? true : false);
+  const [follow3, setFollow3] = useState(formData.proofLike ? true : false);
 
-  const [screenshot1, setScreenshot1] = useState(
-    formData.screenshot1?.name ?? ""
+  const [proofFollow, setProofFollow] = useState(
+    formData.proofFollow?.name ?? ""
   );
-  const [screenshot2, setScreenshot2] = useState(
-    formData.screenshot2?.name ?? ""
+  const [proofStory, setProofStory] = useState(
+    formData.proofStory?.name ?? ""
   );
-  const [screenshot3, setScreenshot3] = useState(
-    formData.screenshot3?.name ?? ""
+  const [proofLike, setProofLike] = useState(
+    formData.proofLike?.name ?? ""
   );
 
   const handleSubmit = () => {
     if (
-      screenshot1 &&
-      screenshot2 &&
-      screenshot3 &&
+      proofFollow &&
+      proofStory &&
+      proofLike &&
       follow1 &&
       follow2 &&
       follow3
@@ -714,27 +680,14 @@ const SixthView = ({
       ...prevState,
       [name]: files ? file : value,
     }));
-    if (name === "screenshot1") {
-      setScreenshot1(file.name);
-    } else if (name === "screenshot2") {
-      setScreenshot2(file.name);
-    } else if (name === "screenshot3") {
-      setScreenshot3(file.name);
+    if (name === "proofFollow") {
+      setProofFollow(file.name);
+    } else if (name === "proofStory") {
+      setProofStory(file.name);
+    } else if (name === "proofLike") {
+      setProofLike(file.name);
     }
   };
-
-  const checkAllFilled = () => {
-    if(
-        proofFollow &&
-        proofIntersummit &&
-        proofLike && 
-        proofPayment
-      ){
-        return true;
-      }
-      errorAlert({ message: "All fields are required" });
-      return false;
-    };
 
   const checkFileSize = (file) => {
     if (file.size <= 2000000) {
@@ -758,24 +711,17 @@ const SixthView = ({
     return false;
   };
 
-  const saveData = () => {
-    setFormData({
-        ...formData,
-        expectation: sanitizeInput(expectation)
-    });
-  }
+  // const handleNext = () => {
+  //   if (checkAllFilled()) {
+  //       saveData();
+  //       onNext();
+  //   }
+  // }
 
-  const handleNext = () => {
-    if (checkAllFilled()) {
-        saveData();
-        onNext();
-    }
-  }
-
-  const handleBack = () => {
-    saveData();
-    onPrevious();
-  }
+  // const handleBack = () => {
+  //   saveData();
+  //   onPrevious();
+  // }
 
   return(
     <div>
@@ -799,18 +745,18 @@ const SixthView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='screenshot1'
-                              name='screenshot1'
+                              id='proofFollow'
+                              name='proofFollow'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='screenshot1'
+                              htmlFor='proofFollow'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{screenshot1}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofFollow}</label>
                       </div>
                   </div>
                   <div className='mb-4'>
@@ -827,18 +773,18 @@ const SixthView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='screenshot2'
-                              name='screenshot2'
+                              id='proofStory'
+                              name='proofStory'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='screenshot2'
+                              htmlFor='proofStory'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{screenshot2}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofStory}</label>
                       </div>
                   </div>
                   <div className=''>
@@ -857,18 +803,18 @@ const SixthView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='screenshot3'
-                              name='screenshot3'
+                              id='proofLike'
+                              name='proofLike'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='screenshot3'
+                              htmlFor='proofLike'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{screenshot3}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofLike}</label>
                       </div>
                   </div>
                   <div className='mt-6 flex justify-between items-center'>
@@ -894,6 +840,183 @@ const SixthView = ({
   );
 };
 
+const PaymentView = ({ 
+  eventData, 
+  formData, 
+  setFormData, 
+  checkFileSize, 
+  checkFileType, 
+  onPrevious, 
+  onNext 
+}) => {
+  const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
+  const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+
+  const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+  // const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+  // const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+
+  //handling file change
+  const handleChange = (e) => {
+      const { name, value, files } = e.target;
+
+      const file = files[0];
+      
+      if (!checkFileSize(file)) {
+        return;
+      }
+
+      if (!checkFileType(file)) {
+        return;
+      }
+
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: files ? file : value,
+      }));
+      setProofPayment(file?.name);
+  };
+
+  //saving referral code
+  // useEffect(() => {
+  //     setFormData({
+  //         ...formData,
+  //         referralCode: verifiedRefCode
+  //     });
+  // }, [verifiedRefCode]);
+
+  //checking payment proof
+  const handleNext = () => {
+      if (checkPayment && proofPayment) {
+          onNext();
+      } else {
+        errorAlert({ message: "Proof must be uploaded"});
+      }
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+          <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+              <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+                  <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+                      <p className='text-white mx-4 mb-2 text-center'>
+                          Please transfer the following amount to complete your registration
+                      </p>
+                      <div className='text-white text-left w-40'>
+                          <div className='flex flex-row justify-between'>
+                              <p><strong>Price: </strong></p>
+                              <p>{regularPrice}</p>
+                          </div>
+                      {
+                          verifiedRefCode && refCodeValid && (
+                              <>
+                              <div className='flex flex-row justify-between'>
+                              <p><strong>Discount:</strong></p>
+                              <p>{discount}</p>
+                              </div>
+                              <div className='flex flex-row justify-between'>
+                              <p><strong>Total:</strong></p>
+                              <p><strong>{discountedPrice}</strong></p>
+                              </div>
+                              </>
+                          )
+                      }
+                      </div>
+                      <p className='text-white mx-4 text-center'>
+                          <strong>Bank Account Number: </strong>{bankAccount}
+                      </p>
+                  <div className='mt-4'>
+                      <label className='block text-white mb-2'>
+                          <input
+                              type='checkbox'
+                              name='checkPayment'
+                              checked={checkPayment}
+                              onChange={(e) => setCheckPayment(e.target.checked)}
+                              className='mr-2'
+                          />
+                          I have paid the registration fee
+                      </label>
+                      <div className='my-4 relative'>
+                          <input
+                              type='file'
+                              id='proofPayment'
+                              name='proofPayment'
+                              onChange={handleChange}
+                              className='absolute inset-0 opacity-0 cursor-pointer'
+                          />
+                          <label
+                              htmlFor='proofPayment'
+                              className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                          >
+                              Submit screenshot
+                          </label>
+                          <p className='text-white mt-4'>{proofPayment}</p>
+                      </div>
+                  </div>
+              </div>
+              <ReferralModal 
+              eventName="bmc"
+              referralCode={formData.referralCode ?? ''}
+              verifiedRefCode={verifiedRefCode}
+              setVerifiedRefCode={setVerifiedRefCode} 
+              setRefCodeValid={setRefCodeValid}
+              />
+              <div className='mt-6 flex justify-center items-center'>
+                  <button
+                      type='button'
+                      onClick={onPrevious}
+                      className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                  >
+                  Back
+                  </button>
+                  <button
+                      type='button'
+                      onClick={handleNext}
+                      className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                  >
+                  Next
+                  </button>
+              </div>
+          </div>
+      </div>
+    </div>
+  )
+};
+
+const Summary =({
+  formData,
+  onPrevious
+}) => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { setRegisteredEvents } = useUser();
+  const {intersummitID} = eventData;
+
+  const handleSubmit = async () => {
+    try{
+      setIsLoading(true);
+      const response = await postBMCRegistration(formData);
+      setIsLoading(false);
+      if(response.status === 200){
+        
+
+      }
+    } catch (error){
+      errorAlert({ message: "Oh no, something happened. Please try again!"});
+      navigate(HOME);
+    }
+  }
+
+
+
+};
 
 
 export default EventCard;
