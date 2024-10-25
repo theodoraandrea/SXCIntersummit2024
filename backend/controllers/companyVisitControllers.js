@@ -53,6 +53,7 @@ exports.registerCompanyVisit = async (req, res) => {
       attendanceType,
       gpa,
       semester,
+      linkedin,
       domicile,
       isCommittee,
       motivation,
