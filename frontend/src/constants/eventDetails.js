@@ -369,6 +369,9 @@ export const eventDetails = {
       "</br>2.&emsp;BCA: Friday, November 15th 2024" +
       "</br>&emsp;&emsp;14.00 - 16.30" +
       "</br>&emsp;&emsp;Menara BCA Grand Indonesia, Jl. M.H. Thamrin No.1, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310" +
+      "</br>3.&emsp;KPMG: Monday, November 18th 2024" +
+      "</br>&emsp;&emsp;9.00 - 13.30" +
+      "</br>&emsp;&emsp;Menara Astra, Jl. Jenderal Sudirman No.5-6 Lt 21, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10220" +
       "</br></br>" +
       "</br><strong>Participant Requirements:</strong>" +
       "</br>&emsp;&emsp;- <strong>Minimum Required Semester for Bosch</strong>: Final year students <strong>(above 5th semester).</strong>" +

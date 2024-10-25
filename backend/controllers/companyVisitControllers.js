@@ -121,6 +121,7 @@ exports.registerCompanyVisit = async (req, res) => {
         attendanceType,
         GPA: gpa,
         semester,
+        linkedin,
         domicile,
         question: qnaList,
         screenshotCompanyVisit,
