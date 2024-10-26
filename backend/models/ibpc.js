@@ -34,9 +34,6 @@ const IBPC = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
-    proof180DCUI: {
-      type: DataTypes.JSON,
-    },
     proofOfPayment: {
       type: DataTypes.JSON,
     },
