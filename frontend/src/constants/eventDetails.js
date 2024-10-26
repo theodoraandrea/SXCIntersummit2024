@@ -4,7 +4,8 @@ import {
   IBCC_REGIST,
   IBPC_REGIST,
   CHAMBERS_REGIST,
-  COMPVIS_REGISTRATION
+  COMPVIS_REGISTRATION,
+  INTERSUMMIT_REGISTRATION
 } from "./routes";
 
 const imgLocation = "/images/programs/";
@@ -447,11 +448,11 @@ export const eventDetails = {
   event_7: {
     title: "Summit",
     image: imgLocation + "summit.png",
-    openRegistration: false,
+    openRegistration: true, //change this
     description:
       "SxC International Summit is a peak event that provides an opportunity for individuals from all backgrounds to present their perspectives on current economic trends and engage with leading economists and industry experts.",
     timelineDesc: "Timeline details for Summit",
-    registerLink: ``,
+    registerLink: `${INTERSUMMIT_REGISTRATION}`,
     faq: [
       "Is the International Summit some kind of seminar event?",
       "When will the International Summit be held?",

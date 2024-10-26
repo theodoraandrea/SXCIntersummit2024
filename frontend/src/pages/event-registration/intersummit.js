@@ -1179,24 +1179,25 @@ const EventCard = () => {
     setCurrentView((prevView) => prevView + 2);
   };
 
+  // views 
   switch (currentView){
     case 1:
       return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
     case 2:
-      return <SecondView {...eventData} formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(2)}} />;
+      return <SecondView formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(2)}} />;
     case 3:
-      return
+      return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(2)}} onNext={handleNext} />;
     case 4:
-      return
+      return <FourthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext2} />;
     case 5:
-      return
+      return <FifthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
     case 6:
-      return
+      return <SixthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={()=>{setCurrentView(7)}} />;
     case 7:
-      return
+      return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext} />;
     case 8:
-      return
-    default:
+      return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(8)}}/>
+      default:
       return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
 
   }
