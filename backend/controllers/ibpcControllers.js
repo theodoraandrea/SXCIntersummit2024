@@ -32,6 +32,7 @@ exports.createNewTeam = async (req, res) => {
       "proofOfStory",
       "proofOfComment",
       "proofOfBroadcast",
+      "proof180DCUI"
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -66,6 +67,7 @@ exports.createNewTeam = async (req, res) => {
       `${teamName}_${user.fullname}_Proof of Student Card`,
       `${teamName}_${user.fullname}_Proof of Comment`,
       `${teamName}_${user.fullname}_Proof of Broadcast`,
+      `${teamName}_${user.fullname}_Proof of 180DCUI`,
     ];
     const rootFolderId = process.env.FOLDER_BUSINESS_PLAN_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
@@ -99,6 +101,11 @@ exports.createNewTeam = async (req, res) => {
       folderId,
       fileNames[4]
     );
+    const proof180dcui = await getImageURLsList(
+      files.proof180dcui,
+      folderId,
+      fileNames[5]
+    );
 
     const screenshotIBPC = [
       proofOfFollow,
@@ -106,6 +113,7 @@ exports.createNewTeam = async (req, res) => {
       studentIds,
       proofOfComment,
       proofOfBroadcast,
+      proof180dcui
     ];
 
     const newTeam = await IBPC.create({

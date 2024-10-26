@@ -16,6 +16,7 @@ router.post(
     { name: "originalityStatement", maxCount: 1 },
     { name: "proofOfComment", maxCount: 1 },
     { name: "proofOfBroadcast", maxCount: 1 },
+    { name: "proof180dcui", maxCount: 1 },
   ]),
   [
     body("teamName").notEmpty().withMessage("Team name is required"),

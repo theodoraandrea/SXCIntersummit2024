@@ -49,7 +49,9 @@ const FirstView = ({
   const [proofOfComment, setproofOfComment] = useState(
     formData.proofOfComment?.name ?? ""
   );
-
+  const [proof180dcui, setProof180dcui] = useState(
+    formData.proof180dcui?.name ?? ""
+  );
   const [originalityStatement, setOriginalityStatement] = useState(
     formData.originalityStatement?.name ?? ""
   );
@@ -151,6 +153,7 @@ const FirstView = ({
       twibbon3 &&
       proofOfStory &&
       proofOfComment &&
+      proof180dcui &&
       question &&
       proofOfBroadcast &&
       originalityStatement
@@ -226,6 +229,8 @@ const FirstView = ({
       setproofOfComment(file.name);
     } else if (name === "proofOfBroadcast") {
       setProofOfBroadcast(file.name);
+    } else if (name === "proof180dcui") {
+      setProof180dcui(file.name);
     } else if (name === "question") {
       setquestion(file.name);
     } else if (name === "originalityStatement") {
@@ -759,6 +764,29 @@ const FirstView = ({
               </div>
               <label className="text-sm text-white ml-2">
                 {proofOfBroadcast}
+              </label>
+            </div>
+            <label className="block text-white">
+                Proof of following @180dcui on Instagram
+            </label>
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">
+                <input
+                  type="file"
+                  id="proof180dcui"
+                  name="proof180dcui"
+                  onChange={handleChange}
+                  className="absolute inset-0 opacity-0 cursor-pointer z-10"
+                />
+                <label
+                  htmlFor="proof180dcui"
+                  className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+                >
+                  Choose file
+                </label>
+              </div>
+              <label className="text-sm text-white ml-2">
+                {proof180dcui}
               </label>
             </div>
 
@@ -1473,6 +1501,10 @@ const Summary = ({
               <p>
                 <strong>Proof of Broadcast</strong>{" "}
                 {formData.proofOfBroadcast?.name}
+              </p>
+              <p>
+                <strong>Proof of Following @180dcui </strong>{" "}
+                {formData.proof180dcui?.name}
               </p>
               <p>
                 <strong>Proof of Originality Statement</strong>{" "}
