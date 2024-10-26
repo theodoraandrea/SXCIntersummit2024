@@ -32,7 +32,7 @@ exports.createNewTeam = async (req, res) => {
       "proofOfStory",
       "proofOfComment",
       "proofOfBroadcast",
-      "proof180DCUI"
+      "proof180dcui"
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
