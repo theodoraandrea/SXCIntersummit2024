@@ -1268,6 +1268,9 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
   );
   const [proofOfComment, setProofOfComment] = useState(formData.proofOfComment?.name ?? ""
   );
+  const [proof180dcui, setProof180dcui] = useState(
+    formData.proof180dcui?.name ?? ""
+  );
   const [proofOfBroadcast, setProofOfBroadcast] = useState(formData.proofOfBroadcast?.name ?? "");
   const [twibbon1, setTwibbon1] = useState(formData.twibbonLink1 ?? "");
   const [twibbon2, setTwibbon2] = useState(formData.twibbonLink2 ?? "");
@@ -1295,7 +1298,7 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
   };
 
   const checkAllFilled = () => {
-    if (studentId && proofOfComment && proofOfFollow && proofOfStory && proofOfBroadcast) {
+    if (studentId && proofOfComment && proofOfFollow && proofOfStory && proofOfBroadcast && proof180dcui) {
       if (formData.registrationType === "Individual") {
         if (cv && twibbon1) {
           return true;
@@ -1344,6 +1347,8 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
       setProofOfComment(file.name);
     } else if (name === "proofOfBroadcast") {
       setProofOfBroadcast(file.name);
+    } else if (name === "proof180dcui") {
+      setProof180dcui(file.name);
     }
   };
 
@@ -1496,6 +1501,27 @@ const UploadsView = ({ formData, setFormData, checkFileSize, checkFileType, onNe
               </label>
               </div>
               <label className="text-sm text-white ml-2">{proofOfBroadcast}</label>
+            </div>
+            <label className="block text-white">
+            Proof of following @180dcui on Instagram
+            </label>
+            <div className="my-4 max-w-full flex flex-col space-y-2 sm:flex-row">
+              <div className="relative">              
+                <input
+                type="file"
+                id="proof180dcui"
+                name="proof180dcui"
+                onChange={handleChange}
+                className="absolute inset-0 opacity-0 cursor-pointer z-10"
+              />
+              <label
+                htmlFor="proof180dcui"
+                className="bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer z-20"
+              >
+                Choose file
+              </label>
+              </div>
+              <label className="text-sm text-white ml-2">{proof180dcui}</label>
             </div>
             <label className="text-white"
             hidden={formData.registrationType === "Individual"}
