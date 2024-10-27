@@ -43,7 +43,7 @@ const IntersummitSummary = () =>{
         for (let i=0; i < response.length; i++) {
           const item = response[i];
               const answers = handleQuestions(item.question);
-                setIntersummitData({
+                setuserData({
                   ...item,
                   eventSource: answers[0],
                   expectation: answers[1],
@@ -86,10 +86,10 @@ const IntersummitSummary = () =>{
       
                 {/* User Data and Session Info */}
                 <div className="flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25">
-                  {intersummitData.sessionType && (
+                  {userData.sessionType && (
                     <div className="bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg">
                       <p className="text-xl text-center text-gradient mb-2">
-                        <strong>{intersummitData.sessionType}</strong>
+                        <strong>{userData.sessionType}</strong>
                       </p>
                       <div className="text-sm md:text-base">
                         <p><strong>Full Name:</strong> {userData.fullname}</p>
@@ -104,22 +104,22 @@ const IntersummitSummary = () =>{
       
                         {/* Event Source and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{intersummitData.eventSource}</p>
+                        <p>{userData.eventSource}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{intersummitData.expectations}</p>
+                        <p>{userData.expectations}</p>
 
-                        {intersummitData.allergy && (
+                        {userData.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
-                            <p>{intersummitData.allergy}</p>
+                            <p>{userData.allergy}</p>
                           </>
                         )}
                         
-                        {intersummitData.referralCode && (
+                        {userData.referralCode && (
                           <>
                             <div className="border-t border-gray-300 my-4"></div>
-                            <p><strong>Referral Code: </strong>{intersummitData.referralCode}</p>
+                            <p><strong>Referral Code: </strong>{userData.referralCode}</p>
                           </>
                         )}
                       </div>
