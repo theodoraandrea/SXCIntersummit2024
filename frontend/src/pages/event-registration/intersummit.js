@@ -1121,17 +1121,17 @@ const Summary =({
 
 const EventCard = () => {
   const [currentView, setCurrentView] = useState(1);
+  const [formData, setFormData] = useState({});
 
     const eventData = {
       title: "International Summit",
-      description:"",
-      intersummitId: 1,
+      description:"</br>&emsp;<strong>1.&emsp;International Summit</strong>",
+      // intersummitId: 1,
       regularPrice: 0,
-      bankAccount: "BCA - ",
+      bankAccount: "BCA - [no rek]",
     };
 
   //all fields
-  const [formData, setFormData] = useState({});
 
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
@@ -1182,23 +1182,90 @@ const EventCard = () => {
   // views 
   switch (currentView){
     case 1:
-      return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+      return (
+        <FirstView 
+          eventData={eventData} 
+          formData={formData} 
+          setFormData={setFormData} 
+          onNext={handleNext} 
+        /> 
+      );
     case 2:
-      return <SecondView formData={formData} setFormData={setFormData} onNext={()=>{setCurrentView(2)}} />;
+      return (
+        <SecondView 
+          formData={formData} 
+          setFormData={setFormData} 
+          onNext={()=>{setCurrentView(2)}} 
+        />
+      );
     case 3:
-      return <ThirdView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInput} onPrevious={()=>{setCurrentView(2)}} onNext={handleNext} />;
+      return (
+        <ThirdView 
+          formData={formData} 
+          setFormData={setFormData} 
+          sanitizeInput={sanitizeInput} 
+          onPrevious={()=>{setCurrentView(2)}} 
+          onNext={handleNext} 
+        />
+      );
     case 4:
-      return <FourthView onPrevious={handlePrevious} onNextHave={handleNext} onNextHaveNot={handleNext2} />;
+      return (
+        <FourthView 
+          onPrevious={handlePrevious} 
+          onNextHave={handleNext} 
+          onNextHaveNot={handleNext2} 
+        />
+      );
     case 5:
-      return <FifthView formData={formData} setFormData={setFormData} sanitizeInput={sanitizeInputParagraph} onPrevious={handlePrevious} onNext={handleNext} />;
+      return (
+        <FifthView 
+          formData={formData} 
+          setFormData={setFormData} 
+          sanitizeInput={sanitizeInputParagraph} 
+          onPrevious={handlePrevious} 
+          onNext={handleNext} 
+        />
+      );
     case 6:
-      return <SixthView formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={()=>{setCurrentView(7)}} />;
+      return (
+        <SixthView 
+          formData={formData} 
+          setFormData={setFormData} 
+          checkFileSize={checkFileSize} 
+          checkFileType={checkFileTypeImage} 
+          onPrevious={handlePrevious} 
+          onNext={()=>{setCurrentView(7)}} 
+        />
+      );
     case 7:
-      return <PaymentView eventData={eventData} formData={formData} setFormData={setFormData} checkFileSize={checkFileSize} checkFileType={checkFileTypeImage} onPrevious={handlePrevious} onNext={handleNext} />;
+      return (
+        <PaymentView 
+          eventData={eventData} 
+          formData={formData} 
+          setFormData={setFormData} 
+          checkFileSize={checkFileSize} 
+          checkFileType={checkFileTypeImage} 
+          onPrevious={handlePrevious} 
+          onNext={handleNext} 
+        />
+      );
     case 8:
-      return <Summary eventData={eventData} formData={formData} onPrevious={()=>{setCurrentView(8)}}/>
+      return (
+        <Summary 
+          eventData={eventData} 
+          formData={formData} 
+          onPrevious={()=>{setCurrentView(8)}}
+        />
+      );
       default:
-      return <FirstView {...eventData} formData={formData} setFormData={setFormData} onNext={handleNext} />;
+      return (
+        <FirstView 
+          eventData={eventData} 
+          formData={formData} 
+          setFormData={setFormData} 
+          onNext={handleNext} 
+        />
+      );
 
   }
 
