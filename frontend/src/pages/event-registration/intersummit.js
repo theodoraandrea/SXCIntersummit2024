@@ -487,8 +487,99 @@ const ThirdView = ({
   );
 };
 
+//question
+const FourthView =({
+  formData,
+  setFormData,
+  sanitizeInput,
+  onPrevious,
+  onNext
+}) =>{
+
+ useEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+
+  const [question, setQuestion] = useState(formData.question ?? "");
+  const [charCount, setCharCount] = useState(formData.question?.length ?? 0);
+
+  const checkAllFilled = () => {
+    if (question) {
+      return true;
+    }
+    errorAlert({ message: "Field must be filled"});
+    return false;
+  };
+
+  const saveData = () => {
+    setFormData({
+      ...formData,
+      question: sanitizeInput(question)
+    });
+  }
+
+  const handleNext = () => {
+    if (checkAllFilled()) {
+      saveData();
+      onNext();
+    }
+  }
+
+  const handleBack = () => {
+    saveData();
+    onPrevious();
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 p-8 my-8 mx-2 max-w-full md:max-w-md rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient mb-4">
+            Do you have any questions for our speakers?
+          </h1>
+          <form className="text-left">
+            <div className="mb-4">
+              <textarea
+                name="question"
+                value={question}
+                onChange={(e) => {
+                  if (e.target.value.length <= 300) {
+                    setQuestion(e.target.value);
+                    setCharCount(e.target.value.length);
+                  }
+                }}
+                className="w-full h-40 px-3 py-2 rounded-lg text-sm"
+              />
+              <p className="text-right text-gray-300 text-sm">
+                {charCount}/300
+              </p>
+            </div>
+          </form>
+          <div className="mt-6 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={handleBack}
+              className="text-white px-6 py-2 mr-6 hover:text-gradient"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="text-white px-6 py-2 hover:text-gradient"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // dietary restriction 
-const FourthView = ({ 
+const FifthView = ({ 
   onPrevious, 
   onNextHave, 
   onNextHaveNot 
@@ -500,7 +591,7 @@ const FourthView = ({
           <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
               <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>Do you have any allergies or dietary restrictions?</h1>
               <div className='flex w-full justify-center'>
-                  {/* I have - goes to fifth view */}
+                  {/* I have - goes to sixth view */}
                   <div className='w-40'>
                       <button 
                           className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
@@ -510,7 +601,7 @@ const FourthView = ({
                       Yes, I have
                       </button>
                   </div>
-                  {/* I have not - goes to sixth view */}
+                  {/* I have not - goes to seventh view */}
                   <div className='w-40 ml-6'>
                       <button 
                           className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
@@ -533,7 +624,7 @@ const FourthView = ({
   </div>
 );
 
-const FifthView = ({
+const SixthView = ({
   formData,
   setFormData,
   sanitizeInput,
@@ -589,7 +680,7 @@ const FifthView = ({
                 name="allergy"
                 value={allergy}
                 onChange={(e) => {
-                  if (e.target.value.length <= 186) {
+                  if (e.target.value.length <= 300) {
                     setAllergy(e.target.value);
                     setCharCount(e.target.value.length);
                   }
@@ -597,7 +688,7 @@ const FifthView = ({
                 className="w-full h-40 px-3 py-2 rounded-lg text-sm"
               />
               <p className="text-right text-gray-300 text-sm">
-                {charCount}/186
+                {charCount}/300
               </p>
             </div>
           </form>
@@ -623,7 +714,7 @@ const FifthView = ({
   );
 };
 
-const SixthView = ({
+const SeventhView = ({
   formData,
   setFormData,
   checkFileSize,
@@ -1212,14 +1303,6 @@ const EventCard = () => {
     case 4:
       return (
         <FourthView 
-          onPrevious={handlePrevious} 
-          onNextHave={handleNext} 
-          onNextHaveNot={handleNext2} 
-        />
-      );
-    case 5:
-      return (
-        <FifthView 
           formData={formData} 
           setFormData={setFormData} 
           sanitizeInput={sanitizeInputParagraph} 
@@ -1227,7 +1310,25 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
+    case 5:
+      return (
+        <FifthView 
+          onPrevious={handlePrevious} 
+          onNextHave={handleNext} 
+          onNextHaveNot={handleNext2} 
+        />
+      );
     case 6:
+      return (
+        <SixthView 
+          formData={formData} 
+          setFormData={setFormData} 
+          sanitizeInput={sanitizeInputParagraph} 
+          onPrevious={handlePrevious} 
+          onNext={handleNext} 
+        />
+      );
+    case 7:
       return (
         <SixthView 
           formData={formData} 
@@ -1235,10 +1336,10 @@ const EventCard = () => {
           checkFileSize={checkFileSize} 
           checkFileType={checkFileTypeImage} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(7)}} 
+          onNext={()=>{setCurrentView(8)}} 
         />
       );
-    case 7:
+    case 8:
       return (
         <PaymentView 
           eventData={eventData} 

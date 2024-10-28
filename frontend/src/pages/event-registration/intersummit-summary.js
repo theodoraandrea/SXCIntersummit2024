@@ -43,7 +43,7 @@ const IntersummitSummary = () =>{
         for (let i=0; i < response.length; i++) {
           const item = response[i];
               const answers = handleQuestions(item.question);
-                setuserData({
+                setUserData({
                   ...item,
                   eventSource: answers[0],
                   expectation: answers[1],
@@ -59,8 +59,9 @@ const IntersummitSummary = () =>{
         //questions
         // 0 - eventSource
         // 1 - expectation
-        // 2 - have allergy?
-        // 3 - list allergy
+        // 2 - question for speaker
+        // 3 - have allergy?
+        // 4 - list allergy
         return answers;
     }
 
@@ -108,6 +109,9 @@ const IntersummitSummary = () =>{
                         
                         <strong>What are your expectations for this International Summit?</strong>
                         <p>{userData.expectations}</p>
+
+                        <strong>Do you have any questions for our speakers?</strong>
+                        <p>{userData.questions}</p>
 
                         {userData.allergy && (
                           <>
