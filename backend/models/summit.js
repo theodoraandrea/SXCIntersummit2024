@@ -30,6 +30,10 @@ const Summit = sequelize.define(
       ],
       allowNull: false,
     },
+    cityOfResidence: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
 
     statusDetail: {
       type: DataTypes.STRING,
@@ -39,9 +43,20 @@ const Summit = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
-    screenshotSummit: {
+    proofOfPayment: {
       type: DataTypes.JSON,
       allowNull: false,
+    },
+    proofOfFollow: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+    proofOfStory: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+    eTicket: {
+      type: DataTypes.STRING,
     },
   },
   {

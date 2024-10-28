@@ -93,7 +93,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
                 Online
               </option>
               <option value="offline" disabled={hasRegisteredOffline}>
-                Offline (BCA/Bosch)
+                Offline (BCA/Bosch/KPMG)
               </option>
             </select>
           </div>
@@ -388,9 +388,10 @@ const ThirdView = ({
   const [gpa, setGpa] = useState("");
   const [domicile, setDomicile] = useState("");
   const [cv, setCv] = useState("");
+  const [linkedin, setLinkedin] = useState("");
 
   const checkAllFilled = () => {
-    if (gpa && cv && domicile) {
+    if (gpa && cv && domicile && linkedin) {
       return true;
     }
     errorAlert({ message: "All fields must be filled" });
@@ -424,6 +425,8 @@ const ThirdView = ({
       setGpa(value);
     } else if (name === "domicile") {
       setDomicile(value);
+    } else if (name === "linkedin") {
+      setLinkedin(value);
     }
   };
 
@@ -457,6 +460,19 @@ const ThirdView = ({
               id="domicile"
               name="domicile"
               value={domicile}
+              onChange={handleChange}
+              className="w-full px-3 py-2 rounded-lg"
+            />
+          </div>
+          <div className="my-2 px-4">
+            <label className="block text-white mb-2" htmlFor="linkedin">
+              LinkedIn Link
+            </label>
+            <input
+              type="text"
+              id="linkedin"
+              name="linkedin"
+              value={linkedin}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg"
             />
@@ -514,7 +530,7 @@ const FourthView = ({
   }, []);
 
   const [selectedCompany, setSelectedCompany] = useState(
-    formData.selectedCompany ?? ""
+    formData.company ?? ""
   );
   const [semester, setSemester] = useState(formData.semester ?? "");
 
@@ -561,7 +577,6 @@ const FourthView = ({
       company: sanitizedCompany,
       semester: semester,
     });
-    console.log("Data Saved:", { selectedCompany: sanitizedCompany, semester });
   };
 
   const handleNext = () => {
@@ -681,6 +696,7 @@ const FourthView = ({
                 />
               </div>
               <div className="grid grid-cols-1 gap-4 text-left">
+                
                 <div className="flex p-4 items center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBosch"
@@ -688,7 +704,7 @@ const FourthView = ({
                     type="radio"
                     value="Bosch"
                     disabled={semester < 5}
-                    // {/* Disabled jika semester kurang dari 5 */}
+                    //  Disabled jika semester kurang dari 5
                     checked={selectedCompany === "Bosch"}
                     onChange={(e) => {
                       setSelectedCompany(e.target.value);
@@ -709,7 +725,7 @@ const FourthView = ({
                     type="radio"
                     value="BCA"
                     disabled={semester < 6}
-                    // {/* Disabled jika semester kurang dari 6 */}
+                    // Disabled jika semester kurang dari 6
                     checked={selectedCompany === "BCA"}
                     onChange={(e) => {
                       setSelectedCompany(e.target.value);
@@ -721,6 +737,25 @@ const FourthView = ({
                     className="w-full ml-2 text-xs sm:text-sm text-gray-800"
                   >
                     BCA (Only for students in 6th semester or above)
+                  </label>
+                </div>
+                
+                <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+                  <input
+                    id="companyKPMG"
+                    name="companyVisit"
+                    type="radio"
+                    value="KPMG"
+                    checked={selectedCompany === "KPMG"}
+                    onChange={(e) => {
+                      setSelectedCompany(e.target.value);
+                    }}
+                  />
+                  <label
+                    htmlFor="companyKPMG"
+                    className="w-full ml-2 text-xs sm:text-sm text-gray-800"
+                  >
+                    KPMG
                   </label>
                 </div>
               </div>
@@ -1517,7 +1552,7 @@ const Summary = ({ formData, onPrevious }) => {
                   Which company do you wish to participate in our Company Visit
                   Event?
                 </strong>
-                <p>{formData.selectedCompany}</p>
+                <p>{formData.company}</p>
 
                 <strong>
                   Are you from the StudentsxCEOs International Summit Committee?
@@ -1526,6 +1561,9 @@ const Summary = ({ formData, onPrevious }) => {
 
                 <strong>Domicile (City, Province)</strong>
                 <p>{formData.domicile}</p>
+
+                <strong>LinkedIn</strong>
+                <p>{formData.linkedin}</p>
 
                 <strong>University/Institution</strong>
                 <p>{formData.university}</p>

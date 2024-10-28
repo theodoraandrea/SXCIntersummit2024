@@ -32,6 +32,7 @@ exports.createNewTeam = async (req, res) => {
       "proofOfStory",
       "proofOfComment",
       "proofOfBroadcast",
+      "proof180dcui"
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -65,6 +66,7 @@ exports.createNewTeam = async (req, res) => {
       teamName + "_" + leader.fullname + "_Student IDs",
       teamName + "_" + leader.fullname + "_Proof of Payment",
       teamName + "_" + leader.fullname + "_Proof of Broadcast",
+      teamName + "_" + leader.fullname + "_Proof 180DCUI",
     ];
 
     const rootFolderId = process.env.FOLDER_BUSINESS_CASE_ID;
@@ -106,11 +108,18 @@ exports.createNewTeam = async (req, res) => {
       fileNames[5]
     );
 
+    const proof180dcui = await getImageURLsList(
+      files.proof180dcui,
+      folderId,
+      fileNames[6]
+    );
+
     const screenshotIBCC = [
       proofOfFollow,
       proofOfStory,
       proofOfComment,
       proofOfBroadcast,
+      proof180dcui
     ];
 
     const twibbonLinks = [twibbonLink1, twibbonLink2, twibbonLink3];

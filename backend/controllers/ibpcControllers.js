@@ -26,13 +26,13 @@ exports.createNewTeam = async (req, res) => {
     const { files, body } = req;
     // Check if there any required image not uploaded.
     const requiredFields = [
-      "proofOfPayment",
       "studentIds",
       "proofOfFollow",
       "originalityStatement",
       "proofOfStory",
       "proofOfComment",
       "proofOfBroadcast",
+      "proof180dcui"
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
@@ -41,10 +41,12 @@ exports.createNewTeam = async (req, res) => {
       });
     }
 
+    console.log(req.files);
+    console.log("=================");
+
     const {
       teamName,
       question,
-      referralCode,
       proofOfTwibbon,
       twibbonLink1,
       twibbonLink2,
@@ -54,6 +56,9 @@ exports.createNewTeam = async (req, res) => {
     const user = await User.findByPk(userId);
     const teamCode = generateTeamCode(6);
 
+    console.log(req.body);
+    console.log("============");
+
     const qnaList = { "How did you know this event?": question };
 
     const fileNames = [
@@ -62,14 +67,11 @@ exports.createNewTeam = async (req, res) => {
       `${teamName}_${user.fullname}_Proof of Student Card`,
       `${teamName}_${user.fullname}_Proof of Comment`,
       `${teamName}_${user.fullname}_Proof of Broadcast`,
+      `${teamName}_${user.fullname}_Proof of 180DCUI`,
     ];
     const rootFolderId = process.env.FOLDER_BUSINESS_PLAN_ID;
     const folderId = await createFolder("Team " + teamName, rootFolderId);
 
-    const proofOfPayment = await getImageURLsList(
-      files.proofOfPayment,
-      folderId
-    );
     const originalityStatement = await getImageURLsList(
       files.originalityStatement,
       folderId
@@ -99,6 +101,11 @@ exports.createNewTeam = async (req, res) => {
       folderId,
       fileNames[4]
     );
+    const proof180dcui = await getImageURLsList(
+      files.proof180dcui,
+      folderId,
+      fileNames[5]
+    );
 
     const screenshotIBPC = [
       proofOfFollow,
@@ -106,6 +113,7 @@ exports.createNewTeam = async (req, res) => {
       studentIds,
       proofOfComment,
       proofOfBroadcast,
+      proof180dcui
     ];
 
     const newTeam = await IBPC.create({
@@ -113,12 +121,12 @@ exports.createNewTeam = async (req, res) => {
       teamName,
       teamCode,
       question: qnaList,
-      proofOfPayment,
       proofOfTwibbon,
       originality: originalityStatement,
       screenshotIBPC,
-      referralCode: referralCode,
     });
+
+    console.log(newTeam);
 
     await CompetitionRegistration.create({
       userId,
@@ -276,11 +284,11 @@ exports.getTeamDetailsByUserId = async (req, res) => {
     res.status(200).json({
       teamName: team.teamName,
       teamCode: team.teamCode,
-      proofPayment: team.proofOfPayment,
+      proofPayment: team.proofOfPayment ? team.proofOfPayment : "",
       proofOfTwibbon: team.proofOfTwibbon,
       // twibbonLinks : team.twibbonLinks,
       screenshotIBPC: team.screenshotIBPC,
-      referralCode: team.referralCode,
+      referralCode: team.referralCode ? team.referralCode : "",
       members: teamMembers.map((member) => ({
         fullname: member.fullname,
         email: member.email,
