@@ -496,12 +496,11 @@ const postIntersummitRegistration = async (data) => {
 };
 
 const getIntersummitRegistrationData = async () => {
-  // Removed data parameter as it is not used
   try {
     const response = await axiosInstance.get(API_GET_INTERSUMMIT_REGISTRATION);
-    return response.data; // return response.data instead of response
+    return response.data; 
   } catch (error) {
-    console.error("Error fetching Intersummit registration data:", error); // Added specific error log
+    console.error("Error fetching Intersummit registration data:", error); 
     throw error;
   }
 };

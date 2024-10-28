@@ -471,7 +471,7 @@ export const eventDetails = {
         title: "Open Registration",
         date: "TBA",
         type: "register",
-        link: ``,
+        link: `${INTERSUMMIT_REGISTRATION}`,
       },
       {
         title: "Technical Meeting",

@@ -6,6 +6,7 @@ import { useUser } from "../../contexts/user-context";
 import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
 import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
 import { errorAlert, successAlert } from '../../components/alert';
+import { postIntersummitRegistration } from "../../service/services";
 
 
 // user data
@@ -1002,7 +1003,7 @@ const Summary =({
   const handleSubmit = async () => {
     try{
       setIsLoading(true);
-      const response = await postBMCRegistration(formData);
+      const response = await postIntersummitRegistration(formData);
       setIsLoading(false);
       if(response.status === 200){
         navigate(USER_DASHBOARD_PAGE);
@@ -1184,7 +1185,7 @@ const EventCard = () => {
     case 1:
       return (
         <FirstView 
-          eventData={eventData} 
+          {...eventData}
           formData={formData} 
           setFormData={setFormData} 
           onNext={handleNext} 
@@ -1260,7 +1261,7 @@ const EventCard = () => {
       default:
       return (
         <FirstView 
-          eventData={eventData} 
+          {...eventData}
           formData={formData} 
           setFormData={setFormData} 
           onNext={handleNext} 
