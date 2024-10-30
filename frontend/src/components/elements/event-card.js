@@ -21,18 +21,21 @@ const EventCard = ({ title, description, category, image, showDetail, id }) => {
         <div className="p-4 text-black flex flex-col justify-between">
           <h1 className="text-xl md:text-2xl font-extrabold mb-2">{title}</h1>
           <p className="text-sm md:text-base mb-4">{description}</p>
-          {showDetail && (
+          {
+            showDetail && 
             <Link to={eventDetailLink}>
-              <button className="bg-primary-3 px-4 py-2 rounded-lg text-white text-sm md:text-base hover:bg-primary-2">
-                View Program
-              </button>
+            <button className="bg-primary-3 px-4 py-2 rounded-lg text-white text-sm md:text-base hover:bg-primary-2">
+              View Program
+            </button>
             </Link>
-          )}
-          {!showDetail && (
+          }
+          {
+            !showDetail && 
             <button className="w-fit bg-primary-2 px-4 py-2 rounded-lg text-white text-sm md:text-base">
               Coming Soon!
-            </button>
-          )}
+          </button>
+          }
+
         </div>
       </div>
     </div>
