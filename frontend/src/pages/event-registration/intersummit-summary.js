@@ -88,22 +88,21 @@ const IntersummitSummary = () =>{
                   </p>
                 </div>
       
-                {/* User Data and Session Info */}
+                {/* User Data */}
                 {intersummitData.map((data, index) =>(
                 <div key={index} className="flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25">
-                  {data.sessionType && ( //change from userData to data
                     <div className="bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg">
                       <p className="text-xl text-center text-gradient mb-2">
-                        <strong>{userData && data.sessionType}</strong>
+                        <strong>{data}</strong>
                       </p>
                       <div className="text-sm md:text-base">
-                        <p><strong>Full Name:</strong> {userData.fullname}</p>
-                        <p><strong>Gender:</strong> {userData.gender}</p>
-                        <p><strong>University:</strong> {userData.institution}</p>
-                        <p><strong>Major:</strong> {userData.major}</p>
-                        <p><strong>Batch:</strong> {userData.batch}</p>
-                        <p><strong>Phone:</strong> {userData.phoneNumber}</p>
-                        <p><strong>Email:</strong> {userData.email}</p>
+                        <p><strong>Full Name:</strong> {data.fullname}</p>
+                        <p><strong>Gender:</strong> {data.gender}</p>
+                        <p><strong>University:</strong> {data.studentType}</p>
+                        <p><strong>Major:</strong> {data.major}</p>
+                        <p><strong>Batch:</strong> {data.batch}</p>
+                        <p><strong>Phone:</strong> {data.phoneNumber}</p>
+                        <p><strong>Email:</strong> {data.email}</p>
       
                         <div className="border-t border-gray-300 my-4"></div>
       
@@ -124,7 +123,7 @@ const IntersummitSummary = () =>{
                           </>
                         )}
                         
-                        {/* {userData.referralCode && (
+                        {/* {data.referralCode && (
                           <>
                             <div className="border-t border-gray-300 my-4"></div>
                             <p><strong>Referral Code: </strong>{userData.referralCode}</p>
@@ -132,7 +131,7 @@ const IntersummitSummary = () =>{
                         )} */}
                       </div>
                     </div>
-                  )}
+                  {/* )} */}
                 </div>
                 ))}
               </div>

@@ -7,10 +7,115 @@ import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE
 import { errorAlert, successAlert } from '../../components/alert';
 import { postIntersummitRegistration } from "../../service/services";
 
+const FirstView =({
+  formData,
+  setFormData,
+  onNext
+}) => {
+  const navigate = useNavigate();
+  const { loading, isLoggedIn, registeredEvents } = useUser();
+  const [studentType, setStudentType] = useState(formData.studentType ?? "");
+  const [hasRegistered, setHasRegistered] = useState(false);
+
+  useEffect(() => {
+    if (!loading) {
+      if (isLoggedIn) {
+      } else {
+        navigate(LANDING_PAGE);
+      }
+    }
+  }, [isLoggedIn, loading]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() =>{
+    if(registeredEvents.includes(7)){
+      setHasRegistered(true);
+    }
+  })
+
+   const checkAllFilled = () => {
+    if (studentType) {
+      return true;
+    }
+    errorAlert({ message: "Please enter your status"});
+    return false;
+  };
+
+  const handleSubmit = () => {
+    if(checkAllFilled()){
+      setFormData({
+        ...formData,
+        studentType: studentType,
+      });
+      onNext();
+    }
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient">International Summit</h1>
+          <p className="text-sm text-white my-6">
+            Select your current status.
+          </p>
+          <div className="mb-4">
+            <label
+              className="block text-white mb-2"
+              htmlFor="selectType"
+            ></label>
+            <select
+              id="selectType"
+              name="selectType"
+              className="w-full px-3 py-2 rounded-lg"
+              onChange={(e) => {
+                setStudentType(e.target.value);
+              }}
+              value={studentType}
+            >
+              <option value="" disabled>
+                Select your institution
+              </option>
+              <option value="High School Student">
+                High School Student
+              </option>
+              <option value="University Student">
+                University Student
+              </option>
+              <option value="Fresh Graduate">
+                Fresh Graduate
+              </option>
+              <option value="Employed">
+                Employed
+              </option>
+              <option value="Professional">
+                Professional
+              </option>
+              <option value="Entrepreneur">
+                Entrepreneur
+              </option>
+            </select>
+          </div>
+          <button
+            className="text-white px-6 py-2 rounded-full hover:text-gradient"
+            onClick={handleSubmit}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+};
+
 
 // user data
-const FirstView = ({
-    // eventData,
+const SecondView = ({
     formData,
     setFormData,
     onPrevious,
@@ -36,7 +141,6 @@ const FirstView = ({
   const [university, setUniversity] = useState("");
   const [major, setMajor] = useState("");
   const [batch, setBatch] = useState("");
-
 
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -239,7 +343,7 @@ const FirstView = ({
 };
 
 // how know event
-const SecondView = ({
+const ThirdView = ({
   formData,
   setFormData,
   sanitizeInput,
@@ -411,7 +515,7 @@ const SecondView = ({
 };
 
 // event expectations
-const ThirdView = ({
+const FourthView = ({
   formData,
   setFormData,
   sanitizeInput,
@@ -502,7 +606,7 @@ const ThirdView = ({
 };
 
 //question
-const FourthView =({
+const FifthView =({
   formData,
   setFormData,
   sanitizeInput,
@@ -593,7 +697,7 @@ const FourthView =({
 };
 
 // dietary restriction 
-const FifthView = ({ 
+const SixthView = ({ 
   onPrevious, 
   onNextHave, 
   onNextHaveNot 
@@ -605,7 +709,7 @@ const FifthView = ({
           <div className='bg-primary-4 p-8 sm:max-w-md max-w-full rounded-xl shadow-lg text-center'>
               <h1 className='text-3xl m-4 font-bold text-gradient mb-4'>Do you have any allergies or dietary restrictions?</h1>
               <div className='flex w-full justify-center'>
-                  {/* I have - goes to sixth view */}
+                  {/* I have - goes to seventh view */}
                   <div className='w-40'>
                       <button 
                           className='text-sm sm:text-base bg-primary-3 border-2 border-primary-3 w-full text-white sm:px-6 py-2 rounded-full' 
@@ -615,7 +719,7 @@ const FifthView = ({
                       Yes, I have
                       </button>
                   </div>
-                  {/* I have not - goes to seventh view */}
+                  {/* I have not - goes to eight view */}
                   <div className='w-40 ml-6'>
                       <button 
                           className='text-sm sm:text-base border-2 border-yellow-500 w-full text-yellow-500 sm:px-6 py-2 rounded-full' 
@@ -638,7 +742,7 @@ const FifthView = ({
   </div>
 );
 
-const SixthView = ({
+const SeventhView = ({
   formData,
   setFormData,
   sanitizeInput,
@@ -728,7 +832,7 @@ const SixthView = ({
   );
 };
 
-const SeventhView = ({
+const EightView = ({
   formData,
   setFormData,
   // checkFileSize,
@@ -1146,9 +1250,6 @@ const Summary =({
                 Please make sure all data is correct before submitting
               </p>
               <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
-                <strong>Session</strong>
-                <p>{formData.sessionType}</p>
-
                 <strong>Full Name</strong> 
                 <p>{formData.fullName}</p>
 
@@ -1156,7 +1257,7 @@ const Summary =({
                 <p>{formData.gender}</p>
 
                 <strong>Institution</strong>
-                <p>{formData.university}</p>
+                <p>{formData.studentType}</p>
 
                 <strong>Major</strong>
                 <p>{formData.major}</p>
@@ -1290,13 +1391,13 @@ const EventCard = () => {
     }
   };
 
-  const handleNext2 = () => {
-    setFormData({
-      ...formData,
-      allergy: "",
-    });
-    setCurrentView((prevView) => prevView + 2);
-  };
+  // const handleNext2 = () => {
+  //   setFormData({
+  //     ...formData,
+  //     allergy: "",
+  //   });
+  //   setCurrentView((prevView) => prevView + 2);
+  // };
 
   // views 
   switch (currentView){
@@ -1306,27 +1407,27 @@ const EventCard = () => {
           {...eventData}
           formData={formData} 
           setFormData={setFormData}
-          sanitizeInput={sanitizeInput} 
           onNext={handleNext} 
         /> 
       );
     case 2:
       return (
         <SecondView 
+          {...eventData}
           formData={formData} 
-          setFormData={setFormData} 
-          sanitizeInput={sanitizeInput}
-          onNext={()=>{setCurrentView(3)}} 
-        />
+          setFormData={setFormData}
+          sanitizeInput={sanitizeInput} 
+          onNext={handleNext} 
+        /> 
       );
-    case 3:
+    case 3: 
       return (
         <ThirdView 
           formData={formData} 
           setFormData={setFormData} 
-          sanitizeInput={sanitizeInput} 
-          onPrevious={()=>{setCurrentView(2)}} 
-          onNext={handleNext} 
+          sanitizeInput={sanitizeInput}
+          onNext={()=>{setCurrentView(4)}} 
+          onPrevious={handlePrevious}
         />
       );
     case 4:
@@ -1334,27 +1435,27 @@ const EventCard = () => {
         <FourthView 
           formData={formData} 
           setFormData={setFormData} 
-          sanitizeInput={sanitizeInputParagraph} 
-          onPrevious={handlePrevious} 
+          sanitizeInput={sanitizeInput} 
+          onPrevious={()=>{setCurrentView(3)}} 
           onNext={handleNext} 
         />
       );
     case 5:
       return (
         <FifthView 
-          onPrevious={handlePrevious} 
-          onNextHave={handleNext} 
-          onNextHaveNot={()=>{setCurrentView(7)}} 
-        />
-      );
-    case 6:
-      return (
-        <SixthView 
           formData={formData} 
           setFormData={setFormData} 
           sanitizeInput={sanitizeInputParagraph} 
           onPrevious={handlePrevious} 
           onNext={handleNext} 
+        />
+      );
+    case 6:
+      return (
+        <SixthView 
+          onPrevious={handlePrevious} 
+          onNextHave={handleNext} 
+          onNextHaveNot={()=>{setCurrentView(8)}} 
         />
       );
     case 7:
@@ -1362,13 +1463,23 @@ const EventCard = () => {
         <SeventhView 
           formData={formData} 
           setFormData={setFormData} 
-          checkFileSize={checkFileSize} 
-          checkFileType={checkFileTypeImage} 
+          sanitizeInput={sanitizeInputParagraph} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(8)}} 
+          onNext={handleNext} 
         />
       );
     case 8:
+      return (
+        <EightView 
+          formData={formData} 
+          setFormData={setFormData} 
+          checkFileSize={checkFileSize} 
+          checkFileType={checkFileTypeImage} 
+          onPrevious={handlePrevious} 
+          onNext={()=>{setCurrentView(9)}} 
+        />
+      );
+    case 9:
       return (
         <PaymentView 
           eventData={eventData} 
@@ -1380,12 +1491,12 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 9:
+    case 10:
       return (
         <Summary 
           eventData={eventData} 
           formData={formData} 
-          onPrevious={()=>{setCurrentView(8)}}
+          onPrevious={()=>{setCurrentView(9)}}
         />
       );
       default:
@@ -1394,7 +1505,6 @@ const EventCard = () => {
           {...eventData}
           formData={formData} 
           setFormData={setFormData}
-          sanitizeInput={sanitizeInput} 
           onNext={handleNext} 
         />
       );
