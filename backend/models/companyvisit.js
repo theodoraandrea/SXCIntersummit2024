@@ -31,6 +31,9 @@ const CompanyVisit = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: true,
     },
+    linkedin: {
+      type: DataTypes.STRING,
+    },
     semester: {
       type: DataTypes.INTEGER,
       allowNull: false,

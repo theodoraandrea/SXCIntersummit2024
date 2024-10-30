@@ -10,13 +10,13 @@ router.post(
   "/team",
   isAuthenticated,
   upload.fields([
-    { name: "proofOfPayment", maxCount: 1 },
     { name: "studentIds", maxCount: 1 },
     { name: "proofOfFollow", maxCount: 1 },
     { name: "proofOfStory", maxCount: 1 },
     { name: "originalityStatement", maxCount: 1 },
     { name: "proofOfComment", maxCount: 1 },
-    { name: "proofOfBroadcast", maxCount: 1},
+    { name: "proofOfBroadcast", maxCount: 1 },
+    { name: "proof180dcui", maxCount: 1 },
   ]),
   [
     body("teamName").notEmpty().withMessage("Team name is required"),
