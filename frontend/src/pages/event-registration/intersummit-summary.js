@@ -9,61 +9,64 @@ const IntersummitSummary = () =>{
   const { profileData, isLoggedIn, loading } = useUser();
   const[ userData, setUserData] = useState({});
   const [response, setResponse] = useState({});
+  const [intersummitData, setIntersummitData] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
 
-    useEffect(() => {
-      if (isLoggedIn) {
-        fetchRegistrationData();
-      }
-    }, [isLoggedIn]);
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchRegistrationData();
+    }
+  }, [isLoggedIn]);
 
-    useEffect(() => {
-      if (!loading) {
-        setUserData(profileData);
-      }
-    }, [loading, profileData]);
+  useEffect(() => {
+    if (!loading) {
+      setUserData(profileData);
+    }
+  }, [loading, profileData]);
 
-    const fetchRegistrationData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await getIntersummitRegistrationData();
-        setResponse(response);
-      } catch (error) {
-        // error
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchRegistrationData = async () => {
+    try {
+      setIsLoading(true);
+      const response = await getIntersummitRegistrationData();
+      setResponse(response);
+    } catch (error) {
+      console.error("Error fetching registration data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    useEffect(() => {
+  useEffect(() => {
+    if (response.length > 0) {
         setFormData();
-    }, [response]);
-
-    const setFormData = () => {
-        for (let i=0; i < response.length; i++) {
-          const item = response[i];
-              const answers = handleQuestions(item.question);
-                setUserData({
-                  ...item,
-                  eventSource: answers[0],
-                  expectation: answers[1],
-                  hasAllergy: answers[2],
-                  allergy: answers[3],
-                });
-        }
     }
+  }, [response]);
 
-    const handleQuestions = (string) => {
+  const setFormData = () => {
+      const updatedData = response.map((item) => {
+          const answers = handleQuestions(item.question);
+          return {
+              ...item,
+              eventSource: answers[0],
+              expectation: answers[1],
+              question: answers[2],
+              hasAllergy: answers[3],
+              allergy: answers[4],
+          };
+      });
+      setIntersummitData(updatedData);
+  };
+
+
+  const handleQuestions = (string) => {
+    try {
         const qna = JSON.parse(string);
-        const answers = qna.map(i => Object.values(i)[0]);
-        //questions
-        // 0 - eventSource
-        // 1 - expectation
-        // 2 - question for speaker
-        // 3 - have allergy?
-        // 4 - list allergy
-        return answers;
+        return qna.map(i => Object.values(i)[0]);
+    } catch (error) {
+        console.error("Error parsing questions:", error);
+        return [];
     }
+  };
 
     return (
         <div>
@@ -86,11 +89,12 @@ const IntersummitSummary = () =>{
                 </div>
       
                 {/* User Data and Session Info */}
-                <div className="flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25">
-                  {userData.sessionType && (
+                {intersummitData.map((data, index) =>(
+                <div key={index} className="flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25">
+                  {data.sessionType && ( //change from userData to data
                     <div className="bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg">
                       <p className="text-xl text-center text-gradient mb-2">
-                        <strong>{userData.sessionType}</strong>
+                        <strong>{userData && data.sessionType}</strong>
                       </p>
                       <div className="text-sm md:text-base">
                         <p><strong>Full Name:</strong> {userData.fullname}</p>
@@ -105,31 +109,32 @@ const IntersummitSummary = () =>{
       
                         {/* Event Source and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{userData.eventSource}</p>
+                        <p>{data.eventSource}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{userData.expectations}</p>
+                        <p>{data.expectations}</p>
 
                         <strong>Do you have any questions for our speakers?</strong>
-                        <p>{userData.questions}</p>
+                        <p>{data.questions}</p>
 
-                        {userData.allergy && (
+                        {data.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
-                            <p>{userData.allergy}</p>
+                            <p>{data.allergy}</p>
                           </>
                         )}
                         
-                        {userData.referralCode && (
+                        {/* {userData.referralCode && (
                           <>
                             <div className="border-t border-gray-300 my-4"></div>
                             <p><strong>Referral Code: </strong>{userData.referralCode}</p>
                           </>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   )}
                 </div>
+                ))}
               </div>
             )}
           </div>

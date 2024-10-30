@@ -4,7 +4,6 @@ import Spinner from "../../components/elements/spinner";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
-import { USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from "../../constants/routes";
 import { errorAlert, successAlert } from '../../components/alert';
 import { postIntersummitRegistration } from "../../service/services";
 
@@ -26,7 +25,7 @@ const FirstView = ({
     setEmail(profileData?.email);
     setPhoneNumber(profileData?.phoneNumber);
     setUniversity(profileData?.institution);
-    setMajor(profileData?.major);
+    setMajor(profileData?.major)
     setBatch(profileData?.batch);
   }, [profileData]);
 
@@ -71,6 +70,21 @@ const FirstView = ({
     }
     errorAlert({ message: "All fields are required!"});
     return false;
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    let inputValue = e.target.value;
+
+    let numericValue = inputValue.replace(/\D/g, "");
+
+    if (!numericValue.startsWith("62")) {
+      if (numericValue.startsWith("0")) {
+        numericValue = numericValue.slice(1);
+      }
+      numericValue = `62${numericValue}`;
+    }
+
+    setPhoneNumber(numericValue);
   };
 
   const formatPhoneNumber = () => {
@@ -717,8 +731,8 @@ const SixthView = ({
 const SeventhView = ({
   formData,
   setFormData,
-  checkFileSize,
-  checkFileType,
+  // checkFileSize,
+  // checkFileType,
   onPrevious,
   onNext
 }) => {
@@ -1002,18 +1016,18 @@ const PaymentView = ({
                               <p>{regularPrice}</p>
                           </div>
                       {
-                          verifiedRefCode && refCodeValid && (
-                              <>
-                              <div className='flex flex-row justify-between'>
-                              <p><strong>Discount:</strong></p>
-                              <p>{discount}</p>
-                              </div>
-                              <div className='flex flex-row justify-between'>
-                              <p><strong>Total:</strong></p>
-                              <p><strong>{discountedPrice}</strong></p>
-                              </div>
-                              </>
-                          )
+                          // verifiedRefCode && refCodeValid && (
+                          //     <>
+                          //     <div className='flex flex-row justify-between'>
+                          //     <p><strong>Discount:</strong></p>
+                          //     <p>{discount}</p>
+                          //     </div>
+                          //     <div className='flex flex-row justify-between'>
+                          //     <p><strong>Total:</strong></p>
+                          //     <p><strong>{discountedPrice}</strong></p>
+                          //     </div>
+                          //     </>
+                          // )
                       }
                       </div>
                       <p className='text-white mx-4 text-center'>
@@ -1048,13 +1062,13 @@ const PaymentView = ({
                       </div>
                   </div>
               </div>
-              <ReferralModal 
-              eventName="bmc"
+              {/* <ReferralModal 
+              eventName="summit"
               referralCode={formData.referralCode ?? ''}
               verifiedRefCode={verifiedRefCode}
               setVerifiedRefCode={setVerifiedRefCode} 
               setRefCodeValid={setRefCodeValid}
-              />
+              /> */}
               <div className='mt-6 flex justify-center items-center'>
                   <button
                       type='button'
@@ -1089,7 +1103,10 @@ const Summary =({
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { setRegisteredEvents } = useUser();
-  const { intersummitId } = eventData;
+
+  let intersummitId;
+
+  intersummitId = 7;
 
   const handleSubmit = async () => {
     try{
@@ -1100,7 +1117,6 @@ const Summary =({
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, intersummitId]);
         successAlert({ 
-          eventId: "event_1",
           message: "Successfully registered for Intersummit. Please check your email for further details!"})
       }
     } catch (error){
@@ -1123,31 +1139,42 @@ const Summary =({
             </div>
           ) : (
             <div className="bg-primary-4 mx-2 my-8 max-w-full md:max-w-lg flex items-center flex-col col-span-2 rounded-xl shadow-lg p-10 bg-opacity-25">
-              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">International Summit Registration Form</p>
+              <p className="text-xl sm:text-3xl text-gradient font-bold mb-2">
+                International Summit Registration Form
+              </p>
               <p className="text-sm text-center font-semibold mb-2">
                 Please make sure all data is correct before submitting
               </p>
               <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
                 <strong>Session</strong>
                 <p>{formData.sessionType}</p>
+
                 <strong>Full Name</strong> 
                 <p>{formData.fullName}</p>
+
                 <strong>Gender</strong> 
                 <p>{formData.gender}</p>
+
                 <strong>Institution</strong>
                 <p>{formData.university}</p>
+
                 <strong>Major</strong>
                 <p>{formData.major}</p>
+
                 <strong>Batch</strong>
                 <p>{formData.batch}</p>
+
                 <strong>Phone</strong>
                 <p>{formData.phoneNumber}</p>
+
                 <strong>Email</strong>
                 <p>{formData.email}</p>
+
               </div>
+
               <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
                 <div className="border-t border-gray-300 my-4"></div>
-                <strong>How did you know this event?</strong>
+                {/* <strong>How did you know this event?</strong>
                 <p>
                   {formData.eventSource === "Other"
                     ? `${formData.eventSource}${
@@ -1156,7 +1183,7 @@ const Summary =({
                           : ""
                       }`
                     : `SxC InterSummit ${formData.eventSource}`}
-                </p>
+                </p> */}
                 {formData.experience ? (
                   <>
                     <strong>
@@ -1246,7 +1273,7 @@ const EventCard = () => {
     if(file.type === "image/jpeg" || file.type === "image/png"){
       return true;
     }
-    const meesage = "File has to be jpg, jpeg, or png";
+    const message = "File has to be jpg, jpeg, or png";
     errorAlert({message: message});
     return false;
   }
@@ -1278,7 +1305,8 @@ const EventCard = () => {
         <FirstView 
           {...eventData}
           formData={formData} 
-          setFormData={setFormData} 
+          setFormData={setFormData}
+          sanitizeInput={sanitizeInput} 
           onNext={handleNext} 
         /> 
       );
@@ -1287,7 +1315,8 @@ const EventCard = () => {
         <SecondView 
           formData={formData} 
           setFormData={setFormData} 
-          onNext={()=>{setCurrentView(2)}} 
+          sanitizeInput={sanitizeInput}
+          onNext={()=>{setCurrentView(3)}} 
         />
       );
     case 3:
@@ -1315,7 +1344,7 @@ const EventCard = () => {
         <FifthView 
           onPrevious={handlePrevious} 
           onNextHave={handleNext} 
-          onNextHaveNot={handleNext2} 
+          onNextHaveNot={()=>{setCurrentView(7)}} 
         />
       );
     case 6:
@@ -1330,7 +1359,7 @@ const EventCard = () => {
       );
     case 7:
       return (
-        <SixthView 
+        <SeventhView 
           formData={formData} 
           setFormData={setFormData} 
           checkFileSize={checkFileSize} 
@@ -1351,7 +1380,7 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 8:
+    case 9:
       return (
         <Summary 
           eventData={eventData} 
@@ -1364,7 +1393,8 @@ const EventCard = () => {
         <FirstView 
           {...eventData}
           formData={formData} 
-          setFormData={setFormData} 
+          setFormData={setFormData}
+          sanitizeInput={sanitizeInput} 
           onNext={handleNext} 
         />
       );
