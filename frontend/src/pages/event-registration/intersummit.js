@@ -1500,7 +1500,7 @@ const EventCard = () => {
         <Summary 
           eventData={eventData} 
           formData={formData} 
-          onPrevious={()=>{setCurrentView(9)}}
+          onPrevious={()=>{setCurrentView(8)}}
         />
       );
       default:
