@@ -96,13 +96,13 @@ const IntersummitSummary = () =>{
                         <strong>{data}</strong>
                       </p>
                       <div className="text-sm md:text-base">
-                        <p><strong>Full Name:</strong> {data.fullname}</p>
-                        <p><strong>Gender:</strong> {data.gender}</p>
-                        <p><strong>University:</strong> {data.studentType}</p>
-                        <p><strong>Major:</strong> {data.major}</p>
-                        <p><strong>Batch:</strong> {data.batch}</p>
-                        <p><strong>Phone:</strong> {data.phoneNumber}</p>
-                        <p><strong>Email:</strong> {data.email}</p>
+                        <p><strong>Full Name:</strong> {userData.fullname}</p>
+                        <p><strong>Gender:</strong> {userData.gender}</p>
+                        <p><strong>University:</strong> {userData.university}</p>
+                        <p><strong>Major:</strong> {userData.major}</p>
+                        <p><strong>Batch:</strong> {userData.batch}</p>
+                        <p><strong>Phone:</strong> {userData.phoneNumber}</p>
+                        <p><strong>Email:</strong> {userData.email}</p>
       
                         <div className="border-t border-gray-300 my-4"></div>
       
