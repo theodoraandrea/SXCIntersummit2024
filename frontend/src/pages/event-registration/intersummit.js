@@ -1480,29 +1480,29 @@ const EventCard = () => {
           checkFileSize={checkFileSize} 
           checkFileType={checkFileTypeImage} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(9)}} 
+          onNext={()=>{setCurrentView(10)}} 
         />
       );
     case 9:
-      return (
-        <PaymentView 
-          eventData={eventData} 
-          formData={formData} 
-          setFormData={setFormData} 
-          checkFileSize={checkFileSize} 
-          checkFileType={checkFileTypeImage} 
-          onPrevious={handlePrevious} 
-          onNext={handleNext} 
-        />
-      );
-    case 10:
       // return (
-      //   <Summary 
+      //   <PaymentView 
       //     eventData={eventData} 
       //     formData={formData} 
-      //     onPrevious={()=>{setCurrentView(9)}}
+      //     setFormData={setFormData} 
+      //     checkFileSize={checkFileSize} 
+      //     checkFileType={checkFileTypeImage} 
+      //     onPrevious={handlePrevious} 
+      //     onNext={handleNext} 
       //   />
       // );
+    case 10:
+      return (
+        <Summary 
+          eventData={eventData} 
+          formData={formData} 
+          onPrevious={()=>{setCurrentView(9)}}
+        />
+      );
       default:
       return (
         <FirstView 
