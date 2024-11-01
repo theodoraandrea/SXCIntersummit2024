@@ -13,7 +13,7 @@ router.post(
   upload.fields([
     { name: "proofOfFollow", minCount: 1, maxCount: 1 },
     { name: "proofOfStory", minCount: 1, maxCount: 1 },
-    { name: "proofOfPayment", minCount: 1, maxCount: 1 },
+    { name: "proofOfPayment", maxCount: 1 },
     { name: "proofOfLikeAndComment", minCount: 1, maxCount: 1 },
   ]),
   [

@@ -154,6 +154,8 @@ const SecondView = ({
         fullName: sanitizeInput(fullName),
         gender: sanitizeInput(gender),
         email: email,
+        major:major,
+        batch:batch,
         phoneNumber: phoneNumber,
         };
         setFormData(formData);
@@ -716,7 +718,7 @@ const SixthView = ({
                           onClick={onNextHave} 
                           aria-label='I have'
                       >
-                      Yes, I have
+                      Yes, I do
                       </button>
                   </div>
                   {/* I have not - goes to eight view */}
@@ -726,7 +728,7 @@ const SixthView = ({
                           onClick={onNextHaveNot} 
                           aria-label='I have not'
                       >
-                          No, I have not
+                          No, I do not
                       </button>
                   </div>
               </div>
@@ -1308,15 +1310,15 @@ const Summary =({
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
                   <strong>Proof of following our Instagram:</strong>{" "}
-                  {formData.screenshot1.name}
+                  {formData.proofFollow.name}
                 </p>
                 <p>
-                  <strong>Proof of reposting the Internation Summit poster:</strong>{" "}
-                  {formData.screenshot2.name}
+                  <strong>Proof of reposting the International Summit poster:</strong>{" "}
+                  {formData.proofStory.name}
                 </p>
                 <p>
                   <strong>Proof of like & comment on the International Summit poster:</strong>{" "}
-                  {formData.screenshot3.name}
+                  {formData.proofLike.name}
                 </p>
               </div>
               <div className="flex w-full mt-6 justify-between">
