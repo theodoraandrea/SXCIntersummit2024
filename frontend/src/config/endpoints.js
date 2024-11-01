@@ -53,8 +53,8 @@ const COMVIS_SUMMARY = "/company-visit/summary";
 
 
 // Intersummit 
-const INTERSUMMIT_REGISTRATION = "/intersummit";
-const INTERSUMMIT_SUMMARY = "/intersummit/summary";
+const INTERSUMMIT_REGISTRATION = "/summit";
+const INTERSUMMIT_SUMMARY = "/summit/summary";
 
 
 // Concat URLs
