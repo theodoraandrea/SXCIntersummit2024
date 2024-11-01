@@ -49,8 +49,8 @@ exports.registerSummit = async (req, res) => {
       return res.status(500).json({ message: "Already Registered Summit" });
 
     const qnaList = [
-      { "Find out about event": body.findAboutEvent },
-      { "Event Expectation": body.eventExpectation },
+      { "Find out about event": body.eventSource },
+      { "Event Expectation": body.expectation },
       {
         "Question for Speaker": body.question,
       },
