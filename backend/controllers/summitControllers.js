@@ -75,11 +75,12 @@ exports.registerSummit = async (req, res) => {
       folderId,
       fileNames[1]
     );
+    /*
     const proofOfPayment = await getImageURLsList(
       files.proofOfPayment,
       folderId,
       fileNames[2]
-    );
+    );*/
     const proofOfLikeAndComment = await getImageURLsList(
       files.proofOfLikeAndComment,
       folderId,
