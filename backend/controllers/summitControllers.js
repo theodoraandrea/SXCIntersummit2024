@@ -18,7 +18,7 @@ exports.registerSummit = async (req, res) => {
     const requiredFields = [
       "proofOfFollow",
       "proofOfStory",
-      "proofOfPayment",
+      //"proofOfPayment",
       "proofOfLikeAndComment",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
