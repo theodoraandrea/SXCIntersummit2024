@@ -15,7 +15,12 @@ exports.registerSummit = async (req, res) => {
     }
 
     // Check if there any required image not uploaded.
-    const requiredFields = ["proofOfFollow", "proofOfStory", "proofOfPayment"];
+    const requiredFields = [
+      "proofOfFollow",
+      "proofOfStory",
+      "proofOfPayment",
+      "proofOfLikeAndComment",
+    ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
         message:
@@ -44,6 +49,7 @@ exports.registerSummit = async (req, res) => {
       return res.status(500).json({ message: "Already Registered Summit" });
 
     const qnaList = [
+      { "Find out about event": body.findAboutEvent },
       { "Event Expectation": body.eventExpectation },
       {
         "Question for Speaker": body.question,
@@ -54,6 +60,7 @@ exports.registerSummit = async (req, res) => {
       `${user.fullname}_Proof of Follow`,
       `${user.fullname}_Proof of Instastory`,
       `${user.fullname}_Proof of Payment`,
+      `${user.fullname}_Proof of Like and Comment`,
     ];
     const rootFolderId = process.env.FOLDER_SUMMIT_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
@@ -73,6 +80,11 @@ exports.registerSummit = async (req, res) => {
       folderId,
       fileNames[2]
     );
+    const proofOfLikeAndComment = await getImageURLsList(
+      files.proofOfLikeAndComment,
+      folderId,
+      fileNames[3]
+    );
 
     const eventRegistration = await EventRegistration.create({
       userId: userId,
@@ -90,6 +102,7 @@ exports.registerSummit = async (req, res) => {
         proofOfStory,
         proofOfFollow,
         proofOfPayment,
+        proofOfLikeAndComment,
       });
     } catch (error) {
       await EventRegistration.destroy({

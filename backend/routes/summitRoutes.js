@@ -14,6 +14,7 @@ router.post(
     { name: "proofOfFollow", minCount: 1, maxCount: 1 },
     { name: "proofOfStory", minCount: 1, maxCount: 1 },
     { name: "proofOfPayment", minCount: 1, maxCount: 1 },
+    { name: "proofOfLikeAndComment", minCount: 1, maxCount: 1 },
   ]),
   [
     body("cityOfResidence")
@@ -33,6 +34,9 @@ router.post(
       .withMessage(
         "Status msut be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
       ),
+    body("findAboutEvent")
+      .notEmpty()
+      .withMessage("Find out about event is required"),
     body("statusDetail").notEmpty().withMessage("Status detail is required"),
     body("question").notEmpty().withMessage("Question is required"),
     body("eventExpectation")

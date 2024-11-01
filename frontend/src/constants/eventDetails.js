@@ -453,7 +453,37 @@ export const eventDetails = {
     image: imgLocation + "summit.png",
     openRegistration: true, //change this
     description:
-      "SxC International Summit is a peak event that provides an opportunity for individuals from all backgrounds to present their perspectives on current economic trends and engage with leading economists and industry experts.",
+      "The StudentsxCEOs International Summit is <strong>the peak event</strong> offering individuals <strong>present their perspectives on current economic trends and engage with leading economists and industry experts.</strong> This summit offers a platform for students to connect with leading economists and industry leaders." + 
+      "</br></br>" +
+      "The grand theme for this summit is <strong>“Pioneering Leadership in the Digital Economy: Strategies for Innovation and Growth from Industry Leaders' Perspective”.</strong> Participants will explore key insights and practical approaches to drive innovation and leadership in today’s fast-evolving digital economy." + 
+      "</br></br>" +
+      "<strong>The international summit consist of</strong>" +
+      "</br></br><strong>&emsp;&emsp;1.&emsp;Prompt Presentation Session</strong>" +
+      "</br>&emsp;&emsp;<strong>Session Title: “Strategic Growth in the Digital Age: Lessons from Industry Leaders”.</strong> </br>International speaker will present practical strategies to address the challenges of the digital economy. The session includes real-world examples of successful digital transformations and essential steps for effective leadership." +
+      "</br></br><strong>&emsp;&emsp;2.&emsp;Panel Discussion Session</strong>" +
+      "</br>&emsp;&emsp;<strong>Session Title: “Digital Leadership: Driving Innovation in the Modern Economy”.</strong></br>This panel will feature two national speakers who will dive into the crucial role of leadership in fostering innovation and leveraging technology for business growth. The session will end with a Q&A where participants can engage with the speakers on stage." +
+      "</br></br><strong>&emsp;&emsp;3.&emsp;Career & Job Fair</strong>" +
+      "</br>&emsp;&emsp;Participants will have <strong>access to numerous career opportunities,</strong> interact with company representatives at booths, explore potential job openings, and receive valuable career advice." +
+      "</br></br><strong>&emsp;&emsp;4.&emsp;Best Participants & Competition Awarding</strong>" +
+      "</br>&emsp;&emsp;Recognition of <strong>the most active participants and the announcement of the International Business Competition winners</strong> during a special awards ceremony." +
+      "</br></br><strong>&emsp;&emsp;5.&emsp;Guest Star Performance</strong>" +
+      "</br>&emsp;&emsp;Enjoy <strong>a closing performance by recognized  bands,</strong>  offering an exciting end to the summit." +
+      "</br></br>" +
+
+      "<strong>When and Where</strong></br>" +
+      "Date : Sunday, 1st December 2024" +
+      "</br>" +
+      "Time : 10.00 AM - 03.15 PM" +
+      "</br>" +
+      "</br>" +
+      "<strong>What Will You Get</strong>" +
+      "</br>&emsp;&emsp;- Enhanced <strong>skills and knowledge</strong> in the digital economy" +
+      "</br>&emsp;&emsp;- Expert perspectives from industry leaders in <strong>top multinational company</strong> during sessions" +
+      "</br>&emsp;&emsp;- Interactive learning through discussions and Q&A" +
+      "</br>&emsp;&emsp;- Emerging <strong>job opportunities</strong> at the career & job fair" +
+      "</br>&emsp;&emsp;- <strong>Networking session</strong> with the top level speakers" +
+      "</br>&emsp;&emsp;- E-Certificate for all participants" 
+      ,
     timelineDesc: "Timeline details for Summit",
     registerLink: `${INTERSUMMIT_REGISTRATION}`,
     faq: [
@@ -471,25 +501,10 @@ export const eventDetails = {
     contactLink: [],
     timelineData: [
       {
-        title: "Open Registration",
-        date: "TBA",
+        title: "D-Day",
+        date: "1st December 2024",
         type: "register",
         link: `${INTERSUMMIT_REGISTRATION}`,
-      },
-      {
-        title: "Technical Meeting",
-        date: "TBA",
-        type: "meeting",
-      },
-      {
-        title: "Project Progress",
-        date: "TBA",
-        type: "progress",
-      },
-      {
-        title: "Submit Project",
-        date: "TBA",
-        type: "submit",
       },
     ],
   },
