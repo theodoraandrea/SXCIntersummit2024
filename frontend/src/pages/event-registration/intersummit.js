@@ -1298,7 +1298,7 @@ const Summary =({
                 <strong>
                   Do you have any allergies or dietary restrictions?
                 </strong>
-                <p>{formData.allergy ?? "No"}
+                <p>{formData.allergy === "" ? "No" : formData.allergy}
                 </p>
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>

@@ -17,9 +17,6 @@ router.post(
     { name: "proofOfLikeAndComment", minCount: 1, maxCount: 1 },
   ]),
   [
-    body("cityOfResidence")
-      .notEmpty()
-      .withMessage("City of residence is required"),
     body("status")
       .notEmpty()
       .withMessage("Status is required")
