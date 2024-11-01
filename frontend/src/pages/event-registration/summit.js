@@ -115,7 +115,7 @@ const SecondView = ({
     setFormData,
     onPrevious,
     onNext,
-    sanitizeInput,    
+    sanitizeInput    
 }) => {
     const { profileData } = useUser();
 
@@ -211,7 +211,8 @@ const SecondView = ({
     setEmail(e.target.value);
   };
 
-
+  // console.log("sanitizeInput function:", sanitizeInput);
+  
   return (
     <div>
         <Navbar />
@@ -373,7 +374,6 @@ const ThirdView = ({
     errorAlert({ message: "Field must be filled"});
     return false;
   };
-  
 
   const saveData = () => {
     setFormData({
@@ -568,7 +568,7 @@ const FourthView = ({
                 name="eventExpectation"
                 value={eventExpectation}
                 onChange={(e) => {
-                  if (e.target.value.length <= 186) {
+                  if (e.target.value.length <= 300) {
                     setEventExpectation(e.target.value);
                     setCharCount(e.target.value.length);
                   }
@@ -576,7 +576,7 @@ const FourthView = ({
                 className="w-full h-40 px-3 py-2 rounded-lg text-sm"
               />
               <p className="text-right text-gray-300 text-sm">
-                {charCount}/186
+                {charCount}/300
               </p>
             </div>
           </form>
@@ -751,11 +751,11 @@ const SeventhView = ({
     window.scrollTo(0, 0);
   },[]);
 
-  const [allergy, setAllergy] = useState(formData.allergy ?? "");
-  const [charCount, setCharCount] = useState(formData.allergy?.length ?? 0);
+  const [allergyDietaryRestriction, setAllergyDietaryRestriction] = useState(formData.allergyDietaryRestriction ?? "");
+  const [charCount, setCharCount] = useState(formData.allergyDietaryRestriction?.length ?? 0);
 
   const checkAllFilled = () => {
-    if (allergy) {
+    if (allergyDietaryRestriction) {
       return true;
     }
     errorAlert({ message: "Field must be filled"});
@@ -765,7 +765,7 @@ const SeventhView = ({
   const saveData = () => {
     setFormData({
         ...formData,
-        allergy: sanitizeInput(allergy)
+        allergyDietaryRestriction: sanitizeInput(allergyDietaryRestriction)
     });
   }
 
@@ -792,11 +792,11 @@ const SeventhView = ({
           <form className="text-left">
             <div className="mb-4">
               <textarea
-                name="allergy"
-                value={allergy}
+                name="allergyDietaryRestriction"
+                value={allergyDietaryRestriction}
                 onChange={(e) => {
                   if (e.target.value.length <= 300) {
-                    setAllergy(e.target.value);
+                    setAllergyDietaryRestriction(e.target.value);
                     setCharCount(e.target.value.length);
                   }
                 }}
@@ -1114,7 +1114,7 @@ const PaymentView = ({
                       <div className='text-white text-left w-40'>
                           <div className='flex flex-row justify-between'>
                               <p><strong>Price: </strong></p>
-                              <p>{regularPrice}</p>
+                              {/* <p>{regularPrice}</p> */}
                           </div>
                       {
                           // verifiedRefCode && refCodeValid && (
@@ -1131,9 +1131,9 @@ const PaymentView = ({
                           // )
                       }
                       </div>
-                      <p className='text-white mx-4 text-center'>
+                      {/* <p className='text-white mx-4 text-center'>
                           <strong>Bank Account Number: </strong>{bankAccount}
-                      </p>
+                      </p> */}
                   <div className='mt-4'>
                       <label className='block text-white mb-2'>
                           <input
@@ -1203,7 +1203,7 @@ const Summary =({
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { setRegisteredEvents } = useUser();
+  const { setRegisteredEvents, userData } = useUser();
 
   let summitId;
 
@@ -1248,25 +1248,25 @@ const Summary =({
               </p>
               <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
                 <strong>Full Name</strong> 
-                <p>{data.fullName}</p>
+                <p>{userData.fullName}</p>
 
                 <strong>Gender</strong> 
-                <p>{data.gender}</p>
+                <p>{userData.gender}</p>
 
                 <strong>Institution</strong>
                 <p>{formData.status}</p>
 
                 <strong>Major</strong>
-                <p>{data.major}</p>
+                <p>{userData.major}</p>
 
                 <strong>Batch</strong>
-                <p>{data.batch}</p>
+                <p>{userData.batch}</p>
 
                 <strong>Phone</strong>
-                <p>{data.phoneNumber}</p>
+                <p>{userData.phoneNumber}</p>
 
                 <strong>Email</strong>
-                <p>{data.email}</p>
+                <p>{userData.email}</p>
 
               </div>
 
@@ -1293,7 +1293,7 @@ const Summary =({
                 <strong>
                   Do you have any allergies or dietary restrictions?
                 </strong>
-                <p>{formData.allergy === "" ? "No" : formData.allergy}
+                <p>{formData.allergyDietaryRestriction === "" ? "No" : formData.allergyDietaryRestriction}
                 </p>
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
@@ -1346,7 +1346,6 @@ const EventCard = () => {
     };
 
   //all fields
-
   const sanitizeInput = (input) => {
     return input.trim().replace(/[^a-zA-Z\s]/g, "");
   };
@@ -1378,7 +1377,7 @@ const EventCard = () => {
   };
 
   const handlePrevious = () => {
-    if(currentView === 8 && !formData.allergy){
+    if(currentView === 8 && !formData.allergyDietaryRestriction){
       setCurrentView((prevView) => prevView - 2);
     }else{
       setCurrentView((prevView) => prevView - 1);
@@ -1388,7 +1387,7 @@ const EventCard = () => {
   // const handleNext2 = () => {
   //   setFormData({
   //     ...formData,
-  //     allergy: "",
+  //     allergyDietaryRestriction: "",
   //   });
   //   setCurrentView((prevView) => prevView + 2);
   // };
@@ -1397,6 +1396,7 @@ const EventCard = () => {
   switch (currentView){
     case 1:
       return (
+        // status
         <FirstView 
           {...eventData}
           formData={formData} 
@@ -1406,44 +1406,39 @@ const EventCard = () => {
       );
     case 2:
       return (
-        <SecondView
-
-        />
-      );
-    case 3:
-      return (
+        // user
         <SecondView 
           {...eventData}
           formData={formData} 
           setFormData={setFormData}
-          sanitizeInput={sanitizeInput} 
+          sanitizeInput={sanitizeInputParagraph} 
           onNext={handleNext}
           onPrevious={handlePrevious}
         /> 
       );
-    case 4: 
+    case 3: 
     // findAboutEvent
       return (
         <ThirdView 
           formData={formData} 
           setFormData={setFormData} 
-          sanitizeInput={sanitizeInput}
+          sanitizeInput={sanitizeInputParagraph}
           onNext={()=>{setCurrentView(4)}} 
           onPrevious={handlePrevious}
         />
       );
-    case 5:
+    case 4:
       return (
         // eventExpectation
         <FourthView 
           formData={formData} 
           setFormData={setFormData} 
-          sanitizeInput={sanitizeInput} 
+          sanitizeInput={sanitizeInputParagraph} 
           onPrevious={()=>{setCurrentView(3)}} 
           onNext={handleNext} 
         />
       );
-    case 6:
+    case 5:
       return (
         // question
         <FifthView 
@@ -1454,18 +1449,18 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 7:
+    case 6:
       return (
         // hasAllergy?
         <SixthView 
           onPrevious={handlePrevious} 
           onNextHave={handleNext} 
           onNextHaveNot={()=>{
-            formData.allergy = ""
+            formData.allergyDietaryRestriction = ""
             setCurrentView(8)}} 
         />
       );
-    case 8:
+    case 7:
       return (
         // desc allergy
         <SeventhView 
@@ -1476,7 +1471,7 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 9:
+    case 8:
       return (
         // proof submit ss
         <EightView 
@@ -1485,10 +1480,10 @@ const EventCard = () => {
           checkFileSize={checkFileSize} 
           checkFileType={checkFileTypeImage} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(10)}} 
+          onNext={()=>{setCurrentView(9)}} 
         />
       );
-    case 10:
+    case 9:
       return (
         <PaymentView 
           eventData={eventData} 
@@ -1500,12 +1495,12 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 11:
+    case 10:
       return (
         <Summary 
           eventData={eventData} 
           formData={formData} 
-          onPrevious={()=>{setCurrentView(8)}}
+          onPrevious={()=>{setCurrentView(9)}}
         />
       );
       default:

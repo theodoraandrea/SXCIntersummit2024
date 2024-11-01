@@ -19,8 +19,8 @@ import ChambersRegistration from "./pages/event-registration/chambers";
 import ChambersSummary from "./pages/event-registration/chambers-summary";
 import CompvisRegistration from "./pages/event-registration/comvis";
 import CompvisSummary from "./pages/event-registration/comvis-summary";
-import summitSummary from "./pages/event-registration/summit-summary";
-import summitRegistration from "./pages/event-registration/summit";
+import SummitSummary from "./pages/event-registration/summit-summary";
+import SummitRegistration from "./pages/event-registration/summit";
 
 import {
   HOME,

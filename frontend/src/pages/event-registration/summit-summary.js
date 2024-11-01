@@ -51,7 +51,7 @@ const SummitSummary = () =>{
               eventExpectation: answers[1],
               question: answers[2],
               hasAllergy: answers[3],
-              allergy: answers[4],
+              allergyDietaryRestriction: answers[4],
           };
       });
       setSummitData(updatedData);
@@ -93,7 +93,7 @@ const SummitSummary = () =>{
                 <div key={index} className="flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25">
                     <div className="bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg">
                       <p className="text-xl text-center text-gradient mb-2">
-                        <strong>{data}</strong>
+                        <strong>International Summit Summary</strong>
                       </p>
                       <div className="text-sm md:text-base">
                         <p><strong>Full Name:</strong> {userData.fullname}</p>
@@ -119,7 +119,7 @@ const SummitSummary = () =>{
                         {data.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
-                            <p>{data.allergy}</p>
+                            <p>{data.allergyDietaryRestriction}</p>
                           </>
                         )}
                         
@@ -141,4 +141,4 @@ const SummitSummary = () =>{
       );      
 };
 
-export default summitSummary;
+export default SummitSummary;
