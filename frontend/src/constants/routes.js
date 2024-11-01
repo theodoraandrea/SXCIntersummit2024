@@ -21,5 +21,5 @@ export const CHAMBERS_REGIST = "/chambers/register";
 export const CHAMBERS_REGIST_SUMMARY = "/chambers/summary";
 export const COMPVIS_REGISTRATION = "/comvis/register";
 export const COMPVIS_REGIST_SUMMARY = "/comvis/summary";
-export const INTERSUMMIT_REGISTRATION = "/intersummit/register";
-export const INTERSUMMIT_REGIS_SUMMARY = "/intersummit/summary";
+export const SUMMIT_REGISTRATION = "/summit/register";
+export const SUMMIT_REGIS_SUMMARY = "/summit/summary";

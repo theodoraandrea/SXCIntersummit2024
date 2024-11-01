@@ -5,7 +5,7 @@ import {
   FCEO_REGIST_SUMMARY,
   IBCC_REGIST_SUMMARY,
   IBPC_REGIST_SUMMARY,
-  INTERSUMMIT_REGIS_SUMMARY
+  SUMMIT_REGIS_SUMMARY
 } from "../constants/routes";
 
 // Function to calculate days and hours until the event
@@ -64,7 +64,7 @@ const getEventSummaryLink = (eventId) => {
     case 5:
       return CHAMBERS_REGIST_SUMMARY;
     case 7:
-      return INTERSUMMIT_REGIS_SUMMARY;
+      return SUMMIT_REGIS_SUMMARY;
     default:
       return "#";
   }

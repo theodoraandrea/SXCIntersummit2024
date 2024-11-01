@@ -5,17 +5,17 @@ import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../contexts/user-context";
 import { EVENTS_PAGE, HOME, LANDING_PAGE, USER_DASHBOARD_PAGE, USER_DETAILS_PAGE } from '../../constants/routes';
 import { errorAlert, successAlert } from '../../components/alert';
-import { postIntersummitRegistration } from "../../service/services";
+import { postSummitRegistration } from "../../service/services";
 
+//status
 const FirstView =({
   formData,
   setFormData,
   onNext
 }) => {
   const navigate = useNavigate();
-  const { loading, isLoggedIn, registeredEvents } = useUser();
+  const { loading, isLoggedIn } = useUser();
   const [studentType, setStudentType] = useState(formData.studentType ?? "");
-  const [hasRegistered, setHasRegistered] = useState(false);
 
   useEffect(() => {
     if (!loading) {
@@ -29,12 +29,6 @@ const FirstView =({
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() =>{
-    if(registeredEvents.includes(7)){
-      setHasRegistered(true);
-    }
-  })
 
    const checkAllFilled = () => {
     if (studentType) {
@@ -355,22 +349,22 @@ const ThirdView = ({
     window.scrollTo(0, 0);
   },[]);
 
-  const [eventSource, setEventSource] = useState(formData.eventSource ?? "");
-  const [eventSourceOther, setEventSourceOther] = useState(
-    formData.eventSourceOther ?? "Other"
+  const [findAboutEvent, setFindAboutEvent] = useState(formData.findAboutEvent ?? "");
+  const [findAboutEventOther, setFindAboutEventOther] = useState(
+    formData.findAboutEventOther ?? "Other"
   );
-  const [option, setOption] = useState(formData.eventSource ?? "");
+  const [option, setOption] = useState(formData.findAboutEvent ?? "");
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
-    setEventSource(e.target.value);
+    setFindAboutEvent(e.target.value);
     if (e.target.value !== 4) {
-      setEventSourceOther("");
+      setFindAboutEventOther("");
     }
   };
 
   const checkAllFilled = () => {
-    if (eventSource) {
+    if (findAboutEvent) {
       return true;
     }
     errorAlert({ message: "Field must be filled"});
@@ -381,8 +375,8 @@ const ThirdView = ({
   const saveData = () => {
     setFormData({
         ...formData,
-        eventSource: eventSource,
-        eventSourceOther: sanitizeInput(eventSourceOther)
+        findAboutEvent: findAboutEvent,
+        findAboutEventOther: sanitizeInput(findAboutEventOther)
     });
   };
 
@@ -409,15 +403,15 @@ const ThirdView = ({
           <div className="grid grid-cols-2 gap-4 text-left">
             <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
-                id="eventSource1"
-                name="eventSourceRadio"
+                id="findAboutEvent1"
+                name="findAboutEventRadio"
                 type="radio"
                 value="Instagram"
                 checked={option === "Instagram"}
                 onChange={handleOptionChange}
               />
               <label
-                htmlFor="eventSource1"
+                htmlFor="findAboutEvent1"
                 className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit Instagram
@@ -425,15 +419,15 @@ const ThirdView = ({
             </div>
             <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
-                id="eventSource2"
-                name="eventSourceRadio"
+                id="findAboutEvent2"
+                name="findAboutEventRadio"
                 type="radio"
                 value="LinkedIn"
                 checked={option === "LinkedIn"}
                 onChange={handleOptionChange}
               />
               <label
-                htmlFor="eventSource2"
+                htmlFor="findAboutEvent2"
                 className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit LinkedIn
@@ -441,15 +435,15 @@ const ThirdView = ({
             </div>
             <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
-                id="eventSource3"
-                name="eventSourceRadio"
+                id="findAboutEvent3"
+                name="findAboutEventRadio"
                 type="radio"
                 value="Tiktok"
                 checked={option === "Tiktok"}
                 onChange={handleOptionChange}
               />
               <label
-                htmlFor="eventSource3"
+                htmlFor="findAboutEvent3"
                 className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 SxC InterSummit Tiktok
@@ -457,15 +451,15 @@ const ThirdView = ({
             </div>
             <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
               <input
-                id="eventSource4"
-                name="eventSourceRadio"
+                id="findAboutEvent4"
+                name="findAboutEventRadio"
                 type="radio"
                 value="Media Partners"
                 checked={option === "Media Partners"}
                 onChange={handleOptionChange}
               />
               <label
-                htmlFor="eventSource4"
+                htmlFor="findAboutEvent4"
                 className="w-full ml-2 text-xs sm:text-sm text-gray-800"
               >
                 Media Partners
@@ -473,21 +467,21 @@ const ThirdView = ({
             </div>
             <div className="flex p-4 col-span-2 text-xs sm:text-sm items-center bg-gray-100 border-gray-300 rounded">
               <input
-                id="eventSource5"
-                name="eventSourceRadio"
+                id="findAboutEvent5"
+                name="findAboutEventRadio"
                 type="radio"
                 value="Other"
                 checked={option === "Other"}
                 onChange={handleOptionChange}
               />
               <input
-                id="eventSource5"
+                id="findAboutEvent5"
                 className="ml-2 bg-gray-100 w-full"
-                name="eventSource"
+                name="findAboutEvent"
                 type="text"
-                value={eventSourceOther}
+                value={findAboutEventOther}
                 placeholder="Other"
-                onChange={(e) => setEventSourceOther(e.target.value)}
+                onChange={(e) => setFindAboutEventOther(e.target.value)}
                 disabled={option !== "Other"}
               />
             </div>
@@ -527,11 +521,11 @@ const FourthView = ({
     window.scrollTo(0, 0);
   },[]);
 
-  const [expectation, setExpectation] = useState(formData.expectation ?? "");
-  const [charCount, setCharCount] = useState(formData.expectation?.length ?? 0);
+  const [eventExpectation, setEventExpectation] = useState(formData.eventExpectation ?? "");
+  const [charCount, setCharCount] = useState(formData.eventExpectation?.length ?? 0);
 
   const checkAllFilled = () => {
-    if (expectation) {
+    if (eventExpectation) {
       return true;
     }
     errorAlert({ message: "Field must be filled"});
@@ -541,7 +535,7 @@ const FourthView = ({
   const saveData = () => {
     setFormData({
         ...formData,
-        expectation: sanitizeInput(expectation)
+        eventExpectation: sanitizeInput(eventExpectation)
     });
   }
 
@@ -568,11 +562,11 @@ const FourthView = ({
           <form className="text-left">
             <div className="mb-4">
               <textarea
-                name="expectation"
-                value={expectation}
+                name="eventExpectation"
+                value={eventExpectation}
                 onChange={(e) => {
                   if (e.target.value.length <= 186) {
-                    setExpectation(e.target.value);
+                    setEventExpectation(e.target.value);
                     setCharCount(e.target.value.length);
                   }
                 }}
@@ -845,25 +839,25 @@ const EightView = ({
     window.scrollTo(0, 0);
   },[]);
 
-  const [follow1, setFollow1] = useState(formData.proofFollow ? true : false);
-  const [follow2, setFollow2] = useState(formData.proofStory ? true : false);
-  const [follow3, setFollow3] = useState(formData.proofLike ? true : false);
+  const [follow1, setFollow1] = useState(formData.proofOfFollow ? true : false);
+  const [follow2, setFollow2] = useState(formData.proofOfStory ? true : false);
+  const [follow3, setFollow3] = useState(formData.proofOfLike ? true : false);
 
-  const [proofFollow, setProofFollow] = useState(
-    formData.proofFollow?.name ?? ""
+  const [proofOfFollow, setProofOfFollow] = useState(
+    formData.proofOfFollow?.name ?? ""
   );
-  const [proofStory, setProofStory] = useState(
-    formData.proofStory?.name ?? ""
+  const [proofOfStory, setProofOFStory] = useState(
+    formData.proofOfStory?.name ?? ""
   );
-  const [proofLike, setProofLike] = useState(
-    formData.proofLike?.name ?? ""
+  const [proofOfLike, setProofOfLike] = useState(
+    formData.proofOfLike?.name ?? ""
   );
 
   const handleSubmit = () => {
     if (
-      proofFollow &&
-      proofStory &&
-      proofLike &&
+      proofOfFollow &&
+      proofOfStory &&
+      proofOfLike &&
       follow1 &&
       follow2 &&
       follow3
@@ -890,12 +884,12 @@ const EightView = ({
       ...prevState,
       [name]: files ? file : value,
     }));
-    if (name === "proofFollow") {
-      setProofFollow(file.name);
-    } else if (name === "proofStory") {
-      setProofStory(file.name);
-    } else if (name === "proofLike") {
-      setProofLike(file.name);
+    if (name === "proofOfFollow") {
+      setProofOfFollow(file.name);
+    } else if (name === "proofOfStory") {
+      setProofOfStory(file.name);
+    } else if (name === "proofOfLike") {
+      setProofOfLike(file.name);
     }
   };
 
@@ -955,18 +949,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofFollow'
-                              name='proofFollow'
+                              id='proofOfFollow'
+                              name='proofOfFollow'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofFollow'
+                              htmlFor='proofOfFollow'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofFollow}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfFollow}</label>
                       </div>
                   </div>
                   <div className='mb-4'>
@@ -983,18 +977,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofStory'
-                              name='proofStory'
+                              id='proofOfStory'
+                              name='proofOfStory'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofStory'
+                              htmlFor='proofOfStory'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofStory}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfStory}</label>
                       </div>
                   </div>
                   <div className=''>
@@ -1013,18 +1007,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofLike'
-                              name='proofLike'
+                              id='proofOfLike'
+                              name='proofOfLike'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofLike'
+                              htmlFor='proofOfLike'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofLike}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfLike}</label>
                       </div>
                   </div>
                   <div className='mt-6 flex justify-between items-center'>
@@ -1050,150 +1044,150 @@ const EightView = ({
   );
 };
 
-// const PaymentView = ({ 
-//   eventData, 
-//   formData, 
-//   setFormData, 
-//   checkFileSize, 
-//   checkFileType, 
-//   onPrevious, 
-//   onNext 
-// }) => {
-//   const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
-//   const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+const PaymentView = ({ 
+  eventData, 
+  formData, 
+  setFormData, 
+  checkFileSize, 
+  checkFileType, 
+  onPrevious, 
+  onNext 
+}) => {
+  const [ checkPayment, setCheckPayment ] = useState(formData.proofOfPayment ? true : false);
+  const [ proofOfPayment, setProofOfPayment ] = useState(formData.proofOfPayment?.name ?? "");
 
-//   const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
-//   const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
-//   const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+  // const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+  // const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+  // const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
-//   //handling file change
-//   const handleChange = (e) => {
-//       const { name, value, files } = e.target;
+  //handling file change
+  const handleChange = (e) => {
+      const { name, value, files } = e.target;
 
-//       const file = files[0];
+      const file = files[0];
       
-//       if (!checkFileSize(file)) {
-//         return;
-//       }
+      if (!checkFileSize(file)) {
+        return;
+      }
 
-//       if (!checkFileType(file)) {
-//         return;
-//       }
+      if (!checkFileType(file)) {
+        return;
+      }
 
-//       setFormData((prevState) => ({
-//         ...prevState,
-//         [name]: files ? file : value,
-//       }));
-//       setProofPayment(file?.name);
-//   };
+      setFormData((prevState) => ({
+        ...prevState,
+        [name]: files ? file : value,
+      }));
+      setProofOfPayment(file?.name);
+  };
 
-//   //saving referral code
-//   useEffect(() => {
-//       setFormData({
-//           ...formData,
-//           referralCode: verifiedRefCode
-//       });
-//   }, [verifiedRefCode]);
+  //saving referral code
+  // useEffect(() => {
+  //     setFormData({
+  //         ...formData,
+  //         referralCode: verifiedRefCode
+  //     });
+  // }, [verifiedRefCode]);
 
-//   //checking payment proof
-//   const handleNext = () => {
-//       if (checkPayment && proofPayment) {
-//           onNext();
-//       } else {
-//         errorAlert({ message: "Proof must be uploaded"});
-//       }
-//   }
+  //checking payment proof
+  const handleNext = () => {
+      if (checkPayment && proofOfPayment) {
+          onNext();
+      } else {
+        errorAlert({ message: "Proof must be uploaded"});
+      }
+  }
 
-//   return (
-//     <div>
-//       <Navbar />
-//       <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-//           <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
-//               <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
-//                   <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
-//                       <p className='text-white mx-4 mb-2 text-center'>
-//                           Please transfer the following amount to complete your registration
-//                       </p>
-//                       <div className='text-white text-left w-40'>
-//                           <div className='flex flex-row justify-between'>
-//                               <p><strong>Price: </strong></p>
-//                               <p>{regularPrice}</p>
-//                           </div>
-//                       {
-//                           verifiedRefCode && refCodeValid && (
-//                               <>
-//                               <div className='flex flex-row justify-between'>
-//                               <p><strong>Discount:</strong></p>
-//                               <p>{discount}</p>
-//                               </div>
-//                               <div className='flex flex-row justify-between'>
-//                               <p><strong>Total:</strong></p>
-//                               <p><strong>{discountedPrice}</strong></p>
-//                               </div>
-//                               </>
-//                           )
-//                       }
-//                       </div>
-//                       <p className='text-white mx-4 text-center'>
-//                           <strong>Bank Account Number: </strong>{bankAccount}
-//                       </p>
-//                   <div className='mt-4'>
-//                       <label className='block text-white mb-2'>
-//                           <input
-//                               type='checkbox'
-//                               name='checkPayment'
-//                               checked={checkPayment}
-//                               onChange={(e) => setCheckPayment(e.target.checked)}
-//                               className='mr-2'
-//                           />
-//                           I have paid the registration fee
-//                       </label>
-//                       <div className='my-4 relative'>
-//                           <input
-//                               type='file'
-//                               id='proofPayment'
-//                               name='proofPayment'
-//                               onChange={handleChange}
-//                               className='absolute inset-0 opacity-0 cursor-pointer'
-//                           />
-//                           <label
-//                               htmlFor='proofPayment'
-//                               className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
-//                           >
-//                               Submit screenshot
-//                           </label>
-//                           <p className='text-white mt-4'>{proofPayment}</p>
-//                       </div>
-//                   </div>
-//               </div>
-//               <ReferralModal 
-//               eventName="summit"
-//               referralCode={formData.referralCode ?? ''}
-//               verifiedRefCode={verifiedRefCode}
-//               setVerifiedRefCode={setVerifiedRefCode} 
-//               setRefCodeValid={setRefCodeValid}
-//               />
-//               <div className='mt-6 flex justify-center items-center'>
-//                   <button
-//                       type='button'
-//                       onClick={onPrevious}
-//                       className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
-//                   >
-//                   Back
-//                   </button>
-//                   <button
-//                       type='button'
-//                       onClick={handleNext}
-//                       className='bg-primary-3 text-white px-6 py-2 rounded-full'
-//                   >
-//                   Next
-//                   </button>
-//               </div>
-//           </div>
-//       </div>
-//     </div>
-//   )
-// };
+  return (
+    <div>
+      <Navbar />
+      <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+          <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+              <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+                  <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+                      <p className='text-white mx-4 mb-2 text-center'>
+                          There is no registration fee, please feel free to upload another f
+                      </p>
+                      <div className='text-white text-left w-40'>
+                          <div className='flex flex-row justify-between'>
+                              <p><strong>Price: </strong></p>
+                              <p>{regularPrice}</p>
+                          </div>
+                      {
+                          // verifiedRefCode && refCodeValid && (
+                          //     <>
+                          //     <div className='flex flex-row justify-between'>
+                          //     <p><strong>Discount:</strong></p>
+                          //     <p>{discount}</p>
+                          //     </div>
+                          //     <div className='flex flex-row justify-between'>
+                          //     <p><strong>Total:</strong></p>
+                          //     <p><strong>{discountedPrice}</strong></p>
+                          //     </div>
+                          //     </>
+                          // )
+                      }
+                      </div>
+                      <p className='text-white mx-4 text-center'>
+                          <strong>Bank Account Number: </strong>{bankAccount}
+                      </p>
+                  <div className='mt-4'>
+                      <label className='block text-white mb-2'>
+                          <input
+                              type='checkbox'
+                              name='checkPayment'
+                              checked={checkPayment}
+                              onChange={(e) => setCheckPayment(e.target.checked)}
+                              className='mr-2'
+                          />
+                          I have paid the registration fee
+                      </label>
+                      <div className='my-4 relative'>
+                          <input
+                              type='file'
+                              id='proofOfPayment'
+                              name='proofOfPayment'
+                              onChange={handleChange}
+                              className='absolute inset-0 opacity-0 cursor-pointer'
+                          />
+                          <label
+                              htmlFor='proofOfPayment'
+                              className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+                          >
+                              Submit screenshot
+                          </label>
+                          <p className='text-white mt-4'>{proofOfPayment}</p>
+                      </div>
+                  </div>
+              </div>
+              {/* <ReferralModal 
+              eventName="summit"
+              referralCode={formData.referralCode ?? ''}
+              verifiedRefCode={verifiedRefCode}
+              setVerifiedRefCode={setVerifiedRefCode} 
+              setRefCodeValid={setRefCodeValid}
+              /> */}
+              <div className='mt-6 flex justify-center items-center'>
+                  <button
+                      type='button'
+                      onClick={onPrevious}
+                      className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+                  >
+                  Back
+                  </button>
+                  <button
+                      type='button'
+                      onClick={handleNext}
+                      className='bg-primary-3 text-white px-6 py-2 rounded-full'
+                  >
+                  Next
+                  </button>
+              </div>
+          </div>
+      </div>
+    </div>
+  )
+};
 
 const Summary =({
   formData,
@@ -1208,20 +1202,20 @@ const Summary =({
   const navigate = useNavigate();
   const { setRegisteredEvents } = useUser();
 
-  let intersummitId;
+  let summitId;
 
-  intersummitId = 7;
+  summitId = 7;
 
   const handleSubmit = async () => {
     try{
       setIsLoading(true);
-      const response = await postIntersummitRegistration(formData);
+      const response = await postSummitRegistration(formData);
       setIsLoading(false);
       if(response.status === 200){
         navigate(USER_DASHBOARD_PAGE);
-        setRegisteredEvents((prevData) => [...prevData, intersummitId]);
+        setRegisteredEvents((prevData) => [...prevData, summitId]);
         successAlert({ 
-          message: "Successfully registered for Intersummit. Please check your email for further details!"})
+          message: "Successfully registered for Summit. Please check your email for further details!"})
       }
     } catch (error){
       errorAlert({ message: "Oh no, something happened. Please try again!"});
@@ -1251,25 +1245,25 @@ const Summary =({
               </p>
               <div className="grid max-w-full grid-cols-2 gap-x-8 md:gap-x-0 text-sm md:text-base">
                 <strong>Full Name</strong> 
-                <p>{formData.fullName}</p>
+                <p>{data.fullName}</p>
 
                 <strong>Gender</strong> 
-                <p>{formData.gender}</p>
+                <p>{data.gender}</p>
 
                 <strong>Institution</strong>
-                <p>{formData.studentType}</p>
+                <p>{data.studentType}</p>
 
                 <strong>Major</strong>
-                <p>{formData.major}</p>
+                <p>{data.major}</p>
 
                 <strong>Batch</strong>
-                <p>{formData.batch}</p>
+                <p>{data.batch}</p>
 
                 <strong>Phone</strong>
-                <p>{formData.phoneNumber}</p>
+                <p>{data.phoneNumber}</p>
 
                 <strong>Email</strong>
-                <p>{formData.email}</p>
+                <p>{data.email}</p>
 
               </div>
 
@@ -1277,20 +1271,20 @@ const Summary =({
                 <div className="border-t border-gray-300 my-4"></div>
                 {/* <strong>How did you know this event?</strong>
                 <p>
-                  {formData.eventSource === "Other"
-                    ? `${formData.eventSource}${
-                        formData.eventSourceOther !== ""
-                          ? `: ${formData.eventSourceOther}`
+                  {formData.findAboutEvente === "Other"
+                    ? `${formData.findAboutEvent}${
+                        formData.findAboutEventOther !== ""
+                          ? `: ${formData.findAboutEventOther}`
                           : ""
                       }`
-                    : `SxC InterSummit ${formData.eventSource}`}
+                    : `SxC summit ${formData.findAboutEvent}`}
                 </p> */}
-                {formData.experience ? (
+                {formData.eventExpectation ? (
                   <>
                     <strong>
                       What are your expectations for this event?
                     </strong>
-                    <p>{formData.expectation}</p>
+                    <p>{formData.eventExpectation}</p>
                     <strong>
                       Any questions for the speaker?
                     </strong>
@@ -1308,15 +1302,15 @@ const Summary =({
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
                   <strong>Proof of following our Instagram:</strong>{" "}
-                  {formData.screenshot1.name}
+                  {formData.proofOfFollow}
                 </p>
                 <p>
                   <strong>Proof of reposting the Internation Summit poster:</strong>{" "}
-                  {formData.screenshot2.name}
+                  {formData.proofOfStory}
                 </p>
                 <p>
                   <strong>Proof of like & comment on the International Summit poster:</strong>{" "}
-                  {formData.screenshot3.name}
+                  {formData.proofOfLike}
                 </p>
               </div>
               <div className="flex w-full mt-6 justify-between">
@@ -1350,7 +1344,7 @@ const EventCard = () => {
     const eventData = {
       title: "International Summit",
       description:"</br>&emsp;<strong>1.&emsp;International Summit</strong>",
-      // intersummitId: 1,
+      // summitId: 7,
       regularPrice: 0,
       bankAccount: "BCA - [no rek]",
     };
@@ -1416,6 +1410,12 @@ const EventCard = () => {
       );
     case 2:
       return (
+        <SecondView
+
+        />
+      );
+    case 3:
+      return (
         <SecondView 
           {...eventData}
           formData={formData} 
@@ -1424,7 +1424,8 @@ const EventCard = () => {
           onNext={handleNext} 
         /> 
       );
-    case 3: 
+    case 4: 
+    // findAboutEvent
       return (
         <ThirdView 
           formData={formData} 
@@ -1434,8 +1435,9 @@ const EventCard = () => {
           onPrevious={handlePrevious}
         />
       );
-    case 4:
+    case 5:
       return (
+        // eventExpectation
         <FourthView 
           formData={formData} 
           setFormData={setFormData} 
@@ -1444,8 +1446,9 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 5:
+    case 6:
       return (
+        // question
         <FifthView 
           formData={formData} 
           setFormData={setFormData} 
@@ -1454,16 +1457,18 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 6:
+    case 7:
       return (
+        // hasAllergy?
         <SixthView 
           onPrevious={handlePrevious} 
           onNextHave={handleNext} 
           onNextHaveNot={()=>{setCurrentView(8)}} 
         />
       );
-    case 7:
+    case 8:
       return (
+        // desc allergy
         <SeventhView 
           formData={formData} 
           setFormData={setFormData} 
@@ -1472,8 +1477,9 @@ const EventCard = () => {
           onNext={handleNext} 
         />
       );
-    case 8:
+    case 9:
       return (
+        // proof submit ss
         <EightView 
           formData={formData} 
           setFormData={setFormData} 
@@ -1483,19 +1489,19 @@ const EventCard = () => {
           onNext={()=>{setCurrentView(10)}} 
         />
       );
-    case 9:
-      // return (
-      //   <PaymentView 
-      //     eventData={eventData} 
-      //     formData={formData} 
-      //     setFormData={setFormData} 
-      //     checkFileSize={checkFileSize} 
-      //     checkFileType={checkFileTypeImage} 
-      //     onPrevious={handlePrevious} 
-      //     onNext={handleNext} 
-      //   />
-      // );
     case 10:
+      return (
+        <PaymentView 
+          eventData={eventData} 
+          formData={formData} 
+          setFormData={setFormData} 
+          checkFileSize={checkFileSize} 
+          checkFileType={checkFileTypeImage} 
+          onPrevious={handlePrevious} 
+          onNext={handleNext} 
+        />
+      );
+    case 11:
       return (
         <Summary 
           eventData={eventData} 

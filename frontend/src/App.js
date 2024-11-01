@@ -19,8 +19,8 @@ import ChambersRegistration from "./pages/event-registration/chambers";
 import ChambersSummary from "./pages/event-registration/chambers-summary";
 import CompvisRegistration from "./pages/event-registration/comvis";
 import CompvisSummary from "./pages/event-registration/comvis-summary";
-import IntersummitSummary from "./pages/event-registration/intersummit-summary";
-import IntersummitRegistration from "./pages/event-registration/intersummit";
+import summitSummary from "./pages/event-registration/summit-summary";
+import summitRegistration from "./pages/event-registration/summit";
 
 import {
   HOME,
@@ -42,8 +42,8 @@ import {
   CHAMBERS_REGIST_SUMMARY,
   COMPVIS_REGISTRATION,
   COMPVIS_REGIST_SUMMARY,
-  INTERSUMMIT_REGISTRATION,
-  INTERSUMMIT_REGIS_SUMMARY
+  SUMMIT_REGISTRATION,
+  SUMMIT_REGIS_SUMMARY
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -85,8 +85,8 @@ export default function App() {
           <Route path={CHAMBERS_REGIST_SUMMARY} element={<ChambersSummary />} />
           <Route path={COMPVIS_REGISTRATION} element={<CompvisRegistration />} />
           <Route path={COMPVIS_REGIST_SUMMARY} element={<CompvisSummary />} />
-          <Route path={INTERSUMMIT_REGISTRATION} element={<IntersummitRegistration />} />
-          <Route path={INTERSUMMIT_REGIS_SUMMARY} element={<IntersummitSummary />} />
+          <Route path={SUMMIT_REGISTRATION} element={<SummitRegistration />} />
+          <Route path={SUMMIT_REGIS_SUMMARY} element={<SummitSummary />} />
         </Routes>
       </Router>
     </UserProvider>

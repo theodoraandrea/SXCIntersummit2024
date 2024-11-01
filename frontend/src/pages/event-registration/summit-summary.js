@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from "../../contexts/user-context";
 import Navbar from "../../components/navbar";
 import Spinner from '../../components/elements/spinner';
-import { getIntersummitRegistrationData } from '../../service/services';
+import { getSummitRegistrationData } from '../../service/services';
 
 
-const IntersummitSummary = () =>{
+const SummitSummary = () =>{
   const { profileData, isLoggedIn, loading } = useUser();
   const[ userData, setUserData] = useState({});
   const [response, setResponse] = useState({});
-  const [intersummitData, setIntersummitData] = useState([]);
+  const [summitData, setSummitData] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const IntersummitSummary = () =>{
   const fetchRegistrationData = async () => {
     try {
       setIsLoading(true);
-      const response = await getIntersummitRegistrationData();
+      const response = await getSummitRegistrationData();
       setResponse(response);
     } catch (error) {
       console.error("Error fetching registration data:", error);
@@ -47,14 +47,14 @@ const IntersummitSummary = () =>{
           const answers = handleQuestions(item.question);
           return {
               ...item,
-              eventSource: answers[0],
-              expectation: answers[1],
+              findAboutEvent: answers[0],
+              eventExpectation: answers[1],
               question: answers[2],
               hasAllergy: answers[3],
               allergy: answers[4],
           };
       });
-      setIntersummitData(updatedData);
+      setSummitData(updatedData);
   };
 
 
@@ -89,7 +89,7 @@ const IntersummitSummary = () =>{
                 </div>
       
                 {/* User Data */}
-                {intersummitData.map((data, index) =>(
+                {summitData.map((data, index) =>(
                 <div key={index} className="flex flex-col max-w-full items-center md:items-end rounded-lg bg-opacity-25">
                     <div className="bg-primary-4 md:mx-2 max-w-full sm:max-w-md w-full p-8 rounded-lg shadow-lg">
                       <p className="text-xl text-center text-gradient mb-2">
@@ -106,12 +106,12 @@ const IntersummitSummary = () =>{
       
                         <div className="border-t border-gray-300 my-4"></div>
       
-                        {/* Event Source and Additional Information */}
+                        {/* findAboutEvent and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{data.eventSource}</p>
+                        <p>{data.findAboutEvent}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{data.expectations}</p>
+                        <p>{data.eventExpectations}</p>
 
                         <strong>Do you have any questions for our speakers?</strong>
                         <p>{data.questions}</p>
@@ -141,4 +141,4 @@ const IntersummitSummary = () =>{
       );      
 };
 
-export default IntersummitSummary;
+export default summitSummary;
