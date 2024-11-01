@@ -101,7 +101,7 @@ exports.registerSummit = async (req, res) => {
         question: qnaList,
         proofOfStory,
         proofOfFollow,
-        proofOfPayment,
+        //proofOfPayment,
         proofOfLikeAndComment,
       });
     } catch (error) {

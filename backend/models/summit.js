@@ -45,7 +45,7 @@ const Summit = sequelize.define(
     },
     proofOfPayment: {
       type: DataTypes.JSON,
-      allowNull: false,
+      allowNull: true,
     },
     proofOfFollow: {
       type: DataTypes.JSON,
