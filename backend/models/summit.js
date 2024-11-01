@@ -32,12 +32,12 @@ const Summit = sequelize.define(
     },
     cityOfResidence: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
 
     statusDetail: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     question: {
       type: DataTypes.JSON,

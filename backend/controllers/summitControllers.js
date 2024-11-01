@@ -95,7 +95,7 @@ exports.registerSummit = async (req, res) => {
     try {
       summit = await Summit.create({
         registrationId: eventRegistration.id,
-        cityOfResidence: body.cityOfResidence,
+        //cityOfResidence: body.cityOfResidence,
         status: body.status,
         statusDetail: body.statusDetail,
         question: qnaList,
