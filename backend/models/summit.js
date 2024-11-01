@@ -55,6 +55,10 @@ const Summit = sequelize.define(
       type: DataTypes.JSON,
       allowNull: false,
     },
+    proofOfLikeAndComment: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
     eTicket: {
       type: DataTypes.STRING,
     },
