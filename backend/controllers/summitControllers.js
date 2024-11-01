@@ -15,7 +15,12 @@ exports.registerSummit = async (req, res) => {
     }
 
     // Check if there any required image not uploaded.
-    const requiredFields = ["proofOfFollow", "proofOfStory", "proofOfPayment"];
+    const requiredFields = [
+      "proofOfFollow",
+      "proofOfStory",
+      //"proofOfPayment",
+      "proofOfLikeAndComment",
+    ];
     if (!checkRequiredFields(req.files, requiredFields)) {
       return res.status(400).json({
         message:
@@ -44,7 +49,8 @@ exports.registerSummit = async (req, res) => {
       return res.status(500).json({ message: "Already Registered Summit" });
 
     const qnaList = [
-      { "Event Expectation": body.eventExpectation },
+      { "Find out about event": body.eventSource },
+      { "Event Expectation": body.expectation },
       {
         "Question for Speaker": body.question,
       },
@@ -54,6 +60,7 @@ exports.registerSummit = async (req, res) => {
       `${user.fullname}_Proof of Follow`,
       `${user.fullname}_Proof of Instastory`,
       `${user.fullname}_Proof of Payment`,
+      `${user.fullname}_Proof of Like and Comment`,
     ];
     const rootFolderId = process.env.FOLDER_SUMMIT_ID;
     const folderId = await createFolder(user.fullname, rootFolderId);
@@ -68,10 +75,16 @@ exports.registerSummit = async (req, res) => {
       folderId,
       fileNames[1]
     );
+    /*
     const proofOfPayment = await getImageURLsList(
       files.proofOfPayment,
       folderId,
       fileNames[2]
+    );*/
+    const proofOfLikeAndComment = await getImageURLsList(
+      files.proofOfLikeAndComment,
+      folderId,
+      fileNames[3]
     );
 
     const eventRegistration = await EventRegistration.create({
@@ -83,13 +96,14 @@ exports.registerSummit = async (req, res) => {
     try {
       summit = await Summit.create({
         registrationId: eventRegistration.id,
-        cityOfResidence: body.cityOfResidence,
+        //cityOfResidence: body.cityOfResidence,
         status: body.status,
-        statusDetail: body.statusDetail,
+        //statusDetail,
         question: qnaList,
         proofOfStory,
         proofOfFollow,
-        proofOfPayment,
+        //proofOfPayment,
+        proofOfLikeAndComment,
       });
     } catch (error) {
       await EventRegistration.destroy({

@@ -14,8 +14,9 @@ const FirstView =({
   onNext
 }) => {
   const navigate = useNavigate();
-  const { loading, isLoggedIn } = useUser();
-  const [studentType, setStudentType] = useState(formData.studentType ?? "");
+  const { loading, isLoggedIn, registeredEvents } = useUser();
+  const [status, setStudentType] = useState(formData.status ?? "");
+  const [hasRegistered, setHasRegistered] = useState(false);
 
   useEffect(() => {
     if (!loading) {
@@ -31,7 +32,7 @@ const FirstView =({
   }, []);
 
    const checkAllFilled = () => {
-    if (studentType) {
+    if (status) {
       return true;
     }
     errorAlert({ message: "Please enter your status"});
@@ -42,7 +43,7 @@ const FirstView =({
     if(checkAllFilled()){
       setFormData({
         ...formData,
-        studentType: studentType,
+        status: status,
       });
       onNext();
     }
@@ -69,7 +70,7 @@ const FirstView =({
               onChange={(e) => {
                 setStudentType(e.target.value);
               }}
-              value={studentType}
+              value={status}
             >
               <option value="" disabled>
                 Select your institution
@@ -148,6 +149,8 @@ const SecondView = ({
         fullName: sanitizeInput(fullName),
         gender: sanitizeInput(gender),
         email: email,
+        major:major,
+        batch:batch,
         phoneNumber: phoneNumber,
         };
         setFormData(formData);
@@ -710,7 +713,7 @@ const SixthView = ({
                           onClick={onNextHave} 
                           aria-label='I have'
                       >
-                      Yes, I have
+                      Yes, I do
                       </button>
                   </div>
                   {/* I have not - goes to eight view */}
@@ -720,7 +723,7 @@ const SixthView = ({
                           onClick={onNextHaveNot} 
                           aria-label='I have not'
                       >
-                          No, I have not
+                          No, I do not
                       </button>
                   </div>
               </div>
@@ -841,23 +844,23 @@ const EightView = ({
 
   const [follow1, setFollow1] = useState(formData.proofOfFollow ? true : false);
   const [follow2, setFollow2] = useState(formData.proofOfStory ? true : false);
-  const [follow3, setFollow3] = useState(formData.proofOfLike ? true : false);
+  const [follow3, setFollow3] = useState(formData.proofOfLikeAndComment ? true : false);
 
-  const [proofOfFollow, setProofOfFollow] = useState(
+  const [proofOfFollow, setproofOfFollow] = useState(
     formData.proofOfFollow?.name ?? ""
   );
-  const [proofOfStory, setProofOFStory] = useState(
+  const [proofOfStory, setproofOfStory] = useState(
     formData.proofOfStory?.name ?? ""
   );
-  const [proofOfLike, setProofOfLike] = useState(
-    formData.proofOfLike?.name ?? ""
+  const [proofOfLikeAndComment, setproofOfLikeAndComment] = useState(
+    formData.proofOfLikeAndComment?.name ?? ""
   );
 
   const handleSubmit = () => {
     if (
       proofOfFollow &&
       proofOfStory &&
-      proofOfLike &&
+      proofOfLikeAndComment &&
       follow1 &&
       follow2 &&
       follow3
@@ -885,11 +888,11 @@ const EightView = ({
       [name]: files ? file : value,
     }));
     if (name === "proofOfFollow") {
-      setProofOfFollow(file.name);
+      setproofOfFollow(file.name);
     } else if (name === "proofOfStory") {
-      setProofOfStory(file.name);
-    } else if (name === "proofOfLike") {
-      setProofOfLike(file.name);
+      setproofOfStory(file.name);
+    } else if (name === "proofOfLikeAndComment") {
+      setproofOfLikeAndComment(file.name);
     }
   };
 
@@ -1007,18 +1010,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofOfLike'
-                              name='proofOfLike'
+                              id='proofOfLikeAndComment'
+                              name='proofOfLikeAndComment'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofOfLike'
+                              htmlFor='proofOfLikeAndComment'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofOfLike}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfLikeAndComment}</label>
                       </div>
                   </div>
                   <div className='mt-6 flex justify-between items-center'>
@@ -1251,7 +1254,7 @@ const Summary =({
                 <p>{data.gender}</p>
 
                 <strong>Institution</strong>
-                <p>{data.studentType}</p>
+                <p>{formData.status}</p>
 
                 <strong>Major</strong>
                 <p>{data.major}</p>
@@ -1269,48 +1272,41 @@ const Summary =({
 
               <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
                 <div className="border-t border-gray-300 my-4"></div>
-                {/* <strong>How did you know this event?</strong>
-                <p>
-                  {formData.findAboutEvente === "Other"
-                    ? `${formData.findAboutEvent}${
-                        formData.findAboutEventOther !== ""
-                          ? `: ${formData.findAboutEventOther}`
+                <strong>How did you know this event?</strong>
+                  <p>
+                  {formData.eventSource === "Other"
+                    ? `${formData.eventSource}${
+                        formData.eventSourceOther !== ""
+                          ? `: ${formData.eventSourceOther}`
                           : ""
                       }`
-                    : `SxC summit ${formData.findAboutEvent}`}
-                </p> */}
-                {formData.eventExpectation ? (
-                  <>
-                    <strong>
-                      What are your expectations for this event?
-                    </strong>
-                    <p>{formData.eventExpectation}</p>
-                    <strong>
-                      Any questions for the speaker?
-                    </strong>
-                    <p>{formData.question}</p>
-                  </>
-                ) : (
-                  ""
-                )}
-                
+                    : `SxC InterSummit ${formData.eventSource}`}
+                    </p>
+                <strong>
+                  What are your expectations for this event?
+                </strong>
+                    <p>{formData.expectation}</p>
+                <strong>
+                  Any questions for the speaker?
+                </strong>
+                  <p>{formData.question}</p>               
                 <strong>
                   Do you have any allergies or dietary restrictions?
                 </strong>
-                <p>{formData.allergy}
+                <p>{formData.allergy === "" ? "No" : formData.allergy}
                 </p>
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
                   <strong>Proof of following our Instagram:</strong>{" "}
-                  {formData.proofOfFollow}
+                  {formData.proofOfFollow.name}
                 </p>
                 <p>
-                  <strong>Proof of reposting the Internation Summit poster:</strong>{" "}
-                  {formData.proofOfStory}
+                  <strong>Proof of reposting the International Summit poster:</strong>{" "}
+                  {formData.proofOfStory.name}
                 </p>
                 <p>
                   <strong>Proof of like & comment on the International Summit poster:</strong>{" "}
-                  {formData.proofOfLike}
+                  {formData.proofOfLikeAndComment.name}
                 </p>
               </div>
               <div className="flex w-full mt-6 justify-between">
@@ -1382,7 +1378,7 @@ const EventCard = () => {
   };
 
   const handlePrevious = () => {
-    if(currentView === 5 && !formData.allergy){
+    if(currentView === 8 && !formData.allergy){
       setCurrentView((prevView) => prevView - 2);
     }else{
       setCurrentView((prevView) => prevView - 1);
@@ -1421,7 +1417,8 @@ const EventCard = () => {
           formData={formData} 
           setFormData={setFormData}
           sanitizeInput={sanitizeInput} 
-          onNext={handleNext} 
+          onNext={handleNext}
+          onPrevious={handlePrevious}
         /> 
       );
     case 4: 
@@ -1463,7 +1460,9 @@ const EventCard = () => {
         <SixthView 
           onPrevious={handlePrevious} 
           onNextHave={handleNext} 
-          onNextHaveNot={()=>{setCurrentView(8)}} 
+          onNextHaveNot={()=>{
+            formData.allergy = ""
+            setCurrentView(8)}} 
         />
       );
     case 8:

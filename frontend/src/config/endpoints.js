@@ -1,5 +1,5 @@
-// const API_URL = "https://srv582502.hstgr.cloud";
-const API_URL = "http://localhost:3001";
+const API_URL = "https://srv582502.hstgr.cloud";
+//const API_URL = "http://localhost:3001";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";
@@ -52,9 +52,15 @@ const COMVIS_REGISTRATION = "/company-visit/register";
 const COMVIS_SUMMARY = "/company-visit/summary";
 
 
+<<<<<<< HEAD
 // SUMMIT
 const SUMMIT_REGISTRATION = "/summit";
 const SUMMIT_SUMMARY = "/summit/summary";
+=======
+// Intersummit 
+const INTERSUMMIT_REGISTRATION = "/summit";
+const INTERSUMMIT_SUMMARY = "/summit/summary";
+>>>>>>> 2eebc8857d7a10dbe17251d519dadd9cc8493f75
 
 
 // Concat URLs

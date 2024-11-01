@@ -13,12 +13,10 @@ router.post(
   upload.fields([
     { name: "proofOfFollow", minCount: 1, maxCount: 1 },
     { name: "proofOfStory", minCount: 1, maxCount: 1 },
-    { name: "proofOfPayment", minCount: 1, maxCount: 1 },
+    //{ name: "proofOfPayment", maxCount: 1 },
+    { name: "proofOfLikeAndComment", minCount: 1, maxCount: 1 },
   ]),
   [
-    body("cityOfResidence")
-      .notEmpty()
-      .withMessage("City of residence is required"),
     body("status")
       .notEmpty()
       .withMessage("Status is required")
@@ -31,11 +29,13 @@ router.post(
         "Entrepreneur",
       ])
       .withMessage(
-        "Status msut be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
+        "Status must be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
       ),
-    body("statusDetail").notEmpty().withMessage("Status detail is required"),
+    body("eventSource")
+      .notEmpty()
+      .withMessage("Event source is required"),
     body("question").notEmpty().withMessage("Question is required"),
-    body("eventExpectation")
+    body("expectation")
       .notEmpty()
       .withMessage("Event Expectation is required"),
   ],
