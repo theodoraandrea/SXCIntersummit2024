@@ -97,7 +97,7 @@ exports.registerSummit = async (req, res) => {
         registrationId: eventRegistration.id,
         //cityOfResidence: body.cityOfResidence,
         status: body.status,
-        statusDetail: body.statusDetail,
+        statusDetail,
         question: qnaList,
         proofOfStory,
         proofOfFollow,
