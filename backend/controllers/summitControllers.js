@@ -3,6 +3,7 @@ const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { validationResult } = require("express-validator");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const sendAutomatedEmail = require("../services/automatedEmail");
+const { generateTeamCode } = require("../utils/generateTeamCode");
 
 const summitWhatsappGroup = "https://chat.whatsapp.com/Cx46vK2imNtDBGlVxVTuxU";
 
@@ -15,10 +16,10 @@ exports.registerSummit = async (req, res) => {
     }
 
     // Check if there any required image not uploaded.
+    console.log(req.files);
     const requiredFields = [
       "proofOfFollow",
       "proofOfStory",
-      //"proofOfPayment",
       "proofOfLikeAndComment",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
@@ -49,6 +50,10 @@ exports.registerSummit = async (req, res) => {
       return res.status(500).json({ message: "Already Registered Summit" });
 
     const qnaList = [
+      {
+        "Do you have any allergies or dietary restrictions?":
+          body.allergyDietaryRestriction,
+      },
       { "Find out about event": body.eventSource },
       { "Event Expectation": body.expectation },
       {
@@ -104,6 +109,7 @@ exports.registerSummit = async (req, res) => {
         proofOfFollow,
         //proofOfPayment,
         proofOfLikeAndComment,
+        summitRegistrationCode: generateTeamCode(8),
       });
     } catch (error) {
       await EventRegistration.destroy({
