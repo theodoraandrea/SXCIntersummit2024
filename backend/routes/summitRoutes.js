@@ -32,14 +32,13 @@ router.post(
         "Entrepreneur",
       ])
       .withMessage(
-        "Status msut be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
+        "Status must be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
       ),
-    body("findAboutEvent")
+    body("eventSource")
       .notEmpty()
-      .withMessage("Find out about event is required"),
-    body("statusDetail").notEmpty().withMessage("Status detail is required"),
+      .withMessage("Event source is required"),
     body("question").notEmpty().withMessage("Question is required"),
-    body("eventExpectation")
+    body("expectation")
       .notEmpty()
       .withMessage("Event Expectation is required"),
   ],
