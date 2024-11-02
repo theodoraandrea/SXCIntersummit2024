@@ -1482,7 +1482,7 @@ const EventCard = () => {
           checkFileSize={checkFileSize} 
           checkFileType={checkFileTypeImage} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(9)}} 
+          onNext={()=>{setCurrentView(10)}} 
         />
       );
     case 9:
@@ -1502,7 +1502,7 @@ const EventCard = () => {
         <Summary 
           eventData={eventData} 
           formData={formData} 
-          onPrevious={()=>{setCurrentView(9)}}
+          onPrevious={()=>{setCurrentView(8)}}
         />
       );
       default:
