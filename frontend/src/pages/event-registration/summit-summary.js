@@ -51,7 +51,7 @@ const SummitSummary = () =>{
               eventExpectation: answers[1],
               question: answers[2],
               hasAllergy: answers[3],
-              allergyDietaryRestriction: answers[4],
+              allergyDietaryRestriction: answers[3],
           };
       });
       setSummitData(updatedData);
@@ -96,27 +96,27 @@ const SummitSummary = () =>{
                         <strong>International Summit Summary</strong>
                       </p>
                       <div className="text-sm md:text-base">
-                        <p><strong>Full Name:</strong> {userData.fullname}</p>
-                        <p><strong>Gender:</strong> {userData.gender}</p>
-                        <p><strong>University:</strong> {userData.university}</p>
-                        <p><strong>Major:</strong> {userData.major}</p>
-                        <p><strong>Batch:</strong> {userData.batch}</p>
-                        <p><strong>Phone:</strong> {userData.phoneNumber}</p>
-                        <p><strong>Email:</strong> {userData.email}</p>
+                        <p><strong>Full Name:</strong> {userData.fullName}</p>
+                        <p><strong>Gender:</strong> {userData?.gender}</p>
+                        <p><strong>University:</strong> {userData?.university}</p>
+                        <p><strong>Major:</strong> {userData?.major}</p>
+                        <p><strong>Batch:</strong> {userData?.batch}</p>
+                        <p><strong>Phone:</strong> {userData?.phoneNumber}</p>
+                        <p><strong>Email:</strong> {userData?.email}</p>
       
                         <div className="border-t border-gray-300 my-4"></div>
       
                         {/* findAboutEvent and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{data.findAboutEvent}</p>
+                        <p>{data?.findAboutEvent}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{data.eventExpectations}</p>
+                        <p>{data?.eventExpectations}</p>
 
                         <strong>Do you have any questions for our speakers?</strong>
-                        <p>{data.questions}</p>
+                        <p>{data?.questions}</p>
 
-                        {data.allergy && (
+                        {data?.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
                             <p>{data.allergyDietaryRestriction}</p>

@@ -1107,13 +1107,15 @@ const PaymentView = ({
       <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
           <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
               <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
-                  <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+                  <h1 className='text-3xl font-bold text-white mb-2'>
+                    Registration Fee
+                  </h1>
                       <p className='text-white mx-4 mb-2 text-center'>
-                          There is no registration fee, please feel free to upload another f
+                          There is no registration fee, please feel free to upload another file.
                       </p>
                       <div className='text-white text-left w-40'>
                           <div className='flex flex-row justify-between'>
-                              <p><strong>Price: </strong></p>
+                              {/* <p><strong>Price: </strong></p> */}
                               {/* <p>{regularPrice}</p> */}
                           </div>
                       {
@@ -1484,17 +1486,17 @@ const EventCard = () => {
         />
       );
     case 9:
-      return (
-        <PaymentView 
-          eventData={eventData} 
-          formData={formData} 
-          setFormData={setFormData} 
-          checkFileSize={checkFileSize} 
-          checkFileType={checkFileTypeImage} 
-          onPrevious={handlePrevious} 
-          onNext={handleNext} 
-        />
-      );
+      // return (
+      //   <PaymentView 
+      //     evenconsttData={eventData} 
+      //     formData={formData} 
+      //     setFormData={setFormData} 
+      //     checkFileSize={checkFileSize} 
+      //     checkFileType={checkFileTypeImage} 
+      //     onPrevious={handlePrevious} 
+      //     onNext={handleNext} 
+      //   />
+      // );
     case 10:
       return (
         <Summary 
