@@ -1111,7 +1111,7 @@ const PaymentView = ({
                     Registration Fee
                   </h1>
                       <p className='text-white mx-4 mb-2 text-center'>
-                          There is no registration fee, please feel free to upload another file.
+                          There is no registration fee, feel free to upload any other file.
                       </p>
                       <div className='text-white text-left w-40'>
                           <div className='flex flex-row justify-between'>
@@ -1482,27 +1482,27 @@ const EventCard = () => {
           checkFileSize={checkFileSize} 
           checkFileType={checkFileTypeImage} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(10)}} 
+          onNext={()=>{setCurrentView(9)}} 
         />
       );
     case 9:
-      // return (
-      //   <PaymentView 
-      //     evenconsttData={eventData} 
-      //     formData={formData} 
-      //     setFormData={setFormData} 
-      //     checkFileSize={checkFileSize} 
-      //     checkFileType={checkFileTypeImage} 
-      //     onPrevious={handlePrevious} 
-      //     onNext={handleNext} 
-      //   />
-      // );
+      return (
+        <PaymentView 
+          evenconsttData={eventData} 
+          formData={formData} 
+          setFormData={setFormData} 
+          checkFileSize={checkFileSize} 
+          checkFileType={checkFileTypeImage} 
+          onPrevious={handlePrevious} 
+          onNext={handleNext} 
+        />
+      );
     case 10:
       return (
         <Summary 
           eventData={eventData} 
           formData={formData} 
-          onPrevious={()=>{setCurrentView(8)}}
+          onPrevious={()=>{setCurrentView(9)}}
         />
       );
       default:
