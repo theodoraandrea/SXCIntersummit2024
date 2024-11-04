@@ -45,6 +45,10 @@ const successAlert = ({ compId, eventId, title, message }) => {
         additionalHtml = `
         <br>
         <a href="https://chat.whatsapp.com/Cx46vK2imNtDBGlVxVTuxU" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
+    } else if (eventId === "event_7") {
+        additionalHtml = `
+        <br>
+        <a href="https://chat.whatsapp.com/ECPYNkFM6RTCw8DVyjN38H" target="_blank" style="display: inline-block; margin-top: 10px; padding: 5px 10px; background-color: #25D366; color: white; border-radius: 5px; text-decoration: none;">Join WhatsApp Group</a>`;
     }
 
     console.log("Additional HTML:", additionalHtml);
