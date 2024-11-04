@@ -93,7 +93,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
                 Online
               </option>
               <option value="offline" disabled={hasRegisteredOffline}>
-                Offline (BCA/Bosch/KPMG)
+                Offline (BCA/KPMG)
               </option>
             </select>
           </div>
@@ -703,7 +703,7 @@ const FourthView = ({
                 />
               </div>
               <div className="grid grid-cols-1 gap-4 text-left">
-                
+{/*                 
                 <div className="flex p-4 items center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBosch"
@@ -724,7 +724,7 @@ const FourthView = ({
                   >
                     Bosch (Only for students in 5th semester or above)
                   </label>
-                </div>
+                </div> */}
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBCA"
