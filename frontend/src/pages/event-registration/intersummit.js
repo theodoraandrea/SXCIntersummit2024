@@ -1223,6 +1223,7 @@ const Summary =({
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, intersummitId]);
         successAlert({ 
+          eventId: "event_7",
           message: "Successfully registered for Intersummit. Please check your email for further details!"})
       }
     } catch (error){
