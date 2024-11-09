@@ -93,7 +93,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
                 Online
               </option>
               <option value="offline" disabled={hasRegisteredOffline}>
-                Offline (BCA/Bosch/KPMG)
+                Offline (BCA/KPMG)
               </option>
             </select>
           </div>
@@ -422,7 +422,13 @@ const ThirdView = ({
     if (name === "cv") {
       setCv(file ? file.name : "");
     } else if (name === "gpa") {
-      setGpa(value);
+      const gpaValue = parseFloat(value);
+      if(gpaValue > 0 || value === ""){
+        setGpa(value);
+      } else {
+        setGpa(value);
+        alert("GPA must be a valid number greater than 0");
+      }
     } else if (name === "domicile") {
       setDomicile(value);
     } else if (name === "linkedin") {
@@ -449,6 +455,7 @@ const ThirdView = ({
               value={gpa}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg"
+              placeholder="e.g. 3.7"
             />
           </div>
           <div className="my-2 px-4">
@@ -696,7 +703,7 @@ const FourthView = ({
                 />
               </div>
               <div className="grid grid-cols-1 gap-4 text-left">
-                
+{/*                 
                 <div className="flex p-4 items center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBosch"
@@ -717,7 +724,7 @@ const FourthView = ({
                   >
                     Bosch (Only for students in 5th semester or above)
                   </label>
-                </div>
+                </div> */}
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBCA"

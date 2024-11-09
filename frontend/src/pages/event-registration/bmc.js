@@ -1081,7 +1081,7 @@ const NinthView = ({ formData, setFormData, checkFileSize, checkFileType, onPrev
                 <div className='bg-primary-4 my-8 mx-2 p-8 max-w-full md:max-w-xl rounded-xl shadow-lg text-center max-w-3xl'>
                     <h1 className='text-3xl font-bold text-gradient mb-4'>Connect with us!</h1>
                     <form className='text-left'>
-                        {/* setiap selesai chekck list harus upload gambar  */}
+                        {/* setiap selesai check list harus upload gambar  */}
                         <div className='mb-4'>
                             <label className='block text-white mb-2'>
                                 <input
@@ -1470,6 +1470,7 @@ const Summary = ({ formData, onPrevious }) => {
     </div>
   );
 };
+
 const EventCard = () => {
   const [currentView, setCurrentView] = useState(1);
 

@@ -3,3 +3,4 @@ node_modules/
 
 # Environment variable file for deployment
 backend/.env.deploy
+node_modules

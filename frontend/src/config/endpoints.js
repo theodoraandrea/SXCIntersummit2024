@@ -1,5 +1,5 @@
 const API_URL = "https://srv582502.hstgr.cloud";
-// const API_URL = "http://localhost:3001";
+//const API_URL = "http://localhost:3001";
 
 // Auth or Profile related
 const SIGNUP = "/auth/signup";
@@ -51,6 +51,12 @@ const CHAMBERS_SUMMARY = "/chamber/summary";
 const COMVIS_REGISTRATION = "/company-visit/register";
 const COMVIS_SUMMARY = "/company-visit/summary";
 
+
+// Intersummit 
+const INTERSUMMIT_REGISTRATION = "/summit";
+const INTERSUMMIT_SUMMARY = "/summit/summary";
+
+
 // Concat URLs
 const API_SIGNUP = `${API_URL}${SIGNUP}`;
 const API_LOGIN = `${API_URL}${LOGIN}`;
@@ -96,6 +102,11 @@ const API_POST_CHAMBERS_REGISTRATION = `${API_URL}${CHAMBERS_REGISTRATION}
 const API_GET_COMPVIS_REGISTRATION = `${API_URL}${COMVIS_SUMMARY}`;
 const API_POST_COMPVIS_REGISTRATION = `${API_URL}${COMVIS_REGISTRATION}`;
 
+// INTERSUMMIT
+const API_GET_INTERSUMMIT_REGISTRATION = `${API_URL}${INTERSUMMIT_SUMMARY}`;
+const API_POST_INTERSUMMIT_REGISTRATION = `${API_URL}${INTERSUMMIT_REGISTRATION}`;
+
+
 export {
   API_URL,
   API_SIGNUP,
@@ -132,4 +143,6 @@ export {
   API_POST_VERIFY_EMAIL,
   API_GET_COMPVIS_REGISTRATION,
   API_POST_COMPVIS_REGISTRATION,
+  API_GET_INTERSUMMIT_REGISTRATION,
+  API_POST_INTERSUMMIT_REGISTRATION
 };
