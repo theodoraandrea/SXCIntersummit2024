@@ -57,6 +57,9 @@ exports.registerCompanyVisit = async (req, res) => {
       domicile,
       isCommittee,
       motivation,
+      appliedShopeeGraduate,
+      batch,
+      expectedGraduation,
     } = body;
 
     const userId = req.user.id;
@@ -72,6 +75,18 @@ exports.registerCompanyVisit = async (req, res) => {
           motivation,
       },
     ];
+
+    // questions if the company is Shopee
+    if (company === "Shopee") {
+      qnaList.push(
+        {
+          "Have you Applied to the Shopee Graduate Development Program?":
+            appliedShopeeGraduate,
+        },
+        { "Batch (University Entry Year)": batch },
+        { "Expected Graduation Date": expectedGraduation }
+      );
+    }
 
     // Create and upload File/Image
     const fileNames = [
@@ -148,7 +163,7 @@ exports.registerCompanyVisit = async (req, res) => {
       emailContent: {
         intro:
           "You have just successfully registered to the Company Visit program by StudentsxCEOs Intersummit 2024. Your registration is under review!",
-        action:[],
+        action: [],
         outro:
           "Stay tuned for updates via email for the further information! Selected participant will be informed via email at November 4th 2024 for Bosch and November 10th 2024 for BCA.",
         signature: "Cheers, StudentsxCEOs International Summit 2024",
