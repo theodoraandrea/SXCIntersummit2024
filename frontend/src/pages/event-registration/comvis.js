@@ -93,7 +93,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
                 Online
               </option>
               <option value="offline" disabled={hasRegisteredOffline}>
-                Offline (BCA/KPMG)
+                Offline (KPMG/Shopee)
               </option>
             </select>
           </div>
@@ -725,7 +725,7 @@ const FourthView = ({
                     Bosch (Only for students in 5th semester or above)
                   </label>
                 </div> */}
-                <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+                {/* <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyBCA"
                     name="companyVisit"
@@ -745,7 +745,7 @@ const FourthView = ({
                   >
                     BCA (Only for students in 6th semester or above)
                   </label>
-                </div>
+                </div> */}
                 
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
