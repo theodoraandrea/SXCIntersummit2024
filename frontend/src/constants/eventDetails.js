@@ -449,7 +449,7 @@ export const eventDetails = {
     ],
   },
   event_7: {
-    title: "Summit",
+    title: "The International Summit",
     image: imgLocation + "summit.png",
     openRegistration: true, //change this
     description:
@@ -496,8 +496,8 @@ export const eventDetails = {
       "The International Summit will be held offline in early December.",
       "Participants will gain a comprehensive understanding of current economic trends, benefit from the leading economists and industry experts, and access valuable networking opportunities. Also, the summit provides a chance to explore job and internship prospects, making it an essential event for anyone looking to advance their career and expand their professional network.",
     ],
-    contactPerson: ["TBA"],
-    contactNumber: ["-"],
+    contactPerson: ["Secilia Deartha", "Angelika Delvia"],
+    contactNumber: ["081385353064", "082114823962"],
     contactLink: [],
     timelineData: [
       {
@@ -505,7 +505,10 @@ export const eventDetails = {
         date: "1st December 2024",
         type: "register",
         link: `${INTERSUMMIT_REGISTRATION}`,
-      },
+      },{
+        title: "Place : Dinas Pendidikan Provinsi DKI Jakarta",
+        date: "Address : Jl. Gatot Subroto No. Kav. 40-41, Kuningan"
+      }
     ],
   },
 };
