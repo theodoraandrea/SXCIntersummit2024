@@ -96,30 +96,30 @@ const IntersummitSummary = () =>{
                         <strong>{data}</strong>
                       </p>
                       <div className="text-sm md:text-base">
-                        <p><strong>Full Name:</strong> {data.fullname}</p>
-                        <p><strong>Gender:</strong> {data.gender}</p>
-                        <p><strong>University:</strong> {data.studentType}</p>
-                        <p><strong>Major:</strong> {data.major}</p>
-                        <p><strong>Batch:</strong> {data.batch}</p>
-                        <p><strong>Phone:</strong> {data.phoneNumber}</p>
-                        <p><strong>Email:</strong> {data.email}</p>
+                        <p><strong>Full Name:</strong> {data?.fullname}</p>
+                        <p><strong>Gender:</strong> {data?.gender}</p>
+                        <p><strong>University:</strong> {data?.studentType}</p>
+                        <p><strong>Major:</strong> {data?.major}</p>
+                        <p><strong>Batch:</strong> {data?.batch}</p>
+                        <p><strong>Phone:</strong> {data?.phoneNumber}</p>
+                        <p><strong>Email:</strong> {data?.email}</p>
       
                         <div className="border-t border-gray-300 my-4"></div>
       
                         {/* Event Source and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{data.eventSource}</p>
+                        <p>{data?.eventSource}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{data.expectations}</p>
+                        <p>{data?.expectations}</p>
 
                         <strong>Do you have any questions for our speakers?</strong>
-                        <p>{data.questions}</p>
+                        <p>{data?.questions}</p>
 
-                        {data.allergy && (
+                        {data?.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
-                            <p>{data.allergy}</p>
+                            <p>{data?.allergy}</p>
                           </>
                         )}
                         
