@@ -531,6 +531,7 @@ const FourthView = ({
   onPrevious,
   onNext,
   attendanceType,
+  company,
 }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -765,6 +766,27 @@ const FourthView = ({
                     KPMG
                   </label>
                 </div>
+
+                <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+                  <input
+                    id="companyShopee"
+                    name="companyVisit"
+                    type="radio"
+                    value="Shopee"
+                    disabled={semester < 3}
+                    checked={selectedCompany === "Shopee"}
+                    onChange={(e) => {
+                      setSelectedCompany(e.target.value);
+                    }}
+                  />
+                  <label
+                    htmlFor="companyShopee"
+                    className="w-full ml-2 text-xs sm:text-sm text-gray-800"
+                  >
+                    Shopee (Minimum 3rd semester students or fresh graduates with less than 2 years working experience
+                    )
+                  </label>
+                </div>
               </div>
             </div>
           )}
@@ -791,6 +813,102 @@ const FourthView = ({
     </div>
   );
 };
+
+const ExtraView = ({ formData, setFormData, onNext, onPrevious}) => {
+  const [appliedToProgram, setAppliedToProgram] = useState(formData.appliedToProgram ?? null);
+  const [graduationDate, setGraduationDate] = useState(formData.graduationDate ?? '');
+
+  const handleNext = () => {
+    if (appliedToProgram === null || !graduationDate) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    // Update form data with current inputs
+    setFormData({
+      ...formData,
+      appliedToProgram,
+      graduationDate,
+    });
+
+    onNext(); // Proceed to the next step
+  };
+
+  return (
+    <div>
+      <Navbar />
+      <div className="bg-primary-1 w-full min-h-screen flex items-center justify-center">
+        <div className="bg-primary-4 mx-2 p-8 rounded-xl shadow-lg text-center max-w-3xl">
+          <h1 className="text-3xl font-bold text-gradient mb-4">Additional Information</h1>
+
+          {/* Question: Applied to Program */}
+          <div className="mb-4">
+            <label className="block text-white mb-2">
+              Have you applied to the Shopee Graduate Development Program?
+            </label>
+            <div className="flex space-x-4">
+              <label>
+                <input
+                  type="radio"
+                  name="appliedToProgram"
+                  value="yes"
+                  checked={appliedToProgram === 'yes'}
+                  onChange={() => setAppliedToProgram('yes')}
+                />
+                <span className="ml-2 text-white">Yes</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="appliedToProgram"
+                  value="no"
+                  checked={appliedToProgram === 'no'}
+                  onChange={() => setAppliedToProgram('no')}
+                />
+                <span className="ml-2 text-white">No</span>
+              </label>
+            </div>
+          </div>
+
+          {/* Expected Graduation Date */}
+          <div className="mb-4">
+            <label htmlFor="graduationDate" className="flex text-white mb-2">
+              Expected Graduation Date (e.g., September 2025)
+            </label>
+            <input
+              type="text"
+              id="graduationDate"
+              name="graduationDate"
+              placeholder="e.g., September 2025"
+              value={graduationDate}
+              onChange={(e) => setGraduationDate(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg bg-gray-100 text-gray-800 border-gray-300"
+            />
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="mt-6 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={onPrevious}
+              className="hover:text-gradient text-white px-6 py-2 mr-6"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="hover:text-gradient text-white px-6 py-2"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 const FifthView = ({
   onPrevious,
@@ -1589,6 +1707,17 @@ const Summary = ({ formData, onPrevious }) => {
 
                 <strong>CV</strong>
                 <p>{formData.cv.name}</p>
+
+                {formData.company === "Shopee" && (
+                  <>
+                    <strong>Expected Graduation</strong>
+                    <p>{formData.graduationDate}</p>
+
+                    <strong>Have you Applied to the Shopee Graduate Development Program?</strong>
+                    <p>{formData.appliedToProgram}</p>
+                  </>
+                )}
+
               </div>
 
               {/* Section for longer answers */}
@@ -1695,7 +1824,7 @@ const EventCard = () => {
   const handleNext = () => {
     setCurrentView((prevView) => prevView + 1);
   };
-
+  
   const handlePrevious = () => {
     if (currentView === 7 && !formData.experience) {
       setCurrentView((prevView) => prevView - 2);
@@ -1703,14 +1832,29 @@ const EventCard = () => {
       setCurrentView((prevView) => prevView - 1);
     }
   };
-
+  
   const handleNext2 = () => {
-    setFormData({
-      ...formData,
-      experience: "",
-    });
-    setCurrentView((prevView) => prevView + 2);
+    // Specific case for YGY Shopee
+    if (currentView === 4 && formData.company === 'Shopee'){
+      // Skip an extra view ahead for Shopee
+      setCurrentView((prevView) => prevView + 2);
+    } else {
+      // Regular next behavior for other cases
+      setCurrentView((prevView) => prevView + 1);
+    }
   };
+  
+  const handlePrevious2 = () => {
+    if (currentView === 7 && !formData.experience) {
+      setCurrentView((prevView) => prevView - 2);
+    } else if (currentView === 4 && formData.company === 'Shopee') {
+      // Special case for Shopee at view 4: skip the previous view
+      setCurrentView((prevView) => prevView - 2);
+    } else {
+      setCurrentView((prevView) => prevView - 1);
+    }
+  };
+  
 
   switch (currentView) {
     case 1:
@@ -1750,12 +1894,21 @@ const EventCard = () => {
           formData={formData}
           setFormData={setFormData}
           sanitizeInput={sanitizeInput}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
+          onPrevious={handlePrevious2}
+          onNext={handleNext2}
           attendanceType={formData.attendanceType}
         />
       );
     case 5:
+      return (
+        <ExtraView
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
+    case 6:
       return (
         <FifthView
           onPrevious={handlePrevious}
@@ -1765,7 +1918,7 @@ const EventCard = () => {
           setFormData={setFormData}
         />
       );
-    case 6:
+    case 7:
       return (
         <SixthView
           formData={formData}
@@ -1775,8 +1928,6 @@ const EventCard = () => {
           onNext={handleNext}
         />
       );
-    case 7:
-    // skip
     case 8:
     // skip
     case 9:

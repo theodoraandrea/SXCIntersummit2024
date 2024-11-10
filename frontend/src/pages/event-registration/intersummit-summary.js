@@ -108,18 +108,18 @@ const IntersummitSummary = () =>{
       
                         {/* Event Source and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{data.eventSource}</p>
+                        <p>{data?.eventSource}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{data.expectations}</p>
+                        <p>{data?.expectations}</p>
 
                         <strong>Do you have any questions for our speakers?</strong>
-                        <p>{data.questions}</p>
+                        <p>{data?.questions}</p>
 
-                        {data.allergy && (
+                        {data?.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
-                            <p>{data.allergy}</p>
+                            <p>{data?.allergy}</p>
                           </>
                         )}
                         

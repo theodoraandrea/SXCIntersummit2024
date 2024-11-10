@@ -51,11 +51,9 @@ const CHAMBERS_SUMMARY = "/chamber/summary";
 const COMVIS_REGISTRATION = "/company-visit/register";
 const COMVIS_SUMMARY = "/company-visit/summary";
 
-
 // Intersummit 
 const INTERSUMMIT_REGISTRATION = "/summit";
 const INTERSUMMIT_SUMMARY = "/summit/summary";
-
 
 // Concat URLs
 const API_SIGNUP = `${API_URL}${SIGNUP}`;
