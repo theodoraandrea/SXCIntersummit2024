@@ -14,7 +14,7 @@ const FirstView =({
 }) => {
   const navigate = useNavigate();
   const { loading, isLoggedIn, registeredEvents } = useUser();
-  const [studentType, setStudentType] = useState(formData.studentType ?? "");
+  const [status, setStudentType] = useState(formData.status ?? "");
   const [hasRegistered, setHasRegistered] = useState(false);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const FirstView =({
   })
 
    const checkAllFilled = () => {
-    if (studentType) {
+    if (status) {
       return true;
     }
     errorAlert({ message: "Please enter your status"});
@@ -48,7 +48,7 @@ const FirstView =({
     if(checkAllFilled()){
       setFormData({
         ...formData,
-        studentType: studentType,
+        status: status,
       });
       onNext();
     }
@@ -75,7 +75,7 @@ const FirstView =({
               onChange={(e) => {
                 setStudentType(e.target.value);
               }}
-              value={studentType}
+              value={status}
             >
               <option value="" disabled>
                 Select your institution
@@ -154,6 +154,8 @@ const SecondView = ({
         fullName: sanitizeInput(fullName),
         gender: sanitizeInput(gender),
         email: email,
+        major:major,
+        batch:batch,
         phoneNumber: phoneNumber,
         };
         setFormData(formData);
@@ -716,7 +718,7 @@ const SixthView = ({
                           onClick={onNextHave} 
                           aria-label='I have'
                       >
-                      Yes, I have
+                      Yes, I do
                       </button>
                   </div>
                   {/* I have not - goes to eight view */}
@@ -726,7 +728,7 @@ const SixthView = ({
                           onClick={onNextHaveNot} 
                           aria-label='I have not'
                       >
-                          No, I have not
+                          No, I do not
                       </button>
                   </div>
               </div>
@@ -845,25 +847,25 @@ const EightView = ({
     window.scrollTo(0, 0);
   },[]);
 
-  const [follow1, setFollow1] = useState(formData.proofFollow ? true : false);
-  const [follow2, setFollow2] = useState(formData.proofStory ? true : false);
-  const [follow3, setFollow3] = useState(formData.proofLike ? true : false);
+  const [follow1, setFollow1] = useState(formData.proofOfFollow ? true : false);
+  const [follow2, setFollow2] = useState(formData.proofOfStory ? true : false);
+  const [follow3, setFollow3] = useState(formData.proofOfLikeAndComment ? true : false);
 
-  const [proofFollow, setProofFollow] = useState(
-    formData.proofFollow?.name ?? ""
+  const [proofOfFollow, setproofOfFollow] = useState(
+    formData.proofOfFollow?.name ?? ""
   );
-  const [proofStory, setProofStory] = useState(
-    formData.proofStory?.name ?? ""
+  const [proofOfStory, setproofOfStory] = useState(
+    formData.proofOfStory?.name ?? ""
   );
-  const [proofLike, setProofLike] = useState(
-    formData.proofLike?.name ?? ""
+  const [proofOfLikeAndComment, setproofOfLikeAndComment] = useState(
+    formData.proofOfLikeAndComment?.name ?? ""
   );
 
   const handleSubmit = () => {
     if (
-      proofFollow &&
-      proofStory &&
-      proofLike &&
+      proofOfFollow &&
+      proofOfStory &&
+      proofOfLikeAndComment &&
       follow1 &&
       follow2 &&
       follow3
@@ -890,12 +892,12 @@ const EightView = ({
       ...prevState,
       [name]: files ? file : value,
     }));
-    if (name === "proofFollow") {
-      setProofFollow(file.name);
-    } else if (name === "proofStory") {
-      setProofStory(file.name);
-    } else if (name === "proofLike") {
-      setProofLike(file.name);
+    if (name === "proofOfFollow") {
+      setproofOfFollow(file.name);
+    } else if (name === "proofOfStory") {
+      setproofOfStory(file.name);
+    } else if (name === "proofOfLikeAndComment") {
+      setproofOfLikeAndComment(file.name);
     }
   };
 
@@ -955,18 +957,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofFollow'
-                              name='proofFollow'
+                              id='proofOfFollow'
+                              name='proofOfFollow'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofFollow'
+                              htmlFor='proofOfFollow'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofFollow}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfFollow}</label>
                       </div>
                   </div>
                   <div className='mb-4'>
@@ -983,18 +985,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofStory'
-                              name='proofStory'
+                              id='proofOfStory'
+                              name='proofOfStory'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofStory'
+                              htmlFor='proofOfStory'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofStory}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfStory}</label>
                       </div>
                   </div>
                   <div className=''>
@@ -1013,18 +1015,18 @@ const EightView = ({
                       <div className='my-4 relative'>
                           <input
                               type='file'
-                              id='proofLike'
-                              name='proofLike'
+                              id='proofOfLikeAndComment'
+                              name='proofOfLikeAndComment'
                               onChange={handleChange}
                               className='absolute inset-0 opacity-0 cursor-pointer'
                           />
                           <label
-                              htmlFor='proofLike'
+                              htmlFor='proofOfLikeAndComment'
                               className='text-sm px-4 py-2 md:text-base bg-primary-3 text-white md:px-6 md:py-2 my-2 rounded-full cursor-pointer'
                           >
                               Submit screenshot
                           </label>
-                          <label className='text-sm md:text-base text-white ml-2'>{proofLike}</label>
+                          <label className='text-sm md:text-base text-white ml-2'>{proofOfLikeAndComment}</label>
                       </div>
                   </div>
                   <div className='mt-6 flex justify-between items-center'>
@@ -1050,150 +1052,150 @@ const EightView = ({
   );
 };
 
-const PaymentView = ({ 
-  eventData, 
-  formData, 
-  setFormData, 
-  checkFileSize, 
-  checkFileType, 
-  onPrevious, 
-  onNext 
-}) => {
-  const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
-  const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
+// const PaymentView = ({ 
+//   eventData, 
+//   formData, 
+//   setFormData, 
+//   checkFileSize, 
+//   checkFileType, 
+//   onPrevious, 
+//   onNext 
+// }) => {
+//   const [ checkPayment, setCheckPayment ] = useState(formData.proofPayment ? true : false);
+//   const [ proofPayment, setProofPayment ] = useState(formData.proofPayment?.name ?? "");
 
-  const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
-  // const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
-  // const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
+//   const { regularPrice, bankAccount, discountedPrice, discount } = eventData;
+//   const [ verifiedRefCode, setVerifiedRefCode ] = useState(formData.referralCode ?? null);
+//   const [ refCodeValid, setRefCodeValid ] = useState(formData.referralCode ? true : false);
 
-  //handling file change
-  const handleChange = (e) => {
-      const { name, value, files } = e.target;
+//   //handling file change
+//   const handleChange = (e) => {
+//       const { name, value, files } = e.target;
 
-      const file = files[0];
+//       const file = files[0];
       
-      if (!checkFileSize(file)) {
-        return;
-      }
+//       if (!checkFileSize(file)) {
+//         return;
+//       }
 
-      if (!checkFileType(file)) {
-        return;
-      }
+//       if (!checkFileType(file)) {
+//         return;
+//       }
 
-      setFormData((prevState) => ({
-        ...prevState,
-        [name]: files ? file : value,
-      }));
-      setProofPayment(file?.name);
-  };
+//       setFormData((prevState) => ({
+//         ...prevState,
+//         [name]: files ? file : value,
+//       }));
+//       setProofPayment(file?.name);
+//   };
 
-  //saving referral code
-  // useEffect(() => {
-  //     setFormData({
-  //         ...formData,
-  //         referralCode: verifiedRefCode
-  //     });
-  // }, [verifiedRefCode]);
+//   //saving referral code
+//   useEffect(() => {
+//       setFormData({
+//           ...formData,
+//           referralCode: verifiedRefCode
+//       });
+//   }, [verifiedRefCode]);
 
-  //checking payment proof
-  const handleNext = () => {
-      if (checkPayment && proofPayment) {
-          onNext();
-      } else {
-        errorAlert({ message: "Proof must be uploaded"});
-      }
-  }
+//   //checking payment proof
+//   const handleNext = () => {
+//       if (checkPayment && proofPayment) {
+//           onNext();
+//       } else {
+//         errorAlert({ message: "Proof must be uploaded"});
+//       }
+//   }
 
-  return (
-    <div>
-      <Navbar />
-      <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
-          <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
-              <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
-                  <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
-                      <p className='text-white mx-4 mb-2 text-center'>
-                          Please transfer the following amount to complete your registration
-                      </p>
-                      <div className='text-white text-left w-40'>
-                          <div className='flex flex-row justify-between'>
-                              <p><strong>Price: </strong></p>
-                              <p>{regularPrice}</p>
-                          </div>
-                      {
-                          // verifiedRefCode && refCodeValid && (
-                          //     <>
-                          //     <div className='flex flex-row justify-between'>
-                          //     <p><strong>Discount:</strong></p>
-                          //     <p>{discount}</p>
-                          //     </div>
-                          //     <div className='flex flex-row justify-between'>
-                          //     <p><strong>Total:</strong></p>
-                          //     <p><strong>{discountedPrice}</strong></p>
-                          //     </div>
-                          //     </>
-                          // )
-                      }
-                      </div>
-                      <p className='text-white mx-4 text-center'>
-                          <strong>Bank Account Number: </strong>{bankAccount}
-                      </p>
-                  <div className='mt-4'>
-                      <label className='block text-white mb-2'>
-                          <input
-                              type='checkbox'
-                              name='checkPayment'
-                              checked={checkPayment}
-                              onChange={(e) => setCheckPayment(e.target.checked)}
-                              className='mr-2'
-                          />
-                          I have paid the registration fee
-                      </label>
-                      <div className='my-4 relative'>
-                          <input
-                              type='file'
-                              id='proofPayment'
-                              name='proofPayment'
-                              onChange={handleChange}
-                              className='absolute inset-0 opacity-0 cursor-pointer'
-                          />
-                          <label
-                              htmlFor='proofPayment'
-                              className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
-                          >
-                              Submit screenshot
-                          </label>
-                          <p className='text-white mt-4'>{proofPayment}</p>
-                      </div>
-                  </div>
-              </div>
-              {/* <ReferralModal 
-              eventName="summit"
-              referralCode={formData.referralCode ?? ''}
-              verifiedRefCode={verifiedRefCode}
-              setVerifiedRefCode={setVerifiedRefCode} 
-              setRefCodeValid={setRefCodeValid}
-              /> */}
-              <div className='mt-6 flex justify-center items-center'>
-                  <button
-                      type='button'
-                      onClick={onPrevious}
-                      className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
-                  >
-                  Back
-                  </button>
-                  <button
-                      type='button'
-                      onClick={handleNext}
-                      className='bg-primary-3 text-white px-6 py-2 rounded-full'
-                  >
-                  Next
-                  </button>
-              </div>
-          </div>
-      </div>
-    </div>
-  )
-};
+//   return (
+//     <div>
+//       <Navbar />
+//       <div className='bg-primary-1 w-full min-h-screen flex items-center justify-center'>
+//           <div className='bg-primary-4 flex flex-col text-center max-w-full md:max-w-3xl'>
+//               <div className='mb-4 rounded-lg shadow-lg flex flex-col items-center justify-center'>
+//                   <h1 className='text-3xl font-bold text-white mb-2'>Registration Fee</h1>
+//                       <p className='text-white mx-4 mb-2 text-center'>
+//                           Please transfer the following amount to complete your registration
+//                       </p>
+//                       <div className='text-white text-left w-40'>
+//                           <div className='flex flex-row justify-between'>
+//                               <p><strong>Price: </strong></p>
+//                               <p>{regularPrice}</p>
+//                           </div>
+//                       {
+//                           verifiedRefCode && refCodeValid && (
+//                               <>
+//                               <div className='flex flex-row justify-between'>
+//                               <p><strong>Discount:</strong></p>
+//                               <p>{discount}</p>
+//                               </div>
+//                               <div className='flex flex-row justify-between'>
+//                               <p><strong>Total:</strong></p>
+//                               <p><strong>{discountedPrice}</strong></p>
+//                               </div>
+//                               </>
+//                           )
+//                       }
+//                       </div>
+//                       <p className='text-white mx-4 text-center'>
+//                           <strong>Bank Account Number: </strong>{bankAccount}
+//                       </p>
+//                   <div className='mt-4'>
+//                       <label className='block text-white mb-2'>
+//                           <input
+//                               type='checkbox'
+//                               name='checkPayment'
+//                               checked={checkPayment}
+//                               onChange={(e) => setCheckPayment(e.target.checked)}
+//                               className='mr-2'
+//                           />
+//                           I have paid the registration fee
+//                       </label>
+//                       <div className='my-4 relative'>
+//                           <input
+//                               type='file'
+//                               id='proofPayment'
+//                               name='proofPayment'
+//                               onChange={handleChange}
+//                               className='absolute inset-0 opacity-0 cursor-pointer'
+//                           />
+//                           <label
+//                               htmlFor='proofPayment'
+//                               className='bg-primary-3 text-white px-6 py-2 my-2 rounded-full cursor-pointer'
+//                           >
+//                               Submit screenshot
+//                           </label>
+//                           <p className='text-white mt-4'>{proofPayment}</p>
+//                       </div>
+//                   </div>
+//               </div>
+//               <ReferralModal 
+//               eventName="summit"
+//               referralCode={formData.referralCode ?? ''}
+//               verifiedRefCode={verifiedRefCode}
+//               setVerifiedRefCode={setVerifiedRefCode} 
+//               setRefCodeValid={setRefCodeValid}
+//               />
+//               <div className='mt-6 flex justify-center items-center'>
+//                   <button
+//                       type='button'
+//                       onClick={onPrevious}
+//                       className='bg-primary-3 text-white px-6 py-2 mr-6 rounded-full'
+//                   >
+//                   Back
+//                   </button>
+//                   <button
+//                       type='button'
+//                       onClick={handleNext}
+//                       className='bg-primary-3 text-white px-6 py-2 rounded-full'
+//                   >
+//                   Next
+//                   </button>
+//               </div>
+//           </div>
+//       </div>
+//     </div>
+//   )
+// };
 
 const Summary =({
   formData,
@@ -1221,6 +1223,7 @@ const Summary =({
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, intersummitId]);
         successAlert({ 
+          eventId: "event_7",
           message: "Successfully registered for Intersummit. Please check your email for further details!"})
       }
     } catch (error){
@@ -1257,7 +1260,7 @@ const Summary =({
                 <p>{formData.gender}</p>
 
                 <strong>Institution</strong>
-                <p>{formData.studentType}</p>
+                <p>{formData.status}</p>
 
                 <strong>Major</strong>
                 <p>{formData.major}</p>
@@ -1275,8 +1278,8 @@ const Summary =({
 
               <div className="max-w-sm w-full text-sm md:max-w-full md:text-base">
                 <div className="border-t border-gray-300 my-4"></div>
-                {/* <strong>How did you know this event?</strong>
-                <p>
+                <strong>How did you know this event?</strong>
+                  <p>
                   {formData.eventSource === "Other"
                     ? `${formData.eventSource}${
                         formData.eventSourceOther !== ""
@@ -1284,35 +1287,32 @@ const Summary =({
                           : ""
                       }`
                     : `SxC InterSummit ${formData.eventSource}`}
-                </p> */}
-                {formData.experience ? (
-                  <>
-                    <strong>
-                      What are your expectations for this event?
-                    </strong>
+                    </p>
+                <strong>
+                  What are your expectations for this event?
+                </strong>
                     <p>{formData.expectation}</p>
-                  </>
-                ) : (
-                  ""
-                )}
-                
+                <strong>
+                  Any questions for the speaker?
+                </strong>
+                  <p>{formData.question}</p>               
                 <strong>
                   Do you have any allergies or dietary restrictions?
                 </strong>
-                <p>{formData.allergy}
+                <p>{formData.allergy === "" ? "No" : formData.allergy}
                 </p>
                 <div className="border-t border-gray-300 my-4"></div>
                 <p>
                   <strong>Proof of following our Instagram:</strong>{" "}
-                  {formData.screenshot1.name}
+                  {formData.proofOfFollow.name}
                 </p>
                 <p>
-                  <strong>Proof of reposting the Internation Summit poster:</strong>{" "}
-                  {formData.screenshot2.name}
+                  <strong>Proof of reposting the International Summit poster:</strong>{" "}
+                  {formData.proofOfStory.name}
                 </p>
                 <p>
                   <strong>Proof of like & comment on the International Summit poster:</strong>{" "}
-                  {formData.screenshot3.name}
+                  {formData.proofOfLikeAndComment.name}
                 </p>
               </div>
               <div className="flex w-full mt-6 justify-between">
@@ -1384,7 +1384,7 @@ const EventCard = () => {
   };
 
   const handlePrevious = () => {
-    if(currentView === 5 && !formData.allergy){
+    if(currentView === 8 && !formData.allergy){
       setCurrentView((prevView) => prevView - 2);
     }else{
       setCurrentView((prevView) => prevView - 1);
@@ -1417,7 +1417,8 @@ const EventCard = () => {
           formData={formData} 
           setFormData={setFormData}
           sanitizeInput={sanitizeInput} 
-          onNext={handleNext} 
+          onNext={handleNext}
+          onPrevious={handlePrevious}
         /> 
       );
     case 3: 
@@ -1455,7 +1456,9 @@ const EventCard = () => {
         <SixthView 
           onPrevious={handlePrevious} 
           onNextHave={handleNext} 
-          onNextHaveNot={()=>{setCurrentView(8)}} 
+          onNextHaveNot={()=>{
+            formData.allergy = ""
+            setCurrentView(8)}} 
         />
       );
     case 7:
@@ -1476,27 +1479,27 @@ const EventCard = () => {
           checkFileSize={checkFileSize} 
           checkFileType={checkFileTypeImage} 
           onPrevious={handlePrevious} 
-          onNext={()=>{setCurrentView(9)}} 
+          onNext={()=>{setCurrentView(10)}} 
         />
       );
     case 9:
-      return (
-        <PaymentView 
-          eventData={eventData} 
-          formData={formData} 
-          setFormData={setFormData} 
-          checkFileSize={checkFileSize} 
-          checkFileType={checkFileTypeImage} 
-          onPrevious={handlePrevious} 
-          onNext={handleNext} 
-        />
-      );
+      // return (
+      //   <PaymentView 
+      //     eventData={eventData} 
+      //     formData={formData} 
+      //     setFormData={setFormData} 
+      //     checkFileSize={checkFileSize} 
+      //     checkFileType={checkFileTypeImage} 
+      //     onPrevious={handlePrevious} 
+      //     onNext={handleNext} 
+      //   />
+      // );
     case 10:
       return (
         <Summary 
           eventData={eventData} 
           formData={formData} 
-          onPrevious={()=>{setCurrentView(9)}}
+          onPrevious={()=>{setCurrentView(8)}}
         />
       );
       default:
