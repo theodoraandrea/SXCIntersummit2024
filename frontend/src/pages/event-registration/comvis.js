@@ -203,13 +203,13 @@ const SecondView = ({
       if (!emailError && !phoneError) {
         formData = {
           ...formData,
-          // fullName: sanitizeInput(fullName),
+          fullName: sanitizeInput(fullName),
           // gender: sanitizeInput(gender),
-          // email: email,
-          // phoneNumber: phoneNumber,
+          email: email,
+          phoneNumber: phoneNumber,
           // university: sanitizeInput(university),
           // major: sanitizeInput(major),
-          // batch: batch,
+          batch: batch,
         };
         setFormData(formData);
         onNext();
@@ -1623,6 +1623,7 @@ const Summary = ({ formData, onPrevious }) => {
   compvisId = 6;
 
   const handleSubmit = async () => {
+    
     try {
       setIsLoading(true);
       const response = await postCompvisRegistration(formData);
@@ -1728,7 +1729,7 @@ const Summary = ({ formData, onPrevious }) => {
                   Motivation to join the StudentsxCEOs International Summit
                   Company Visit 2024
                 </strong>
-                <p>{formData.experience}</p>
+                <p>{formData.motivation}</p>
 
                 <div className="border-t border-gray-300 my-4"></div>
 
