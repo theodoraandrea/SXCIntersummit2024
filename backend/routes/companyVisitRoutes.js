@@ -30,21 +30,12 @@ router.post(
     body("isCommittee").notEmpty().withMessage("Please answer all questions"),
     body("motivation").notEmpty().withMessage("Please answer all questions"),
 
-    // Conditional validations for Shopee questions
-    body("appliedShopeeGraduate")
-      .if(body("company").equals("Shopee"))
-      .notEmpty()
-      .withMessage(
-        "Please specify if you have applied to the Shopee Graduate Development Program"
-      ),
+    // Conditional validations for Shopee questions 
     body("batch")
       .if(body("company").equals("Shopee"))
       .notEmpty()
       .withMessage("University Entry Year (Batch) is required for Shopee"),
-    body("expectedGraduation")
-      .if(body("company").equals("Shopee"))
-      .notEmpty()
-      .withMessage("Expected Graduation Date is required for Shopee"),
+   
   ],
   errorHandling,
   companyVisitControllers.registerCompanyVisit
