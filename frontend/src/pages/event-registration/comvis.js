@@ -773,7 +773,7 @@ const FourthView = ({
                     name="companyVisit"
                     type="radio"
                     value="Shopee"
-                    disabled={semester < 3}
+                    disabled={semester < 5}
                     checked={selectedCompany === "Shopee"}
                     onChange={(e) => {
                       setSelectedCompany(e.target.value);
