@@ -201,16 +201,16 @@ export default function Home() {
         <h2 className="text-2xl md:text-4xl font-semibold mt-4 text-gradient mx-10 md:mx-20">
           Elevating Future Leaders: Transcending User-Centricity To Strategic Innovation In The Digital Economy
         </h2>
-        <p class="mt-5 text-md md:text-lg max-w-[72vw] mx-10 md:mx-20 text-white">
+        <p className="mt-5 text-md md:text-lg max-w-[72vw] mx-10 md:mx-20 text-white">
         The StudentsxCEOs International Summit is <strong>a grand event</strong> organized by <strong>StudentsxCEOs Jakarta</strong>.
         </p>
-        <p class="mt-5 text-md md:text-lg max-w-[72vw] mx-10 md:mx-20 text-white">
+        <p className="mt-5 text-md md:text-lg max-w-[72vw] mx-10 md:mx-20 text-white">
         This summit will take you on an <strong>unforgettable upskilling journey </strong> with a series of <strong>events </strong> 
         consisting of <strong>Business Master Class, Chambers, Company Visit, and Summit Talkshow</strong>, 
         as well as <strong>challenging competitions</strong>, namely,
         <strong> Future CEO, Business Case Competition, and Business Plan Competition</strong>.
         </p>
-        <p class="mt-5 text-md md:text-lg max-w-full mx-10 md:mx-20 text-white">
+        <p className="mt-5 text-md md:text-lg max-w-full mx-10 md:mx-20 text-white">
             We dare you to <strong className="text-gradient text-lg md:text-xl">#Lead the Change, Shape the Future</strong> with us now!
         </p>
         <button

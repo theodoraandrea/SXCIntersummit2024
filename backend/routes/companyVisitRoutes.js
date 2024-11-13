@@ -29,6 +29,13 @@ router.post(
       .withMessage("Registrant's domicile is required"),
     body("isCommittee").notEmpty().withMessage("Please answer all questions"),
     body("motivation").notEmpty().withMessage("Please answer all questions"),
+
+    // Conditional validations for Shopee questions 
+    body("batch")
+      .if(body("company").equals("Shopee"))
+      .notEmpty()
+      .withMessage("University Entry Year (Batch) is required for Shopee"),
+   
   ],
   errorHandling,
   companyVisitControllers.registerCompanyVisit

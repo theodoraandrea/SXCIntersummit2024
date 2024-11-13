@@ -80,13 +80,41 @@ const IntersummitSummary = () =>{
               <div className="grid md:grid-cols-2 md:gap-x-4 md:gap-y-4">
                 {/* Heading and Intro Text */}
                 <div className="grid grid-cols-1 gap-y-4 md:col-span-2 mx-2 sm:mx-8 py-4 md:py-8">
-                  <h1 className="text-gradient font-bold mx-8 text-4xl md:text-5xl text-center">
-                    International Summit
-                  </h1>
-                  <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto">
-                    Congratulations! You have been registered for the International Summit. Please check this page and your email for updates.
-                  </p>
-                </div>
+  <h1 className="text-gradient font-bold mx-8 text-4xl md:text-5xl text-center">
+    International Summit
+  </h1>
+
+  <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto">
+    Congratulations! You have been registered for the International Summit. Please check this page and your email for updates.
+  </p>
+
+  <p className="text-sm md:text-3xl text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto font-semibold text-gradient">
+    Get ready for an exciting experience!
+  </p>
+
+  <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto">
+    The International Summit will be held offline.Please mark your calendar:
+  </p>
+
+  <div className="space-y-2">
+    <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto font-medium text-white">
+      <span className="font-bold text-gradient">Date:</span> Sunday, 1st December 2024
+    </p>
+
+    <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto font-medium text-white">
+      <span className="font-bold text-gradient">Time:</span> 10.10 - 15.15
+    </p>
+
+    <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto font-medium text-white">
+      <span className="font-bold text-gradient">Place:</span> Dinas Pendidikan Provinsi DKI Jakarta (Jl. Gatot Subroto No. Kav. 40-41, Kuningan)
+    </p>
+  </div>
+
+  <p className="text-sm md:text-base text-center mx-2 sm:mx-32 md:max-w-lg lg:mx-auto mt-4">
+    Your ticket will be delivered straight to your inbox 3-5 days before the event and important updates and details sent to you regularly via email. Stay tuned!
+  </p>
+</div>
+
       
                 {/* User Data */}
                 {intersummitData.map((data, index) =>(
@@ -108,18 +136,18 @@ const IntersummitSummary = () =>{
       
                         {/* Event Source and Additional Information */}
                         <strong>How did you know this event?</strong>
-                        <p>{data.eventSource}</p>
+                        <p>{data?.eventSource}</p>
                         
                         <strong>What are your expectations for this International Summit?</strong>
-                        <p>{data.expectations}</p>
+                        <p>{data?.expectations}</p>
 
                         <strong>Do you have any questions for our speakers?</strong>
-                        <p>{data.questions}</p>
+                        <p>{data?.questions}</p>
 
-                        {data.allergy && (
+                        {data?.allergy && (
                           <>
                             <strong>Please list any allergies or dietary restrictions.</strong>
-                            <p>{data.allergy}</p>
+                            <p>{data?.allergy}</p>
                           </>
                         )}
                         

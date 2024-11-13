@@ -850,6 +850,7 @@ const EightView = ({
   const [follow1, setFollow1] = useState(formData.proofOfFollow ? true : false);
   const [follow2, setFollow2] = useState(formData.proofOfStory ? true : false);
   const [follow3, setFollow3] = useState(formData.proofOfLikeAndComment ? true : false);
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const [proofOfFollow, setproofOfFollow] = useState(
     formData.proofOfFollow?.name ?? ""
@@ -862,6 +863,13 @@ const EightView = ({
   );
 
   const handleSubmit = () => {
+    if (!isTermsChecked) {
+      errorAlert({
+        message: "You must agree to the terms and conditions to proceed.",
+      });
+      return;
+    }
+
     if (
       proofOfFollow &&
       proofOfStory &&
@@ -1029,6 +1037,17 @@ const EightView = ({
                           <label className='text-sm md:text-base text-white ml-2'>{proofOfLikeAndComment}</label>
                       </div>
                   </div>
+                  <div className="mb-4">
+                <label className="block text-white mt-5">
+                  <input
+                    type="checkbox"
+                    className="mr-2"
+                    checked={isTermsChecked}
+                    onChange={(e) => setIsTermsChecked(!isTermsChecked)}
+                  />
+                  The International Summit will be held fully offline. Please ensure you're available to attend.
+                </label>
+              </div>
                   <div className='mt-6 flex justify-between items-center'>
                       <button
                           type='button'
@@ -1223,6 +1242,7 @@ const Summary =({
         navigate(USER_DASHBOARD_PAGE);
         setRegisteredEvents((prevData) => [...prevData, intersummitId]);
         successAlert({ 
+          eventId: "event_7",
           message: "Successfully registered for Intersummit. Please check your email for further details!"})
       }
     } catch (error){

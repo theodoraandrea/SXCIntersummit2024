@@ -102,6 +102,16 @@ const CompvisSummary = () => {
                                         <p><strong>Semester:</strong> {userData.semester}</p>
                                         <p><strong>Domicile:</strong> {userData.domicile}</p>
                                         <p><strong>CV:</strong> {userData.cv}</p>
+                                        {data.company === "Shopee" && (
+                                            <>
+                                            <strong>Expected Graduation</strong>
+                                            <p>{data.expectedGraduation}</p>
+
+                                            <strong>Have you Applied to the Shopee Graduate Development Program?</strong>
+                                            <p>{data.appliedShopeeGraduate}</p>
+                                            </>
+                                        )}
+
                                         <strong>What are your expectations for this Business Master Class?</strong>
                                         <p>{data.expectations}</p>
                                         <strong>What kind of competition materials do you need?</strong>
