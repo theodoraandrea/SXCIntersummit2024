@@ -31,13 +31,9 @@ router.post(
       .withMessage(
         "Status must be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
       ),
-    body("eventSource")
-      .notEmpty()
-      .withMessage("Event source is required"),
+    body("eventSource").notEmpty().withMessage("Event source is required"),
     body("question").notEmpty().withMessage("Question is required"),
-    body("expectation")
-      .notEmpty()
-      .withMessage("Event Expectation is required"),
+    body("expectation").notEmpty().withMessage("Event Expectation is required"),
   ],
   errorHandling,
   summitControllers.registerSummit
@@ -47,6 +43,12 @@ router.get(
   "/summary",
   isAuthenticated,
   summitControllers.getSummitRegistration
+);
+
+router.post(
+  "/send-email-to-all-participants",
+  isAuthenticated,
+  summitControllers.sendTestBulkEmail
 );
 
 module.exports = router;
