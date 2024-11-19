@@ -51,8 +51,7 @@ exports.registerSummit = async (req, res) => {
 
     const qnaList = [
       {
-        "Do you have any allergies or dietary restrictions?":
-          body.allergyDietaryRestriction,
+        "Do you have any allergies or dietary restrictions?": body.allergy,
       },
       { "Find out about event": body.eventSource },
       { "Event Expectation": body.expectation },
@@ -80,12 +79,16 @@ exports.registerSummit = async (req, res) => {
       folderId,
       fileNames[1]
     );
-    /*
-    const proofOfPayment = await getImageURLsList(
-      files.proofOfPayment,
-      folderId,
-      fileNames[2]
-    );*/
+
+    let proofPayment;
+    if (files.proofPayment) {
+      proofPayment = await getImageURLsList(
+        files.proofPayment,
+        folderId,
+        fileNames[2]
+      );
+    }
+
     const proofOfLikeAndComment = await getImageURLsList(
       files.proofOfLikeAndComment,
       folderId,
@@ -107,7 +110,7 @@ exports.registerSummit = async (req, res) => {
         question: qnaList,
         proofOfStory,
         proofOfFollow,
-        //proofOfPayment,
+        proofOfPayment: proofPayment ?? "",
         proofOfLikeAndComment,
         summitRegistrationCode: generateTeamCode(8),
       });
