@@ -44,6 +44,17 @@ router.post(
   summitControllers.registerSummit
 );
 
+router.post(
+  "/check-registration-code",
+  isAuthenticated,
+  [
+    body("summitRegistrationCode")
+      .notEmpty()
+      .withMessage("Summit Registration Code is required"),
+  ],
+  summitControllers.checkRegistrationCode
+);
+
 router.get(
   "/summary",
   isAuthenticated,

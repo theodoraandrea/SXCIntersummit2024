@@ -210,3 +210,45 @@ exports.getSummitRegistration = async (req, res) => {
     });
   }
 };
+
+exports.checkRegistrationCode = async (req, res) => {
+  try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const { summitRegistrationCode } = req.body;
+
+    const summit = await Summit.findOne({
+      where: {
+        summitRegistrationCode: summitRegistrationCode,
+      },
+      include: [
+        {
+          model: EventRegistration,
+          include: [User],
+        },
+      ],
+    });
+
+    if (!summit) {
+      return res.status(404).json({ message: "Invalid registration code" });
+    }
+
+    const user = summit.EventRegistration.User;
+
+    res.status(200).json({
+      message: "Summit registration code is valid",
+      registrant: {
+        name: user.fullname,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
+  }
+};
