@@ -218,7 +218,17 @@ exports.sendBulkEmail = async (req, res) => {
 
     const registrations = await EventRegistration.findAll({
       where: { eventId: summitId },
-      include: [{ model: User, attributes: ["fullname", "email"] }],
+      include: [
+        {
+          model: User,
+          attributes: ["fullname", "email"],
+        },
+        {
+          model: Summit,
+          attributes: ["summitRegistrationCode"],
+          required: true,
+        },
+      ],
     });
 
     if (!registrations.length) {
@@ -227,32 +237,6 @@ exports.sendBulkEmail = async (req, res) => {
         .json({ message: "No registered users found for this summit" });
     }
 
-    // Define email details common to all users
-    const emailDetails = {
-      from: process.env.EMAIL_USER,
-      fromName: "StudentsXCEOs International Summit 2024",
-      mailgenOptions: {
-        theme: "salted",
-        product: {
-          name: "StudentsxCEOs International Summit 2024",
-          link: "#",
-        },
-      },
-      emailContent: {
-        intro: "We're excited to see you at the International Summit!",
-        action: {
-          instructions: "Join the WA Group for further instructions",
-          button: {
-            color: "#003337",
-            text: "Join WA Group",
-            link: "https://chat.whatsapp.com/ECPYNkFM6RTCw8DVyjN38H",
-          },
-        },
-        outro: "Stay tuned in the group for more information!",
-        signature: "Cheers, StudentsxCEOs International Summit 2024",
-      },
-    };
-
     // Initialize success and failure counters
     let successCount = 0;
     let failureCount = 0;
@@ -260,13 +244,70 @@ exports.sendBulkEmail = async (req, res) => {
     // Send email to each registered user
     for (const registration of registrations) {
       const { fullname, email } = registration.User;
+      const { summitRegistrationCode } = registration.Summit;
       const subject = `Welcome to SxC Intersummit - ${fullname}`;
+
+      const emailDetails = {
+        from: process.env.EMAIL_USER,
+        fromName: "StudentsXCEOs International Summit 2024",
+        mailgenOptions: {
+          theme: "salted",
+          product: {
+            name: "StudentsxCEOs International Summit 2024",
+            link: "#",
+          },
+        },
+        emailContent: {
+          intro: `
+            Dear Future Leader!
+            <br><br>
+            We are excited to officially welcome you as a participant in the <b>StudentsxCEOs International Summit 2024</b>!
+            <br><br>
+            This summit is a unique opportunity for you to gain insights on the theme <i>“Pioneering Leadership in the Digital Economy: Strategies for Innovation and Growth from Industry Leaders’ Perspective”</i>.
+            You'll engage with leading economists, top industry professionals, and explore emerging trends shaping the future of business and innovation.
+            <br><br>
+            <br><b>Event Details:</b><br>
+            Date: Sunday, 1st December 2024<br>
+            Time: 10:00 AM – 03:15 PM<br>
+            Venue: Dinas Pendidikan Provinsi DKI Jakarta<br>
+            Address: Jl. Gatot Subroto No. Kav. 40-41, Kuningan, Jakarta <br>
+            <a href="https://shorturl.at/IWk1Z">View Map</a>
+            <br><br>
+            <br><b>What Awaits You at the Summit:</b>
+            <ul style="text-align: left; padding-left: 20px;">
+              <li><b>Prompt Presentation Session:</b> Learn from top speakers as they share practical strategies and real-world examples of successful digital transformations.</li>
+              <li><b>Forum Group Discussion Session:</b> This interactive session will bring together national leaders to discuss the critical role of digital leadership in fostering innovation and business growth.</li>
+              <li><b>Talkshow Session:</b> Gain insights from industry experts in a more casual, engaging talk show format.</li>
+            </ul>
+          `,
+          action: {
+            instructions:
+              "Below is your registration code for the summit, Make sure to bring this code with you, as it will be required for your registration on the event day",
+            button: {
+              color: "#003337",
+              text: summitRegistrationCode,
+              link: "#",
+            },
+          },
+          outro: `
+            <br>
+            Should you have any questions or need further assistance, please contact:<br>
+            Secilia Deartha: 081385353064<br>
+            Angelika Delvia: 082114823962<br>
+            <br>
+            We are looking forward to seeing you at the summit and embarking on this journey of innovation and leadership together!<br><br>
+            Best regards,<br>
+            <b>StudentsxCEOs International Summit 2024</b>
+          `,
+          signature: "Cheers, StudentsxCEOs International Summit 2024",
+        },
+      };
+
       const emailResult = await sendAutomatedEmail(
         { fullname, email },
         subject,
         emailDetails
       );
-
       if (emailResult.success) {
         successCount++;
       } else {
@@ -287,98 +328,6 @@ exports.sendBulkEmail = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Failed to send bulk email", error: error.message });
-  }
-};
-
-exports.sendTestBulkEmail = async (req, res) => {
-  try {
-    const { secret } = req.body;
-
-    if (secret !== "kirimEmailnya") {
-      return res.status(403).json({
-        message: "Invalid secret key",
-      });
-    }
-
-    // Mock data for testing specific emails
-    const testRegistrations = [
-      {
-        User: {
-          fullname: "Andrew Bro",
-          email: "andrew.bro1122@gmail.com",
-        },
-      },
-      {
-        User: {
-          fullname: "Andrew Hardianta",
-          email: "andrew.hardianta@student.sgu.ac.id",
-        },
-      },
-    ];
-
-    // Define email details common to all test users
-    const emailDetails = {
-      from: process.env.EMAIL_USER,
-      fromName: "StudentsXCEOs International Summit 2024",
-      mailgenOptions: {
-        theme: "salted",
-        product: {
-          name: "StudentsxCEOs International Summit 2024",
-          link: "#",
-        },
-      },
-      emailContent: {
-        intro:
-          "This is a test email for the International Summit registration!",
-        action: {
-          instructions: "Join the WA Group for further instructions",
-          button: {
-            color: "#003337",
-            text: "Join WA Group",
-            link: "https://chat.whatsapp.com/ECPYNkFM6RTCw8DVyjN38H",
-          },
-        },
-        outro: "Stay tuned for more information!",
-        signature: "Cheers, StudentsxCEOs International Summit 2024",
-      },
-    };
-
-    // Initialize success and failure counters
-    let successCount = 0;
-    let failureCount = 0;
-
-    // Send email to each test user
-    for (const registration of testRegistrations) {
-      const { fullname, email } = registration.User;
-      const subject = `Test Welcome to SxC Intersummit - ${fullname}`;
-      const emailResult = await sendAutomatedEmail(
-        { fullname, email },
-        subject,
-        emailDetails
-      );
-
-      if (emailResult.success) {
-        successCount++;
-        console.log(`Email sent to ${email}: ${emailResult.message}`);
-      } else {
-        failureCount++;
-        console.error(
-          `Failed to send email to ${email}: ${emailResult.message}`
-        );
-      }
-    }
-
-    res.status(200).json({
-      message: `Test bulk email process completed.`,
-      successCount,
-      failureCount,
-      total: testRegistrations.length,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message: "Failed to send test bulk email",
-      error: error.message,
-    });
   }
 };
 
