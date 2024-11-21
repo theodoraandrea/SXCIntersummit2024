@@ -13,8 +13,8 @@ router.post(
   upload.fields([
     { name: "proofOfFollow", minCount: 1, maxCount: 1 },
     { name: "proofOfStory", minCount: 1, maxCount: 1 },
-    //{ name: "proofOfPayment", maxCount: 1 },
     { name: "proofOfLikeAndComment", minCount: 1, maxCount: 1 },
+    { name: "proofPayment", minCount: 1, maxCount: 1 },
   ]),
   [
     body("status")
@@ -32,11 +32,27 @@ router.post(
         "Status must be High School Student, University Student, Fresh Graduate, Employed, Professional, or Entrepreneur"
       ),
     body("eventSource").notEmpty().withMessage("Event source is required"),
+    body("allergy")
+      .notEmpty()
+      .withMessage(
+        "Information about allergies and dietary restriction is required"
+      ),
     body("question").notEmpty().withMessage("Question is required"),
     body("expectation").notEmpty().withMessage("Event Expectation is required"),
   ],
   errorHandling,
   summitControllers.registerSummit
+);
+
+router.post(
+  "/check-registration-code",
+  isAuthenticated,
+  [
+    body("summitRegistrationCode")
+      .notEmpty()
+      .withMessage("Summit Registration Code is required"),
+  ],
+  summitControllers.checkRegistrationCode
 );
 
 router.get(
