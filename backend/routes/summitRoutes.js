@@ -61,4 +61,10 @@ router.get(
   summitControllers.getSummitRegistration
 );
 
+router.post(
+  "/send-email-to-all-participants",
+  isAuthenticated,
+  summitControllers.sendBulkEmail
+);
+
 module.exports = router;
