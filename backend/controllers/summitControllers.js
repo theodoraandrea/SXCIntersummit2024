@@ -3,6 +3,7 @@ const { createFolder, getImageURLsList } = require("../utils/handleImage");
 const { validationResult } = require("express-validator");
 const checkRequiredFields = require("../utils/checkRequiredFields");
 const sendAutomatedEmail = require("../services/automatedEmail");
+const { generateTeamCode } = require("../utils/generateTeamCode");
 
 const summitWhatsappGroup = "https://chat.whatsapp.com/ECPYNkFM6RTCw8DVyjN38H";
 
@@ -15,10 +16,10 @@ exports.registerSummit = async (req, res) => {
     }
 
     // Check if there any required image not uploaded.
+    console.log(req.files);
     const requiredFields = [
       "proofOfFollow",
       "proofOfStory",
-      //"proofOfPayment",
       "proofOfLikeAndComment",
     ];
     if (!checkRequiredFields(req.files, requiredFields)) {
@@ -49,6 +50,9 @@ exports.registerSummit = async (req, res) => {
       return res.status(500).json({ message: "Already Registered Summit" });
 
     const qnaList = [
+      {
+        "Do you have any allergies or dietary restrictions?": body.allergy,
+      },
       { "Find out about event": body.eventSource },
       { "Event Expectation": body.expectation },
       {
@@ -75,12 +79,16 @@ exports.registerSummit = async (req, res) => {
       folderId,
       fileNames[1]
     );
-    /*
-    const proofOfPayment = await getImageURLsList(
-      files.proofOfPayment,
-      folderId,
-      fileNames[2]
-    );*/
+
+    let proofPayment;
+    if (files.proofPayment) {
+      proofPayment = await getImageURLsList(
+        files.proofPayment,
+        folderId,
+        fileNames[2]
+      );
+    }
+
     const proofOfLikeAndComment = await getImageURLsList(
       files.proofOfLikeAndComment,
       folderId,
@@ -102,8 +110,9 @@ exports.registerSummit = async (req, res) => {
         question: qnaList,
         proofOfStory,
         proofOfFollow,
-        //proofOfPayment,
+        proofOfPayment: proofPayment ?? "",
         proofOfLikeAndComment,
+        summitRegistrationCode: generateTeamCode(8),
       });
     } catch (error) {
       await EventRegistration.destroy({
@@ -199,5 +208,47 @@ exports.getSummitRegistration = async (req, res) => {
       message: "Failed to get Summit registration",
       error: error.message,
     });
+  }
+};
+
+exports.checkRegistrationCode = async (req, res) => {
+  try {
+    // Body Validation Checking
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array() });
+    }
+
+    const { summitRegistrationCode } = req.body;
+
+    const summit = await Summit.findOne({
+      where: {
+        summitRegistrationCode: summitRegistrationCode,
+      },
+      include: [
+        {
+          model: EventRegistration,
+          include: [User],
+        },
+      ],
+    });
+
+    if (!summit) {
+      return res.status(404).json({ message: "Invalid registration code" });
+    }
+
+    const user = summit.EventRegistration.User;
+
+    res.status(200).json({
+      message: "Summit registration code is valid",
+      registrant: {
+        name: user.fullname,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 };
