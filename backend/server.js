@@ -11,6 +11,7 @@ const path = require("path");
 const user = require("./models/user");
 const db = require("./config/databaseConfig");
 const Summit = require("./models/summit");
+const { updateNullSummitCodes } = require("./services/summitAddCodeToNull");
 require("./associations/association").eventAssociations();
 require("./associations/association").competitionAssociations();
 
@@ -29,6 +30,7 @@ db.authenticate()
     console.log(err);
   });
 
+updateNullSummitCodes();
 // Database Table synchronizing
 // Summit.sync({ alter: true })
 //   .then(() => {
