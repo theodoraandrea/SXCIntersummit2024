@@ -245,15 +245,6 @@ exports.sendBulkEmail = async (req, res) => {
     for (const registration of registrations) {
       const { fullname, email } = registration.User;
       const { summitRegistrationCode } = registration.Summit;
-
-      if (!summitRegistrationCode) {
-        failureCount++;
-        console.error(
-          `Failed to send email to ${email}: Summit registration code not found`
-        );
-        continue;
-      }
-
       const subject = `Welcome to SxC Intersummit - ${fullname}`;
 
       const emailDetails = {
