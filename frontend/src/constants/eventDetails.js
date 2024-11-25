@@ -358,7 +358,7 @@ export const eventDetails = {
   event_6: {
     title: "Company Visit",
     image: imgLocation + "comvis.png",
-    openRegistration: true,
+    openRegistration: false,
     description:
       "Company visit is <strong>an organized event to learn about a company's operations, culture, and career paths</strong> that includes <strong>office tours, discussions on work environments, and recruitment tips.</strong> The goal is to provide first-hand experience and networking opportunities to gain a deeper understanding of the industry and potential career paths."+
       "</br></br>" +
@@ -488,7 +488,8 @@ export const eventDetails = {
       "</br>&emsp;&emsp;- E-Certificate for all participants" 
       ,
     timelineDesc: "Timeline details for Summit",
-    registerLink: `${INTERSUMMIT_REGISTRATION}`,
+    // registerLink: `${INTERSUMMIT_REGISTRATION}`,
+    registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdWDi9Bpe3a5i58zzsecR9YzxpBPtr9U4ole1FakJK1lCr8jw/viewform`,
     faq: [
       "Is the International Summit some kind of seminar event?",
       "When will the International Summit be held?",
