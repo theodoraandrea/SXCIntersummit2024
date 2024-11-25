@@ -18,6 +18,10 @@ const Summit = sequelize.define(
         key: "id",
       },
     },
+    summitRegistrationCode: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     status: {
       type: DataTypes.ENUM,
       values: [

@@ -57,9 +57,9 @@ exports.registerCompanyVisit = async (req, res) => {
       domicile,
       isCommittee,
       motivation,
-      appliedShopeeGraduate,
+      appliedToProgram,
       batch,
-      expectedGraduation,
+      graduationDate,
     } = body;
 
     const userId = req.user.id;
@@ -81,10 +81,10 @@ exports.registerCompanyVisit = async (req, res) => {
       qnaList.push(
         {
           "Have you Applied to the Shopee Graduate Development Program?":
-            appliedShopeeGraduate,
+            appliedToProgram,
         },
         { "Batch (University Entry Year)": batch },
-        { "Expected Graduation Date": expectedGraduation }
+        { "Expected Graduation Date": graduationDate }
       );
     }
 
