@@ -488,8 +488,8 @@ export const eventDetails = {
       "</br>&emsp;&emsp;- E-Certificate for all participants" 
       ,
     timelineDesc: "Timeline details for Summit",
-    // registerLink: `${INTERSUMMIT_REGISTRATION}`,
-    registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdWDi9Bpe3a5i58zzsecR9YzxpBPtr9U4ole1FakJK1lCr8jw/viewform`,
+    registerLink: `${INTERSUMMIT_REGISTRATION}`,
+    // registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdWDi9Bpe3a5i58zzsecR9YzxpBPtr9U4ole1FakJK1lCr8jw/viewform`,
     faq: [
       "Is the International Summit some kind of seminar event?",
       "When will the International Summit be held?",

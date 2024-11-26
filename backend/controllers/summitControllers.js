@@ -80,14 +80,14 @@ exports.registerSummit = async (req, res) => {
       fileNames[1]
     );
 
-    let proofPayment;
-    if (files.proofPayment) {
-      proofPayment = await getImageURLsList(
-        files.proofPayment,
-        folderId,
-        fileNames[2]
-      );
-    }
+    // let proofPayment;
+    // if (files.proofPayment) {
+    //   proofPayment = await getImageURLsList(
+    //     files.proofPayment,
+    //     folderId,
+    //     fileNames[2]
+    //   );
+    // }
 
     const proofOfLikeAndComment = await getImageURLsList(
       files.proofOfLikeAndComment,
@@ -110,7 +110,7 @@ exports.registerSummit = async (req, res) => {
         question: qnaList,
         proofOfStory,
         proofOfFollow,
-        proofOfPayment: proofPayment ?? "",
+        // proofOfPayment: proofPayment ?? "",
         proofOfLikeAndComment,
         summitRegistrationCode: generateTeamCode(8),
       });
