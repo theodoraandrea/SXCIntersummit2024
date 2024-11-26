@@ -14,7 +14,7 @@ router.post(
     { name: "proofOfFollow", minCount: 1, maxCount: 1 },
     { name: "proofOfStory", minCount: 1, maxCount: 1 },
     { name: "proofOfLikeAndComment", minCount: 1, maxCount: 1 },
-    // { name: "proofPayment", minCount: 1, maxCount: 1 },
+    { name: "proofPayment", minCount: 1, maxCount: 1 },
   ]),
   [
     body("status")
