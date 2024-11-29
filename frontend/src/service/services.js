@@ -509,15 +509,30 @@ const getIntersummitRegistrationData = async () => {
 };
 
 // SUMMIT
-const getSummitRegistrationData = async () => {
+const getSummitRegistrationData = async (data) => {
   try {
-    const response = await axiosInstance.get(API_GET_SUMMIT_REGISTRATION);
-    return response.data;
+    const response = await axios.get(`${API_GET_SUMMIT_REGISTRATION}`);
+
+    // Cek apakah response.status adalah 200 dan data ada
+    if (response.status === 200 && response.data) {
+      const summitRegistrationCode = response.data.summitRegistrationCode;
+
+      // Cek apakah summitRegistrationCode yang ada di response cocok dengan data yang diberikan
+      if (summitRegistrationCode && summitRegistrationCode === data) {
+        return summitRegistrationCode; // Mengembalikan summitRegistrationCode jika cocok
+      } else {
+        throw new Error("Summit registration code mismatch or not found.");
+      }
+    } else {
+      throw new Error("Failed to fetch data or invalid response.");
+    }
   } catch (error) {
-    console.error("Error fetching Summit registration data:", error);
+    console.error("Error fetching data:", error);
     throw error;
   }
 };
+
+
 
 const validateSummitRegistrationCode = async (registrationCode) => {
   try {

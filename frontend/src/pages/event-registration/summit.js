@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { getIntersummitRegistrationData } from "../../service/services";
+import React, { useState } from "react";
+import { getSummitRegistrationData } from "../../service/services";
 import Spinner from "../../components/elements/spinner";
-import { errorAlert, successAlert } from "../../components/alert";
 
 const Summit = () => {
-  const [uniqueCode, setUniqueCode] = useState("");
+  const [summitRegistrationCode, setSummitRegistrationCode] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Fetch data awal saat komponen dimuat
-  useEffect(() => {
-    // No need to fetch initial data anymore
-  }, []); // No longer necessary to fetch initial data
+  const [responseData, setResponseData] = useState(null);
 
   const handleVerification = async (e) => {
     e.preventDefault();
 
-    if (!uniqueCode.trim()) {
+    // Trim kode untuk menghapus spasi ekstra
+    const trimmedCode = summitRegistrationCode.trim();
+
+    if (!trimmedCode) {
       setMessage("Please enter a code.");
       return;
     }
@@ -25,22 +23,25 @@ const Summit = () => {
       setLoading(true);
       setMessage("");
 
-      // Directly check the database for the unique code
-      const response = await getIntersummitRegistrationData(uniqueCode);
+      // Cek kode verifikasi langsung dari database
+      const response = await getSummitRegistrationData(trimmedCode);
 
       if (response && response.valid) {
-        // If the code is valid, we assume it is new and verified
-        successAlert("Code Verified Successfully!");
+        setResponseData(response); // Menyimpan respons API ke state
+        setMessage("Code Verified Successfully!");
       } else {
-        // Invalid code handling
-        errorAlert("Invalid Code. Please try again.");
+        setResponseData(null); // Reset data jika kode tidak valid
+        setMessage("Invalid Code. Please try again.");
+        console.log("Invalid code response data:", response);
+        console.log("Kode yang diterima backend:", summitRegistrationCode);
+
       }
     } catch (error) {
       console.error("Error verifying code:", error);
-      errorAlert("An error occurred while verifying the code.");
+      setMessage("An error occurred while verifying the code.");
     } finally {
       setLoading(false);
-      setUniqueCode("");
+      setSummitRegistrationCode(""); // Reset input setelah proses
     }
   };
 
@@ -55,12 +56,12 @@ const Summit = () => {
           <form onSubmit={handleVerification}>
             <div className="mb-4">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Enter Unique Code:
+                Enter Summit Registration Code:
               </label>
               <input
                 type="text"
-                value={uniqueCode}
-                onChange={(e) => setUniqueCode(e.target.value)}
+                value={summitRegistrationCode}
+                onChange={(e) => setSummitRegistrationCode(e.target.value)}
                 placeholder="Enter your code"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-primary-3 outline-none transition-all"
               />
@@ -73,6 +74,7 @@ const Summit = () => {
               {loading ? "Verifying..." : "Verify Code"}
             </button>
           </form>
+
           {message && (
             <p
               className={`text-center mt-4 font-medium transition-all ${
@@ -84,14 +86,19 @@ const Summit = () => {
               {message}
             </p>
           )}
+
+          {/* Menampilkan data respons jika kode valid */}
+          {responseData && responseData.valid && (
+            <div className="mt-6 bg-white/90 p-4 rounded-lg shadow-lg text-gray-800">
+              <h3 className="text-xl font-semibold">Registration Details:</h3>
+              <p><strong>Name:</strong> {responseData.name}</p>
+              <p><strong>Email:</strong> {responseData.email}</p>
+              <p><strong>Registration Date:</strong> {responseData.registrationDate}</p>
+            </div>
+          )}
         </div>
 
-        {loading ? (
-          <Spinner />
-        ) : (
-          // Data table section has been removed since it's no longer needed
-          <></>
-        )}
+        {loading && <Spinner />}
       </div>
     </div>
   );

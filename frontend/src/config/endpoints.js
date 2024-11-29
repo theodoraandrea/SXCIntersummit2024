@@ -57,6 +57,7 @@ const INTERSUMMIT_SUMMARY = "/summit/summary";
 
 // summit 
 const SUMMIT_REGISTRATION = "/summit/check-registration-code";
+// curl --location 'http://localhost:3001/summit/check-registration-code' \
 
 // Concat URLs
 const API_SIGNUP = `${API_URL}${SIGNUP}`;
