@@ -6,26 +6,12 @@ import { errorAlert, successAlert } from "../../components/alert";
 const Summit = () => {
   const [uniqueCode, setUniqueCode] = useState("");
   const [message, setMessage] = useState("");
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   // Fetch data awal saat komponen dimuat
   useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        setLoading(true); // Tampilkan indikator loading
-        const initialData = await getIntersummitRegistrationData(); // Ambil semua data yang diverifikasi
-        setData(initialData); // Set state dengan data awal
-      } catch (error) {
-        console.error("Error fetching initial data:", error);
-        errorAlert("Failed to fetch initial data.");
-      } finally {
-        setLoading(false); // Sembunyikan indikator loading
-      }
-    };
-
-    fetchInitialData();
-  }, []); // Hanya dijalankan sekali saat komponen dimuat
+    // No need to fetch initial data anymore
+  }, []); // No longer necessary to fetch initial data
 
   const handleVerification = async (e) => {
     e.preventDefault();
@@ -35,27 +21,18 @@ const Summit = () => {
       return;
     }
 
-    const isAlreadyVerified = data.some((item) => item.code === uniqueCode);
-    if (isAlreadyVerified) {
-      setMessage("Code has already been verified.");
-      return;
-    }
-
     try {
       setLoading(true);
       setMessage("");
 
+      // Directly check the database for the unique code
       const response = await getIntersummitRegistrationData(uniqueCode);
 
       if (response && response.valid) {
-        const verifiedData = {
-          ...response.details,
-          status: "Verified",
-          code: uniqueCode,
-        };
-        setData((prevData) => [...prevData, verifiedData]);
+        // If the code is valid, we assume it is new and verified
         successAlert("Code Verified Successfully!");
       } else {
+        // Invalid code handling
         errorAlert("Invalid Code. Please try again.");
       }
     } catch (error) {
@@ -112,38 +89,8 @@ const Summit = () => {
         {loading ? (
           <Spinner />
         ) : (
-          data.length > 0 && (
-            <div className="backdrop-blur-md p-2 md:p-6 rounded-lg shadow-lg mt-8 max-w-4xl mx-auto">
-              <h2 className="text-2xl font-bold text-white mb-4 text-center">
-                Verified Data
-              </h2>
-              <table className="w-full text-xs text-gray-700 border-collapse sm:text-xs md:text-sm">
-                <thead>
-                  <tr className="bg-gradient-to-r from-primary-3 to-primary-3 text-white">
-                    <th className="p-3 border">Name</th>
-                    <th className="p-3 border">Batch</th>
-                    <th className="p-3 border">School/University</th>
-                    <th className="p-3 border">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((item) => (
-                    <tr
-                      key={item.code}
-                      className="text-center odd:bg-gray-100 even:bg-gray-200 hover:bg-primary-6 transition-all"
-                    >
-                      <td className="p-3 border">{item.name}</td>
-                      <td className="p-3 border">{item.batch}</td>
-                      <td className="p-3 border">{item.school}</td>
-                      <td className="p-3 border text-green-600 font-bold">
-                        {item.status}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )
+          // Data table section has been removed since it's no longer needed
+          <></>
         )}
       </div>
     </div>
