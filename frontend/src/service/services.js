@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "../config/axiosConfig";
 import {
   // Auth
@@ -44,6 +45,8 @@ import {
   // INTERSUMMIT
   API_GET_INTERSUMMIT_REGISTRATION,
   API_POST_INTERSUMMIT_REGISTRATION,
+  // SUMMIT
+  API_GET_SUMMIT_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -505,6 +508,30 @@ const getIntersummitRegistrationData = async () => {
   }
 };
 
+// SUMMIT
+const getSummitRegistrationData = async () => {
+  try {
+    const response = await axiosInstance.get(API_GET_SUMMIT_REGISTRATION);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching Summit registration data:", error);
+    throw error;
+  }
+};
+
+const validateSummitRegistrationCode = async (registrationCode) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API_GET_SUMMIT_REGISTRATION}/check-registration-code`,
+      { summitRegistrationCode: registrationCode }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error validating Summit registration code:", error);
+    throw error;
+  }
+};
+
 export {
   login,
   register,
@@ -537,6 +564,8 @@ export {
   getCompvisRegistrationData,
   postIntersummitRegistration,
   getIntersummitRegistrationData,
+  validateSummitRegistrationCode,
+  getSummitRegistrationData,
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,
