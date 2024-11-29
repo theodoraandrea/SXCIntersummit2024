@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { getSummitRegistrationData } from "../../service/services";
+import { validateSummitRegistrationCode } from "../../service/services";
 import Spinner from "../../components/elements/spinner";
 
 const Summit = () => {
   const [summitRegistrationCode, setSummitRegistrationCode] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [responseData, setResponseData] = useState(null);
+  const [data, setData] = useState([]);
 
   const handleVerification = async (e) => {
     e.preventDefault();
 
-    // Trim kode untuk menghapus spasi ekstra
     const trimmedCode = summitRegistrationCode.trim();
 
     if (!trimmedCode) {
@@ -19,29 +18,32 @@ const Summit = () => {
       return;
     }
 
+    // Cek apakah kode sudah diverifikasi sebelumnya
+    const isAlreadyVerified = data.some((item) => item.code === trimmedCode);
+    if (isAlreadyVerified) {
+      setMessage("Code has already been verified.");
+      return;
+    }
+
     try {
       setLoading(true);
       setMessage("");
 
-      // Cek kode verifikasi langsung dari database
-      const response = await getSummitRegistrationData(trimmedCode);
+      const response = await validateSummitRegistrationCode(trimmedCode);
 
-      if (response && response.valid) {
-        setResponseData(response); // Menyimpan respons API ke state
+      if (response) {
+        const verifiedData = { ...response, code: trimmedCode, status: "Verified" };
+        setData([...data, verifiedData]);
         setMessage("Code Verified Successfully!");
       } else {
-        setResponseData(null); // Reset data jika kode tidak valid
-        setMessage("Invalid Code. Please try again.");
-        console.log("Invalid code response data:", response);
-        console.log("Kode yang diterima backend:", summitRegistrationCode);
-
+        setMessage("Code not found. Please try again.");
       }
     } catch (error) {
       console.error("Error verifying code:", error);
       setMessage("An error occurred while verifying the code.");
     } finally {
       setLoading(false);
-      setSummitRegistrationCode(""); // Reset input setelah proses
+      setSummitRegistrationCode("");
     }
   };
 
@@ -86,17 +88,38 @@ const Summit = () => {
               {message}
             </p>
           )}
-
-          {/* Menampilkan data respons jika kode valid */}
-          {responseData && responseData.valid && (
-            <div className="mt-6 bg-white/90 p-4 rounded-lg shadow-lg text-gray-800">
-              <h3 className="text-xl font-semibold">Registration Details:</h3>
-              <p><strong>Name:</strong> {responseData.name}</p>
-              <p><strong>Email:</strong> {responseData.email}</p>
-              <p><strong>Registration Date:</strong> {responseData.registrationDate}</p>
-            </div>
-          )}
         </div>
+
+        {data.length > 0 && (
+          <div className=" backdrop-blur-md p-2 md:p-6 rounded-lg shadow-lg mt-8 max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-white mb-4 text-center">
+              Verified Data
+            </h2>
+            <table className="w-full text-xs text-gray-700 border-collapse sm:text-xs md:text-sm">
+              <thead>
+                <tr className="bg-gradient-to-r from-primary-3 to-primary-3 text-white">
+                  <th className="p-3 border">Name</th>
+                  <th className="p-3 border">Email</th>
+                  <th className="p-3 border">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <tr
+                    key={index}
+                    className="text-center odd:bg-gray-100 even:bg-gray-200 hover:bg-primary-6 transition-all"
+                  >
+                    <td className="p-3 border">{item.registrant.name}</td>
+                    <td className="p-3 border">{item.registrant.email}</td>
+                    <td className="p-3 border text-green-600 font-bold">
+                      {item.status}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         {loading && <Spinner />}
       </div>

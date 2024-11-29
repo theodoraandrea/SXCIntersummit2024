@@ -46,7 +46,7 @@ import {
   API_GET_INTERSUMMIT_REGISTRATION,
   API_POST_INTERSUMMIT_REGISTRATION,
   // SUMMIT
-  API_GET_SUMMIT_REGISTRATION,
+  API_POST_SUMMIT_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -509,9 +509,12 @@ const getIntersummitRegistrationData = async () => {
 };
 
 // SUMMIT
-const getSummitRegistrationData = async (data) => {
+const postSummitRegistrationData = async (data) => {
   try {
-    const response = await axios.get(`${API_GET_SUMMIT_REGISTRATION}`);
+    // Mengirim data menggunakan POST
+    const response = await axios.post(API_POST_SUMMIT_REGISTRATION, {
+      registrationCode: data,  // Mengirimkan data registrationCode yang diterima
+    });
 
     // Cek apakah response.status adalah 200 dan data ada
     if (response.status === 200 && response.data) {
@@ -532,12 +535,10 @@ const getSummitRegistrationData = async (data) => {
   }
 };
 
-
-
 const validateSummitRegistrationCode = async (registrationCode) => {
   try {
     const response = await axiosInstance.post(
-      `${API_GET_SUMMIT_REGISTRATION}/check-registration-code`,
+      `${API_POST_SUMMIT_REGISTRATION}`,
       { summitRegistrationCode: registrationCode }
     );
     return response.data;
@@ -580,7 +581,7 @@ export {
   postIntersummitRegistration,
   getIntersummitRegistrationData,
   validateSummitRegistrationCode,
-  getSummitRegistrationData,
+  postSummitRegistrationData,
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,
