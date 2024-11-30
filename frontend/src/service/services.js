@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "../config/axiosConfig";
 import {
   // Auth
@@ -44,6 +45,8 @@ import {
   // INTERSUMMIT
   API_GET_INTERSUMMIT_REGISTRATION,
   API_POST_INTERSUMMIT_REGISTRATION,
+  // SUMMIT
+  API_POST_SUMMIT_REGISTRATION,
 } from "../config/endpoints";
 
 //Login
@@ -505,6 +508,46 @@ const getIntersummitRegistrationData = async () => {
   }
 };
 
+// SUMMIT
+const postSummitRegistrationData = async (data) => {
+  try {
+    // Mengirim data menggunakan POST
+    const response = await axios.post(API_POST_SUMMIT_REGISTRATION, {
+      registrationCode: data,  // Mengirimkan data registrationCode yang diterima
+    });
+
+    // Cek apakah response.status adalah 200 dan data ada
+    if (response.status === 200 && response.data) {
+      const summitRegistrationCode = response.data.summitRegistrationCode;
+
+      // Cek apakah summitRegistrationCode yang ada di response cocok dengan data yang diberikan
+      if (summitRegistrationCode && summitRegistrationCode === data) {
+        return summitRegistrationCode; // Mengembalikan summitRegistrationCode jika cocok
+      } else {
+        throw new Error("Summit registration code mismatch or not found.");
+      }
+    } else {
+      throw new Error("Failed to fetch data or invalid response.");
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+const validateSummitRegistrationCode = async (registrationCode) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API_POST_SUMMIT_REGISTRATION}`,
+      { summitRegistrationCode: registrationCode }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error validating Summit registration code:", error);
+    throw error;
+  }
+};
+
 export {
   login,
   register,
@@ -537,6 +580,8 @@ export {
   getCompvisRegistrationData,
   postIntersummitRegistration,
   getIntersummitRegistrationData,
+  validateSummitRegistrationCode,
+  postSummitRegistrationData,
   postForgotPassword,
   postVerifyOtp,
   putResetPassword,

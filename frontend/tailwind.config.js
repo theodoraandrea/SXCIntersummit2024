@@ -22,6 +22,8 @@ module.exports = {
         'primary-3': '#D5A141',
         'primary-4': '#004349',
         'primary-5': '#E2E8EA',
+        'primary-6': '#FDEAC7',
+
         'secondary-1': '#004d40',
         'secondary-2': '#007e87',
         'secondary-4': '#006B6B',

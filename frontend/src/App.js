@@ -21,6 +21,7 @@ import CompvisRegistration from "./pages/event-registration/comvis";
 import CompvisSummary from "./pages/event-registration/comvis-summary";
 import IntersummitSummary from "./pages/event-registration/intersummit-summary";
 import IntersummitRegistration from "./pages/event-registration/intersummit";
+import SummitRegistration from "./pages/event-registration/summit";
 
 import {
   HOME,
@@ -43,7 +44,8 @@ import {
   COMPVIS_REGISTRATION,
   COMPVIS_REGIST_SUMMARY,
   INTERSUMMIT_REGISTRATION,
-  INTERSUMMIT_REGIS_SUMMARY
+  INTERSUMMIT_REGIS_SUMMARY,
+  SUMMIT_REGIST,
 } from "./constants/routes";
 import { UserProvider } from "./contexts/user-context";
 
@@ -87,6 +89,7 @@ export default function App() {
           <Route path={COMPVIS_REGIST_SUMMARY} element={<CompvisSummary />} />
           <Route path={INTERSUMMIT_REGISTRATION} element={<IntersummitRegistration />} />
           <Route path={INTERSUMMIT_REGIS_SUMMARY} element={<IntersummitSummary />} />
+          <Route path={SUMMIT_REGIST} element={<SummitRegistration />} />
         </Routes>
       </Router>
     </UserProvider>
