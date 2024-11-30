@@ -358,7 +358,7 @@ export const eventDetails = {
   event_6: {
     title: "Company Visit",
     image: imgLocation + "comvis.png",
-    openRegistration: true,
+    openRegistration: false,
     description:
       "Company visit is <strong>an organized event to learn about a company's operations, culture, and career paths</strong> that includes <strong>office tours, discussions on work environments, and recruitment tips.</strong> The goal is to provide first-hand experience and networking opportunities to gain a deeper understanding of the industry and potential career paths."+
       "</br></br>" +
@@ -371,8 +371,11 @@ export const eventDetails = {
       "</br>&emsp;&emsp;14.00 - 16.30" +
       "</br>&emsp;&emsp;Menara BCA Grand Indonesia, Jl. M.H. Thamrin No.1, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310" +
       "</br>3.&emsp;KPMG: Monday, November 18th 2024" +
-      "</br>&emsp;&emsp;9.00 - 13.30" +
+      "</br>&emsp;&emsp;09.00 - 13.30" +
       "</br>&emsp;&emsp;Menara Astra, Jl. Jenderal Sudirman No.5-6 Lt 21, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10220" +
+      "</br>4.&emsp;Shopee: Friday, November 29th 2024" +
+      "</br>&emsp;&emsp;09.30 - 11.45" +
+      "</br>&emsp;&emsp;Gama Tower 8F, Jl. H. R. Rasuna Said No. 2, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940" +
       "</br></br>" +
       "</br><strong>Participant Requirements:</strong>" +
       "</br>&emsp;&emsp;- <strong>Minimum Required Semester for Bosch</strong>: Final year students <strong>(above 5th semester).</strong>" +
@@ -485,7 +488,8 @@ export const eventDetails = {
       "</br>&emsp;&emsp;- E-Certificate for all participants" 
       ,
     timelineDesc: "Timeline details for Summit",
-    registerLink: `${INTERSUMMIT_REGISTRATION}`,
+    // registerLink: `${INTERSUMMIT_REGISTRATION}`,
+    registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdWDi9Bpe3a5i58zzsecR9YzxpBPtr9U4ole1FakJK1lCr8jw/viewform`,
     faq: [
       "Is the International Summit some kind of seminar event?",
       "When will the International Summit be held?",

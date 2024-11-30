@@ -93,7 +93,7 @@ const FirstView = ({ title, description, formData, setFormData, onNext }) => {
                 Online
               </option>
               <option value="offline" disabled={hasRegisteredOffline}>
-                Offline (KPMG/Shopee)
+                Offline (Shopee)
               </option>
             </select>
           </div>
@@ -748,7 +748,7 @@ const FourthView = ({
                   </label>
                 </div> */}
                 
-                <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
+                {/* <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
                     id="companyKPMG"
                     name="companyVisit"
@@ -765,7 +765,7 @@ const FourthView = ({
                   >
                     KPMG
                   </label>
-                </div>
+                </div> */}
 
                 <div className="flex p-4 items-center bg-gray-100 border-gray-300 rounded">
                   <input
@@ -773,7 +773,7 @@ const FourthView = ({
                     name="companyVisit"
                     type="radio"
                     value="Shopee"
-                    disabled={semester < 3}
+                    disabled={semester < 5}
                     checked={selectedCompany === "Shopee"}
                     onChange={(e) => {
                       setSelectedCompany(e.target.value);
@@ -783,7 +783,7 @@ const FourthView = ({
                     htmlFor="companyShopee"
                     className="w-full ml-2 text-xs sm:text-sm text-gray-800"
                   >
-                    Shopee (Minimum 3rd semester students or fresh graduates with less than 2 years working experience
+                    Shopee (Minimum 3rd years in semester 5 students or fresh graduates with less than 2 years working experience
                     )
                   </label>
                 </div>
