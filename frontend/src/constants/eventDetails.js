@@ -14,7 +14,7 @@ export const eventDetails = {
   event_1: {
     title: "Business Master Class",
     image: imgLocation + "bmc.png",
-    openRegistration: true,
+    openRegistration: false,
     linkBooklet: "https://bit.ly/GuidebookBusineesMasterClass",
     description:
       "The StudentsxCEOs International Summit Business Master Class is a <strong>one-hit competition free class</strong> specifically designed for 300 high school and college students who are eager to <strong>excel in business case and business plan competitions.</strong>" +
@@ -66,7 +66,7 @@ export const eventDetails = {
   comp_1: {
     title: "Future CEO",
     image: imgLocation + "fceo.png",
-    openRegistration: true,
+    openRegistration: false,
     linkBooklet:
       "https://drive.google.com/file/d/1Pbhq9gaN-Guztj4c866fWb3u9IY_UecN/view?usp=sharing",
     description:
@@ -136,7 +136,7 @@ export const eventDetails = {
   comp_2: {
     title: "SxC International Business Challenge: Business Case Competition",
     image: imgLocation + "ibc-bcc.png",
-    openRegistration: true,
+    openRegistration: false,
     linkBooklet: "https://bit.ly/SxCIBCC2024Booklet",
     description:
       "<strong>The SxC International Business Case Competition</strong> is a global event designed to challenge students to apply their analytical and problem-solving skills to real-world business scenarios. <strong>Each team will analyze complex case studies</strong> of business problems and develop strategic solutions. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
@@ -212,7 +212,7 @@ export const eventDetails = {
   comp_3: {
     title: "SxC International Business Challenge: Business Plan Competition",
     image: imgLocation + "ibc-bpc.png",
-    openRegistration: true,
+    openRegistration: false,
     linkBooklet: "https://bit.ly/SxCIBPC2024Booklet",
     description:
       "<strong>The SxC International Business Plan Competition</strong> is a global event designed to foster entrepreneurial skills and innovation among students. <strong>Participants are encouraged to present their innovative business models,</strong> turning them into viable businesses. To ensure participants are well-prepared, there are <strong>2 coaching clinic sessions</strong> led by experienced mentors, guiding them through the <strong>Preliminary, Semi-Final, and Final stages.</strong>" +
@@ -295,7 +295,7 @@ export const eventDetails = {
   event_5: {
     title: "Chambers",
     image: imgLocation + "chambers.png",
-    openRegistration: true,
+    openRegistration: false,
     registerLink: `${CHAMBERS_REGIST}`,
     //registerLink: `https://docs.google.com/forms/d/e/1FAIpQLSdIGGuMZzQiJaU0nIz16ixVLLSXJ2M23bcjP9Eiew3O0TefYw/viewform`,
     description:
@@ -454,7 +454,7 @@ export const eventDetails = {
   event_7: {
     title: "The International Summit",
     image: imgLocation + "summit.png",
-    openRegistration: true, //change this
+    openRegistration: false, //change this
     description:
       "The StudentsxCEOs International Summit is <strong>the peak event</strong> offering individuals <strong>present their perspectives on current economic trends and engage with leading economists and industry experts.</strong> This summit offers a platform for students to connect with leading economists and industry leaders." + 
       "</br></br>" +
